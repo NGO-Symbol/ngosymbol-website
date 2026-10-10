@@ -1,0 +1,13 @@
+node_modules/
+.nuxt/
+.output/
+dist
+.data/
+.cache/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.vscode/

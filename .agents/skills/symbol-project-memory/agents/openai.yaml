@@ -1,0 +1,4 @@
+interface:
+  display_name: "Symbol Project Memory"
+  short_description: "Maintain the Symbol website knowledge base"
+  default_prompt: "Review the project knowledge base before work and update it after durable decisions."

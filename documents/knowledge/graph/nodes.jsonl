@@ -1,0 +1,26 @@
+{"id":"org:symbol","type":"organization","label":"ГО «Символ» / NGO Symbol","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"person:yurii-rassokha","type":"person","label":"Юрій Рассоха","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"person:petro-chekal","type":"person","label":"Петро Чекаль","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"person:hanna-franyk","type":"person","label":"Ганна Франик","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"person:olena-mordyk","type":"person","label":"Олена Мордик","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"project:street-history","type":"project","label":"Історія моєї вулиці","confidence":"USER_CONFIRMED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:voices-in-motion","type":"project","label":"Голоси у русі","confidence":"USER_CONFIRMED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:show-your-documents","type":"project","label":"Покажіть свої документи, будь ласка","confidence":"EXTRACTED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:mhgap-kyiv","type":"project","label":"Тренінги mhGAP на Київщині","confidence":"USER_CONFIRMED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:different-stories","type":"project","label":"Історії різних","confidence":"EXTRACTED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:lily-collector","type":"project","label":"Збирач конвалій","confidence":"EXTRACTED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:2-10-300","type":"project","label":"2, 10, 300…","confidence":"EXTRACTED","source":"documents/knowledge/project-registry.md"}
+{"id":"project:kharkiv-sea","type":"project","label":"Харківське море","confidence":"USER_CONFIRMED","source":"documents/knowledge/project-registry.md"}
+{"id":"domain:symbol-ngo","type":"domain","label":"symbol.ngo","confidence":"USER_CONFIRMED","source":"documents/knowledge/technical-architecture.md"}
+{"id":"domain:street-history","type":"domain","label":"istoriia-vulytsi.symbol.ngo","confidence":"USER_CONFIRMED","source":"documents/knowledge/information-architecture.md"}
+{"id":"app:main","type":"application","label":"Institutional Nuxt application","confidence":"USER_CONFIRMED","source":"documents/knowledge/technical-architecture.md"}
+{"id":"app:street-history","type":"application","label":"Street History autonomous Nuxt application","confidence":"USER_CONFIRMED","source":"documents/knowledge/technical-architecture.md"}
+{"id":"theme:culture","type":"theme","label":"Culture and contemporary art","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"theme:mental-health","type":"theme","label":"Mental health","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"theme:human-rights","type":"theme","label":"Human rights (inactive workstream)","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}
+{"id":"audience:donors","type":"audience","label":"Donors and patrons","confidence":"USER_CONFIRMED","source":"documents/knowledge/website-strategy.md"}
+{"id":"audience:project-visitors","type":"audience","label":"Project audiences","confidence":"USER_CONFIRMED","source":"documents/knowledge/website-strategy.md"}
+{"id":"audience:artists","type":"audience","label":"Artists and beneficiaries","confidence":"USER_CONFIRMED","source":"documents/knowledge/website-strategy.md"}
+{"id":"audience:partners","type":"audience","label":"Partner institutions","confidence":"USER_CONFIRMED","source":"documents/knowledge/website-strategy.md"}
+{"id":"design:orbit-index","type":"design_direction","label":"Orbit composition with Index typography","confidence":"USER_CONFIRMED","source":"documents/knowledge/design-system.md"}
+{"id":"platform:cloudflare-pages","type":"hosting_platform","label":"Cloudflare Pages multi-project hosting","confidence":"PROPOSED","source":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}

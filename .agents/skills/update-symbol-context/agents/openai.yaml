@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Symbol Context"
+  short_description: "Sync new decisions into the Symbol knowledge base"
+  default_prompt: "Update the Symbol project context from this conversation and validate the knowledge base."
