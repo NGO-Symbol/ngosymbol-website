@@ -12,7 +12,7 @@ The site is maintained by organization members without development experience, e
 `USER_CONFIRMED`: changes reach `main` only through pull requests from `task/*` branches.
 
 - Git is driven through `pnpm task:status | task:new | task:save | task:ship` (`scripts/task.mjs`) so agents run deterministic, cross-platform commands instead of improvising Git.
-- `task:save` creates local checkpoint commits after each finished step; `task:ship` merges the latest `main`, runs `pnpm check`, pushes, opens or updates the pull request, and enables squash auto-merge.
+- `task:save` creates local checkpoint commits after each finished step; `task:ship` merges the latest `main`, runs `pnpm check`, pushes, opens or updates the pull request, and enables squash auto-merge only when `main` requires the `validate` check (otherwise GitHub would merge before CI runs).
 - `main` is protected by a ruleset requiring a pull request and the `validate` CI check. Approvals are not required initially.
 - One vendor-neutral `AGENTS.md` holds the rules; `CLAUDE.md` and `GEMINI.md` import it. The `site-workflow` skill holds the procedure. Claude Code also receives `task:status` output at session start through `.claude/settings.json`.
 - Squash-merge subjects on `main` act as the human-readable change log shown by `task:status`.

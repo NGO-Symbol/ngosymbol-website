@@ -188,12 +188,24 @@ function ship(title) {
     console.log(`✔ Pull request updated: ${url}`)
   }
 
+  // Without a required check, `gh pr merge --auto` merges immediately, before CI runs.
+  if (!mainRequiresChecks()) {
+    console.log('main has no required checks yet; merge the pull request on GitHub after checks pass.')
+    return
+  }
   const auto = run('gh', ['pr', 'merge', branch, '--auto', '--squash', '--delete-branch'], { allowFail: true, quiet: true })
   console.log(
     auto.ok
       ? 'It will merge and deploy automatically once GitHub checks pass.'
       : 'Auto-merge is unavailable; merge the pull request on GitHub after checks pass.'
   )
+}
+
+function mainRequiresChecks() {
+  const rules = run('gh', ['api', `repos/{owner}/{repo}/rules/branches/${MAIN}`, '--jq', '[.[] | select(.type == "required_status_checks")] | length'], { allowFail: true })
+  if (rules.ok && Number(rules.out) > 0) return true
+  const classic = run('gh', ['api', `repos/{owner}/{repo}/branches/${MAIN}`, '--jq', '.protection.required_status_checks.contexts + .protection.required_status_checks.checks | length'], { allowFail: true })
+  return classic.ok && Number(classic.out) > 0
 }
 
 const [command, ...rest] = process.argv.slice(2)

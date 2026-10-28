@@ -5,14 +5,14 @@
 
 ## Context
 
-One repository must deploy at least two independent static applications to `symbol.ngo` and `istoriia-vulytsi.symbol.ngo`. GitHub Pages serves one site per repository and, on the free plan, only from public repositories. `symbol.ngo` is registered at Cloudflare and its DNS is managed there, alongside Google Workspace mail records.
+One repository must deploy at least two independent static applications to `symbol.ngo` and `istoriia-vulytsi.symbol.ngo`. GitHub Pages serves one site per repository and, on the free plan, only from public repositories. The repository was moved from the `ngosymbol` personal account to the `NGO-Symbol` organization (free plan) on 2026-10-28 so several people can hold admin rights. `symbol.ngo` is registered at Cloudflare and its DNS is managed there, alongside Google Workspace mail records.
 
 ## Decision
 
-`USER_CONFIRMED` (2026-10-28): host on **GitHub Pages** and make `ngosymbol/ngosymbol-website` public.
+`USER_CONFIRMED` (2026-10-28): host on **GitHub Pages** and make `NGO-Symbol/ngosymbol-website` public.
 
 - `apps/main` deploys to this repository's Pages site through GitHub Actions.
-- Each autonomous app deploys its build output to a deploy-only public repository (first: `ngosymbol/istoriia-vulytsi`, `gh-pages` branch) using a write-scoped deploy key.
+- Each autonomous app deploys its build output to a deploy-only public repository (first: `NGO-Symbol/istoriia-vulytsi`, `gh-pages` branch) using a write-scoped deploy key.
 - DNS records stay in Cloudflare in DNS-only (unproxied) mode; mail records are untouched.
 
 Setup and DNS records: [`../../operations/deployment.md`](../../operations/deployment.md).
