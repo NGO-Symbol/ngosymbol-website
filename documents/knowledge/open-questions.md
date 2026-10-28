@@ -19,7 +19,7 @@ Items here are unresolved and must not be silently assumed.
 
 ## Infrastructure
 
-- Owner to complete the one-time setup in `documents/operations/deployment.md`: make the repository public, enable Pages, protect `main`, create `ngosymbol/istoriia-vulytsi`, add DNS records in Cloudflare.
+- Owner to complete the one-time setup in `documents/operations/deployment.md`: make the repository public, enable Pages, protect `main`, create `NGO-Symbol/istoriia-vulytsi`, add DNS records in Cloudflare.
 - Decide whether pull requests need a human approval before going live (currently CI only).
 - Configure GitHub CLI authentication on each editor's computer.
 

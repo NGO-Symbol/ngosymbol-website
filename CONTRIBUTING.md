@@ -10,7 +10,7 @@ Install Git, Node 22, and the GitHub CLI, then:
 ```bash
 corepack enable
 gh auth login
-git clone https://github.com/ngosymbol/ngosymbol-website.git
+git clone https://github.com/NGO-Symbol/ngosymbol-website.git
 cd ngosymbol-website
 pnpm install
 ```
