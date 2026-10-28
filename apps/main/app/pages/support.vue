@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'tilt', mode: 'out-in' } })
 useSeoMeta({ title: 'Доєднатися і підтримати', description: 'Як підтримати ГО «Символ»: внески, меценатство, партнерство, волонтерство.' })
 
 const route = useRoute()

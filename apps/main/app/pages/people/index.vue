@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'blur', mode: 'out-in' } })
 useSeoMeta({ title: 'Люди', description: 'Митці, куратори, лектори й команда проєктів ГО «Символ».' })
 
 const query = ref('')

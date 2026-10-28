@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'slide', mode: 'out-in' } })
 useSeoMeta({ title: 'Події', description: 'Події ГО «Символ»: відкриття, екскурсії, перформанси, лекції. Список і календар.' })
 
 const view = ref<'list' | 'calendar'>('list')

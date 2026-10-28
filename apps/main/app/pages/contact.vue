@@ -1,4 +1,7 @@
-<script setup lang="ts">useSeoMeta({ title: 'Контакти' })</script>
+<script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'fade', mode: 'out-in' } })
+useSeoMeta({ title: 'Контакти' })
+</script>
 
 <template>
   <section class="contact-page">

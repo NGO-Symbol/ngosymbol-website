@@ -1,7 +1,22 @@
+<script setup lang="ts">
+// Every click on the logo plays the next animation of the mark.
+const markAnimations = ['mark-spin', 'mark-bounce', 'mark-flip', 'mark-wobble', 'mark-pulse']
+const clicks = ref(0)
+const markClass = ref('')
+
+function animateMark() {
+  markClass.value = ''
+  requestAnimationFrame(() => {
+    markClass.value = markAnimations[clicks.value % markAnimations.length]!
+    clicks.value++
+  })
+}
+</script>
+
 <template>
   <header class="site-header container">
-    <NuxtLink class="wordmark" to="/" aria-label="ГО Символ — головна">
-      <SymbolMark />
+    <NuxtLink class="wordmark" to="/" aria-label="ГО Символ — головна" @click="animateMark">
+      <SymbolMark :class="markClass" @animationend="markClass = ''" />
       <span>СИМВОЛ</span>
     </NuxtLink>
     <nav aria-label="Основна навігація">

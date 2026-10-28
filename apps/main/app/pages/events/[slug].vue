@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'slide', mode: 'out-in' } })
 const route = useRoute()
 const event = getEvent(String(route.params.slug))
 

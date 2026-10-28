@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'blur', mode: 'out-in' } })
 const route = useRoute()
 const person = getPerson(String(route.params.slug))
 

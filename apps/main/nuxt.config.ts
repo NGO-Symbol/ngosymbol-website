@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['@symbol/brand/tokens.css', '~/assets/css/main.css'],
   app: {
+    pageTransition: { name: 'fade', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'uk' },
       titleTemplate: '%s · ГО «Символ»',

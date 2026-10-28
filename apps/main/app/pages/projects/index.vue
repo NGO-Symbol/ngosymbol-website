@@ -1,4 +1,5 @@
 <script setup lang="ts">
+definePageMeta({ pageTransition: { name: 'rise', mode: 'out-in' } })
 useSeoMeta({ title: 'Проєкти', description: 'Усі проєкти ГО «Символ» за роками: виставки, фільми, плейбек-театр, тренінги, фестивалі.' })
 
 const route = useRoute()
