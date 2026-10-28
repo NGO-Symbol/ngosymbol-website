@@ -26,6 +26,10 @@ The design system is implemented in `packages/ui` (tokens, tones, motion, `Sym*`
 The logo (`packages/brand/assets/symbol-logo.svg`), the mark (`symbol-mark.svg`) and the spiral (`symbol-spiral.svg`) are vector, taken from the organization's logo file; `SymOrbit` is the logo's real spiral. The logo typeface (`packages/brand/fonts`) sets the wordmark and organization name only.
 Typography is a provisional Cyrillic-capable pair (Source Serif 4 + Manrope) because Newsreader and DM Sans have no Cyrillic; final fonts and exact tone values are decided in the design pass.
 
+## Icons
+
+The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` (16/32/48), `apple-touch-icon.png`, Android icons and a web manifest, all generated from `packages/brand/assets/symbol-mark.svg` by `scripts/build-icons.mjs` and served by the `@symbol/brand` layer (every app extends it, so the links are added automatically, with the app's base path).
+
 ## Visual principles
 
 - The spiral means movement, attention, return, and collected stories.

@@ -9,6 +9,7 @@ const font = (p: string) => fileURLToPath(new URL(`./node_modules/@fontsource-va
 // NGO Symbol design system. An app uses it with `extends: ['@symbol/ui']`; components are auto-imported as <SymButton>, <SymCard>, ...
 // Handbook: packages/ui/docs/CONTEXT.md
 export default defineNuxtConfig({
+  extends: ['@symbol/brand'],
   components: [{ path: dir(''), prefix: 'Sym', global: true, pathPrefix: false }],
   css: [fileURLToPath(new URL('../brand/tokens.css', import.meta.url)), fileURLToPath(new URL('../brand/fonts.css', import.meta.url)), font('source-serif-4/opsz.css'), font('manrope/wght.css'), css('tokens.css'), css('tones.css'), css('base.css')],
   app: {

@@ -2,6 +2,7 @@
 const indexable = false
 
 export default defineNuxtConfig({
+  extends: ['@symbol/brand'],
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
   css: ['@symbol/brand/tokens.css', '~/assets/css/main.css'],
