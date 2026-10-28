@@ -26,6 +26,7 @@ Known design facts: violet + cream is 3.37:1 (large text only); violet + apricot
 
 ## Space, type, widths
 Fluid between a 390 px phone and a 1440 px desktop. Steps `--sym-space-3xs … 4xl`; semantic `--sym-gap-stack|inline|grid`, `--sym-section-y`, `--sym-page-margin`, `--sym-pad-card`.
+Fonts: `--sym-font-display`, `--sym-font-text`, `--sym-font-brand` (the logo typeface, wordmark only).
 Type roles `--sym-text-display-xl … caption` are applied through `.sym-t-*` classes (components `SymHeading`, `SymText`, `SymEyebrow`). Widths `--sym-width-page|wide|narrow|prose`.
 
 ## Shape and lines

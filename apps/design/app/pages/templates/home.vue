@@ -7,7 +7,7 @@ useHead({ title: 'Шаблон: Головна' })
   <div>
   <!-- Hero -->
   <SymSection tone="paper" space="lg" clip>
-    <template #decor><SymOrbit anchor="top-right" size="hero" :bleed="0.32" :rotate="-28" spin /></template>
+    <template #decor><SymOrbit anchor="top-right" size="hero" :bleed="0.32" spin /></template>
     <SymStack gap="xl">
       <SymPageHeader size="xl" eyebrow="Культура · мистецтво · психічне здоров’я" title="Створюємо простір для уважності й сучасної культури" flush />
       <SymSplit ratio="7:5" align="end" gap="l">
@@ -19,7 +19,7 @@ useHead({ title: 'Шаблон: Головна' })
 
   <!-- Featured autonomous project -->
   <SymSection tone="violet" space="lg" clip>
-    <template #decor><SymOrbit anchor="top-right" size="hero" :bleed="0.28" :rotate="-28" color="accent" /></template>
+    <template #decor><SymOrbit anchor="top-right" size="hero" :bleed="0.28" color="accent" /></template>
     <SymReveal>
       <SymCallout eyebrow="Новий автономний проєкт" title="Історія моєї вулиці" text="Окремий простір про вулиці, міську пам’ять і досвіди Харкова.">
         <template #actions><SymButton href="https://istoriia-vulytsi.symbol.ngo">Перейти на сайт проєкту</SymButton></template>

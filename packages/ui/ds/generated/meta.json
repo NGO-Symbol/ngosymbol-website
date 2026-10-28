@@ -123,6 +123,24 @@
    }
   ]
  },
+ "SymBrand": {
+  "props": [
+   {
+    "name": "caps",
+    "type": "false | true",
+    "required": false,
+    "description": "Set in capitals (СИМВОЛ), as in the logo; the face has capital-like lowercase either way."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
  "SymBreadcrumb": {
   "props": [
    {
@@ -935,21 +953,14 @@
     "type": "\"md\" | \"lg\" | \"xs\" | \"sm\" | \"hero\"",
     "required": false,
     "default": "\"lg\"",
-    "description": "xs 56 px · sm 140 · md 260 · lg 420 · hero fluid 360 → 760 px."
-   },
-   {
-    "name": "weight",
-    "type": "\"regular\" | \"thin\" | \"heavy\"",
-    "required": false,
-    "default": "\"regular\"",
-    "description": "Ring thickness: thin | regular | heavy (share of the diameter)."
+    "description": "xs 56 px · sm 140 · md 260 · lg 420 · hero fluid 240 → 760 px."
    },
    {
     "name": "rotate",
     "type": "number",
     "required": false,
-    "default": "-28",
-    "description": "Static rotation in degrees (the ring opens at the right before rotation)."
+    "default": "0",
+    "description": "Static rotation in degrees (0 = as in the logo)."
    },
    {
     "name": "anchor",
@@ -962,7 +973,7 @@
     "type": "number",
     "required": false,
     "default": "0.25",
-    "description": "Share of the diameter that sticks out past the anchored corner (0–0.6)."
+    "description": "Share of the size that sticks out past the anchored corner (0–0.6)."
    },
    {
     "name": "color",
@@ -976,13 +987,6 @@
     "type": "false | true",
     "required": false,
     "description": "Very slow ambient rotation."
-   },
-   {
-    "name": "diamond",
-    "type": "false | true",
-    "required": false,
-    "default": "true",
-    "description": "Show the diamond that ends the spiral (default true)."
    },
    {
     "name": "soft",
@@ -1756,6 +1760,12 @@
     "required": false,
     "default": "\"md\"",
     "description": "sm = 32 px mark (footer, project bar) | md = 44 px mark (header)."
+   },
+   {
+    "name": "subtitle",
+    "type": "string",
+    "required": false,
+    "description": "Second line under the word, as in the logo («Громадська організація»). Off by default; use it on large lockups only."
    }
   ],
   "slots": [
