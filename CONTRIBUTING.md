@@ -24,7 +24,7 @@ Preview locally with `pnpm dev` (main site) or `pnpm dev:street` (Street History
 | See what is new | `pnpm task:status` | Fetches GitHub, shows your branch, unsaved files, recent published changes, open pull requests. |
 | Start a task | `pnpm task:new "about-page-photos"` | Updates `main` and creates `task/about-page-photos`. Re-running it continues the same task. |
 | Save progress | `pnpm task:save "Add team photos to About page"` | Commits everything on the task branch. Local only; repeat after each finished step. |
-| Publish | `pnpm task:ship` | Merges the latest `main`, runs `pnpm check`, pushes, opens or updates the pull request, and turns on auto-merge. |
+| Publish | `pnpm task:ship` | Merges the latest `main`, runs `pnpm check`, pushes, opens or updates the pull request, and turns on auto-merge once `main` is protected. |
 
 After the pull request’s checks pass, GitHub squash-merges it into `main` and the
 [Deploy workflow](.github/workflows/deploy.yml) updates the live sites within a few minutes.
