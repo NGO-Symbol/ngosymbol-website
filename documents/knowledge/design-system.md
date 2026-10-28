@@ -28,6 +28,11 @@ The two original logo colors have insufficient contrast against each other for o
 - Project sites may define their own typography and layout.
 - The institutional connection can shrink to a compact “A project by NGO Symbol” bar on autonomous sites.
 
+## Motion
+
+- Intro: on the first page view of a browser session the spiral mark draws itself (≤1.5 s), then the overlay lifts. Click or key skips it; it is disabled for `prefers-reduced-motion`. `USER_CONFIRMED` (intro wanted), implementation `PROPOSED`.
+- Home visual hook: project titles with years circle the spiral mark on an orbit; hovering pauses the orbit; each title links to its project. `PROPOSED`, 2026-10-29.
+
 ## Shared versus project identity
 
 Shared: original mark, organization name, backlink pattern, accessibility baseline, and institutional metadata.

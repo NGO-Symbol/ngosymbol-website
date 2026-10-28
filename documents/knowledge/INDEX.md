@@ -1,6 +1,6 @@
 # NGO Symbol knowledge base
 
-Last consolidated: 2026-10-10.
+Last consolidated: 2026-10-29.
 
 This directory is the canonical memory for the institutional website and its project websites. It borrows Graphify’s useful ideas—explicit entities and relationships, source-aware confidence labels, architecture documentation, deterministic validation, and agent guidance—without importing Graphify’s application code.
 
@@ -24,7 +24,8 @@ Repository boundaries are summarized in [`../../ARCHITECTURE.md`](../../ARCHITEC
 - Small projects: `symbol.ngo/projects/{slug}` with one focused page and optional internal child pages.
 - Large autonomous projects: separate apps on `{project}.symbol.ngo`.
 - First autonomous project: `istoriia-vulytsi.symbol.ngo`.
-- Main project gallery links directly to the relevant internal page or subdomain.
+- Every project has a main-site page; projects with a subsite link to it from there (ADR-0006).
+- Linked content model: projects, events (each belongs to a project), people, opportunities, press, organizations.
 - No CMS; project content is maintained in code.
 - Framework: Nuxt 4 / Vue 3, static-first.
 - Repository: pnpm monorepo with independently deployable applications.

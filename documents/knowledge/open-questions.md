@@ -17,6 +17,17 @@ Items here are unresolved and must not be silently assumed.
 - Decide whether the English locale uses `/en/...` on each host or a language switch stored in local state.
 - Decide whether events and opportunities are one page or two when enough content exists.
 
+## Site content model (2026-10-29)
+
+- «Покажіть свої документи…»: restore as a subsite from the saved copy or migrate into a large main-site project page?
+- Section name: «Люди» or «Автори»? Team as a separate tab or a block in «Про нас»?
+- Donations: which account of ГО «Символ» (UAH and foreign currency), which card acquiring, non-profit register status.
+- Patron tiers and what patrons receive.
+- Newsletter service (or Telegram channel only).
+- Which donor names, credit lines, and logos may be published for each project (Voices in Motion has EU / European Cultural Foundation visibility requirements to check in the grant agreement).
+- Public status, dates, and roles for «Ті, що побачили світ (Мілан)» and «Відкрита книга: поліаморія».
+- Vector (SVG) version of the logo for the intro animation.
+
 ## Infrastructure
 
 - Select DNS provider and deployment platform.
