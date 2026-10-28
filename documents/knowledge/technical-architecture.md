@@ -26,6 +26,10 @@ Each hostname is a separate deployment target:
 
 Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). The source repository is public. The `Deploy` workflow publishes `apps/main` to this repository's Pages site and each autonomous app to its own deploy-only repository (`NGO-Symbol/istoriia-vulytsi`). Builds use the Nitro `github_pages` preset; the base path switches from `/<repo>/` to `/` once a custom domain is configured. DNS stays in Cloudflare in DNS-only mode. Setup steps: [`../operations/deployment.md`](../operations/deployment.md).
 
+## Search visibility
+
+While in development both apps emit `<meta name="robots" content="noindex, nofollow">` on every page (`indexable = false` in each `nuxt.config.ts`). This is a request, not access control: the sites are publicly reachable, and `robots.txt` is deliberately not used because it would stop crawlers from seeing the tag. Already-indexed pages drop out only after being recrawled.
+
 ## Change workflow
 
 All changes go through `task/*` branches and pull requests guarded by the `validate` check; agents drive Git through `pnpm task:*` ([ADR-0006](decisions/ADR-0006-agent-git-workflow.md), [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md)).
