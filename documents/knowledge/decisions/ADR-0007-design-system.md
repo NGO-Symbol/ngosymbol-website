@@ -15,7 +15,7 @@ The sites are built by people without coding experience through their own AI age
 - Pages use only components and tokens (enforced by `pnpm ds:lint`); autonomous project sites may override tokens in `@layer sym-project` (`theme.css`).
 - `apps/design` is the gallery (components with live examples, states, API tables, foundations, page templates). It is published at `symbol.ngo/design/` (static, noindex) so it can be opened on a phone; built into the main site artifact by the Deploy workflow.
 - Agent contract in `AGENTS.md` + `.agents/skills/build-with-design-system`; the handbook lives with the code in `packages/ui/docs/` (router `CONTEXT.md`); this knowledge base keeps only decisions.
-- Fonts are self-hosted and Cyrillic-checked: Source Serif 4 + Manrope as a **provisional** pair.
+- Fonts are self-hosted and Cyrillic-checked: Playfair Display + Commissioner, with the logo face for labels (updated 2026-10-29; first provisional pair was Source Serif 4 + Manrope).
 
 ## Alternatives considered
 

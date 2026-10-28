@@ -7,10 +7,12 @@
   :root {
     /* ---------- typography ---------- */
     /* Provisional pair, chosen because both have a Cyrillic subset (Newsreader / DM Sans do not: Ukrainian fell back to Georgia / system). Change here only. */
-    --sym-font-display: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
-    --sym-font-text: 'Manrope Variable', Manrope, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --sym-font-display: 'Playfair Display Variable', 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --sym-font-text: 'Commissioner Variable', Commissioner, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     /* the logo typeface (packages/brand/fonts): wordmark and the brand name only, never running text */
     --sym-font-brand: 'Symbol Brand', var(--sym-font-text);
+    /* variant C: the brand face also sets labels, navigation, meta and big numerals (it has one weight, 400: never ask it for bold) */
+    --sym-font-label: var(--sym-font-brand);
     --sym-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
     /* sizes (fluid, 390 → 1440 px viewport) */
@@ -25,7 +27,7 @@
     --sym-text-body: clamp(1rem, 0.9768rem + 0.0952vw, 1.0625rem);
     --sym-text-body-sm: clamp(0.9rem, 0.8861rem + 0.0571vw, 0.9375rem);
     --sym-text-caption: clamp(0.8125rem, 0.7893rem + 0.0952vw, 0.875rem);
-    --sym-text-label: clamp(0.7188rem, 0.6955rem + 0.0952vw, 0.7813rem);
+    --sym-text-label: clamp(0.75rem, 0.7268rem + 0.0952vw, 0.8125rem);
 
     /* ---------- space (fluid steps; pages use the semantic names) ---------- */
     --sym-space-3xs: 2px;

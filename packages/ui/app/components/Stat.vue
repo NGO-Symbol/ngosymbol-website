@@ -19,7 +19,7 @@ withDefaults(defineProps<{
 
 <template>
   <figure class="sym-stat" :data-size="size">
-    <div class="sym-stat__value sym-tabular" :class="size === 'l' ? 'sym-t-display' : 'sym-t-headline-lg'">{{ value }}<span v-if="unit" class="sym-stat__unit sym-t-title">{{ unit }}</span></div>
+    <div class="sym-stat__value sym-t-numeral" :class="size === 'l' ? 'sym-t-display' : 'sym-t-headline-lg'">{{ value }}<span v-if="unit" class="sym-stat__unit sym-t-title">{{ unit }}</span></div>
     <figcaption class="sym-stat__caption">
       <span class="sym-stat__label sym-t-body-sm">{{ label }}</span>
       <span class="sym-stat__source sym-t-caption">Джерело: {{ source }}</span>
