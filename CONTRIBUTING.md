@@ -15,7 +15,7 @@ cd ngosymbol-website
 pnpm install
 ```
 
-Preview locally with `pnpm dev` (main site) or `pnpm dev:street` (Street History).
+Preview locally with `pnpm dev` (main site), `pnpm dev:street` (Street History) or `pnpm dev:design` (design-system gallery, also at `symbol.ngo/design/`).
 
 ## Daily workflow
 
@@ -35,6 +35,7 @@ Start the next piece of work with a new `pnpm task:new`.
 - Never commit on `main`; `main` only changes through pull requests (enforced on GitHub).
 - One task branch per topic. Keep application changes and their knowledge-base updates together.
 - Commit messages describe the result in plain English: `Add contact form copy`, not `fix`.
+- Pages are built only from the design system (`Sym*` components and tokens); see `packages/ui/docs/CONTEXT.md`. `pnpm check` runs `ds:lint` and `ds:contrast`.
 - Never commit secrets, private documents, or unpublished personal data.
 - Do not invent impact metrics, partnerships, quotes, or biographies.
 - Read `AGENTS.md` and the documents linked from `documents/knowledge/INDEX.md` before

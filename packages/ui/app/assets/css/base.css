@@ -1,0 +1,98 @@
+@layer sym-reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+  body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, ul, ol, dl, dd, fieldset { margin: 0; }
+  fieldset { padding: 0; border: 0; min-width: 0; }
+  ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
+  button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+  button { cursor: pointer; background: none; border: 0; padding: 0; }
+  img, svg, video, canvas { display: block; max-width: 100%; }
+  img, video { height: auto; }
+  table { border-collapse: collapse; }
+  /* touch: no UA tap flash, no double-tap zoom delay on controls, no text selection when a control is long-pressed */
+  :where(a, button, input, label, select, summary, textarea, [role='button'], [tabindex]) { touch-action: manipulation; }
+  :where(button, [role='button']) { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  :where(input:not([type='checkbox'], [type='radio']), textarea, select) { -webkit-appearance: none; appearance: none; border-radius: 0; }
+}
+
+@layer sym-base {
+  html { scroll-padding-top: calc(var(--sym-header-h) + var(--sym-space-m)); }
+  @media (prefers-reduced-motion: no-preference) { html:not([data-motion='reduce']) { scroll-behavior: smooth; } }
+  body {
+    background: var(--sym-bg); color: var(--sym-fg);
+    font-family: var(--sym-font-text); font-size: var(--sym-text-body); line-height: 1.65; font-weight: 400;
+    font-optical-sizing: auto; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    min-height: 100dvh; overflow-wrap: break-word; hyphens: manual;
+  }
+  /* Ukrainian words are long: running text may hyphenate (lang="uk" is set by the layer), display type never does but may break as a last resort */
+  p, li, dd { hyphens: auto; text-wrap: pretty; }
+  :focus-visible { outline: var(--sym-focus-width) solid var(--sym-focus); outline-offset: var(--sym-focus-offset); border-radius: 2px; }
+  ::selection { background: var(--sym-accent); color: var(--sym-bg); }
+  a { color: var(--sym-link); text-underline-offset: .22em; text-decoration-thickness: 1px; }
+  hr { border: 0; border-top: var(--sym-rule-width) solid var(--sym-rule); margin: 0; }
+}
+
+@layer sym-utilities {
+  /* ---------- type roles: .sym-t-<role>; components (SymHeading, SymText) apply these, pages do not size text ---------- */
+  .sym-t-display-xl, .sym-t-display, .sym-t-headline-lg, .sym-t-headline, .sym-t-title-lg, .sym-t-title, .sym-t-quote {
+    font-family: var(--sym-font-display); font-weight: 400; font-optical-sizing: auto; text-wrap: balance; hyphens: manual; overflow-wrap: anywhere;
+  }
+  .sym-t-display-xl { font-size: var(--sym-text-display-xl); line-height: .88; letter-spacing: -.045em; }
+  .sym-t-display { font-size: var(--sym-text-display); line-height: .92; letter-spacing: -.04em; }
+  .sym-t-headline-lg { font-size: var(--sym-text-headline-lg); line-height: 1; letter-spacing: -.03em; }
+  .sym-t-headline { font-size: var(--sym-text-headline); line-height: 1.06; letter-spacing: -.02em; }
+  .sym-t-title-lg { font-size: var(--sym-text-title-lg); line-height: 1.1; letter-spacing: -.012em; }
+  .sym-t-title { font-size: var(--sym-text-title); line-height: 1.2; letter-spacing: -.008em; }
+  .sym-t-quote { font-size: var(--sym-text-quote); line-height: 1.12; letter-spacing: -.02em; font-style: italic; }
+  .sym-t-lead { font-family: var(--sym-font-text); font-size: var(--sym-text-lead); line-height: 1.55; }
+  .sym-t-body { font-family: var(--sym-font-text); font-size: var(--sym-text-body); line-height: 1.65; }
+  .sym-t-body-sm { font-family: var(--sym-font-text); font-size: var(--sym-text-body-sm); line-height: 1.5; }
+  .sym-t-caption { font-family: var(--sym-font-text); font-size: var(--sym-text-caption); line-height: 1.45; }
+  .sym-t-label { font-family: var(--sym-font-text); font-size: var(--sym-text-label); line-height: 1.3; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+  /* large display text may use the tone's livelier large-text colour */
+  :is(.sym-t-display-xl, .sym-t-display, .sym-t-headline-lg) { color: var(--sym-fg-large); }
+  .sym-muted { color: var(--sym-fg-muted); }
+  .sym-tabular { font-variant-numeric: tabular-nums; }
+  .sym-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* ---------- state layer (hover / pressed overlay in the content colour); hover only on hover devices ---------- */
+  .sym-state { position: relative; isolation: isolate; }
+  .sym-state::before { content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1; pointer-events: none; background: currentColor; opacity: 0; transition: opacity var(--sym-t-state); }
+  @media (hover: hover) { .sym-state:hover::before { opacity: var(--sym-state-hover); } }
+  .sym-state:active::before { opacity: var(--sym-state-pressed); transition-duration: 0s; }
+
+  /* ---------- scroll reveal (SymReveal / v-reveal). Content is visible in the HTML; JS hides only what is below the fold, then reveals it once. ---------- */
+  [data-reveal] { transition: opacity var(--sym-t-fx-hero), translate var(--sym-t-large-in); transition-delay: calc(min(var(--sym-i, 0), 6) * var(--sym-stagger)); }
+  [data-reveal='hidden'] { opacity: 0; translate: 0 calc(var(--sym-reveal-distance) * var(--sym-motion-travel)); }
+  [data-reveal='hidden'][data-reveal-kind='fade'] { translate: none; }
+  [data-reveal][data-reveal-kind='wipe'] { transition: clip-path var(--sym-t-hero-in), opacity var(--sym-t-fx-hero); clip-path: inset(0); }
+  [data-reveal='hidden'][data-reveal-kind='wipe'] { opacity: 1; translate: none; clip-path: inset(0 0 100% 0); }
+  /* reduced motion: a wipe becomes a plain fade */
+  :root[data-motion='reduce'] [data-reveal='hidden'][data-reveal-kind='wipe'] { opacity: 0; clip-path: none; }
+  @media (prefers-reduced-motion: reduce) { :root:not([data-motion='full']) [data-reveal='hidden'][data-reveal-kind='wipe'] { opacity: 0; clip-path: none; } }
+
+  /* print and no-motion contexts always show everything */
+  @media print { [data-reveal] { opacity: 1 !important; translate: none !important; clip-path: none !important; transition: none !important; } }
+
+  /* ---------- route change: fade through (old page leaves fast, the new one fades in and rises a little) ---------- */
+  .sym-page-leave-active { transition: opacity var(--sym-t-fx-micro); }
+  .sym-page-leave-to { opacity: 0; }
+  .sym-page-enter-active { transition: opacity var(--sym-t-fx-large), translate var(--sym-t-large-in); }
+  .sym-page-enter-from { opacity: 0; translate: 0 calc(12px * var(--sym-motion-travel)); }
+
+  /* ---------- orbit ambient rotation ---------- */
+  @keyframes sym-orbit-spin { to { rotate: 360deg; } }
+}
+
+@layer sym-components {
+  /* ---------- horizontal scroll row (phones): one line of chips that scrolls instead of wrapping into a tall block ---------- */
+  .sym-hscroll { display: flex; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; padding-block: var(--sym-space-xs); margin-block: calc(-1 * var(--sym-space-xs)); /* room for the focus ring (3 px + 3 px offset) */ }
+  .sym-hscroll::-webkit-scrollbar { display: none; }
+  .sym-hscroll > * { flex: none; }
+  [data-more-end] { -webkit-mask-image: linear-gradient(to left, transparent, #000 var(--sym-space-l)); mask-image: linear-gradient(to left, transparent, #000 var(--sym-space-l)); }
+  [data-more-start] { -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--sym-space-l)); mask-image: linear-gradient(to right, transparent, #000 var(--sym-space-l)); }
+  [data-more-start][data-more-end] {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--sym-space-l), #000 calc(100% - var(--sym-space-l)), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 var(--sym-space-l), #000 calc(100% - var(--sym-space-l)), transparent);
+  }
+}

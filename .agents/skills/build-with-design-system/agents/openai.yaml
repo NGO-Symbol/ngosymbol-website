@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build with Symbol Design System"
+  short_description: "Compose pages and components from the NGO Symbol design system"
+  default_prompt: "Read the design-system selection guide, compose the page only from Sym components and tokens, and verify it on phone and desktop screenshots."

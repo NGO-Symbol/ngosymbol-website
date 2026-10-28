@@ -12,6 +12,7 @@ This repository contains both source code and the durable knowledge base for Г�
 Skills live in `.agents/skills/`. If your tool does not load them automatically, read the `SKILL.md` whose trigger matches the task:
 
 - `site-workflow` — session start, saving, publishing, «збережи», «опублікуй», «що нового».
+- `build-with-design-system` — ANY page, layout, style, animation or component work («зроби сторінку», «адаптуй під телефон»). Pages are built only from `Sym*` components and tokens (`packages/ui/docs/CONTEXT.md`).
 - `symbol-project-memory` — organization facts, product, design, architecture, or content decisions.
 - `update-symbol-context` — «онови контекст», «синхронізуй контекст», `$update-symbol-context`.
 
@@ -30,13 +31,19 @@ Run `pnpm kb:validate` after knowledge-graph changes and `pnpm check` after appl
 
 When the user says “онови контекст”, “синхронізуй контекст”, “запам’ятай ці рішення”, or invokes `$update-symbol-context`, use `.agents/skills/update-symbol-context/SKILL.md` to perform an explicit knowledge synchronization pass.
 
+## Design-system rules (apps use `@symbol/ui`)
+
+- Pages are assembled **only** from `Sym*` components and `var(--sym-*)` tokens. No hex colours, raw `px` font sizes, durations, `z-index` numbers, or own flex/grid CSS in pages. A missing piece becomes a new component (SFC + registry entry + examples), never page CSS.
+- Colour comes from the section's `tone` (`paper | white | lilac | violet | apricot | plum`). Motion follows the ladder in `packages/ui/docs/foundations/motion.md`. Mobile first: check 390 px before 1280 px.
+- Live gallery: `pnpm dev:design` (http://localhost:3002), published at `https://symbol.ngo/design/`. Enforced by `pnpm ds:lint` (part of `pnpm check`).
+
 ## Product invariants
 
 - Small projects live under `symbol.ngo/projects/{slug}`.
 - Autonomous projects are separate apps on `{project}.symbol.ngo` and return to the institutional site.
 - The main project gallery may link internally or directly to a project subdomain.
 - No CMS is planned. Content and project experiences are maintained in code.
-- Brand source colors are `#9280A6` and `#FDD08F`.
+- Brand source colors are `#9280A6` and `#FDD08F`; the full palette is `packages/brand/tokens.css`, applied through tones.
 - The current main-site direction combines the color/composition of “Orbit” with the editorial serif character of “Index”.
 - Ukrainian is the primary language; English is required as the next locale.
 
