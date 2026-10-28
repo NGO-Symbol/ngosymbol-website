@@ -1,0 +1,157 @@
+/* NGO Symbol design system tokens. The one place for raw values: components and pages reference var(--sym-*) only.
+   Handbook: packages/ui/docs/foundations/tokens.md. Tiers: brand palette (--symbol-*, packages/brand) → system (--sym-*) → component-private (--_x).
+   Fluid values interpolate between a 390 px phone and a 1440 px desktop (no per-pointer density: this is a content site). */
+@layer sym-reset, sym-tokens, sym-base, sym-components, sym-utilities, sym-project;
+
+@layer sym-tokens {
+  :root {
+    /* ---------- typography ---------- */
+    /* Provisional pair, chosen because both have a Cyrillic subset (Newsreader / DM Sans do not: Ukrainian fell back to Georgia / system). Change here only. */
+    --sym-font-display: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sym-font-text: 'Manrope Variable', Manrope, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --sym-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+    /* sizes (fluid, 390 → 1440 px viewport) */
+    --sym-text-display-xl: clamp(3.25rem, 1.3rem + 8vw, 8.5rem);
+    --sym-text-display: clamp(2.75rem, 1.5429rem + 4.9524vw, 6rem);
+    --sym-text-headline-lg: clamp(2.25rem, 1.6rem + 2.6667vw, 4rem);
+    --sym-text-headline: clamp(1.75rem, 1.3786rem + 1.5238vw, 2.75rem);
+    --sym-text-title-lg: clamp(1.5rem, 1.2214rem + 1.1429vw, 2.25rem);
+    --sym-text-title: clamp(1.25rem, 1.1107rem + 0.5714vw, 1.625rem);
+    --sym-text-quote: clamp(1.625rem, 1.2071rem + 1.7143vw, 2.75rem);
+    --sym-text-lead: clamp(1.125rem, 1.0554rem + 0.2857vw, 1.3125rem);
+    --sym-text-body: clamp(1rem, 0.9768rem + 0.0952vw, 1.0625rem);
+    --sym-text-body-sm: clamp(0.9rem, 0.8861rem + 0.0571vw, 0.9375rem);
+    --sym-text-caption: clamp(0.8125rem, 0.7893rem + 0.0952vw, 0.875rem);
+    --sym-text-label: clamp(0.7188rem, 0.6955rem + 0.0952vw, 0.7813rem);
+
+    /* ---------- space (fluid steps; pages use the semantic names) ---------- */
+    --sym-space-3xs: 2px;
+    --sym-space-2xs: 4px;
+    --sym-space-xs: 8px;
+    --sym-space-s: clamp(0.75rem, 0.6571rem + 0.381vw, 1rem);
+    --sym-space-m: clamp(1rem, 0.8143rem + 0.7619vw, 1.5rem);
+    --sym-space-l: clamp(1.5rem, 1.1286rem + 1.5238vw, 2.5rem);
+    --sym-space-xl: clamp(2.5rem, 1.9429rem + 2.2857vw, 4rem);
+    --sym-space-2xl: clamp(3.5rem, 2.3857rem + 4.5714vw, 6.5rem);
+    --sym-space-3xl: clamp(5rem, 3.5143rem + 6.0952vw, 9rem);
+    --sym-space-4xl: clamp(7rem, 4.9571rem + 8.381vw, 12.5rem);
+    --sym-gap-inline: var(--sym-space-xs);          /* between buttons, chips, meta items */
+    --sym-gap-stack: var(--sym-space-m);            /* between blocks inside a section */
+    --sym-gap-grid: clamp(1rem, 0.8143rem + 0.7619vw, 1.5rem);
+    --sym-gap-section-head: var(--sym-space-l);    /* section heading → its content */
+    --sym-section-y: clamp(4.5rem, 2.9214rem + 6.4762vw, 8.75rem);   /* vertical padding of a band */
+    --sym-section-y-sm: clamp(3rem, 2.2571rem + 3.0476vw, 5rem);
+    --sym-page-margin: clamp(1.25rem, 0.4143rem + 3.4286vw, 3.5rem);
+    --sym-header-h: clamp(4rem, 3.5357rem + 1.9048vw, 5.25rem);
+    --sym-pad-card: var(--sym-space-m);
+
+    /* ---------- widths ---------- */
+    --sym-width-page: 1180px;       /* default content width */
+    --sym-width-wide: 1440px;       /* wide media bands */
+    --sym-width-narrow: 760px;      /* one-column pages, forms */
+    --sym-width-prose: 66ch;        /* running text */
+    --sym-size-touch: 44px;         /* minimum hit area of any control (WCAG 2.5.5 AAA; AA needs 24) */
+    --sym-size-orbit-hero: clamp(15rem, 2.93rem + 49.52vw, 47.5rem);
+
+    /* ---------- shape & lines ---------- */
+    /* Editorial language: square fields, hairline rules, round controls. Roles first, so the design pass changes one line. */
+    --sym-radius-none: 0;
+    --sym-radius-sm: 4px;
+    --sym-radius-md: 8px;
+    --sym-radius-lg: 16px;
+    --sym-radius-pill: 999px;
+    --sym-shape-card: var(--sym-radius-none);
+    --sym-shape-media: var(--sym-radius-none);
+    --sym-shape-control: var(--sym-radius-pill);
+    --sym-shape-chip: var(--sym-radius-pill);
+    --sym-shape-popup: var(--sym-radius-md);
+    --sym-rule-width: 1px;
+    --sym-rule-width-strong: 2px;
+    --sym-focus-width: 3px;
+    --sym-focus-offset: 3px;
+
+    /* ---------- elevation: only floating things (sticky header, drawer, popups). Plum-tinted, layered (never grey). ---------- */
+    --sym-shadow-tint: #302738;
+    --sym-shadow-float: 0 1px 2px color-mix(in srgb, var(--sym-shadow-tint) 8%, transparent),
+      0 8px 20px color-mix(in srgb, var(--sym-shadow-tint) 9%, transparent),
+      0 24px 48px color-mix(in srgb, var(--sym-shadow-tint) 8%, transparent);
+    --sym-scrim: color-mix(in srgb, var(--sym-shadow-tint) 48%, transparent);
+
+    /* ---------- z-index (never a number in CSS) ---------- */
+    --sym-z-base: 0;
+    --sym-z-raised: 1;
+    --sym-z-sticky: 100;
+    --sym-z-drawer: 300;
+    --sym-z-popover: 400;
+    --sym-z-skip: 900;
+
+    /* ---------- state layers ---------- */
+    --sym-state-hover: .08;
+    --sym-state-pressed: .14;
+    --sym-state-disabled: .4;
+
+    /* ================= MOTION =================
+       One duration ladder × curve roles. The tier is chosen by what moves (size / distance); exits are one tier shorter;
+       colour and opacity run one tier faster than movement; parts of one object share one clock. Handbook «motion». */
+    --sym-motion-scale: 1;       /* multiplies every duration */
+    --sym-motion-travel: 1;      /* 0 under reduced motion: multiplies every translate / scale delta, so movement becomes a fade */
+    --sym-stagger: 60ms;         /* step between siblings of a reveal group; max 6 steps (editorial pace; app UIs use 20 ms) */
+    --sym-reveal-distance: 24px;
+
+    --sym-dur-instant: calc(80ms * var(--sym-motion-scale));    /* link colour, state layer */
+    --sym-dur-micro: calc(120ms * var(--sym-motion-scale));     /* arrow nudge, icon swap */
+    --sym-dur-small: calc(180ms * var(--sym-motion-scale));     /* button fill, chip, underline, card hover */
+    --sym-dur-medium: calc(250ms * var(--sym-motion-scale));    /* accordion, banner, tabs */
+    --sym-dur-large: calc(350ms * var(--sym-motion-scale));     /* route change, drawer panel, header condense, reveal of text */
+    --sym-dur-xlarge: calc(500ms * var(--sym-motion-scale));    /* full-screen menu */
+    --sym-dur-hero: calc(700ms * var(--sym-motion-scale));      /* reveal of large media / hero (this site only; apps cap at 500) */
+    --sym-dur-ambient: 60s;                                     /* orbit rotation: slower than attention, not scaled */
+    --sym-dur-micro-out: var(--sym-dur-instant);
+    --sym-dur-small-out: var(--sym-dur-micro);
+    --sym-dur-medium-out: var(--sym-dur-small);
+    --sym-dur-large-out: var(--sym-dur-medium);
+    --sym-dur-xlarge-out: var(--sym-dur-large);
+    --sym-fx-micro: var(--sym-dur-instant);
+    --sym-fx-small: var(--sym-dur-micro);
+    --sym-fx-medium: var(--sym-dur-small);
+    --sym-fx-large: var(--sym-dur-medium);
+    --sym-fx-hero: var(--sym-dur-large);
+
+    --sym-ease-standard: cubic-bezier(.2, 0, 0, 1);
+    --sym-ease-enter: cubic-bezier(0, 0, 0, 1);
+    --sym-ease-exit: cubic-bezier(.3, 0, 1, 1);
+    --sym-ease-emph-enter: cubic-bezier(.05, .7, .1, 1);        /* long decelerating tail: reveals, hero */
+    --sym-ease-emph-exit: cubic-bezier(.3, 0, .8, .15);
+    /* soft spring (damping .8): things that move or resize on screen. Never for colour or opacity (overshoot clamps). */
+    --sym-ease-spring: linear(0, 0.0064 1.8%, 0.024 3.7%, 0.0563 5.8%, 0.1018 8.2%, 0.2011 12.3%, 0.4228 20.7%, 0.5204 24.5%, 0.6099 28.3%, 0.6896 32.2%, 0.7504 35.5%, 0.8055 39%, 0.8523 42.5%, 0.8911 46%, 0.932 50.7%, 0.963 55.5%, 0.9866 60.8%, 1.0025 66.7%, 1.0124 74.2%, 1.0151 83.7%, 1.0101 99.8%, 1);
+
+    /* shorthands: transition: <moving prop> var(--sym-t-small), <colour prop> var(--sym-t-fx-small) */
+    --sym-t-state: var(--sym-dur-instant) linear;
+    --sym-t-micro: var(--sym-dur-micro) var(--sym-ease-spring);
+    --sym-t-small: var(--sym-dur-small) var(--sym-ease-spring);
+    --sym-t-medium: var(--sym-dur-medium) var(--sym-ease-spring);
+    --sym-t-large: var(--sym-dur-large) var(--sym-ease-spring);
+    --sym-t-small-in: var(--sym-dur-small) var(--sym-ease-enter);
+    --sym-t-medium-in: var(--sym-dur-medium) var(--sym-ease-enter);
+    --sym-t-large-in: var(--sym-dur-large) var(--sym-ease-emph-enter);
+    --sym-t-xlarge-in: var(--sym-dur-xlarge) var(--sym-ease-emph-enter);
+    --sym-t-hero-in: var(--sym-dur-hero) var(--sym-ease-emph-enter);
+    --sym-t-micro-out: var(--sym-dur-micro-out) var(--sym-ease-exit);
+    --sym-t-small-out: var(--sym-dur-small-out) var(--sym-ease-exit);
+    --sym-t-medium-out: var(--sym-dur-medium-out) var(--sym-ease-exit);
+    --sym-t-large-out: var(--sym-dur-large-out) var(--sym-ease-emph-exit);
+    --sym-t-xlarge-out: var(--sym-dur-xlarge-out) var(--sym-ease-emph-exit);
+    --sym-t-fx-micro: var(--sym-fx-micro) var(--sym-ease-standard);
+    --sym-t-fx-small: var(--sym-fx-small) var(--sym-ease-standard);
+    --sym-t-fx-medium: var(--sym-fx-medium) var(--sym-ease-standard);
+    --sym-t-fx-large: var(--sym-fx-large) var(--sym-ease-standard);
+    --sym-t-fx-hero: var(--sym-fx-hero) var(--sym-ease-standard);
+  }
+
+  /* motion profiles: an explicit attribute on <html> wins over the OS setting only for `no-preference` users */
+  :root[data-motion='reduce'] { --sym-motion-travel: 0; --sym-stagger: 0ms; --sym-ease-spring: var(--sym-ease-standard); }
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-motion='full']) { --sym-motion-travel: 0; --sym-stagger: 0ms; --sym-ease-spring: var(--sym-ease-standard); }
+  }
+}

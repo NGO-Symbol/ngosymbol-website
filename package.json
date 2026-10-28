@@ -13,10 +13,20 @@
     "generate": "pnpm -r generate",
     "typecheck": "pnpm -r typecheck",
     "kb:validate": "node scripts/kb-validate.mjs",
-    "check": "pnpm kb:validate && pnpm typecheck && pnpm build",
+    "check": "pnpm kb:validate && pnpm ds:contrast && pnpm ds:lint && pnpm typecheck && pnpm build",
     "task:status": "node scripts/task.mjs status",
     "task:new": "node scripts/task.mjs new",
     "task:save": "node scripts/task.mjs save",
-    "task:ship": "node scripts/task.mjs ship"
+    "task:ship": "node scripts/task.mjs ship",
+    "dev:design": "pnpm --filter @symbol/design dev",
+    "ds:meta": "node scripts/ds-meta.mjs",
+    "ds:shot": "node scripts/ds-shot.mjs",
+    "ds:lint": "node scripts/ds-lint.mjs",
+    "ds:contrast": "node scripts/ds-contrast.mjs",
+    "ds:crawl": "node scripts/ds-crawl.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "playwright-core": "^1.64.1"
   }
 }

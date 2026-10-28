@@ -42,6 +42,12 @@ jobs:
         env:
           NITRO_PRESET: github_pages
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+      # the design-system gallery is published inside the main site at /design/ (static, noindex) so it can be opened on a phone
+      - run: pnpm --filter @symbol/design generate
+        env:
+          NITRO_PRESET: github_pages
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/design/
+      - run: mkdir -p apps/main/.output/public/design && cp -R apps/design/.output/public/. apps/main/.output/public/design/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/main/.output/public

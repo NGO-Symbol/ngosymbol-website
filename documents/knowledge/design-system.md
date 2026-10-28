@@ -20,6 +20,11 @@ Combine:
 
 The two original logo colors have insufficient contrast against each other for ordinary body text. Use deep plum/ink on apricot and cream on deep plum. Keep violet/apricot pairings for large marks, backgrounds, and decorative geometry.
 
+## Implementation
+
+The design system is implemented in `packages/ui` (tokens, tones, motion, `Sym*` components) and documented in `packages/ui/docs/CONTEXT.md`; the live gallery is `symbol.ngo/design/` ([ADR-0007](decisions/ADR-0007-design-system.md)). This file keeps the direction; the handbook keeps the rules.
+Typography is a provisional Cyrillic-capable pair (Source Serif 4 + Manrope) because Newsreader and DM Sans have no Cyrillic; final fonts and exact tone values are decided in the design pass.
+
 ## Visual principles
 
 - The spiral means movement, attention, return, and collected stories.

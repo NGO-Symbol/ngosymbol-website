@@ -10,7 +10,7 @@ This directory is the canonical memory for the institutional website and its pro
 | --- | --- |
 | Understand the organization | [`organization.md`](organization.md), [`project-registry.md`](project-registry.md) |
 | Plan pages or content | [`website-strategy.md`](website-strategy.md), [`information-architecture.md`](information-architecture.md) |
-| Design UI | [`design-system.md`](design-system.md), [`content-inventory.md`](content-inventory.md) |
+| Design UI | [`design-system.md`](design-system.md), [`content-inventory.md`](content-inventory.md), [`../../packages/ui/docs/CONTEXT.md`](../../packages/ui/docs/CONTEXT.md) (components, tokens, motion) |
 | Change code or deployment | [`technical-architecture.md`](technical-architecture.md), [`decisions/`](decisions/), [`../operations/deployment.md`](../operations/deployment.md) |
 | Save or publish work | [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md), `.agents/skills/site-workflow` |
 | Verify a claim | [`sources.md`](sources.md), [`schema.md`](schema.md) |
