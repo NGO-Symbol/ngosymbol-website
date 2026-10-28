@@ -1,0 +1,150 @@
+# Deployment and one-time GitHub setup
+
+Both sites are static Nuxt builds published by
+[`.github/workflows/deploy.yml`](../../.github/workflows/deploy.yml) on every push to `main`.
+The decision and its alternatives are recorded in
+[ADR-0005](../knowledge/decisions/ADR-0005-multi-app-hosting.md).
+
+| Site | Built from | Published to | Pages source |
+| --- | --- | --- | --- |
+| `symbol.ngo` | `apps/main` | this repository | GitHub Actions |
+| `istoriia-vulytsi.symbol.ngo` | `apps/istoriia-vulytsi` | `ngosymbol/istoriia-vulytsi` (deploy-only) | `gh-pages` branch |
+
+GitHub Pages serves one site per repository, so each autonomous project needs its own
+deploy-only repository. Nobody edits those repositories by hand; the workflow overwrites them.
+
+Everything below requires **owner/admin** rights on the `ngosymbol` account and is done once.
+Commands use the GitHub CLI (`gh`); each step also names the web UI location.
+
+## 1. Repository settings
+
+Before making the repository public, confirm that nothing private is committed
+(`documents/knowledge` is published with the code).
+
+```bash
+gh repo edit ngosymbol/ngosymbol-website \
+  --visibility public --accept-visibility-change-consequences \
+  --enable-auto-merge --delete-branch-on-merge \
+  --enable-squash-merge --enable-merge-commit=false --enable-rebase-merge=false
+```
+
+Web UI: Settings → General (visibility is under “Danger Zone”; merge options under “Pull Requests”).
+
+## 2. Protect `main`
+
+Changes reach `main` only through a pull request whose `validate` check (CI) passed.
+
+```bash
+gh api -X POST repos/ngosymbol/ngosymbol-website/rulesets --input - <<'EOF'
+{
+  "name": "protect-main",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
+  "rules": [
+    { "type": "deletion" },
+    { "type": "non_fast_forward" },
+    { "type": "pull_request", "parameters": {
+        "required_approving_review_count": 0,
+        "dismiss_stale_reviews_on_push": false,
+        "require_code_owner_review": false,
+        "require_last_push_approval": false,
+        "required_review_thread_resolution": false } },
+    { "type": "required_status_checks", "parameters": {
+        "strict_required_status_checks_policy": false,
+        "required_status_checks": [{ "context": "validate" }] } }
+  ]
+}
+EOF
+```
+
+Web UI: Settings → Rules → Rulesets. Raise `required_approving_review_count` to 1 if a
+person should approve every change before it goes live.
+
+## 3. Main site on GitHub Pages
+
+```bash
+gh api -X POST repos/ngosymbol/ngosymbol-website/pages -f build_type=workflow
+```
+
+Web UI: Settings → Pages → Source: **GitHub Actions**. Until the custom domain is active the
+site is available at `https://ngosymbol.github.io/ngosymbol-website/`.
+
+## 4. Street History deploy repository
+
+```bash
+gh repo create ngosymbol/istoriia-vulytsi --public \
+  --description "Build output of istoriia-vulytsi.symbol.ngo. Source: ngosymbol/ngosymbol-website" \
+  --add-readme
+
+ssh-keygen -t ed25519 -N "" -C "street-deploy" -f street_deploy_key
+gh repo deploy-key add street_deploy_key.pub -R ngosymbol/istoriia-vulytsi --allow-write -t "deploy from ngosymbol-website"
+gh secret set STREET_DEPLOY_KEY -R ngosymbol/ngosymbol-website < street_deploy_key
+gh variable set STREET_DEPLOY_REPO -R ngosymbol/ngosymbol-website -b ngosymbol/istoriia-vulytsi
+rm street_deploy_key street_deploy_key.pub
+```
+
+Run the **Deploy** workflow once (Actions → Deploy → Run workflow) so the `gh-pages` branch exists, then:
+
+```bash
+gh api -X POST repos/ngosymbol/istoriia-vulytsi/pages -f "source[branch]=gh-pages" -f "source[path]=/"
+```
+
+Web UI: in `ngosymbol/istoriia-vulytsi` → Settings → Pages → Deploy from a branch → `gh-pages` / root.
+
+## 5. Domain (DNS is managed in Cloudflare)
+
+`symbol.ngo` is registered at Cloudflare and its DNS lives there. Google Workspace mail uses the
+existing `MX` and `TXT` records — **do not delete or edit them**.
+
+1. Verify the domain for the account (prevents takeover): GitHub → profile Settings → Pages →
+   Add a domain → `symbol.ngo`. Add the shown `TXT` record (`_github-pages-challenge-ngosymbol`)
+   in Cloudflare, then press Verify.
+2. In Cloudflare → `symbol.ngo` → DNS → Records, add (Proxy status: **DNS only**, grey cloud —
+   GitHub cannot issue the HTTPS certificate through the Cloudflare proxy):
+
+   | Type | Name | Content |
+   | --- | --- | --- |
+   | A | `@` | `185.199.108.153` |
+   | A | `@` | `185.199.109.153` |
+   | A | `@` | `185.199.110.153` |
+   | A | `@` | `185.199.111.153` |
+   | AAAA | `@` | `2606:50c0:8000::153` |
+   | AAAA | `@` | `2606:50c0:8001::153` |
+   | AAAA | `@` | `2606:50c0:8002::153` |
+   | AAAA | `@` | `2606:50c0:8003::153` |
+   | CNAME | `www` | `ngosymbol.github.io` |
+   | CNAME | `istoriia-vulytsi` | `ngosymbol.github.io` |
+
+   Never add a wildcard (`*`) record.
+3. Attach the domains:
+
+   ```bash
+   gh api -X PUT repos/ngosymbol/ngosymbol-website/pages -f cname=symbol.ngo
+   gh variable set STREET_DOMAIN -R ngosymbol/ngosymbol-website -b istoriia-vulytsi.symbol.ngo
+   gh workflow run deploy.yml -R ngosymbol/ngosymbol-website
+   ```
+
+   The workflow switches both builds from the temporary `github.io/<repo>/` path to the root
+   path and writes the `CNAME` file into the Street History deploy repository.
+4. After the certificate is issued (minutes to a few hours), enable **Enforce HTTPS** in
+   Settings → Pages of both repositories.
+
+## 6. Collaborators
+
+Invite each editor with **Write** access (Settings → Collaborators). Each computer needs Git,
+Node 22, pnpm (`corepack enable`), and an authenticated GitHub CLI (`gh auth login`); the daily
+workflow is in [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
+
+## Adding another autonomous project
+
+Create `apps/{project}`, then copy the `street-site` job in `deploy.yml` with its own
+deploy repository, key, and domain variables, and add one `CNAME` record for the subdomain.
+
+## Troubleshooting
+
+- Deploy job fails at “configure-pages”: step 3 was not done.
+- `street-site` job is skipped: `STREET_DEPLOY_REPO` variable is missing.
+- Site loads without styles: the custom-domain setting and the `STREET_DOMAIN` variable or
+  Pages custom domain disagree; rerun the Deploy workflow after fixing.
+- Certificate stays pending: a record is proxied (orange cloud) in Cloudflare.

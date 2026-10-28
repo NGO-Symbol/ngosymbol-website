@@ -2,6 +2,19 @@
 
 This repository contains both source code and the durable knowledge base for ГО «Символ».
 
+## Every session
+
+1. Run `pnpm task:status` and follow `.agents/skills/site-workflow/SKILL.md`: it tells you how to start a task branch, save progress in small commits, and publish through a pull request. The people you work with are not developers; run these commands for them.
+2. Never edit on `main`, never force-push, never bypass checks.
+
+## Repository skills
+
+Skills live in `.agents/skills/`. If your tool does not load them automatically, read the `SKILL.md` whose trigger matches the task:
+
+- `site-workflow` — session start, saving, publishing, «збережи», «опублікуй», «що нового».
+- `symbol-project-memory` — organization facts, product, design, architecture, or content decisions.
+- `update-symbol-context` — «онови контекст», «синхронізуй контекст», `$update-symbol-context`.
+
 ## Before substantial work
 
 1. Read `documents/knowledge/INDEX.md`.

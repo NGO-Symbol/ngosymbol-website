@@ -1,0 +1,87 @@
+name: Deploy
+
+# Publishes both static sites after every merge to main.
+# One-time owner setup: documents/operations/deployment.md
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  main-site:
+    name: symbol.ngo
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - id: pages
+        uses: actions/configure-pages@v5
+      # base_path is empty once a custom domain is set, otherwise "/<repo>".
+      - run: pnpm --filter @symbol/main generate
+        env:
+          NITRO_PRESET: github_pages
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/main/.output/public
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  street-site:
+    name: istoriia-vulytsi.symbol.ngo
+    # Skipped until the owner creates the deploy repository and sets STREET_DEPLOY_REPO.
+    if: vars.STREET_DEPLOY_REPO != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Resolve base path
+        run: |
+          if [ -n "$STREET_DOMAIN" ]; then
+            echo "NUXT_APP_BASE_URL=/" >> "$GITHUB_ENV"
+          else
+            echo "NUXT_APP_BASE_URL=/${STREET_REPO#*/}/" >> "$GITHUB_ENV"
+          fi
+        env:
+          STREET_DOMAIN: ${{ vars.STREET_DOMAIN }}
+          STREET_REPO: ${{ vars.STREET_DEPLOY_REPO }}
+      - run: pnpm --filter @symbol/istoriia-vulytsi generate
+        env:
+          NITRO_PRESET: github_pages
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.STREET_DEPLOY_KEY }}
+          external_repository: ${{ vars.STREET_DEPLOY_REPO }}
+          publish_branch: gh-pages
+          publish_dir: apps/istoriia-vulytsi/.output/public
+          cname: ${{ vars.STREET_DOMAIN }}
+          force_orphan: true
+          commit_message: ${{ github.event.head_commit.message }}

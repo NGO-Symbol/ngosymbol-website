@@ -19,9 +19,7 @@ Items here are unresolved and must not be silently assumed.
 
 ## Infrastructure
 
-- Select DNS provider and deployment platform.
-- Confirm whether the GitHub repository is private and which organization plan is available.
-- Decide whether main and project sites deploy as separate Cloudflare Pages projects, separate GitHub Pages repositories, or another multi-project host.
-- Configure GitHub authentication on development computers.
-- Activate DNS for `symbol.ngo` and create explicit subdomain records; avoid an unmanaged wildcard.
+- Owner to complete the one-time setup in `documents/operations/deployment.md`: make the repository public, enable Pages, protect `main`, create `ngosymbol/istoriia-vulytsi`, add DNS records in Cloudflare.
+- Decide whether pull requests need a human approval before going live (currently CI only).
+- Configure GitHub CLI authentication on each editor's computer.
 

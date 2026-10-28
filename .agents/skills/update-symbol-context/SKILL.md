@@ -36,4 +36,4 @@ Latest explicit user/team corrections outrank older PDFs and public sources. If 
 - Never store credentials, private links, hidden personal data, or raw conversation transcripts.
 - Do not promote proposals or inferences to confirmed facts.
 - Do not create duplicate canonical explanations.
-- Do not commit or push unless the user separately requested repository publication.
+- Save the result as a local commit per `site-workflow`; publish (`pnpm task:ship`) only when the user asks.

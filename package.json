@@ -13,6 +13,10 @@
     "generate": "pnpm -r generate",
     "typecheck": "pnpm -r typecheck",
     "kb:validate": "node scripts/kb-validate.mjs",
-    "check": "pnpm kb:validate && pnpm typecheck && pnpm build"
+    "check": "pnpm kb:validate && pnpm typecheck && pnpm build",
+    "task:status": "node scripts/task.mjs status",
+    "task:new": "node scripts/task.mjs new",
+    "task:save": "node scripts/task.mjs save",
+    "task:ship": "node scripts/task.mjs ship"
   }
 }

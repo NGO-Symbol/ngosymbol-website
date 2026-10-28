@@ -1,0 +1,4 @@
+interface:
+  display_name: "Symbol Site Workflow"
+  short_description: "Start, save, and publish website changes safely"
+  default_prompt: "Check the repository status, then start, save, or publish the current task with the pnpm task commands."
