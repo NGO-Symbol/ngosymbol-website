@@ -20,7 +20,9 @@ Accepted model: [ADR-0006](decisions/ADR-0006-linked-content-model.md). `USER_CO
 /en/...                 English version (URL pattern still open)
 ```
 
-Header: Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA / EN.
+Header: official logo · Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA / EN.
+
+Every page except Home shows a path (breadcrumbs) at the top, like a Finder path: «Головна › Люди › Павло Маков». An event's path goes through its project: «Головна › Проєкти › {project · year} › {event}». `USER_CONFIRMED` 2026-10-29.
 
 Later, when content justifies it: News, Press kit. There is still no global “Materials / Stories” item (see `website-strategy.md`).
 

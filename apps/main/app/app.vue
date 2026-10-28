@@ -13,6 +13,7 @@ useHead({
   <div class="site-shell">
     <IntroSplash />
     <ClickEffects />
+    <RouteWipe />
     <SiteHeader />
     <main>
       <NuxtPage />

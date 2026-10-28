@@ -24,7 +24,9 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
 <template>
   <article v-if="project" class="project-page">
     <header class="project-hero" :class="`tone-${project.tone}`">
+      <ProjectMotif class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
+        <Breadcrumbs :items="[{ label: 'Проєкти', to: '/projects' }, { label: project.title }]" />
         <div class="project-kicker">
           <span>{{ projectYears(project) }}</span>
           <span>{{ projectPlace(project) }}</span>

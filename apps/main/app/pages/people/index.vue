@@ -13,11 +13,25 @@ const visible = computed(() => {
   return q ? listed.filter(({ person }) => person.name.toLowerCase().includes(q)) : listed
 })
 
+// The search hint names a different artist on every visit (never the same twice in a row).
+const hint = ref('Наприклад, Маков')
+onMounted(() => {
+  const artists = listed.filter(({ person, appearances }) => !person.team && appearances.length).map(({ person }) => person.name.replace(/\s*\(.*\)$/, ''))
+  if (!artists.length) return
+  let last = ''
+  try { last = localStorage.getItem('symbol-people-hint') ?? '' } catch {}
+  const pool = artists.length > 1 ? artists.filter(name => name !== last) : artists
+  const name = pool[Math.floor(Math.random() * pool.length)]!
+  try { localStorage.setItem('symbol-people-hint', name) } catch {}
+  hint.value = `Наприклад, ${name}`
+})
+
 const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => part[0]).join('')
 </script>
 
 <template>
   <section class="page container">
+    <Breadcrumbs :items="[{ label: 'Люди' }]" />
     <div class="page-title">
       <span class="eyebrow">Автори · митці · команда</span>
       <h1>Люди</h1>
@@ -25,7 +39,7 @@ const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => par
     </div>
     <label class="search">
       <span class="label">Пошук за ім’ям</span>
-      <input id="people-search" v-model="query" type="search" placeholder="Наприклад, Маков">
+      <input id="people-search" v-model="query" type="search" :placeholder="hint">
     </label>
     <ul class="people-grid">
       <li v-for="{ person, appearances } in visible" :key="person.slug">

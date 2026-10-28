@@ -67,6 +67,7 @@ function jump(year: number) {
 
 <template>
   <section class="page container">
+    <Breadcrumbs :items="[{ label: 'Проєкти' }]" />
     <div class="page-title">
       <span class="eyebrow">Архів та актуальні ініціативи</span>
       <h1>Проєкти</h1>

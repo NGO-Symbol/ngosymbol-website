@@ -25,6 +25,7 @@ async function copy(value: string) {
 
 <template>
   <section class="page container support-page">
+    <Breadcrumbs :items="[{ label: 'Підтримати' }]" />
     <div class="page-title page-title--wide">
       <span class="eyebrow">Доєднатися і підтримати</span>
       <h1>Станьте частиною «Символу»</h1>

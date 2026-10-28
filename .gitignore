@@ -11,3 +11,7 @@ dist
 .DS_Store
 .idea/
 .vscode/
+
+# Local working material (not for the repository)
+media-inbox/
+Сайт_*/

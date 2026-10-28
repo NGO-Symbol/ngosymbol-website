@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { socials } from '~/data/social'
 definePageMeta({ pageTransition: { name: 'fade', mode: 'out-in' } })
 useSeoMeta({ title: 'Контакти' })
 </script>
@@ -10,8 +11,7 @@ useSeoMeta({ title: 'Контакти' })
       <h1>Поговорімо про майбутній проєкт</h1>
       <div class="contact-links">
         <span class="selectable">ngo.symbol@gmail.com</span>
-        <a href="https://www.instagram.com/symbol.ngo/" target="_blank" rel="noreferrer">Instagram ↗</a>
-        <a href="https://t.me/symbolngo" target="_blank" rel="noreferrer">Telegram ↗</a>
+        <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
       </div>
       <p>Корпоративна пошта з’явиться після налаштування Google Workspace для неприбуткових організацій.</p>
     </div>

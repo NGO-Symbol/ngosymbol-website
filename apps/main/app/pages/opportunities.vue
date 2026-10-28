@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { socials } from '~/data/social'
 definePageMeta({ pageTransition: { name: 'curtain', mode: 'out-in' } })
 useSeoMeta({ title: 'Можливості', description: 'Опен-коли, резиденції та інші можливості від ГО «Символ».' })
 
@@ -9,6 +10,7 @@ const archive = opportunities.filter(item => !isActive(item)).sort((a, b) => b.d
 
 <template>
   <section class="page container">
+    <Breadcrumbs :items="[{ label: 'Можливості' }]" />
     <div class="page-title">
       <span class="eyebrow">Опен-коли · резиденції · волонтерство</span>
       <h1>Можливості</h1>
@@ -25,10 +27,12 @@ const archive = opportunities.filter(item => !isActive(item)).sort((a, b) => b.d
       </a>
     </div>
     <div v-else class="empty-state">
-      <span class="orbit-small" />
-      <h2>Зараз відкритих можливостей немає</h2>
-      <p>Нові опен-коли анонсуємо тут і в соцмережах.</p>
-      <a href="https://www.instagram.com/symbol.ngo/" target="_blank" rel="noreferrer">Instagram ↗</a>
+      <SymbolMark class="empty-state__mark" />
+      <h2>Нові можливості вже на орбіті</h2>
+      <p>Готуємо опен-коли, резиденції та набори волонтерів. Стежте за анонсами тут і в наших соцмережах — і долучайтеся першими.</p>
+      <div class="button-row">
+        <a v-for="(item, index) in socials" :key="item.label" class="button" :class="{ 'button--dark': index === 0 }" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
+      </div>
     </div>
 
     <section v-if="archive.length" class="events-block">

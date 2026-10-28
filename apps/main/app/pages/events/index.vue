@@ -36,6 +36,7 @@ const days = computed(() => {
 
 <template>
   <section class="page container">
+    <Breadcrumbs :items="[{ label: 'Події' }]" />
     <div class="page-title">
       <span class="eyebrow">Календар</span>
       <h1>Події</h1>

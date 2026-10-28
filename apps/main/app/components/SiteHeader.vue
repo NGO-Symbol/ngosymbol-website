@@ -15,9 +15,8 @@ function animateMark() {
 
 <template>
   <header class="site-header container">
-    <NuxtLink class="wordmark" to="/" aria-label="ГО Символ — головна" @click="animateMark">
-      <SymbolMark :class="markClass" @animationend="markClass = ''" />
-      <span>СИМВОЛ</span>
+    <NuxtLink class="wordmark" to="/" aria-label="ГО «Символ» — головна" @click="animateMark">
+      <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
     <nav aria-label="Основна навігація">
       <NuxtLink to="/projects">Проєкти</NuxtLink>

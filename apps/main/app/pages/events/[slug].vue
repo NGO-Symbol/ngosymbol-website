@@ -40,7 +40,7 @@ const googleUrl = computed(() => {
 
 <template>
   <article v-if="event" class="page container event-page">
-    <NuxtLink class="text-link" :to="`/projects/${project.slug}`">← Проєкт «{{ project.title }}» · {{ projectByline(project) }}</NuxtLink>
+    <Breadcrumbs :items="[{ label: 'Проєкти', to: '/projects' }, { label: `${project.title} · ${projectYears(project)}`, to: `/projects/${project.slug}` }, { label: event.title }]" />
     <div class="page-title page-title--wide">
       <span class="eyebrow">{{ formats[event.format] }}</span>
       <h1>{{ event.title }}</h1>

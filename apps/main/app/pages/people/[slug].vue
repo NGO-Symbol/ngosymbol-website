@@ -20,7 +20,7 @@ useHead({
 
 <template>
   <article v-if="person" class="page container">
-    <NuxtLink class="text-link" to="/people">← Усі люди</NuxtLink>
+    <Breadcrumbs :items="[{ label: 'Люди', to: '/people' }, { label: person.name }]" />
     <div class="page-title page-title--wide">
       <span class="eyebrow">{{ person.team ? 'Команда «Символу»' : 'Учасники проєктів' }}<template v-if="person.teamRole"> · {{ person.teamRole }}</template></span>
       <h1>{{ person.name }}</h1>

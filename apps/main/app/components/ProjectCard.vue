@@ -11,7 +11,7 @@ defineProps<{ project: Project }>()
       <span>{{ statusLabels[project.status] }}</span>
     </div>
     <div class="project-card__visual">
-      <span class="orbit" />
+      <ProjectMotif class="project-card__motif" :motif="project.motif" />
       <span v-if="project.role === 'partner'" class="project-card__badge">Символ — партнер</span>
       <span v-if="project.subsiteUrl" class="project-card__badge project-card__badge--site">Є сайт проєкту ↗</span>
     </div>

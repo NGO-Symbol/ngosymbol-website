@@ -28,15 +28,21 @@ The two original logo colors have insufficient contrast against each other for o
 - Project sites may define their own typography and layout.
 - The institutional connection can shrink to a compact “A project by NGO Symbol” bar on autonomous sites.
 
+## Logo
+
+The official logo (mark + «СИМВОЛ» + «громадська організація») comes from the organization's Drive folder «Актуальні логотипи Символу» and is stored as `packages/brand/assets/symbol-logo.svg`. `apps/main/app/components/SymbolLogo.vue` renders it inline: the inscription takes `currentColor` (ink on light, cream on dark), the mark keeps violet `#9280A6` and apricot `#FDD08F`. Parts: `full`, `mark`, `wordmark`. Generic arcs/“C” shapes are not used as a stand-in for the mark. `USER_CONFIRMED` 2026-10-29.
+
 ## Motion
 
-Every kind of interaction has its own motion, built from the logo's shapes (circle, spiral arc, diamond). `USER_CONFIRMED` 2026-10-29 (wanted: different animations for intro, clicks, page transitions, logo clicks); concrete motions `PROPOSED`.
+Motion follows the identity: Symbol as a whole moves along the spiral and the orbit (movement, attention, return, collected stories); every project moves in its own way, taken from what the project is about. `USER_CONFIRMED` 2026-10-29 (principle, more expressive motion); concrete motions `PROPOSED`.
 
-- **Intro**: on the first page view of a browser session; ≤1.5 s; click or key skips; disabled for `prefers-reduced-motion`. Four variants rotate on each new visit: circular sweep reveal, spiral spin-in, iris opening, drop-in with spreading ring.
-- **Home visual hook**: project titles with years circle the spiral mark on an orbit; hover pauses it and shows the project line; each title links to its project.
-- **Clicks**: a short shape at the pointer, by control type — diamond (orbit titles), spiral arc (project and person cards), dot burst (main navigation), ring (buttons and filters), wave (events and open calls), small spark (other links). Buttons and cards also press in slightly.
-- **Page transitions** by section: Home and Contact fade; Projects rise; a project page zooms in; Events slide sideways; People blur in; Opportunities and About open like a curtain; Support tilts in.
-- **Header logo**: each click plays the next of five mark animations (spin, bounce, flip, wobble, pulse).
+- **Intro**: once per browser session, ≈2 s, click or key skips, off for `prefers-reduced-motion`. Four variants rotate per visit (sweep reveal, spin-in, iris, drop with rings); the official inscription is revealed under the mark, then the mark flies to the header logo.
+- **Home hook**: project titles with years orbit the mark; the orbit tilts toward the pointer, turns further on scroll, pauses on hover, and spins away when a title is clicked.
+- **Project motifs** (`ProjectMotif.vue`, `motif` field of a project) on cards and project heroes: Історія моєї вулиці — streets drawn like a map with a walker; Голоси у русі — sound waves; Покажіть свої документи — shuffling sheets and a landing stamp; Тренінги mhGAP — breathing circles; Історії різних — playback curtains opening on a spotlight; Збирач конвалій — a running film strip; 2, 10, 300 років потому — three rings of time; Харківське море — waves.
+- **Between sections**: a disc in the target section's colour spreads from the click with the logo turning in it, then closes over the new page; each section also has its own page transition (rise, zoom, slide, blur, curtain, tilt).
+- **On scroll**: blocks rise into place one after another.
+- **Clicks**: a shape at the pointer by control type (diamond, spiral arc, dot burst, ring, wave, spark); buttons and cards press in.
+- **Header logo**: each click plays the next mark animation (spin, bounce, flip, wobble, pulse).
 
 ## Shared versus project identity
 

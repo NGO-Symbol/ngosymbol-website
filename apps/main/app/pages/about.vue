@@ -13,6 +13,7 @@ const supporters = organizations
 
 <template>
   <section class="page container">
+    <Breadcrumbs :items="[{ label: 'Про нас' }]" />
     <div class="page-title page-title--wide">
       <span class="eyebrow">ГО «Символ»</span>
       <h1>Незалежна організація про культуру, мистецтво й уважність</h1>

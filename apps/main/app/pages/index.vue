@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { socials } from '~/data/social'
 definePageMeta({ pageTransition: { name: 'fade', mode: 'out-in' } })
 useSeoMeta({
   title: 'Культура в русі',
@@ -78,8 +79,7 @@ const supporters = organizations.filter(org => projects.some(project => project.
         <h2>Стежте за «Символом»</h2>
         <div class="subscribe__links">
           <a href="/events.ics">Підписатися на календар подій</a>
-          <a href="https://www.instagram.com/symbol.ngo/" target="_blank" rel="noreferrer">Instagram ↗</a>
-          <a href="https://t.me/symbolngo" target="_blank" rel="noreferrer">Telegram ↗</a>
+          <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
           <p>Розсилка запуститься згодом.</p>
         </div>
       </div>

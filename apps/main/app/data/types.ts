@@ -8,6 +8,8 @@ export type ProjectStatus = 'planned' | 'launching' | 'ongoing' | 'completed'
 export type ProjectKind = 'long' | 'single'
 export type ProjectRole = 'organizer' | 'partner'
 export type Tone = 'violet' | 'apricot' | 'cream' | 'plum' | 'lilac'
+/** Project-specific motion motif (components/ProjectMotif.vue). */
+export type Motif = 'streets' | 'voices' | 'documents' | 'breath' | 'curtain' | 'film' | 'time' | 'sea'
 
 export interface Credit {
   person: string
@@ -37,6 +39,7 @@ export interface Project {
   body?: Paragraphs
   concept?: Paragraphs
   tone: Tone
+  motif: Motif
   people?: Credit[]
   partners?: string[]
   donors?: string[]
