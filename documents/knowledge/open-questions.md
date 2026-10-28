@@ -19,7 +19,6 @@ Items here are unresolved and must not be silently assumed.
 
 ## Infrastructure
 
-- Connect the domain (step 5 of `documents/operations/deployment.md`): verify `symbol.ngo` for the `NGO-Symbol` organization, add the GitHub Pages records in Cloudflare, then set the custom domains. Steps 1–4 were completed on 2026-10-28; until then the sites run at `ngo-symbol.github.io/ngosymbol-website/` and `ngo-symbol.github.io/istoriia-vulytsi/`.
 - Invite remaining editors to the `NGO-Symbol` organization with Write access.
 - Decide whether pull requests need a human approval before going live (currently CI only).
 - Configure GitHub CLI authentication on each editor's computer.
