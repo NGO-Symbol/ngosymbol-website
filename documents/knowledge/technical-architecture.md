@@ -24,11 +24,11 @@ Each hostname is a separate deployment target:
 - `symbol.ngo` builds `apps/main`.
 - `istoriia-vulytsi.symbol.ngo` builds `apps/istoriia-vulytsi`.
 
-GitHub remains the source repository. A single GitHub Pages deployment does not provide independent build outputs for multiple apps/hostnames in one repository. Viable deployment models:
+Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). The source repository is public. The `Deploy` workflow publishes `apps/main` to this repository's Pages site and each autonomous app to its own deploy-only repository (`ngosymbol/istoriia-vulytsi`). Builds use the Nitro `github_pages` preset; the base path switches from `/<repo>/` to `/` once a custom domain is configured. DNS stays in Cloudflare in DNS-only mode. Setup steps: [`../operations/deployment.md`](../operations/deployment.md).
 
-1. **Recommended, pending approval:** separate Cloudflare Pages projects connected to the same monorepo, each with its own root/build command and custom domain.
-2. Separate GitHub Pages repositories receiving generated artifacts from this monorepo.
-3. Another platform that supports multiple projects from one repository.
+## Change workflow
+
+All changes go through `task/*` branches and pull requests guarded by the `validate` check; agents drive Git through `pnpm task:*` ([ADR-0006](decisions/ADR-0006-agent-git-workflow.md), [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md)).
 
 Do not create wildcard DNS for all subdomains. Add and verify each project hostname explicitly to reduce domain-takeover risk.
 
@@ -55,6 +55,6 @@ Share only stable, truly institutional concerns: source color tokens, the origin
 
 - Nuxt layers and extension model: https://nuxt.com/docs/examples/advanced
 - Nuxt deployments: https://nuxt.com/deploy
-- Cloudflare Pages monorepos: https://developers.cloudflare.com/pages/configuration/monorepos/
+- Nuxt on GitHub Pages: https://nuxt.com/deploy/github-pages
 - GitHub Pages custom domains: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages
 

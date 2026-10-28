@@ -23,4 +23,4 @@
 {"id":"audience:artists","type":"audience","label":"Artists and beneficiaries","confidence":"USER_CONFIRMED","source":"documents/knowledge/website-strategy.md"}
 {"id":"audience:partners","type":"audience","label":"Partner institutions","confidence":"USER_CONFIRMED","source":"documents/knowledge/website-strategy.md"}
 {"id":"design:orbit-index","type":"design_direction","label":"Orbit composition with Index typography","confidence":"USER_CONFIRMED","source":"documents/knowledge/design-system.md"}
-{"id":"platform:cloudflare-pages","type":"hosting_platform","label":"Cloudflare Pages multi-project hosting","confidence":"PROPOSED","source":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}
+{"id":"platform:github-pages","type":"hosting_platform","label":"GitHub Pages","confidence":"USER_CONFIRMED","source":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}

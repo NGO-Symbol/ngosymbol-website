@@ -1,43 +1,51 @@
 # Contributing
 
-## Set up
+Most changes are made by organization members working with a coding agent. The workflow below
+is deliberately small: four commands, and nothing reaches the live site without passing checks.
 
-Use Node 22 and pnpm 11.
+## Set up a computer (once)
+
+Install Git, Node 22, and the GitHub CLI, then:
 
 ```bash
 corepack enable
+gh auth login
+git clone https://github.com/ngosymbol/ngosymbol-website.git
+cd ngosymbol-website
 pnpm install
-pnpm dev
 ```
 
-Run the autonomous Street History application with `pnpm dev:street`.
+Preview locally with `pnpm dev` (main site) or `pnpm dev:street` (Street History).
 
-## Before changing the product
+## Daily workflow
 
-Read `AGENTS.md` and the task-specific documents linked from
-`documents/knowledge/INDEX.md`. Do not treat older PDFs, public mentions, or
-inferences as more authoritative than a current user-confirmed correction.
+| Step | Command | What it does |
+| --- | --- | --- |
+| See what is new | `pnpm task:status` | Fetches GitHub, shows your branch, unsaved files, recent published changes, open pull requests. |
+| Start a task | `pnpm task:new "about-page-photos"` | Updates `main` and creates `task/about-page-photos`. Re-running it continues the same task. |
+| Save progress | `pnpm task:save "Add team photos to About page"` | Commits everything on the task branch. Local only; repeat after each finished step. |
+| Publish | `pnpm task:ship` | Merges the latest `main`, runs `pnpm check`, pushes, opens or updates the pull request, and turns on auto-merge. |
 
-When a change introduces a durable decision, update the relevant knowledge file
-in the same branch. Invoke `$update-symbol-context` or say «онови контекст» to
-request a dedicated synchronization pass from a compatible coding agent.
+After the pull request’s checks pass, GitHub squash-merges it into `main` and the
+[Deploy workflow](.github/workflows/deploy.yml) updates the live sites within a few minutes.
+Start the next piece of work with a new `pnpm task:new`.
 
-## Branch and review convention
+## Rules
 
-- Create a focused branch from `main`.
-- Keep application changes and their required documentation changes together.
-- Never commit secrets or private personal data.
+- Never commit on `main`; `main` only changes through pull requests (enforced on GitHub).
+- One task branch per topic. Keep application changes and their knowledge-base updates together.
+- Commit messages describe the result in plain English: `Add contact form copy`, not `fix`.
+- Never commit secrets, private documents, or unpublished personal data.
 - Do not invent impact metrics, partnerships, quotes, or biographies.
-- Prefer small pull requests that can be previewed and reviewed independently.
+- Read `AGENTS.md` and the documents linked from `documents/knowledge/INDEX.md` before
+  changing the product. A current user-confirmed correction outranks older PDFs and public mentions.
+- When a change introduces a durable decision, update the knowledge base in the same branch
+  (`$update-symbol-context` or «онови контекст» asks an agent to do it).
 
 ## Checks
 
-```bash
-pnpm kb:validate
-pnpm typecheck
-pnpm generate
-```
+`pnpm check` runs `kb:validate`, `typecheck`, and `build`; `task:ship` runs it automatically and
+GitHub runs it again on every pull request. The sites are static-first; add runtime
+infrastructure only after documenting the feature that requires it.
 
-The `generate` check matters because the current applications are static-first.
-Add runtime infrastructure only after documenting the feature that requires it.
-
+Deployment and one-time owner setup: [`documents/operations/deployment.md`](documents/operations/deployment.md).
