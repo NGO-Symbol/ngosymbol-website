@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
   .sym-site-header__lang {
     position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: var(--sym-size-touch); min-height: var(--sym-size-touch);
     border-radius: var(--sym-shape-control); color: var(--sym-fg); text-decoration: none;
-    font-family: var(--sym-font-text); font-size: var(--sym-text-label); font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    font-family: var(--sym-font-label); font-size: var(--sym-text-label); font-weight: 400; letter-spacing: .1em; text-transform: uppercase;
   }
   .sym-site-header__lang[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .35em; }
   .sym-site-header__lang[aria-disabled] { opacity: var(--sym-state-disabled); cursor: not-allowed; }
@@ -233,7 +233,7 @@ onBeforeUnmount(() => {
     .sym-site-header__list { display: flex; flex-wrap: wrap; align-items: center; gap: 0; } /* too many items: the row wraps whole items instead of overflowing */
     .sym-site-header__link {
       display: inline-flex; align-items: center; min-height: var(--sym-size-touch); padding-inline: var(--sym-space-xs); border-radius: var(--sym-shape-control);
-      font-family: var(--sym-font-text); font-size: var(--sym-text-body-sm); font-weight: 600; line-height: 1.2; letter-spacing: .01em; white-space: nowrap;
+      font-family: var(--sym-font-label); font-size: var(--sym-text-body-sm); font-weight: 400; line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
     }
     .sym-site-header__arrow { display: none; }
     /* the current page keeps an underline; hover draws it in (opacity first, the draw only when motion is allowed) */

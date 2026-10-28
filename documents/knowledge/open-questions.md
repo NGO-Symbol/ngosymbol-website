@@ -19,7 +19,7 @@ Items here are unresolved and must not be silently assumed.
 
 ## Design
 
-- Design pass: final type pair (current Source Serif 4 + Manrope is provisional), exact tone values, whether a dark theme is wanted, square vs softer card shapes, photo treatment, hero animation personality.
+- Design pass: exact tone values (type pair is decided: Playfair Display + Commissioner + logo face for labels), whether a dark theme is wanted, square vs softer card shapes, photo treatment, hero animation personality.
 - Choose how widely to use the logo typeface (options A–D in the artifact «Шрифт Символу»; recommended: wordmark and name, plus navigation, eyebrows, tags and button labels). Confirm the font author's permission (Oleksii Chekal) to publish it as a web font on a public site.
 - Migrate `apps/main` and `apps/istoriia-vulytsi` to the design system (page by page, using the gallery templates).
 

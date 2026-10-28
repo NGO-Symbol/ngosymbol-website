@@ -6,8 +6,8 @@
   "main": "./nuxt.config.ts",
   "description": "NGO Symbol design system: Nuxt layer with tokens, tones, motion and Sym* components",
   "dependencies": {
-    "@fontsource-variable/manrope": "^5.3.0",
-    "@fontsource-variable/source-serif-4": "^5.3.0",
+    "@fontsource-variable/commissioner": "^5.3.0",
+    "@fontsource-variable/playfair-display": "^5.3.0",
     "@symbol/brand": "workspace:*"
   },
   "devDependencies": {

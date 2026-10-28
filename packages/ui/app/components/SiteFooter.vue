@@ -43,7 +43,7 @@ defineSlots<{
   .sym-site-footer__brand > p { margin: 0; color: var(--sym-fg-muted); }
   .sym-site-footer__contact { font-style: normal; }
   /* slotted content: label headings, link lists, 44 px link rows */
-  .sym-site-footer :is(h2, h3) { margin: 0 0 var(--sym-space-xs); color: var(--sym-fg-muted); font-family: var(--sym-font-text); font-size: var(--sym-text-label); font-weight: 600; line-height: 1.3; letter-spacing: .14em; text-transform: uppercase; }
+  .sym-site-footer :is(h2, h3) { margin: 0 0 var(--sym-space-xs); color: var(--sym-fg-muted); font-family: var(--sym-font-label); font-size: var(--sym-text-label); font-weight: 400; line-height: 1.3; letter-spacing: .1em; text-transform: uppercase; }
   .sym-site-footer :is(ul, ol) { display: grid; margin: 0; padding: 0; list-style: none; }
   .sym-site-footer__contact p { margin: 0; }
   .sym-site-footer a {

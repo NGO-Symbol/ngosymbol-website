@@ -24,7 +24,7 @@ The two original logo colors have insufficient contrast against each other for o
 
 The design system is implemented in `packages/ui` (tokens, tones, motion, `Sym*` components) and documented in `packages/ui/docs/CONTEXT.md`; the live gallery is `symbol.ngo/design/` ([ADR-0007](decisions/ADR-0007-design-system.md)). This file keeps the direction; the handbook keeps the rules.
 The logo (`packages/brand/assets/symbol-logo.svg`), the mark (`symbol-mark.svg`) and the spiral (`symbol-spiral.svg`) are vector, taken from the organization's logo file; `SymOrbit` is the logo's real spiral. The logo typeface (`packages/brand/fonts`) sets the wordmark and organization name only.
-Typography is a provisional Cyrillic-capable pair (Source Serif 4 + Manrope) because Newsreader and DM Sans have no Cyrillic; final fonts and exact tone values are decided in the design pass.
+Typography (USER_CONFIRMED 2026-10-29): Playfair Display for headlines, Commissioner for text, the logo face EXDocument for labels, navigation, meta and big numerals (variant C). Chosen from six measured pairs; method in `packages/ui/docs/foundations/font-selection.md`, check a new candidate with `pnpm ds:font`. Newsreader and DM Sans (still imported by the not-yet-migrated main and street apps) have no Cyrillic. Final tone values are decided in the design pass.
 
 ## Visual principles
 
