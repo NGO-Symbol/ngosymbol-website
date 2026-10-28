@@ -85,6 +85,10 @@ gh variable set STREET_DEPLOY_REPO -R NGO-Symbol/ngosymbol-website -b NGO-Symbol
 rm street_deploy_key street_deploy_key.pub
 ```
 
+Deploy keys are disabled by default in new organizations; enable them first
+(Organization settings → Repository → Deploy keys, or
+`gh api -X PATCH orgs/NGO-Symbol -F deploy_keys_enabled_for_repositories=true`).
+
 Run the **Deploy** workflow once (Actions → Deploy → Run workflow) so the `gh-pages` branch exists, then:
 
 ```bash
