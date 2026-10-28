@@ -11,6 +11,7 @@ Live gallery: `pnpm dev:design` → http://localhost:3002 (published at `symbol.
 | A component that is planned but not built yet | [[component-backlog]] |
 | Colours, tones, contrast, tokens | [[foundations/tokens]] |
 | Type roles, fonts, Cyrillic | [[foundations/typography]] |
+| The logo typeface, the name «Символ» in text | [[foundations/brand-font]] |
 | Any animation, reveal, page transition | [[foundations/motion]] |
 | Phone vs desktop, touch, breakpoints | [[foundations/responsive]] |
 | Why it is built this way (what was taken from studio-ui, what was not) | [[research]] |

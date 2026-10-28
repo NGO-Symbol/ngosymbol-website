@@ -9,6 +9,8 @@
     /* Provisional pair, chosen because both have a Cyrillic subset (Newsreader / DM Sans do not: Ukrainian fell back to Georgia / system). Change here only. */
     --sym-font-display: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
     --sym-font-text: 'Manrope Variable', Manrope, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    /* the logo typeface (packages/brand/fonts): wordmark and the brand name only, never running text */
+    --sym-font-brand: 'Symbol Brand', var(--sym-font-text);
     --sym-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
     /* sizes (fluid, 390 → 1440 px viewport) */

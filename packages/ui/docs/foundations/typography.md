@@ -7,6 +7,9 @@ Currently **Source Serif 4** (variable, optical size) + **Manrope** (variable), 
 They are a **provisional pair**: the previous Newsreader and DM Sans have **no Cyrillic subset** (checked in the Google Fonts API, 2026-10-28), so Ukrainian text silently fell back to Georgia / system sans.
 Any replacement must have a `cyrillic` subset (candidates checked: Literata, Lora, Spectral, Playfair Display, Cormorant for serif; Inter, Onest, Commissioner, Golos Text for sans). Change `--sym-font-*` and the two imports in `packages/ui/nuxt.config.ts`.
 
+## Brand font
+A third face, the logo typeface, sets only the wordmark and the organization name (`SymBrand`, `SymWordmark`): [[foundations/brand-font]].
+
 ## Roles
 | Role | Class | Use | Size 390 → 1440 |
 |---|---|---|---|

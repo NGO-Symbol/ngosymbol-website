@@ -20,7 +20,7 @@ Items here are unresolved and must not be silently assumed.
 ## Design
 
 - Design pass: final type pair (current Source Serif 4 + Manrope is provisional), exact tone values, whether a dark theme is wanted, square vs softer card shapes, photo treatment, hero animation personality.
-- Obtain a vector (SVG) version of the logo/spiral from the organization; only a raster PNG exists, so `SymOrbit` approximates the spiral with a ring and diamond.
+- Choose how widely to use the logo typeface (options A–D in the artifact «Шрифт Символу»; recommended: wordmark and name, plus navigation, eyebrows, tags and button labels). Confirm the font author's permission (Oleksii Chekal) to publish it as a web font on a public site.
 - Migrate `apps/main` and `apps/istoriia-vulytsi` to the design system (page by page, using the gallery templates).
 
 ## Infrastructure

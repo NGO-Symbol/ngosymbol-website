@@ -29,7 +29,7 @@ onMounted(() => {
           <strong style="font:400 2rem var(--sym-font-display)">{{ t }}</strong>
           <span style="color:var(--sym-fg-muted)">Приглушений текст на цьому тоні</span>
           <span class="sym-t-headline" style="color:var(--sym-fg-large)">Великий заголовок</span>
-          <div style="display:flex;gap:8px;align-items:center"><SymOrbit size="xs" :rotate="-28" /><SymButton size="m">Дія</SymButton><SymButton variant="outline">Інша</SymButton></div>
+          <div style="display:flex;gap:8px;align-items:center"><SymOrbit size="xs" /><SymButton size="m">Дія</SymButton><SymButton variant="outline">Інша</SymButton></div>
           <div class="ds-pairs"><div v-for="p in results[t] ?? []" :key="p.label"><span>{{ p.label }}</span><span><span class="ds-pass">{{ p.ratio.toFixed(2) }}</span> {{ p.need ? `/ ${p.need} ${p.ok ? '✓' : '✗'}` : '· лише геометрія' }}</span></div></div>
         </div>
       </div>

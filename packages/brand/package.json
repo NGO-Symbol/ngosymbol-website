@@ -5,6 +5,11 @@
   "type": "module",
   "exports": {
     "./tokens.css": "./tokens.css",
-    "./symbol-mark.png": "./assets/symbol-mark.png"
+    "./symbol-mark.png": "./assets/symbol-mark.png",
+    "./fonts.css": "./fonts.css",
+    "./symbol-mark.svg": "./assets/symbol-mark.svg",
+    "./symbol-spiral.svg": "./assets/symbol-spiral.svg",
+    "./symbol-logo.svg": "./assets/symbol-logo.svg",
+    "./fonts/ex-document.woff2": "./fonts/ex-document.woff2"
   }
 }
