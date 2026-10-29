@@ -11,6 +11,7 @@ function animateMark() {
     clicks.value++
   })
 }
+
 </script>
 
 <template>

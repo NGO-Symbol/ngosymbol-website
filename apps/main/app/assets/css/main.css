@@ -182,7 +182,7 @@ h1,h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 400; }
 .rich-text p { font-size: 1.05rem; line-height: 1.7; max-width: 680px; }
 .rich-text a { text-underline-offset: 4px; text-decoration-color: var(--symbol-violet); }
 .lead-text p:first-child { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.25; }
-.content-placeholder { margin-top: 0; min-height: 300px; }
+
 .facts { display: grid; gap: 16px; margin: 0; }
 .facts dt { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--symbol-violet); margin-bottom: 3px; }
 .facts dd { margin: 0; line-height: 1.45; }
@@ -200,6 +200,14 @@ h1,h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 400; }
 .appearances a { font-family: 'Newsreader', Georgia, serif; font-size: 1.35rem; text-underline-offset: 4px; }
 .appearances__role { font-size: .85rem; }
 .link-list { list-style: none; padding: 0; display: grid; gap: 8px; }
+
+/* CV on person pages */
+.cv__section { margin-top: 26px; }
+.cv__section h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 1.5rem; margin: 0 0 10px; }
+.cv__section ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--symbol-plum); }
+.cv__section li { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--symbol-plum) 30%, transparent); line-height: 1.5; }
+.cv__period { font-size: .8rem; letter-spacing: .04em; color: var(--symbol-violet); font-variant-numeric: tabular-nums; padding-top: 3px; }
+@media (max-width: 600px) { .cv__section li { grid-template-columns: 1fr; gap: 2px; } }
 
 /* People */
 .people-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
@@ -239,6 +247,22 @@ h1,h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 400; }
 .subscribe__links p { width: 100%; margin: 0; color: var(--symbol-lilac); font-size: .9rem; }
 .footer-grid a { text-underline-offset: 4px; }
 .footer-small { font-size: .78rem; opacity: .8; }
+
+/* Project site button in the project hero */
+.hero-site { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; padding: 16px 26px; border-radius: 999px; background: var(--symbol-apricot); color: var(--symbol-ink); text-decoration: none; font-size: 1.15rem; font-weight: 500; box-shadow: 0 14px 30px -16px var(--symbol-ink); transition: transform .3s cubic-bezier(.3, 1.6, .5, 1); animation: subsite-in .7s cubic-bezier(.2, 1.4, .4, 1) .3s both; }
+.hero-site:hover { transform: scale(1.06); }
+.hero-site__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--symbol-violet); animation: subsite-pulse 1.8s ease-out infinite; }
+@keyframes subsite-in { from { transform: translateY(20px) scale(.9); opacity: 0; } }
+@keyframes subsite-pulse { 0% { box-shadow: 0 0 0 0 var(--symbol-violet); } 70%, 100% { box-shadow: 0 0 0 12px transparent; } }
+
+/* Photos */
+.project-card__visual.has-cover { min-height: 260px; }
+.project-card__cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.9); transition: transform .7s cubic-bezier(.2, .8, .2, 1); }
+.project-card:hover .project-card__cover { transform: scale(1.07); }
+.project-card__visual.has-cover .project-card__motif { inset: auto 12px 12px auto; height: 70px !important; width: 70px !important; padding: 8px; border-radius: 50%; background: var(--symbol-cream); color: var(--symbol-ink); z-index: 1; }
+.person-card__avatar--photo { object-fit: cover; padding: 0; }
+.person-portrait { width: 100%; max-width: 320px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin-bottom: 24px; display: block; }
+.team-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
 
 /* Scroll reveal (plugins/reveal.client.ts) */
 html.reveal-ready [data-reveal] { transition: opacity .6s ease var(--reveal-delay, 0ms), transform .7s cubic-bezier(.2, 1.1, .3, 1) var(--reveal-delay, 0ms); }

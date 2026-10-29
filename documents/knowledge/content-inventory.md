@@ -44,3 +44,7 @@ Folder names only; no private links. Rights and selection still need confirmatio
 | Збирач конвалій | 2023 → Збирач конвалій → Фото, Лого партнерів | a few stills |
 | 2, 10, 300 років потому | 2024 → 2, 10, 300 років потому → Репортаж з виставки, exhibition | exhibition report photos |
 | Харківське море | 2026 → Харківське море 2026 → 2026 Фотографії (by day) | festival photos (partner project) |
+
+## Media on the site (2026-10-29)
+
+Selected, web-compressed copies live in `apps/main/public/media/` (projects/{slug}/, people/{slug}.jpg). Only a selection is published, never whole folders. «Покажіть свої документи…»: 6 exhibition photos (cover first) and 5 opening photos from the saved project site; 23 portraits and 17 artist bios from the saved project site.

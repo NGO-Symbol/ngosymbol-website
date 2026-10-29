@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
-  css: ['@symbol/brand/tokens.css', '~/assets/css/main.css'],
+  css: ['@symbol/brand/tokens.css', '~/assets/css/main.css', '~/assets/css/theme-documents.css'],
   app: {
     pageTransition: { name: 'fade', mode: 'out-in' },
     head: {

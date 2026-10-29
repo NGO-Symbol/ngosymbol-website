@@ -44,6 +44,12 @@ Motion follows the identity: Symbol as a whole moves along the spiral and the or
 - **Clicks**: a shape at the pointer by control type (diamond, spiral arc, dot burst, ring, wave, spark); buttons and cards press in.
 - **Header logo**: each click plays the next mark animation (spin, bounce, flip, wobble, pulse).
 
+## Project identities on the main site
+
+Every project page carries its project's own identity where one exists (`theme` field of a project, `apps/main/app/assets/css/theme-*.css`). `USER_CONFIRMED` 2026-10-29.
+
+- **Покажіть свої документи…** (`theme: 'documents'`), from the exhibition's logo, banner, and invitation: black/white/grey paper, the project font **EXDocument** by Олексій Чекаль (created for the exhibition; `apps/main/public/fonts/EXDocument.otf`, from the Drive), IBM Plex Mono text (as on the former project site), translucent grey tape strips behind the title, barcode-like rules, and a round blue stamp with the title around a QR-like centre. Motion: rules draw, tapes slide in, words are «typed», the stamp lands. Photos are greyscale until hovered.
+
 ## Shared versus project identity
 
 Shared: original mark, organization name, backlink pattern, accessibility baseline, and institutional metadata.

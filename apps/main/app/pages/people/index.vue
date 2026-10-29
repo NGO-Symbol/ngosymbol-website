@@ -44,7 +44,8 @@ const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => par
     <ul class="people-grid">
       <li v-for="{ person, appearances } in visible" :key="person.slug">
         <NuxtLink class="person-card" :to="`/people/${person.slug}`">
-          <span class="person-card__avatar" aria-hidden="true">{{ initials(person.name) }}</span>
+          <img v-if="person.photo" class="person-card__avatar person-card__avatar--photo" :src="person.photo" alt="" loading="lazy">
+          <span v-else class="person-card__avatar" aria-hidden="true">{{ initials(person.name) }}</span>
           <span class="person-card__name">{{ person.name }}</span>
           <span v-if="person.team" class="person-card__team">Команда «Символу»</span>
           <span class="person-card__projects">{{ appearances.map(item => item.title).join(' · ') }}</span>

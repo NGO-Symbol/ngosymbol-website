@@ -11,7 +11,9 @@ const openCalls = activeOpportunities()
 const upcoming = eventItems.filter(isUpcoming).reverse().slice(0, 4)
 const recent = eventItems.filter(item => !isUpcoming(item)).slice(0, 3)
 const current = projects.filter(project => project.status !== 'completed')
-const supporters = organizations.filter(org => projects.some(project => project.partners?.includes(org.slug) || project.donors?.includes(org.slug)))
+const supporters = organizations
+  .map(org => ({ org, projects: projects.filter(project => project.partners?.includes(org.slug) || project.donors?.includes(org.slug)) }))
+  .filter(item => item.projects.length)
 </script>
 
 <template>
@@ -28,6 +30,8 @@ const supporters = organizations.filter(org => projects.some(project => project.
       </div>
       <ProjectOrbit class="home-hero__orbit" />
     </section>
+
+    <StatsCounters />
 
     <section v-if="openCalls.length" class="open-calls">
       <div class="container">
@@ -69,9 +73,7 @@ const supporters = organizations.filter(org => projects.some(project => project.
 
     <section v-if="supporters.length" class="section section--tight container">
       <span class="label">Партнери й донори проєктів</span>
-      <ul class="logo-strip">
-        <li v-for="org in supporters" :key="org.slug">{{ org.name }}</li>
-      </ul>
+      <PartnerTiles :items="supporters" />
     </section>
 
     <section class="subscribe">

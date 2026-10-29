@@ -27,6 +27,7 @@ useHead({
     </div>
     <div class="project-content">
       <aside>
+        <img v-if="person.photo" class="person-portrait" :src="person.photo" :alt="person.name">
         <ul v-if="person.links?.length" class="link-list">
           <li v-for="link in person.links" :key="link.url"><a :href="link.url" target="_blank" rel="noreferrer">{{ link.label }} ↗</a></li>
         </ul>
@@ -36,6 +37,18 @@ useHead({
           <span class="label">Біографія</span>
           <RichText v-if="person.bio" class="lead-text" :paragraphs="person.bio" />
           <p v-else class="empty-note">Біографія готується.</p>
+        </section>
+        <section v-if="person.cv?.length" class="cv">
+          <span class="label">CV</span>
+          <div v-for="section in person.cv" :key="section.title" class="cv__section">
+            <h3>{{ section.title }}</h3>
+            <ul>
+              <li v-for="(item, index) in section.items" :key="index">
+                <span class="cv__period">{{ item.period ?? '' }}</span>
+                <span>{{ item.text }}</span>
+              </li>
+            </ul>
+          </div>
         </section>
         <section v-if="appearances.length">
           <span class="label">У проєктах «Символу»</span>

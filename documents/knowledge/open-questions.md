@@ -28,6 +28,15 @@ Items here are unresolved and must not be silently assumed.
 - Public status, dates, and roles for «Ті, що побачили світ (Мілан)» and «Відкрита книга: поліаморія».
 - Vector (SVG) version of the logo for the intro animation.
 
+## Покажіть свої документи… (2026-10-29)
+
+- Which November programme events took place as planned, their times, and speakers (ZMINA, artist talk guests).
+- Subdomain name for the restored project site (proposed `pokazhit-dokumenty.symbol.ngo`).
+- Photographer credits for event photos and for photos not marked «Chekal».
+- Partner and donor logo files and permission to show them.
+- Team: see `team-cv.md` → Open (Олена Мордик bio, Ганна Франик public name, PSD volunteers, Kharkiv Sea role wording).
+- Which PSD artworks are shown in the photos (captions are generic until confirmed).
+
 ## Infrastructure
 
 - Select DNS provider and deployment platform.

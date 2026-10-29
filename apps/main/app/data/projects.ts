@@ -61,10 +61,14 @@ export const projects: Project[] = [
     directions: ['art'],
     tone: 'cream',
     motif: 'documents',
+    theme: 'documents',
+    poster: '/media/projects/pokazhit-svoi-dokumenty/poster.jpg',
+    subsiteUrl: 'https://pokazhit-dokumenty.symbol.ngo',
     summary: 'Виставка про документ як мистецький феномен: 20 митців у ЄрміловЦентрі.',
     body: [
       'Виставка досліджує документ як мистецький феномен, що виходить за межі його функціональної ролі. Документ тут — не лише механізм бюрократичного контролю, а й естетичний, ритуальний та соціальний артефакт.',
       'Учасники працювали з фотографією, текстом, живописом, колажем та перформативними практиками. У виставці взяли участь 20 митців, серед них [[person:pavlo-makov]], [[person:oleh-tistol]] і [[person:roman-piatkovka]].',
+      'Це перший проєкт молодих кураторів [[person:petro-chekal]] і [[person:yurii-rassokha]] у ЄрміловЦентрі. Виставку супроводжувала програма подій: екскурсії, лекція та дискусії з Центром прав людини ZMINA, артісток і плейбек-перформанс.',
       'ЄрміловЦентр, Харків, 17 жовтня — 7 грудня 2025 року.'
     ],
     concept: [
@@ -72,7 +76,12 @@ export const projects: Project[] = [
       'Офіційні документи — це інструменти влади. Вони не просто фіксують реальність, а й конструюють її, визначаючи, хто і як може бути представленим у соціальному просторі.'
     ],
     people: [
-      { person: 'yurii-rassokha', role: 'Автор концепції' },
+      { person: 'petro-chekal', role: 'Куратори' },
+      { person: 'yurii-rassokha', role: 'Куратори' },
+      { person: 'hanna-franyk', role: 'Менеджерка проєкту' },
+      { person: 'oleksii-chekal', role: 'Дизайн айдентики та шрифт EXDocument' },
+      { person: 'nataliia-ivanova', role: 'Координація від ЄрміловЦентру' },
+      { person: 'sofiia-hurilova', role: 'Координація від ЄрміловЦентру' },
       { person: 'pavlo-makov', role: 'Митці' },
       { person: 'oleh-tistol', role: 'Митці' },
       { person: 'roman-piatkovka', role: 'Митці' },
@@ -91,11 +100,22 @@ export const projects: Project[] = [
       { person: 'kostiantyn-hlyvlias', role: 'Митці' },
       { person: 'mariia-matiashova', role: 'Митці' },
       { person: 'mariia-prokopenko', role: 'Митці' },
-      { person: 'nataliia-okhman', role: 'Митці' }
+      { person: 'nataliia-okhman', role: 'Митці' },
+      { person: 'senora-serpiente', role: 'Митці' }
     ],
-    partners: ['yermilov-centre'],
+    partners: ['yermilov-centre', 'karazin-university', 'zmina'],
     donors: ['president-grant', 'grynyov-art-foundation'],
-    donorCredit: 'Виставка відбулася за підтримки Гранту Президента України для молодих митців та Grynyov Art Foundation.'
+    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Виставка відбулася за підтримки Гранту Президента України для молодих митців та Grynyov Art Collection.',
+    gallery: [
+      { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/viewers.jpg', alt: 'Глядачі перед стіною з чорно-білими фотографіями' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: 'Ряди червоних паспортів на стіні', credit: 'Петро Чекаль' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/sealed.jpg', alt: 'Бетонний блок із замурованими документами' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/strips.jpg', alt: 'Підвішені прозорі смуги зі світлом і тінями', credit: 'Петро Чекаль' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/tv.jpg', alt: 'Два телевізори з відеороботами', credit: 'Петро Чекаль' }
+    ]
   },
   {
     slug: 'istorii-riznykh',
@@ -140,6 +160,34 @@ export const projects: Project[] = [
     donorCredit: 'Проєкт реалізовано за донорської підтримки українсько-швейцарського проєкту «Психічне здоров’я для України».'
   },
   {
+    slug: 'ti-khto-pobachyly-svit',
+    title: 'Ті, хто побачили світ',
+    yearStart: 2026,
+    city: 'Мілан',
+    country: 'Італія',
+    kind: 'single',
+    status: 'completed',
+    role: 'organizer',
+    formats: ['exhibition'],
+    directions: ['art'],
+    tone: 'apricot',
+    motif: 'aperture',
+    summary: 'Фотовиставка Петра Чекаля та Юрія Рассохи на Фестивалі української книги в Мілані.',
+    body: [
+      'The Ones Who Saw the World / Coloro che hanno visto il mondo — довге й уважне спостереження за Україною в часі змін. Світлини зроблені майже в усіх регіонах країни: у містах, селах, на околицях, у просторах повсякдення й у місцях, позначених війною. Разом вони складають не географічну мапу, а внутрішній портрет країни.',
+      'Проєкт водночас досліджує саму фотографію: колір, ритм, фактуру й композицію — як фотографічна мова може не лише фіксувати реальність, а й інтерпретувати її. На фестивалі показали 20 робіт.',
+      'Фестиваль української книги в Мілані, Villa Scheibler, 30–31 травня 2026 року, на запрошення асоціації Ucraina Più – Milano APS.'
+    ],
+    people: [
+      { person: 'petro-chekal', role: 'Автори фотографій' },
+      { person: 'yurii-rassokha', role: 'Автори фотографій' }
+    ],
+    partners: ['ucraina-piu'],
+    start: '2026-05-30',
+    end: '2026-05-31',
+    venue: { name: 'Villa Scheibler', city: 'Мілан', country: 'Італія' }
+  },
+  {
     slug: '2-10-300',
     title: '2, 10, 300 років потому',
     yearStart: 2024,
@@ -153,8 +201,15 @@ export const projects: Project[] = [
     tone: 'apricot',
     motif: 'time',
     summary: 'Виставка просто неба з роботами митців зі сходу України.',
-    body: ['Виставка просто неба в Балашадьярматі, Угорщина, у якій зібрані роботи митців зі сходу України.'],
-    people: [{ person: 'hanna-franyk', role: 'Кураторка' }],
+    body: [
+      'Виставка просто неба в Балашшадьярматі, Угорщина, у якій зібрані роботи митців зі сходу України. Проєкт представляв мистецький контекст Східної України європейській аудиторії й розповідав, як люди проживають війну через мистецтво.',
+      'Виставка відбулася в межах волонтерства Європейського корпусу солідарності у співпраці з ГО «Символ».'
+    ],
+    people: [
+      { person: 'hanna-franyk', role: 'Кураторка' },
+      { person: 'petro-chekal', role: 'Співавтор проєкту' },
+      { person: 'yurii-rassokha', role: 'Учасник, асистент кураторки' }
+    ],
     start: '2024-04-26',
     end: '2024-04-28',
     venue: { city: 'Балашадьярмат', country: 'Угорщина' }

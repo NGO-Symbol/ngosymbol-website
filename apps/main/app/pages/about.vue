@@ -31,6 +31,8 @@ const supporters = organizations
       </div>
     </div>
 
+    <StatsCounters />
+
     <section class="section section--tight">
       <div class="section-heading">
         <div><span class="label">Цінності</span><h2>Мистецтво, яке говорить з людьми</h2></div>
@@ -49,23 +51,32 @@ const supporters = organizations
       </div>
       <div class="team-list">
         <NuxtLink v-for="(person, index) in team" :key="person.slug" :to="`/people/${person.slug}`">
-          <span>{{ String(index + 1).padStart(2, '0') }}</span>
+          <img v-if="person.photo" class="team-photo" :src="person.photo" alt="" loading="lazy">
+          <span v-else>{{ String(index + 1).padStart(2, '0') }}</span>
           <strong>{{ person.name }}</strong>
           <p>{{ person.teamRole ?? person.shortBio ?? '' }}</p>
         </NuxtLink>
       </div>
     </section>
 
-    <section class="section section--tight">
+    <section id="partners" class="section section--tight">
       <div class="section-heading">
         <div><span class="label">Партнери й донори</span><h2>З ким ми працюємо</h2></div>
       </div>
+      <PartnerTiles :items="supporters" />
+    </section>
+
+    <section id="press" class="section section--tight">
+      <div class="section-heading">
+        <div><span class="label">Медіа</span><h2>Про нас пишуть</h2></div>
+        <p>Згадки в медіа зібрані й на сторінках відповідних проєктів.</p>
+      </div>
       <ul class="press-list">
-        <li v-for="{ org, projects: list } in supporters" :key="org.slug">
-          <strong>{{ org.name }}</strong>
+        <li v-for="item in press" :key="item.url">
+          <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }} ↗</a>
           <span>
-            <template v-for="(project, index) in list" :key="project.slug">
-              <NuxtLink :to="`/projects/${project.slug}`">{{ project.title }}</NuxtLink><template v-if="index < list.length - 1">, </template>
+            <template v-for="(slug, index) in item.projects" :key="slug">
+              <NuxtLink :to="`/projects/${slug}`">{{ getProject(slug)?.title }}</NuxtLink><template v-if="index < item.projects.length - 1">, </template>
             </template>
           </span>
         </li>

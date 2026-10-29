@@ -9,7 +9,13 @@ export type ProjectKind = 'long' | 'single'
 export type ProjectRole = 'organizer' | 'partner'
 export type Tone = 'violet' | 'apricot' | 'cream' | 'plum' | 'lilac'
 /** Project-specific motion motif (components/ProjectMotif.vue). */
-export type Motif = 'streets' | 'voices' | 'documents' | 'breath' | 'curtain' | 'film' | 'time' | 'sea'
+export type Motif = 'streets' | 'voices' | 'documents' | 'breath' | 'curtain' | 'film' | 'time' | 'sea' | 'aperture'
+
+export interface Photo {
+  src: string
+  alt: string
+  credit?: string
+}
 
 export interface Credit {
   person: string
@@ -40,6 +46,12 @@ export interface Project {
   concept?: Paragraphs
   tone: Tone
   motif: Motif
+  /** Project identity applied to its page (assets/css/theme-*.css). */
+  theme?: 'documents'
+  /** Poster or key visual, used as the card cover when present. */
+  poster?: string
+  /** Selected photos only; the first is the cover. Files live in public/media/projects/{slug}/. */
+  gallery?: Photo[]
   people?: Credit[]
   partners?: string[]
   donors?: string[]
@@ -64,11 +76,19 @@ export interface SymbolEvent {
   description?: Paragraphs
   registrationUrl?: string
   people?: Credit[]
+  gallery?: Photo[]
+}
+
+export interface CvSection {
+  title: string
+  items: { period?: string; text: string }[]
 }
 
 export interface Person {
   slug: string
   name: string
+  /** Portrait in public/media/people/{slug}.jpg */
+  photo?: string
   shortBio?: string
   bio?: Paragraphs
   links?: { label: string; url: string }[]
@@ -76,6 +96,8 @@ export interface Person {
   teamRole?: string
   teamOrder?: number
   hasPage?: boolean
+  /** Structured CV for the team (no contacts or personal data). Sources: documents/knowledge/team-cv.md */
+  cv?: CvSection[]
 }
 
 export interface Opportunity {
@@ -99,5 +121,8 @@ export interface PressMention {
 export interface Organization {
   slug: string
   name: string
+  /** Website, or a social profile when there is no website. */
   url?: string
+  /** Logo file in public/media/partners/ — added only with permission. */
+  logo?: string
 }

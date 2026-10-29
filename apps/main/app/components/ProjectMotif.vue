@@ -73,6 +73,14 @@ defineProps<{ motif: Motif; live?: boolean }>()
     <g v-else-if="motif === 'sea'" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
       <path v-for="i in 4" :key="i" class="m-sea" :style="{ animationDelay: `${-i * 0.6}s` }" :d="`M-100 ${50 + i * 25} q25 -14 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0`" />
     </g>
+    <!-- Ті, хто побачили світ: a camera aperture opens and closes -->
+    <g v-else-if="motif === 'aperture'" fill="none" stroke="currentColor" stroke-width="3">
+      <circle cx="100" cy="100" r="78" />
+      <g class="m-aperture">
+        <path v-for="i in 6" :key="i" :transform="`rotate(${i * 60} 100 100)`" d="M100 22 L148 74 L100 100 Z" fill="var(--symbol-apricot)" fill-opacity=".55" />
+      </g>
+      <circle class="m-lens" cx="100" cy="100" r="16" fill="currentColor" />
+    </g>
   </svg>
 </template>
 
@@ -112,6 +120,9 @@ defineProps<{ motif: Motif; live?: boolean }>()
 @keyframes m-turn { to { transform: rotate(360deg); } }
 
 .m-sea { animation: m-sea 2.6s linear infinite; }
+.m-aperture { transform-origin: 100px 100px; animation: m-aperture 3.2s ease-in-out infinite; }
+@keyframes m-aperture { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(60deg) scale(.55); } }
+.m-lens { transform-box: fill-box; transform-origin: center; animation: m-breath 3.2s ease-in-out infinite; }
 @keyframes m-sea { to { transform: translateX(100px); } }
 
 @media (prefers-reduced-motion: reduce) { .motif * { animation: none !important; } .m-draw { stroke-dashoffset: 0; } .m-wave { opacity: 1; } }

@@ -37,6 +37,16 @@ Later, when content justifies it: News, Press kit. There is still no global “M
 | Press mention | outlet, title, date, URL, archived copy, projects | Collected on the project page |
 | Organization | slug, name, URL, logo (only with permission) | Partners and donors |
 
+## Project site link in the header
+
+On the main-site page of a project with its own site, the middle of the site header shows a prominent pulsing button «Перейти на сайт проєкту ↗» with the project title (in the project's identity where one exists). `USER_CONFIRMED` 2026-10-29. Currently: Історія моєї вулиці, Покажіть свої документи… (subdomain name still `PROPOSED`).
+
+## Indicators, partners, press
+
+- Home and About show interactive indicators counted from the site data (projects, events, artists, partners, cities); they count up on scroll and link to their lists. No hand-typed impact numbers. `USER_CONFIRMED` (idea, MH4U reference) 2026-10-29.
+- Partners and donors are tiles linking to their site or social profile; logo files go to `public/media/partners/` with permission and are animated on hover; until then a monogram is shown. `USER_CONFIRMED` 2026-10-29; logos pending.
+- About has «Про нас пишуть» with all press mentions; each project page keeps its own.
+
 ## Projects page
 
 - Year chronology rail (Izolyatsia-style): newest at top; only years that contain projects; scrollspy; horizontal strip on phones.

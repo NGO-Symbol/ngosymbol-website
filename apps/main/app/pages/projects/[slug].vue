@@ -9,12 +9,18 @@ if (!project) {
 
 useSeoMeta({ title: `${project.title} · ${projectYears(project)}`, description: project.summary })
 
+// Fonts of a project identity load only on that project's page.
+if (project.theme === 'documents') {
+  useHead({ link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap' }] })
+}
+
 const projectEvents = eventsOfProject(project.slug)
 const upcomingEvents = projectEvents.filter(isUpcoming)
-const pastEvents = projectEvents.filter(event => !isUpcoming(event)).reverse()
+const pastEvents = projectEvents.filter(event => !isUpcoming(event))
 const team = creditsByRole(project.people)
-const partners = (project.partners ?? []).map(getOrganization).filter(Boolean)
-const donors = (project.donors ?? []).map(getOrganization).filter(Boolean)
+const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: projects.filter(p => p.partners?.includes(org!.slug) || p.donors?.includes(org!.slug)) }))
+const partners = toTiles(project.partners)
+const donors = toTiles(project.donors)
 const mentions = pressOfProject(project.slug)
 const calls = opportunitiesOfProject(project.slug)
 const related = relatedProjects(project)
@@ -22,8 +28,9 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
 </script>
 
 <template>
-  <article v-if="project" class="project-page">
-    <header class="project-hero" :class="`tone-${project.tone}`">
+  <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
+    <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
+    <header v-else class="project-hero" :class="`tone-${project.tone}`">
       <ProjectMotif class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
         <Breadcrumbs :items="[{ label: 'Проєкти', to: '/projects' }, { label: project.title }]" />
@@ -36,7 +43,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </div>
         <h1>{{ project.title }}</h1>
         <p>{{ project.summary }}</p>
-        <a v-if="project.subsiteUrl" class="button button--dark" :href="project.subsiteUrl" target="_blank" rel="noreferrer">Сайт проєкту ↗</a>
+        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту ↗</a>
       </div>
     </header>
 
@@ -63,7 +70,10 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <RichText :paragraphs="project.concept" />
         </section>
 
-        <section class="content-placeholder"><span>Фото та відео проєкту з’являться після відбору матеріалів</span></section>
+        <section v-if="project.gallery?.length">
+          <span class="label">Фото</span>
+          <PhotoGallery :photos="project.gallery" />
+        </section>
 
         <section v-if="projectEvents.length">
           <span class="label">Події проєкту</span>
@@ -97,11 +107,11 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <div class="credits">
             <div v-if="partners.length" class="credits__group">
               <h3>Партнери</h3>
-              <p>{{ partners.map(org => org!.name).join(', ') }}</p>
+              <PartnerTiles :items="partners" />
             </div>
             <div v-if="donors.length" class="credits__group">
               <h3>За підтримки</h3>
-              <p>{{ donors.map(org => org!.name).join(', ') }}</p>
+              <PartnerTiles :items="donors" />
             </div>
           </div>
           <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>

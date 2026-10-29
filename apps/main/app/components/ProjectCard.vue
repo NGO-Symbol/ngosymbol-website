@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Project } from '~/data/types'
 
-defineProps<{ project: Project }>()
+const props = defineProps<{ project: Project }>()
+const cover = computed(() => props.project.poster ?? props.project.gallery?.[0]?.src)
 </script>
 
 <template>
@@ -10,7 +11,8 @@ defineProps<{ project: Project }>()
       <span>{{ projectByline(project) }}</span>
       <span>{{ statusLabels[project.status] }}</span>
     </div>
-    <div class="project-card__visual">
+    <div class="project-card__visual" :class="{ 'has-cover': cover }">
+      <img v-if="cover" class="project-card__cover" :src="cover" alt="" loading="lazy">
       <ProjectMotif class="project-card__motif" :motif="project.motif" />
       <span v-if="project.role === 'partner'" class="project-card__badge">Символ — партнер</span>
       <span v-if="project.subsiteUrl" class="project-card__badge project-card__badge--site">Є сайт проєкту ↗</span>

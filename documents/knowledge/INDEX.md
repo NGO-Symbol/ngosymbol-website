@@ -13,6 +13,7 @@ This directory is the canonical memory for the institutional website and its pro
 | Design UI | [`design-system.md`](design-system.md), [`content-inventory.md`](content-inventory.md) |
 | Change code or deployment | [`technical-architecture.md`](technical-architecture.md), [`decisions/`](decisions/) |
 | Verify a claim | [`sources.md`](sources.md), [`schema.md`](schema.md) |
+| Team bios and CVs | [`team-cv.md`](team-cv.md) |
 | Find unresolved choices | [`open-questions.md`](open-questions.md) |
 | Inspect machine-readable relations | [`graph/nodes.jsonl`](graph/nodes.jsonl), [`graph/edges.jsonl`](graph/edges.jsonl) |
 
