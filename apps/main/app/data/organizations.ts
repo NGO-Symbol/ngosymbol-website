@@ -10,8 +10,9 @@ export const organizations: Organization[] = [
   // «Тисячовесна»: the President of Ukraine's initiative for Ukrainian cultural product, run by the Ministry of Culture;
   // logo with the bird from the Symbol Drive («лого з птахом.svg»); website given by the team (2026-10-29).
   { slug: 'tysyachovesna', name: 'Тисячовесна — ініціатива Президента України зі створення українського культурного продукту', url: 'https://www.culture.gov.ua/', logo: '/media/partners/tysyachovesna.svg', motion: 'rise' },
-  // The state body that contracts the «Тисячовесна» winners (Symbol's letters of 23.10.2026); no public logo found.
-  { slug: 'czipu', name: 'Центр захисту інформаційного простору України' },
+  // The state body that contracts the «Тисячовесна» winners (Symbol's letters of 23.10.2026); logo given by the team
+  // (2026-10-29). It is a coloured badge on its own blue, so it is shown as is in both themes.
+  { slug: 'czipu', name: 'Центр захисту інформаційного простору України', logo: '/media/partners/czipu.png', logoDark: '/media/partners/czipu.png', motion: 'pulse' },
   { slug: 'grynyov-art-foundation', name: 'Grynyov Art Collection', url: 'https://grynyov.art', logo: '/media/partners/grynyov-art-collection.png', motion: 'wipe' },
   { slug: 'mh4u', name: 'Українсько-швейцарський проєкт «Психічне здоров’я для України»', url: 'https://www.mh4u.in.ua', logo: '/media/partners/mh4u.svg', motion: 'bloom' },
   { slug: 'eu', name: 'Співфінансовано Європейським Союзом', url: 'https://european-union.europa.eu', logo: '/media/partners/eu-cofunded.png', logoDark: '/media/partners/eu-cofunded-white.png', motion: 'fade' },

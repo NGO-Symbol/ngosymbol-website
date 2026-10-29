@@ -3,6 +3,7 @@
 // on its own, following the logo's rhythm (motion); PNG logos move as a whole. The motion plays when the
 // tile scrolls into view and again on hover (PartnerTiles calls replay()).
 // srcDark: the organization's own variant for dark backgrounds (the EU emblem may not be recoloured, so it is never inverted).
+// srcDark equal to src: a coloured badge on its own background, shown unchanged in both themes.
 const props = defineProps<{ src: string; srcDark?: string; name: string; slug: string; motion?: string }>()
 
 const isSvg = props.src.endsWith('.svg')
@@ -60,10 +61,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <span ref="root" class="partner-logo" :class="[`partner-logo--${motion ?? 'wave'}`, { 'is-playing': playing, 'partner-logo--official': srcDark, 'partner-logo--opaque': src.endsWith('.jpg') }]" role="img" :aria-label="name">
+  <span ref="root" class="partner-logo" :class="[`partner-logo--${motion ?? 'wave'}`, { 'is-playing': playing, 'partner-logo--official': srcDark && srcDark !== src, 'partner-logo--keep': srcDark === src, 'partner-logo--opaque': src.endsWith('.jpg') }]" role="img" :aria-label="name">
     <span v-if="isSvg && markup" class="partner-logo__svg" v-html="markup" />
     <img v-else :src="src" alt="" loading="lazy" class="partner-logo__light">
-    <img v-if="srcDark" :src="srcDark" alt="" loading="lazy" class="partner-logo__dark">
+    <img v-if="srcDark && srcDark !== src" :src="srcDark" alt="" loading="lazy" class="partner-logo__dark">
     <span class="partner-logo__fx" aria-hidden="true" />
   </span>
 </template>
@@ -182,12 +183,12 @@ onMounted(async () => {
    Unscoped: in a scoped block :global(...) would drop the rest of the selector and filter the whole page. */
 .partner-logo .partner-logo__dark { display: none; }
 .partner-logo--opaque img { mix-blend-mode: multiply; }
-:root[data-theme="dark"] .partner-logo:not(.partner-logo--official) img, :root[data-theme="dark"] .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
+:root[data-theme="dark"] .partner-logo:not(.partner-logo--official, .partner-logo--keep) img, :root[data-theme="dark"] .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
 :root[data-theme="dark"] .partner-logo--opaque img { mix-blend-mode: screen; filter: invert(1); }
 :root[data-theme="dark"] .partner-logo--official .partner-logo__light { display: none; }
 :root[data-theme="dark"] .partner-logo--official .partner-logo__dark { display: block; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .partner-logo:not(.partner-logo--official) img, :root:not([data-theme="light"]) .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
+  :root:not([data-theme="light"]) .partner-logo:not(.partner-logo--official, .partner-logo--keep) img, :root:not([data-theme="light"]) .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
   :root:not([data-theme="light"]) .partner-logo--opaque img { mix-blend-mode: screen; filter: invert(1); }
   :root:not([data-theme="light"]) .partner-logo--official .partner-logo__light { display: none; }
   :root:not([data-theme="light"]) .partner-logo--official .partner-logo__dark { display: block; }
