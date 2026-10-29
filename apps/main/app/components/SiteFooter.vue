@@ -25,7 +25,7 @@ const labels: Record<string, [string, string]> = {
         <span class="label">{{ isEn ? 'Contact' : 'Зв’язок' }}</span>
         <span class="selectable">ngo.symbol@gmail.com</span>
         <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
-        <a href="/events.ics">{{ isEn ? 'Subscribe to the events calendar' : 'Підписатися на календар подій' }}</a>
+        <NuxtLink :to="isEn ? '/en/events' : '/events'">{{ isEn ? 'Subscribe to the events calendar' : 'Підписатися на календар подій' }}</NuxtLink>
       </div>
       <div>
         <span class="label">{{ isEn ? 'Where we work' : 'Географія' }}</span>

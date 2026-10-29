@@ -48,14 +48,8 @@ const days = computed(() => {
         <button type="button" :class="{ active: view === 'list' }" :aria-pressed="view === 'list'" @click="view = 'list'">Список</button>
         <button type="button" :class="{ active: view === 'calendar' }" :aria-pressed="view === 'calendar'" @click="view = 'calendar'">Календар</button>
       </div>
-      <label class="select">
-        <span class="label">Проєкт</span>
-        <select id="event-project" v-model="projectFilter">
-          <option value="">Усі проєкти</option>
-          <option v-for="project in eventProjects" :key="project.slug" :value="project.slug">{{ project.title }}</option>
-        </select>
-      </label>
-      <a class="text-link" href="/events.ics">Підписатися на календар (.ics)</a>
+      <ProjectPicker v-model="projectFilter" label="Проєкт" all-label="Усі проєкти" :options="eventProjects.map(project => ({ value: project.slug, label: project.title }))" />
+      <CalendarSubscribe />
     </div>
 
     <template v-if="view === 'list'">
