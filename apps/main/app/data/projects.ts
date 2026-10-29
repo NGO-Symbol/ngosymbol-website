@@ -28,6 +28,17 @@ const entries: Project[] = [
       { person: 'larysa-chaika', role: 'Головна ілюстраторка' },
       { person: 'oleksii-chekal', role: 'Головний дизайнер' },
       { person: 'olena-mordyk', role: 'Комунікація' }
+    ],
+    // Archive views of Kharkiv streets from the project's Drive («Візуальні матеріали ІМВ / Будинки»), used as illustrations.
+    backdrop: '/media/projects/istoriia-moiei-vulytsi/mykolaivskyi-maidan.jpg',
+    gallery: [
+      { src: '/media/projects/istoriia-moiei-vulytsi/sumska-1901.jpg', alt: 'Сумська вулиця, травень 1901 року: архівна світлина' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/mykolaivskyi-maidan.jpg', alt: 'Панорама Миколаївського майдану в 1900-х роках' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/moskovskyi-prospekt.jpg', alt: 'Московський проспект (нині проспект Героїв Харкова) на старій листівці' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/skovorody.jpg', alt: 'Будинок на вулиці Сковороди: архівна світлина' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-1.jpg', alt: 'Житловий будинок на вулиці Чичибабіна: архівна світлина' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-9.jpg', alt: 'Вулиця Чичибабіна: архівна панорама забудови' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/staromoskovska-98.jpg', alt: 'Будинок на вулиці Старомосковській, 98: фасад і план' }
     ]
     // The project site (my-street.symbol.ngo) is hidden while it is being built; add subsiteUrl back when it opens.
   },
@@ -134,6 +145,11 @@ const entries: Project[] = [
     directions: ['art', 'mental-health'],
     tone: 'plum',
     gallery: [
+      { src: '/media/projects/istorii-riznykh/ensemble.jpg', alt: 'Актори плейбек-перформансу «Історії різних» у спільному русі' },
+      { src: '/media/projects/istorii-riznykh/ensemble-stage.jpg', alt: 'Актори відіграють історію глядача на сцені «Арсеналу ідей»' },
+      { src: '/media/projects/istorii-riznykh/conductor.jpg', alt: 'Кондукторка перформансу біля мікрофона' },
+      { src: '/media/projects/istorii-riznykh/reach.jpg', alt: 'Акторки тягнуться одна до одної в сцені' },
+      { src: '/media/projects/istorii-riznykh/care.jpg', alt: 'Сцена турботи між акторами' },
       { src: '/media/projects/istorii-riznykh/performance.jpg', alt: 'Плейбек-перформанс «Історії різних»: акторка відіграє історію глядача, решта акторів на сцені' },
       { src: '/media/projects/istorii-riznykh/bow.jpg', alt: 'Актори плейбек-театру і ведуча після перформансу в Арсеналі ідей', people: true },
       { src: '/media/projects/istorii-riznykh/stage.jpg', alt: 'Сцена перформансу: актори в чорному на тлі білої стіни' },

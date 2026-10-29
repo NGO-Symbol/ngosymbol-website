@@ -21,6 +21,28 @@ function scope(svg: string) {
 }
 
 const root = ref<HTMLElement>()
+
+// Each logo starts its own motion when it scrolls into view (it does not depend on the page-wide reveal, which can
+// miss tiles after client-side navigation) and replays it whenever the pointer enters its tile.
+const playing = ref(false)
+let observer: IntersectionObserver | undefined
+function replay() {
+  playing.value = false
+  requestAnimationFrame(() => requestAnimationFrame(() => { playing.value = true }))
+}
+onMounted(() => {
+  const tile = root.value?.closest('.partner') ?? root.value
+  tile?.addEventListener('mouseenter', replay)
+  observer = new IntersectionObserver((entries) => {
+    if (entries.some(entry => entry.isIntersecting)) { playing.value = true; observer?.disconnect() }
+  }, { rootMargin: '0px 0px -5% 0px' })
+  if (root.value) observer.observe(root.value)
+})
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  root.value?.closest('.partner')?.removeEventListener('mouseenter', replay)
+})
+
 onMounted(async () => {
   if (!isSvg) return
   try {
@@ -37,7 +59,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <span ref="root" class="partner-logo" :class="`partner-logo--${motion ?? 'wave'}`" role="img" :aria-label="name">
+  <span ref="root" class="partner-logo" :class="[`partner-logo--${motion ?? 'wave'}`, { 'is-playing': playing }]" role="img" :aria-label="name">
     <span v-if="isSvg && markup" class="partner-logo__svg" v-html="markup" />
     <img v-else :src="src" alt="" loading="lazy">
     <span class="partner-logo__fx" aria-hidden="true" />
@@ -57,46 +79,46 @@ onMounted(async () => {
 .partner-logo__svg :deep(svg *) { animation-delay: calc(var(--n, 0) * 35ms); }
 
 /* ЄрміловЦентр: two red blocks frame the name; the blocks slide in, the letters light up one by one like a hall. */
-.is-visible .partner-logo--blink :deep(rect) { animation: pl-slide .6s cubic-bezier(.2, 1, .3, 1) both; }
-.is-visible .partner-logo--blink :deep(path), .is-visible .partner-logo--blink :deep(polygon) { animation: pl-blink .7s steps(1) both; animation-delay: calc(.3s + var(--n, 0) * 30ms); }
+.partner-logo.is-playing.partner-logo--blink :deep(rect) { animation: pl-slide .6s cubic-bezier(.2, 1, .3, 1) both; }
+.partner-logo.is-playing.partner-logo--blink :deep(path), .partner-logo.is-playing.partner-logo--blink :deep(polygon) { animation: pl-blink .7s steps(1) both; animation-delay: calc(.3s + var(--n, 0) * 30ms); }
 @keyframes pl-slide { from { transform: scaleX(0); } }
 @keyframes pl-blink { 0% { opacity: 0; } 30% { opacity: 1; } 45% { opacity: .25; } 60%, 100% { opacity: 1; } }
 
 /* Karazin University: a heraldic emblem and a long title; shapes rise in order like a seal being pressed. */
-.is-visible .partner-logo--unfold :deep(svg *:not(g):not(style):not(defs)) { animation: pl-rise .7s cubic-bezier(.2, 1.2, .3, 1) both; animation-delay: calc(var(--n, 0) * 18ms); }
+.partner-logo.is-playing.partner-logo--unfold :deep(svg *:not(g):not(style):not(defs)) { animation: pl-rise .7s cubic-bezier(.2, 1.2, .3, 1) both; animation-delay: calc(var(--n, 0) * 18ms); }
 @keyframes pl-rise { from { opacity: 0; transform: translateY(6px) scale(.85); } }
 
 /* ZMINA, «change»: every letter swaps in from the left with a skew, one beat after another. */
-.is-visible .partner-logo--shift :deep(svg *:not(g):not(style):not(defs)) { animation: pl-shift .7s cubic-bezier(.2, 1.4, .4, 1) both; animation-delay: calc(var(--n, 0) * 70ms); }
+.partner-logo.is-playing.partner-logo--shift :deep(svg *:not(g):not(style):not(defs)) { animation: pl-shift .7s cubic-bezier(.2, 1.4, .4, 1) both; animation-delay: calc(var(--n, 0) * 70ms); }
 @keyframes pl-shift { 0% { opacity: 0; transform: translateX(-14px) skewX(-18deg); } 70% { opacity: 1; transform: translateX(2px) skewX(4deg); } }
 
 /* European Cultural Foundation: the top bar draws across, then the three stacked words drop in like lines of type. */
-.is-visible .partner-logo--wave :deep(svg *:not(g):not(style):not(defs)) { animation: pl-drop .55s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 90ms); }
-.is-visible .partner-logo--wave :deep(path:first-child), .is-visible .partner-logo--wave :deep(rect:first-of-type) { transform-origin: left center; }
+.partner-logo.is-playing.partner-logo--wave :deep(svg *:not(g):not(style):not(defs)) { animation: pl-drop .55s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 90ms); }
+.partner-logo.is-playing.partner-logo--wave :deep(path:first-child), .partner-logo.is-playing.partner-logo--wave :deep(rect:first-of-type) { transform-origin: left center; }
 @keyframes pl-drop { from { opacity: 0; transform: translateY(-8px); } }
 
 /* Mental health for Ukraine: the ring of dots blooms open, then the letters settle. */
-.is-visible .partner-logo--bloom :deep(svg *:not(g):not(style):not(defs)) { animation: pl-bloom .9s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 22ms); }
+.partner-logo.is-playing.partner-logo--bloom :deep(svg *:not(g):not(style):not(defs)) { animation: pl-bloom .9s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 22ms); }
 @keyframes pl-bloom { from { opacity: 0; transform: scale(.2); } }
 
 /* Grynyov Art Collection: the stacked words are uncovered left to right, like a bar being drawn. */
-.is-visible .partner-logo--wipe img { animation: pl-wipe 1s cubic-bezier(.7, 0, .2, 1) both; }
+.partner-logo.is-playing.partner-logo--wipe img { animation: pl-wipe 1s cubic-bezier(.7, 0, .2, 1) both; }
 @keyframes pl-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
 /* Mental health for Ukraine (raster fallback): a calm double heartbeat. */
-.is-visible .partner-logo--beat img { animation: pl-beat 1.4s ease-in-out both; transform-origin: left center; }
+.partner-logo.is-playing.partner-logo--beat img { animation: pl-beat 1.4s ease-in-out both; transform-origin: left center; }
 @keyframes pl-beat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.08); } 28% { transform: scale(1); } 42% { transform: scale(1.05); } 70% { transform: scale(1); } }
 
 /* Creative Europe: the EU ring of twelve stars turns once around the flag while the logo pops in. */
-.is-visible .partner-logo--stars img { animation: pl-pop .7s cubic-bezier(.3, 1.6, .5, 1) both; }
+.partner-logo.is-playing.partner-logo--stars img { animation: pl-pop .7s cubic-bezier(.3, 1.6, .5, 1) both; }
 .partner-logo--stars .partner-logo__fx { left: 4px; top: 50%; width: 52px; height: 52px; margin-top: -26px; border: 2px dotted #ffcc00; border-radius: 50%; }
-.is-visible .partner-logo--stars .partner-logo__fx { animation: pl-ring 1.4s ease-out both; }
+.partner-logo.is-playing.partner-logo--stars .partner-logo__fx { animation: pl-ring 1.4s ease-out both; }
 @keyframes pl-pop { from { opacity: 0; transform: scale(.85); } }
 @keyframes pl-ring { 0% { opacity: 0; transform: rotate(0) scale(.5); } 30% { opacity: 1; } 100% { opacity: 0; transform: rotate(180deg) scale(1.25); } }
 
 /* Playback theatre «Нема»: a stage curtain parts and the logo is revealed. */
 .partner-logo--curtain .partner-logo__fx { inset: 0; background: linear-gradient(90deg, var(--symbol-violet) 50%, var(--symbol-plum) 50%); }
-.is-visible .partner-logo--curtain .partner-logo__fx { animation: pl-curtain 1.1s cubic-bezier(.6, 0, .2, 1) both; }
+.partner-logo.is-playing.partner-logo--curtain .partner-logo__fx { animation: pl-curtain 1.1s cubic-bezier(.6, 0, .2, 1) both; }
 @keyframes pl-curtain { 0% { opacity: 1; clip-path: inset(0 0 0 0); } 99% { opacity: 1; } 100% { opacity: 0; clip-path: inset(0 50% 0 50%); } }
 
 @media (prefers-reduced-motion: reduce) { .partner-logo *, .partner-logo :deep(*) { animation: none !important; } }

@@ -9,6 +9,18 @@ if (!person || person.hasPage === false) {
 
 const appearances = appearancesOf(person.slug)
 
+// The short bio is shown as the lead under the name; when the biography opens with the same sentence, it is not repeated.
+const bioParagraphs = computed(() => {
+  const paragraphs = [...(person.bio ?? [])]
+  const lead = person.shortBio?.trim()
+  if (lead && paragraphs[0]?.startsWith(lead)) {
+    const rest = paragraphs[0].slice(lead.length).trim()
+    if (rest) paragraphs[0] = rest
+    else paragraphs.shift()
+  }
+  return paragraphs
+})
+
 useSeoMeta({ title: person.name, description: person.shortBio ?? `${person.name} у проєктах ГО «Символ».` })
 useHead({
   script: [{
@@ -19,11 +31,12 @@ useHead({
 </script>
 
 <template>
-  <article v-if="person" class="page container">
+  <article v-if="person" class="page container person-page">
     <Breadcrumbs :items="[{ label: 'Люди', to: '/people' }, { label: person.name }]" />
     <div class="page-title page-title--wide">
       <span class="eyebrow">{{ person.team ? 'Команда «Символу»' : 'Учасники проєктів' }}<template v-if="person.teamRole"> · {{ person.teamRole }}</template></span>
       <h1>{{ person.name }}</h1>
+      <p v-if="person.shortBio" class="person-lead">{{ person.shortBio }}</p>
     </div>
     <div class="project-content">
       <aside>
@@ -33,13 +46,13 @@ useHead({
         </ul>
       </aside>
       <div class="project-sections">
-        <section>
-          <span class="label">Біографія</span>
-          <RichText v-if="person.bio" class="lead-text" :paragraphs="person.bio" />
-          <p v-else class="empty-note">Біографія готується.</p>
+        <section v-if="bioParagraphs.length || !person.shortBio">
+          <h2 class="person-section">Біографія</h2>
+          <RichText v-if="bioParagraphs.length" class="person-bio" :paragraphs="bioParagraphs" />
+          <p v-else-if="!person.shortBio" class="empty-note">Біографія готується.</p>
         </section>
         <section v-if="person.cv?.length" class="cv">
-          <span class="label">CV</span>
+          <h2 class="person-section">Резюме</h2>
           <div v-for="section in person.cv" :key="section.title" class="cv__section">
             <h3>{{ section.title }}</h3>
             <ul>
@@ -51,7 +64,7 @@ useHead({
           </div>
         </section>
         <section v-if="appearances.length">
-          <span class="label">У проєктах «Символу»</span>
+          <h2 class="person-section">У проєктах «Символу»</h2>
           <ul class="appearances">
             <li v-for="item in appearances" :key="item.to">
               <NuxtLink :to="item.to">{{ item.title }}</NuxtLink>
