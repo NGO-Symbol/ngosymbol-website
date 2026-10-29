@@ -53,7 +53,9 @@ export function formatDay(iso: string) {
  * parts: artists open their page here, everyone and everything else opens on symbol.ngo.
  */
 export type TextPart = { text: string; href?: string; internal?: boolean }
-export function textParts(paragraph: string): TextPart[] {
+export function textParts(source: string): TextPart[] {
+  // Key-phrase stars (**…**) are a symbol.ngo styling cue; this site shows the plain words.
+  const paragraph = source.replace(/\*\*/g, '')
   const parts: TextPart[] = []
   const pattern = /\[\[(person|project|event):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g
   let last = 0

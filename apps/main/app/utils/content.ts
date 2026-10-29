@@ -125,7 +125,8 @@ export const appearancesOf = (slug: string) => {
 // Inline references: [[type:slug]] or [[type:slug|label]].
 const referencePattern = /\[\[(project|event|person):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g
 
-export type Segment = { text: string } | { text: string; to: string }
+// `key`: a key phrase written **like this** in the data — dates, places, numbers, the essence of a project.
+export type Segment = { text: string; key?: boolean } | { text: string; to: string; key?: boolean }
 
 export const resolveReference = (type: string, slug: string): { label: string; to?: string } | undefined => {
   if (type === 'project') {
@@ -154,8 +155,17 @@ export const parseRichText = (text: string): Segment[] => {
     last = match.index! + whole.length
   }
   if (last < text.length) segments.push({ text: text.slice(last) })
-  return segments
+  return segments.flatMap(splitKeys)
 }
+
+// **…** inside a segment marks a key phrase; a reference inside the stars ([[…]]) stays a link and is emphasised too.
+function splitKeys(segment: Segment): Segment[] {
+  if (!segment.text.includes('**')) return [segment]
+  return segment.text.split(/\*\*/).map((part, index) => ({ ...segment, text: part, key: index % 2 === 1 || segment.key })).filter(part => part.text)
+}
+
+/** Text without reference and emphasis markup, for search, meta descriptions and feeds. */
+export const plainText = (text: string) => text.replace(/\[\[[a-z]+:[a-z0-9-]+\|?([^\]]*)\]\]/g, '$1').replace(/\*\*/g, '')
 
 function textsOf(record: { body?: string[]; concept?: string[]; description?: string[]; bio?: string[] }) {
   return [...(record.body ?? []), ...(record.concept ?? []), ...(record.description ?? []), ...(record.bio ?? [])]

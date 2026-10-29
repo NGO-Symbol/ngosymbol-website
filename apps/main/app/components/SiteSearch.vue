@@ -18,7 +18,7 @@ const index = computed<Hit[]>(() => [
 ])
 
 // Case- and apostrophe-insensitive; references like [[person:slug|Name]] are reduced to their label.
-const normalize = (text: string) => text.toLowerCase().replace(/\[\[[a-z]+:[a-z0-9-]+\|?([^\]]*)\]\]/g, '$1').replace(/[’'ʼ`]/g, '').replace(/ё/g, 'е')
+const normalize = (text: string) => text.toLowerCase().replace(/\[\[[a-z]+:[a-z0-9-]+\|?([^\]]*)\]\]/g, '$1').replace(/\*\*/g, '').replace(/[’'ʼ`]/g, '').replace(/ё/g, 'е')
 
 const open = ref(false)
 const query = ref('')
