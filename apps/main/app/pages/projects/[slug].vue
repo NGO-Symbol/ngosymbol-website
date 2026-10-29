@@ -69,22 +69,22 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
 
       <div class="project-sections">
         <section v-if="project.body">
-          <span class="label">Про проєкт</span>
+          <h2 class="section-title">Про проєкт</h2>
           <RichText class="lead-text" :paragraphs="project.body" />
         </section>
 
         <section v-if="project.concept">
-          <span class="label">Кураторська концепція</span>
+          <h2 class="section-title">Кураторська концепція</h2>
           <RichText :paragraphs="project.concept" />
         </section>
 
         <section v-if="project.gallery?.length">
-          <span class="label">Фото</span>
+          <h2 class="section-title">Фото</h2>
           <PhotoGallery :photos="project.gallery" />
         </section>
 
         <section v-if="projectEvents.length">
-          <span class="label">Події проєкту</span>
+          <h2 class="section-title">Події проєкту</h2>
           <div class="event-list">
             <NuxtLink v-for="event in [...upcomingEvents, ...pastEvents]" :key="event.slug" class="event-row" :to="`/events/${event.slug}`">
               <time class="event-row__date" :datetime="event.start">{{ formatRange(event.start, event.end) }}</time>
@@ -95,7 +95,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </section>
 
         <section v-if="team.length">
-          <span class="label">Люди</span>
+          <h2 class="section-title">Люди</h2>
           <div class="credits">
             <div v-for="group in team" :key="group.role" class="credits__group">
               <h3>{{ group.role }}</h3>
@@ -111,7 +111,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </section>
 
         <section v-if="partners.length || donors.length || project.programLogo">
-          <span class="label">Партнери й донори</span>
+          <h2 class="section-title">Партнери й донори</h2>
           <div class="credits">
             <div v-if="partners.length" class="credits__group">
               <h3>Партнери</h3>
@@ -130,7 +130,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </section>
 
         <section v-if="mentions.length">
-          <span class="label">Преса</span>
+          <h2 class="section-title">Преса</h2>
           <ul class="press-list">
             <li v-for="item in mentions" :key="item.url">
               <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }} ↗</a>
@@ -140,7 +140,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </section>
 
         <section v-if="calls.length">
-          <span class="label">Можливості</span>
+          <h2 class="section-title">Можливості</h2>
           <a v-for="call in calls" :key="call.slug" class="open-call" :href="call.applyUrl" target="_blank" rel="noreferrer">
             <strong>{{ call.title }}</strong><span>Дедлайн: {{ formatDate(call.deadline) }}</span><span class="open-call__cta">Подати заявку ↗</span>
           </a>
@@ -149,7 +149,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
     </div>
 
     <section class="container section section--tight">
-      <span class="label">{{ related.length ? 'Пов’язані проєкти' : 'Інші проєкти «Символу»' }}</span>
+      <h2 class="section-title">{{ related.length ? 'Пов’язані проєкти' : 'Інші проєкти «Символу»' }}</h2>
       <div class="project-grid">
         <ProjectCard v-for="other in (related.length ? related : others)" :key="other.slug" :project="other" />
       </div>

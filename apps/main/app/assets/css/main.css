@@ -265,7 +265,10 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .project-sections > section > .label { margin-bottom: 18px; }
 .rich-text p { font-size: 1.05rem; line-height: 1.7; max-width: 680px; }
 .rich-text a { text-underline-offset: 4px; text-decoration-color: var(--symbol-violet); }
-.lead-text p:first-child { font-family: var(--font-display); font-size: clamp(0.9rem, calc(0.45rem + 2.04vw), 2.1rem); line-height: 1.25; }
+.lead-text { max-width: 66ch; font-size: 1.05rem; line-height: 1.7; }
+.lead-text p:first-child { font-family: var(--font-display); font-size: clamp(1.15rem, calc(.95rem + .6vw), 1.45rem); line-height: 1.45; }
+/* Section titles on project pages: calm, sentence case — large type is kept for the page title only. */
+.project-content section h2.section-title, .project-related h2.section-title, h2.section-title { margin: 0 0 16px; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; line-height: 1.2; max-width: none; }
 
 .facts { display: grid; gap: 16px; margin: 0; }
 .facts dt { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--symbol-violet); margin-bottom: 3px; }
