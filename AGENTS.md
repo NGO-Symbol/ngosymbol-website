@@ -6,6 +6,7 @@ This repository contains both source code and the durable knowledge base for Г�
 
 1. Run `pnpm task:status` and follow `.agents/skills/site-workflow/SKILL.md`: it tells you how to start a task branch, save progress in small commits, and publish through a pull request. The people you work with are not developers; run these commands for them.
 2. Never edit on `main`, never force-push, never bypass checks.
+3. Source materials (photos, CVs, logos, documents) the team sends are collected in `media-inbox/` in this folder (local, not in git), sorted by kind (`people/`, `cv/`, `logos/`, `projects/`…). Copy files there from Downloads or elsewhere first; only processed web versions go into `apps/*/public`.
 
 ## Repository skills
 
