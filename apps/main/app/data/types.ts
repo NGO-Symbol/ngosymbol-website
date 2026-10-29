@@ -15,6 +15,8 @@ export interface Photo {
   src: string
   alt: string
   credit?: string
+  /** Photos of people (curators, team, audience portraits) stay out of the home photo orbit. */
+  people?: boolean
 }
 
 export interface Credit {

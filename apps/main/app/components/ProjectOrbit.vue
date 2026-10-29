@@ -9,6 +9,21 @@ const weights = items.map(project => project.title.length + 9)
 const total = weights.reduce((sum, weight) => sum + weight, 0)
 const offsets = weights.map((_, index) => (weights.slice(0, index).reduce((sum, weight) => sum + weight, 0) / total) * 100)
 
+// Photo ring: exhibition and event photos (never photos of people) ride the dashed inner ring, each linking
+// to its project or event. A new random set on every visit (shuffled after mount, so SSR stays stable).
+const ringSize = 8
+const allPhotos = [
+  ...projects.flatMap(project => (project.gallery ?? []).filter(photo => !photo.people).map(photo => ({ ...photo, to: `/projects/${project.slug}`, place: project.title }))),
+  ...events.flatMap(event => (event.gallery ?? []).filter(photo => !photo.people).map(photo => ({ ...photo, to: `/events/${event.slug}`, place: event.title })))
+]
+const ringPhotos = ref(allPhotos.slice(0, ringSize))
+const ringRadius = 340
+const ringSlot = (index: number) => {
+  const angle = (index / ringPhotos.value.length) * Math.PI * 2 - Math.PI / 2
+  return { x: 500 + ringRadius * Math.cos(angle), y: 500 + ringRadius * Math.sin(angle) }
+}
+const hoveredPhoto = ref<number>()
+
 const active = ref(0)
 const paused = ref(false)
 const launching = ref(false)
@@ -44,6 +59,7 @@ function onScroll() {
 }
 
 onMounted(() => {
+  ringPhotos.value = [...allPhotos].sort(() => Math.random() - 0.5).slice(0, ringSize)
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   window.addEventListener('scroll', onScroll, { passive: true })
 })
@@ -69,7 +85,19 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
         <path id="orbit-path" d="M 500 500 m -430 0 a 430 430 0 1 1 860 0 a 430 430 0 1 1 -860 0" />
       </defs>
       <circle cx="500" cy="500" r="470" class="orbit-hook__ring" />
-      <circle cx="500" cy="500" r="390" class="orbit-hook__ring orbit-hook__ring--dashed" />
+      <circle cx="500" cy="500" r="340" class="orbit-hook__ring orbit-hook__ring--dashed" />
+      <g v-if="ringPhotos.length" class="orbit-hook__photos" :class="{ 'is-hovered': hoveredPhoto !== undefined }">
+        <g v-for="(photo, index) in ringPhotos" :key="photo.src" :transform="`translate(${ringSlot(index).x} ${ringSlot(index).y})`">
+          <g class="orbit-hook__photo" :class="{ 'is-hovered': hoveredPhoto === index }" :style="{ '--i': index }">
+            <a :href="photo.to" :aria-label="`${photo.place}: ${photo.alt}`" @click.prevent="navigateTo(photo.to)" @mouseenter="hoveredPhoto = index; paused = true" @mouseleave="hoveredPhoto = undefined" @focus="hoveredPhoto = index" @blur="hoveredPhoto = undefined">
+              <title>{{ photo.place }} — {{ photo.alt }}</title>
+              <clipPath :id="`orbit-photo-${index}`"><circle r="50" /></clipPath>
+              <image :href="photo.src" x="-50" y="-50" width="100" height="100" preserveAspectRatio="xMidYMid slice" :clip-path="`url(#orbit-photo-${index})`" />
+              <circle r="50" class="orbit-hook__photo-rim" />
+            </a>
+          </g>
+        </g>
+      </g>
       <g :transform="`rotate(${scrollTurn} 500 500)`">
         <g class="orbit-hook__spin">
           <text v-for="(project, index) in items" :key="project.slug" class="orbit-hook__title" :class="{ 'is-active': index === active }">
@@ -121,6 +149,20 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 .orbit-hook__caption strong { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
 .orbit-hook__caption span:last-child { font-size: .92rem; line-height: 1.5; }
 .orbit-hook__caption .label { color: var(--symbol-violet); }
+/* Photos turn with the dashed ring, each counter-rotating to stay upright; hover lifts one and dims the rest. */
+.orbit-hook__photos { transform-origin: 500px 500px; animation: orbit-spin 60s linear infinite reverse; }
+.orbit-hook.is-paused .orbit-hook__photos, .orbit-hook.is-paused .orbit-hook__photo { animation-play-state: paused; }
+.orbit-hook__photo { transform-box: fill-box; transform-origin: center; animation: orbit-spin 60s linear infinite; }
+.orbit-hook__photo a { cursor: pointer; outline: none; }
+.orbit-hook__photo image, .orbit-hook__photo-rim { transform-box: fill-box; transform-origin: center; transition: transform .45s cubic-bezier(.3, 1.5, .5, 1), opacity .3s ease, filter .3s ease; }
+.orbit-hook__photo image { animation: orbit-photo-in .8s cubic-bezier(.3, 1.4, .5, 1) both; animation-delay: calc(.4s + var(--i) * 90ms); }
+.orbit-hook__photo-rim { fill: none; stroke: var(--symbol-cream); stroke-width: 4; }
+.orbit-hook__photos.is-hovered .orbit-hook__photo:not(.is-hovered) image { opacity: .45; filter: grayscale(1); }
+.orbit-hook__photo.is-hovered image, .orbit-hook__photo.is-hovered .orbit-hook__photo-rim { transform: scale(1.4); }
+.orbit-hook__photo.is-hovered .orbit-hook__photo-rim { stroke: var(--symbol-apricot); }
+.orbit-hook__photo a:focus-visible .orbit-hook__photo-rim { stroke: var(--symbol-violet); stroke-width: 6; }
+@keyframes orbit-photo-in { from { transform: scale(0) rotate(-120deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .orbit-hook__photos, .orbit-hook__photo, .orbit-hook__photo image { animation: none; } }
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 @keyframes orbit-breathe { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(-14deg) scale(1.06); } }
 @keyframes orbit-satellite { to { transform: rotate(-360deg); } }

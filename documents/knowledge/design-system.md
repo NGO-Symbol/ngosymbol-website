@@ -42,6 +42,10 @@ The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` 
 
 The main site uses the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for headings and display text (`--font-display`), and **Source Serif 4** (variable, self-hosted from `@fontsource-variable/source-serif-4`, finer serifs) for running and small text (`--font-body`). `USER_CONFIRMED` 2026-10-29: the team likes Zakon for large letters and wants a serif with smaller serifs for small text. Zakon headings need loose leading: display line-height is at least 1.04 and letter-spacing no tighter than −0.015em, otherwise accents (Й, Ї) collide with the line above. Project pages with their own identity override these variables. Web-embedding licence of Zakon to be confirmed.
 
+## Home photo orbit
+
+The home orbit carries a ring of round photos on its inner dashed ring: eight random exhibition and event photos per visit, never photos of people (`Photo.people` marks those), each linking to its project or event. They turn with the ring, stay upright, appear one after another and grow on hover while the others dim. More projects need selected photos for variety. `USER_CONFIRMED` 2026-10-29.
+
 ## Going home
 
 Any way home (logo click or link to `/`, `/en`) plays a violet disc that spreads from the click point and then shrinks back into the disc of the header logo (`RouteWipe.vue`). On the home page itself the logo click plays the same circle without navigating. `USER_CONFIRMED` 2026-10-29.
