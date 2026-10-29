@@ -13,34 +13,77 @@ export function workPhotos(slug: string) {
 // artists by their works), in /media/projects/pokazhit-svoi-dokumenty/works/{slug}-n.jpg. Where an artist has these,
 // they replace the smaller pictures from the saved pages, which are mostly the same shots.
 export const chekalPhotoCount: Record<string, number> = {
-  'alina-prokopenko': 2, 'andrii-skrypka': 3, 'anna-hareieva': 4, 'anton-kariuk': 5, 'kostiantyn-hlyvlias': 3,
-  'dara-sholokh': 4, 'kinich-azla': 4,
-  'mariia-matiashova': 3, 'mariia-prokopenko': 12, 'nataliia-okhman': 2, 'oleh-tistol': 2, 'pavlo-makov': 1,
-  'oleksii-sai': 3, 'roman-piatkovka': 3, 'senora-serpiente': 2,
-  'serhii-melnychenko': 4, 'vira-pakosh': 3, 'volodymyr-kuznietsov': 5, 'yeva-fomitski': 3
+  'alina-prokopenko': 2, 'andrii-skrypka': 3, 'anna-hareieva': 4, 'anton-kariuk': 5, 'kostiantyn-hlyvlias': 7,
+  'dara-sholokh': 9, 'kinich-azla': 4,
+  'mariia-matiashova': 3, 'mariia-prokopenko': 12, 'nataliia-okhman': 2, 'oleh-tistol': 2, 'pavlo-makov': 7,
+  'oleksii-sai': 3, 'roman-piatkovka': 6, 'senora-serpiente': 3,
+  'serhii-melnychenko': 4, 'vira-pakosh': 4, 'volodymyr-kuznietsov': 5, 'yeva-fomitski': 3
 }
 
 export function chekalPhotos(slug: string) {
   return Array.from({ length: chekalPhotoCount[slug] ?? 0 }, (_, i) => `/media/projects/pokazhit-svoi-dokumenty/works/${slug}-${i + 1}.jpg`)
 }
 
-// Additional photographs from an artist-specific source folder. They supplement, rather than replace, the exhibition
-// photographs above and keep their own credit when one is known.
-export const supplementalWorkPhotos: Record<string, { src: string, credit?: string }[]> = {
+export interface WorkPhoto { src: string, credit?: string }
+export interface WorkPhotoGroup { title: string, photos: WorkPhoto[] }
+
+// Artists with several works need an explicit per-work split rather than one mixed appendix.
+export const workPhotoGroups: Record<string, WorkPhotoGroup[]> = {
+  'kinich-azla': [
+    {
+      title: 'Мімік',
+      photos: [
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-1.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-2.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-mimik-3.jpg' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-mimik-4.jpg' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-mimik-5.jpg' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-mimik-6.jpg' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-mimik-7.jpg', credit: 'Петро Чекаль' }
+      ]
+    },
+    {
+      title: 'Сучасна мода',
+      photos: [
+        { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', credit: 'Олександр Осіпов' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-3.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-4.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-fashion-3.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-fashion-4.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-fashion-5.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-fashion-6.jpg' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/kinich-azla-fashion-7.jpg' }
+      ]
+    }
+  ],
   'oleksii-sai': [
-    { src: '/works/oleksii-sai/1.jpg' },
-    { src: '/works/oleksii-sai/2.jpg' }
+    {
+      title: 'Заяви',
+      photos: [
+        { src: '/works/oleksii-sai/1.jpg' },
+        { src: '/works/oleksii-sai/2.jpg' },
+        { src: '/works/oleksii-sai/3.jpg' }
+      ]
+    },
+    {
+      title: 'Excel-art',
+      photos: [
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/oleksii-sai-1.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/oleksii-sai-2.jpg', credit: 'Петро Чекаль' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/oleksii-sai-3.jpg' },
+        { src: '/media/projects/pokazhit-svoi-dokumenty/works/oleksii-sai-excel-4.jpg' }
+      ]
+    }
   ]
 }
 
 // Exhibition photographs by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов») that show a work, by artist
 // (Маков, Апріс and Пятковка identified by the team; «Блокпост» — the block with tea cups and visitors' notes; the photo on the wall of A4 sheets is not Сай's work).
 export const osipovPhotos: Record<string, string[]> = {
-  'yeva-fomitski': ['/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg'],
+  'yeva-fomitski': ['/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-430.jpg'],
   'pavlo-makov': ['/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg'],
   'alina-prokopenko': ['/media/projects/pokazhit-svoi-dokumenty/osipov-048.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-034.jpg'],
   'dara-sholokh': ['/media/projects/pokazhit-svoi-dokumenty/osipov-552.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-493.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-554.jpg'],
-  'kostiantyn-hlyvlias': ['/media/projects/pokazhit-svoi-dokumenty/osipov-430.jpg'],
   'andrii-skrypka': ['/media/projects/pokazhit-svoi-dokumenty/osipov-464.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-459.jpg'],
   'roman-piatkovka': ['/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg']
 }
@@ -52,7 +95,7 @@ export const coverPhoto: Record<string, string> = {
   'andrii-skrypka': '/media/projects/pokazhit-svoi-dokumenty/osipov-464.jpg',
   'anna-hareieva': chekal('anna-hareieva', 2),
   'anton-kariuk': chekal('anton-kariuk', 1),
-  'kostiantyn-hlyvlias': '/media/projects/pokazhit-svoi-dokumenty/osipov-430.jpg',
+  'kostiantyn-hlyvlias': chekal('kostiantyn-hlyvlias', 1),
   'mariia-matiashova': chekal('mariia-matiashova', 2),
   'mariia-prokopenko': chekal('mariia-prokopenko', 3),
   'nataliia-okhman': chekal('nataliia-okhman', 2),

@@ -38,7 +38,19 @@ export const events: SymbolEvent[] = [
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-curators.jpg', alt: 'Куратори виставки виступають на відкритті', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Перформанс на відкритті: художник друкує напис на довгому аркуші' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance-banner.jpg', alt: 'Учасники перформансу піднімають надрукований банер' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-team.jpg', alt: 'Спільне фото команди, митців і гостей на відкритті', people: true }
+      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-team.jpg', alt: 'Спільне фото команди, митців і гостей на відкритті', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/balcony-guests.jpg', alt: 'Гості відкриття розмовляють на верхньому рівні ЄрміловЦентру', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/visitor-speaking.jpg', alt: 'Відвідувачка розповідає про роботу під час відкриття', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/speakers-line.jpg', alt: 'Команда й партнери виставки під час вступних промов', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/exhibition-conversation.jpg', alt: 'Розмова гостей біля робіт виставки', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/balcony-crowd.jpg', alt: 'Глядачі на балконі ЄрміловЦентру', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/opening-speakers.jpg', alt: 'Промова під час відкриття виставки', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/team-portrait.jpg', alt: 'Спільний портрет учасників відкриття', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/viewers-wall.jpg', alt: 'Відвідувачі розглядають роботи на стіні', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/visitors-table.jpg', alt: 'Гості біля інтерактивної роботи з документами', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/interactive-art.jpg', alt: 'Відвідувачка взаємодіє з роботою на виставці', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/dogs.jpg', alt: 'Собаки гостей у залі під час відкриття' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/audience-balcony.jpg', alt: 'Повна зала й балкон під час відкриття', people: true }
     ]
   },
   {
@@ -58,7 +70,11 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/audience.jpg', alt: 'Глядачі спостерігають за перформансом Олексія Чекаля', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/printing.jpg', alt: 'Олексій Чекаль наносить напис на довгу смугу паперу', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/banner.jpg', alt: 'Олексій Чекаль розгортає надруковану смугу перед глядачами', credit: 'Петро Чекаль', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/shredder.jpg', alt: 'Фрагмент перформансу «Шредер Шредінґера» з подрібненим папером', credit: 'Петро Чекаль' }
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/shredder.jpg', alt: 'Фрагмент перформансу «Шредер Шредінґера» з подрібненим папером', credit: 'Петро Чекаль' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/preparation.jpg', alt: 'Підготовка паперової смуги до друку під час перформансу', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/printing-wide.jpg', alt: 'Перформанс «Шредер Шредінґера» — друк напису перед глядачами', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/banner-wide.jpg', alt: 'Розгортання довгої надрукованої смуги в просторі виставки', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/shredding.jpg', alt: 'Олексій Чекаль подрібнює надрукований папір', people: true }
     ]
   },
   {
@@ -74,7 +90,16 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/group.jpg', alt: 'Учасники екскурсії в залі виставки' },
       { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/hall.jpg', alt: 'Екскурсія біля інсталяцій' },
       { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/walk.jpg', alt: 'Глядачі йдуть експозицією разом із кураторами' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/interactive.jpg', alt: 'Інтерактив із роботою на екскурсії' }
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/interactive.jpg', alt: 'Інтерактив із роботою на екскурсії' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/guests-portrait.jpg', alt: 'Учасники першої кураторської екскурсії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/curator-listening.jpg', alt: 'Куратор розмовляє з учасниками екскурсії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/group-wall.jpg', alt: 'Група слухає розповідь біля робіт виставки', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/artist-guide.jpg', alt: 'Розповідь про роботу під час кураторської екскурсії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/behind-artwork.jpg', alt: 'Куратор пояснює роботу за напівпрозорою інсталяцією', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/black-box.jpg', alt: 'Учасники екскурсії біля інтерактивної роботи', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/interaction-table.jpg', alt: 'Взаємодія з роботою під час екскурсії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/screen-work.jpg', alt: 'Учасниця екскурсії біля відеороботи', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/speaker-wall.jpg', alt: 'Розповідь біля експозиційної стіни', people: true }
     ],
     partners: ['yermilov-centre'],
     description: [
@@ -137,7 +162,8 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/stage.jpg', alt: 'Павло Маков і модератори розмови', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/talk.jpg', alt: 'Розмова про документ і пам’ять', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/makov.jpg', alt: 'Павло Маков відповідає на запитання', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-makov/listeners.jpg', alt: 'Слухачі розмови', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/listeners.jpg', alt: 'Слухачі розмови', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/overview.jpg', alt: 'Розмова з Павлом Маковим — вигляд на зал згори', people: true }
     ],
     partners: ['yermilov-centre'],
     description: [
@@ -157,7 +183,11 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/artist.jpg', alt: 'Андрій Скрипка показує ліногравюру квитка', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/prints.jpg', alt: 'Гості розглядають відбитки «Квитків Харкова»', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket.jpg', alt: 'Відбиток квитка з серії «Квитки Харкова»' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/talk.jpg', alt: 'Андрій Скрипка розповідає про проєкт', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/talk.jpg', alt: 'Андрій Скрипка розповідає про проєкт', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/audience-close.jpg', alt: 'Гості слухають розповідь Андрія Скрипки', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/workshop.jpg', alt: 'Учасники розглядають і розкладають відбитки квитків', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket-portrait.jpg', alt: 'Учасниця приміряє відбиток квитка', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/conversation.jpg', alt: 'Андрій Скрипка спілкується з учасницею артисттоку', credit: 'Петро Чекаль', people: true }
     ],
     partners: ['yermilov-centre'],
     description: [
@@ -177,7 +207,13 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel.jpg', alt: 'Спікери панельної дискусії', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/speaker.jpg', alt: 'Модераторка й спікери дискусії', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/hall.jpg', alt: 'Зала ЄрміловЦентру під час дискусії' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience.jpg', alt: 'Глядачі дискусії', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience.jpg', alt: 'Глядачі дискусії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience-side.jpg', alt: 'Учасники панельної дискусії в залі', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel-speaker.jpg', alt: 'Спікерка панельної дискусії відповідає на запитання', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/listener.jpg', alt: 'Слухачка під час правозахисної дискусії', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/conversation.jpg', alt: 'Розмова учасників панелі', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/speaker-close.jpg', alt: 'Виступ учасника панельної дискусії', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/participant.jpg', alt: 'Учасниця слухає дискусію', credit: 'Петро Чекаль', people: true }
     ],
     partners: ['yermilov-centre', 'zmina'],
     description: [
@@ -196,7 +232,15 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/actors.jpg', alt: 'Актори плейбек-театру «Нема» на сцені', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/scene.jpg', alt: 'Актори відіграють історію глядача' },
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/gesture.jpg', alt: 'Сцена перформансу' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/story.jpg', alt: 'Оповідачка розповідає історію', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/story.jpg', alt: 'Оповідачка розповідає історію', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/audience-wide.jpg', alt: 'Глядачі плейбек-перформансу в залі', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/vertical-scene.jpg', alt: 'Вертикальна мізансцена акторок плейбек-театру', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/balcony.jpg', alt: 'Глядачі спостерігають за перформансом із балкона', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/ensemble-seated.jpg', alt: 'Акторки ансамблю сидять у ряд під час перформансу', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/audience-side.jpg', alt: 'Глядачі слухають історію оповідачки', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/narrator.jpg', alt: 'Оповідачка й кондукторка плейбек-перформансу', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/scene-wide.jpg', alt: 'Сцена плейбек-перформансу — широкий план', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/hall-wide.jpg', alt: 'Перформанс і глядачі в просторі ЄрміловЦентру', people: true }
     ],
     partners: ['yermilov-centre', 'nema-playback'],
     description: [
@@ -216,7 +260,9 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/violin.jpg', alt: 'Скрипалька серед паперових аркушів — вигляд згори' },
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/flute.jpg', alt: 'Флейтистка під час виконання In C' },
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass.jpg', alt: 'Контрабасист на тлі робіт виставки' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/audience.jpg', alt: 'Слухачки з бумвекерами долучаються до ритму', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/audience.jpg', alt: 'Слухачки з бумвекерами долучаються до ритму', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass-close.jpg', alt: 'Контрабасист виконує In C', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/guitar.jpg', alt: 'Гітарист під час музично-просторового перформансу', people: true }
     ],
     partners: ['yermilov-centre'],
     description: [

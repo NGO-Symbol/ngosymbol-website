@@ -2,7 +2,7 @@
 // An artist of the exhibition as a personal case file: a folder cover with the 3×4 portrait clipped on and the case
 // fields, then sheets — the biography, the curatorial text of each work, the photographs as an appendix — and the full
 // page on symbol.ngo (biography, links, other projects). Texts are in Ukrainian.
-import { chekalPhotos, osipovPhotos, supplementalWorkPhotos, workPhotos } from '~/data/workPhotos'
+import { chekalPhotos, osipovPhotos, workPhotoGroups, workPhotos } from '~/data/workPhotos'
 
 const { isEn, t, localePath } = useLang()
 const route = useRoute()
@@ -18,16 +18,20 @@ const next = exhibitionArtists[(index + 1) % exhibitionArtists.length]!
 const alt = `${artist.name}: ${t('робота на виставці', 'work at the exhibition')}`
 const byChekal = chekalPhotos(artist.slug).map(src => ({ src, alt, credit: 'Петро Чекаль' }))
 const exhibitionShots = (exhibition.gallery ?? []).filter(photo => artist.works.some(work => photo.alt.includes(`«${work.title}»`)))
-const photos = [
+const flatPhotos = [
   ...(osipovPhotos[artist.slug] ?? []).map(src => ({ src, alt, credit: 'Олександр Осіпов' })),
   ...(byChekal.length ? byChekal : [
     ...workPhotos(artist.slug).map(src => ({ src, alt })),
     ...(artist.person?.works ?? []),
     ...artist.coAuthors.flatMap(person => person.works ?? [])
   ]),
-  ...(supplementalWorkPhotos[artist.slug] ?? []).map(photo => ({ ...photo, alt })),
   ...exhibitionShots
 ]
+const photoGroups = workPhotoGroups[artist.slug]?.map(group => ({
+  title: group.title,
+  photos: group.photos.map(photo => ({ ...photo, alt: `${artist.name}: «${group.title}»` }))
+})) ?? [{ title: artist.works[0]?.title ?? '', photos: flatPhotos }]
+const photos = photoGroups.flatMap(group => group.photos)
 const credits = [...new Set(photos.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
 // Marks of use on some files, placed differently on each: a coffee ring on one sheet, a tea splash on another.
 const stainOf = (sheet: number) => {
@@ -105,9 +109,12 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
       </DocsSheet>
 
       <DocsSheet v-if="photos.length" :case-no="caseNo" :kind="t('Додаток: фотографії робіт', 'Appendix: photographs of the works')" :sheet="artist.works.length + 2" :tilt="0.15">
-        <ul class="docs-photos case-photos">
-          <li v-for="photo in photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
-        </ul>
+        <section v-for="group in photoGroups" :key="group.title">
+          <h3 v-if="photoGroups.length > 1" class="case-work">«{{ group.title }}»</h3>
+          <ul class="docs-photos case-photos">
+            <li v-for="photo in group.photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
+          </ul>
+        </section>
         <p v-if="credits.length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ credits.join(', ') }}</p>
       </DocsSheet>
     </div>
