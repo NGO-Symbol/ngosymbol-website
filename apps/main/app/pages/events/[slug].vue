@@ -11,7 +11,7 @@ const speakers = creditsByRole(event.people)
 const siblings = eventsOfProject(project.slug).filter(other => other.slug !== event.slug)
 const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: [{ slug: project.slug, title: project.title }] }))
 // Partners of this particular event; donor credits of the project repeat on each of its events (funders ask for them in every event description).
-const partners = toTiles(event.partners)
+const partners = toTiles([...(event.partners ?? [])].sort(bySignificance))
 const donors = toTiles(project.donors)
 
 useSeoMeta({ title: event.title, description: `${formatRange(event.start, event.end)} · ${venueLine(event.venue)}` })

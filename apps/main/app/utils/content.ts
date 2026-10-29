@@ -2,14 +2,14 @@
 import { events } from '~/data/events'
 import { formats, directions, statusLabels } from '~/data/formats'
 import { opportunities } from '~/data/opportunities'
-import { organizations } from '~/data/organizations'
+import { bySignificance, organizations } from '~/data/organizations'
 import { people } from '~/data/people'
 import { news } from '~/data/news'
 import { press } from '~/data/press'
 import { projects } from '~/data/projects'
 import type { Credit, Opportunity, Person, Project, SymbolEvent, Venue } from '~/data/types'
 
-export { events, news, opportunities, organizations, people, press, projects, formats, directions, statusLabels }
+export { bySignificance, events, news, opportunities, organizations, people, press, projects, formats, directions, statusLabels }
 
 const bySlug = <T extends { slug: string }>(items: T[]) => new Map(items.map(item => [item.slug, item]))
 const projectMap = bySlug(projects)

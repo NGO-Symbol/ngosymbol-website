@@ -19,6 +19,7 @@ const latestNews = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(
 const supporters = organizations
   .map(org => ({ org, projects: projects.filter(project => project.partners?.includes(org.slug) || project.donors?.includes(org.slug)) }))
   .filter(item => item.projects.length)
+  .sort((a, b) => bySignificance(a.org.slug, b.org.slug))
 </script>
 
 <template>

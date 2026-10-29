@@ -11,7 +11,7 @@ const hidden = ref(false)
 let lastY = 0
 function onScroll() {
   const y = window.scrollY
-  if (Math.abs(y - lastY) < 6) return
+  if (Math.abs(y - lastY) < 10) return
   hidden.value = y > 120 && y > lastY
   lastY = y
 }
@@ -76,8 +76,10 @@ function toggleTheme() {
 </template>
 
 <style scoped>
-.docs-header { position: sticky; top: 0; z-index: 40; background: var(--docs-paper); border-bottom: 3px solid var(--docs-ink); transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
-.docs-header.is-hidden { transform: translateY(-100%); }
+/* Hiding and returning glide slowly and fade a little, as on symbol.ngo. */
+.docs-header { position: sticky; top: 0; z-index: 40; background: var(--docs-paper); border-bottom: 3px solid var(--docs-ink); transition: transform .6s cubic-bezier(.22, .61, .36, 1), opacity .45s ease; will-change: transform; }
+.docs-header.is-hidden { transform: translateY(calc(-100% - 6px)); opacity: .2; transition: transform .75s cubic-bezier(.22, .61, .36, 1), opacity .75s ease; }
+@media (prefers-reduced-motion: reduce) { .docs-header, .docs-header.is-hidden { transition: none; } }
 .docs-back__short { display: none; }
 /* The way back to Symbol: a bright band in Symbol's own colours (violet with the apricot button and the round mark),
    so it reads at once as «the organization», not as part of the exhibition. */
