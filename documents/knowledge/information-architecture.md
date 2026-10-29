@@ -12,7 +12,7 @@ Accepted model: [ADR-0008](decisions/ADR-0008-linked-content-model.md). `USER_CO
 /events/{slug}          Event page
 /events.ics             Calendar subscription feed
 /opportunities          Open calls, residencies, vacancies
-/people                 People (artists, curators, speakers, team)
+/people                 People in two sections: the Symbol team first (by teamOrder), then project participants A–Z
 /people/{slug}          Person page with automatic backlinks to projects (a role in a project's event counts as the project; events are not listed separately)
 /about                  Mission, values, team, partners and donors, reports
 /support                Join and support

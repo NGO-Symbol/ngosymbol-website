@@ -313,6 +313,12 @@ section:hover > .label::before, section:hover > div > .label::before { transform
 .person-card__name { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.1; }
 .person-card__team { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--symbol-violet); }
 .person-card__projects { font-size: .85rem; line-height: 1.45; }
+.people-group { margin-top: 48px; }
+.people-group .section-heading { margin-bottom: 18px; }
+.person-card--team { background: var(--symbol-lilac); border-color: var(--symbol-violet); }
+.person-card--team:hover { background: var(--symbol-white); }
+.person-card--team .person-card__avatar { width: 84px; height: 84px; background: var(--symbol-white); }
+.people-empty { margin-top: 32px; opacity: .75; }
 
 /* About, support */
 .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }

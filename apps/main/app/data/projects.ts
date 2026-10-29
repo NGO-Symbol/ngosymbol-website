@@ -23,7 +23,11 @@ export const projects: Project[] = [
     ],
     people: [
       { person: 'yurii-rassokha', role: 'Команда проєкту' },
-      { person: 'petro-chekal', role: 'Команда проєкту' }
+      { person: 'petro-chekal', role: 'Команда проєкту' },
+      { person: 'maksym-rozenfeld', role: 'Голова експертної ради' },
+      { person: 'larysa-chaika', role: 'Головна ілюстраторка' },
+      { person: 'oleksii-chekal', role: 'Головний дизайнер' },
+      { person: 'olena-mordyk', role: 'Комунікація' }
     ],
     subsiteUrl: 'https://istoriia-vulytsi.symbol.ngo'
   },
