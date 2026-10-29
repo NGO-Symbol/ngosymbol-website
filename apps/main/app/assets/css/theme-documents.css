@@ -34,7 +34,9 @@
 .theme-documents .facts dt { display: inline-block; }
 .theme-documents .rich-text p { font-family: var(--docs-mono); font-size: .98rem; }
 .theme-documents .lead-text p:first-child { font-family: var(--docs-mono); font-size: 1.25rem; line-height: 1.5; }
-.theme-documents .press-list, .theme-documents .press-list li { border-color: var(--docs-ink); border-style: dashed; }
+.theme-documents .press-list { border-top-style: dashed; border-color: var(--docs-ink); }
+.theme-documents .press-list li { border-bottom-style: dashed; border-color: var(--docs-ink); }
+.theme-documents .press-list__kind { background: var(--docs-ink); color: var(--docs-paper); border-radius: 0; font-family: var(--docs-mono); }
 .theme-documents .event-row__title { font-family: var(--docs-display); text-transform: uppercase; }
 .theme-documents .event-row:hover { background: color-mix(in srgb, var(--docs-ink) 10%, transparent); }
 .theme-documents .gallery__item img { filter: grayscale(1) contrast(1.05); }

@@ -27,7 +27,9 @@ const team = creditsByRole(project.people)
 const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: projects.filter(p => p.partners?.includes(org!.slug) || p.donors?.includes(org!.slug)) }))
 const partners = toTiles(project.partners)
 const donors = toTiles(project.donors)
-const mentions = pressOfProject(project.slug)
+// Newest first; mentions without a stated date after the dated ones.
+const mentions = [...pressOfProject(project.slug)].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+const pressKinds = { review: 'Огляд', announcement: 'Анонс', listing: 'Добірка', 'open-call': 'Опен-кол', video: 'Відео', radio: 'Радіо', post: 'Допис' } as const
 const calls = opportunitiesOfProject(project.slug)
 const related = relatedProjects(project)
 const others = projects.filter(other => other.slug !== project.slug && !related.includes(other)).slice(0, 3)
@@ -134,8 +136,10 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <h2 class="section-title">Преса</h2>
           <ul class="press-list">
             <li v-for="item in mentions" :key="item.url">
-              <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }}</a>
-              <span v-if="item.date">{{ formatDate(item.date) }}</span>
+              <a :href="item.url" target="_blank" rel="noreferrer">
+                <span class="press-list__meta"><span v-if="item.kind" class="press-list__kind">{{ pressKinds[item.kind] }}</span><strong>{{ item.outlet }}</strong><span v-if="item.author">{{ item.author }}</span><time v-if="item.date" :datetime="item.date">{{ formatDate(item.date) }}</time></span>
+                <span class="press-list__title">{{ item.title }}</span>
+              </a>
             </li>
           </ul>
         </section>

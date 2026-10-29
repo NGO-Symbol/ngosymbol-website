@@ -135,6 +135,10 @@ export interface PressMention {
   date?: string
   url: string
   projects: string[]
+  /** Kind of mention, shown as a label: review, announcement, listing, open call, video, radio, post. */
+  kind?: 'review' | 'announcement' | 'listing' | 'open-call' | 'video' | 'radio' | 'post'
+  /** Author of a review or interview, when the page names one. */
+  author?: string
 }
 
 export interface Organization {
