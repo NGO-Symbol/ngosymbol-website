@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { projectsEn } from '~/data/projects-en'
 
-definePageMeta({ pageTransition: { name: 'zoom', mode: 'out-in' } })
 const route = useRoute()
 const project = getProject(String(route.params.slug))
 

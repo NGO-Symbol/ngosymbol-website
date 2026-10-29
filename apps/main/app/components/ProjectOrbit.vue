@@ -191,6 +191,12 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); cancelAn
 .orbit-hook__title a { cursor: pointer; outline: none; }
 .orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: 27px; text-decoration: underline; }
 .orbit-hook__year { font-family: var(--font-body); font-size: 15px; letter-spacing: .1em; fill: var(--symbol-violet); }
+/* Phones: the orbit is drawn small, so titles get larger type and the years step aside to make room. */
+@media (max-width: 600px) {
+  .orbit-hook__title { font-size: 30px; }
+  .orbit-hook__title.is-active { font-size: 33px; }
+  .orbit-hook__year { display: none; }
+}
 .orbit-hook__caption { width: min(100%, 460px); display: grid; gap: 6px; text-align: center; text-decoration: none; min-height: 7.5em; animation: caption-in .45s cubic-bezier(.2, 1.2, .4, 1); }
 .orbit-hook__caption strong { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
 .orbit-hook__caption span:last-child { font-size: .92rem; line-height: 1.5; }

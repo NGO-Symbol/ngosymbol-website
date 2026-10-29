@@ -40,7 +40,7 @@ The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` 
 
 ## Typography
 
-The main site uses the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for headings and display text (`--font-display`), and **Source Serif 4** (variable, self-hosted from `@fontsource-variable/source-serif-4`, finer serifs) for running and small text (`--font-body`). `USER_CONFIRMED` 2026-10-29: the team likes Zakon for large letters and wants a serif with smaller serifs for small text. Zakon headings need loose leading: display line-height is at least 1.04 and letter-spacing no tighter than −0.015em, otherwise accents (Й, Ї) collide with the line above. Project pages with their own identity override these variables. Web-embedding licence of Zakon to be confirmed.
+(Superseded on 2026-10-29: Zakon is now used for all text, see «Typeface: Zakon everywhere» below.) The main site used the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for headings and display text (`--font-display`), and **Source Serif 4** (variable, self-hosted from `@fontsource-variable/source-serif-4`, finer serifs) for running and small text (`--font-body`). `USER_CONFIRMED` 2026-10-29: the team likes Zakon for large letters and wants a serif with smaller serifs for small text. Zakon headings need loose leading: display line-height is at least 1.04 and letter-spacing no tighter than −0.015em, otherwise accents (Й, Ї) collide with the line above. Project pages with their own identity override these variables. Web-embedding licence of Zakon to be confirmed.
 
 ## Home photo orbit (removed)
 
@@ -108,3 +108,17 @@ On touch screens every tap leaves a short mark from the identity, different by t
 ## Person pages (2026-10-29)
 
 `USER_CONFIRMED`: person pages read like an article. Calm name (smaller than project titles), the short bio as a one-or-two-sentence lead in the display face, then the biography in body text (~66 characters per line), section titles in sentence case («Біографія», «Резюме», «У проєктах «Символу»»), not uppercase labels. When the biography starts with the lead sentence, it is not repeated. Tap marks on phones were made a little larger and longer (still under one second).
+
+## Calmer motion (2026-10-29)
+
+`USER_CONFIRMED`: less animation overall, so motion never pulls focus while people look for information. Tap marks on phones and click effects (components/ClickEffects, on every click and tap) removed entirely, and the header logo does not animate on tap; no route wipe between pages; every page uses one quiet fade (≈0.2 s, 6 px lift); scroll reveal is a short 12 px fade; project card hover lifts 4 px without tilt. The intro on first visit stays. Project filters are a compact list («Формат: Плейбек · Перформанс · …») instead of pills. Headings use `text-wrap: balance`, paragraphs `pretty`, to avoid lonely last words; page titles are smaller on phones. Orbit titles on phones are larger, years hidden there.
+
+## Ukrainian line breaks (2026-10-29)
+
+`USER_CONFIRMED`: prepositions, conjunctions and other words of up to three letters («і», «й», «в», «з», «до», «від», «для», «та»…) always move to the next line together with the word they belong to; a dash or an arrow never starts a line. Implemented once for all text by `plugins/typography.client.ts` (non-breaking spaces in rendered text, re-applied after page changes; SVG, code and form fields are left alone).
+
+`USER_CONFIRMED` (2026-10-29): quotes in Ukrainian text are «ялинки», inner quotes „лапки-лапки“; a dash between words is always the long dash (—), never a hyphen or en dash (ranges like 2024–2025 keep the en dash without spaces). Sources were fixed, and `plugins/typography.client.ts` converts any leftover straight/English quotes and spaced hyphens in rendered text.
+
+## Typeface: Zakon everywhere (2026-10-29)
+
+`USER_CONFIRMED`: the whole site (headings and all text) is set in the updated Zakon — the Ministry of Culture typeface (mincult.gov.ua/zakon), Regular, Italic, Bold, Bold Italic, from `fonts/OTF` (copied to `apps/main/public/fonts/zakon`). This replaces the earlier split with Source Serif 4 for body text. Project pages with their own identity (PSD) keep their fonts.

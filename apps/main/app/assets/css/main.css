@@ -1,10 +1,10 @@
-/* Site fonts: Zakon for headings (fonts/ in the repository root, copied to public/fonts/zakon); Source Serif 4, with finer serifs, for text. Project pages with their own
+/* Site font: Zakon (the Ministry of Culture typeface, mincult.gov.ua/zakon), updated version from fonts/ in the repository root, copied to public/fonts/zakon; used for headings and all text. Project pages with their own
    identity (e.g. .theme-documents) override these variables. */
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-Bold.otf') format('opentype'); font-weight: 500 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-BoldItalic.otf') format('opentype'); font-weight: 500 700; font-style: italic; font-display: swap; }
-:root { --font-display: 'Zakon', Georgia, serif; --font-body: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif; }
+:root { --font-display: 'Zakon', Georgia, serif; --font-body: 'Zakon', Georgia, serif; }
 
 * { box-sizing: border-box; }
 
@@ -81,6 +81,9 @@ html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 body { background: var(--symbol-cream); }
 /* Large display type never pushes the page sideways: long words wrap when zoomed in or on narrow phones. */
 h1, h2, .large-copy { overflow-wrap: break-word; }
+/* No lonely last words: headings are balanced, paragraphs avoid one-word last lines. */
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd, figcaption { text-wrap: pretty; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .hero { padding: clamp(70px, 11vw, 150px) 0 40px; }
 .eyebrow,.label { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .15em; }
@@ -130,7 +133,7 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .page { padding-block: clamp(70px, 10vw, 130px); }
 .page-title { max-width: 800px; margin-bottom: 58px; }
 .page-title--wide { max-width: 1000px; }
-.page-title h1 { font-size: clamp(3rem, calc(1.5rem + 10.12vw), 10rem); line-height: 1.06; letter-spacing: -.015em; margin-bottom: 34px; }
+.page-title h1 { font-size: clamp(2.6rem, calc(1rem + 8.6vw), 9rem); line-height: 1.06; letter-spacing: -.015em; margin-bottom: 34px; }
 .page-title--wide h1 { font-size: clamp(2.4rem, calc(1.2rem + 7.5vw), 8rem); }
 .page-title p { max-width: 620px; font-size: 1.1rem; line-height: 1.6; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
@@ -221,9 +224,17 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .calendar__event { font-size: .78rem; line-height: 1.25; overflow-wrap: anywhere; }
 
 /* Projects: filters and chronology */
-.filter-panel { display: grid; gap: 14px; margin-bottom: 50px; }
-.filter-panel .filters { align-items: center; margin: 0; }
-.filter-panel .filters .label { width: 80px; }
+.filter-panel { display: grid; gap: 6px; margin-bottom: 40px; padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--symbol-plum) 30%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--symbol-plum) 30%, transparent); }
+/* Filters as a compact list: «Формат: Плейбек · Перформанс · …» — words, not a wall of pills. */
+.filter-panel .filters { display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: baseline; gap: 4px 12px; margin: 0; }
+.filter-panel .filters__name { font-size: .85rem; color: var(--symbol-violet); }
+.filter-panel .filters button { display: inline; margin: 0 2px 0 0; padding: 2px 8px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: .95rem; line-height: 1.6; color: var(--symbol-plum); cursor: pointer; transition: background .2s ease, color .2s ease; }
+.filter-panel .filters button:not(:last-child)::after { content: ' ·'; margin-left: 8px; color: color-mix(in srgb, var(--symbol-plum) 40%, transparent); }
+.filter-panel .filters button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.filter-panel .filters button.active { background: var(--symbol-plum); color: var(--symbol-cream); }
+.filter-panel .filters button.active::after { color: color-mix(in srgb, var(--symbol-cream) 50%, transparent); }
+.filter-panel .text-button { justify-self: start; margin-top: 4px; font-size: .85rem; }
+@media (max-width: 560px) { .filter-panel .filters { grid-template-columns: 1fr; gap: 0; } .filter-panel .filters + .filters { margin-top: 8px; } }
 .chronology { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 40px; }
 .year-rail { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .year-rail button { border: 0; background: none; padding: 2px 0; font-size: 1.35rem; color: color-mix(in srgb, var(--symbol-plum) 55%, transparent); cursor: pointer; border-bottom: 3px solid transparent; font-variant-numeric: tabular-nums; }
@@ -231,9 +242,9 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .year-block { margin-bottom: 70px; scroll-margin-top: 24px; }
 .year-block__title { font-size: clamp(1.8rem, calc(0.9rem + 4.88vw), 5rem); letter-spacing: -.015em; line-height: 1.1; margin: 0 0 20px; color: var(--symbol-violet); }
 .project-card__motif { position: absolute; inset: 14px 14px 14px auto; width: auto !important; height: calc(100% - 28px) !important; aspect-ratio: 1; transition: transform .5s cubic-bezier(.2, 1.3, .4, 1); }
-.project-card:hover .project-card__motif { transform: scale(1.12) rotate(-4deg); }
+.project-card:hover .project-card__motif { transform: scale(1.04); }
 .project-card { transition: transform .35s cubic-bezier(.2, 1.3, .4, 1), box-shadow .35s ease !important; }
-.project-card:hover { transform: translateY(-10px) rotate(-.6deg) !important; box-shadow: 0 22px 40px -18px color-mix(in srgb, var(--symbol-ink) 55%, transparent); }
+.project-card:hover { transform: translateY(-4px) !important; box-shadow: 0 14px 28px -20px color-mix(in srgb, var(--symbol-ink) 55%, transparent); }
 .project-hero { position: relative; overflow: hidden; }
 .project-hero > .container { position: relative; z-index: 1; }
 /* Archive backdrop: the photograph is toned into the hero colour like a print, so the title stays readable. */
@@ -409,12 +420,15 @@ section:hover > .label::before, section:hover > div > .label::before { transform
 .team-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
 
 /* Scroll reveal (plugins/reveal.client.ts) */
-html.reveal-ready [data-reveal] { transition: opacity .6s ease var(--reveal-delay, 0ms), transform .7s cubic-bezier(.2, 1.1, .3, 1) var(--reveal-delay, 0ms); }
-html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(46px) scale(.98); }
+html.reveal-ready [data-reveal] { transition: opacity .45s ease var(--reveal-delay, 0ms), transform .5s ease-out var(--reveal-delay, 0ms); }
+html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(12px); }
 
 /* Page transitions: each section opens with its own motion (definePageMeta in each page). */
-.fade-enter-active, .fade-leave-active { transition: opacity .3s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
+/* Page change: one quiet cross-fade with a few pixels of lift, the same on every page (calm when looking for information). */
+.fade-enter-active { transition: opacity .22s ease-out, transform .22s ease-out; }
+.fade-leave-active { transition: opacity .12s ease-in; }
+.fade-enter-from { opacity: 0; transform: translateY(6px); }
+.fade-leave-to { opacity: 0; }
 .rise-enter-active, .rise-leave-active { transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .2, 1); }
 .rise-enter-from { opacity: 0; transform: translateY(90px); }
 .rise-leave-to { opacity: 0; transform: translateY(-24px); }
@@ -485,17 +499,4 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
 
-/* Touch marks (plugins/tap.client.ts): the native grey tap flash is replaced by marks from the identity. */
-.tap-marks, .tap-marks * { -webkit-tap-highlight-color: transparent; }
-.tap-mark { position: fixed; z-index: 200; width: 76px; height: 76px; margin: -38px 0 0 -38px; pointer-events: none; }
-.tap-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.tap-mark--orbit { width: 104px; height: 104px; margin: -52px 0 0 -52px; animation: tap-fade .95s ease-out forwards; }
-.tap-mark__ring { fill: none; stroke: var(--symbol-violet); stroke-width: 4; transform-origin: 50px 50px; animation: tap-ring .7s cubic-bezier(.2, 1, .3, 1) forwards; }
-.tap-mark__moon { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform-origin: 50px 50px; animation: tap-moon .95s cubic-bezier(.4, 0, .2, 1) forwards; }
-.tap-mark--drop { width: 50px; height: 50px; margin: -25px 0 0 -25px; animation: tap-drop .75s cubic-bezier(.2, 1, .3, 1) forwards; }
-.tap-mark--drop circle { fill: color-mix(in srgb, var(--symbol-apricot) 70%, transparent); }
-@keyframes tap-ring { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.1); opacity: .2; } }
-@keyframes tap-moon { from { transform: rotate(0) scale(.4); } to { transform: rotate(300deg) scale(1); } }
-@keyframes tap-drop { from { transform: scale(.2); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
-@keyframes tap-fade { 70% { opacity: 1; } to { opacity: 0; } }
 

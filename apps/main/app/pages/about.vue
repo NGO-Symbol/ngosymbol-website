@@ -1,5 +1,4 @@
 <script setup lang="ts">
-definePageMeta({ pageTransition: { name: 'curtain', mode: 'out-in' } })
 useSeoMeta({ title: 'Про нас', description: 'ГО «Символ»: місія, цінності, команда, партнери й звіти.' })
 
 const team = people.filter(person => person.team).sort((a, b) => (a.teamOrder ?? 99) - (b.teamOrder ?? 99))

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { socials } from '~/data/social'
-definePageMeta({ pageTransition: { name: 'curtain', mode: 'out-in' } })
 useSeoMeta({ title: 'Можливості', description: 'Опен-коли, резиденції та інші можливості від ГО «Символ».' })
 
 const typeLabels: Record<string, string> = { 'open-call': 'Опен-кол', residency: 'Резиденція', vacancy: 'Вакансія', volunteering: 'Волонтерство' }
