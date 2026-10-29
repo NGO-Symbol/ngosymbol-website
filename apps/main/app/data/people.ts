@@ -99,6 +99,7 @@ export const people: Person[] = [
   {
     slug: 'olena-mordyk',
     name: 'Олена Мордик',
+    photo: '/media/people/olena-mordyk.jpg',
     team: true,
     teamOrder: 4,
     shortBio: 'Членкиня команди «Символу», відповідає за комунікацію проєкту «Історія моєї вулиці».',

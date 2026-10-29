@@ -47,9 +47,9 @@ const list = [...projects].sort((a, b) => b.yearStart - a.yearStart)
       <div class="container subscribe__grid">
         <h2>Get in touch</h2>
         <div class="subscribe__links">
-          <span class="selectable">{{ contactEmail }}</span>
-          <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
-          <p>Registration code (EDRPOU) 45221328.</p>
+          <CopyValue :value="contactEmail" en />
+          <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
+          <p>Registration code (EDRPOU) <CopyValue value="45221328" en /></p>
         </div>
       </div>
     </section>

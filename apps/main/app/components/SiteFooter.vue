@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { socials } from '~/data/social'
+import { contactEmail, socials } from '~/data/social'
 
 const { isEn, localePath } = useLang()
 const sections = ['/projects', '/events', '/opportunities', '/people', '/news', '/press', '/support']
@@ -23,15 +23,15 @@ const labels: Record<string, [string, string]> = {
       </div>
       <div>
         <span class="label">{{ isEn ? 'Contact' : 'Зв’язок' }}</span>
-        <span class="selectable">ngo.symbol@gmail.com</span>
-        <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
+        <CopyValue :value="contactEmail" :en="isEn" />
+        <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
         <NuxtLink :to="isEn ? '/en/events' : '/events'">{{ isEn ? 'Subscribe to the events calendar' : 'Підписатися на календар подій' }}</NuxtLink>
       </div>
       <div>
         <span class="label">{{ isEn ? 'Where we work' : 'Географія' }}</span>
         <p v-if="isEn">Kharkiv · Kyiv · Zakarpattia<br>Ukraine and international projects</p>
         <p v-else>Харків · Київ · Закарпаття<br>Україна та міжнародні проєкти</p>
-        <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} 45221328</p>
+        <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} <CopyValue value="45221328" :en="isEn" /></p>
       </div>
     </div>
   </footer>

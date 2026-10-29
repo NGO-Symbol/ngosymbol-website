@@ -5,7 +5,7 @@
 const { isEn } = useLang()
 useHead({
   htmlAttrs: { lang: () => (isEn.value ? 'en' : 'uk') },
-  titleTemplate: title => (isEn.value ? (title && title !== 'NGO Symbol' ? `${title} · NGO Symbol` : 'NGO Symbol') : `${title} · ГО «Символ»`),
+  titleTemplate: title => (isEn.value ? (title && title !== 'NGO Symbol' ? `${title} · NGO Symbol` : 'NGO Symbol') : (title && title !== 'ГО «Символ»' ? `${title} · ГО «Символ»` : 'ГО «Символ»')),
   script: [{
     tagPosition: 'head',
     innerHTML: "try{var t=localStorage.getItem('symbol-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}"

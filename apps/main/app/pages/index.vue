@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { socials } from '~/data/social'
 useSeoMeta({
-  title: 'Культура в русі',
+  title: 'ГО «Символ»',
   ogTitle: 'ГО «Символ» — культура в русі',
   ogDescription: 'Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.'
 })
@@ -94,7 +94,7 @@ const supporters = organizations
         <h2>Стежте за «Символом»</h2>
         <div class="subscribe__links">
           <a href="/events.ics">Підписатися на календар подій</a>
-          <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
+          <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
           <p>Розсилка запуститься згодом.</p>
         </div>
       </div>

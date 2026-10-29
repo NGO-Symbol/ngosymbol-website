@@ -50,7 +50,7 @@ async function copy(text: string, key: string) {
         <p class="selectable press-asset__email">{{ contactEmail }}</p>
         <p>Портфоліо організації та фото у високій роздільній здатності — за запитом.</p>
         <div class="button-row">
-          <a v-for="item in socials.slice(0, 3)" :key="item.label" class="button" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
+          <SocialLink v-for="item in socials.slice(0, 3)" :key="item.url" class="button" :url="item.url" />
         </div>
       </article>
     </div>

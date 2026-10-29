@@ -26,12 +26,13 @@ const nav = computed(() => isEn.value
 
 // Active-tab ink: a bar slides under the current section; the clicked tab gives a small spring.
 const navEl = ref<HTMLElement>()
-const ink = ref({ left: 0, width: 0, visible: false })
+const ink = ref({ left: 0, top: 0, width: 0, visible: false })
 const pressed = ref('')
 function moveInk() {
   const link = navEl.value?.querySelector<HTMLElement>('.nav-tab.router-link-active')
   if (!link || !navEl.value) { ink.value = { ...ink.value, visible: false }; return }
-  ink.value = { left: link.offsetLeft, width: link.offsetWidth, visible: true }
+  // The tabs wrap onto several rows on phones, so the bar follows the active tab both across and down.
+  ink.value = { left: link.offsetLeft, top: link.offsetTop + link.offsetHeight + 4, width: link.offsetWidth, visible: true }
 }
 function press(to: string) {
   pressed.value = ''
@@ -103,7 +104,7 @@ function toggleTheme() {
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
     <nav ref="navEl" :aria-label="isEn ? 'Main navigation' : 'Основна навігація'">
-      <span class="nav-ink" :class="{ 'is-visible': ink.visible }" :style="{ transform: `translateX(${ink.left}px)`, width: `${ink.width}px` }" aria-hidden="true" />
+      <span class="nav-ink" :class="{ 'is-visible': ink.visible }" :style="{ transform: `translate(${ink.left}px, ${ink.top}px)`, width: `${ink.width}px` }" aria-hidden="true" />
       <NuxtLink v-for="item in nav" :key="item.to" :to="item.to" class="nav-tab" :class="{ 'is-pressed': pressed === item.to }" @click="press(item.to)" @animationend="pressed = ''">
         <span class="nav-tab__label"><span class="nav-tab__roll" :data-label="item.label">{{ item.label }}</span></span>
       </NuxtLink>
