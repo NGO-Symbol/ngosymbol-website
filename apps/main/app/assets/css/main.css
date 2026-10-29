@@ -205,9 +205,18 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .event-row__meta { display: flex; flex-direction: column; gap: 3px; font-size: .85rem; }
 .events-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 18px 28px; margin-bottom: 40px; }
 .events-block { margin-bottom: 60px; }
-.segmented { display: inline-flex; border: 1px solid var(--symbol-plum); border-radius: 999px; padding: 3px; }
-.segmented button { border: 0; background: transparent; color: var(--symbol-plum); padding: 8px 16px; border-radius: 999px; cursor: pointer; }
+.segmented { position: relative; display: inline-flex; border: 1px solid var(--symbol-plum); border-radius: 999px; padding: 3px; }
+.segmented button { position: relative; z-index: 1; border: 0; background: transparent; color: var(--symbol-plum); padding: 8px 16px; border-radius: 999px; cursor: pointer; transition: color .35s ease; }
 .segmented button.active { background: var(--symbol-plum); color: var(--symbol-cream); }
+/* With the gliding thumb (plugins/segmented.client.ts) the active colour moves instead of jumping. */
+.segmented__thumb { position: absolute; top: 0; left: 0; z-index: 0; border-radius: 999px; background: var(--symbol-plum); pointer-events: none; transition: transform .45s cubic-bezier(.3, 1.2, .4, 1), width .45s cubic-bezier(.3, 1.2, .4, 1), opacity .2s ease; }
+.segmented.has-thumb button.active { background: transparent; }
+@media (prefers-reduced-motion: reduce) { .segmented__thumb { transition: none; } }
+/* Content under a switch changes with a soft fade instead of a cut. */
+.swap-enter-active { transition: opacity .35s ease, transform .35s cubic-bezier(.2, .8, .2, 1); }
+.swap-leave-active { transition: opacity .18s ease; }
+.swap-enter-from { opacity: 0; transform: translateY(8px); }
+.swap-leave-to { opacity: 0; }
 .segmented--large { margin: 50px 0 24px; }
 .segmented--large button { padding: 12px 22px; font-size: 1rem; }
 .select, .search { display: grid; gap: 6px; }

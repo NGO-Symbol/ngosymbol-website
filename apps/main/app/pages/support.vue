@@ -37,6 +37,7 @@ const requisites = [
       <button id="tab-community" type="button" role="tab" :aria-selected="tab === 'community'" :class="{ active: tab === 'community' }" @click="tab = 'community'">Доєднатися до спільноти</button>
     </div>
 
+    <Transition name="swap" mode="out-in">
     <div v-if="tab === 'patron'" class="support-options" role="tabpanel" aria-labelledby="tab-patron">
       <div class="support-option"><h3>Разовий внесок</h3><p>Будь-яка сума на статутну діяльність організації.</p></div>
       <div class="support-option"><h3>Регулярна підтримка</h3><p>Щомісячний внесок, який дає змогу планувати проєкти наперед. Рівні меценатства готуються.</p></div>
@@ -49,6 +50,7 @@ const requisites = [
       <div class="support-option"><h3>Членство в ГО</h3><p>Для тих, хто хоче розвивати організацію разом із командою.</p></div>
       <div class="support-option"><h3>Інформаційна підтримка</h3><p>Розкажіть про наші проєкти й події. Підписка на календар: <a href="/events.ics">events.ics</a></p></div>
     </div>
+    </Transition>
 
     <section class="requisites">
       <span class="label">Реквізити</span>
