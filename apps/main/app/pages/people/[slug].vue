@@ -63,6 +63,10 @@ useHead({
             </ul>
           </div>
         </section>
+        <section v-if="person.works?.length">
+          <h2 class="person-section">Роботи на виставках «Символу»</h2>
+          <PhotoGallery :photos="person.works" />
+        </section>
         <section v-if="appearances.length">
           <h2 class="person-section">У проєктах «Символу»</h2>
           <ul class="appearances">
