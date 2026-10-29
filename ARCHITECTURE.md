@@ -6,7 +6,7 @@ This repository is the shared home of the institutional website, autonomous proj
 ngosymbol-website
 ├── apps/
 │   ├── main/                 symbol.ngo
-│   └── istoriia-vulytsi/     istoriia-vulytsi.symbol.ngo
+│   └── istoriia-vulytsi/     my-street.symbol.ngo
 ├── packages/
 │   └── brand/                shared source palette and logo asset
 ├── documents/knowledge/          canonical project memory

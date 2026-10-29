@@ -22,7 +22,7 @@ useHead({ title: 'Шаблон: Головна' })
     <template #decor><SymOrbit anchor="top-right" size="hero" :bleed="0.28" color="accent" /></template>
     <SymReveal>
       <SymCallout eyebrow="Новий автономний проєкт" title="Історія моєї вулиці" text="Окремий простір про вулиці, міську пам’ять і досвіди Харкова.">
-        <template #actions><SymButton href="https://istoriia-vulytsi.symbol.ngo">Перейти на сайт проєкту</SymButton></template>
+        <template #actions><SymButton href="https://my-street.symbol.ngo">Перейти на сайт проєкту</SymButton></template>
       </SymCallout>
     </SymReveal>
   </SymSection>

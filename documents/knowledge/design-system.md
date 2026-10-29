@@ -92,3 +92,11 @@ Project-owned: palette extensions, fonts, grids, motion, content components, nav
 
 The original uploaded logo asset is stored at `packages/brand/assets/symbol-mark.png`.
 
+
+## Project order, programme logos, theme switch (2026-10-29)
+
+- Project order everywhere: newest year first; within a year donor-funded projects lead, then long projects, then one-off event projects (`data/projects.ts`). `USER_CONFIRMED` 2026-10-29.
+- A project may carry `programLogo` (e.g. WHO mhGAP for the Kyiv trainings): shown in the project hero, on its card and beside the credit line; transparent, inverted in dark mode like partner logos.
+- Partner logos added: Міністерство культури України (mincult.gov.ua, replaces the «Грант Президента» tile as the funder), Grynyov Art Collection and the MH4U vector logo (Drive). Ucraina Più – Milano logo not found yet.
+- Theme switch: one View Transition, the new theme spreads as a circle from the toggle, so header and page change together; colour cross-fade fallback.
+- Sticky header hides fully (including its 12px full-bleed overhang) and ignores rubber-band overscroll at page ends on phones.

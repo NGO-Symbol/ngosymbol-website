@@ -9,6 +9,7 @@ const selector = [
   '.support-option',
   '.year-block__title',
   '.credits__group',
+  '.program-logo',
   '.press-list li',
   '.appearances li',
   '.logo-strip li',

@@ -25,7 +25,7 @@ Repository boundaries are summarized in [`../../ARCHITECTURE.md`](../../ARCHITEC
 - Main site: `symbol.ngo`.
 - Small projects: `symbol.ngo/projects/{slug}` with one focused page and optional internal child pages.
 - Large autonomous projects: separate apps on `{project}.symbol.ngo`.
-- First autonomous project: `istoriia-vulytsi.symbol.ngo`.
+- First autonomous project: `my-street.symbol.ngo` (renamed from `istoriia-vulytsi.symbol.ngo` on 2026-10-29; hidden behind a «coming soon» page while in development).
 - Every project has a main-site page; projects with a subsite link to it from there (ADR-0008).
 - Every page has an English mirror under `/en`; the UA/EN switch keeps the same page (ADR-0009).
 - Linked content model: projects, events (each belongs to a project), people, opportunities, press, organizations.

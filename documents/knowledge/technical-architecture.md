@@ -6,7 +6,7 @@ The repository is a **pnpm monorepo** containing independently deployable Nuxt 4
 
 ```text
 apps/main                  -> symbol.ngo
-apps/istoriia-vulytsi      -> istoriia-vulytsi.symbol.ngo
+apps/istoriia-vulytsi      -> my-street.symbol.ngo
 packages/brand             -> optional shared tokens and original mark
 documents/knowledge        -> durable project memory
 ```
@@ -22,7 +22,7 @@ Start static-first with Nuxt prerendering. Do not introduce a persistent Node se
 Each hostname is a separate deployment target:
 
 - `symbol.ngo` builds `apps/main`.
-- `istoriia-vulytsi.symbol.ngo` builds `apps/istoriia-vulytsi`.
+- `my-street.symbol.ngo` builds `apps/istoriia-vulytsi`.
 
 Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). The source repository is public. The `Deploy` workflow publishes `apps/main` to this repository's Pages site and each autonomous app to its own deploy-only repository (`NGO-Symbol/istoriia-vulytsi`). Builds use the Nitro `github_pages` preset; the base path switches from `/<repo>/` to `/` once a custom domain is configured. DNS stays in Cloudflare in DNS-only mode. Setup steps: [`../operations/deployment.md`](../operations/deployment.md).
 

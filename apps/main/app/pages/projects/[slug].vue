@@ -38,7 +38,8 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="`tone-${project.tone}`">
-      <ProjectMotif class="project-hero__motif" :motif="project.motif" live />
+      <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
+      <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
         <Breadcrumbs :items="[{ label: 'Проєкти', to: '/projects' }, { label: project.title }]" />
         <div class="project-kicker">
@@ -109,7 +110,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           </div>
         </section>
 
-        <section v-if="partners.length || donors.length">
+        <section v-if="partners.length || donors.length || project.programLogo">
           <span class="label">Партнери й донори</span>
           <div class="credits">
             <div v-if="partners.length" class="credits__group">
@@ -122,6 +123,10 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
             </div>
           </div>
           <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>
+          <figure v-if="project.programLogo" class="program-logo">
+            <img :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
+            <figcaption>{{ project.programLogo.name }}</figcaption>
+          </figure>
         </section>
 
         <section v-if="mentions.length">

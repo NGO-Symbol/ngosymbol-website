@@ -5,7 +5,7 @@ Monorepo for the institutional website of ГО «Символ» and autonomous p
 ## Repository map
 
 - `apps/main` — `symbol.ngo`, including the shared project gallery and small project pages.
-- `apps/istoriia-vulytsi` — autonomous website intended for `istoriia-vulytsi.symbol.ngo`.
+- `apps/istoriia-vulytsi` — autonomous website intended for `my-street.symbol.ngo`.
 - `apps/design` — the design-system gallery (components, foundations, page templates), published at `symbol.ngo/design/`.
 - `packages/ui` — the design system: Nuxt layer `@symbol/ui` (tokens, tones, motion, `Sym*` components) and its handbook in `packages/ui/docs`.
 - `packages/brand` — shared brand tokens and the original logo asset.

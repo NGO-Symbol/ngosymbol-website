@@ -50,7 +50,11 @@ const hidden = ref(false)
 const scrolled = ref(false)
 let lastY = 0
 function onScroll() {
-  const y = window.scrollY
+  // Phones bounce past the top and bottom edges (rubber-band scroll); those overshoots are ignored so the
+  // header does not flicker in and out at the end of a page.
+  const max = document.documentElement.scrollHeight - window.innerHeight
+  const y = Math.min(Math.max(window.scrollY, 0), Math.max(max, 0))
+  if (y >= max - 2 && y > 160) { lastY = y; return }
   scrolled.value = y > 8
   if (y < 160) {
     hidden.value = false
@@ -71,13 +75,25 @@ onMounted(() => {
   const set = document.documentElement.getAttribute('data-theme')
   theme.value = set === 'dark' || (!set && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'
 })
+// The whole page (header and background together) cross-fades to the new theme as one picture.
+// Browsers without View Transitions cross-fade colours instead.
 function toggleTheme() {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  const next = theme.value === 'dark' ? 'light' : 'dark'
   const root = document.documentElement
-  root.classList.add('theme-switching')
-  root.setAttribute('data-theme', theme.value)
-  try { localStorage.setItem('symbol-theme', theme.value) } catch {}
-  window.setTimeout(() => root.classList.remove('theme-switching'), 700)
+  const apply = () => {
+    theme.value = next
+    root.setAttribute('data-theme', next)
+    try { localStorage.setItem('symbol-theme', next) } catch {}
+  }
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!document.startViewTransition || reduced) {
+    root.classList.add('theme-switching')
+    apply()
+    window.setTimeout(() => root.classList.remove('theme-switching'), 700)
+    return
+  }
+  root.classList.add('theme-wipe')
+  document.startViewTransition(apply).finished.finally(() => root.classList.remove('theme-wipe'))
 }
 </script>
 

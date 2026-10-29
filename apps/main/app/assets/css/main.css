@@ -18,7 +18,8 @@ button { font: inherit; }
 /* Sticky header (always reachable): full-bleed background via a spread shadow clipped to the sides; hides on
    scroll down and slides back on scroll up. */
 .site-header { position: sticky; top: 0; z-index: 60; background: var(--symbol-cream); box-shadow: 0 0 0 100vmax var(--symbol-cream); clip-path: inset(0 -100vmax -12px); transition: transform .45s cubic-bezier(.3, 1, .4, 1), background .4s ease, box-shadow .4s ease, color .4s ease; }
-.site-header.is-hidden { transform: translateY(-100%); }
+/* The full-bleed background reaches 12px below the header (clip-path), so hiding moves it that much further. */
+.site-header.is-hidden { transform: translateY(calc(-100% - 14px)); }
 .site-header.is-scrolled { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 
@@ -59,7 +60,10 @@ html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 .theme-toggle circle { fill: none; stroke: currentColor; stroke-width: 2; }
 .theme-toggle path { fill: currentColor; }
 .theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
-.theme-switching, .theme-switching * { transition: background-color .6s ease, color .6s ease, border-color .6s ease !important; }
+.theme-switching, .theme-switching * { transition: background-color .6s ease, color .6s ease, border-color .6s ease, box-shadow .6s ease, fill .6s ease, stroke .6s ease, filter .6s ease !important; }
+/* Theme switch (View Transitions): the old page and the new one cross-fade as single pictures, header included. */
+.theme-wipe::view-transition-old(root), .theme-wipe::view-transition-new(root) { animation-duration: .55s; animation-timing-function: ease; mix-blend-mode: normal; }
+.theme-wipe, .theme-wipe * { transition: none !important; }
 
 /* Dark mode: page surfaces turn dark; brand-coloured blocks (cards, bands, project heroes) stay as light islands. */
 :root[data-theme="dark"] { --symbol-cream: #17131b; --symbol-white: #221c28; --symbol-plum: #ebe2f0; --symbol-ink: #f7f1fa; --symbol-lilac: #3a3145; --symbol-violet: #b7a6cc; color-scheme: dark; }
@@ -100,7 +104,7 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .project-card { display: flex; flex-direction: column; min-height: 530px; color: var(--symbol-ink); text-decoration: none; border: 1px solid color-mix(in srgb, currentColor 45%, transparent); transition: transform .2s ease; }
 .project-card:hover { transform: translateY(-5px); }
 .project-card__meta { display: flex; justify-content: space-between; gap: 10px; padding: 12px; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid currentColor; }
-.project-card__visual { min-height: 220px; position: relative; overflow: hidden; }
+.project-card__visual { min-height: 260px; flex: 1 1 auto; position: relative; overflow: hidden; }
 .project-card__visual .orbit { position: absolute; width: 210px; height: 210px; border: 38px solid currentColor; border-right-color: transparent; border-radius: 50%; top: 25px; right: -45px; transform: rotate(-23deg); opacity: .65; }
 .project-card__type { position: absolute; left: 12px; bottom: 12px; padding: 8px 10px; background: var(--symbol-white); color: var(--symbol-ink); font-size: .72rem; }
 .project-card__body { padding: 20px 16px 24px; margin-top: auto; }
@@ -252,6 +256,29 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .credits__group h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 500; margin-bottom: 6px; }
 .credits__group p { font-size: 1.05rem; line-height: 1.7; margin: 0; }
 .credits__group a { text-underline-offset: 4px; }
+.program-logo { margin: 20px 0 0; display: flex; align-items: center; gap: 18px; max-width: 680px; }
+.program-logo img { height: 84px; width: auto; }
+.program-logo.is-visible img { animation: program-logo-in 1.1s cubic-bezier(.6, 0, .2, 1) both; }
+.program-logo:hover img { animation: program-logo-hop .7s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes program-logo-in { from { clip-path: inset(0 100% 0 0); transform: translateX(-8px); } to { clip-path: inset(0 0 0 0); } }
+@keyframes program-logo-hop { 40% { transform: translateY(-6px) rotate(-3deg); } }
+@media (prefers-reduced-motion: reduce) { .program-logo img { animation: none !important; } }
+.program-logo figcaption { font-size: .85rem; line-height: 1.45; }
+/* Programme logo (e.g. mhGAP) is transparent: on the light hero and cards it stays as is; on the dark page it is
+   inverted with the hue kept, like partner logos. */
+:root[data-theme="dark"] .program-logo img { filter: invert(.92) hue-rotate(180deg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .program-logo img { filter: invert(.92) hue-rotate(180deg); } }
+.project-hero__program { position: absolute; right: max(24px, calc((100vw - 1180px) / 2)); top: 50%; width: min(36vw, 500px); height: auto; transform: translateY(-50%); animation: program-logo-in 1.2s .3s cubic-bezier(.6, 0, .2, 1) both; }
+/* With a programme logo on the right, the title keeps to the left part of the hero. */
+.project-hero:has(.project-hero__program) h1 { max-width: 58%; font-size: clamp(3.4rem, 6.4vw, 6.6rem); }
+@media (max-width: 900px) {
+  .project-hero:has(.project-hero__program) { flex-direction: column; align-items: stretch; }
+  .project-hero:has(.project-hero__program) h1 { max-width: none; }
+  .project-hero__program { position: static; transform: none; order: 2; width: min(80vw, 420px); margin: 10px 16px 0; }
+}
+.project-card__program { position: absolute; z-index: 1; inset: 50% auto auto 50%; width: 78%; height: auto; max-height: 82%; object-fit: contain; transform: translate(-50%, -50%); transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
+.project-card:hover .project-card__program { transform: translate(-50%, calc(-50% - 6px)) rotate(-3deg); }
+@media (prefers-reduced-motion: reduce) { .project-hero__program { animation: none; } }
 .donor-credit { margin-top: 20px; padding: 16px 18px; background: var(--symbol-white); border-left: 3px solid var(--symbol-violet); font-size: .9rem; line-height: 1.55; max-width: 680px; }
 .press-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--symbol-plum); }
 .press-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding: 14px 0; border-bottom: 1px solid var(--symbol-plum); }

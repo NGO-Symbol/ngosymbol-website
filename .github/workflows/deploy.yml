@@ -55,10 +55,12 @@ jobs:
         uses: actions/deploy-pages@v4
 
   street-site:
-    name: istoriia-vulytsi.symbol.ngo
+    name: my-street.symbol.ngo
     # Skipped until the owner creates the deploy repository and sets STREET_DEPLOY_REPO.
     if: vars.STREET_DEPLOY_REPO != ''
     runs-on: ubuntu-latest
+    env:
+      STREET_HIDDEN: 'true'
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -79,15 +81,20 @@ jobs:
         env:
           STREET_DOMAIN: ${{ vars.STREET_DOMAIN }}
           STREET_REPO: ${{ vars.STREET_DEPLOY_REPO }}
+      # While the site is being built it stays hidden: only a "coming soon" page (noindex) is published.
+      # Set STREET_HIDDEN to 'false' here when the team opens the site.
       - run: pnpm --filter @symbol/istoriia-vulytsi generate
+        if: env.STREET_HIDDEN != 'true'
         env:
           NITRO_PRESET: github_pages
+      - name: Choose what to publish
+        run: echo "STREET_PUBLISH_DIR=${{ env.STREET_HIDDEN == 'true' && 'apps/istoriia-vulytsi/hidden' || 'apps/istoriia-vulytsi/.output/public' }}" >> "$GITHUB_ENV"
       - uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.STREET_DEPLOY_KEY }}
           external_repository: ${{ vars.STREET_DEPLOY_REPO }}
           publish_branch: gh-pages
-          publish_dir: apps/istoriia-vulytsi/.output/public
+          publish_dir: ${{ env.STREET_PUBLISH_DIR }}
           cname: ${{ vars.STREET_DOMAIN }}
           force_orphan: true
           commit_message: ${{ github.event.head_commit.message }}

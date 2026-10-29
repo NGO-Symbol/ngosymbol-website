@@ -8,7 +8,7 @@ The decision and its alternatives are recorded in
 | Site | Built from | Published to | Pages source |
 | --- | --- | --- | --- |
 | `symbol.ngo` | `apps/main` | this repository | GitHub Actions |
-| `istoriia-vulytsi.symbol.ngo` | `apps/istoriia-vulytsi` | `NGO-Symbol/istoriia-vulytsi` (deploy-only) | `gh-pages` branch |
+| `my-street.symbol.ngo` | `apps/istoriia-vulytsi` | `NGO-Symbol/istoriia-vulytsi` (deploy-only) | `gh-pages` branch |
 
 GitHub Pages serves one site per repository, so each autonomous project needs its own
 deploy-only repository. Nobody edits those repositories by hand; the workflow overwrites them.
@@ -75,7 +75,7 @@ site is available at `https://ngo-symbol.github.io/ngosymbol-website/`.
 
 ```bash
 gh repo create NGO-Symbol/istoriia-vulytsi --public \
-  --description "Build output of istoriia-vulytsi.symbol.ngo. Source: NGO-Symbol/ngosymbol-website" \
+  --description "Build output of my-street.symbol.ngo. Source: NGO-Symbol/ngosymbol-website" \
   --add-readme
 
 ssh-keygen -t ed25519 -N "" -C "street-deploy" -f street_deploy_key
@@ -126,7 +126,7 @@ existing `MX` and `TXT` records — **do not delete or edit them**.
 
    ```bash
    gh api -X PUT repos/NGO-Symbol/ngosymbol-website/pages -f cname=symbol.ngo
-   gh variable set STREET_DOMAIN -R NGO-Symbol/ngosymbol-website -b istoriia-vulytsi.symbol.ngo
+   gh variable set STREET_DOMAIN -R NGO-Symbol/ngosymbol-website -b my-street.symbol.ngo
    gh workflow run deploy.yml -R NGO-Symbol/ngosymbol-website
    ```
 
