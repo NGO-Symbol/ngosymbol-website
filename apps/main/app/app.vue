@@ -19,6 +19,7 @@ useHead({
 <template>
   <div class="site-shell">
     <IntroSplash />
+    <HomeWipe />
     <a class="skip-link" href="#main">{{ isEn ? 'Skip to content' : 'Перейти до змісту' }}</a>
     <SiteHeader />
     <EnNotice />

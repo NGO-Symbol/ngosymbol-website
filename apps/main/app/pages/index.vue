@@ -1,19 +1,15 @@
 <script setup lang="ts">
 import { socials } from '~/data/social'
-import { highlights, highlightsShown } from '~/data/highlights'
+import { highlights, pickHighlights } from '~/data/highlights'
 useSeoMeta({
   title: 'ГО «Символ»',
   ogTitle: 'ГО «Символ» — культура в русі',
   ogDescription: 'Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.'
 })
 
-// A different selection from the curated pool on every visit (shuffled after load, so the prerendered page stays stable).
-const reel = ref(highlights.slice(0, highlightsShown))
-onMounted(() => {
-  const pool = [...highlights]
-  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j]!, pool[i]!] }
-  reel.value = pool.slice(0, highlightsShown)
-})
+// A different selection from the curated pool on every visit, chosen in the browser before any photo loads.
+const reel = ref<typeof highlights>([])
+onMounted(() => { reel.value = pickHighlights() })
 
 const openCalls = activeOpportunities()
 const upcoming = eventItems.filter(isUpcoming).reverse().slice(0, 4)
@@ -47,7 +43,7 @@ const supporters = organizations
         <div><span class="label">Кадри</span><h2>Як це виглядає</h2></div>
         <p>Виставки, тренінги, перформанси й кадри з фільму. Гортайте стрічку, натисніть на фото, щоб переглянути на весь екран.</p>
       </div>
-      <PhotoReel :photos="reel" />
+      <PhotoReel :photos="reel" :placeholders="14" />
     </section>
 
     <section v-if="openCalls.length" class="open-calls">

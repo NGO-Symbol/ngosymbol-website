@@ -55,3 +55,4 @@ Items here are unresolved and must not be silently assumed.
 - Decide whether pull requests need a human approval before going live (currently CI only).
 - Configure GitHub CLI authentication on each editor's computer.
 
+- «2, 10, 300 років потому»: website or social page of the partner Union Forum (logo only so far).

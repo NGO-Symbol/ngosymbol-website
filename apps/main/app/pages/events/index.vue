@@ -8,6 +8,12 @@ const eventProjects = [...new Map(eventItems.map(item => [item.project.slug, ite
 const filtered = computed(() => eventItems.filter(item => !projectFilter.value || item.project.slug === projectFilter.value))
 const upcoming = computed(() => filtered.value.filter(isUpcoming).reverse())
 const past = computed(() => filtered.value.filter(item => !isUpcoming(item)))
+// The archive by year, newest first — the same card grid as the People page.
+const pastYears = computed(() => {
+  const groups = new Map<string, typeof eventItems>()
+  for (const item of past.value) groups.set(item.start.slice(0, 4), [...(groups.get(item.start.slice(0, 4)) ?? []), item])
+  return [...groups].map(([year, items]) => ({ year, items }))
+})
 
 // Calendar month: the month of the nearest upcoming event, otherwise of the latest event.
 const initial = (upcoming.value[0] ?? past.value[0])?.start ?? todayIso()
@@ -54,12 +60,12 @@ const days = computed(() => {
     <template v-if="view === 'list'">
       <section class="events-block">
         <h2 class="block-title">Майбутні</h2>
-        <div v-if="upcoming.length" class="event-list"><EventRow v-for="item in upcoming" :key="item.slug" :item="item" /></div>
+        <ul v-if="upcoming.length" class="people-grid"><li v-for="item in upcoming" :key="item.slug"><EventCard :item="item" /></li></ul>
         <p v-else class="empty-note">Нові анонси готуються. Підпишіться на календар, щоб не пропустити.</p>
       </section>
-      <section class="events-block">
-        <h2 class="block-title">Архів</h2>
-        <div class="event-list"><EventRow v-for="item in past" :key="item.slug" :item="item" /></div>
+      <section v-for="year in pastYears" :key="year.year" class="events-block">
+        <h2 class="block-title">{{ year.year }}</h2>
+        <ul class="people-grid"><li v-for="item in year.items" :key="item.slug"><EventCard :item="item" /></li></ul>
       </section>
     </template>
 

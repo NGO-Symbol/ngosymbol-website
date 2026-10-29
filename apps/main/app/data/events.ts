@@ -24,6 +24,15 @@ export const events: SymbolEvent[] = [
       { person: 'hanna-franyk', role: 'Менеджерка' }
     ],
     gallery: [
+      // Opening photos by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов»).
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-032.jpg', alt: 'Відкриття виставки: глядачі слухають промови в залі ЄрміловЦентру', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-064.jpg', alt: 'Глядачі колом у залі під час відкриття', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-140.jpg', alt: 'Синє світло інсталяції в темряві', credit: 'Олександр Осіпов' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-052.jpg', alt: 'Глядачка біля килима з прикріпленими документами', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-hall.jpg', alt: 'Глядачі заповнили зал ЄрміловЦентру на відкритті виставки' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-curators.jpg', alt: 'Куратори виставки виступають на відкритті', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Перформанс на відкритті: художник друкує напис на довгому аркуші' },

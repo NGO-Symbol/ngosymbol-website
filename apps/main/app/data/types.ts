@@ -147,5 +147,5 @@ export interface Organization {
   /** The organization's own logo variant for dark backgrounds, used instead of recolouring (required for the EU emblem). */
   logoDark?: string
   /** Hover motion that echoes the logo's own identity (see PartnerTiles). */
-  motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain' | 'bloom' | 'wipe'
+  motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain' | 'bloom' | 'wipe' | 'rise' | 'flip' | 'fade' | 'spin' | 'brush' | 'stamp' | 'unveil' | 'shoot' | 'pulse' | 'flag' | 'orbit' | 'type' | 'focus' | 'shutter'
 }

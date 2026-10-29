@@ -50,6 +50,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', moveInk))
 const hidden = ref(false)
 const scrolled = ref(false)
 let lastY = 0
+let travel = 0
 function onScroll() {
   // Phones bounce past the top and bottom edges (rubber-band scroll); those overshoots are ignored so the
   // header does not flicker in and out at the end of a page.
@@ -62,9 +63,14 @@ function onScroll() {
     lastY = y
     return
   }
-  if (Math.abs(y - lastY) < 6) return
-  hidden.value = y > lastY && !document.querySelector('.site-search')
+  // Only a deliberate scroll moves the header: the distance travelled in one direction must pass a threshold,
+  // so small finger or trackpad jitters never make it twitch.
+  const delta = y - lastY
   lastY = y
+  if (delta === 0) return
+  travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta
+  if (travel > 24 && !document.querySelector('.site-search')) hidden.value = true
+  else if (travel < -24) hidden.value = false
 }
 onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))

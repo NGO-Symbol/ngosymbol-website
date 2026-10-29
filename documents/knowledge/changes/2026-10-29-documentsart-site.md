@@ -13,3 +13,8 @@ Affected: `project-registry.md`, `team-cv.md`, `open-questions.md`, `documents/o
 - Home «Кадри» shows a random selection of 14 from a curated pool of 23 on every visit.
 - «Ті, хто побачили світ»: the gallery leads with the exhibited photographs (Drive «Мілан (Ті, що побачили світ)»).
 - Decorative «↗» arrows removed site-wide; footer contacts use one set of thin icons.
+- Exhibition site: prominent way back to Symbol, UA/EN mirror (/en), day/night switch, home sections, press page (media mentions checked online), works photos from the saved Wix pages, artist pager.
+- Partners: «Збирач конвалій» (Gwara Media, Media Development Foundation, MOKSOP), «2, 10, 300 років потому» (Egyesek, Artéria, Union Forum), mhGAP venue «Сенс», Bila Tserkva library logo, «Нема» on PSD; white backgrounds removed; every logo has its own motion.
+- mhGAP: trainers Іван Кутчак and Ольга Климовська, photographer Петро Чекаль (post of 26.06.2025). Олена Мордик: CV from her own file.
+- PSD opening photos by Олександр Осіпов (ЄрміловЦентр Drive). «Ті, хто побачили світ»: mostly Петро Чекаль's prints, a few graphic works by Юрій Рассоха.
+- Events page as cards by year; header hides only after a deliberate scroll; full-screen violet transition only into the home page; home photo strip uses 720 px previews and mixes projects.

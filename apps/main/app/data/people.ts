@@ -503,5 +503,21 @@ export const people: Person[] = [
       { src: '/media/people/works/ruslana-kliuchko/2.jpg', alt: 'Суха голка Руслани Ключко з серії «Розмиваючи межу»' },
       { src: '/media/people/works/ruslana-kliuchko/3.jpg', alt: 'Суха голка Руслани Ключко з серії «Розмиваючи межу»' }
     ]
+  },
+
+  // Trainers of the mhGAP trainings (named in the @symbol.ngo post of 26.06.2025; profiles linked there).
+  {
+    slug: 'ivan-kutchak',
+    name: 'Іван Кутчак',
+    shortBio: 'Тренер програми ВООЗ mhGAP, Закарпаття.',
+    bio: ['Тренер програми ВООЗ mhGAP із Закарпаття. Разом з [[person:olha-klymovska]] вів тренінги [[project:mhgap-kyiv]] для медпрацівників первинної ланки (2025).'],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/ivan_kutchak/' }]
+  },
+  {
+    slug: 'olha-klymovska',
+    name: 'Ольга Климовська',
+    shortBio: 'Психологиня, тренерка програми ВООЗ mhGAP, Закарпаття.',
+    bio: ['Психологиня, тренерка програми ВООЗ mhGAP із Закарпаття. Разом з [[person:ivan-kutchak]] вела тренінги [[project:mhgap-kyiv]] для медпрацівників первинної ланки (2025).'],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/klymovska.psychologist/' }]
   }
 ]

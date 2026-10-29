@@ -99,12 +99,13 @@ onMounted(async () => {
 .partner-logo.is-playing.partner-logo--wave :deep(path:first-child), .partner-logo.is-playing.partner-logo--wave :deep(rect:first-of-type) { transform-origin: left center; }
 @keyframes pl-drop { from { opacity: 0; transform: translateY(-8px); } }
 
-/* Mental health for Ukraine: the whole mark settles in one smooth breath while its dots and letters
-   fade up in order (opacity only, the stagger capped, so the logo never stutters shape by shape). */
-.partner-logo.is-playing.partner-logo--bloom .partner-logo__svg { animation: pl-settle 1s cubic-bezier(.2, .8, .2, 1) both; transform-origin: left center; }
-.partner-logo.is-playing.partner-logo--bloom :deep(svg *:not(g):not(style):not(defs)) { animation: pl-fade .6s ease-out both; animation-delay: calc(min(var(--n, 0), 24) * 20ms); }
-@keyframes pl-settle { from { opacity: 0; transform: scale(.94); } }
-@keyframes pl-fade { from { opacity: 0; } }
+/* Mental health for Ukraine: the logo blooms out of the centre of its dot ring — one smooth reveal of the whole
+   mark (the file has 441 separate dots, so moving them one by one stutters). */
+.partner-logo.is-playing.partner-logo--bloom .partner-logo__svg { animation: pl-bloom-reveal 1.2s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes pl-bloom-reveal {
+  from { clip-path: circle(0% at 24% 50%); opacity: .3; transform: scale(.97) rotate(-4deg); transform-origin: 24% 50%; }
+  to { clip-path: circle(150% at 24% 50%); opacity: 1; transform: none; transform-origin: 24% 50%; }
+}
 
 /* Grynyov Art Collection: the stacked words are uncovered left to right, like a bar being drawn. */
 .partner-logo.is-playing.partner-logo--wipe img { animation: pl-wipe 1s cubic-bezier(.7, 0, .2, 1) both; }
@@ -120,6 +121,51 @@ onMounted(async () => {
 .partner-logo.is-playing.partner-logo--stars .partner-logo__fx { animation: pl-ring 1.4s ease-out both; }
 @keyframes pl-pop { from { opacity: 0; transform: scale(.85); } }
 @keyframes pl-ring { 0% { opacity: 0; transform: rotate(0) scale(.5); } 30% { opacity: 1; } 100% { opacity: 0; transform: rotate(180deg) scale(1.25); } }
+
+/* Each logo below moves as one piece, in the spirit of its own identity (raster files and SVGs alike). */
+.partner-logo.is-playing :is(img, .partner-logo__svg) { transform-origin: left center; }
+/* Мінкульт: the emblem rises into place. */
+.partner-logo.is-playing.partner-logo--rise :is(img, .partner-logo__svg) { animation: pl-rise-whole .8s cubic-bezier(.2, .9, .3, 1) both; }
+@keyframes pl-rise-whole { from { opacity: 0; transform: translateY(14px); } }
+/* Culture Helps Solidarity: two languages, two sides — the mark turns over like a page. */
+.partner-logo.is-playing.partner-logo--flip :is(img, .partner-logo__svg) { animation: pl-flip .9s cubic-bezier(.3, 1.3, .5, 1) both; }
+@keyframes pl-flip { from { opacity: 0; transform: perspective(500px) rotateY(80deg); } }
+/* EU emblem: only a soft fade — its look may not be altered in any way. */
+.partner-logo.is-playing.partner-logo--fade :is(img, .partner-logo__svg) { animation: pl-fade-whole .9s ease both; }
+@keyframes pl-fade-whole { from { opacity: 0; } }
+/* Інша Освіта: the four-pointed star turns like a compass needle finding north. */
+.partner-logo.is-playing.partner-logo--spin :is(img, .partner-logo__svg) { animation: pl-spin 1s cubic-bezier(.2, 1.2, .4, 1) both; transform-origin: 12% 50%; }
+@keyframes pl-spin { from { opacity: 0; transform: rotate(-90deg) scale(.8); } }
+/* zusa: the brush circle — the logo opens in a round stroke. */
+.partner-logo.is-playing.partner-logo--brush :is(img, .partner-logo__svg) { animation: pl-brush 1s cubic-bezier(.4, 0, .2, 1) both; }
+@keyframes pl-brush { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+/* VETERANKA: heavy blackletter, pressed down like a stamp. */
+.partner-logo.is-playing.partner-logo--stamp :is(img, .partner-logo__svg) { animation: pl-stamp .7s cubic-bezier(.5, 0, .3, 1.6) both; }
+@keyframes pl-stamp { 0% { opacity: 0; transform: scale(1.35); } 60% { opacity: 1; transform: scale(.97); } }
+/* «Сенс» bookshop: rises from below like a book being pulled from the shelf. */
+.partner-logo.is-playing.partner-logo--unveil :is(img, .partner-logo__svg) { animation: pl-unveil .8s cubic-bezier(.6, 0, .2, 1) both; }
+@keyframes pl-unveil { from { clip-path: inset(100% 0 0 0); transform: translateY(8px); } to { clip-path: inset(0 0 0 0); } }
+/* Bila Tserkva library: a bow with arrows — the mark flies in like an arrow. */
+.partner-logo.is-playing.partner-logo--shoot :is(img, .partner-logo__svg) { animation: pl-shoot .7s cubic-bezier(.2, 1.3, .4, 1) both; }
+@keyframes pl-shoot { from { opacity: 0; transform: translateX(-40px) skewX(-12deg); } }
+/* Artéria: an artery — a pulse runs through the name. */
+.partner-logo.is-playing.partner-logo--pulse :is(img, .partner-logo__svg) { animation: pl-pulse 1.3s ease-out both; }
+@keyframes pl-pulse { 0% { opacity: 0; transform: scaleX(.92); } 25% { opacity: 1; transform: scaleX(1.03); } 45% { transform: scaleX(1); } 60% { transform: scaleX(1.02); } }
+/* Union Forum: the flag-like mark flutters once. */
+.partner-logo.is-playing.partner-logo--flag :is(img, .partner-logo__svg) { animation: pl-flag 1.1s ease-out both; }
+@keyframes pl-flag { 0% { opacity: 0; transform: skewY(6deg); } 30% { opacity: 1; transform: skewY(-4deg); } 60% { transform: skewY(2deg); } }
+/* Egyesek: the round «e» — the logo rolls in along its circle. */
+.partner-logo.is-playing.partner-logo--orbit :is(img, .partner-logo__svg) { animation: pl-orbit .9s cubic-bezier(.2, 1, .3, 1) both; transform-origin: 30% 50%; }
+@keyframes pl-orbit { from { opacity: 0; transform: rotate(-120deg) scale(.6); } }
+/* Gwara Media: a newsroom — the name is typed out letter by letter. */
+.partner-logo.is-playing.partner-logo--type :is(img, .partner-logo__svg) { animation: pl-type .9s steps(8, end) both; }
+@keyframes pl-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+/* Media Development Foundation: media coming into focus. */
+.partner-logo.is-playing.partner-logo--focus :is(img, .partner-logo__svg) { animation: pl-focus 1s ease-out both; }
+@keyframes pl-focus { from { opacity: 0; filter: blur(8px); } }
+/* MOKSOP, the photography museum: a camera shutter opens. */
+.partner-logo.is-playing.partner-logo--shutter :is(img, .partner-logo__svg) { animation: pl-shutter .6s cubic-bezier(.7, 0, .2, 1) both; }
+@keyframes pl-shutter { from { clip-path: inset(50% 0 50% 0); } to { clip-path: inset(0 0 0 0); } }
 
 /* Playback theatre «Нема»: a stage curtain parts and the logo is revealed. */
 .partner-logo--curtain .partner-logo__fx { inset: 0; background: linear-gradient(90deg, var(--symbol-violet) 50%, var(--symbol-plum) 50%); }

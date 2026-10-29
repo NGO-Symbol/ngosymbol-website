@@ -17,9 +17,9 @@ button { font: inherit; }
 .site-header { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--symbol-plum); }
 /* Sticky header (always reachable): full-bleed background via a spread shadow clipped to the sides; hides on
    scroll down and slides back on scroll up. */
-.site-header { position: sticky; top: 0; z-index: 60; background: var(--symbol-cream); box-shadow: 0 0 0 100vmax var(--symbol-cream); clip-path: inset(0 -100vmax -12px); transition: transform .45s cubic-bezier(.3, 1, .4, 1), background .4s ease, box-shadow .4s ease, color .4s ease; }
+.site-header { position: sticky; top: 0; z-index: 60; background: var(--symbol-cream); box-shadow: 0 0 0 100vmax var(--symbol-cream); clip-path: inset(0 -100vmax -12px); will-change: transform; transition: transform .6s cubic-bezier(.22, .61, .36, 1), opacity .45s ease, background .4s ease, box-shadow .4s ease, color .4s ease; }
 /* The full-bleed background reaches 12px below the header (clip-path), so hiding moves it that much further. */
-.site-header.is-hidden { transform: translateY(calc(-100% - 14px)); }
+.site-header.is-hidden { transform: translateY(calc(-100% - 14px)); opacity: .2; transition: transform .7s cubic-bezier(.22, .61, .36, 1), opacity .7s ease, background .4s ease, box-shadow .4s ease, color .4s ease; }
 .site-header.is-scrolled { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 

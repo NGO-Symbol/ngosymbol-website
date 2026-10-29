@@ -7,6 +7,10 @@ import type { Photo } from './types'
 export interface Highlight extends Photo { to: string; project: string }
 
 export const highlights: Highlight[] = [
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/projects/zbyrach-konvalii/archive.jpg', alt: 'Фотограф гортає свої знімки', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
   { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах на тренінгу mhGAP', credit: 'Петро Чекаль', to: '/projects/mhgap-kyiv', project: 'Тренінги mhGAP' },
@@ -34,3 +38,18 @@ export const highlights: Highlight[] = [
 
 /** How many photos the home page shows at once. */
 export const highlightsShown = 14
+
+/** Light preview for the strip (public/media/thumbs, 720 px); the full photo opens only in the viewer. */
+export const thumbOf = (src: string) => src.replace(/^\/media\//, '/media/thumbs/')
+
+/**
+ * A fresh selection for each visit that mixes projects: photos are shuffled within each project, then taken from
+ * the projects in turn, so neighbouring frames never come from the same project.
+ */
+export function pickHighlights(pool: Highlight[] = highlights, count = highlightsShown) {
+  const shuffle = <T>(list: T[]) => { const a = [...list]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j]!, a[i]!] } return a }
+  const groups = shuffle([...new Set(pool.map(photo => photo.project))]).map(project => shuffle(pool.filter(photo => photo.project === project)))
+  const picked: Highlight[] = []
+  while (picked.length < count && groups.some(group => group.length)) for (const group of groups) if (group.length && picked.length < count) picked.push(group.shift()!)
+  return picked
+}

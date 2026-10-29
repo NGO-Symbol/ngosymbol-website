@@ -126,10 +126,14 @@ const entries: Project[] = [
       { person: 'nataliia-okhman', role: 'Митці' },
       { person: 'senora-serpiente', role: 'Митці' }
     ],
-    partners: ['yermilov-centre', 'karazin-university', 'zmina'],
+    partners: ['yermilov-centre', 'karazin-university', 'zmina', 'nema-playback'],
     donors: ['mincult', 'grynyov-art-foundation'],
     donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Виставка відбулася за фінансової підтримки Міністерства культури України в межах Гранту Президента України для молодих митців та за підтримки Grynyov Art Collection.',
     gallery: [
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль' },
@@ -199,10 +203,17 @@ const entries: Project[] = [
       'mhGAP — програма дій ВООЗ з подолання прогалин у галузі психічного здоров’я на первинній ланці охорони здоров’я.',
       'З лютого по травень 2025 року «Символ» провів три п’ятиденні й один чотириденний тренінг для медпрацівників первинної ланки Київщини — сімейних лікарів, медсестер, педіатрів, фельдшерів, терапевтів — з проживанням, харчуванням і посібниками для учасників. Після навчання учасники отримували онлайн-супервізію від кваліфікованих спеціалістів.',
       'В Україні досі поширена стигма щодо звернення до фахівців з психічного здоров’я, тож значна частина допомоги людям із психічними, неврологічними розладами та розладами через вживання психоактивних речовин лягає на інших медиків. mhGAP дає їм навички діагностики й ведення таких станів.',
-      'Це перший грантовий проєкт «Символу». Організація — офіційний партнер ініціативи mhGAP в Україні. Останній тренінг, на прохання учасників, охопив другу частину програми.'
+      'Тренінги вели тренери із Закарпаття [[person:ivan-kutchak]] та [[person:olha-klymovska]]. Фотографував [[person:petro-chekal]].',
+      'Це перший грантовий проєкт «Символу». Організація — офіційний партнер ініціативи mhGAP в Україні. Останній тренінг, на прохання учасників, охопив другу частину програми й відбувся в книгарні-кав’ярні «Сенс» на Хрещатику.'
     ],
-    partners: ['bila-tserkva-library'],
-    people: [{ person: 'yurii-rassokha', role: 'Менеджер проєкту' }],
+    // Team and trainers as credited in the @symbol.ngo post of 26.06.2025 (training 13–16.05.2025 in «Сенс»).
+    partners: ['bila-tserkva-library', 'sens'],
+    people: [
+      { person: 'yurii-rassokha', role: 'Менеджер проєкту' },
+      { person: 'ivan-kutchak', role: 'Тренери' },
+      { person: 'olha-klymovska', role: 'Тренери' },
+      { person: 'petro-chekal', role: 'Фотограф' }
+    ],
     donors: ['mh4u'],
     donorCredit: 'Проєкт реалізовано за донорської підтримки українсько-швейцарського проєкту «Психічне здоров’я для України».',
     programLogo: { src: '/media/projects/mhgap-kyiv/mhgap-logo.svg', name: 'Програма дій ВООЗ із подолання прогалин у сфері психічного здоров’я (mhGAP)' }
@@ -274,6 +285,7 @@ const entries: Project[] = [
       'Кураторка — [[person:hanna-franyk]]. Митці: [[person:alla-pasichnyk]] (акварелі, ікона святого Миколая), [[person:olena-mordyk]] (ескізи «вихід ні»), [[person:magran-tata]] (піксель-арт), [[person:petro-chekal]] (фотосерії «Між тінню і світлом» та «Інші світи» — з кладовища розстріляних автомобілів у Бучі), [[person:ruslana-kliuchko]] (суха голка «Розмиваючи межу»), [[person:yurii-rassokha]] (фотографії «За мотивами Г. Крюдсона», «Сутінки»).',
       'Виставка відбулася в межах волонтерства Європейського корпусу солідарності у співпраці з ГО «Символ».'
     ],
+    partners: ['egyesek', 'arteria', 'union-forum'],
     people: [
       { person: 'hanna-franyk', role: 'Кураторка' },
       { person: 'petro-chekal', role: 'Співавтор проєкту' },

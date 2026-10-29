@@ -43,6 +43,8 @@ export interface EventItem {
   end?: string
   venue: Venue
   isProject: boolean
+  /** Card picture: the event's first photo, otherwise its project's poster or first photo. */
+  cover?: string
 }
 
 export const eventItems: EventItem[] = [
@@ -55,7 +57,8 @@ export const eventItems: EventItem[] = [
     start: event.start,
     end: event.end,
     venue: event.venue,
-    isProject: false
+    isProject: false,
+    cover: event.gallery?.[0]?.src ?? projectMap.get(event.project)?.poster ?? projectMap.get(event.project)?.gallery?.[0]?.src
   })),
   ...projects
     .filter(project => project.kind === 'single' && project.start)
@@ -68,7 +71,8 @@ export const eventItems: EventItem[] = [
       start: project.start!,
       end: project.end,
       venue: project.venue ?? { city: project.city, country: project.country },
-      isProject: true
+      isProject: true,
+      cover: project.poster ?? project.gallery?.[0]?.src
     }))
 ].sort((a, b) => b.start.localeCompare(a.start))
 
