@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { socials } from '~/data/social'
 useSeoMeta({
-  title: 'Культура в русі',
+  title: 'ГО «Символ»',
   ogTitle: 'ГО «Символ» — культура в русі',
   ogDescription: 'Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.'
 })
