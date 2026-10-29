@@ -14,7 +14,6 @@ Items here are unresolved and must not be silently assumed.
 
 - Confirm final Latin transliteration of every route slug, particularly `istoriia-vulytsi` and individual street names.
 - Decide whether autonomous projects share a cookie-free analytics solution.
-- Decide whether the English locale uses `/en/...` on each host or a language switch stored in local state.
 - Decide whether events and opportunities are one page or two when enough content exists.
 
 ## Site content model (2026-10-29)
@@ -39,7 +38,8 @@ Items here are unresolved and must not be silently assumed.
 
 - Zakon font: confirm the web-embedding licence.
 - Kharkiv Sea 2026: confirm dates (14–23.08 from photo folders) and programme.
-- Full English version of all pages and the URL pattern (`/en/...`).
+- Full English translation of page texts (URL pattern decided in ADR-0009; interface and project titles are translated, page bodies are not).
+- Logo files for partners without one (Grynyov Art Collection, President's grant, Здибанка, Khust theatre, Uzh Station, Ucraina Più) and confirmation that partners agree to logo use; current logos come from the shared Drive (Nema) and the organizations' own websites.
 
 ## Design
 

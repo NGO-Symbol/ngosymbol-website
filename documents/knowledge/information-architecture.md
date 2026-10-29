@@ -17,10 +17,10 @@ Accepted model: [ADR-0008](decisions/ADR-0008-linked-content-model.md). `USER_CO
 /about                  Mission, values, team, partners and donors, reports
 /support                Join and support
 /contact                Contacts
-/en/...                 English version (URL pattern still open)
+/en/...                 English mirror of every page (ADR-0009)
 ```
 
-Header: official logo · Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA/EN switch (sliding pill; the header speaks the page's language) · light/dark toggle.
+Header: official logo · Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA/EN switch (sliding pill; keeps the same page, ADR-0009) · site search (button, «/» or Ctrl/⌘+K; projects, events, people, news, opportunities) · light/dark toggle. Tabs roll on hover; a sliding ink bar marks the current section.
 
 Added 2026-10-29: `/news` (short news, latest three on Home), `/press` (press kit: logo files, UA/EN boilerplate, press contact, project photos), `/en` (first English page for international partners: intro, indicators, projects with English titles and summaries), archived open calls on `/opportunities`, `/sitemap.xml`, a skip link. The full English version of every page is still open.
 

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // Path at the top of a page, like a Finder path: Головна › Розділ › Сторінка. The last item is the current page.
 const props = defineProps<{ items: { label: string; to?: string }[] }>()
-const trail = computed(() => [{ label: 'Головна', to: '/' }, ...props.items])
+const { isEn, localePath } = useLang()
+const trail = computed(() => [{ label: 'Головна', to: '/' }, ...props.items].map(item => ({ label: translate(item.label, isEn.value), to: item.to && localePath(item.to) })))
 
 useHead({
   script: [{
@@ -16,7 +17,7 @@ useHead({
 </script>
 
 <template>
-  <nav class="breadcrumbs" aria-label="Шлях до сторінки">
+  <nav class="breadcrumbs" :aria-label="isEn ? 'Breadcrumbs' : 'Шлях до сторінки'">
     <ol>
       <li v-for="(item, index) in trail" :key="index">
         <NuxtLink v-if="item.to && index < trail.length - 1" :to="item.to">{{ item.label }}</NuxtLink>

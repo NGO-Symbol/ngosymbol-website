@@ -27,6 +27,7 @@ Repository boundaries are summarized in [`../../ARCHITECTURE.md`](../../ARCHITEC
 - Large autonomous projects: separate apps on `{project}.symbol.ngo`.
 - First autonomous project: `istoriia-vulytsi.symbol.ngo`.
 - Every project has a main-site page; projects with a subsite link to it from there (ADR-0008).
+- Every page has an English mirror under `/en`; the UA/EN switch keeps the same page (ADR-0009).
 - Linked content model: projects, events (each belongs to a project), people, opportunities, press, organizations.
 - No CMS; project content is maintained in code.
 - Framework: Nuxt 4 / Vue 3, static-first.

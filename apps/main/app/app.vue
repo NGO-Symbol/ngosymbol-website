@@ -2,7 +2,10 @@
 // Decide before first paint whether the logo intro is skipped, so returning visitors never see it flash.
 // When it plays, pick the next of the intro variants (rotates on every new visit).
 // Theme: the visitor's choice (light/dark) is stored; without a choice the system setting applies.
+const { isEn } = useLang()
 useHead({
+  htmlAttrs: { lang: () => (isEn.value ? 'en' : 'uk') },
+  titleTemplate: title => (isEn.value ? (title && title !== 'NGO Symbol' ? `${title} · NGO Symbol` : 'NGO Symbol') : `${title} · ГО «Символ»`),
   script: [{
     tagPosition: 'head',
     innerHTML: "try{var t=localStorage.getItem('symbol-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}"
@@ -18,8 +21,9 @@ useHead({
     <IntroSplash />
     <ClickEffects />
     <RouteWipe />
-    <a class="skip-link" href="#main">Перейти до змісту</a>
+    <a class="skip-link" href="#main">{{ isEn ? 'Skip to content' : 'Перейти до змісту' }}</a>
     <SiteHeader />
+    <EnNotice />
     <main id="main" tabindex="-1">
       <NuxtPage />
     </main>

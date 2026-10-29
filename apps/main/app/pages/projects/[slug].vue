@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { projectsEn } from '~/data/projects-en'
+
 definePageMeta({ pageTransition: { name: 'zoom', mode: 'out-in' } })
 const route = useRoute()
 const project = getProject(String(route.params.slug))
@@ -7,7 +9,9 @@ if (!project) {
   throw createError({ statusCode: 404, statusMessage: 'Проєкт не знайдено' })
 }
 
-useSeoMeta({ title: `${project.title} · ${projectYears(project)}`, description: project.summary })
+const { isEn } = useLang()
+const text = computed(() => (isEn.value && projectsEn[project.slug]) || project)
+useSeoMeta({ title: () => `${text.value.title} · ${projectYears(project)}`, description: () => text.value.summary })
 
 // Fonts of a project identity load only on that project's page.
 if (project.theme === 'documents') {
@@ -41,8 +45,8 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <span v-for="format in project.formats" :key="format">{{ formats[format] }}</span>
           <span v-if="project.role === 'partner'">Символ — партнер</span>
         </div>
-        <h1>{{ project.title }}</h1>
-        <p>{{ project.summary }}</p>
+        <h1>{{ text.title }}</h1>
+        <p>{{ text.summary }}</p>
         <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту ↗</a>
       </div>
     </header>
