@@ -10,7 +10,7 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
 <template>
   <section class="docs-container docs-page">
     <div class="docs-page-title">
-      <span class="docs-label">{{ t('20 митців і мисткинь · 18 проєктів', '20 artists · 18 projects') }}</span>
+      <span class="docs-label">{{ t(`20 митців і мисткинь · ${exhibitionArtists.length} справ`, `20 artists · ${exhibitionArtists.length} files`) }}</span>
       <h1>{{ t('Митці', 'Artists') }}</h1>
       <p>{{ t('Кожна сторінка — біографія митця, опис роботи на виставці та фотографії. Повна сторінка кожного — на сайті ГО «Символ».', 'Each page has the artist’s biography, the work shown at the exhibition and photographs. Full profiles are on the NGO Symbol website.') }}</p>
     </div>
@@ -18,7 +18,11 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
       <li v-for="artist in exhibitionArtists" :key="artist.slug">
         <NuxtLink class="artist" :to="localePath(`/mytsi/${artist.slug}`)">
           <span class="artist__media">
-            <img v-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artist.name" loading="lazy">
+            <!-- Co-authors share one frame: their portraits side by side. -->
+            <span v-if="artist.coAuthors.length" class="artist__portrait artist__duo">
+              <img v-for="person in [artist.person, ...artist.coAuthors].filter(p => p?.photo)" :key="person!.slug" :src="person!.photo" :alt="person!.name" loading="lazy">
+            </span>
+            <img v-else-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artist.name" loading="lazy">
             <img v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)" alt="" loading="lazy">
           </span>
           <span class="artist__name">{{ artist.name }}</span>
@@ -35,6 +39,8 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
 .artist__media { position: relative; display: block; aspect-ratio: 1; overflow: hidden; background: var(--docs-line); }
 .artist__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .artist__portrait { filter: grayscale(1) contrast(1.05); transition: opacity .35s ease; }
+.artist__duo { position: absolute; inset: 0; display: flex; }
+.artist__media .artist__duo img { position: static; flex: 1 1 0; min-width: 0; width: 50%; }
 /* On hover the portrait gives way to a photograph of the work. */
 .artist__work { opacity: 0; transition: opacity .35s ease; }
 .artist:hover .artist__work { opacity: 1; }

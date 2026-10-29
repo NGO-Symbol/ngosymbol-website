@@ -23,13 +23,14 @@ export function chekalPhotos(slug: string) {
 }
 
 // Exhibition photographs by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов») that show a work, by artist
-// (Маков, Апріс and Пятковка identified by the team; «Блокпост» — the block with tea cups and visitors' notes).
+// (Маков, Апріс and Пятковка identified by the team; «Блокпост» — the block with tea cups and visitors' notes; the photo on the wall of A4 sheets is not Сай's work).
 export const osipovPhotos: Record<string, string[]> = {
   'yeva-fomitski': ['/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg'],
-  'oleksii-sai': ['/media/projects/pokazhit-svoi-dokumenty/osipov-264.jpg'],
   'pavlo-makov': ['/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg'],
   'alina-prokopenko': ['/media/projects/pokazhit-svoi-dokumenty/osipov-048.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-034.jpg'],
-  'dara-sholokh': ['/media/projects/pokazhit-svoi-dokumenty/osipov-552.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-554.jpg'],
+  'dara-sholokh': ['/media/projects/pokazhit-svoi-dokumenty/osipov-552.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-493.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-554.jpg'],
+  'kostiantyn-hlyvlias': ['/media/projects/pokazhit-svoi-dokumenty/osipov-430.jpg'],
+  'andrii-skrypka': ['/media/projects/pokazhit-svoi-dokumenty/osipov-464.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-459.jpg'],
   'roman-piatkovka': ['/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg']
 }
 
@@ -37,21 +38,20 @@ export const osipovPhotos: Record<string, string[]> = {
 const chekal = (slug: string, n: number) => `/media/projects/pokazhit-svoi-dokumenty/works/${slug}-${n}.jpg`
 export const coverPhoto: Record<string, string> = {
   'alina-prokopenko': chekal('alina-prokopenko', 2),
-  'andrii-skrypka': chekal('andrii-skrypka', 1),
+  'andrii-skrypka': '/media/projects/pokazhit-svoi-dokumenty/osipov-464.jpg',
   'anna-hareieva': chekal('anna-hareieva', 2),
   'anton-kariuk': chekal('anton-kariuk', 1),
-  'kostiantyn-hlyvlias': chekal('kostiantyn-hlyvlias', 2),
+  'kostiantyn-hlyvlias': '/media/projects/pokazhit-svoi-dokumenty/osipov-430.jpg',
   'mariia-matiashova': chekal('mariia-matiashova', 2),
   'mariia-prokopenko': chekal('mariia-prokopenko', 3),
   'nataliia-okhman': chekal('nataliia-okhman', 2),
   'oleh-tistol': chekal('oleh-tistol', 2),
   'pavlo-makov': '/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg',
   'serhii-melnychenko': chekal('serhii-melnychenko', 1),
-  'vira-pakosh': chekal('vira-pakosh', 1),
+  'vira-pakosh': chekal('vira-pakosh', 2),
   'volodymyr-kuznietsov': chekal('volodymyr-kuznietsov', 1),
   'yeva-fomitski': '/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg',
   'kinich-azla': '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg',
-  'oleksii-sai': '/media/projects/pokazhit-svoi-dokumenty/osipov-264.jpg',
   'roman-piatkovka': '/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg',
   'dara-sholokh': '/media/projects/pokazhit-svoi-dokumenty/osipov-552.jpg'
 }

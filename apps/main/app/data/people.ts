@@ -168,6 +168,7 @@ export const people: Person[] = [
   {
     slug: 'oleh-tistol',
     name: 'Олег Тістол',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/tistololegart' }, { label: 'Вікіпедія', url: 'https://uk.wikipedia.org/wiki/%D0%A2%D1%96%D1%81%D1%82%D0%BE%D0%BB_%D0%9E%D0%BB%D0%B5%D0%B3_%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D0%B8%D1%87' }],
     photo: '/media/people/oleh-tistol.jpg',
     shortBio: 'Олег Тістол — провідний український митець, що живе й працює в Києві, один із ключових представників Нової української хвилі.',
     bio: [
@@ -188,6 +189,7 @@ export const people: Person[] = [
   {
     slug: 'serhii-melnychenko',
     name: 'Сергій Мельниченко',
+    links: [{ label: 'Сайт', url: 'https://melnitchenko.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/sergey_melnitchenko' }],
     photo: '/media/people/serhii-melnychenko.jpg',
     shortBio: 'Сергій Мельниченко — український фотограф, танцюрист, майстер спорту міжнародного класу з бальних танців та засновник платформи концептуальної та арт-фотографії «MYPH» та член творчого об’єднання «Українська фотографічна альтернатива».',
     bio: [
@@ -212,6 +214,7 @@ export const people: Person[] = [
   {
     slug: 'volodymyr-kuznietsov',
     name: 'Володимир Кузнецов',
+    links: [{ label: 'Сайт', url: 'https://volodymyrkuznetsov.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/kuznetsov_kraftworks' }],
     photo: '/media/people/volodymyr-kuznietsov.jpg',
     shortBio: 'Володимир Кузнецов — український митець родом із Луцька, живе й працює в Києві.',
     bio: [
@@ -227,6 +230,7 @@ export const people: Person[] = [
   {
     slug: 'alina-prokopenko',
     name: 'Аліна Прокопенко (Apris)',
+    links: [{ label: 'Сайт', url: 'https://www.apris.art/' }, { label: 'Instagram', url: 'https://www.instagram.com/a.pr.is' }],
     photo: '/media/people/alina-prokopenko.jpg',
     shortBio: 'Аліна Прокопенко (Apris) — фуд-дизайнерка, що працює в Парижі.',
     bio: [
@@ -237,6 +241,7 @@ export const people: Person[] = [
   {
     slug: 'andrii-skrypka',
     name: 'Андрій Скрипка',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/a_r___t_s' }, { label: 'Facebook', url: 'https://www.facebook.com/a.skripohcka' }, { label: 'Telegram', url: 'https://t.me/arts_daily' }],
     photo: '/media/people/andrii-skrypka.jpg',
     shortBio: 'Андрій Скрипка — міждисциплінарний митець і дизайнер, народився в Керчі, Крим.',
     bio: [
@@ -251,6 +256,7 @@ export const people: Person[] = [
   {
     slug: 'anna-hareieva',
     name: 'Анна Гареєва',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/_anny.gareeva_photo.art_' }],
     photo: '/media/people/anna-hareieva.jpg',
     shortBio: 'Анна Гареєва — фотограф з Харкова, наразі мешкає в Чернівцях.',
     bio: [
@@ -265,6 +271,7 @@ export const people: Person[] = [
   {
     slug: 'anton-kariuk',
     name: 'Антон Карюк',
+    links: [{ label: 'Сайт', url: 'https://antonkaryuk.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/antonkaryuk' }],
     photo: '/media/people/anton-kariuk.jpg',
     shortBio: 'Антон Карюк — український міждисциплінарний митець родом з Дніпра, що живе у Вільнюсі, Литва.',
     bio: [
@@ -279,6 +286,7 @@ export const people: Person[] = [
   {
     slug: 'vira-pakosh',
     name: 'Віра Пакош',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/piravakosh' }],
     photo: '/media/people/vira-pakosh.jpg',
     shortBio: 'Віра Пакош — міждисциплінарна мисткиня, яка працює з темами сприйняття реальності, памʼяті та спогадів.',
     bio: [
@@ -303,6 +311,7 @@ export const people: Person[] = [
   {
     slug: 'yeva-fomitski',
     name: 'Єва Фоміцкі',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/eva_fomitski' }],
     photo: '/media/people/yeva-fomitski.jpg',
     shortBio: 'Єва Фоміцкі — мисткиня та кураторка родом з Харкова, що наразі проживає в Берліні, Німеччина.',
     bio: [
@@ -323,6 +332,7 @@ export const people: Person[] = [
   {
     slug: 'kostiantyn-hlyvlias',
     name: 'Костянтин Гливляс',
+    links: [{ label: 'Сайт', url: 'https://hlyvlias.myportfolio.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/hlyvliass' }],
     photo: '/media/people/kostiantyn-hlyvlias.jpg',
     shortBio: 'Костянтин Гливляс живе і працює у Львові.',
     bio: [
@@ -333,6 +343,7 @@ export const people: Person[] = [
   {
     slug: 'mariia-matiashova',
     name: 'Марія Матяшова',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/maria.matiashova' }],
     photo: '/media/people/mariia-matiashova.jpg',
     shortBio: 'Марія Матяшова — українська художниця.',
     bio: [
@@ -346,6 +357,7 @@ export const people: Person[] = [
   {
     slug: 'mariia-prokopenko',
     name: 'Марія Прокопенко',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/chambosatori' }],
     photo: '/media/people/mariia-prokopenko.jpg',
     shortBio: 'Марія Прокопенко — графічна дизайнерка та мисткиня з Харкова.',
     bio: [
@@ -361,6 +373,7 @@ export const people: Person[] = [
   {
     slug: 'nataliia-okhman',
     name: 'Наталія Охман',
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/nata_okhman' }],
     photo: '/media/people/nataliia-okhman.jpg',
     shortBio: 'Наталія Охман — українська київська мисткиня, що працює в техніках аналогового колажу, лендарту та фотографії.',
     bio: [
@@ -375,6 +388,8 @@ export const people: Person[] = [
     slug: 'senora-serpiente',
     name: 'Señora Serpiente',
     photo: '/media/people/senora-serpiente.jpg',
+    shortBio: 'Чилійська мисткиня, живе в Парижі; працює з текстилем, вишивкою й тілом.',
+    bio: ['Чилійська мисткиня, яка живе в Парижі. Працює з текстилем, вишивкою, тілом і образом, досліджуючи ідентичність, кордони й спадок колоніалізму з феміністичної та деколоніальної перспективи.', 'На виставці [[project:pokazhit-svoi-dokumenty]] — робота «La visa es un dispositivo colonial» (2023): вишита сторінка старого паспорта з візою.']
   },
   {
     slug: 'nataliia-ivanova',
