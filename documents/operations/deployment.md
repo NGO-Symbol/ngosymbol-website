@@ -9,6 +9,7 @@ The decision and its alternatives are recorded in
 | --- | --- | --- | --- |
 | `symbol.ngo` | `apps/main` | this repository | GitHub Actions |
 | `my-street.symbol.ngo` | `apps/istoriia-vulytsi` | `NGO-Symbol/istoriia-vulytsi` (deploy-only) | `gh-pages` branch |
+| `documentsart.symbol.ngo` | `apps/documents` | `NGO-Symbol/documentsart` (deploy-only) | `gh-pages` branch |
 
 GitHub Pages serves one site per repository, so each autonomous project needs its own
 deploy-only repository. Nobody edits those repositories by hand; the workflow overwrites them.
@@ -97,6 +98,27 @@ gh api -X POST repos/NGO-Symbol/istoriia-vulytsi/pages -f "source[branch]=gh-pag
 
 Web UI: in `NGO-Symbol/istoriia-vulytsi` → Settings → Pages → Deploy from a branch → `gh-pages` / root.
 
+## 4a. «Покажіть свої документи…» deploy repository (documentsart.symbol.ngo)
+
+Same steps as section 4, with its own names. The `documents-site` job stays skipped until `DOCS_DEPLOY_REPO` is set.
+
+```bash
+gh repo create NGO-Symbol/documentsart --public \
+  --description "Build output of documentsart.symbol.ngo. Source: NGO-Symbol/ngosymbol-website" \
+  --add-readme
+
+ssh-keygen -t ed25519 -N "" -C "docs-deploy" -f docs_deploy_key
+gh repo deploy-key add docs_deploy_key.pub -R NGO-Symbol/documentsart --allow-write -t "deploy from ngosymbol-website"
+gh secret set DOCS_DEPLOY_KEY -R NGO-Symbol/ngosymbol-website < docs_deploy_key
+gh variable set DOCS_DEPLOY_REPO -R NGO-Symbol/ngosymbol-website -b NGO-Symbol/documentsart
+gh variable set DOCS_DOMAIN -R NGO-Symbol/ngosymbol-website -b documentsart.symbol.ngo
+rm docs_deploy_key docs_deploy_key.pub
+```
+
+Run the Deploy workflow once, then turn on Pages for `NGO-Symbol/documentsart` (branch `gh-pages`, root), and add in
+Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io` (DNS only). Until then the site is built inside the main site at `symbol.ngo/documentsart/`; once the subdomain works, point
+`subsiteUrl` (projects.ts) and the stamp QR code in `DocumentsHero.vue` to `https://documentsart.symbol.ngo/`.
+
 ## 5. Domain (DNS is managed in Cloudflare)
 
 `symbol.ngo` is registered at Cloudflare and its DNS lives there. Google Workspace mail uses the
@@ -120,6 +142,7 @@ existing `MX` and `TXT` records — **do not delete or edit them**.
    | AAAA | `@` | `2606:50c0:8003::153` |
    | CNAME | `www` | `ngo-symbol.github.io` |
    | CNAME | `istoriia-vulytsi` | `ngo-symbol.github.io` |
+   | CNAME | `documentsart` | `ngo-symbol.github.io` |
 
    Never add a wildcard (`*`) record.
 3. Attach the domains:
