@@ -61,11 +61,14 @@ const entries: Project[] = [
       'Перформанси грає плейбек-театр «Серденьки» в турі Закарпатською областю: арт-простір «Станція Уж» в Ужгороді, ліцей у селищі Бакош, Берегове. Події проєкту — нижче на сторінці.',
       'Проєкт продовжує роботу «Символу» з плейбек-театром після перформансу [[project:istorii-riznykh]].'
     ],
-    // Credits as in the project's Instagram posts (@serdenky.playback, 2026); USER_CONFIRMED 2026-10-29: supported by
-    // «Культура допомагає: Солідарність», co-funded by the European Union (not a Creative Europe project of ours).
-    partners: ['serdenky-playback', 'uzh-station', 'zdybanka', 'khust-theatre', 'ecf', 'insha-osvita', 'zusa', 'veteranka'],
-    donors: ['culture-helps-solidarity', 'eu'],
-    donorCredit: 'Проєкт реалізується за підтримки проєкту «Culture Helps Solidarity / Культура допомагає: Солідарність», що співфінансується Європейським Союзом та реалізується European Cultural Foundation (NL), Інша Освіта (UA), zusa (DE) та рухом VETERANKA (UA). Фінансується Європейським Союзом. Висловлені погляди та думки належать виключно автору(ам) і не обов’язково відображають позицію Європейського Союзу або Європейського виконавчого агентства з питань освіти та культури (EACEA). Ані Європейський Союз, ані орган, що надає фінансування, не несуть відповідальності за них.',
+    // Credits follow the «Culture Helps Solidarity» communication guidelines (culturehelpssolidarity.eu, 2026):
+    // the programme disclaimer in every description, the EU emblem unaltered, logos in the order CHS → EU → ECF →
+    // Insha Osvita → zusa → VETERANKA, and the EU funding notice on the project page. USER_CONFIRMED 2026-10-29:
+    // supported by «Культура допомагає: Солідарність», co-funded by the European Union.
+    partners: ['serdenky-playback', 'uzh-station', 'zdybanka', 'khust-theatre'],
+    donors: ['culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka'],
+    donorCredit: 'Проєкт «Голоси у русі» реалізується в межах програми «Culture Helps Solidarity / Культура допомагає: Солідарність». «Culture Helps Solidarity / Культура допомагає: Солідарність» — проєкт, що співфінансується Європейським Союзом і реалізується European Cultural Foundation (Амстердам), «Іншою Освітою» (Київ), zusa (Берлін) і рухом VETERANKA (Київ).',
+    fundingNotice: 'Фінансується Європейським Союзом. Висловлені погляди та думки належать виключно автору(ам) і не обов’язково відображають позицію Європейського Союзу або Європейського виконавчого агентства з питань освіти та культури (EACEA). Ані Європейський Союз, ані EACEA не несуть відповідальності за них.',
     related: ['istorii-riznykh']
   },
   {
@@ -217,10 +220,14 @@ const entries: Project[] = [
     directions: ['art'],
     tone: 'apricot',
     gallery: [
+      // The exhibited photographs first (prints from the Drive folder «Мілан (Ті, що побачили світ)»), then the exhibition.
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-04.jpg', alt: 'Чорно-біла фотографія: вікно крізь сплетіння гілок' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-13.jpg', alt: 'Нічний парк із ліхтарями' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-20.jpg', alt: 'Світні літери на фасаді вночі' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-03.jpg', alt: 'Ящик із розсипаними дитячими іграшками' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-21.jpg', alt: 'Постать у смугах світла й тіні' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-02.jpg', alt: 'Абстрактна фотографія: світла пляма в темряві' },
       { src: '/media/projects/ti-khto-pobachyly-svit/exhibition.jpg', alt: 'Роботи виставки на стендах у залі в Мілані' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/talk.jpg', alt: 'Розмова на відкритті виставки в Мілані', people: true },
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-label.jpg', alt: 'Фотографія Петра Чекаля з підписом трьома мовами' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/audience.jpg', alt: 'Глядачі на відкритті', people: true },
       { src: '/media/projects/ti-khto-pobachyly-svit/flute.jpg', alt: 'Музичний виступ на відкритті виставки', people: true }
     ],
     motif: 'aperture',

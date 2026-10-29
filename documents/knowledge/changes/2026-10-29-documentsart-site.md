@@ -8,3 +8,8 @@
 Affected: `project-registry.md`, `team-cv.md`, `open-questions.md`, `documents/operations/deployment.md`.
 
 - Home page «Кадри»: 14 selected photos (Петро Чекаль, Іван Самойлов, performances) in `apps/main/app/data/highlights.ts`, shown as a swipeable strip with a full-screen viewer (`PhotoReel.vue`). Credits only where the author is recorded.
+
+- «Голоси у русі» credits follow the «Culture Helps Solidarity» communication guidelines (culturehelpssolidarity.eu/wp-content/uploads/2026/10/CHS-communication-guidelines.pdf): programme disclaimer on the project and all its event pages, EU funding notice, official logos (Drive «LOGOS for Grantees») in the order CHS → EU → ECF → Інша Освіта → zusa → VETERANKA; the EU emblem is never recoloured (its own white variant in dark mode).
+- Home «Кадри» shows a random selection of 14 from a curated pool of 23 on every visit.
+- «Ті, хто побачили світ»: the gallery leads with the exhibited photographs (Drive «Мілан (Ті, що побачили світ)»).
+- Decorative «↗» arrows removed site-wide; footer contacts use one set of thin icons.

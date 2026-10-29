@@ -6,8 +6,8 @@
         <p>Виставка сучасного мистецтва · ЄрміловЦентр, Харків · 17.10–07.12.2025</p>
       </div>
       <div class="docs-footer__links">
-        <a :href="`${SYMBOL}/projects/pokazhit-svoi-dokumenty`">Проєкт на symbol.ngo ↗</a>
-        <a :href="SYMBOL">ГО «Символ» ↗</a>
+        <a :href="`${SYMBOL}/projects/pokazhit-svoi-dokumenty`">Проєкт на symbol.ngo</a>
+        <a :href="SYMBOL">ГО «Символ»</a>
       </div>
     </div>
   </footer>

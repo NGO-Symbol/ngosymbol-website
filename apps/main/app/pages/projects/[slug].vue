@@ -51,7 +51,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </div>
         <h1>{{ text.title }}</h1>
         <p>{{ text.summary }}</p>
-        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту ↗</a>
+        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту</a>
       </div>
     </header>
 
@@ -123,6 +123,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
             </div>
           </div>
           <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>
+          <p v-if="project.fundingNotice" class="donor-credit donor-credit--notice">{{ project.fundingNotice }}</p>
           <figure v-if="project.programLogo" class="program-logo">
             <img :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
             <figcaption>{{ project.programLogo.name }}</figcaption>
@@ -133,7 +134,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <h2 class="section-title">Преса</h2>
           <ul class="press-list">
             <li v-for="item in mentions" :key="item.url">
-              <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }} ↗</a>
+              <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }}</a>
               <span v-if="item.date">{{ formatDate(item.date) }}</span>
             </li>
           </ul>
@@ -142,7 +143,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         <section v-if="calls.length">
           <h2 class="section-title">Можливості</h2>
           <a v-for="call in calls" :key="call.slug" class="open-call" :href="call.applyUrl" target="_blank" rel="noreferrer">
-            <strong>{{ call.title }}</strong><span>Дедлайн: {{ formatDate(call.deadline) }}</span><span class="open-call__cta">Подати заявку ↗</span>
+            <strong>{{ call.title }}</strong><span>Дедлайн: {{ formatDate(call.deadline) }}</span><span class="open-call__cta">Подати заявку</span>
           </a>
         </section>
       </div>

@@ -2,7 +2,8 @@
 // A partner logo on a transparent background. SVG logos are inlined so every letter or shape can move
 // on its own, following the logo's rhythm (motion); PNG logos move as a whole. The motion plays when the
 // tile scrolls into view and again on hover (PartnerTiles calls replay()).
-const props = defineProps<{ src: string; name: string; slug: string; motion?: string }>()
+// srcDark: the organization's own variant for dark backgrounds (the EU emblem may not be recoloured, so it is never inverted).
+const props = defineProps<{ src: string; srcDark?: string; name: string; slug: string; motion?: string }>()
 
 const isSvg = props.src.endsWith('.svg')
 const markup = ref('')
@@ -59,9 +60,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <span ref="root" class="partner-logo" :class="[`partner-logo--${motion ?? 'wave'}`, { 'is-playing': playing }]" role="img" :aria-label="name">
+  <span ref="root" class="partner-logo" :class="[`partner-logo--${motion ?? 'wave'}`, { 'is-playing': playing, 'partner-logo--official': srcDark, 'partner-logo--opaque': src.endsWith('.jpg') }]" role="img" :aria-label="name">
     <span v-if="isSvg && markup" class="partner-logo__svg" v-html="markup" />
-    <img v-else :src="src" alt="" loading="lazy">
+    <img v-else :src="src" alt="" loading="lazy" class="partner-logo__light">
+    <img v-if="srcDark" :src="srcDark" alt="" loading="lazy" class="partner-logo__dark">
     <span class="partner-logo__fx" aria-hidden="true" />
   </span>
 </template>
@@ -129,7 +131,19 @@ onMounted(async () => {
 
 <style>
 /* Dark mode: logos are inverted (hue kept) so dark marks stay readable on the dark background.
+   Logos with an official dark variant (the EU emblem) switch to it instead and are never filtered.
+   JPG logos have a white field: it melts into the page (multiply on light, screen once inverted on dark).
    Unscoped: in a scoped block :global(...) would drop the rest of the selector and filter the whole page. */
-:root[data-theme="dark"] .partner-logo img, :root[data-theme="dark"] .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .partner-logo img, :root:not([data-theme="light"]) .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); } }
+.partner-logo .partner-logo__dark { display: none; }
+.partner-logo--opaque img { mix-blend-mode: multiply; }
+:root[data-theme="dark"] .partner-logo:not(.partner-logo--official) img, :root[data-theme="dark"] .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
+:root[data-theme="dark"] .partner-logo--opaque img { mix-blend-mode: screen; filter: invert(1); }
+:root[data-theme="dark"] .partner-logo--official .partner-logo__light { display: none; }
+:root[data-theme="dark"] .partner-logo--official .partner-logo__dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .partner-logo:not(.partner-logo--official) img, :root:not([data-theme="light"]) .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
+  :root:not([data-theme="light"]) .partner-logo--opaque img { mix-blend-mode: screen; filter: invert(1); }
+  :root:not([data-theme="light"]) .partner-logo--official .partner-logo__light { display: none; }
+  :root:not([data-theme="light"]) .partner-logo--official .partner-logo__dark { display: block; }
+}
 </style>

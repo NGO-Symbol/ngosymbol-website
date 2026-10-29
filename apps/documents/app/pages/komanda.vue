@@ -26,7 +26,7 @@ useSeoMeta({ title: 'Команда', description: 'Команда вистав�
     <h2 class="docs-section-title">ГО «Символ»</h2>
     <div class="docs-text">
       <p v-for="paragraph in aboutSymbol" :key="paragraph">{{ paragraph }}</p>
-      <p><a class="docs-button" :href="SYMBOL">symbol.ngo ↗</a></p>
+      <p><a class="docs-button" :href="SYMBOL">symbol.ngo</a></p>
     </div>
     <p class="partners">Партнери виставки: <a href="https://yermilovcentre.org">ЄрміловЦентр</a>, <a href="https://karazin.ua">ХНУ ім. В. Н. Каразіна</a>, <a href="https://zmina.info">Центр прав людини ZMINA</a>.</p>
   </section>

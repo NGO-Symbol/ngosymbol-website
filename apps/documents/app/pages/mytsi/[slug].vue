@@ -21,8 +21,8 @@ const photos = [...(artist.person?.works ?? []), ...artist.coAuthors.flatMap(per
         <h1>{{ artist.name }}</h1>
         <div class="docs-text"><p v-for="paragraph in artist.bio" :key="paragraph">{{ paragraph }}</p></div>
         <p class="artist-head__links">
-          <a :href="symbolPersonUrl(artist.slug)">Сторінка {{ artist.coAuthors.length ? 'Дари Шолох' : 'митця' }} на symbol.ngo ↗</a>
-          <a v-for="person in artist.coAuthors" :key="person.slug" :href="symbolPersonUrl(person.slug)">{{ person.name }} на symbol.ngo ↗</a>
+          <a :href="symbolPersonUrl(artist.slug)">Сторінка {{ artist.coAuthors.length ? 'Дари Шолох' : 'митця' }} на symbol.ngo</a>
+          <a v-for="person in artist.coAuthors" :key="person.slug" :href="symbolPersonUrl(person.slug)">{{ person.name }} на symbol.ngo</a>
         </p>
       </div>
     </header>

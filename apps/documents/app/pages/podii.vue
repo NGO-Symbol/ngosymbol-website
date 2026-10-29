@@ -22,7 +22,7 @@ useSeoMeta({ title: 'Події', description: 'Паралельна прогр�
           <ul v-if="event.gallery?.length" class="docs-photos event__photos">
             <li v-for="photo in event.gallery" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
           </ul>
-          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}`">Подія на symbol.ngo ↗</a>
+          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}`">Подія на symbol.ngo</a>
         </div>
       </li>
     </ol>

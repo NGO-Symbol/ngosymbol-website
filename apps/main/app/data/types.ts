@@ -58,6 +58,8 @@ export interface Project {
   partners?: string[]
   donors?: string[]
   donorCredit?: string
+  /** Funder's required notice (e.g. the EU disclaimer), shown under the credit on the project and its event pages. */
+  fundingNotice?: string
   /** Image laid behind the project hero (e.g. archive photographs), toned to the page. */
   backdrop?: string
   /** Logo of the programme the project belongs to (e.g. WHO mhGAP), shown beside the credit line. */
@@ -142,6 +144,8 @@ export interface Organization {
   url?: string
   /** Logo file in public/media/partners/ (from the shared Drive or the organization's own site). */
   logo?: string
+  /** The organization's own logo variant for dark backgrounds, used instead of recolouring (required for the EU emblem). */
+  logoDark?: string
   /** Hover motion that echoes the logo's own identity (see PartnerTiles). */
   motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain' | 'bloom' | 'wipe'
 }

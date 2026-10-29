@@ -9,6 +9,8 @@ if (!event) {
 const project = getProject(event.project)!
 const speakers = creditsByRole(event.people)
 const siblings = eventsOfProject(project.slug).filter(other => other.slug !== event.slug)
+// Donor credits of the project repeat on each of its events (funders ask for them in every event description).
+const donors = (project.donors ?? []).map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: [{ slug: project.slug, title: project.title }] }))
 
 useSeoMeta({ title: event.title, description: `${formatRange(event.start, event.end)} · ${venueLine(event.venue)}` })
 
@@ -52,8 +54,8 @@ const googleUrl = computed(() => {
           <div><dt>Проєкт</dt><dd><NuxtLink :to="`/projects/${project.slug}`">{{ project.title }}</NuxtLink></dd></div>
         </dl>
         <div class="button-stack">
-          <a v-if="event.registrationUrl && isUpcoming(event)" class="button button--dark" :href="event.registrationUrl" target="_blank" rel="noreferrer">Зареєструватися ↗</a>
-          <a class="button" :href="googleUrl" target="_blank" rel="noreferrer">Додати в Google Calendar ↗</a>
+          <a v-if="event.registrationUrl && isUpcoming(event)" class="button button--dark" :href="event.registrationUrl" target="_blank" rel="noreferrer">Зареєструватися</a>
+          <a class="button" :href="googleUrl" target="_blank" rel="noreferrer">Додати в Google Calendar</a>
         </div>
       </aside>
       <div class="project-sections">
@@ -76,6 +78,12 @@ const googleUrl = computed(() => {
               </p>
             </div>
           </div>
+        </section>
+        <section v-if="donors.length">
+          <span class="label">За підтримки</span>
+          <PartnerTiles :items="donors" />
+          <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>
+          <p v-if="project.fundingNotice" class="donor-credit donor-credit--notice">{{ project.fundingNotice }}</p>
         </section>
         <section v-if="siblings.length">
           <span class="label">Інші події проєкту</span>

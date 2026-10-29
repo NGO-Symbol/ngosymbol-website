@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { socials } from '~/data/social'
-import { highlights } from '~/data/highlights'
+import { highlights, highlightsShown } from '~/data/highlights'
 useSeoMeta({
   title: 'ГО «Символ»',
   ogTitle: 'ГО «Символ» — культура в русі',
   ogDescription: 'Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.'
+})
+
+// A different selection from the curated pool on every visit (shuffled after load, so the prerendered page stays stable).
+const reel = ref(highlights.slice(0, highlightsShown))
+onMounted(() => {
+  const pool = [...highlights]
+  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j]!, pool[i]!] }
+  reel.value = pool.slice(0, highlightsShown)
 })
 
 const openCalls = activeOpportunities()
@@ -39,7 +47,7 @@ const supporters = organizations
         <div><span class="label">Кадри</span><h2>Як це виглядає</h2></div>
         <p>Виставки, тренінги, перформанси й кадри з фільму. Гортайте стрічку, натисніть на фото, щоб переглянути на весь екран.</p>
       </div>
-      <PhotoReel :photos="highlights" />
+      <PhotoReel :photos="reel" />
     </section>
 
     <section v-if="openCalls.length" class="open-calls">
@@ -49,7 +57,7 @@ const supporters = organizations
           <a v-for="call in openCalls" :key="call.slug" class="open-call" :href="call.applyUrl" target="_blank" rel="noreferrer">
             <strong>{{ call.title }}</strong>
             <span>Дедлайн: {{ formatDate(call.deadline) }}</span>
-            <span class="open-call__cta">Подати заявку ↗</span>
+            <span class="open-call__cta">Подати заявку</span>
           </a>
         </div>
       </div>

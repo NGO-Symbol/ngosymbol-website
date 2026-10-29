@@ -510,3 +510,4 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 }
 
 
+.footer-icon-link { display: inline-flex; align-items: center; gap: .45em; width: fit-content; }
