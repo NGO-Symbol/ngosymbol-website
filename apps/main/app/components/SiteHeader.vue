@@ -5,6 +5,8 @@ const clicks = ref(0)
 const markClass = ref('')
 
 function animateMark(event: MouseEvent) {
+  // Phones and tablets: no logo animation on tap (it distracted from navigation).
+  if (matchMedia('(pointer: coarse)').matches) return
   // Already home: no navigation happens, so ask RouteWipe for the circle → logo animation directly.
   if (route.path === '/' || route.path === '/en') window.dispatchEvent(new CustomEvent('symbol:home-wipe', { detail: { x: event.clientX, y: event.clientY } }))
   markClass.value = ''
