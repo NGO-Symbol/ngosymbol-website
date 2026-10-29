@@ -28,20 +28,34 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 const ACTIVE_SCALE = 27 / 23
 const YEAR_GAP = 10
 const NEIGHBOUR_ROOM = 14
+// Smallest clear space between two titles. When the titles do not fit round the circle with it (many projects,
+// the larger phone type), all titles are set smaller together, so they never run into each other.
+const MIN_GAP = 28
 // Before fonts are measured: an estimate from the number of letters.
 const titleLengths = ref(items.map(project => project.title.length * 11))
 const yearLengths = ref(items.map(() => 40))
 const measuring = ref(false)
 
+const fit = computed(() => {
+  const titles = titleLengths.value
+  const longest = Math.max(...titles)
+  const needed = items.reduce((sum, _, index) => sum + titles[index]! + (yearLengths.value[index]! ? YEAR_GAP + yearLengths.value[index]! : 0), 0)
+    + longest * (ACTIVE_SCALE - 1) + NEIGHBOUR_ROOM * 2 + MIN_GAP * items.length
+  return Math.min(1, CIRCUMFERENCE / needed)
+})
+
 const targets = computed(() => {
   const count = items.length
-  const base = items.map((_, index) => titleLengths.value[index]! + YEAR_GAP + yearLengths.value[index]!)
+  const f = fit.value
+  const titleLength = (index: number) => titleLengths.value[index]! * f
+  const yearLength = (index: number) => yearLengths.value[index]! ? (YEAR_GAP + yearLengths.value[index]!) * f : 0
+  const base = items.map((_, index) => titleLength(index) + yearLength(index))
   const gap = (CIRCUMFERENCE - base.reduce((sum, length) => sum + length, 0)) / count
   const baseStart: number[] = []
   base.reduce((position, length, index) => { baseStart[index] = position; return position + length + gap }, 0)
 
   const a = active.value
-  const grown = base.map((length, index) => index === a ? length + titleLengths.value[index]! * (ACTIVE_SCALE - 1) : length)
+  const grown = base.map((length, index) => index === a ? length + titleLength(index) * (ACTIVE_SCALE - 1) : length)
   const extra = hovering.value ? NEIGHBOUR_ROOM : 0
   const shrink = grown[a]! - base[a]! + extra * 2
   const gaps = items.map((_, index) => index === a || index === (a - 1 + count) % count ? gap + extra : gap - shrink / (count - 2))
@@ -113,13 +127,17 @@ function onScroll() {
   scrollTurn.value = window.scrollY * 0.12
 }
 
+// Phones use larger type with the years hidden, so the titles are measured again when the layout switches.
+let phone: MediaQueryList | undefined
 onMounted(async () => {
   await document.fonts?.ready
   await measure()
+  phone = matchMedia('(max-width: 600px)')
+  phone.addEventListener('change', measure)
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   window.addEventListener('scroll', onScroll, { passive: true })
 })
-onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame) })
+onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.removeEventListener('change', measure); cancelAnimationFrame(frame) })
 </script>
 
 <template>
@@ -135,7 +153,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); cancelAn
       viewBox="0 0 1000 1000"
       role="group"
       aria-label="Проєкти «Символу» на орбіті"
-      :style="{ transform: `perspective(1400px) rotateY(${tilt.x * 10}deg) rotateX(${-tilt.y * 10}deg)` }"
+      :style="{ transform: `perspective(1400px) rotateY(${tilt.x * 10}deg) rotateX(${-tilt.y * 10}deg)`, '--orbit-fit': measuring ? 1 : fit }"
     >
       <defs>
         <!-- The circle is traced twice so a title that starts near the end of the loop continues instead of being cut. -->
@@ -186,15 +204,15 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); cancelAn
 .orbit-hook__parallax { transition: transform .3s ease-out; }
 .orbit-hook__satellite { transform-origin: 500px 500px; animation: orbit-satellite 12s linear infinite; }
 .orbit-hook__satellite rect { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform: translate(500px, 30px) rotate(45deg); transform-box: fill-box; transform-origin: center; }
-.orbit-hook__title { font-family: var(--font-display); font-size: 23px; fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1), fill .25s ease; }
+.orbit-hook__title { font-family: var(--font-display); font-size: calc(23px * var(--orbit-fit, 1)); fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1), fill .25s ease; }
 .orbit-hook.is-measuring .orbit-hook__title { transition: none; }
 .orbit-hook__title a { cursor: pointer; outline: none; }
-.orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: 27px; text-decoration: underline; }
-.orbit-hook__year { font-family: var(--font-body); font-size: 15px; letter-spacing: .1em; fill: var(--symbol-violet); }
+.orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: calc(27px * var(--orbit-fit, 1)); text-decoration: underline; }
+.orbit-hook__year { font-family: var(--font-body); font-size: calc(15px * var(--orbit-fit, 1)); letter-spacing: .1em; fill: var(--symbol-violet); }
 /* Phones: the orbit is drawn small, so titles get larger type and the years step aside to make room. */
 @media (max-width: 600px) {
-  .orbit-hook__title { font-size: 30px; }
-  .orbit-hook__title.is-active { font-size: 33px; }
+  .orbit-hook__title { font-size: calc(30px * var(--orbit-fit, 1)); }
+  .orbit-hook__title.is-active { font-size: calc(33px * var(--orbit-fit, 1)); }
   .orbit-hook__year { display: none; }
 }
 .orbit-hook__caption { width: min(100%, 460px); display: grid; gap: 6px; text-align: center; text-decoration: none; min-height: 7.5em; animation: caption-in .45s cubic-bezier(.2, 1.2, .4, 1); }
