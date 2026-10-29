@@ -15,7 +15,10 @@ import { socials } from '~/data/social'
         <NuxtLink to="/events">Події</NuxtLink>
         <NuxtLink to="/opportunities">Можливості</NuxtLink>
         <NuxtLink to="/people">Люди</NuxtLink>
+        <NuxtLink to="/news">Новини</NuxtLink>
+        <NuxtLink to="/press">Для медіа</NuxtLink>
         <NuxtLink to="/support">Підтримати</NuxtLink>
+        <NuxtLink to="/en" lang="en">English</NuxtLink>
       </div>
       <div>
         <span class="label">Зв’язок</span>

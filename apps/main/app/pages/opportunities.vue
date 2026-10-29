@@ -37,9 +37,14 @@ const archive = opportunities.filter(item => !isActive(item)).sort((a, b) => b.d
 
     <section v-if="archive.length" class="events-block">
       <h2 class="block-title">Архів</h2>
-      <ul class="press-list">
-        <li v-for="item in archive" :key="item.slug"><strong>{{ item.title }}</strong><span>до {{ formatDate(item.deadline) }}</span></li>
-      </ul>
+      <div class="archive-calls">
+        <article v-for="item in archive" :key="item.slug" class="archive-call">
+          <span class="label">{{ typeLabels[item.type] }} · завершено {{ formatDate(item.deadline) }}</span>
+          <h3>{{ item.title }}</h3>
+          <RichText :paragraphs="item.description" />
+          <NuxtLink v-if="item.project" class="text-link" :to="`/projects/${item.project}`">Проєкт «{{ getProject(item.project)?.title }}» →</NuxtLink>
+        </article>
+      </div>
     </section>
   </section>
 </template>

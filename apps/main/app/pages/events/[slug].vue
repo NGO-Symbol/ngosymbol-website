@@ -68,7 +68,13 @@ const googleUrl = computed(() => {
           <div class="credits">
             <div v-for="group in speakers" :key="group.role" class="credits__group">
               <h3>{{ group.role }}</h3>
-              <p><NuxtLink v-for="person in group.people" :key="person.slug" :to="`/people/${person.slug}`">{{ person.name }}</NuxtLink></p>
+              <p>
+                <template v-for="(person, index) in group.people" :key="person.slug">
+                  <NuxtLink v-if="person.hasPage !== false" :to="`/people/${person.slug}`">{{ person.name }}</NuxtLink>
+                  <template v-else>{{ person.name }}</template>
+                  <template v-if="index < group.people.length - 1">, </template>
+                </template>
+              </p>
             </div>
           </div>
         </section>

@@ -12,7 +12,17 @@ const selector = [
   '.press-list li',
   '.appearances li',
   '.logo-strip li',
-  '.team-list > *'
+  '.team-list > *',
+  '.news-item',
+  '.archive-call',
+  '.press-asset',
+  '.en-projects li',
+  '.partners li',
+  '.stat',
+  '.gallery__item',
+  '.cv__section',
+  '.facts > div',
+  '.label'
 ].join(',')
 
 export default defineNuxtPlugin((nuxtApp) => {

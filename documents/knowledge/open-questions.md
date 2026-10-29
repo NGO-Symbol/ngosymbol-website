@@ -37,6 +37,10 @@ Items here are unresolved and must not be silently assumed.
 - Team: see `team-cv.md` → Open (Олена Мордик bio, Ганна Франик public name, PSD volunteers, Kharkiv Sea role wording).
 - Which PSD artworks are shown in the photos (captions are generic until confirmed).
 
+- Zakon font: confirm the web-embedding licence.
+- Kharkiv Sea 2026: confirm dates (14–23.08 from photo folders) and programme.
+- Full English version of all pages and the URL pattern (`/en/...`).
+
 ## Infrastructure
 
 - Select DNS provider and deployment platform.

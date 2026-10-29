@@ -4,11 +4,12 @@ import { formats, directions, statusLabels } from '~/data/formats'
 import { opportunities } from '~/data/opportunities'
 import { organizations } from '~/data/organizations'
 import { people } from '~/data/people'
+import { news } from '~/data/news'
 import { press } from '~/data/press'
 import { projects } from '~/data/projects'
 import type { Credit, Opportunity, Person, Project, SymbolEvent, Venue } from '~/data/types'
 
-export { events, opportunities, organizations, people, press, projects, formats, directions, statusLabels }
+export { events, news, opportunities, organizations, people, press, projects, formats, directions, statusLabels }
 
 const bySlug = <T extends { slug: string }>(items: T[]) => new Map(items.map(item => [item.slug, item]))
 const projectMap = bySlug(projects)
@@ -215,10 +216,12 @@ function validate() {
   }
   opportunities.forEach(item => check('project', item.project, `opportunity ${item.slug}`, projectMap))
   press.forEach(item => item.projects.forEach(slug => check('project', slug, `press ${item.url}`, projectMap)))
+  news.forEach(item => check('project', item.project, `news ${item.slug}`, projectMap))
   const maps: Record<string, Map<string, unknown>> = { project: projectMap, event: eventMap, person: personMap }
   for (const record of [...projects, ...events, ...people] as Parameters<typeof textsOf>[0][]) {
     for (const ref of references(record)) check(ref.type, ref.slug, `text reference in ${(record as { slug: string }).slug}`, maps[ref.type]!)
   }
+  for (const item of news) for (const ref of references(item)) check(ref.type, ref.slug, `text reference in news ${item.slug}`, maps[ref.type]!)
   if (errors.length) throw new Error(`Content references are broken:\n- ${errors.join('\n- ')}`)
 }
 

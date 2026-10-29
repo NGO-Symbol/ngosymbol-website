@@ -9,6 +9,8 @@
   --docs-stamp: #3a6fd2;
   --docs-display: 'EXDocument', 'Arial Narrow', sans-serif;
   --docs-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: var(--docs-display);
+  --font-body: var(--docs-mono);
   background: var(--docs-paper);
   color: var(--docs-ink);
 }

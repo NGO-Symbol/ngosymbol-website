@@ -11,6 +11,7 @@ const openCalls = activeOpportunities()
 const upcoming = eventItems.filter(isUpcoming).reverse().slice(0, 4)
 const recent = eventItems.filter(item => !isUpcoming(item)).slice(0, 3)
 const current = projects.filter(project => project.status !== 'completed')
+const latestNews = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3)
 const supporters = organizations
   .map(org => ({ org, projects: projects.filter(project => project.partners?.includes(org.slug) || project.donors?.includes(org.slug)) }))
   .filter(item => item.projects.length)
@@ -66,6 +67,19 @@ const supporters = organizations
       </div>
       <div class="project-grid">
         <ProjectCard v-for="project in current" :key="project.slug" :project="project" />
+      </div>
+    </section>
+
+    <section class="section section--tight container">
+      <div class="section-heading">
+        <div><span class="label">Новини</span><h2>Що нового</h2></div>
+        <p><NuxtLink class="text-link" to="/news">Усі новини →</NuxtLink></p>
+      </div>
+      <div class="news-list news-list--compact">
+        <NuxtLink v-for="item in latestNews" :key="item.slug" class="news-item" :to="`/news#${item.slug}`">
+          <time :datetime="item.date">{{ formatDate(item.date) }}</time>
+          <div><h2>{{ item.title }}</h2></div>
+        </NuxtLink>
       </div>
     </section>
 

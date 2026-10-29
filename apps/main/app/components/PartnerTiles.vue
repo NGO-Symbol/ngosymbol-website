@@ -26,7 +26,7 @@ const monogram = (name: string) => name.replace(/[«»"]/g, '').split(/\s+/).fil
 .partners { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
 .partner { height: 100%; display: grid; grid-template-columns: 56px 1fr; grid-template-rows: auto 1fr; gap: 4px 14px; align-items: center; padding: 16px; border: 1px solid var(--symbol-plum); text-decoration: none; overflow: hidden; position: relative; transition: background .3s ease; }
 a.partner:hover { background: var(--symbol-white); }
-.partner__mark { grid-row: span 2; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--symbol-lilac); font-family: 'Newsreader', Georgia, serif; font-size: 1.3rem; transition: transform .7s cubic-bezier(.2, 1.2, .3, 1), background .3s ease; }
+.partner__mark { grid-row: span 2; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--symbol-lilac); font-family: var(--font-display); font-size: 1.3rem; transition: transform .7s cubic-bezier(.2, 1.2, .3, 1), background .3s ease; }
 .partner__mark img { width: 100%; height: 100%; object-fit: contain; }
 a.partner:hover .partner__mark { transform: rotate(360deg) scale(1.08); background: var(--symbol-apricot); }
 .partner__name { font-weight: 500; line-height: 1.3; }

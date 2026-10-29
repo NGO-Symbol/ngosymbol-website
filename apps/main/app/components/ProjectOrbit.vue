@@ -113,12 +113,12 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 .orbit-hook__parallax { transition: transform .3s ease-out; }
 .orbit-hook__satellite { transform-origin: 500px 500px; animation: orbit-satellite 12s linear infinite; }
 .orbit-hook__satellite rect { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform: translate(500px, 30px) rotate(45deg); transform-box: fill-box; transform-origin: center; }
-.orbit-hook__title { font-family: 'Newsreader', Georgia, serif; font-size: 23px; fill: var(--symbol-plum); transition: font-size .25s ease, fill .25s ease; }
+.orbit-hook__title { font-family: var(--font-display); font-size: 23px; fill: var(--symbol-plum); transition: font-size .25s ease, fill .25s ease; }
 .orbit-hook__title a { cursor: pointer; outline: none; }
 .orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: 27px; text-decoration: underline; }
-.orbit-hook__year { font-family: 'DM Sans', sans-serif; font-size: 15px; letter-spacing: .1em; fill: var(--symbol-violet); }
+.orbit-hook__year { font-family: var(--font-body); font-size: 15px; letter-spacing: .1em; fill: var(--symbol-violet); }
 .orbit-hook__caption { width: min(100%, 460px); display: grid; gap: 6px; text-align: center; text-decoration: none; min-height: 7.5em; animation: caption-in .45s cubic-bezier(.2, 1.2, .4, 1); }
-.orbit-hook__caption strong { font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
+.orbit-hook__caption strong { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
 .orbit-hook__caption span:last-child { font-size: .92rem; line-height: 1.5; }
 .orbit-hook__caption .label { color: var(--symbol-violet); }
 @keyframes orbit-spin { to { transform: rotate(360deg); } }

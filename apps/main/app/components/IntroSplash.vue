@@ -1,14 +1,42 @@
 <script setup lang="ts">
-// Logo intro: the mark appears with one of four variants (html[data-intro], chosen in app.vue),
-// the wordmark letters rise, then the mark flies into the header logo and the overlay lifts.
-// Shown once per browser session; skipped for reduced motion.
+// Logo intro: the mark appears with one of four variants (html[data-intro], chosen in app.vue), the official
+// inscription is revealed, then the circle spirals — turning twice along a curved path — straight into the mark
+// of the header logo, which takes over seamlessly. Shown once per browser session; skipped for reduced motion.
 const visible = ref(true)
+const root = ref<HTMLElement>()
+const mark = ref<SVGSVGElement>()
+let flying = false
 
 function finish() {
   if (!visible.value) return
   visible.value = false
   try { sessionStorage.setItem('symbol-intro', '1') } catch {}
+  document.documentElement.classList.remove('intro-playing')
   document.documentElement.classList.add('intro-done')
+}
+
+function spiralIntoHeader() {
+  if (flying || !mark.value || !root.value) return finish()
+  flying = true
+  const header = document.querySelector<SVGSVGElement>('.header-logo')
+  if (!header) return finish()
+  const from = mark.value.getBoundingClientRect()
+  const to = header.getBoundingClientRect()
+  // The round mark is the first 178.22 of the logo's 900.93-unit width.
+  const size = to.width * (178.22 / 900.93)
+  const dx = to.left + size / 2 - (from.left + from.width / 2)
+  const dy = to.top + to.height / 2 - (from.top + from.height / 2)
+  const scale = size / from.width
+  const duration = 950
+  mark.value.animate([
+    { transform: 'translate(0, 0) rotate(0deg) scale(1)' },
+    { transform: `translate(${dx * 0.25 + dy * 0.18}px, ${dy * 0.35 - dx * 0.12}px) rotate(260deg) scale(${0.62 + scale * 0.38})`, offset: 0.4 },
+    { transform: `translate(${dx * 0.7}px, ${dy * 0.85}px) rotate(560deg) scale(${scale * 1.25})`, offset: 0.78 },
+    { transform: `translate(${dx}px, ${dy}px) rotate(720deg) scale(${scale})` }
+  ], { duration, easing: 'cubic-bezier(.6, 0, .25, 1)', fill: 'forwards' })
+  root.value.animate([{ backgroundColor: getComputedStyle(root.value).backgroundColor }, { backgroundColor: 'transparent' }], { duration: duration * 0.8, delay: duration * 0.2, easing: 'ease-in', fill: 'forwards' })
+  root.value.querySelectorAll<HTMLElement>('.intro__word, .intro__skip').forEach(el => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }))
+  window.setTimeout(finish, duration)
 }
 
 onMounted(() => {
@@ -16,7 +44,8 @@ onMounted(() => {
     visible.value = false
     return
   }
-  const timer = window.setTimeout(finish, 2150)
+  document.documentElement.classList.add('intro-playing')
+  const timer = window.setTimeout(spiralIntoHeader, 1450)
   const skip = () => { window.clearTimeout(timer); finish() }
   window.addEventListener('keydown', skip, { once: true })
   onBeforeUnmount(() => { window.clearTimeout(timer); window.removeEventListener('keydown', skip) })
@@ -24,9 +53,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="visible" class="intro" role="presentation" @click="finish">
+  <div v-if="visible" ref="root" class="intro" role="presentation" @click="finish">
     <div class="intro__stage">
-      <svg class="intro__mark" viewBox="0 0 1000 1000" aria-hidden="true">
+      <svg ref="mark" class="intro__mark" viewBox="0 0 1000 1000" aria-hidden="true">
         <defs>
           <mask id="intro-spiral" maskUnits="userSpaceOnUse">
             <circle class="intro__sweep" cx="500" cy="500" r="260" fill="none" stroke="#fff" stroke-width="520" pathLength="100" transform="rotate(-40 500 500)" />
@@ -52,9 +81,8 @@ onMounted(() => {
   place-items: center;
   background: var(--symbol-cream);
   cursor: pointer;
-  animation: intro-lift .5s cubic-bezier(.7, 0, .3, 1) 1.65s forwards;
 }
-.intro__stage { display: grid; justify-items: center; gap: 28px; animation: intro-fly .55s cubic-bezier(.7, 0, .3, 1) 1.55s forwards; }
+.intro__stage { display: grid; justify-items: center; gap: 28px; }
 .intro__mark { width: min(52vmin, 340px); height: auto; overflow: visible; }
 .intro__disc { transform-origin: 500px 500px; animation: intro-disc .6s cubic-bezier(.2, 1.3, .4, 1) both; }
 .intro__sweep { stroke-dasharray: 100 100; stroke-dashoffset: 100; animation: intro-sweep .9s cubic-bezier(.6, 0, .2, 1) .3s forwards; }
@@ -63,13 +91,13 @@ onMounted(() => {
 @keyframes intro-disc { from { transform: scale(0); } to { transform: scale(1); } }
 @keyframes intro-sweep { to { stroke-dashoffset: 0; } }
 @keyframes intro-word { to { clip-path: inset(0 0 0 0); } }
-@keyframes intro-fly { to { transform: translate(calc(-50vw + 60px), calc(-50vh + 42px)) scale(.12); opacity: .4; } }
-@keyframes intro-lift { to { opacity: 0; visibility: hidden; } }
 </style>
 
 <style>
 /* Unscoped: hides the server-rendered overlay before hydration for returning visitors. */
 .intro-done .intro { display: none; }
+/* While the intro plays, the header mark waits for the flying circle to land in its place. */
+.intro-playing .header-logo .logo-disc, .intro-playing .header-logo .logo-spiral { opacity: 0; }
 
 /* Intro variants, chosen in the head script (html[data-intro]). 0 is the default circular sweep. */
 html[data-intro="1"] .intro__sweep, html[data-intro="2"] .intro__sweep, html[data-intro="3"] .intro__sweep { animation: none; stroke-dashoffset: 0; }

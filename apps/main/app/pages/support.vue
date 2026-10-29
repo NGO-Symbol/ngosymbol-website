@@ -54,7 +54,7 @@ async function copy(value: string) {
     </div>
 
     <div v-else id="community" class="support-options" role="tabpanel" aria-labelledby="tab-community">
-      <div class="support-option"><h3>Волонтерство</h3><p>Допомога на виставках, подіях і фестивалях. Відкриті набори — у розділі <NuxtLink to="/opportunities">Можливості</NuxtLink>.</p></div>
+      <div class="support-option"><h3>Волонтерство</h3><p>Допомога на виставках, подіях і фестивалях: монтаж, зустріч гостей, документація. Відкриті набори — у розділі <NuxtLink to="/opportunities">Можливості</NuxtLink>, а написати можна вже зараз: <span class="selectable">ngo.symbol@gmail.com</span></p></div>
       <div class="support-option"><h3>Членство в ГО</h3><p>Для тих, хто хоче розвивати організацію разом із командою.</p></div>
       <div class="support-option"><h3>Інформаційна підтримка</h3><p>Розкажіть про наші проєкти й події. Підписка на календар: <a href="/events.ics">events.ics</a></p></div>
     </div>

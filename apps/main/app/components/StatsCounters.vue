@@ -62,7 +62,7 @@ onMounted(() => {
 .stat__track { fill: none; stroke: var(--symbol-lilac); stroke-width: 6; }
 .stat__arc { fill: none; stroke: var(--symbol-violet); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 100; }
 .stat:nth-child(even) .stat__arc { stroke: var(--symbol-apricot); }
-.stat__value { position: absolute; top: 26px; width: 120px; height: 120px; display: grid; place-items: center; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 2.8rem; font-variant-numeric: tabular-nums; }
+.stat__value { position: absolute; top: 26px; width: 120px; height: 120px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 400; font-size: 2.8rem; font-variant-numeric: tabular-nums; }
 .stat__label { font-weight: 500; margin-top: 8px; }
 .stat__hint { font-size: .8rem; color: color-mix(in srgb, var(--symbol-plum) 70%, transparent); opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
 .stat:hover .stat__hint, .stat:focus-visible .stat__hint { opacity: 1; transform: none; }

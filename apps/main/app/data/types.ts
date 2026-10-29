@@ -107,7 +107,16 @@ export interface Opportunity {
   project?: string
   deadline: string
   description: Paragraphs
-  applyUrl: string
+  /** Omitted for archived calls whose form is closed. */
+  applyUrl?: string
+}
+
+export interface NewsItem {
+  slug: string
+  date: string
+  title: string
+  body: Paragraphs
+  project?: string
 }
 
 export interface PressMention {
