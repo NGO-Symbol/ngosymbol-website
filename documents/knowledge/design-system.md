@@ -122,3 +122,7 @@ On touch screens every tap leaves a short mark from the identity, different by t
 ## Typeface: Zakon everywhere (2026-10-29)
 
 `USER_CONFIRMED`: the whole site (headings and all text) is set in the updated Zakon — the Ministry of Culture typeface (mincult.gov.ua/zakon), Regular, Italic, Bold, Bold Italic, from `fonts/OTF` (copied to `apps/main/public/fonts/zakon`). This replaces the earlier split with Source Serif 4 for body text. Project pages with their own identity (PSD) keep their fonts.
+
+## PSD stamp and page titles (2026-10-29)
+
+The PSD stamp on the project page carries a working QR code to `https://documentsart.symbol.ngo/` (generated in-house, verified with a QR reader; grain is applied only to rings and lettering so the code stays readable) and links to the project site; it lands on the page with a stamping motion. Page titles: at most 6.4rem (wide titles 6rem) so single long words such as «Можливості» never break; the nav underline follows the active tab across wrapped rows on phones; the active project filter is a violet pill with a check mark, the reset is a bordered button next to the result count.
