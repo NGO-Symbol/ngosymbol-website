@@ -145,6 +145,11 @@ const entries: Project[] = [
     directions: ['art', 'mental-health'],
     tone: 'plum',
     gallery: [
+      { src: '/media/projects/istorii-riznykh/ensemble.jpg', alt: 'Актори плейбек-перформансу «Історії різних» у спільному русі' },
+      { src: '/media/projects/istorii-riznykh/ensemble-stage.jpg', alt: 'Актори відіграють історію глядача на сцені «Арсеналу ідей»' },
+      { src: '/media/projects/istorii-riznykh/conductor.jpg', alt: 'Кондукторка перформансу біля мікрофона' },
+      { src: '/media/projects/istorii-riznykh/reach.jpg', alt: 'Акторки тягнуться одна до одної в сцені' },
+      { src: '/media/projects/istorii-riznykh/care.jpg', alt: 'Сцена турботи між акторами' },
       { src: '/media/projects/istorii-riznykh/performance.jpg', alt: 'Плейбек-перформанс «Історії різних»: акторка відіграє історію глядача, решта акторів на сцені' },
       { src: '/media/projects/istorii-riznykh/bow.jpg', alt: 'Актори плейбек-театру і ведуча після перформансу в Арсеналі ідей', people: true },
       { src: '/media/projects/istorii-riznykh/stage.jpg', alt: 'Сцена перформансу: актори в чорному на тлі білої стіни' },
