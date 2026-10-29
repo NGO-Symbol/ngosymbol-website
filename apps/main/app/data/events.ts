@@ -39,6 +39,13 @@ export const events: SymbolEvent[] = [
     start: '2025-10-18T12:00',
     end: '2025-10-18T14:00',
     venue: yermilov,
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/curator.jpg', alt: 'Куратор розповідає про роботи на екскурсії' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/group.jpg', alt: 'Учасники екскурсії в залі виставки' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/hall.jpg', alt: 'Екскурсія біля інсталяцій' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/walk.jpg', alt: 'Глядачі йдуть експозицією разом із кураторами' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/interactive.jpg', alt: 'Інтерактив із роботою на екскурсії' }
+    ],
     description: [
       'Перша подія паралельної програми. Куратори розповіли про ідеї, що лягли в основу проєкту, і про представлені роботи. До екскурсії долучилися митці [[person:hanna-franyk]] та [[person:andrii-skrypka]], які презентували свої твори.'
     ],
@@ -88,6 +95,12 @@ export const events: SymbolEvent[] = [
     format: 'artist-talk',
     start: '2025-11-14T18:00',
     venue: yermilov,
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/stage.jpg', alt: 'Павло Маков і модератори розмови', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/talk.jpg', alt: 'Розмова про документ і пам’ять', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/makov.jpg', alt: 'Павло Маков відповідає на запитання', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/listeners.jpg', alt: 'Слухачі розмови', people: true }
+    ],
     description: [
       'На виставці представлено проєкт [[person:pavlo-makov]] «Утопія. Хроніки», що досліджує документування мистецтва. Документ тут — не папір і не архів, а форма пам’яті, жест, який промовляє: «Ми тут були».',
       'Розмова про те, як зберігати пам’ять про сучасне українське мистецтво і як документувати не події, а стан присутності.'
@@ -101,6 +114,12 @@ export const events: SymbolEvent[] = [
     format: 'artist-talk',
     start: '2025-11-21T18:00',
     venue: yermilov,
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/artist.jpg', alt: 'Андрій Скрипка показує ліногравюру квитка', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/prints.jpg', alt: 'Гості розглядають відбитки «Квитків Харкова»', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket.jpg', alt: 'Відбиток квитка з серії «Квитки Харкова»' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/talk.jpg', alt: 'Андрій Скрипка розповідає про проєкт', people: true }
+    ],
     description: [
       '[[person:andrii-skrypka]] розповів історію проєкту «Квитки Харкова» — від перших ідей до фінальної реалізації: ліногравюрні відбитки квитків від 1 до 6 гривень, робота з дощечками, з яких друкувалися квитки, і власний тираж квитків для Харкова.'
     ],
@@ -114,6 +133,12 @@ export const events: SymbolEvent[] = [
     start: '2025-11-15T16:00',
     end: '2025-11-15T17:30',
     venue: yermilov,
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel.jpg', alt: 'Спікери панельної дискусії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/speaker.jpg', alt: 'Модераторка й спікери дискусії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/hall.jpg', alt: 'Зала ЄрміловЦентру під час дискусії' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience.jpg', alt: 'Глядачі дискусії', people: true }
+    ],
     description: [
       'Під час повномасштабного вторгнення правозахисна діяльність стала частиною щоденного виживання, документування війни, захисту цивільних, допомоги переселеним і мобілізованим. Розмова про ціну активізму, моральну стійкість, репрезентацію в медіа й спільну мову між правозахисними, культурними та академічними середовищами.',
       'Спікери: Максим Потапович, Анна Шаригіна, Ірина Юзик. Модераторка — Інна Ільченко, менеджерка проєктів Центру прав людини ZMINA.'
@@ -126,6 +151,12 @@ export const events: SymbolEvent[] = [
     format: 'playback',
     start: '2025-11-23T18:00',
     venue: yermilov,
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/actors.jpg', alt: 'Актори плейбек-театру «Нема» на сцені', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/scene.jpg', alt: 'Актори відіграють історію глядача' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/gesture.jpg', alt: 'Сцена перформансу' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/story.jpg', alt: 'Оповідачка розповідає історію', people: true }
+    ],
     description: [
       'Перформанс плейбек-театру «Нема» (Харків). Глядачі розповідають історії, актори тут і зараз відтворюють їх на сцені під живу музику. Тема — ідентичність: що б ви розповіли, якби замість документів вас попросили надати історію?',
       'За вечір прозвучало й було відіграно 9 історій для понад 50 глядачів. Третину зібраних на перформансі коштів театр передав на збір на дві машини для 47 ОМБр і НГУ «Спартан».',
@@ -151,6 +182,12 @@ export const events: SymbolEvent[] = [
     format: 'performance',
     start: '2025-12-05T17:00',
     venue: yermilov,
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/violin.jpg', alt: 'Скрипалька серед паперових аркушів — вигляд згори' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/flute.jpg', alt: 'Флейтистка під час виконання In C' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass.jpg', alt: 'Контрабасист на тлі робіт виставки' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/audience.jpg', alt: 'Слухачки з бумвекерами долучаються до ритму', people: true }
+    ],
     description: [
       'Музично-просторовий перформанс: годинне виконання In C Террі Райлі — твору, з якого почався музичний мінімалізм. 53 мелодичні патерни переплітаються й нашаровуються в медитативний звуковий ландшафт; слухачі могли долучитися й задавати ритм.',
       'Чи може партитура бути документом? Перформанс досліджує свободу виконавців усередині чітко заданої структури.'
@@ -178,6 +215,12 @@ export const events: SymbolEvent[] = [
     start: '2025-02-10',
     end: '2025-02-14',
     venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
+    gallery: [
+      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/hall.jpg', alt: 'Зала тренінгу в Центральній міській бібліотеці' },
+      { src: '/media/events/mhgap-kyiv-trening-1/trainer.jpg', alt: 'Тренерка пояснює матеріал учасникам' },
+      { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах', people: true }
+    ],
     description: ['Перший тренінг «Символу» за програмою ВООЗ mhGAP (частина 1) для медпрацівників первинної ланки. Програма включала й модулі допомоги за гуманітарних надзвичайних станів: горе, гострий стрес, посттравматичний стресовий розлад.']
   },
   {
@@ -188,6 +231,11 @@ export const events: SymbolEvent[] = [
     start: '2025-02-24',
     end: '2025-02-28',
     venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
+    gallery: [
+      { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Учасники другого тренінгу з посібниками mhGAP', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-2/session.jpg', alt: 'Робота учасників у залі' },
+      { src: '/media/events/mhgap-kyiv-trening-2/flipchart.jpg', alt: 'Робота з фліпчартом' }
+    ],
     description: ['Другий тренінг mhGAP (частина 1) для працівників первинної ланки охорони здоров’я.']
   },
   {
@@ -198,6 +246,12 @@ export const events: SymbolEvent[] = [
     start: '2025-03-31',
     end: '2025-04-04',
     venue: { city: 'Київська область' },
+    gallery: [
+      { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Спільне фото учасників тренінгу з посібниками', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/hall.jpg', alt: 'Тренер веде заняття для повної зали' },
+      { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер біля презентації' },
+      { src: '/media/events/mhgap-kyiv-trening-3/manual.jpg', alt: 'Посібник mhGAP' }
+    ],
     description: ['Тренінг mhGAP (частина 1) для 33 учасників — переважно медичних працівників, а також кількох соціальних працівників. Усі учасники отримали посібники mhGAP.']
   },
   {
@@ -208,6 +262,12 @@ export const events: SymbolEvent[] = [
     start: '2025-05-13',
     end: '2025-05-16',
     venue: { name: 'Книгарня-кав’ярня «Сенс»', address: 'Хрещатик', city: 'Київ' },
+    gallery: [
+      { src: '/media/events/mhgap-kyiv-trening-4/trainer.jpg', alt: 'Тренерка веде другу частину тренінгу mhGAP' },
+      { src: '/media/events/mhgap-kyiv-trening-4/lecture.jpg', alt: 'Тренер пояснює модуль біля презентації' },
+      { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту', people: true }
+    ],
     description: [
       'Останній тренінг проєкту — програма другої частини mhGAP: психози, епілепсія, дитячі та підліткові психічні й поведінкові розлади, деменція. Спочатку планували лише першу частину, але учасники просили продовження, і всі місця в залі були зайняті.',
       'Тренери приїхали із Закарпаття. Після тренінгу учасники продовжили онлайн-супервізії зі спеціалістами з психічного здоров’я та сімейної медицини.'
@@ -221,6 +281,11 @@ export const events: SymbolEvent[] = [
     format: 'playback',
     start: '2026-08-22T18:00',
     venue: { name: 'Арт-простір «Станція Уж»', address: 'вул. Новака, 20', city: 'Ужгород' },
+    gallery: [
+      { src: '/media/events/holosy-u-rusi-uzhhorod/ensemble.jpg', alt: 'Актори театру «Серденьки» після перформансу в Ужгороді', people: true },
+      { src: '/media/events/holosy-u-rusi-uzhhorod/scene.jpg', alt: 'Сцена плейбек-перформансу' },
+      { src: '/media/events/holosy-u-rusi-uzhhorod/audience.jpg', alt: 'Глядачі перформансу на «Станції Уж»', people: true }
+    ],
     description: ['Перформанс плейбек-театру «Серденьки», що відкрив тур Закарпатською областю. Глядачі розповідали історії, актори миттєво їх відтворювали; більшість історій були про дітей і батьків.']
   },
   {
