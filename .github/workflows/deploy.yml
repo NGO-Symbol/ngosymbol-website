@@ -1,6 +1,6 @@
 name: Deploy
 
-# Publishes both static sites after every merge to main.
+# Publishes the static sites after every merge to main.
 # One-time owner setup: documents/operations/deployment.md
 on:
   push:
@@ -96,5 +96,44 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ${{ env.STREET_PUBLISH_DIR }}
           cname: ${{ vars.STREET_DOMAIN }}
+          force_orphan: true
+          commit_message: ${{ github.event.head_commit.message }}
+
+  documents-site:
+    name: documentsart.symbol.ngo
+    # Project site of «Покажіть свої документи…». Skipped until the owner creates the deploy repository and sets
+    # DOCS_DEPLOY_REPO (+ secret DOCS_DEPLOY_KEY, var DOCS_DOMAIN=documentsart.symbol.ngo, DNS CNAME). See deployment.md.
+    if: vars.DOCS_DEPLOY_REPO != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Resolve base path
+        run: |
+          if [ -n "$DOCS_DOMAIN" ]; then
+            echo "NUXT_APP_BASE_URL=/" >> "$GITHUB_ENV"
+          else
+            echo "NUXT_APP_BASE_URL=/${DOCS_REPO#*/}/" >> "$GITHUB_ENV"
+          fi
+        env:
+          DOCS_DOMAIN: ${{ vars.DOCS_DOMAIN }}
+          DOCS_REPO: ${{ vars.DOCS_DEPLOY_REPO }}
+      - run: pnpm --filter @symbol/documents generate
+        env:
+          NITRO_PRESET: github_pages
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
+          external_repository: ${{ vars.DOCS_DEPLOY_REPO }}
+          publish_branch: gh-pages
+          publish_dir: apps/documents/.output/public
+          cname: ${{ vars.DOCS_DOMAIN }}
           force_orphan: true
           commit_message: ${{ github.event.head_commit.message }}
