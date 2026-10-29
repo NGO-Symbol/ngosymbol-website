@@ -69,8 +69,7 @@ const fields = computed(() => [
 
 <style scoped>
 .form-hero { padding: 32px 0 56px; overflow: hidden; }
-.form-sheet { position: relative; padding: clamp(18px, 3vw, 36px); background: var(--docs-sheet, #f4f4f1); border: 2px solid var(--docs-ink); box-shadow: 10px 10px 0 color-mix(in srgb, var(--docs-ink) 14%, transparent); animation: form-in .7s cubic-bezier(.2, .8, .2, 1) both; }
-:root[data-theme="dark"] .form-sheet { --docs-sheet: #232321; }
+.form-sheet { position: relative; padding: clamp(18px, 3vw, 36px); background: var(--docs-sheet); border: 2px solid var(--docs-ink); box-shadow: 10px 10px 0 color-mix(in srgb, var(--docs-ink) 14%, transparent); animation: form-in .7s cubic-bezier(.2, .8, .2, 1) both; }
 .form-sheet__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding-bottom: 12px; border-bottom: 1px solid var(--docs-ink); font-family: var(--docs-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; }
 .form-sheet__serial { color: var(--docs-stamp); }
 .form-field { display: grid; gap: 4px; padding: 10px 0 8px; border-bottom: 1px dashed color-mix(in srgb, var(--docs-ink) 45%, transparent); animation: form-type .5s steps(12, end) both; animation-delay: calc(.5s + var(--i, 0) * .12s); }

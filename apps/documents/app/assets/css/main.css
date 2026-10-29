@@ -9,14 +9,17 @@
   --docs-stamp: #3a6fd2;
   --docs-muted: color-mix(in srgb, var(--docs-ink) 62%, var(--docs-paper));
   --docs-line: color-mix(in srgb, var(--docs-ink) 22%, var(--docs-paper));
+  /* A sheet of the case file, a shade lighter than the desk paper (darker at night). */
+  --docs-sheet: #f6f6f3;
+  --docs-folder: #d9c9a3;
   --docs-display: 'EXDocument', 'Arial Narrow', sans-serif;
   --docs-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   color-scheme: light;
 }
 /* Night: carbon paper with off-white ink. Chosen in the header (data-theme) or, without a choice, by the system. */
-:root[data-theme="dark"] { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; color-scheme: dark; }
+:root[data-theme="dark"] { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; --docs-sheet: #222220; --docs-folder: #3a3324; color-scheme: dark; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; --docs-sheet: #222220; --docs-folder: #3a3324; color-scheme: dark; }
 }
 body { transition: background-color .3s ease, color .3s ease; }
 
