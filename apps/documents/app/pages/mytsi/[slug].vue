@@ -115,9 +115,7 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
           </DocsSheet>
           <DocsSheet v-if="file.photos.length" :case-no="caseNo" :doc-no="t('Файл роботи', 'Work file')" :kind="t('Фотографії роботи', 'Photographs of the work')" :sheet="workIndex * 2 + 3" :tilt="workIndex % 2 ? 0.15 : -0.15">
             <h3 class="case-work">«{{ file.work.title }}»</h3>
-            <ul class="docs-photos case-photos">
-              <li v-for="photo in file.photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
-            </ul>
+            <DocsPhotoGallery class="case-photos" :photos="file.photos" />
             <p v-if="photoCredits(file.photos).length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ photoCredits(file.photos).join(', ') }}</p>
           </DocsSheet>
         </section>
@@ -131,9 +129,7 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 
         <DocsSheet v-if="photos.length" :case-no="caseNo" :kind="t('Додаток: фотографії робіт', 'Appendix: photographs of the works')" :sheet="artist.works.length + 2" :tilt="0.15">
           <h3 class="case-work">«{{ photoGroups[0]?.title }}»</h3>
-          <ul class="docs-photos case-photos">
-            <li v-for="photo in photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
-          </ul>
+          <DocsPhotoGallery class="case-photos" :photos="photos" />
           <p v-if="credits.length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ credits.join(', ') }}</p>
         </DocsSheet>
       </template>
