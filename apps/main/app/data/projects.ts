@@ -110,7 +110,7 @@ export const projects: Project[] = [
       { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/viewers.jpg', alt: 'Глядачі перед стіною з чорно-білими фотографіями' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/viewers.jpg', alt: 'Глядачі перед стіною з чорно-білими фотографіями', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: 'Ряди червоних паспортів на стіні', credit: 'Петро Чекаль' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/sealed.jpg', alt: 'Бетонний блок із замурованими документами' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/strips.jpg', alt: 'Підвішені прозорі смуги зі світлом і тінями', credit: 'Петро Чекаль' },

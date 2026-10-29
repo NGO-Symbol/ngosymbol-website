@@ -15,6 +15,21 @@ button { font: inherit; }
 .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
 .site-shell { min-height: 100vh; overflow: clip; }
 .site-header { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--symbol-plum); }
+/* Sticky header (always reachable): full-bleed background via a spread shadow clipped to the sides; hides on
+   scroll down and slides back on scroll up. */
+.site-header { position: sticky; top: 0; z-index: 60; background: var(--symbol-cream); box-shadow: 0 0 0 100vmax var(--symbol-cream); clip-path: inset(0 -100vmax -12px); transition: transform .45s cubic-bezier(.3, 1, .4, 1), background .4s ease, box-shadow .4s ease, color .4s ease; }
+.site-header.is-hidden { transform: translateY(-100%); }
+.site-header.is-scrolled { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
+
+/* Project pages with their own identity recolour the header (html[data-page-theme] set by the project page). */
+html[data-page-theme="documents"] .site-header { --symbol-cream: #e8e8e5; --symbol-white: #f4f4f2; --symbol-plum: #111111; --symbol-ink: #111111; --symbol-lilac: #cfcfca; --symbol-violet: #3a6fd2; color: #111111; border-bottom: 3px solid #111111; }
+html[data-page-theme="documents"] .site-header nav { font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; font-size: .76rem; letter-spacing: .04em; }
+html[data-page-theme="documents"] .nav-support { background: #111111; color: #e8e8e5; border-radius: 0; box-shadow: 3px 3px 0 #3a6fd2; }
+html[data-page-theme="documents"] .nav-support:hover { background: #3a6fd2; color: #fff; }
+html[data-page-theme="documents"] .lang-switch, html[data-page-theme="documents"] .lang-switch__thumb, html[data-page-theme="documents"] .theme-toggle { border-radius: 0; }
+html[data-page-theme="documents"] .lang-switch a[aria-current] { color: #e8e8e5; }
+html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; letter-spacing: .12em; }
 .site-header nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 32px); font-size: .85rem; }
 .site-header nav { position: relative; }
@@ -55,6 +70,8 @@ button { font: inherit; }
   :root:not([data-theme="light"]) :is(.project-card, .project-hero, .support-band, .open-calls, .subscribe, .orbit-hook__core),
   :root:not([data-theme="light"]) .site-footer { --symbol-cream: #fff7eb; --symbol-white: #fffdf8; --symbol-plum: #302738; --symbol-ink: #211b28; --symbol-lilac: #d8cfe1; --symbol-violet: #9280a6; }
 }
+/* Light islands set their own text colour: inherited light text would vanish on apricot/cream. */
+:is(.project-card, .project-hero, .support-band, .open-calls, .subscribe) { color: var(--symbol-plum); }
 :root[data-theme="dark"] .site-footer { background: #0f0c12; color: #ebe2f0; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .site-footer { background: #0f0c12; color: #ebe2f0; } }
 body { background: var(--symbol-cream); }
@@ -313,7 +330,7 @@ section:hover > .label::before, section:hover > div > .label::before { transform
 .requisites dl > div { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 12px; border-bottom: 1px solid color-mix(in srgb, var(--symbol-cream) 25%, transparent); padding-bottom: 10px; }
 .requisites dt { color: var(--symbol-lilac); font-size: .85rem; }
 .requisites dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; overflow-wrap: anywhere; }
-.support-band { background: var(--symbol-apricot); padding-block: clamp(60px, 8vw, 100px); position: relative; overflow: hidden; }
+.support-band { color: var(--symbol-plum); background: var(--symbol-apricot); padding-block: clamp(60px, 8vw, 100px); position: relative; overflow: hidden; }
 .support-band__grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: end; }
 .support-band h2 { font-size: clamp(2.6rem, 5vw, 4.8rem); line-height: 1.06; letter-spacing: -.015em; margin: 14px 0 0; }
 .support-band__side p { line-height: 1.6; margin-bottom: 22px; }

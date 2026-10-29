@@ -28,5 +28,6 @@ useHead({
       <NuxtPage />
     </main>
     <SiteFooter />
+    <BackToTop />
   </div>
 </template>
