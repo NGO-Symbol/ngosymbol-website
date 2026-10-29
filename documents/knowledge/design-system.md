@@ -103,7 +103,7 @@ The original uploaded logo asset is stored at `packages/brand/assets/symbol-mark
 
 ## Touch marks on phones (2026-10-29)
 
-On touch screens every tap leaves a short mark from the identity, different by target (`plugins/tap.client.ts`): projects, people, partners, photos — an orbit ring with a satellite; links, buttons and navigation — the «С» spiral draws like a pen stroke; empty space — an apricot drop. Mouse clicks and reduced-motion users get no marks. Partner SVG logos: only drawn shapes get `transform-origin: center`; on `<g>` it broke Inkscape logos (MH4U was invisible).
+On touch screens every tap leaves a short mark from the identity, different by target (`plugins/tap.client.ts`): projects, people, partners, photos — an orbit ring with a satellite; everything else — a quiet apricot drop (the «С» logo and spiral variants were removed: too busy and unclear, USER_CONFIRMED 2026-10-29). Mouse clicks and reduced-motion users get no marks. Partner SVG logos: only drawn shapes get `transform-origin: center`; on `<g>` it broke Inkscape logos (MH4U was invisible).
 
 ## Person pages (2026-10-29)
 
