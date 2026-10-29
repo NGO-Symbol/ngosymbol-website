@@ -2,8 +2,8 @@ import type { SymbolEvent } from './types'
 
 // Every event belongs to a project (ADR-0008). Projects of kind 'single' are listed as events automatically.
 // «Покажіть свої документи…»: dates and times checked against the Instagram posts of @symbol.ngo, @yermilovcentre
-// and @nema_pbt (2026-10-29). The ZMINA lecture (08.11) and the «Бюрократія» discussion (29.11) come only from the
-// planned programme «Розклад Листопад» (Drive) and are not confirmed by any post.
+// and @nema_pbt (2026-10-29). The ZMINA lecture (08.11) and the «Бюрократія» discussion (29.11) have no post, but the
+// team confirmed they took place (USER_CONFIRMED 2026-10-29).
 const yermilov = { name: 'ЄрміловЦентр', address: 'майдан Свободи, 4', city: 'Харків' }
 
 export const events: SymbolEvent[] = [
