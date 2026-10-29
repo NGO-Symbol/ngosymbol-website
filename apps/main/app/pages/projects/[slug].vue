@@ -25,7 +25,7 @@ const upcomingEvents = projectEvents.filter(isUpcoming)
 const pastEvents = projectEvents.filter(event => !isUpcoming(event))
 const team = creditsByRole(project.people)
 const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: projects.filter(p => p.partners?.includes(org!.slug) || p.donors?.includes(org!.slug)) }))
-const partners = toTiles(project.partners)
+const partners = toTiles([...(project.partners ?? [])].sort(bySignificance))
 const donors = toTiles(project.donors)
 // Newest first; mentions without a stated date after the dated ones.
 const mentions = [...pressOfProject(project.slug)].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))

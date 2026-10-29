@@ -48,12 +48,12 @@ const sections = computed(() => [
     </section>
 
     <section v-if="exhibitionPartners.length" class="docs-container partners">
-      <h2 class="docs-section-title">{{ t('Партнери', 'Partners') }}</h2>
+      <h2 class="docs-section-title">{{ t('Партнери й донори', 'Partners and donors') }}</h2>
       <ul>
         <li v-for="org in exhibitionPartners" :key="org!.slug">
           <a :href="org!.url" target="_blank" rel="noreferrer">
             <img v-if="org!.logo" :src="org!.logo" :alt="org!.name" loading="lazy">
-            <span>{{ org!.name }}</span>
+            <span :class="{ 'partners__name--logo': org!.logo }">{{ org!.name }}</span>
           </a>
         </li>
       </ul>
@@ -94,7 +94,18 @@ const sections = computed(() => [
 .partners a { display: grid; gap: 10px; align-content: start; height: 100%; padding: 16px; border: 2px solid var(--docs-ink); text-decoration: none; color: var(--docs-ink); font-family: var(--docs-mono); font-size: .78rem; line-height: 1.35; transition: transform .2s ease, box-shadow .2s ease; }
 .partners a:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--docs-stamp); }
 .partners img { height: 48px; width: auto; max-width: 100%; object-fit: contain; object-position: left; }
-:root[data-theme="dark"] .partners img { filter: invert(1) hue-rotate(180deg); }
+/* Night: every logo in plain white on the carbon paper (system dark or the switch). */
+:root[data-theme="dark"] .partners img { filter: brightness(0) invert(.92); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .partners img { filter: brightness(0) invert(.92); } }
+/* Phones: the logos alone in a compact grid, so more of them fit on the screen; the name stays for screen readers
+   and shows only where an organization has no logo. */
+@media (max-width: 640px) {
+  .partners ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .partners a { place-items: center; align-content: center; min-height: 72px; padding: 10px; border-width: 1px; }
+  .partners img { height: 34px; object-position: center; }
+  .partners__name--logo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .partners span { text-align: center; font-size: .66rem; }
+}
 @media (max-width: 860px) {
   .brief, .about { grid-template-columns: 1fr; gap: 20px; }
 }

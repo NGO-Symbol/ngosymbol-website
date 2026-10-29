@@ -32,3 +32,18 @@ export const organizations: Organization[] = [
   { slug: 'bila-tserkva-library', name: 'Білоцерківська централізована бібліотечна система імені П. Красножона', url: 'https://biblioteka.com.ua', logo: '/media/partners/bila-tserkva-library.png', motion: 'shoot' },
   { slug: 'nema-playback', name: 'Плейбек-театр «Нема»', url: 'https://www.instagram.com/nema_pbt/', logo: '/media/partners/nema.png', motion: 'curtain' }
 ]
+
+// Order of logos wherever several organizations are shown together (home, «Про нас», partner tiles, the exhibition
+// site): funders first — international and state, then foundations and donors — then co-organizing institutions,
+// then venues, partner organizations and companies. By status, as the amounts are not part of the site
+// (USER_CONFIRMED 2026-10-29). Donor lists that a funder's guideline orders (Culture Helps Solidarity) keep their own order.
+export const significance = [
+  'eu', 'culture-helps-solidarity', 'ecf', 'mincult', 'mh4u', 'media-development-foundation', 'grynyov-art-foundation',
+  'insha-osvita', 'zusa', 'veteranka',
+  'yermilov-centre', 'karazin-university', 'moksop', 'zmina', 'gwara-media', 'ucraina-piu', 'egyesek', 'arteria', 'union-forum',
+  'khust-theatre', 'uzh-station', 'zdybanka', 'bila-tserkva-library', 'sens', 'serdenky-playback', 'nema-playback'
+]
+export const bySignificance = (a: string, b: string) => {
+  const rank = (slug: string) => (significance.includes(slug) ? significance.indexOf(slug) : significance.length)
+  return rank(a) - rank(b)
+}

@@ -8,6 +8,7 @@ const supporters = organizations
     projects: projects.filter(project => project.partners?.includes(org.slug) || project.donors?.includes(org.slug))
   }))
   .filter(item => item.projects.length)
+  .sort((a, b) => bySignificance(a.org.slug, b.org.slug))
 </script>
 
 <template>
