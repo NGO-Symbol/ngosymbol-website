@@ -30,7 +30,7 @@ const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Мен
       <p v-for="paragraph in (isEn ? aboutSymbolEn : aboutSymbol)" :key="paragraph">{{ paragraph }}</p>
       <p><a class="docs-button" :href="SYMBOL">symbol.ngo</a></p>
     </div>
-    <p class="partners">{{ isEn ? 'Organised by NGO «Symbol», YermilovCentre and V. N. Karazin Kharkiv National University. Supported by the Ministry of Culture of Ukraine within the Grant of the President of Ukraine for young artists, and by Grynyov Art Collection. Partner: ZMINA Human Rights Centre.' : exhibition.donorCredit }}</p>
+    <p class="partners">{{ isEn ? 'Organised by NGO «Symbol», YermilovCentre and V. N. Karazin Kharkiv National University. Donors: the Ministry of Culture of Ukraine (Grant of the President of Ukraine for young artists) and Grynyov Art Collection. Partner: ZMINA Human Rights Centre.' : exhibition.donorCredit }}</p>
   </section>
 </template>
 

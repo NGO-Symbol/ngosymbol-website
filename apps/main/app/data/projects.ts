@@ -129,7 +129,7 @@ const entries: Project[] = [
     ],
     partners: ['yermilov-centre', 'karazin-university', 'zmina', 'nema-playback'],
     donors: ['mincult', 'grynyov-art-foundation'],
-    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Виставка відбулася за фінансової підтримки Міністерства культури України в межах Гранту Президента України для молодих митців та за підтримки Grynyov Art Collection.',
+    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Донори: Міністерство культури України (Грант Президента України для молодих митців) і Grynyov Art Collection.',
     gallery: [
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов' },
@@ -221,7 +221,7 @@ const entries: Project[] = [
       { person: 'petro-chekal', role: 'Фотограф' }
     ],
     donors: ['mh4u'],
-    donorCredit: 'Проєкт реалізовано за донорської підтримки українсько-швейцарського проєкту «Психічне здоров’я для України».',
+    donorCredit: 'Донор — українсько-швейцарський проєкт «Психічне здоров’я для України».',
     programLogo: { src: '/media/projects/mhgap-kyiv/mhgap-logo.svg', name: 'Програма дій ВООЗ із подолання прогалин у сфері психічного здоров’я (mhGAP)' }
   },
   {

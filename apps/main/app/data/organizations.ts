@@ -34,12 +34,13 @@ export const organizations: Organization[] = [
 ]
 
 // Order of logos wherever several organizations are shown together (home, «Про нас», partner tiles, the exhibition
-// site): funders first — international and state, then foundations and donors — then co-organizing institutions,
-// then venues, partner organizations and companies. By status, as the amounts are not part of the site
-// (USER_CONFIRMED 2026-10-29). Donor lists that a funder's guideline orders (Culture Helps Solidarity) keep their own order.
+// site), USER_CONFIRMED 2026-10-29: the Ministry of Culture first, then «Психічне здоров’я для України», then the donors
+// of «Голоси у русі» together in the order of the Culture Helps Solidarity guideline, then the other donors, then
+// co-organizing institutions, venues, partner organizations and groups.
 export const significance = [
-  'eu', 'culture-helps-solidarity', 'ecf', 'mincult', 'mh4u', 'media-development-foundation', 'grynyov-art-foundation',
-  'insha-osvita', 'zusa', 'veteranka',
+  'mincult', 'mh4u',
+  'culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka',
+  'media-development-foundation', 'grynyov-art-foundation',
   'yermilov-centre', 'karazin-university', 'moksop', 'zmina', 'gwara-media', 'ucraina-piu', 'egyesek', 'arteria', 'union-forum',
   'khust-theatre', 'uzh-station', 'zdybanka', 'bila-tserkva-library', 'sens', 'serdenky-playback', 'nema-playback'
 ]
