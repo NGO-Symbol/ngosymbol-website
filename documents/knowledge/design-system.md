@@ -100,3 +100,7 @@ The original uploaded logo asset is stored at `packages/brand/assets/symbol-mark
 - Partner logos added: Міністерство культури України (mincult.gov.ua, replaces the «Грант Президента» tile as the funder), Grynyov Art Collection and the MH4U vector logo (Drive). Ucraina Più – Milano logo not found yet.
 - Theme switch: one View Transition, the new theme spreads as a circle from the toggle, so header and page change together; colour cross-fade fallback.
 - Sticky header hides fully (including its 12px full-bleed overhang) and ignores rubber-band overscroll at page ends on phones.
+
+## Touch marks on phones (2026-10-29)
+
+On touch screens every tap leaves a short mark from the identity, different by target (`plugins/tap.client.ts`): header and navigation — the Symbol «С» pops from a violet disc and turns; projects, people, partners, photos — an orbit ring with a satellite; other links and buttons — the «С» spiral draws like a pen stroke; empty space — an apricot drop. Mouse clicks and reduced-motion users get no marks. Partner SVG logos: only drawn shapes get `transform-origin: center`; on `<g>` it broke Inkscape logos (MH4U was invisible).

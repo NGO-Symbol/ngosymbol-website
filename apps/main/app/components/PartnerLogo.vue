@@ -49,7 +49,8 @@ onMounted(async () => {
 .partner-logo img, .partner-logo__svg :deep(svg) { display: block; max-width: 100%; max-height: 72px; width: auto; height: 72px; object-fit: contain; object-position: left center; overflow: visible; }
 .partner-logo__svg { display: block; height: 72px; }
 .partner-logo__svg :deep(svg) { max-width: 220px; }
-.partner-logo__svg :deep(svg *) { transform-box: fill-box; transform-origin: center; }
+/* Only drawn shapes get a local origin: on <g> it would shift the group's own transform attribute (Inkscape logos). */
+.partner-logo__svg :deep(:is(path, rect, polygon, circle, ellipse, line, polyline, text)) { transform-box: fill-box; transform-origin: center; }
 .partner-logo__fx { position: absolute; pointer-events: none; opacity: 0; }
 
 /* Shapes of an inline SVG get a delay from their order: the rhythm of the logo itself. */
