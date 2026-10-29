@@ -163,7 +163,8 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/talk.jpg', alt: 'Розмова про документ і пам’ять', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/makov.jpg', alt: 'Павло Маков відповідає на запитання', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/listeners.jpg', alt: 'Слухачі розмови', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-makov/overview.jpg', alt: 'Розмова з Павлом Маковим — вигляд на зал згори', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/overview.jpg', alt: 'Розмова з Павлом Маковим — вигляд на зал згори', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/audience-wide.jpg', alt: 'Павло Маков і глядачі під час розмови — вигляд на зал згори', people: true }
     ],
     partners: ['yermilov-centre'],
     description: [
@@ -207,7 +208,6 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel.jpg', alt: 'Спікери панельної дискусії', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/speaker.jpg', alt: 'Модераторка й спікери дискусії', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/hall.jpg', alt: 'Зала ЄрміловЦентру під час дискусії' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience.jpg', alt: 'Глядачі дискусії', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience-side.jpg', alt: 'Учасники панельної дискусії в залі', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel-speaker.jpg', alt: 'Спікерка панельної дискусії відповідає на запитання', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/listener.jpg', alt: 'Слухачка під час правозахисної дискусії', credit: 'Петро Чекаль', people: true },

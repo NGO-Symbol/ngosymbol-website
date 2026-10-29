@@ -23,6 +23,7 @@ Status: `USER_CONFIRMED`
 
 ## Corrected photo attribution
 
+- The former ZMINA discussion image `audience.jpg` belongs to the conversation with Павло Маков and was moved to that event gallery (`USER_CONFIRMED`, 2026-10-29).
 - A concrete-block installation previously shown in Віра Пакош's appendix is Наталія Охман's work and was removed from Пакош's page (`USER_CONFIRMED`, 2026-10-29).
 - `osipov-430.jpg`, previously assigned to Костянтин Гливляс, shows Єва Фоміцкі's work; it now belongs to Фоміцкі's gallery (`USER_CONFIRMED`, 2026-10-29).
 - The former `pavlo-makov-1.jpg` showed works by Віра Пакош and Анна Гареєва rather than Павло Маков; it was replaced with verified photographs from the local `Маков` folder (`USER_CONFIRMED`, 2026-10-29).
