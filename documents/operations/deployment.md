@@ -116,8 +116,8 @@ rm docs_deploy_key docs_deploy_key.pub
 ```
 
 Run the Deploy workflow once, then turn on Pages for `NGO-Symbol/documentsart` (branch `gh-pages`, root), and add in
-Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io` (DNS only). The stamp QR code and the «Перейти на сайт
-проєкту» button on symbol.ngo already point to `https://documentsart.symbol.ngo/`.
+Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io` (DNS only). Until then the site is built inside the main site at `symbol.ngo/documentsart/`; once the subdomain works, point
+`subsiteUrl` (projects.ts) and the stamp QR code in `DocumentsHero.vue` to `https://documentsart.symbol.ngo/`.
 
 ## 5. Domain (DNS is managed in Cloudflare)
 

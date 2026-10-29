@@ -82,7 +82,8 @@ const entries: Project[] = [
     motif: 'documents',
     theme: 'documents',
     poster: '/media/projects/pokazhit-svoi-dokumenty/poster.jpg',
-    subsiteUrl: 'https://documentsart.symbol.ngo',
+    // Served at symbol.ngo/documentsart/ until documentsart.symbol.ngo is connected (deployment.md §4a).
+    subsiteUrl: 'https://symbol.ngo/documentsart/',
     summary: 'Виставка про документ як мистецький феномен: 20 митців у ЄрміловЦентрі.',
     body: [
       'Виставка досліджує документ як мистецький феномен, що виходить за межі його функціональної ролі. Документ тут — не лише механізм бюрократичного контролю, а й естетичний, ритуальний та соціальний артефакт.',

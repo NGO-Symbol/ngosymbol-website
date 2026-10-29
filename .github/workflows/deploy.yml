@@ -48,6 +48,13 @@ jobs:
           NITRO_PRESET: github_pages
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/design/
       - run: mkdir -p apps/main/.output/public/design && cp -R apps/design/.output/public/. apps/main/.output/public/design/
+      # Project site of «Покажіть свої документи…» at /documentsart/ until documentsart.symbol.ngo is connected.
+      # Its photos and fonts are the main site's own files (/media, /fonts), so they are not copied twice.
+      - run: pnpm --filter @symbol/documents generate
+        env:
+          NITRO_PRESET: github_pages
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/documentsart/
+      - run: mkdir -p apps/main/.output/public/documentsart && rsync -a --exclude media --exclude fonts apps/documents/.output/public/ apps/main/.output/public/documentsart/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/main/.output/public
