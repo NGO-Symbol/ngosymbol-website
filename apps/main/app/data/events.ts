@@ -294,10 +294,18 @@ export const events: SymbolEvent[] = [
     end: '2025-02-14',
     venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', people: true },
-      { src: '/media/events/mhgap-kyiv-trening-1/hall.jpg', alt: 'Зала тренінгу в Центральній міській бібліотеці' },
-      { src: '/media/events/mhgap-kyiv-trening-1/trainer.jpg', alt: 'Тренерка пояснює матеріал учасникам' },
-      { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах', people: true }
+      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/hall.jpg', alt: 'Зала тренінгу в Центральній міській бібліотеці', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/trainer.jpg', alt: 'Тренерка пояснює матеріал учасникам', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/group-work-1.jpg', alt: 'Учасники працюють у малих групах над практичним завданням', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/group-work-2.jpg', alt: 'Обговорення завдання в малій групі', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/circle-exercise.jpg', alt: 'Групова вправа учасників тренінгу', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/practical-exercise.jpg', alt: 'Учасники виконують практичну вправу в колі', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/trainer-session.jpg', alt: 'Тренерка веде заняття для учасників', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/presentation.jpg', alt: 'Презентація навчального модуля mhGAP', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/participants-manuals.jpg', alt: 'Учасники працюють із навчальними матеріалами mhGAP', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/flipchart-session.jpg', alt: 'Робота з фліпчартом під час тренінгу', credit: 'Юрій Рассоха', people: true }
     ],
     people: [
       { person: 'olena-lemeshko', role: 'Тренери' },
@@ -315,9 +323,9 @@ export const events: SymbolEvent[] = [
     end: '2025-02-28',
     venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Учасники другого тренінгу з посібниками mhGAP', people: true },
-      { src: '/media/events/mhgap-kyiv-trening-2/session.jpg', alt: 'Робота учасників у залі' },
-      { src: '/media/events/mhgap-kyiv-trening-2/flipchart.jpg', alt: 'Робота з фліпчартом' }
+      { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Учасники другого тренінгу з посібниками mhGAP', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-2/session.jpg', alt: 'Робота учасників у залі', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-2/flipchart.jpg', alt: 'Робота з фліпчартом', credit: 'Юрій Рассоха', people: true }
     ],
     people: [
       { person: 'yurii-sich', role: 'Тренери' },
@@ -335,10 +343,20 @@ export const events: SymbolEvent[] = [
     end: '2025-04-04',
     venue: { name: 'Готель «Україна»', city: 'Київ' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Спільне фото учасників тренінгу з посібниками', people: true },
-      { src: '/media/events/mhgap-kyiv-trening-3/hall.jpg', alt: 'Тренер веде заняття для повної зали' },
-      { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер біля презентації' },
-      { src: '/media/events/mhgap-kyiv-trening-3/manual.jpg', alt: 'Посібник mhGAP' }
+      { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Спільне фото учасників тренінгу з посібниками', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/hall.jpg', alt: 'Тренер веде заняття для повної зали', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер біля презентації', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/manual.jpg', alt: 'Посібник mhGAP', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-3/welcome-sign.jpg', alt: 'Навігаційна табличка «Символ» на тренінгу в Києві', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-3/participants-1.jpg', alt: 'Учасники слухають пояснення тренерів', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/training-material.jpg', alt: 'Навчальний матеріал із модуля mhGAP у руках учасниці', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-3/facilitator-1.jpg', alt: 'Тренерка працює з навчальними матеріалами', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/participants-2.jpg', alt: 'Учасниці занотовують матеріали тренінгу', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/group-practice-1.jpg', alt: 'Обговорення практичного завдання в малій групі', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/group-practice-2.jpg', alt: 'Робота учасників над завданням у групі', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/facilitator-2.jpg', alt: 'Тренер пояснює практичну вправу', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/group-practice-3.jpg', alt: 'Учасниці обговорюють навчальний кейс', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/workshop-wide.jpg', alt: 'Загальний план практичної роботи на тренінгу', credit: 'Петро Чекаль', people: true }
     ],
     people: [
       { person: 'alesia-lysenko', role: 'Тренери' },
@@ -355,10 +373,20 @@ export const events: SymbolEvent[] = [
     end: '2025-05-16',
     venue: { name: 'Книгарня-кав’ярня «Сенс»', address: 'Хрещатик', city: 'Київ' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-4/trainer.jpg', alt: 'Тренерка веде другу частину тренінгу mhGAP' },
-      { src: '/media/events/mhgap-kyiv-trening-4/lecture.jpg', alt: 'Тренер пояснює модуль біля презентації' },
-      { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання', people: true },
-      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту', people: true }
+      { src: '/media/events/mhgap-kyiv-trening-4/trainer.jpg', alt: 'Тренерка веде другу частину тренінгу mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/lecture.jpg', alt: 'Тренер пояснює модуль біля презентації', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/participants-1.jpg', alt: 'Учасниці слухають презентацію тренерів', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/trainer-1.jpg', alt: 'Тренерка пояснює матеріал другої частини mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/note-taking.jpg', alt: 'Учасниця занотовує матеріали тренінгу', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/participants-2.jpg', alt: 'Учасниці під час навчальної сесії', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/trainer-2.jpg', alt: 'Тренер працює з групою в залі книгарні «Сенс»', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/participants-3.jpg', alt: 'Учасники останнього тренінгу mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/mhgap-on-phone.jpg', alt: 'Учасниця фотографує слайд презентації mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/workshop-wide.jpg', alt: 'Загальний план навчальної сесії в книгарні «Сенс»', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/participants-4.jpg', alt: 'Учасниці працюють із посібниками mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/group-practice.jpg', alt: 'Практична робота учасників у малій групі', credit: 'Петро Чекаль', people: true }
     ],
     people: [
       { person: 'ivan-kutchak', role: 'Тренери' },

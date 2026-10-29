@@ -202,12 +202,24 @@ const entries: Project[] = [
     directions: ['mental-health'],
     tone: 'lilac',
     motif: 'breath',
+    cardCover: false,
     summary: 'Навчання медпрацівників первинної ланки за програмою ВООЗ з психічного здоров’я.',
+    gallery: [
+      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/group-work-1.jpg', alt: 'Практична робота в малих групах у Білій Церкві', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/trainer-session.jpg', alt: 'Навчальна сесія першого тренінгу mhGAP', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/welcome-sign.jpg', alt: 'Навігаційна табличка «Символ» на тренінгу в Києві', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-3/workshop-wide.jpg', alt: 'Практична робота учасників тренінгу в готелі «Україна»', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/training-material.jpg', alt: 'Навчальний матеріал із модуля mhGAP', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-4/trainer-1.jpg', alt: 'Тренерка веде другу частину програми mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання під час тренінгу', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту в Києві', credit: 'Петро Чекаль', people: true }
+    ],
     body: [
       'mhGAP — **програма дій ВООЗ** з подолання прогалин у галузі психічного здоров’я на первинній ланці охорони здоров’я.',
       '**З лютого по травень 2025 року** «Символ» провів **чотири тренінги** — три п’ятиденні й один чотириденний — для **медпрацівників первинної ланки Київщини** — сімейних лікарів, медсестер, педіатрів, фельдшерів, терапевтів — з проживанням, харчуванням і посібниками для учасників. Після навчання учасники отримували **онлайн-супервізію** від кваліфікованих спеціалістів.',
       'В Україні досі поширена стигма щодо звернення до фахівців з психічного здоров’я, тож значна частина допомоги людям із психічними, неврологічними розладами та розладами через вживання психоактивних речовин лягає на інших медиків. mhGAP дає їм **навички діагностики й ведення таких станів**.',
-      'Кожен тренінг вели **двоє тренерів mhGAP**: [[person:olena-lemeshko]] і [[person:nataliia-opryshko]], [[person:yurii-sich]] і [[person:viktoriia-myroniuk-danko]], [[person:alesia-lysenko]] і [[person:ivan-kutchak]], [[person:ivan-kutchak]] і [[person:olha-klymovska]]. Після тренінгів **усі тренери вели онлайн-супервізії** для своїх учасників. Фотографував [[person:petro-chekal]].',
+      'Кожен тренінг вели **двоє тренерів mhGAP**: [[person:olena-lemeshko]] і [[person:nataliia-opryshko]], [[person:yurii-sich]] і [[person:viktoriia-myroniuk-danko]], [[person:alesia-lysenko]] і [[person:ivan-kutchak]], [[person:ivan-kutchak]] і [[person:olha-klymovska]]. Після тренінгів **усі тренери вели онлайн-супервізії** для своїх учасників. Тренінги в Білій Церкві фотографував [[person:yurii-rassokha]], київські — [[person:petro-chekal]].',
       'Це **перший грантовий проєкт «Символу»**. Організація — **офіційний партнер ініціативи mhGAP в Україні**. Останній тренінг, на прохання учасників, охопив другу частину програми й відбувся в книгарні-кав’ярні «Сенс» на Хрещатику.'
     ],
     // Trainers by training from Symbol's service contracts and acts (2025); team as credited in the @symbol.ngo post of 26.06.2025.
@@ -221,6 +233,7 @@ const entries: Project[] = [
       { person: 'alesia-lysenko', role: 'Тренери' },
       { person: 'ivan-kutchak', role: 'Тренери' },
       { person: 'olha-klymovska', role: 'Тренери' },
+      { person: 'yurii-rassokha', role: 'Фотограф' },
       { person: 'petro-chekal', role: 'Фотограф' }
     ],
     donors: ['mh4u'],

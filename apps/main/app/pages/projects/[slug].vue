@@ -101,13 +101,18 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <div class="credits">
             <div v-for="group in team" :key="group.role" class="credits__group">
               <h3>{{ group.role }}</h3>
-              <p>
-                <template v-for="(person, index) in group.people" :key="person.slug">
-                  <NuxtLink v-if="person.hasPage !== false" :to="`/people/${person.slug}`">{{ person.name }}</NuxtLink>
-                  <template v-else>{{ person.name }}</template>
-                  <template v-if="index < group.people.length - 1">, </template>
-                </template>
-              </p>
+              <ul class="project-people">
+                <li v-for="person in group.people" :key="person.slug">
+                  <NuxtLink v-if="person.hasPage !== false" class="project-person" :to="`/people/${person.slug}`">
+                    <img v-if="person.photo" :src="person.photo" :alt="person.name" loading="lazy">
+                    <span>{{ person.name }}</span>
+                  </NuxtLink>
+                  <span v-else class="project-person">
+                    <img v-if="person.photo" :src="person.photo" :alt="person.name" loading="lazy">
+                    <span>{{ person.name }}</span>
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </section>
