@@ -58,6 +58,8 @@ export interface Project {
   partners?: string[]
   donors?: string[]
   donorCredit?: string
+  /** Image laid behind the project hero (e.g. archive photographs), toned to the page. */
+  backdrop?: string
   /** Logo of the programme the project belongs to (e.g. WHO mhGAP), shown beside the credit line. */
   programLogo?: { src: string; name: string }
   related?: string[]

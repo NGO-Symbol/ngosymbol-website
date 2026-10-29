@@ -28,6 +28,17 @@ const entries: Project[] = [
       { person: 'larysa-chaika', role: 'Головна ілюстраторка' },
       { person: 'oleksii-chekal', role: 'Головний дизайнер' },
       { person: 'olena-mordyk', role: 'Комунікація' }
+    ],
+    // Archive views of Kharkiv streets from the project's Drive («Візуальні матеріали ІМВ / Будинки»), used as illustrations.
+    backdrop: '/media/projects/istoriia-moiei-vulytsi/mykolaivskyi-maidan.jpg',
+    gallery: [
+      { src: '/media/projects/istoriia-moiei-vulytsi/sumska-1901.jpg', alt: 'Сумська вулиця, травень 1901 року: архівна світлина' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/mykolaivskyi-maidan.jpg', alt: 'Панорама Миколаївського майдану в 1900-х роках' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/moskovskyi-prospekt.jpg', alt: 'Московський проспект (нині проспект Героїв Харкова) на старій листівці' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/skovorody.jpg', alt: 'Будинок на вулиці Сковороди: архівна світлина' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-1.jpg', alt: 'Житловий будинок на вулиці Чичибабіна: архівна світлина' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-9.jpg', alt: 'Вулиця Чичибабіна: архівна панорама забудови' },
+      { src: '/media/projects/istoriia-moiei-vulytsi/staromoskovska-98.jpg', alt: 'Будинок на вулиці Старомосковській, 98: фасад і план' }
     ]
     // The project site (my-street.symbol.ngo) is hidden while it is being built; add subsiteUrl back when it opens.
   },

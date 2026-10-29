@@ -37,7 +37,8 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
 <template>
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
-    <header v-else class="project-hero" :class="`tone-${project.tone}`">
+    <header v-else class="project-hero" :class="[`tone-${project.tone}`, { 'has-backdrop': project.backdrop }]">
+      <img v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" alt="">
       <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
       <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
