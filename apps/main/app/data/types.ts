@@ -102,6 +102,8 @@ export interface Person {
   teamRole?: string
   teamOrder?: number
   hasPage?: boolean
+  /** Photographs of the person's works shown in Symbol projects. */
+  works?: Photo[]
   /** Structured CV for the team (no contacts or personal data). Sources: documents/knowledge/team-cv.md */
   cv?: CvSection[]
 }
