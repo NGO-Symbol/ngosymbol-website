@@ -23,12 +23,13 @@ export function chekalPhotos(slug: string) {
 }
 
 // Exhibition photographs by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов») that show a work, by artist
-// (Маков, Апріс and Пятковка identified by the team).
+// (Маков, Апріс and Пятковка identified by the team; «Блокпост» — the block with tea cups and visitors' notes).
 export const osipovPhotos: Record<string, string[]> = {
   'yeva-fomitski': ['/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg'],
   'oleksii-sai': ['/media/projects/pokazhit-svoi-dokumenty/osipov-264.jpg'],
   'pavlo-makov': ['/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg'],
-  'alina-prokopenko': ['/media/projects/pokazhit-svoi-dokumenty/osipov-034.jpg'],
+  'alina-prokopenko': ['/media/projects/pokazhit-svoi-dokumenty/osipov-048.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-034.jpg'],
+  'dara-sholokh': ['/media/projects/pokazhit-svoi-dokumenty/osipov-552.jpg', '/media/projects/pokazhit-svoi-dokumenty/osipov-554.jpg'],
   'roman-piatkovka': ['/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg']
 }
 
@@ -51,5 +52,6 @@ export const coverPhoto: Record<string, string> = {
   'yeva-fomitski': '/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg',
   'kinich-azla': '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg',
   'oleksii-sai': '/media/projects/pokazhit-svoi-dokumenty/osipov-264.jpg',
-  'roman-piatkovka': '/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg'
+  'roman-piatkovka': '/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg',
+  'dara-sholokh': '/media/projects/pokazhit-svoi-dokumenty/osipov-552.jpg'
 }
