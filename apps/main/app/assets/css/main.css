@@ -335,6 +335,9 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
   .project-hero__program { position: static; transform: none; order: 2; width: min(80vw, 420px); margin: 10px 16px 0; }
 }
 .project-card__program { position: absolute; z-index: 1; inset: 50% auto auto 50%; width: 78%; height: auto; max-height: 82%; object-fit: contain; transform: translate(-50%, -50%); transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
+/* A partner's identity banner, shown whole across the card on the banner's own colours. */
+.project-card__banner { position: absolute; z-index: 1; inset: 50% 0 auto 0; width: 100%; height: auto; transform: translateY(-50%); transition: transform .7s cubic-bezier(.2, .8, .2, 1); }
+.project-card:hover .project-card__banner { transform: translateY(-50%) scale(1.04); }
 .project-card:hover .project-card__program { transform: translate(-50%, calc(-50% - 6px)) rotate(-3deg); }
 @media (prefers-reduced-motion: reduce) { .project-hero__program { animation: none; } }
 .donor-credit { margin-top: 20px; padding: 16px 18px; background: var(--symbol-white); border-left: 3px solid var(--symbol-violet); font-size: .9rem; line-height: 1.55; max-width: 680px; }

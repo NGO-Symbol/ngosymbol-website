@@ -310,9 +310,8 @@ const entries: Project[] = [
   },
   {
     slug: 'kharkivske-more',
-    title: 'Харківське море',
+    title: 'Харківське море 2024',
     yearStart: 2024,
-    yearEnd: 2025,
     city: 'Харків',
     kind: 'long',
     status: 'completed',
@@ -320,7 +319,7 @@ const entries: Project[] = [
     formats: ['festival'],
     directions: ['culture', 'art'],
     tone: 'plum',
-    cardLogo: { src: '/media/projects/kharkivske-more/logo.png', name: 'Логотип фестивалю «Харківське море»' },
+    cardBanner: { src: '/media/projects/kharkivske-more/banner.jpg', name: 'Айдентика фестивалю «Харківське море»: риба, хвилі й човни', background: 'linear-gradient(#b1d6d3, #96cad7)' },
     motif: 'sea',
     summary: 'Незалежний мультидисциплінарний фестиваль локальної культури. «Символ» — партнер фестивалю.',
     body: [
@@ -342,13 +341,13 @@ const entries: Project[] = [
     formats: ['festival'],
     directions: ['culture', 'art'],
     tone: 'violet',
-    cardLogo: { src: '/media/projects/kharkivske-more/logo.png', name: 'Логотип фестивалю «Харківське море»' },
+    cardBanner: { src: '/media/projects/kharkivske-more/banner.jpg', name: 'Айдентика фестивалю «Харківське море»: риба, хвилі й човни', background: 'linear-gradient(#b1d6d3, #96cad7)' },
     motif: 'sea',
     summary: 'Фестиваль локальної культури 2026 року. Партнерський проєкт: організатор — ГО «Платформа театральних ініціатив».',
     body: [
       '**Фестиваль локальної культури «Харківське море»** 2026 року — виставки, воркшопи, вистави, плейбек-перформанси, лекції й концерти в Харкові в **серпні 2026**.',
       'Це **не проєкт «Символу»**, а партнерський: фестиваль організовує **ГО «Платформа театральних ініціатив»** за гранту European Cultural Foundation у межах проєкту «Культура допомагає: Солідарність», що співфінансується Європейським Союзом. «Символ» — партнер фестивалю.',
-      'Попередні фестивалі — [[project:kharkivske-more]] (2024–2025).'
+      'Попередній фестиваль, у якому «Символ» був партнером, — [[project:kharkivske-more]].'
     ],
     donors: ['culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka']
   },
