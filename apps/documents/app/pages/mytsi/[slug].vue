@@ -47,6 +47,8 @@ function leaf(event: KeyboardEvent) {
 }
 onMounted(() => window.addEventListener('keydown', leaf))
 onBeforeUnmount(() => window.removeEventListener('keydown', leaf))
+// Keep the open file's tab in view in the sideways row on phones.
+onMounted(() => document.querySelector('.case-tabs__tab.is-open')?.scrollIntoView({ inline: 'center', block: 'nearest' }))
 const caseNo = computed(() => `${t('Особова справа', 'Personal file')} № ${String(index + 1).padStart(2, '0')}`)
 </script>
 
@@ -170,13 +172,17 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 .pager__next { justify-items: end !important; text-align: right; }
 @media (max-width: 760px) {
   .case-cover__grid { grid-template-columns: 1fr; }
-  /* Phones: the drawer's tabs in two staggered rows, numbers only; the open file's name is on its label below. */
-  .case-cover { margin-top: 74px; }
-  .case-tabs { flex-wrap: wrap; row-gap: 3px; }
-  .case-tabs__tab { flex: 0 0 calc((100% - 18px) / 10); padding: 5px 0 4px; transform: none; }
-  .case-tabs__tab.is-open { flex: 0 0 calc((100% - 18px) / 10); padding: 5px 0 6px; text-align: center; }
+  /* Phones: one sideways row of numbered tabs that keeps the open file in view; less padding everywhere. */
+  .crumbs { margin-bottom: 30px; }
+  .case-back { font-size: .95rem; padding: 9px 12px 7px; box-shadow: 3px 3px 0 var(--docs-stamp); }
+  .case-count { font-size: .66rem; }
+  .case-cover { margin-top: 34px; padding: 10px; }
+  .case-cover__label { padding: 14px; }
+  .case-tabs { overflow-x: auto; scrollbar-width: none; padding-top: 6px; }
+  .case-tabs::-webkit-scrollbar { display: none; }
+  .case-tabs__tab { flex: 0 0 34px; padding: 5px 0 4px; transform: none; }
+  .case-tabs__tab.is-open { flex: 0 0 auto; padding: 5px 10px 6px; }
   .case-tabs__tab.is-open .case-tabs__name { display: none; }
-  .case-tabs__tab.is-open .case-tabs__no template { display: none; }
   .case-cover__photos { width: 56%; max-width: 220px; }
   .case-cover__photos.is-duo { width: 80%; max-width: 320px; }
 }

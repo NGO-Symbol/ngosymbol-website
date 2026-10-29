@@ -82,7 +82,7 @@ html[data-cross="leave"] body::after { background: #9280a6 url(/favicon.svg) cen
 @keyframes cross-drop { from { transform: translateY(-100%); } }
 
 /* Room for the folder tabs at the bottom on phones (DocsTabs). */
-@media (max-width: 640px) { .docs-site-shell { padding-bottom: 76px; } }
+@media (max-width: 640px) { .docs-site-shell { padding-bottom: 58px; } .docs-page { padding-top: 20px; } }
 
 /* Moving between artists' files: the open file slides away and the next one slides in from the side it lies on in
    the drawer (html[data-case-dir], plugins/case-direction). Short, soft and without a flip. */

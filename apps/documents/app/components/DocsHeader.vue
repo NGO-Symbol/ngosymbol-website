@@ -5,6 +5,18 @@
 const { isEn, localePath, switchPath, t } = useLang()
 const backHref = ref(isEn.value ? `${SYMBOL}/en` : SYMBOL)
 onMounted(() => { backHref.value = returnUrl(isEn.value) })
+
+// While reading down the header slides away to give the page the room; any scroll up brings it back.
+const hidden = ref(false)
+let lastY = 0
+function onScroll() {
+  const y = window.scrollY
+  if (Math.abs(y - lastY) < 6) return
+  hidden.value = y > 120 && y > lastY
+  lastY = y
+}
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 const route = useRoute()
 const links = computed(() => [
   { to: '/', label: t('Про виставку', 'About') },
@@ -15,6 +27,7 @@ const links = computed(() => [
   { to: '/komanda', label: t('Команда', 'Team') }
 ])
 const current = computed(() => route.path.replace(/^\/en/, '').replace(/\/$/, '') || '/')
+watch(() => route.path, () => { hidden.value = false })
 const isActive = (to: string) => (to === '/' ? current.value === '/' : current.value.startsWith(to))
 
 // Day / night: the visitor's choice is kept; without a choice the system setting applies (set before paint in app.vue).
@@ -29,12 +42,12 @@ function toggleTheme() {
 </script>
 
 <template>
-  <header class="docs-header">
+  <header class="docs-header" :class="{ 'is-hidden': hidden }">
     <div class="docs-back">
       <div class="docs-container docs-back__inner">
         <a class="docs-back__link" :href="backHref" @click="leaveTo($event, backHref)">
           <img class="docs-back__mark" src="/favicon.svg" alt="" width="28" height="28">
-          <span class="docs-back__text"><span aria-hidden="true">←</span> {{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span>
+          <span class="docs-back__text"><span aria-hidden="true">←</span> <span class="docs-back__long">{{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span><span class="docs-back__short">{{ t('Сайт «Символу»', 'NGO Symbol') }}</span></span>
         </a>
         <div class="docs-back__tools">
           <NuxtLink class="docs-lang" :to="switchPath" :aria-label="t('English version', 'Українська версія')">
@@ -63,7 +76,9 @@ function toggleTheme() {
 </template>
 
 <style scoped>
-.docs-header { position: sticky; top: 0; z-index: 40; background: var(--docs-paper); border-bottom: 3px solid var(--docs-ink); }
+.docs-header { position: sticky; top: 0; z-index: 40; background: var(--docs-paper); border-bottom: 3px solid var(--docs-ink); transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
+.docs-header.is-hidden { transform: translateY(-100%); }
+.docs-back__short { display: none; }
 /* The way back to Symbol: a bright band in Symbol's own colours (violet with the apricot button and the round mark),
    so it reads at once as «the organization», not as part of the exhibition. */
 .docs-back { background: #9280a6; color: #fff7eb; }
@@ -91,12 +106,20 @@ function toggleTheme() {
 .docs-nav a:hover { border-color: var(--docs-ink); }
 .docs-nav a.is-active { background: var(--docs-ink); color: var(--docs-paper); }
 @media (max-width: 640px) {
-  .docs-back__link { font-size: .8rem; gap: 8px; padding: 4px 12px 4px 4px; }
-  .docs-back__mark { width: 24px; height: 24px; }
+  /* Phones: one slim line for the way back, a smaller mark; the sections are the folder tabs at the bottom. */
+  .docs-back__inner { padding-block: 6px; }
+  .docs-back__link { font-size: .78rem; gap: 8px; padding: 3px 12px 3px 3px; }
+  .docs-back__mark { width: 22px; height: 22px; }
+  .docs-back__long { display: none; }
+  .docs-back__short { display: inline; }
+  .docs-lang span { padding: 3px 8px; }
+  .docs-theme { width: 28px; height: 28px; }
   .docs-header__main { padding-block: 8px; }
-  .docs-mark__stamp { width: 40px; height: 40px; }
-  .docs-mark__top { font-size: 1.5rem; }
-  .docs-mark__tape { font-size: .9rem; }
+  .docs-header__main { padding-block: 6px; }
+  .docs-mark { gap: 8px; }
+  .docs-mark__stamp { width: 32px; height: 32px; }
+  .docs-mark__top { font-size: 1.2rem; }
+  .docs-mark__tape { font-size: .74rem; }
   /* On phones the sections are the folder tabs at the bottom (DocsTabs). */
   .docs-nav { display: none; }
 }
