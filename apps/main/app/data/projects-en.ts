@@ -9,5 +9,6 @@ export const projectsEn: Record<string, { title: string; summary: string }> = {
   'ti-khto-pobachyly-svit': { title: 'Those Who Have Seen the World', summary: 'A photo exhibition by Petro Chekal and Yurii Rassokha at the Festival of Ukrainian Books in Milan.' },
   '2-10-300': { title: '2, 10, 300 Years Later', summary: 'An open-air exhibition of works by artists from eastern Ukraine.' },
   'kharkivske-more': { title: 'Kharkiv Sea', summary: 'An independent multidisciplinary festival of local culture. Symbol is a partner of the festival.' },
+  'kharkivske-more-2026': { title: 'Kharkiv Sea 2026', summary: 'The 2026 festival of local culture. A partner project organised by the NGO Platform of Theatre Initiatives.' },
   'zbyrach-konvalii': { title: 'The Lily of the Valley Collector', summary: 'A documentary about Oleksandr Suprun, a photographer of the Kharkiv School of Photography.' }
 }

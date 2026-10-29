@@ -16,7 +16,7 @@ const text = computed(() => (isEn.value && projectsEn[props.project.slug]) || pr
     </div>
     <div class="project-card__visual" :class="{ 'has-cover': cover }">
       <img v-if="cover" class="project-card__cover" :src="cover" alt="" loading="lazy">
-      <img v-if="project.programLogo" class="project-card__program" :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
+      <img v-if="project.programLogo ?? project.cardLogo" class="project-card__program" :src="(project.programLogo ?? project.cardLogo)!.src" :alt="(project.programLogo ?? project.cardLogo)!.name" loading="lazy">
       <ProjectMotif v-else class="project-card__motif" :motif="project.motif" />
       <span v-if="project.role === 'partner'" class="project-card__badge">{{ isEn ? 'Symbol is a partner' : 'Символ — партнер' }}</span>
       <span v-if="project.subsiteUrl" class="project-card__badge project-card__badge--site">{{ isEn ? 'Project website' : 'Є сайт проєкту' }}</span>

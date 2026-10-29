@@ -52,6 +52,8 @@ export interface Project {
   theme?: 'documents'
   /** Poster or key visual, used as the card cover when present. */
   poster?: string
+  /** The project's own logo shown on its card instead of a photo (e.g. a partner festival's identity). */
+  cardLogo?: { src: string; name: string }
   /** Selected photos only; the first is the cover. Files live in public/media/projects/{slug}/. */
   gallery?: Photo[]
   people?: Credit[]

@@ -312,21 +312,45 @@ const entries: Project[] = [
     slug: 'kharkivske-more',
     title: 'Харківське море',
     yearStart: 2024,
-    yearEnd: 2026,
+    yearEnd: 2025,
     city: 'Харків',
     kind: 'long',
     status: 'completed',
     role: 'partner',
     formats: ['festival'],
     directions: ['culture', 'art'],
-    tone: 'violet',
-    poster: '/media/projects/kharkivske-more/cover.jpg',
+    tone: 'plum',
+    cardLogo: { src: '/media/projects/kharkivske-more/logo.png', name: 'Логотип фестивалю «Харківське море»' },
     motif: 'sea',
     summary: 'Незалежний мультидисциплінарний фестиваль локальної культури. «Символ» — партнер фестивалю.',
     body: [
       'Фестиваль досліджує **ідентичність Харкова в умовах війни** й працює з темами міської ідентичності, пам’яті та досвіду через мистецькі практики.',
-      '«Символ» — **партнер фестивалю**, не організатор.'
+      '«Символ» — **партнер фестивалю**, не організатор. Про фестиваль 2026 року — [[project:kharkivske-more-2026]].'
     ]
+  },
+  {
+    // Facts from the festival's 2026 folder on the Symbol Drive (contracts and the SMM plan); not a Symbol project.
+    slug: 'kharkivske-more-2026',
+    title: 'Харківське море 2026',
+    yearStart: 2026,
+    start: '2026-08-14',
+    end: '2026-08-23',
+    city: 'Харків',
+    kind: 'single',
+    status: 'completed',
+    role: 'partner',
+    formats: ['festival'],
+    directions: ['culture', 'art'],
+    tone: 'violet',
+    cardLogo: { src: '/media/projects/kharkivske-more/logo.png', name: 'Логотип фестивалю «Харківське море»' },
+    motif: 'sea',
+    summary: 'Фестиваль локальної культури 2026 року. Партнерський проєкт: організатор — ГО «Платформа театральних ініціатив».',
+    body: [
+      '**Фестиваль локальної культури «Харківське море»** 2026 року — виставки, воркшопи, вистави, плейбек-перформанси, лекції й концерти в Харкові в **серпні 2026**.',
+      'Це **не проєкт «Символу»**, а партнерський: фестиваль організовує **ГО «Платформа театральних ініціатив»** за гранту European Cultural Foundation у межах проєкту «Культура допомагає: Солідарність», що співфінансується Європейським Союзом. «Символ» — партнер фестивалю.',
+      'Попередні фестивалі — [[project:kharkivske-more]] (2024–2025).'
+    ],
+    donors: ['culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka']
   },
   {
     slug: 'zbyrach-konvalii',
