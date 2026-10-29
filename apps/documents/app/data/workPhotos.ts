@@ -21,3 +21,35 @@ export const chekalPhotoCount: Record<string, number> = {
 export function chekalPhotos(slug: string) {
   return Array.from({ length: chekalPhotoCount[slug] ?? 0 }, (_, i) => `/media/projects/pokazhit-svoi-dokumenty/works/${slug}-${i + 1}.jpg`)
 }
+
+// Exhibition photographs by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов») that show a work, by artist
+// (Маков, Апріс and Пятковка identified by the team).
+export const osipovPhotos: Record<string, string[]> = {
+  'yeva-fomitski': ['/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg'],
+  'oleksii-sai': ['/media/projects/pokazhit-svoi-dokumenty/osipov-264.jpg'],
+  'pavlo-makov': ['/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg'],
+  'alina-prokopenko': ['/media/projects/pokazhit-svoi-dokumenty/osipov-034.jpg'],
+  'roman-piatkovka': ['/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg']
+}
+
+// One photograph per artist for the hover on the artists page, chosen to show at once what the work is.
+const chekal = (slug: string, n: number) => `/media/projects/pokazhit-svoi-dokumenty/works/${slug}-${n}.jpg`
+export const coverPhoto: Record<string, string> = {
+  'alina-prokopenko': chekal('alina-prokopenko', 2),
+  'andrii-skrypka': chekal('andrii-skrypka', 1),
+  'anna-hareieva': chekal('anna-hareieva', 2),
+  'anton-kariuk': chekal('anton-kariuk', 1),
+  'kostiantyn-hlyvlias': chekal('kostiantyn-hlyvlias', 2),
+  'mariia-matiashova': chekal('mariia-matiashova', 2),
+  'mariia-prokopenko': chekal('mariia-prokopenko', 3),
+  'nataliia-okhman': chekal('nataliia-okhman', 2),
+  'oleh-tistol': chekal('oleh-tistol', 2),
+  'pavlo-makov': '/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg',
+  'serhii-melnychenko': chekal('serhii-melnychenko', 1),
+  'vira-pakosh': chekal('vira-pakosh', 1),
+  'volodymyr-kuznietsov': chekal('volodymyr-kuznietsov', 1),
+  'yeva-fomitski': '/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg',
+  'kinich-azla': '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg',
+  'oleksii-sai': '/media/projects/pokazhit-svoi-dokumenty/osipov-264.jpg',
+  'roman-piatkovka': '/media/projects/pokazhit-svoi-dokumenty/osipov-230.jpg'
+}

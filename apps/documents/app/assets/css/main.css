@@ -83,3 +83,10 @@ html[data-cross="leave"] body::after { background: #9280a6 url(/favicon.svg) cen
 
 /* Room for the folder tabs at the bottom on phones (DocsTabs). */
 @media (max-width: 640px) { .docs-site-shell { padding-bottom: 76px; } }
+
+/* Moving between artists' files: the open file turns away like a page and the next one settles in (pages/mytsi/[slug]). */
+.case-turn-leave-active { transition: transform .38s cubic-bezier(.55, 0, .8, .2), opacity .38s ease; transform-origin: left center; }
+.case-turn-leave-to { transform: perspective(1800px) rotateY(-70deg) translateX(-3%); opacity: 0; }
+.case-turn-enter-active { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s ease; transform-origin: left center; }
+.case-turn-enter-from { transform: perspective(1800px) rotateY(18deg) translateX(2%); opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .case-turn-leave-active, .case-turn-enter-active { transition: opacity .2s ease; } .case-turn-leave-to, .case-turn-enter-from { transform: none; } }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { workPhotos } from '~/data/workPhotos'
+import { coverPhoto, workPhotos } from '~/data/workPhotos'
 
 const { t, localePath } = useLang()
 useSeoMeta({ title: () => t('Митці', 'Artists'), description: () => t('Митці виставки «Покажіть свої документи…» та їхні роботи.', 'Artists of the exhibition «May I See Your Documents…» and their works.') })
-// A work photo for the card when there is one, the portrait otherwise.
-const cover = (slug: string, photo?: string) => workPhotos(slug)[0] ?? photo
+// On hover the portrait gives way to the photograph that shows the artist's work best (data/workPhotos.ts).
+const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
 </script>
 
 <template>
@@ -19,7 +19,7 @@ const cover = (slug: string, photo?: string) => workPhotos(slug)[0] ?? photo
         <NuxtLink class="artist" :to="localePath(`/mytsi/${artist.slug}`)">
           <span class="artist__media">
             <img v-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artist.name" loading="lazy">
-            <img v-if="workPhotos(artist.slug)[0]" class="artist__work" :src="cover(artist.slug, artist.person?.photo)" alt="" loading="lazy">
+            <img v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)" alt="" loading="lazy">
           </span>
           <span class="artist__name">{{ artist.name }}</span>
           <span class="artist__works">{{ artist.works.map(work => `«${work.title}»`).join(', ') }}</span>

@@ -2,7 +2,7 @@
 // An artist of the exhibition as a personal case file: a folder cover with the 3×4 portrait clipped on and the case
 // fields, then sheets — the biography, the curatorial text of each work, the photographs as an appendix — and the full
 // page on symbol.ngo (biography, links, other projects). Texts are in Ukrainian.
-import { chekalPhotos, workPhotos } from '~/data/workPhotos'
+import { chekalPhotos, osipovPhotos, workPhotos } from '~/data/workPhotos'
 
 const { isEn, t, localePath } = useLang()
 const route = useRoute()
@@ -24,19 +24,29 @@ const photos = [
     ...(artist.person?.works ?? []),
     ...artist.coAuthors.flatMap(person => person.works ?? [])
   ]),
+  ...(osipovPhotos[artist.slug] ?? []).map(src => ({ src, alt, credit: 'Олександр Осіпов' })),
   ...exhibitionShots
 ]
 const credits = [...new Set(photos.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
+// Marks of use on some files, placed differently on each: a coffee ring on one sheet, a tea splash on another.
+const stainOf = (sheet: number) => {
+  const turn = (index * 47 + sheet * 31) % 360
+  if ((index + sheet) % 3 === 0) return { kind: 'coffee' as const, top: `${8 + (index * 13) % 40}%`, left: `${55 + (index * 7) % 30}%`, size: 'clamp(130px, 22vw, 210px)', turn, seed: index + sheet }
+  if ((index + sheet) % 5 === 1) return { kind: 'tea' as const, top: `${40 + (index * 11) % 40}%`, left: `${(index * 17) % 60}%`, size: 'clamp(110px, 18vw, 180px)', turn, seed: index + sheet }
+  return undefined
+}
+definePageMeta({ pageTransition: { name: 'case-turn', mode: 'out-in' } })
 const caseNo = computed(() => `${t('Особова справа', 'Personal file')} № ${String(index + 1).padStart(2, '0')}`)
 </script>
 
 <template>
   <article class="docs-container docs-page">
     <nav class="crumbs" :aria-label="t('Навігація', 'Navigation')">
-      <NuxtLink :to="localePath('/mytsi')">← {{ t('Усі митці', 'All artists') }}</NuxtLink>
-      <span>{{ index + 1 }} / {{ exhibitionArtists.length }}</span>
+      <NuxtLink class="case-back" :to="localePath('/mytsi')"><span aria-hidden="true">←</span> {{ t('Усі митці', 'All artists') }}</NuxtLink>
+      <span class="case-count">{{ t('Справа', 'File') }} {{ index + 1 }} {{ t('з', 'of') }} {{ exhibitionArtists.length }}</span>
     </nav>
     <header class="case-cover">
+      <DocsStain v-if="index % 3 === 1" kind="coffee" :seed="index" class="case-cover__stain" />
       <span class="case-cover__tab">{{ t('Справа', 'File') }} № {{ String(index + 1).padStart(2, '0') }}</span>
       <div class="case-cover__label">
         <p class="case-cover__kind">{{ t('Особова справа', 'Personal file') }} · {{ t('Покажіть свої документи…', 'May I See Your Documents…') }}</p>
@@ -61,11 +71,11 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 
     <div class="case-papers">
       <p v-if="isEn" class="lang-note">Texts about the artists are available in Ukrainian.</p>
-      <DocsSheet :case-no="caseNo" :kind="t('Біографія', 'Biography')" :sheet="1" :tilt="-0.3">
+      <DocsSheet :case-no="caseNo" :kind="t('Біографія', 'Biography')" :sheet="1" :tilt="-0.3" :stain="stainOf(1)">
         <div class="docs-text"><p v-for="paragraph in artist.bio" :key="paragraph">{{ paragraph }}</p></div>
       </DocsSheet>
 
-      <DocsSheet v-for="(work, workIndex) in artist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25">
+      <DocsSheet v-for="(work, workIndex) in artist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex + 2)">
         <h2 class="case-work">«{{ work.title }}»</h2>
         <div class="docs-text"><p v-for="paragraph in work.text" :key="paragraph">{{ paragraph }}</p></div>
       </DocsSheet>
@@ -86,9 +96,15 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 </template>
 
 <style scoped>
-.crumbs { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 24px; font-size: .85rem; }
-.crumbs span { color: var(--docs-muted); }
+.crumbs { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 40px; }
+/* Back to all artists: an ink tab like a folder divider, clearly a button. */
+.case-back { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px 9px; background: var(--docs-ink); color: var(--docs-paper); font-family: var(--docs-display); font-size: 1.25rem; line-height: 1; text-transform: uppercase; text-decoration: none; box-shadow: 5px 5px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease; }
+.case-back:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--docs-stamp); }
+.case-back span { font-family: var(--docs-mono); font-size: 1.1rem; transition: transform .2s ease; }
+.case-back:hover span { transform: translateX(-4px); }
+.case-count { font-family: var(--docs-mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--docs-muted); }
 /* The folder: manila cover with a tab, a pasted label with the case fields and the clipped 3×4 portrait. */
+.case-cover__stain { top: -30px; right: 6%; width: clamp(120px, 18vw, 190px); height: clamp(120px, 18vw, 190px); z-index: 1; transform: rotate(40deg); }
 .case-cover { position: relative; margin-top: 28px; padding: clamp(20px, 3vw, 36px); background: var(--docs-folder); border-radius: 0 6px 6px 6px; box-shadow: 0 2px 0 color-mix(in srgb, var(--docs-ink) 18%, transparent); }
 .case-cover__tab { position: absolute; left: 0; bottom: 100%; padding: 6px 18px 4px; background: var(--docs-folder); border-radius: 6px 6px 0 0; font-family: var(--docs-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 .case-cover__label { padding: clamp(16px, 2.6vw, 28px); background: var(--docs-sheet); border: 1px solid var(--docs-ink); }
