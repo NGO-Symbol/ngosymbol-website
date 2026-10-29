@@ -40,8 +40,11 @@ const entries: Project[] = [
       { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-1.jpg', alt: 'Житловий будинок на вулиці Чичибабіна: архівна світлина' },
       { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-9.jpg', alt: 'Вулиця Чичибабіна: архівна панорама забудови' },
       { src: '/media/projects/istoriia-moiei-vulytsi/staromoskovska-98.jpg', alt: 'Будинок на вулиці Старомосковській, 98: фасад і план' }
-    ]
+    ],
     // The project site (my-street.symbol.ngo) is hidden while it is being built; add subsiteUrl back when it opens.
+    // Winner of the «Тисячовесна» competition (Symbol's letters to the Centre, 23.10.2026).
+    donors: ['mincult', 'tysyachovesna', 'czipu'],
+    donorCredit: 'Проєкт — переможець конкурсного відбору ініціативи Президента України «Тисячовесна». Донори: Міністерство культури України, «Тисячовесна», Центр захисту інформаційного простору України.'
   },
   {
     slug: 'holosy-u-rusi',
@@ -54,6 +57,7 @@ const entries: Project[] = [
     formats: ['playback', 'performance'],
     directions: ['art', 'mental-health'],
     tone: 'apricot',
+    poster: '/media/events/holosy-u-rusi-uzhhorod/ensemble.jpg',
     motif: 'voices',
     summary: 'Плейбек-театр на Закарпатті: живі історії людей, зіграні тут і зараз.',
     body: [
@@ -128,7 +132,7 @@ const entries: Project[] = [
     ],
     partners: ['yermilov-centre', 'karazin-university', 'zmina', 'nema-playback'],
     donors: ['mincult', 'grynyov-art-foundation'],
-    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Виставка відбулася за фінансової підтримки Міністерства культури України в межах Гранту Президента України для молодих митців та за підтримки Grynyov Art Collection.',
+    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Донори: Міністерство культури України (Грант Президента України для молодих митців) і Grynyov Art Collection.',
     gallery: [
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов' },
@@ -220,7 +224,7 @@ const entries: Project[] = [
       { person: 'petro-chekal', role: 'Фотограф' }
     ],
     donors: ['mh4u'],
-    donorCredit: 'Проєкт реалізовано за донорської підтримки українсько-швейцарського проєкту «Психічне здоров’я для України».',
+    donorCredit: 'Донор — українсько-швейцарський проєкт «Психічне здоров’я для України».',
     programLogo: { src: '/media/projects/mhgap-kyiv/mhgap-logo.svg', name: 'Програма дій ВООЗ із подолання прогалин у сфері психічного здоров’я (mhGAP)' }
   },
   {
@@ -282,6 +286,7 @@ const entries: Project[] = [
     formats: ['exhibition'],
     directions: ['art'],
     tone: 'apricot',
+    poster: '/media/projects/2-10-300/cover.jpg',
     motif: 'time',
     summary: 'Виставка просто неба з роботами митців зі сходу України.',
     body: [
@@ -308,22 +313,46 @@ const entries: Project[] = [
   },
   {
     slug: 'kharkivske-more',
-    title: 'Харківське море',
+    title: 'Харківське море 2024',
     yearStart: 2024,
-    yearEnd: 2026,
     city: 'Харків',
     kind: 'long',
     status: 'completed',
     role: 'partner',
     formats: ['festival'],
     directions: ['culture', 'art'],
-    tone: 'violet',
+    tone: 'plum',
+    poster: '/media/projects/kharkivske-more/card.jpg',
     motif: 'sea',
     summary: 'Незалежний мультидисциплінарний фестиваль локальної культури. «Символ» — партнер фестивалю.',
     body: [
       'Фестиваль досліджує **ідентичність Харкова в умовах війни** й працює з темами міської ідентичності, пам’яті та досвіду через мистецькі практики.',
-      '«Символ» — **партнер фестивалю**, не організатор.'
+      '«Символ» — **партнер фестивалю**, не організатор. Про фестиваль 2026 року — [[project:kharkivske-more-2026]].'
     ]
+  },
+  {
+    // Facts from the festival's 2026 folder on the Symbol Drive (contracts and the SMM plan); not a Symbol project.
+    slug: 'kharkivske-more-2026',
+    title: 'Харківське море 2026',
+    yearStart: 2026,
+    start: '2026-08-14',
+    end: '2026-08-23',
+    city: 'Харків',
+    kind: 'single',
+    status: 'completed',
+    role: 'partner',
+    formats: ['festival'],
+    directions: ['culture', 'art'],
+    tone: 'violet',
+    poster: '/media/projects/kharkivske-more/card.jpg',
+    motif: 'sea',
+    summary: 'Фестиваль локальної культури 2026 року. Партнерський проєкт: організатор — ГО «Платформа театральних ініціатив».',
+    body: [
+      '**Фестиваль локальної культури «Харківське море»** 2026 року — виставки, воркшопи, вистави, плейбек-перформанси, лекції й концерти в Харкові в **серпні 2026**.',
+      'Це **не проєкт «Символу»**, а партнерський: фестиваль організовує **ГО «Платформа театральних ініціатив»** за гранту European Cultural Foundation у межах проєкту «Культура допомагає: Солідарність», що співфінансується Європейським Союзом. «Символ» — партнер фестивалю.',
+      'Попередній фестиваль, у якому «Символ» був партнером, — [[project:kharkivske-more]].'
+    ],
+    donors: ['culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka']
   },
   {
     slug: 'zbyrach-konvalii',

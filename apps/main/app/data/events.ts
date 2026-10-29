@@ -2,8 +2,8 @@ import type { SymbolEvent } from './types'
 
 // Every event belongs to a project (ADR-0008). Projects of kind 'single' are listed as events automatically.
 // «Покажіть свої документи…»: dates and times checked against the Instagram posts of @symbol.ngo, @yermilovcentre
-// and @nema_pbt (2026-10-29). The ZMINA lecture (08.11) and the «Бюрократія» discussion (29.11) have no post, but the
-// team confirmed they took place (USER_CONFIRMED 2026-10-29).
+// and @nema_pbt (2026-10-29). The ZMINA lecture (08.11) has no post, but the team confirmed it took place; the planned
+// «Бюрократія в мистецьких практиках» discussion (29.11) did not take place and is not listed (USER_CONFIRMED 2026-10-29).
 const yermilov = { name: 'ЄрміловЦентр', address: 'майдан Свободи, 4', city: 'Харків' }
 
 export const events: SymbolEvent[] = [
@@ -182,19 +182,6 @@ export const events: SymbolEvent[] = [
     ]
   },
   {
-    slug: 'pokazhit-svoi-dokumenty-biurokratiia',
-    title: 'Панельна дискусія «Бюрократія в мистецьких практиках»',
-    project: 'pokazhit-svoi-dokumenty',
-    format: 'discussion',
-    start: '2025-11-29',
-    venue: yermilov,
-    partners: ['yermilov-centre'],
-    description: [
-      'Розмова з митцями виставки та культурними менеджерами. Перша частина — **документ як матеріал, символ, традиція, пам’ять**.',
-      'Друга — **практичне «буття митцем»**: сайт і портфоліо, мистецька діяльність через ФОП, подача на опен-коли й гранти, комунікація з кураторами та інституціями. Питання з залу, вільна дискусія.'
-    ]
-  },
-  {
     slug: 'pokazhit-svoi-dokumenty-kvero',
     title: 'Перформанс KVERO contemporary music ensemble «In C»',
     project: 'pokazhit-svoi-dokumenty',
@@ -342,14 +329,14 @@ export const events: SymbolEvent[] = [
   {
     slug: 'kharkivske-more-2026',
     title: 'Фестиваль «Харківське море» 2026',
-    project: 'kharkivske-more',
+    project: 'kharkivske-more-2026',
     format: 'festival',
     start: '2026-08-14',
     end: '2026-08-23',
     venue: { city: 'Харків' },
     description: [
       '**Незалежний фестиваль локальної культури**: виставки, артістоки, воркшопи, вистави, плейбек-перформанси, лекції, концерти. «Символ» — партнер фестивалю.',
-      'Дати — за фотоархівом фестивалю; програму варто уточнити в організаторів.'
+      'Організатор — ГО «Платформа театральних ініціатив». Дати — за фотоархівом фестивалю.'
     ]
   }
 ]

@@ -152,7 +152,8 @@ export interface Organization {
   url?: string
   /** Logo file in public/media/partners/ (from the shared Drive or the organization's own site). */
   logo?: string
-  /** The organization's own logo variant for dark backgrounds, used instead of recolouring (required for the EU emblem). */
+  /** The organization's own logo variant for dark backgrounds, used instead of recolouring (required for the EU emblem).
+   *  The same file as `logo` keeps a coloured badge unchanged in both themes. */
   logoDark?: string
   /** Hover motion that echoes the logo's own identity (see PartnerTiles). */
   motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain' | 'bloom' | 'wipe' | 'rise' | 'flip' | 'fade' | 'spin' | 'brush' | 'stamp' | 'unveil' | 'shoot' | 'pulse' | 'flag' | 'orbit' | 'type' | 'focus' | 'shutter'

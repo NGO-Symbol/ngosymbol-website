@@ -7,6 +7,12 @@ export const organizations: Organization[] = [
   { slug: 'karazin-university', name: 'Харківський національний університет імені В. Н. Каразіна', url: 'https://karazin.ua', logo: '/media/partners/karazin-university.svg', motion: 'unfold' },
   { slug: 'zmina', name: 'Центр прав людини ZMINA', url: 'https://zmina.info', logo: '/media/partners/zmina.svg', motion: 'shift' },
   { slug: 'mincult', name: 'Міністерство культури України', url: 'https://mincult.gov.ua', logo: '/media/partners/mincult.svg', motion: 'rise' },
+  // «Тисячовесна»: the President of Ukraine's initiative for Ukrainian cultural product, run by the Ministry of Culture;
+  // logo with the bird from the Symbol Drive («лого з птахом.svg»); website given by the team (2026-10-29).
+  { slug: 'tysyachovesna', name: 'Тисячовесна — ініціатива Президента України зі створення українського культурного продукту', url: 'https://www.culture.gov.ua/', logo: '/media/partners/tysyachovesna.svg', motion: 'rise' },
+  // The state body that contracts the «Тисячовесна» winners (Symbol's letters of 23.10.2026); logo given by the team
+  // (2026-10-29). It is a coloured badge on its own blue, so it is shown as is in both themes.
+  { slug: 'czipu', name: 'Центр захисту інформаційного простору України', logo: '/media/partners/czipu.png', logoDark: '/media/partners/czipu.png', motion: 'pulse' },
   { slug: 'grynyov-art-foundation', name: 'Grynyov Art Collection', url: 'https://grynyov.art', logo: '/media/partners/grynyov-art-collection.png', motion: 'wipe' },
   { slug: 'mh4u', name: 'Українсько-швейцарський проєкт «Психічне здоров’я для України»', url: 'https://www.mh4u.in.ua', logo: '/media/partners/mh4u.svg', motion: 'bloom' },
   { slug: 'eu', name: 'Співфінансовано Європейським Союзом', url: 'https://european-union.europa.eu', logo: '/media/partners/eu-cofunded.png', logoDark: '/media/partners/eu-cofunded-white.png', motion: 'fade' },
@@ -14,7 +20,7 @@ export const organizations: Organization[] = [
   { slug: 'insha-osvita', name: 'Інша Освіта', url: 'https://insha-osvita.org', logo: '/media/partners/insha-osvita.png', motion: 'spin' },
   { slug: 'zusa', name: 'zusa (Берлін)', url: 'https://zusaculture.org', logo: '/media/partners/zusa.png', motion: 'brush' },
   { slug: 'veteranka', name: 'Жіночий ветеранський рух VETERANKA', url: 'https://veteranka.org.ua', logo: '/media/partners/veteranka.png', motion: 'stamp' },
-  { slug: 'serdenky-playback', name: 'Плейбек-театр «Серденьки»', url: 'https://www.instagram.com/serdenky.playback/' },
+  { slug: 'serdenky-playback', name: 'Плейбек-театр «Серденьки»', url: 'https://www.instagram.com/serdenky.playback/', logo: '/media/partners/serdenky-playback.png', motion: 'beat' },
   // «2, 10, 300 років потому» partners (Drive «exhibition/Partners logo» and the anniversary post of 06.09.2026).
   { slug: 'egyesek', name: 'Egyesek', url: 'https://egyesek.hu', logo: '/media/partners/egyesek.svg', motion: 'orbit' },
   { slug: 'arteria', name: 'Галерея Artéria, Балашшадьярмат', url: 'https://www.programturizmus.hu/ajanlat-arteria-galeria-programok-balassagyarmat.html', logo: '/media/partners/arteria.png', motion: 'pulse' },
@@ -27,19 +33,21 @@ export const organizations: Organization[] = [
   { slug: 'ecf', name: 'European Cultural Foundation', url: 'https://culturalfoundation.eu', logo: '/media/partners/ecf.svg', motion: 'wave' },
   { slug: 'zdybanka', name: 'Молодіжний центр «Здибанка», Батьово', url: 'https://www.facebook.com/mc.zdybanka' },
   { slug: 'khust-theatre', name: 'Хустський Закарпатський обласний театр драми та комедії', url: 'https://teatr-khust.com.ua' },
-  { slug: 'uzh-station', name: 'Арт-простір «Станція Уж», Ужгород', url: 'https://www.instagram.com/stantsiia.uzh/' },
+  { slug: 'uzh-station', name: 'Арт-простір «Станція Уж», Ужгород', url: 'https://www.instagram.com/stantsiia.uzh/', logo: '/media/partners/uzh-station.png', motion: 'rise' },
   { slug: 'ucraina-piu', name: 'Ucraina Più – Milano APS', url: 'https://www.instagram.com/ucrainapiu_milano_aps/' },
   { slug: 'bila-tserkva-library', name: 'Білоцерківська централізована бібліотечна система імені П. Красножона', url: 'https://biblioteka.com.ua', logo: '/media/partners/bila-tserkva-library.png', motion: 'shoot' },
   { slug: 'nema-playback', name: 'Плейбек-театр «Нема»', url: 'https://www.instagram.com/nema_pbt/', logo: '/media/partners/nema.png', motion: 'curtain' }
 ]
 
 // Order of logos wherever several organizations are shown together (home, «Про нас», partner tiles, the exhibition
-// site): funders first — international and state, then foundations and donors — then co-organizing institutions,
-// then venues, partner organizations and companies. By status, as the amounts are not part of the site
-// (USER_CONFIRMED 2026-10-29). Donor lists that a funder's guideline orders (Culture Helps Solidarity) keep their own order.
+// site), USER_CONFIRMED 2026-10-29: the Ministry of Culture first, then «Психічне здоров’я для України», then the donors
+// of «Голоси у русі» together in the order of the Culture Helps Solidarity guideline, then the other donors, then
+// co-organizing institutions, venues, partner organizations and groups.
 export const significance = [
-  'eu', 'culture-helps-solidarity', 'ecf', 'mincult', 'mh4u', 'media-development-foundation', 'grynyov-art-foundation',
-  'insha-osvita', 'zusa', 'veteranka',
+  'mincult', 'mh4u',
+  'culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka',
+  'tysyachovesna', 'czipu',
+  'media-development-foundation', 'grynyov-art-foundation',
   'yermilov-centre', 'karazin-university', 'moksop', 'zmina', 'gwara-media', 'ucraina-piu', 'egyesek', 'arteria', 'union-forum',
   'khust-theatre', 'uzh-station', 'zdybanka', 'bila-tserkva-library', 'sens', 'serdenky-playback', 'nema-playback'
 ]

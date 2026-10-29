@@ -120,7 +120,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
               <PartnerTiles :items="partners" />
             </div>
             <div v-if="donors.length" class="credits__group">
-              <h3>За підтримки</h3>
+              <h3>Донори</h3>
               <PartnerTiles :items="donors" />
             </div>
           </div>
