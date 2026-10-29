@@ -50,6 +50,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </div>
         <h1>{{ text.title }}</h1>
         <p>{{ text.summary }}</p>
+        <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
         <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту ↗</a>
       </div>
     </header>
@@ -109,7 +110,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           </div>
         </section>
 
-        <section v-if="partners.length || donors.length">
+        <section v-if="partners.length || donors.length || project.programLogo">
           <span class="label">Партнери й донори</span>
           <div class="credits">
             <div v-if="partners.length" class="credits__group">
@@ -122,6 +123,10 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
             </div>
           </div>
           <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>
+          <figure v-if="project.programLogo" class="program-logo">
+            <img :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
+            <figcaption>{{ project.programLogo.name }}</figcaption>
+          </figure>
         </section>
 
         <section v-if="mentions.length">

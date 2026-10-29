@@ -74,7 +74,15 @@ onMounted(async () => {
 .is-visible .partner-logo--wave :deep(path:first-child), .is-visible .partner-logo--wave :deep(rect:first-of-type) { transform-origin: left center; }
 @keyframes pl-drop { from { opacity: 0; transform: translateY(-8px); } }
 
-/* Mental health for Ukraine: a calm double heartbeat. */
+/* Mental health for Ukraine: the ring of dots blooms open, then the letters settle. */
+.is-visible .partner-logo--bloom :deep(svg *:not(g):not(style):not(defs)) { animation: pl-bloom .9s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 22ms); }
+@keyframes pl-bloom { from { opacity: 0; transform: scale(.2); } }
+
+/* Grynyov Art Collection: the stacked words are uncovered left to right, like a bar being drawn. */
+.is-visible .partner-logo--wipe img { animation: pl-wipe 1s cubic-bezier(.7, 0, .2, 1) both; }
+@keyframes pl-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* Mental health for Ukraine (raster fallback): a calm double heartbeat. */
 .is-visible .partner-logo--beat img { animation: pl-beat 1.4s ease-in-out both; transform-origin: left center; }
 @keyframes pl-beat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.08); } 28% { transform: scale(1); } 42% { transform: scale(1.05); } 70% { transform: scale(1); } }
 

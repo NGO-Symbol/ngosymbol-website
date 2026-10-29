@@ -58,6 +58,8 @@ export interface Project {
   partners?: string[]
   donors?: string[]
   donorCredit?: string
+  /** Logo of the programme the project belongs to (e.g. WHO mhGAP), shown beside the credit line. */
+  programLogo?: { src: string; name: string }
   related?: string[]
   subsiteUrl?: string
   externalUrl?: string
@@ -137,5 +139,5 @@ export interface Organization {
   /** Logo file in public/media/partners/ (from the shared Drive or the organization's own site). */
   logo?: string
   /** Hover motion that echoes the logo's own identity (see PartnerTiles). */
-  motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain'
+  motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain' | 'bloom' | 'wipe'
 }

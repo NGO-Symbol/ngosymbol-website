@@ -50,7 +50,11 @@ const hidden = ref(false)
 const scrolled = ref(false)
 let lastY = 0
 function onScroll() {
-  const y = window.scrollY
+  // Phones bounce past the top and bottom edges (rubber-band scroll); those overshoots are ignored so the
+  // header does not flicker in and out at the end of a page.
+  const max = document.documentElement.scrollHeight - window.innerHeight
+  const y = Math.min(Math.max(window.scrollY, 0), Math.max(max, 0))
+  if (y >= max - 2 && y > 160) { lastY = y; return }
   scrolled.value = y > 8
   if (y < 160) {
     hidden.value = false
@@ -71,13 +75,32 @@ onMounted(() => {
   const set = document.documentElement.getAttribute('data-theme')
   theme.value = set === 'dark' || (!set && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'
 })
-function toggleTheme() {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+// The whole page (header and background together) switches as one picture: the new theme spreads as a circle
+// from the button. Browsers without View Transitions cross-fade colours instead.
+function toggleTheme(event: MouseEvent) {
+  const next = theme.value === 'dark' ? 'light' : 'dark'
   const root = document.documentElement
-  root.classList.add('theme-switching')
-  root.setAttribute('data-theme', theme.value)
-  try { localStorage.setItem('symbol-theme', theme.value) } catch {}
-  window.setTimeout(() => root.classList.remove('theme-switching'), 700)
+  const apply = () => {
+    theme.value = next
+    root.setAttribute('data-theme', next)
+    try { localStorage.setItem('symbol-theme', next) } catch {}
+  }
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!document.startViewTransition || reduced) {
+    root.classList.add('theme-switching')
+    apply()
+    window.setTimeout(() => root.classList.remove('theme-switching'), 700)
+    return
+  }
+  const x = event.clientX || innerWidth - 40
+  const y = event.clientY || 40
+  const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
+  root.classList.add('theme-wipe')
+  const transition = document.startViewTransition(apply)
+  transition.ready.then(() => {
+    root.animate({ clipPath: [`circle(0 at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] }, { duration: 650, easing: 'cubic-bezier(.6, 0, .25, 1)', pseudoElement: '::view-transition-new(root)' })
+  })
+  transition.finished.finally(() => root.classList.remove('theme-wipe'))
 }
 </script>
 

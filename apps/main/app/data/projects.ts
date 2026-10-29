@@ -2,7 +2,7 @@ import type { Project } from './types'
 
 // Facts come from documents/knowledge/project-registry.md (portfolio 2026, presentation 2024, grant files).
 // Donor names and credit lines still need publication approval (documents/knowledge/open-questions.md).
-export const projects: Project[] = [
+const entries: Project[] = [
   {
     slug: 'istoriia-moiei-vulytsi',
     title: 'Історія моєї вулиці',
@@ -108,8 +108,8 @@ export const projects: Project[] = [
       { person: 'senora-serpiente', role: 'Митці' }
     ],
     partners: ['yermilov-centre', 'karazin-university', 'zmina'],
-    donors: ['president-grant', 'grynyov-art-foundation'],
-    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Виставка відбулася за підтримки Гранту Президента України для молодих митців та Grynyov Art Collection.',
+    donors: ['mincult', 'grynyov-art-foundation'],
+    donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Виставка відбулася за фінансової підтримки Міністерства культури України в межах Гранту Президента України для молодих митців та за підтримки Grynyov Art Collection.',
     gallery: [
       { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу' },
@@ -167,7 +167,8 @@ export const projects: Project[] = [
     ],
     people: [{ person: 'yurii-rassokha', role: 'Менеджер проєкту' }],
     donors: ['mh4u'],
-    donorCredit: 'Проєкт реалізовано за донорської підтримки українсько-швейцарського проєкту «Психічне здоров’я для України».'
+    donorCredit: 'Проєкт реалізовано за донорської підтримки українсько-швейцарського проєкту «Психічне здоров’я для України».',
+    programLogo: { src: '/media/projects/mhgap-kyiv/mhgap-logo.svg', name: 'Програма дій ВООЗ із подолання прогалин у сфері психічного здоров’я (mhGAP)' }
   },
   {
     slug: 'ti-khto-pobachyly-svit',
@@ -269,3 +270,8 @@ export const projects: Project[] = [
     ]
   }
 ]
+
+// Order everywhere on the site: newest year first; within a year, donor-funded projects lead, then long projects,
+// then one-off events (USER_CONFIRMED 2026-10-29).
+const weight = (project: Project) => (project.donors?.length ? 0 : 2) + (project.kind === 'single' ? 1 : 0)
+export const projects: Project[] = entries.sort((a, b) => b.yearStart - a.yearStart || weight(a) - weight(b))
