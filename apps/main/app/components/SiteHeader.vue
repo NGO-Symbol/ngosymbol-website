@@ -4,7 +4,9 @@ const markAnimations = ['mark-spin', 'mark-bounce', 'mark-flip', 'mark-wobble', 
 const clicks = ref(0)
 const markClass = ref('')
 
-function animateMark() {
+function animateMark(event: MouseEvent) {
+  // Already home: no navigation happens, so ask RouteWipe for the circle → logo animation directly.
+  if (route.path === '/' || route.path === '/en') window.dispatchEvent(new CustomEvent('symbol:home-wipe', { detail: { x: event.clientX, y: event.clientY } }))
   markClass.value = ''
   requestAnimationFrame(() => {
     markClass.value = markAnimations[clicks.value % markAnimations.length]!
@@ -43,6 +45,26 @@ onMounted(() => {
 })
 onBeforeUnmount(() => window.removeEventListener('resize', moveInk))
 
+// Sticky header: hides while scrolling down, comes back as soon as the visitor scrolls up.
+const hidden = ref(false)
+const scrolled = ref(false)
+let lastY = 0
+function onScroll() {
+  const y = window.scrollY
+  scrolled.value = y > 8
+  if (y < 160) {
+    hidden.value = false
+    lastY = y
+    return
+  }
+  if (Math.abs(y - lastY) < 6) return
+  hidden.value = y > lastY && !document.querySelector('.site-search')
+  lastY = y
+}
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+watch(() => route.path, () => { hidden.value = false })
+
 // Theme: light ↔ dark; the first click flips from whatever the system shows.
 const theme = ref<'light' | 'dark'>('light')
 onMounted(() => {
@@ -60,7 +82,7 @@ function toggleTheme() {
 </script>
 
 <template>
-  <header class="site-header container">
+  <header class="site-header container" :class="{ 'is-hidden': hidden, 'is-scrolled': scrolled }" @focusin="hidden = false">
     <NuxtLink class="wordmark" :to="isEn ? '/en' : '/'" :aria-label="isEn ? 'NGO Symbol — home' : 'ГО «Символ» — головна'" @click="animateMark">
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>

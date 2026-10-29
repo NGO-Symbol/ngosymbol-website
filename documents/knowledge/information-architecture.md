@@ -20,7 +20,7 @@ Accepted model: [ADR-0008](decisions/ADR-0008-linked-content-model.md). `USER_CO
 /en/...                 English mirror of every page (ADR-0009)
 ```
 
-Header: official logo · Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA/EN switch (sliding pill; keeps the same page, ADR-0009) · site search (button, «/» or Ctrl/⌘+K; projects, events, people, news, opportunities) · light/dark toggle. Tabs roll on hover; a sliding ink bar marks the current section.
+Header: official logo · Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA/EN switch (sliding pill; keeps the same page, ADR-0009) · site search (button, «/» or Ctrl/⌘+K; projects, events, people, news, opportunities) · light/dark toggle. Tabs roll on hover; a sliding ink bar marks the current section. The header is sticky: it hides while scrolling down and returns on any scroll up; on project pages with their own identity it takes the project's colours (PSD: paper grey, black, blue). A small back-to-top button with a reading-progress ring appears after the first screen. `USER_CONFIRMED` 2026-10-29.
 
 Added 2026-10-29: `/news` (short news, latest three on Home), `/press` (press kit: logo files, UA/EN boilerplate, press contact, project photos), `/en` (first English page for international partners: intro, indicators, projects with English titles and summaries), archived open calls on `/opportunities`, `/sitemap.xml`, a skip link. The full English version of every page is still open.
 

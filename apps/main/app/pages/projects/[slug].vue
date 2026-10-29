@@ -13,6 +13,9 @@ const { isEn } = useLang()
 const text = computed(() => (isEn.value && projectsEn[project.slug]) || project)
 useSeoMeta({ title: () => `${text.value.title} · ${projectYears(project)}`, description: () => text.value.summary })
 
+// The header takes the project's colours on themed pages (html[data-page-theme], main.css).
+if (project.theme) useHead({ htmlAttrs: { 'data-page-theme': project.theme } })
+
 // Fonts of a project identity load only on that project's page.
 if (project.theme === 'documents') {
   useHead({ link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap' }] })
