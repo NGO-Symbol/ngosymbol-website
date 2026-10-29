@@ -132,6 +132,8 @@ export interface Organization {
   name: string
   /** Website, or a social profile when there is no website. */
   url?: string
-  /** Logo file in public/media/partners/ — added only with permission. */
+  /** Logo file in public/media/partners/ (from the shared Drive or the organization's own site). */
   logo?: string
+  /** Hover motion that echoes the logo's own identity (see PartnerTiles). */
+  motion?: 'blink' | 'unfold' | 'shift' | 'beat' | 'wave' | 'stars' | 'curtain'
 }

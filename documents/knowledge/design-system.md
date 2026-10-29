@@ -40,7 +40,11 @@ The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` 
 
 ## Typography
 
-The main site uses the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for both display and text, through `--font-display` and `--font-body`. Project pages with their own identity override these variables. `USER_CONFIRMED` 2026-10-29. Web-embedding licence of Zakon to be confirmed.
+The main site uses the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for headings and display text (`--font-display`), and **Source Serif 4** (variable, self-hosted from `@fontsource-variable/source-serif-4`, finer serifs) for running and small text (`--font-body`). `USER_CONFIRMED` 2026-10-29: the team likes Zakon for large letters and wants a serif with smaller serifs for small text. Zakon headings need loose leading: display line-height is at least 1.04 and letter-spacing no tighter than −0.015em, otherwise accents (Й, Ї) collide with the line above. Project pages with their own identity override these variables. Web-embedding licence of Zakon to be confirmed.
+
+## Partner logos
+
+Partner and donor logos are shown transparent (no plate) and each moves in the rhythm of its own mark, once when the tile scrolls into view and again on hover (`PartnerLogo.vue`): ЄрміловЦентр blocks slide in and letters light up; Karazin's emblem shapes rise in order; ZMINA letters shift in one by one; ECF words drop in line by line; MH4U beats twice; Creative Europe's ring of stars turns; «Нема» opens like a curtain. SVG logos are inlined so each shape can move; in dark mode logos are inverted with their hue kept. Organizations without a logo file show the name only. `USER_CONFIRMED` 2026-10-29.
 
 ## Light and dark mode
 
