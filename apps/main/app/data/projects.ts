@@ -132,6 +132,14 @@ const entries: Project[] = [
     formats: ['playback', 'performance'],
     directions: ['art', 'mental-health'],
     tone: 'plum',
+    gallery: [
+      { src: '/media/projects/istorii-riznykh/bow.jpg', alt: 'Актори плейбек-театру і ведуча після перформансу в Арсеналі ідей', people: true },
+      { src: '/media/projects/istorii-riznykh/stage.jpg', alt: 'Сцена перформансу: актори в чорному на тлі білої стіни' },
+      { src: '/media/projects/istorii-riznykh/scene.jpg', alt: 'Актори відіграють історію глядача' },
+      { src: '/media/projects/istorii-riznykh/actress.jpg', alt: 'Акторка в момент гри', people: true },
+      { src: '/media/projects/istorii-riznykh/actors-mic.jpg', alt: 'Актор розповідає біля мікрофона, поруч партнерки по сцені', people: true },
+      { src: '/media/projects/istorii-riznykh/gesture.jpg', alt: 'Акторка й рухомі фігури позаду неї', people: true }
+    ],
     motif: 'curtain',
     summary: 'Плейбек-перформанс, у якому актори відіграли історії глядачів.',
     body: [
@@ -182,6 +190,13 @@ const entries: Project[] = [
     formats: ['exhibition'],
     directions: ['art'],
     tone: 'apricot',
+    gallery: [
+      { src: '/media/projects/ti-khto-pobachyly-svit/exhibition.jpg', alt: 'Роботи виставки на стендах у залі в Мілані' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/talk.jpg', alt: 'Розмова на відкритті виставки в Мілані', people: true },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-label.jpg', alt: 'Фотографія Петра Чекаля з підписом трьома мовами' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/audience.jpg', alt: 'Глядачі на відкритті', people: true },
+      { src: '/media/projects/ti-khto-pobachyly-svit/flute.jpg', alt: 'Музичний виступ на відкритті виставки', people: true }
+    ],
     motif: 'aperture',
     summary: 'Фотовиставка Петра Чекаля та Юрія Рассохи на Фестивалі української книги в Мілані.',
     body: [
@@ -255,6 +270,13 @@ const entries: Project[] = [
     formats: ['film'],
     directions: ['art'],
     tone: 'plum',
+    gallery: [
+      { src: '/media/projects/zbyrach-konvalii/title.jpg', alt: 'Титр фільму «Збирач конвалій» на кадрі з квартири фотографа' },
+      { src: '/media/projects/zbyrach-konvalii/archive.jpg', alt: 'Кадр із фільму: фотограф гортає свої знімки' },
+      { src: '/media/projects/zbyrach-konvalii/silhouette.jpg', alt: 'Кадр із фільму: силует у кімнаті з червоним світлом' },
+      { src: '/media/projects/zbyrach-konvalii/room.jpg', alt: 'Кадр із фільму: стіна з фотографіями й предметами' },
+      { src: '/media/projects/zbyrach-konvalii/newspapers.jpg', alt: 'Кадр із фільму: газети й знімки з архіву' }
+    ],
     motif: 'film',
     summary: 'Документальний фільм про фотографа Харківської школи фотографії Олександра Супруна.',
     body: [
