@@ -525,6 +525,7 @@ export const people: Person[] = [
   {
     slug: 'ivan-kutchak',
     name: 'Іван Кутчак',
+    photo: '/media/people/ivan-kutchak.jpg',
     shortBio: 'Тренер і супервізор програми ВООЗ mhGAP.',
     bio: [
       'Тренер і супервізор програми ВООЗ mhGAP. У проєкті [[project:mhgap-kyiv]] разом з [[person:alesia-lysenko|Алесею Лисенко]] вів тренінг **31 березня — 4 квітня 2025**, а разом з [[person:olha-klymovska|Ольгою Климовською]] — другу частину програми **13–16 травня 2025** у Києві.',
@@ -546,30 +547,35 @@ export const people: Person[] = [
   {
     slug: 'olena-lemeshko',
     name: 'Олена Лемешко',
+    photo: '/media/people/olena-lemeshko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Лікарка загальної практики — сімейної медицини, тренерка програми ВООЗ mhGAP. Разом з [[person:nataliia-opryshko|Наталією Опришко]] вела **перший тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **10–14 лютого 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
   },
   {
     slug: 'nataliia-opryshko',
     name: 'Наталія Опришко',
+    photo: '/media/people/nataliia-opryshko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:olena-lemeshko|Оленою Лемешко]] вела **перший тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **10–14 лютого 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
   },
   {
     slug: 'yurii-sich',
     name: 'Юрій Січ',
+    photo: '/media/people/yurii-sich.jpg',
     shortBio: 'Тренер і супервізор програми ВООЗ mhGAP.',
     bio: ['Тренер програми ВООЗ mhGAP. Разом з [[person:viktoriia-myroniuk-danko|Вікторією Миронюк-Данко]] вів **другий тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **24–28 лютого 2025**. Після тренінгу вів **онлайн-супервізії** для учасників.']
   },
   {
     slug: 'viktoriia-myroniuk-danko',
     name: 'Вікторія Миронюк-Данко',
+    photo: '/media/people/viktoriia-myroniuk-danko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:yurii-sich|Юрієм Січем]] вела **другий тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **24–28 лютого 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
   },
   {
     slug: 'alesia-lysenko',
     name: 'Алеся Лисенко',
+    photo: '/media/people/alesia-lysenko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:ivan-kutchak|Іваном Кутчаком]] вела **третій тренінг** проєкту [[project:mhgap-kyiv]], **31 березня — 4 квітня 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
   }
