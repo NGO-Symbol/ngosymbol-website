@@ -36,14 +36,14 @@ watch(current, reveal)
 <style scoped>
 .docs-tabs { display: none; }
 @media (max-width: 640px) {
-  .docs-tabs { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; background: var(--docs-ink); padding: 8px 0 calc(env(safe-area-inset-bottom) + 0px); box-shadow: 0 -6px 18px color-mix(in srgb, var(--docs-ink) 25%, transparent); }
+  .docs-tabs { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; background: var(--docs-ink); padding: 5px 0 env(safe-area-inset-bottom); box-shadow: 0 -6px 18px color-mix(in srgb, var(--docs-ink) 25%, transparent); }
   .docs-tabs__row { display: flex; align-items: flex-end; gap: 4px; padding: 0 12px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
   .docs-tabs__row::-webkit-scrollbar { display: none; }
   /* A folder index tab: slanted shoulders, a case number above the name. */
-  .docs-tab { flex: none; scroll-snap-align: center; display: grid; gap: 1px; min-width: 92px; padding: 8px 14px 10px; clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 100%, 0 100%); background: color-mix(in srgb, var(--docs-paper) 72%, var(--docs-ink)); color: var(--docs-ink); text-decoration: none; transform: translateY(6px); transition: transform .25s cubic-bezier(.3, 1.4, .5, 1), background .2s ease; }
+  .docs-tab { flex: none; scroll-snap-align: center; display: grid; gap: 1px; min-width: 80px; padding: 5px 12px 6px; clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 100%, 0 100%); background: color-mix(in srgb, var(--docs-paper) 72%, var(--docs-ink)); color: var(--docs-ink); text-decoration: none; transform: translateY(6px); transition: transform .25s cubic-bezier(.3, 1.4, .5, 1), background .2s ease; }
   .docs-tab__no { font-family: var(--docs-mono); font-size: .62rem; letter-spacing: .12em; opacity: .6; }
-  .docs-tab__label { font-family: var(--docs-display); text-transform: uppercase; font-size: 1.05rem; line-height: 1; white-space: nowrap; }
-  .docs-tab.is-active { background: var(--docs-paper); transform: translateY(0); padding-bottom: 14px; }
+  .docs-tab__label { font-family: var(--docs-display); text-transform: uppercase; font-size: .92rem; line-height: 1; white-space: nowrap; }
+  .docs-tab.is-active { background: var(--docs-paper); transform: translateY(0); padding-bottom: 9px; }
   .docs-tab.is-active .docs-tab__no { color: var(--docs-stamp); opacity: 1; }
   .docs-tab:active { transform: translateY(2px); }
 }

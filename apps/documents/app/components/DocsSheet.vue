@@ -28,4 +28,5 @@ const { t } = useLang()
 .docs-sheet__foot { margin-top: 24px; padding-top: 8px; border-top: 1px dashed color-mix(in srgb, var(--docs-ink) 40%, transparent); text-align: right; font-family: var(--docs-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--docs-muted); }
 @keyframes docs-sheet-in { from { opacity: 0; transform: translateY(18px) rotate(calc(var(--tilt) - .8deg)); } }
 @media (prefers-reduced-motion: reduce) { .docs-sheet { animation: none; } }
+@media (max-width: 640px) { .docs-sheet { padding: 14px 16px 12px 22px; } .docs-sheet__form { margin-bottom: 14px; font-size: .62rem; } .docs-sheet + .docs-sheet { margin-top: 18px; } }
 </style>
