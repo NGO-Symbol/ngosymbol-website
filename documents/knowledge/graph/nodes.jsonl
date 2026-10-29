@@ -12,7 +12,7 @@
 {"id":"project:2-10-300","type":"project","label":"2, 10, 300…","confidence":"EXTRACTED","source":"documents/knowledge/project-registry.md"}
 {"id":"project:kharkiv-sea","type":"project","label":"Харківське море","confidence":"USER_CONFIRMED","source":"documents/knowledge/project-registry.md"}
 {"id":"domain:symbol-ngo","type":"domain","label":"symbol.ngo","confidence":"USER_CONFIRMED","source":"documents/knowledge/technical-architecture.md"}
-{"id":"domain:street-history","type":"domain","label":"istoriia-vulytsi.symbol.ngo","confidence":"USER_CONFIRMED","source":"documents/knowledge/information-architecture.md"}
+{"id":"domain:street-history","type":"domain","label":"my-street.symbol.ngo","confidence":"USER_CONFIRMED","source":"documents/knowledge/information-architecture.md"}
 {"id":"app:main","type":"application","label":"Institutional Nuxt application","confidence":"USER_CONFIRMED","source":"documents/knowledge/technical-architecture.md"}
 {"id":"app:street-history","type":"application","label":"Street History autonomous Nuxt application","confidence":"USER_CONFIRMED","source":"documents/knowledge/technical-architecture.md"}
 {"id":"theme:culture","type":"theme","label":"Culture and contemporary art","confidence":"USER_CONFIRMED","source":"documents/knowledge/organization.md"}

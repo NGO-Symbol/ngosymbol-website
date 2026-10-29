@@ -19,7 +19,7 @@ const entries: Project[] = [
     summary: 'Таблички з QR-кодами на вулицях Харкова й окремі сторінки вулиць: історії, які місто розповідає про себе.',
     body: [
       'Проєкт збирає історії харківських вулиць. На вулицях з’являться таблички з QR-кодами, які ведуть на сторінки вулиць на сайті проєкту.',
-      'Тексти перевіряє експертна рада. Сайт проєкту — окремий простір зі своєю структурою й дизайном.'
+      'Тексти перевіряє експертна рада. Окремий сайт проєкту зі своєю структурою й дизайном зараз у розробці.'
     ],
     people: [
       { person: 'yurii-rassokha', role: 'Команда проєкту' },
@@ -28,8 +28,8 @@ const entries: Project[] = [
       { person: 'larysa-chaika', role: 'Головна ілюстраторка' },
       { person: 'oleksii-chekal', role: 'Головний дизайнер' },
       { person: 'olena-mordyk', role: 'Комунікація' }
-    ],
-    subsiteUrl: 'https://istoriia-vulytsi.symbol.ngo'
+    ]
+    // The project site (my-street.symbol.ngo) is hidden while it is being built; add subsiteUrl back when it opens.
   },
   {
     slug: 'holosy-u-rusi',
@@ -134,6 +134,7 @@ const entries: Project[] = [
     directions: ['art', 'mental-health'],
     tone: 'plum',
     gallery: [
+      { src: '/media/projects/istorii-riznykh/performance.jpg', alt: 'Плейбек-перформанс «Історії різних»: акторка відіграє історію глядача, решта акторів на сцені' },
       { src: '/media/projects/istorii-riznykh/bow.jpg', alt: 'Актори плейбек-театру і ведуча після перформансу в Арсеналі ідей', people: true },
       { src: '/media/projects/istorii-riznykh/stage.jpg', alt: 'Сцена перформансу: актори в чорному на тлі білої стіни' },
       { src: '/media/projects/istorii-riznykh/scene.jpg', alt: 'Актори відіграють історію глядача' },

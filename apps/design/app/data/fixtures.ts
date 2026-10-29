@@ -4,7 +4,7 @@ export const navItems = [
   { label: 'Про нас', to: '/templates/about' }, { label: 'Контакти', to: '/templates/contact' },
 ]
 export const projects = [
-  { title: 'Історія моєї вулиці', href: 'https://istoriia-vulytsi.symbol.ngo', external: true, period: '2026–2027', status: 'launching', statusLabel: 'Запускається', direction: 'Міська культура · пам’ять', summary: 'Автономний проєктний сайт з окремими сторінками вулиць і сталими QR-маршрутами.', tone: 'violet' },
+  { title: 'Історія моєї вулиці', href: 'https://my-street.symbol.ngo', external: true, period: '2026–2027', status: 'launching', statusLabel: 'Запускається', direction: 'Міська культура · пам’ять', summary: 'Автономний проєктний сайт з окремими сторінками вулиць і сталими QR-маршрутами.', tone: 'violet' },
   { title: 'Голоси у русі', to: '/templates/project', period: '2026', status: 'ongoing', statusLabel: 'Триває', direction: 'Плейбек-театр', summary: 'Проєкт про плейбек-театр і живі історії на Закарпатті.', tone: 'apricot' },
   { title: 'Покажіть свої документи, будь ласка', to: '/templates/project', period: '2025', status: 'completed', statusLabel: 'Завершено', direction: 'Сучасне мистецтво', summary: 'Мистецький проєкт, представлений у ЄрміловЦентрі.', tone: 'white' },
   { title: 'Тренінги mhGAP на Київщині', to: '/templates/project', period: '2025', status: 'completed', statusLabel: 'Завершено', direction: 'Психічне здоров’я', summary: 'Завершений освітній проєкт у напрямі психічного здоров’я.', tone: 'plum' },

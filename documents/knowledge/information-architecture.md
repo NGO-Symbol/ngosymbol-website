@@ -87,7 +87,7 @@ An autonomous project owns its information architecture, page count, layout, med
 
 ### First example
 
-`istoriia-vulytsi.symbol.ngo`
+`my-street.symbol.ngo`
 
 - `/` — project home.
 - `/vulytsi` — all streets.
@@ -96,3 +96,7 @@ An autonomous project owns its information architecture, page count, layout, med
 - `/team` — project team and partners, if content warrants a separate page.
 
 Short printed QR aliases such as `/v/chebaievyna` may redirect to the canonical street page. QR destinations must remain stable after printing.
+
+### Street History subdomain (2026-10-29)
+
+`USER_CONFIRMED`: the project subdomain is renamed from `istoriia-vulytsi.symbol.ngo` to `my-street.symbol.ngo` (a hyphen, not `my_street`: underscores are not valid in host names and get no HTTPS certificate). While the team builds it, the site is hidden: the deploy publishes only a noindex «coming soon» page (`apps/istoriia-vulytsi/hidden`, switch `STREET_HIDDEN` in `deploy.yml`), and the project page on symbol.ngo has no link to it. To finish the rename the owner adds a Cloudflare DNS record `my-street` CNAME `ngo-symbol.github.io` (DNS only) and sets the repository variable `STREET_DOMAIN` to `my-street.symbol.ngo`.
