@@ -17,7 +17,7 @@ export const events: SymbolEvent[] = [
     venue: yermilov,
     partners: ['yermilov-centre'],
     description: [
-      '**Урочисте відкриття виставки**: промови кураторів, менеджерки, керівниці ЄрміловЦентру, ректора ХНУ ім. В. Н. Каразіна та перформанс [[person:oleksii-chekal]].'
+      '**Урочисте відкриття виставки**: промови кураторів, менеджерки, керівниці ЄрміловЦентру, ректора ХНУ ім. В. Н. Каразіна та [[event:pokazhit-svoi-dokumenty-shreder-shredingera|перформанс Олексія Чекаля «Шредер Шредінґера»]].'
     ],
     people: [
       { person: 'petro-chekal', role: 'Куратори' },
@@ -39,6 +39,26 @@ export const events: SymbolEvent[] = [
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Перформанс на відкритті: художник друкує напис на довгому аркуші' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance-banner.jpg', alt: 'Учасники перформансу піднімають надрукований банер' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-team.jpg', alt: 'Спільне фото команди, митців і гостей на відкритті', people: true }
+    ]
+  },
+  {
+    slug: 'pokazhit-svoi-dokumenty-shreder-shredingera',
+    title: 'Перформанс «Шредер Шредінґера»',
+    project: 'pokazhit-svoi-dokumenty',
+    format: 'performance',
+    start: '2025-10-17T18:00',
+    venue: yermilov,
+    partners: ['yermilov-centre'],
+    description: [
+      'Перформанс [[person:oleksii-chekal]] **«Шредер Шредінґера»** відбувся в день відкриття виставки «Покажіть свої документи…».'
+    ],
+    people: [{ person: 'oleksii-chekal', role: 'Автор перформансу' }],
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/overhead.jpg', alt: 'Олексій Чекаль друкує напис під час перформансу «Шредер Шредінґера» — вигляд згори', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/audience.jpg', alt: 'Глядачі спостерігають за перформансом Олексія Чекаля', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/printing.jpg', alt: 'Олексій Чекаль наносить напис на довгу смугу паперу', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/banner.jpg', alt: 'Олексій Чекаль розгортає надруковану смугу перед глядачами', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-shreder-shredingera/shredder.jpg', alt: 'Фрагмент перформансу «Шредер Шредінґера» з подрібненим папером', credit: 'Петро Чекаль' }
     ]
   },
   {
@@ -74,6 +94,10 @@ export const events: SymbolEvent[] = [
     venue: yermilov,
     partners: ['yermilov-centre'],
     description: ['Друга кураторська екскурсія виставкою.'],
+    gallery: [
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia-zhovten/interactive.jpg', alt: 'Учасниці кураторської екскурсії взаємодіють із роботою на виставці', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia-zhovten/tour.jpg', alt: 'Кураторська екскурсія 28 жовтня — вигляд із нижнього рівня ЄрміловЦентру', credit: 'Петро Чекаль', people: true }
+    ],
     people: [
       { person: 'petro-chekal', role: 'Куратори' },
       { person: 'yurii-rassokha', role: 'Куратори' }

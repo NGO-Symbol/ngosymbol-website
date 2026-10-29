@@ -14,12 +14,23 @@ export function workPhotos(slug: string) {
 // they replace the smaller pictures from the saved pages, which are mostly the same shots.
 export const chekalPhotoCount: Record<string, number> = {
   'alina-prokopenko': 2, 'andrii-skrypka': 3, 'anna-hareieva': 4, 'anton-kariuk': 5, 'kostiantyn-hlyvlias': 3,
+  'dara-sholokh': 4, 'kinich-azla': 4,
   'mariia-matiashova': 3, 'mariia-prokopenko': 12, 'nataliia-okhman': 2, 'oleh-tistol': 2, 'pavlo-makov': 1,
+  'oleksii-sai': 3, 'roman-piatkovka': 3, 'senora-serpiente': 2,
   'serhii-melnychenko': 4, 'vira-pakosh': 3, 'volodymyr-kuznietsov': 5, 'yeva-fomitski': 3
 }
 
 export function chekalPhotos(slug: string) {
   return Array.from({ length: chekalPhotoCount[slug] ?? 0 }, (_, i) => `/media/projects/pokazhit-svoi-dokumenty/works/${slug}-${i + 1}.jpg`)
+}
+
+// Additional photographs from an artist-specific source folder. They supplement, rather than replace, the exhibition
+// photographs above and keep their own credit when one is known.
+export const supplementalWorkPhotos: Record<string, { src: string, credit?: string }[]> = {
+  'oleksii-sai': [
+    { src: '/works/oleksii-sai/1.jpg' },
+    { src: '/works/oleksii-sai/2.jpg' }
+  ]
 }
 
 // Exhibition photographs by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов») that show a work, by artist
@@ -47,6 +58,8 @@ export const coverPhoto: Record<string, string> = {
   'nataliia-okhman': chekal('nataliia-okhman', 2),
   'oleh-tistol': chekal('oleh-tistol', 2),
   'pavlo-makov': '/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg',
+  'oleksii-sai': chekal('oleksii-sai', 1),
+  'senora-serpiente': chekal('senora-serpiente', 1),
   'serhii-melnychenko': chekal('serhii-melnychenko', 1),
   'vira-pakosh': chekal('vira-pakosh', 2),
   'volodymyr-kuznietsov': chekal('volodymyr-kuznietsov', 1),

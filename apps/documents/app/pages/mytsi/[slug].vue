@@ -2,7 +2,7 @@
 // An artist of the exhibition as a personal case file: a folder cover with the 3×4 portrait clipped on and the case
 // fields, then sheets — the biography, the curatorial text of each work, the photographs as an appendix — and the full
 // page on symbol.ngo (biography, links, other projects). Texts are in Ukrainian.
-import { chekalPhotos, osipovPhotos, workPhotos } from '~/data/workPhotos'
+import { chekalPhotos, osipovPhotos, supplementalWorkPhotos, workPhotos } from '~/data/workPhotos'
 
 const { isEn, t, localePath } = useLang()
 const route = useRoute()
@@ -25,6 +25,7 @@ const photos = [
     ...(artist.person?.works ?? []),
     ...artist.coAuthors.flatMap(person => person.works ?? [])
   ]),
+  ...(supplementalWorkPhotos[artist.slug] ?? []).map(photo => ({ ...photo, alt })),
   ...exhibitionShots
 ]
 const credits = [...new Set(photos.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
