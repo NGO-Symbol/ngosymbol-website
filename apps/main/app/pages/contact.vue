@@ -9,8 +9,8 @@ useSeoMeta({ title: 'Контакти' })
       <span class="eyebrow">Партнерство · підтримка · спільні ідеї</span>
       <h1>Поговорімо про майбутній проєкт</h1>
       <div class="contact-links">
-        <span class="selectable">ngo.symbol@gmail.com</span>
-        <a v-for="item in socials" :key="item.label" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
+        <CopyValue value="ngo.symbol@gmail.com" />
+        <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
       </div>
       <p>Корпоративна пошта з’явиться після налаштування Google Workspace для неприбуткових організацій.</p>
     </div>

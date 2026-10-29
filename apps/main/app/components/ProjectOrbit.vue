@@ -97,7 +97,7 @@ function open(slug: string) {
   if (launching.value) return
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return navigateTo(`/projects/${slug}`)
   launching.value = true
-  window.setTimeout(() => navigateTo(`/projects/${slug}`), 520)
+  window.setTimeout(() => navigateTo(`/projects/${slug}`), 260)
 }
 
 function onPointerMove(event: PointerEvent) {
@@ -180,8 +180,8 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); cancelAn
 .orbit-hook__ring--dashed { stroke-dasharray: 3 9; opacity: .5; transform-origin: 500px 500px; animation: orbit-spin 60s linear infinite reverse; }
 .orbit-hook__spin { transform-origin: 500px 500px; animation: orbit-spin 45s linear infinite; }
 .orbit-hook.is-paused .orbit-hook__spin { animation-play-state: paused; }
-.orbit-hook.is-launching .orbit-hook__spin { animation: orbit-launch .55s cubic-bezier(.6, 0, .3, 1) forwards; }
-.orbit-hook.is-launching .orbit-hook__core { animation: orbit-core-launch .55s cubic-bezier(.6, 0, .3, 1) forwards; }
+.orbit-hook.is-launching .orbit-hook__spin { animation: orbit-launch .3s ease-in forwards; }
+.orbit-hook.is-launching .orbit-hook__core { animation: orbit-core-launch .3s ease-in forwards; }
 .orbit-hook__core { transform-origin: 500px 500px; animation: orbit-breathe 7s ease-in-out infinite; }
 .orbit-hook__parallax { transition: transform .3s ease-out; }
 .orbit-hook__satellite { transform-origin: 500px 500px; animation: orbit-satellite 12s linear infinite; }
@@ -204,7 +204,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); cancelAn
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 @keyframes orbit-breathe { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(-14deg) scale(1.06); } }
 @keyframes orbit-satellite { to { transform: rotate(-360deg); } }
-@keyframes orbit-launch { to { transform: rotate(540deg) scale(.6); opacity: 0; } }
-@keyframes orbit-core-launch { 40% { transform: scale(.85); } to { transform: scale(2.4) rotate(-90deg); opacity: 0; } }
+@keyframes orbit-launch { to { transform: rotate(60deg); opacity: 0; } }
+@keyframes orbit-core-launch { to { transform: scale(.92); opacity: 0; } }
 @keyframes caption-in { from { opacity: 0; transform: translateY(14px) scale(.97); } }
 </style>

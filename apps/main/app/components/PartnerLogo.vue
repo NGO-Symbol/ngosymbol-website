@@ -97,9 +97,12 @@ onMounted(async () => {
 .partner-logo.is-playing.partner-logo--wave :deep(path:first-child), .partner-logo.is-playing.partner-logo--wave :deep(rect:first-of-type) { transform-origin: left center; }
 @keyframes pl-drop { from { opacity: 0; transform: translateY(-8px); } }
 
-/* Mental health for Ukraine: the ring of dots blooms open, then the letters settle. */
-.partner-logo.is-playing.partner-logo--bloom :deep(svg *:not(g):not(style):not(defs)) { animation: pl-bloom .9s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 22ms); }
-@keyframes pl-bloom { from { opacity: 0; transform: scale(.2); } }
+/* Mental health for Ukraine: the whole mark settles in one smooth breath while its dots and letters
+   fade up in order (opacity only, the stagger capped, so the logo never stutters shape by shape). */
+.partner-logo.is-playing.partner-logo--bloom .partner-logo__svg { animation: pl-settle 1s cubic-bezier(.2, .8, .2, 1) both; transform-origin: left center; }
+.partner-logo.is-playing.partner-logo--bloom :deep(svg *:not(g):not(style):not(defs)) { animation: pl-fade .6s ease-out both; animation-delay: calc(min(var(--n, 0), 24) * 20ms); }
+@keyframes pl-settle { from { opacity: 0; transform: scale(.94); } }
+@keyframes pl-fade { from { opacity: 0; } }
 
 /* Grynyov Art Collection: the stacked words are uncovered left to right, like a bar being drawn. */
 .partner-logo.is-playing.partner-logo--wipe img { animation: pl-wipe 1s cubic-bezier(.7, 0, .2, 1) both; }

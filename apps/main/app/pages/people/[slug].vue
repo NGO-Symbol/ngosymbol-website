@@ -41,7 +41,7 @@ useHead({
       <aside>
         <img v-if="person.photo" class="person-portrait" :src="person.photo" :alt="person.name">
         <ul v-if="person.links?.length" class="link-list">
-          <li v-for="link in person.links" :key="link.url"><a :href="link.url" target="_blank" rel="noreferrer">{{ link.label }} ↗</a></li>
+          <li v-for="link in person.links" :key="link.url"><SocialLink :url="link.url" :label="isSocialUrl(link.url) ? undefined : link.label" /></li>
         </ul>
       </aside>
       <div class="project-sections">

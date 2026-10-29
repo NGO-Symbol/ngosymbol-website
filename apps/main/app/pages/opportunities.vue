@@ -30,7 +30,7 @@ const archive = opportunities.filter(item => !isActive(item)).sort((a, b) => b.d
       <h2>Нові можливості вже на орбіті</h2>
       <p>Готуємо опен-коли, резиденції та набори волонтерів. Стежте за анонсами тут і в наших соцмережах — і долучайтеся першими.</p>
       <div class="button-row">
-        <a v-for="(item, index) in socials" :key="item.label" class="button" :class="{ 'button--dark': index === 0 }" :href="item.url" target="_blank" rel="noreferrer">{{ item.label }} ↗</a>
+        <SocialLink v-for="(item, index) in socials" :key="item.url" class="button" :class="{ 'button--dark': index === 0 }" :url="item.url" />
       </div>
     </div>
 

@@ -12,14 +12,6 @@ const requisites = [
   { label: 'Призначення платежу', value: 'Благодійний внесок на статутну діяльність' }
 ]
 
-const copied = ref('')
-async function copy(value: string) {
-  try {
-    await navigator.clipboard.writeText(value)
-    copied.value = value
-    setTimeout(() => (copied.value = ''), 1600)
-  } catch {}
-}
 </script>
 
 <template>
@@ -64,8 +56,8 @@ async function copy(value: string) {
         <div v-for="item in requisites" :key="item.label">
           <dt>{{ item.label }}</dt>
           <dd>
-            <span class="selectable">{{ item.value }}</span>
-            <button v-if="item.value !== 'уточнюється'" type="button" class="text-button" @click="copy(item.value)">{{ copied === item.value ? 'Скопійовано' : 'Скопіювати' }}</button>
+            <CopyValue v-if="item.value !== 'уточнюється'" :value="item.value" />
+            <span v-else>{{ item.value }}</span>
           </dd>
         </div>
       </dl>

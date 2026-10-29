@@ -13,6 +13,7 @@ Skills live in `.agents/skills/`. If your tool does not load them automatically,
 
 - `site-workflow` — session start, saving, publishing, «збережи», «опублікуй», «що нового».
 - `build-with-design-system` — ANY page, layout, style, animation or component work («зроби сторінку», «адаптуй під телефон»). Pages are built only from `Sym*` components and tokens (`packages/ui/docs/CONTEXT.md`).
+- `social-links` — any link to a social network or partner page (artists, team, partners, donors): name + minimal icon via `<SocialLink>`, never plain text; copyable details via `<CopyValue>`.
 - `symbol-project-memory` — organization facts, product, design, architecture, or content decisions.
 - `update-symbol-context` — «онови контекст», «синхронізуй контекст», `$update-symbol-context`.
 

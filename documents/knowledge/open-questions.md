@@ -39,6 +39,7 @@ Items here are unresolved and must not be silently assumed.
 - Zakon font: confirm the web-embedding licence.
 - Kharkiv Sea 2026: confirm dates (14–23.08 from photo folders) and programme.
 - Full English translation of page texts (URL pattern decided in ADR-0009; interface and project titles are translated, page bodies are not).
+- Uzh Station (partner of «Голоси у русі»): no website or social profile found (2026-10-29); the tile has no link until the team gives one.
 - Logo files for partners without one (Grynyov Art Collection, President's grant, Здибанка, Khust theatre, Uzh Station, Ucraina Più) and confirmation that partners agree to logo use; current logos come from the shared Drive (Nema) and the organizations' own websites.
 
 ## Design
