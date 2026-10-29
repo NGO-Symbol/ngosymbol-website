@@ -31,3 +31,5 @@ Checked 2026-10-29 against the organization's Drive. Contacts, dates of birth be
 ## «Історія моєї вулиці» participants (added 2026-10-29)
 
 Source: Drive «Портфоліо команди проєкту.pdf» (project application, 2026) and the pitch speech. Only professional facts are published; contacts, age and addresses are left out. Roles from the speech and the project schedule: Максим Розенфельд — голова експертної ради; Лариса Чайка — головна ілюстраторка; Олексій Чекаль — головний дизайнер; Олена Мордик — комунікація. Лариса Чайка is a co-founder of ГО «Символ» and a member of its Steering Board (founding protocol 1/2023), shown in the team section at the team's request. `EXTRACTED`, confirm before relying on details.
+
+«Історія моєї вулиці» roles (USER_CONFIRMED 2026-10-29): Юрій Рассоха — менеджер проєкту, куратор; Петро Чекаль — програмний менеджер, куратор; Аліна Войтюк — асистентка проєкту (her bio uses only professional facts from «Портфоліо команди проєкту.pdf»).

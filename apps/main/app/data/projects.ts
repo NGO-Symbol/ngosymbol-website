@@ -22,8 +22,9 @@ const entries: Project[] = [
       'Тексти перевіряє експертна рада. Окремий сайт проєкту зі своєю структурою й дизайном зараз у розробці.'
     ],
     people: [
-      { person: 'yurii-rassokha', role: 'Команда проєкту' },
-      { person: 'petro-chekal', role: 'Команда проєкту' },
+      { person: 'yurii-rassokha', role: 'Менеджер проєкту, куратор' },
+      { person: 'petro-chekal', role: 'Програмний менеджер, куратор' },
+      { person: 'alina-voitiuk', role: 'Асистентка проєкту' },
       { person: 'maksym-rozenfeld', role: 'Голова експертної ради' },
       { person: 'larysa-chaika', role: 'Головна ілюстраторка' },
       { person: 'oleksii-chekal', role: 'Головний дизайнер' },
