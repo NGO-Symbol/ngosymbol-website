@@ -141,6 +141,8 @@ export interface PressMention {
   kind?: 'review' | 'announcement' | 'listing' | 'open-call' | 'video' | 'radio' | 'post'
   /** Author of a review or interview, when the page names one. */
   author?: string
+  /** An interview with the team: its title says something of its own, so lists show it as prominently as the outlet. */
+  interview?: boolean
 }
 
 export interface Organization {

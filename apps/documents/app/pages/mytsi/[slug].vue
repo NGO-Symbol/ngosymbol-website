@@ -19,12 +19,12 @@ const alt = `${artist.name}: ${t('робота на виставці', 'work at 
 const byChekal = chekalPhotos(artist.slug).map(src => ({ src, alt, credit: 'Петро Чекаль' }))
 const exhibitionShots = (exhibition.gallery ?? []).filter(photo => artist.works.some(work => photo.alt.includes(`«${work.title}»`)))
 const photos = [
+  ...(osipovPhotos[artist.slug] ?? []).map(src => ({ src, alt, credit: 'Олександр Осіпов' })),
   ...(byChekal.length ? byChekal : [
     ...workPhotos(artist.slug).map(src => ({ src, alt })),
     ...(artist.person?.works ?? []),
     ...artist.coAuthors.flatMap(person => person.works ?? [])
   ]),
-  ...(osipovPhotos[artist.slug] ?? []).map(src => ({ src, alt, credit: 'Олександр Осіпов' })),
   ...exhibitionShots
 ]
 const credits = [...new Set(photos.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
@@ -36,6 +36,17 @@ const stainOf = (sheet: number) => {
   return undefined
 }
 definePageMeta({ pageTransition: { name: 'case-turn', mode: 'out-in' } })
+const portraits = [artist.person, ...artist.coAuthors].filter((person): person is NonNullable<typeof person> & { photo: string } => !!person?.photo)
+const links = [...(artist.person?.links ?? []), ...artist.coAuthors.flatMap(person => person.links ?? [])]
+// ← and → leaf through the files, as in a drawer.
+const router = useRouter()
+function leaf(event: KeyboardEvent) {
+  if (event.target instanceof HTMLElement && /input|textarea|select/i.test(event.target.tagName)) return
+  if (event.key === 'ArrowLeft') router.push(localePath(`/mytsi/${prev.slug}`))
+  if (event.key === 'ArrowRight') router.push(localePath(`/mytsi/${next.slug}`))
+}
+onMounted(() => window.addEventListener('keydown', leaf))
+onBeforeUnmount(() => window.removeEventListener('keydown', leaf))
 const caseNo = computed(() => `${t('Особова справа', 'Personal file')} № ${String(index + 1).padStart(2, '0')}`)
 </script>
 
@@ -47,24 +58,34 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
     </nav>
     <header class="case-cover">
       <DocsStain v-if="index % 3 === 1" kind="coffee" :seed="index" class="case-cover__stain" />
-      <span class="case-cover__tab">{{ t('Справа', 'File') }} № {{ String(index + 1).padStart(2, '0') }}</span>
+      <!-- The cabinet: a tab for every file, the open one joined to its folder; any tab opens that file. -->
+      <nav class="case-tabs" :aria-label="t('Особові справи митців', 'Artists’ personal files')">
+        <NuxtLink v-for="(other, otherIndex) in exhibitionArtists" :key="other.slug" :to="localePath(`/mytsi/${other.slug}`)" class="case-tabs__tab" :class="{ 'is-open': other.slug === artist.slug }" :title="other.name" :aria-current="other.slug === artist.slug ? 'page' : undefined" :style="{ '--n': otherIndex }">
+          <span class="case-tabs__no"><template v-if="other.slug === artist.slug">№ </template>{{ String(otherIndex + 1).padStart(2, '0') }}</span>
+          <span class="case-tabs__name">{{ other.name }}</span>
+        </NuxtLink>
+      </nav>
       <div class="case-cover__label">
         <p class="case-cover__kind">{{ t('Особова справа', 'Personal file') }} · {{ t('Покажіть свої документи…', 'May I See Your Documents…') }}</p>
         <div class="case-cover__grid">
-          <figure v-if="artist.person?.photo" class="case-cover__photo">
-            <img :src="artist.person.photo" :alt="artist.name">
-            <span class="case-cover__clip" aria-hidden="true" />
-          </figure>
+          <div v-if="portraits.length" class="case-cover__photos" :class="{ 'is-duo': portraits.length > 1 }">
+            <figure v-for="person in portraits" :key="person.slug" class="case-cover__photo">
+              <img :src="person.photo" :alt="person.name">
+              <span class="case-cover__clip" aria-hidden="true" />
+            </figure>
+          </div>
           <dl class="case-cover__fields">
             <div class="case-cover__name"><dt>{{ t('Прізвище, ім’я', 'Name') }}</dt><dd><h1>{{ artist.name }}</h1></dd></div>
             <div><dt>{{ artist.works.length > 1 ? t('Роботи', 'Works') : t('Робота', 'Work') }}</dt><dd>{{ artist.works.map(work => `«${work.title}»`).join(', ') }}</dd></div>
             <div><dt>{{ t('Статус', 'Status') }}</dt><dd>{{ artist.coAuthors.length ? t('Митці виставки', 'Artists of the exhibition') : t('Митець виставки', 'Artist of the exhibition') }}</dd></div>
             <div><dt>{{ t('Аркушів', 'Sheets') }}</dt><dd>{{ 1 + artist.works.length + (photos.length ? 1 : 0) }}</dd></div>
+            <div v-if="links.length"><dt>{{ t('Посилання', 'Links') }}</dt><dd class="case-cover__social"><a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer">{{ link.label }}</a></dd></div>
           </dl>
         </div>
         <p class="case-cover__links">
-          <a class="docs-button" :href="symbolPersonUrl(artist.slug)">{{ t('Сторінка на symbol.ngo', 'Profile on symbol.ngo') }}</a>
-          <a v-for="person in artist.coAuthors" :key="person.slug" class="docs-button" :href="symbolPersonUrl(person.slug)">{{ person.name }}</a>
+          <a v-if="!artist.coAuthors.length" class="docs-button" :href="symbolPersonUrl(artist.slug)">{{ t('Сторінка на symbol.ngo', 'Profile on symbol.ngo') }}</a>
+          <!-- A shared file: one button per author, each named, alike. -->
+          <a v-for="person in artist.coAuthors.length ? portraits : []" :key="person.slug" class="docs-button" :href="symbolPersonUrl(person.slug)">{{ person.name.replace(/\s*\(.*\)$/, '') }} · symbol.ngo</a>
         </p>
       </div>
     </header>
@@ -105,11 +126,28 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 .case-count { font-family: var(--docs-mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--docs-muted); }
 /* The folder: manila cover with a tab, a pasted label with the case fields and the clipped 3×4 portrait. */
 .case-cover__stain { top: -30px; right: 6%; width: clamp(120px, 18vw, 190px); height: clamp(120px, 18vw, 190px); z-index: 1; transform: rotate(40deg); }
-.case-cover { position: relative; margin-top: 28px; padding: clamp(20px, 3vw, 36px); background: var(--docs-folder); border-radius: 0 6px 6px 6px; box-shadow: 0 2px 0 color-mix(in srgb, var(--docs-ink) 18%, transparent); }
-.case-cover__tab { position: absolute; left: 0; bottom: 100%; padding: 6px 18px 4px; background: var(--docs-folder); border-radius: 6px 6px 0 0; font-family: var(--docs-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+.case-cover { position: relative; padding: clamp(20px, 3vw, 36px); background: var(--docs-folder); border-radius: 0 6px 6px 6px; box-shadow: 0 2px 0 color-mix(in srgb, var(--docs-ink) 18%, transparent); }
+.case-cover { margin-top: 64px; }
+/* The tabs of all files stand along the top edge, the further ones a shade darker; the open file's tab is part of
+   its folder. They scroll sideways on phones. */
+.case-tabs { position: absolute; left: 0; right: 0; bottom: 100%; display: flex; align-items: flex-end; gap: 2px; }
+/* All tabs fit in one row: closed tabs share the width and show the number; the open one is wider and shows the name. */
+.case-tabs__tab { flex: 1 1 0; min-width: 0; display: grid; gap: 1px; padding: 6px 6px 5px; border-radius: 6px 6px 0 0; background: color-mix(in srgb, var(--docs-folder) 78%, var(--docs-ink)); color: var(--docs-ink); text-decoration: none; text-align: center; transform: translateY(5px); transition: transform .25s ease, flex-grow .35s ease, background .2s ease; overflow: hidden; }
+.case-tabs__tab:nth-child(even) { background: color-mix(in srgb, var(--docs-folder) 88%, var(--docs-ink)); }
+.case-tabs__tab:hover, .case-tabs__tab:focus-visible { transform: translateY(0); background: var(--docs-folder); }
+.case-tabs__tab.is-open { flex-grow: 4; background: var(--docs-folder); transform: none; padding-bottom: 8px; text-align: left; padding-inline: 12px; }
+.case-tabs__no { font-family: var(--docs-mono); font-size: .66rem; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+.case-tabs__name { display: none; font-family: var(--docs-display); font-size: .82rem; text-transform: uppercase; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.case-tabs__tab.is-open .case-tabs__name { display: block; }
+.case-cover__social { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.case-cover__social a { color: inherit; text-underline-offset: 3px; }
 .case-cover__label { padding: clamp(16px, 2.6vw, 28px); background: var(--docs-sheet); border: 1px solid var(--docs-ink); }
 .case-cover__kind { margin: 0 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--docs-ink); font-family: var(--docs-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
 .case-cover__grid { display: grid; grid-template-columns: minmax(120px, 210px) minmax(0, 1fr); gap: clamp(16px, 3vw, 36px); align-items: start; }
+.case-cover__photos { display: grid; }
+@media (min-width: 761px) { .case-cover__grid:has(.is-duo) { grid-template-columns: minmax(200px, 340px) minmax(0, 1fr); } }
+.case-cover__photos.is-duo { grid-template-columns: 1fr 1fr; gap: 8px; }
+.case-cover__photos.is-duo .case-cover__photo:last-child { transform: rotate(2.5deg) translateY(10px); }
 .case-cover__photo { position: relative; margin: 0; transform: rotate(-2deg); }
 .case-cover__photo img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; filter: grayscale(1) contrast(1.08); border: 6px solid #fff; box-shadow: 2px 3px 0 color-mix(in srgb, var(--docs-ink) 25%, transparent); }
 /* A paper clip over the top edge of the photo. */
@@ -132,6 +170,14 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 .pager__next { justify-items: end !important; text-align: right; }
 @media (max-width: 760px) {
   .case-cover__grid { grid-template-columns: 1fr; }
-  .case-cover__photo { width: 56%; max-width: 220px; }
+  /* Phones: the drawer's tabs in two staggered rows, numbers only; the open file's name is on its label below. */
+  .case-cover { margin-top: 74px; }
+  .case-tabs { flex-wrap: wrap; row-gap: 3px; }
+  .case-tabs__tab { flex: 0 0 calc((100% - 18px) / 10); padding: 5px 0 4px; transform: none; }
+  .case-tabs__tab.is-open { flex: 0 0 calc((100% - 18px) / 10); padding: 5px 0 6px; text-align: center; }
+  .case-tabs__tab.is-open .case-tabs__name { display: none; }
+  .case-tabs__tab.is-open .case-tabs__no template { display: none; }
+  .case-cover__photos { width: 56%; max-width: 220px; }
+  .case-cover__photos.is-duo { width: 80%; max-width: 320px; }
 }
 </style>
