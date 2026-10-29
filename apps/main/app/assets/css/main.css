@@ -489,9 +489,6 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 .tap-marks, .tap-marks * { -webkit-tap-highlight-color: transparent; }
 .tap-mark { position: fixed; z-index: 200; width: 76px; height: 76px; margin: -38px 0 0 -38px; pointer-events: none; }
 .tap-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.tap-mark--logo { width: 58px; height: 58px; margin: -29px 0 0 -29px; filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--symbol-plum) 35%, transparent)); animation: tap-logo .95s cubic-bezier(.2, 1.4, .4, 1) forwards; }
-.tap-mark--logo circle { fill: var(--symbol-violet); }
-.tap-mark--logo path { fill: var(--symbol-apricot); }
 .tap-mark--orbit { width: 104px; height: 104px; margin: -52px 0 0 -52px; animation: tap-fade .95s ease-out forwards; }
 .tap-mark__ring { fill: none; stroke: var(--symbol-violet); stroke-width: 4; transform-origin: 50px 50px; animation: tap-ring .7s cubic-bezier(.2, 1, .3, 1) forwards; }
 .tap-mark__moon { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform-origin: 50px 50px; animation: tap-moon .95s cubic-bezier(.4, 0, .2, 1) forwards; }
@@ -499,7 +496,6 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 .tap-mark--spiral path { fill: none; stroke: var(--symbol-violet); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; animation: tap-draw .7s cubic-bezier(.3, 0, .2, 1) forwards; }
 .tap-mark--drop { width: 50px; height: 50px; margin: -25px 0 0 -25px; animation: tap-drop .75s cubic-bezier(.2, 1, .3, 1) forwards; }
 .tap-mark--drop circle { fill: color-mix(in srgb, var(--symbol-apricot) 70%, transparent); }
-@keyframes tap-logo { 0% { opacity: 0; transform: scale(.3) rotate(-120deg); } 35% { opacity: 1; transform: scale(1.05) rotate(0); } 70% { opacity: 1; transform: scale(.95) rotate(20deg); } 100% { opacity: 0; transform: scale(.5) rotate(200deg); } }
 @keyframes tap-ring { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.1); opacity: .2; } }
 @keyframes tap-moon { from { transform: rotate(0) scale(.4); } to { transform: rotate(300deg) scale(1); } }
 @keyframes tap-draw { to { stroke-dashoffset: 0; } }
