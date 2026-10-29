@@ -103,20 +103,16 @@ export const creditsByRole = (credits: Credit[] = []) => {
   return [...groups].map(([role, members]) => ({ role, people: members }))
 }
 
-/** Backlinks for a person page: projects and events with the person's roles, newest first. */
+/** Backlinks for a person page: the projects the person took part in, with their roles, newest first.
+ *  A role in one of a project's events counts as taking part in that project, so events are not listed on their own. */
 export const appearancesOf = (slug: string) => {
   const result: { title: string; to: string; byline: string; roles: string[]; year: number }[] = []
   for (const project of projects) {
-    const roles = (project.people ?? []).filter(credit => credit.person === slug).map(credit => credit.role)
+    const credits = [...(project.people ?? []), ...events.filter(event => event.project === project.slug).flatMap(event => event.people ?? [])]
+    const roles = [...new Set(credits.filter(credit => credit.person === slug).map(credit => credit.role))]
     const mentioned = references(project).some(ref => ref.type === 'person' && ref.slug === slug)
     if (roles.length || mentioned) {
       result.push({ title: project.title, to: `/projects/${project.slug}`, byline: projectByline(project), roles: roles.length ? roles : ['Згадка'], year: project.yearStart })
-    }
-  }
-  for (const event of events) {
-    const roles = (event.people ?? []).filter(credit => credit.person === slug).map(credit => credit.role)
-    if (roles.length) {
-      result.push({ title: event.title, to: `/events/${event.slug}`, byline: formatDate(event.start), roles, year: Number(event.start.slice(0, 4)) })
     }
   }
   return result.sort((a, b) => b.year - a.year)

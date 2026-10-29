@@ -27,3 +27,7 @@ Checked 2026-10-29 against the organization's Drive. Contacts, dates of birth be
 - Olena Mordyk: short bio, role in the team, photo, and her relation to Kharkiv Sea / «Нема».
 - Ганна Франик: confirm public name and an updated bio (CV under the personal name lists ESC volunteering, the «Немає зайвих» residency, a street performance in Tbilisi).
 - PSD volunteers: no list found on the Drive or the saved project site.
+
+## «Історія моєї вулиці» participants (added 2026-10-29)
+
+Source: Drive «Портфоліо команди проєкту.pdf» (project application, 2026) and the pitch speech. Only professional facts are published; contacts, age and addresses are left out. Roles from the speech and the project schedule: Максим Розенфельд — голова експертної ради; Лариса Чайка — головна ілюстраторка; Олексій Чекаль — головний дизайнер; Олена Мордик — комунікація. Лариса Чайка is a co-founder of ГО «Символ» and a member of its Steering Board (founding protocol 1/2023), shown in the team section at the team's request. `EXTRACTED`, confirm before relying on details.

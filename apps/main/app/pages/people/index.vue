@@ -12,6 +12,11 @@ const visible = computed(() => {
   const q = query.value.trim().toLowerCase()
   return q ? listed.filter(({ person }) => person.name.toLowerCase().includes(q)) : listed
 })
+// The Symbol team comes first (in its own order), then everyone who took part in the projects.
+const groups = computed(() => [
+  { key: 'team', label: 'Постійна команда', title: 'Команда «Символу»', items: visible.value.filter(({ person }) => person.team).sort((a, b) => (a.person.teamOrder ?? 99) - (b.person.teamOrder ?? 99)) },
+  { key: 'participants', label: 'Митці, куратори, автори', title: 'Учасники проєктів', items: visible.value.filter(({ person }) => !person.team) }
+].filter(group => group.items.length))
 
 // The search hint names a different artist on every visit (never the same twice in a row).
 const hint = ref('Наприклад, Маков')
@@ -35,22 +40,28 @@ const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => par
     <div class="page-title">
       <span class="eyebrow">Автори · митці · команда</span>
       <h1>Люди</h1>
-      <p>Усі, хто створював проєкти «Символу». На сторінці кожної людини — проєкти й події, у яких вона брала участь.</p>
+      <p>Усі, хто створював проєкти «Символу». На сторінці кожної людини — проєкти, у яких вона брала участь.</p>
     </div>
     <label class="search">
       <span class="label">Пошук за ім’ям</span>
       <input id="people-search" v-model="query" type="search" :placeholder="hint">
     </label>
-    <ul class="people-grid">
-      <li v-for="{ person, appearances } in visible" :key="person.slug">
-        <NuxtLink class="person-card" :to="`/people/${person.slug}`">
-          <img v-if="person.photo" class="person-card__avatar person-card__avatar--photo" :src="person.photo" alt="" loading="lazy">
-          <span v-else class="person-card__avatar" aria-hidden="true">{{ initials(person.name) }}</span>
-          <span class="person-card__name">{{ person.name }}</span>
-          <span v-if="person.team" class="person-card__team">Команда «Символу»</span>
-          <span class="person-card__projects">{{ appearances.map(item => item.title).join(' · ') }}</span>
-        </NuxtLink>
-      </li>
-    </ul>
+    <section v-for="group in groups" :key="group.key" class="people-group" :aria-labelledby="`people-${group.key}`">
+      <div class="section-heading">
+        <div><span class="label">{{ group.label }}</span><h2 :id="`people-${group.key}`">{{ group.title }}</h2></div>
+      </div>
+      <ul class="people-grid" :class="{ 'people-grid--team': group.key === 'team' }">
+        <li v-for="{ person, appearances } in group.items" :key="person.slug">
+          <NuxtLink class="person-card" :class="{ 'person-card--team': person.team }" :to="`/people/${person.slug}`">
+            <img v-if="person.photo" class="person-card__avatar person-card__avatar--photo" :src="person.photo" alt="" loading="lazy">
+            <span v-else class="person-card__avatar" aria-hidden="true">{{ initials(person.name) }}</span>
+            <span class="person-card__name">{{ person.name }}</span>
+            <span v-if="person.team && person.teamRole" class="person-card__team">{{ person.teamRole }}</span>
+            <span class="person-card__projects">{{ appearances.map(item => item.title).join(' · ') }}</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </section>
+    <p v-if="!groups.length" class="people-empty">Нікого не знайшли. Спробуйте інше ім’я.</p>
   </section>
 </template>
