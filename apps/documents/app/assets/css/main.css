@@ -13,9 +13,12 @@
   --docs-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   color-scheme: light;
 }
+/* Night: carbon paper with off-white ink. Chosen in the header (data-theme) or, without a choice, by the system. */
+:root[data-theme="dark"] { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; color-scheme: dark; }
 @media (prefers-color-scheme: dark) {
-  :root { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; color-scheme: dark; }
 }
+body { transition: background-color .3s ease, color .3s ease; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 120px; }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Hero of the project site, the same composition as the project page on symbol.ngo (DocumentsHero there):
 // the project font EXDocument by Олексій Чекаль, words on grey tape strips between barcode rules, the blue stamp.
+const { t, localePath } = useLang()
 </script>
 
 <template>
@@ -10,11 +11,11 @@
 
       <div class="docs-hero__grid">
         <div class="docs-hero__main">
-          <p class="docs-kicker"><span>Виставка</span><span>сучасного</span><span>мистецтва</span></p>
-          <h1 class="docs-title" aria-label="Покажіть свої документи…">
-            <span class="docs-word docs-word--1" aria-hidden="true">Покажіть</span>
-            <span class="docs-word docs-word--2" aria-hidden="true">свої</span>
-            <span class="docs-word docs-word--3" aria-hidden="true">документи…</span>
+          <p class="docs-kicker"><span>{{ t('Виставка', 'Exhibition') }}</span><span>{{ t('сучасного', 'of contemporary') }}</span><span>{{ t('мистецтва', 'art') }}</span></p>
+          <h1 class="docs-title" :aria-label="t('Покажіть свої документи…', 'May I See Your Documents…')">
+            <span class="docs-word docs-word--1" aria-hidden="true">{{ t('Покажіть', 'May I see') }}</span>
+            <span class="docs-word docs-word--2" aria-hidden="true">{{ t('свої', 'your') }}</span>
+            <span class="docs-word docs-word--3" aria-hidden="true">{{ t('документи…', 'documents…') }}</span>
           </h1>
         </div>
 
@@ -39,12 +40,12 @@
             </g>
           </svg>
           <dl class="docs-meta">
-            <div><dt>Куратори</dt><dd>Петро Чекаль, Юрій Рассоха</dd></div>
-            <div><dt>Дати</dt><dd>17.10.2025 — 07.12.2025</dd></div>
-            <div><dt>Місце</dt><dd>ЄрміловЦентр, Харків</dd></div>
+            <div><dt>{{ t('Куратори', 'Curators') }}</dt><dd>{{ t('Петро Чекаль, Юрій Рассоха', 'Petro Chekal, Yurii Rassokha') }}</dd></div>
+            <div><dt>{{ t('Дати', 'Dates') }}</dt><dd>17.10.2025 — 07.12.2025</dd></div>
+            <div><dt>{{ t('Місце', 'Venue') }}</dt><dd>{{ t('ЄрміловЦентр, Харків', 'YermilovCentre, Kharkiv') }}</dd></div>
           </dl>
-          <NuxtLink class="docs-site" to="/mytsi">
-            <span>Митці виставки</span>
+          <NuxtLink class="docs-site" :to="localePath('/mytsi')">
+            <span>{{ t('Митці виставки', 'The artists') }}</span>
             <span aria-hidden="true">→</span>
           </NuxtLink>
         </aside>

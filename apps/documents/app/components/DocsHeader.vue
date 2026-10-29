@@ -1,30 +1,55 @@
 <script setup lang="ts">
-// Header of the project site: a thin bar back to symbol.ngo, the project mark and the four sections of the
-// original site (concept, artists, events, team). On phones the sections scroll sideways in one row.
-const links = [
-  { to: '/', label: 'Концепція' },
-  { to: '/mytsi', label: 'Митці' },
-  { to: '/podii', label: 'Події' },
-  { to: '/komanda', label: 'Команда' }
-]
+// Header of the project site: a clear way back to symbol.ngo (the organization behind the exhibition), the project
+// mark, the sections, the language switch and the day/night switch. On phones the sections scroll sideways in one row.
+const { isEn, localePath, switchPath, t } = useLang()
 const route = useRoute()
-const isActive = (to: string) => (to === '/' ? route.path === '/' : route.path.startsWith(to))
+const links = computed(() => [
+  { to: '/', label: t('Концепція', 'Concept') },
+  { to: '/mytsi', label: t('Митці', 'Artists') },
+  { to: '/podii', label: t('Події', 'Events') },
+  { to: '/presa', label: t('Преса', 'Press') },
+  { to: '/komanda', label: t('Команда', 'Team') }
+])
+const current = computed(() => route.path.replace(/^\/en/, '').replace(/\/$/, '') || '/')
+const isActive = (to: string) => (to === '/' ? current.value === '/' : current.value.startsWith(to))
+
+// Day / night: the visitor's choice is kept; without a choice the system setting applies (set before paint in app.vue).
+const dark = ref(false)
+onMounted(() => { dark.value = document.documentElement.dataset.theme === 'dark' || (!document.documentElement.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches) })
+function toggleTheme() {
+  dark.value = !dark.value
+  const value = dark.value ? 'dark' : 'light'
+  document.documentElement.dataset.theme = value
+  try { localStorage.setItem('docs-theme', value) } catch {}
+}
 </script>
 
 <template>
   <header class="docs-header">
-    <div class="docs-bar">
-      <div class="docs-container docs-bar__inner">
-        <a :href="SYMBOL">← symbol.ngo</a>
-        <span>Проєкт ГО «Символ»</span>
+    <div class="docs-back">
+      <div class="docs-container docs-back__inner">
+        <a class="docs-back__link" :href="isEn ? `${SYMBOL}/en` : SYMBOL">
+          <span aria-hidden="true">←</span>
+          <span>{{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span>
+        </a>
+        <div class="docs-back__tools">
+          <NuxtLink class="docs-lang" :to="switchPath" :aria-label="t('English version', 'Українська версія')">
+            <span :class="{ 'is-on': !isEn }">UA</span><span :class="{ 'is-on': isEn }">EN</span>
+          </NuxtLink>
+          <button type="button" class="docs-theme" :aria-pressed="dark" :aria-label="t('Денний або нічний режим', 'Day or night mode')" @click="toggleTheme">
+            <svg v-if="dark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" /></svg>
+            <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z" /></svg>
+          </button>
+        </div>
       </div>
     </div>
     <div class="docs-container docs-header__main">
-      <NuxtLink class="docs-mark" to="/" aria-label="Покажіть свої документи… — головна">
-        <span>Покажіть</span><span>свої документи…</span>
+      <NuxtLink class="docs-mark" :to="localePath('/')" :aria-label="t('Покажіть свої документи… — головна', 'May I See Your Documents… — home')">
+        <template v-if="isEn"><span>May I see</span><span>your documents…</span></template>
+        <template v-else><span>Покажіть</span><span>свої документи…</span></template>
       </NuxtLink>
-      <nav class="docs-nav" aria-label="Розділи сайту виставки">
-        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" :class="{ 'is-active': isActive(link.to) }">{{ link.label }}</NuxtLink>
+      <nav class="docs-nav" :aria-label="t('Розділи сайту виставки', 'Exhibition site sections')">
+        <NuxtLink v-for="link in links" :key="link.to" :to="localePath(link.to)" :class="{ 'is-active': isActive(link.to) }">{{ link.label }}</NuxtLink>
       </nav>
     </div>
   </header>
@@ -32,10 +57,18 @@ const isActive = (to: string) => (to === '/' ? route.path === '/' : route.path.s
 
 <style scoped>
 .docs-header { position: sticky; top: 0; z-index: 40; background: var(--docs-paper); border-bottom: 3px solid var(--docs-ink); }
-.docs-bar { background: var(--docs-ink); color: var(--docs-paper); font-family: var(--docs-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
-.docs-bar__inner { display: flex; justify-content: space-between; gap: 16px; padding-block: 6px; }
-.docs-bar a { color: inherit; text-decoration: none; }
-.docs-bar a:hover { text-decoration: underline; }
+/* The way back to Symbol: in Symbol's own violet, so it reads as «the organization», not as part of the exhibition. */
+.docs-back { background: #9280a6; color: #fff7eb; }
+.docs-back__inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; }
+.docs-back__link { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 10px; border-radius: 999px; background: #fff7eb; color: #302738; font-family: var(--docs-mono); font-size: .82rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+.docs-back__link:hover { transform: translateX(-3px); background: #fdd08f; }
+.docs-back__link span:first-child { font-size: 1.1em; }
+.docs-back__tools { display: flex; align-items: center; gap: 8px; }
+.docs-lang { display: inline-flex; border: 1px solid #fff7eb; border-radius: 999px; overflow: hidden; font-family: var(--docs-mono); font-size: .75rem; text-decoration: none; color: #fff7eb; }
+.docs-lang span { padding: 4px 9px; }
+.docs-lang span.is-on { background: #fff7eb; color: #302738; }
+.docs-theme { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #fff7eb; border-radius: 50%; background: transparent; color: #fff7eb; cursor: pointer; }
+.docs-theme svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
 .docs-header__main { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 12px; flex-wrap: wrap; }
 .docs-mark { display: grid; font-family: var(--docs-display); text-transform: uppercase; line-height: .95; font-size: 1.15rem; color: var(--docs-ink); text-decoration: none; }
 .docs-mark span:last-child { font-size: .78em; }
@@ -44,7 +77,8 @@ const isActive = (to: string) => (to === '/' ? route.path === '/' : route.path.s
 .docs-nav a:hover { border-color: var(--docs-ink); }
 .docs-nav a.is-active { background: var(--docs-ink); color: var(--docs-paper); }
 @media (max-width: 640px) {
-  .docs-header__main { flex-direction: column; align-items: flex-start; }
+  .docs-back__link { font-size: .74rem; padding: 5px 10px 5px 8px; }
+  .docs-header__main { flex-direction: column; align-items: flex-start; padding-block: 8px; }
   .docs-nav { margin-inline: -10px; }
 }
 </style>

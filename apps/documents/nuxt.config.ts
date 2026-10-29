@@ -30,6 +30,12 @@ export default defineNuxtConfig({
       ]
     }
   },
+  hooks: {
+    // English mirror: every page also lives under /en/... (as on symbol.ngo, ADR-0009).
+    'pages:extend'(pages) {
+      for (const page of [...pages]) pages.push({ ...page, name: `en-${String(page.name)}`, path: page.path === '/' ? '/en' : `/en${page.path}` })
+    }
+  },
   nitro: {
     publicAssets: [
       { dir: main('public/fonts'), baseURL: '/fonts' },
