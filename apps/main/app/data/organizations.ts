@@ -20,7 +20,7 @@ export const organizations: Organization[] = [
   { slug: 'insha-osvita', name: 'Інша Освіта', url: 'https://insha-osvita.org', logo: '/media/partners/insha-osvita.png', motion: 'spin' },
   { slug: 'zusa', name: 'zusa (Берлін)', url: 'https://zusaculture.org', logo: '/media/partners/zusa.png', motion: 'brush' },
   { slug: 'veteranka', name: 'Жіночий ветеранський рух VETERANKA', url: 'https://veteranka.org.ua', logo: '/media/partners/veteranka.png', motion: 'stamp' },
-  { slug: 'serdenky-playback', name: 'Плейбек-театр «Серденьки»', url: 'https://www.instagram.com/serdenky.playback/' },
+  { slug: 'serdenky-playback', name: 'Плейбек-театр «Серденьки»', url: 'https://www.instagram.com/serdenky.playback/', logo: '/media/partners/serdenky-playback.png', motion: 'beat' },
   // «2, 10, 300 років потому» partners (Drive «exhibition/Partners logo» and the anniversary post of 06.09.2026).
   { slug: 'egyesek', name: 'Egyesek', url: 'https://egyesek.hu', logo: '/media/partners/egyesek.svg', motion: 'orbit' },
   { slug: 'arteria', name: 'Галерея Artéria, Балашшадьярмат', url: 'https://www.programturizmus.hu/ajanlat-arteria-galeria-programok-balassagyarmat.html', logo: '/media/partners/arteria.png', motion: 'pulse' },
@@ -33,7 +33,7 @@ export const organizations: Organization[] = [
   { slug: 'ecf', name: 'European Cultural Foundation', url: 'https://culturalfoundation.eu', logo: '/media/partners/ecf.svg', motion: 'wave' },
   { slug: 'zdybanka', name: 'Молодіжний центр «Здибанка», Батьово', url: 'https://www.facebook.com/mc.zdybanka' },
   { slug: 'khust-theatre', name: 'Хустський Закарпатський обласний театр драми та комедії', url: 'https://teatr-khust.com.ua' },
-  { slug: 'uzh-station', name: 'Арт-простір «Станція Уж», Ужгород', url: 'https://www.instagram.com/stantsiia.uzh/' },
+  { slug: 'uzh-station', name: 'Арт-простір «Станція Уж», Ужгород', url: 'https://www.instagram.com/stantsiia.uzh/', logo: '/media/partners/uzh-station.png', motion: 'rise' },
   { slug: 'ucraina-piu', name: 'Ucraina Più – Milano APS', url: 'https://www.instagram.com/ucrainapiu_milano_aps/' },
   { slug: 'bila-tserkva-library', name: 'Білоцерківська централізована бібліотечна система імені П. Красножона', url: 'https://biblioteka.com.ua', logo: '/media/partners/bila-tserkva-library.png', motion: 'shoot' },
   { slug: 'nema-playback', name: 'Плейбек-театр «Нема»', url: 'https://www.instagram.com/nema_pbt/', logo: '/media/partners/nema.png', motion: 'curtain' }
