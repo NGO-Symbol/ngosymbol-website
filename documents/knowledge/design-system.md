@@ -42,9 +42,9 @@ The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` 
 
 The main site uses the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for headings and display text (`--font-display`), and **Source Serif 4** (variable, self-hosted from `@fontsource-variable/source-serif-4`, finer serifs) for running and small text (`--font-body`). `USER_CONFIRMED` 2026-10-29: the team likes Zakon for large letters and wants a serif with smaller serifs for small text. Zakon headings need loose leading: display line-height is at least 1.04 and letter-spacing no tighter than −0.015em, otherwise accents (Й, Ї) collide with the line above. Project pages with their own identity override these variables. Web-embedding licence of Zakon to be confirmed.
 
-## Home photo orbit
+## Home photo orbit (removed)
 
-The home orbit carries a ring of round photos on its inner dashed ring: eight random exhibition and event photos per visit, never photos of people (`Photo.people` marks those), each linking to its project or event. They turn with the ring, stay upright, appear one after another and grow on hover while the others dim. More projects need selected photos for variety. `USER_CONFIRMED` 2026-10-29.
+A ring of random exhibition photos inside the home orbit was tried on 2026-10-29 and removed at the team's request: it did not work visually. The `Photo.people` flag that keeps photos of people out of such selections stays in the data.
 
 ## Going home
 
