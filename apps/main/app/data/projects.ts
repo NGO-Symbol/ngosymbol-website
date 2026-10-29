@@ -54,6 +54,7 @@ const entries: Project[] = [
     formats: ['playback', 'performance'],
     directions: ['art', 'mental-health'],
     tone: 'apricot',
+    poster: '/media/events/holosy-u-rusi-uzhhorod/ensemble.jpg',
     motif: 'voices',
     summary: 'Плейбек-театр на Закарпатті: живі історії людей, зіграні тут і зараз.',
     body: [
@@ -282,6 +283,7 @@ const entries: Project[] = [
     formats: ['exhibition'],
     directions: ['art'],
     tone: 'apricot',
+    poster: '/media/projects/2-10-300/cover.jpg',
     motif: 'time',
     summary: 'Виставка просто неба з роботами митців зі сходу України.',
     body: [
@@ -318,6 +320,7 @@ const entries: Project[] = [
     formats: ['festival'],
     directions: ['culture', 'art'],
     tone: 'violet',
+    poster: '/media/projects/kharkivske-more/cover.jpg',
     motif: 'sea',
     summary: 'Незалежний мультидисциплінарний фестиваль локальної культури. «Символ» — партнер фестивалю.',
     body: [
