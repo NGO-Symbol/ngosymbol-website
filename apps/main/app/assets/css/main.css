@@ -1,10 +1,10 @@
-/* Site fonts: Zakon for headings (fonts/ in the repository root, copied to public/fonts/zakon); Source Serif 4, with finer serifs, for text. Project pages with their own
+/* Site font: Zakon (the Ministry of Culture typeface, mincult.gov.ua/zakon), updated version from fonts/ in the repository root, copied to public/fonts/zakon; used for headings and all text. Project pages with their own
    identity (e.g. .theme-documents) override these variables. */
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-Bold.otf') format('opentype'); font-weight: 500 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Zakon'; src: url('/fonts/zakon/Zakon-BoldItalic.otf') format('opentype'); font-weight: 500 700; font-style: italic; font-display: swap; }
-:root { --font-display: 'Zakon', Georgia, serif; --font-body: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif; }
+:root { --font-display: 'Zakon', Georgia, serif; --font-body: 'Zakon', Georgia, serif; }
 
 * { box-sizing: border-box; }
 

@@ -118,3 +118,7 @@ On touch screens every tap leaves a short mark from the identity, different by t
 `USER_CONFIRMED`: prepositions, conjunctions and other words of up to three letters («і», «й», «в», «з», «до», «від», «для», «та»…) always move to the next line together with the word they belong to; a dash or an arrow never starts a line. Implemented once for all text by `plugins/typography.client.ts` (non-breaking spaces in rendered text, re-applied after page changes; SVG, code and form fields are left alone).
 
 `USER_CONFIRMED` (2026-10-29): quotes in Ukrainian text are «ялинки», inner quotes „лапки-лапки“; a dash between words is always the long dash (—), never a hyphen or en dash (ranges like 2024–2025 keep the en dash without spaces). Sources were fixed, and `plugins/typography.client.ts` converts any leftover straight/English quotes and spaced hyphens in rendered text.
+
+## Typeface: Zakon everywhere (2026-10-29)
+
+`USER_CONFIRMED`: the whole site (headings and all text) is set in the updated Zakon — the Ministry of Culture typeface (mincult.gov.ua/zakon), Regular, Italic, Bold, Bold Italic, from `fonts/OTF` (copied to `apps/main/public/fonts/zakon`). This replaces the earlier split with Source Serif 4 for body text. Project pages with their own identity (PSD) keep their fonts.

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   extends: ['@symbol/brand'],
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
-  css: ['@symbol/brand/tokens.css', '@fontsource-variable/source-serif-4/opsz.css', '@fontsource-variable/source-serif-4/opsz-italic.css', '~/assets/css/main.css', '~/assets/css/theme-documents.css'],
+  css: ['@symbol/brand/tokens.css', '~/assets/css/main.css', '~/assets/css/theme-documents.css'],
   app: {
     pageTransition: { name: 'fade', mode: 'out-in' },
     head: {
