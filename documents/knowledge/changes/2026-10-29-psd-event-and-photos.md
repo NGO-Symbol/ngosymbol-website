@@ -8,18 +8,18 @@ Status: `USER_CONFIRMED`
 
 - Add Олексій Чекаль's performance «Шредер Шредінґера» as a separate event in the «Покажіть свої документи…» programme.
 - The performance took place on 17 October 2025 at 18:00, on the same date and time as the exhibition opening.
-- Use the local project photo archive to supplement corresponding event pages and artist pages.
+- Use the curator-sorted local project photo archive as the source of truth for artist work galleries; publish every non-duplicate photograph from each artist/work folder (`USER_CONFIRMED`, 2026-10-29).
 - When several frames are near-duplicates, publish the strongest representative frame rather than every source file.
 - Photo galleries are not limited to five images; use a wider, varied selection when the archive supports it (`USER_CONFIRMED`, 2026-10-29).
-- For artists represented by two works, group the photographs by work instead of mixing them in one sequence (`USER_CONFIRMED`, 2026-10-29).
+- For Олексій Сай and Kinich Azla, each of the two works is a separate «work file» inside the artist's personal file, with its own curatorial text and photo appendix (`USER_CONFIRMED`, 2026-10-29).
 
 ## Applied to the website
 
 - Added a dedicated event page and gallery for «Шредер Шредінґера».
 - Added the available gallery to the curatorial tour of 28 October 2025.
-- Added selected photographs of works to the artist pages for Дара Шолох, Kinich Azla, Роман Пятковка, Олексій Сай and Señora Serpiente.
+- Imported all 246 non-duplicate photographs from the restructured artist archive into the corresponding artist pages; three byte-identical accidental copies were skipped. Web copies are auto-oriented, metadata-free and limited to 1800 px; the source archive is unchanged.
 - Expanded the opening, tour, artist-talk, panel, playback and performance galleries with additional non-duplicate frames from the archive.
-- Split Kinich Azla's photographs between «Мімік» and «Сучасна мода», and Олексій Сай's photographs between «Заяви» and «Excel-art».
+- Split Kinich Azla's personal file into the work files «Мімік» and «Сучасна мода», and Олексій Сай's into «Заяви» and «Excel-art».
 
 ## Corrected photo attribution
 
