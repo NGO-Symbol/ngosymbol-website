@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // A strip of photographs that scrolls sideways (swipe, trackpad, arrows), with a full-screen view:
 // swipe or ← → to go through, Esc or a tap outside to close. Each photo links to its project.
-import { thumbOf, type Highlight } from '~/data/highlights'
+import { highlightCaption, thumbOf, type Highlight } from '~/data/highlights'
 
 // placeholders: empty frames shown until the selection is made (keeps the layout still while it loads).
 const props = defineProps<{ photos: Highlight[]; placeholders?: number }>()
@@ -60,7 +60,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
         <button type="button" class="reel__photo" :aria-label="`Відкрити фото: ${photo.alt}`" @click="open = index">
           <img :src="thumbOf(photo.src)" :alt="photo.alt" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')">
         </button>
-        <NuxtLink class="reel__caption" :to="photo.to">{{ photo.project }}</NuxtLink>
+        <NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo) }}</NuxtLink>
       </li>
     </ul>
     <div class="reel__controls">
@@ -79,7 +79,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
           <figcaption>
             <span class="reel-view__count">{{ (open ?? 0) + 1 }} / {{ photos.length }}</span>
             <span>{{ current.alt }}<template v-if="current.credit"> · Фото: {{ current.credit }}</template></span>
-            <NuxtLink :to="current.to" @click="open = null">{{ current.project }} →</NuxtLink>
+            <NuxtLink :to="current.to" @click="open = null">{{ highlightCaption(current) }} →</NuxtLink>
           </figcaption>
         </figure>
         <button type="button" class="reel-view__close" aria-label="Закрити" @click="close">×</button>
