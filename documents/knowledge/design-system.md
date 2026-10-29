@@ -112,3 +112,7 @@ On touch screens every tap leaves a short mark from the identity, different by t
 ## Calmer motion (2026-10-29)
 
 `USER_CONFIRMED`: less animation overall, so motion never pulls focus while people look for information. Tap marks on phones removed entirely; no route wipe between pages; every page uses one quiet fade (≈0.2 s, 6 px lift); scroll reveal is a short 12 px fade; project card hover lifts 4 px without tilt. The intro on first visit stays. Project filters are a compact list («Формат: Плейбек · Перформанс · …») instead of pills. Headings use `text-wrap: balance`, paragraphs `pretty`, to avoid lonely last words; page titles are smaller on phones. Orbit titles on phones are larger, years hidden there.
+
+## Ukrainian line breaks (2026-10-29)
+
+`USER_CONFIRMED`: prepositions, conjunctions and other words of up to three letters («і», «й», «в», «з», «до», «від», «для», «та»…) always move to the next line together with the word they belong to; a dash or an arrow never starts a line. Implemented once for all text by `plugins/typography.client.ts` (non-breaking spaces in rendered text, re-applied after page changes; SVG, code and form fields are left alone).
