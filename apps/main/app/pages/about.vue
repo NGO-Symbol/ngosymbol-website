@@ -72,7 +72,7 @@ const supporters = organizations
       </div>
       <ul class="press-list">
         <li v-for="item in press" :key="item.url">
-          <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }} ↗</a>
+          <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }}</a>
           <span>
             <template v-for="(slug, index) in item.projects" :key="slug">
               <NuxtLink :to="`/projects/${slug}`">{{ getProject(slug)?.title }}</NuxtLink><template v-if="index < item.projects.length - 1">, </template>

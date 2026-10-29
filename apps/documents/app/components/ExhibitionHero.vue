@@ -1,93 +1,105 @@
 <script setup lang="ts">
-// Hero of the project site, the same composition as the project page on symbol.ngo (DocumentsHero there):
-// the project font EXDocument by Олексій Чекаль, words on grey tape strips between barcode rules, the blue stamp.
+// Home of the project site, composed as a filled-in document — unlike the project page on symbol.ngo, which shows the
+// title on tape strips beside a side column: the exhibition «issued» as a form with a 3×4 photo, typed-in fields, the
+// stamp over the photo, the curators' signature and a machine-readable zone at the bottom, as in a passport.
+const { t, localePath } = useLang()
+const photo = (exhibition.gallery ?? []).find(item => !item.people) ?? exhibition.gallery?.[0]
+
+const fields = computed(() => [
+  { label: t('Вид', 'Type'), value: t('Виставка сучасного мистецтва', 'Contemporary art exhibition') },
+  { label: t('Дійсна з', 'Valid from'), value: '17.10.2025', half: true },
+  { label: t('Дійсна до', 'Valid until'), value: '07.12.2025', half: true },
+  { label: t('Місце', 'Place'), value: t('ЄрміловЦентр, Харків', 'YermilovCentre, Kharkiv') },
+  { label: t('Учасники', 'Holders'), value: t('20 митців і мисткинь', '20 artists') },
+  { label: t('Видано', 'Issued by'), value: t('ГО «Символ» · ЄрміловЦентр · ХНУ ім. В. Н. Каразіна', 'NGO Symbol · YermilovCentre · Karazin University') }
+])
 </script>
 
 <template>
-  <header class="docs-hero">
-    <div class="docs-container docs-hero__inner">
-      <div class="docs-rule" aria-hidden="true"><span /><span /></div>
-
-      <div class="docs-hero__grid">
-        <div class="docs-hero__main">
-          <p class="docs-kicker"><span>Виставка</span><span>сучасного</span><span>мистецтва</span></p>
-          <h1 class="docs-title" aria-label="Покажіть свої документи…">
-            <span class="docs-word docs-word--1" aria-hidden="true">Покажіть</span>
-            <span class="docs-word docs-word--2" aria-hidden="true">свої</span>
-            <span class="docs-word docs-word--3" aria-hidden="true">документи…</span>
-          </h1>
+  <header class="form-hero">
+    <div class="docs-container">
+      <article class="form-sheet">
+        <div class="form-sheet__head">
+          <span>{{ t('Форма № ПСД-2025', 'Form No. PSD-2025') }}</span>
+          <span>{{ t('Проєкт ГО «Символ»', 'A project of NGO Symbol') }}</span>
+          <span class="form-sheet__serial">{{ t('Серія', 'Series') }} ЄЦ 171025</span>
         </div>
 
-        <aside class="docs-hero__side">
-          <!-- The exhibition stamp, redrawn after the original identity by Олексій Чекаль: thick outer ring, the title
-               running clockwise with «СВОЇ» at the top, a double inner ring and a QR code, printed with ink grain. -->
-          <svg class="docs-stamp" viewBox="0 0 200 200" aria-hidden="true">
-            <defs>
-              <path id="docs-stamp-path" d="M100 100 m0 75 a75 75 0 1 1 0.01 0" />
-              <filter id="docs-stamp-ink" x="-5%" y="-5%" width="110%" height="110%">
-                <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="3" result="grain" />
-                <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.3 1.45" result="mask" />
-                <feComposite in="SourceGraphic" in2="mask" operator="in" />
-              </filter>
-            </defs>
-            <g filter="url(#docs-stamp-ink)" fill="currentColor">
-              <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="6" />
-              <circle cx="100" cy="100" r="59" fill="none" stroke="currentColor" stroke-width="3" />
-              <circle cx="100" cy="100" r="53.5" fill="none" stroke="currentColor" stroke-width="2" />
-              <text font-size="23" font-family="EXDocument, monospace" text-anchor="middle"><textPath href="#docs-stamp-path" startOffset="50%" textLength="392" lengthAdjust="spacingAndGlyphs">ПОКАЖІТЬ СВОЇ ДОКУМЕНТИ…</textPath></text>
-              <g><rect x="68.5" y="68.5" width="3.0" height="3.0" /><rect x="71.5" y="68.5" width="3.0" height="3.0" /><rect x="74.5" y="68.5" width="3.0" height="3.0" /><rect x="77.5" y="68.5" width="3.0" height="3.0" /><rect x="80.5" y="68.5" width="3.0" height="3.0" /><rect x="83.5" y="68.5" width="3.0" height="3.0" /><rect x="86.5" y="68.5" width="3.0" height="3.0" /><rect x="92.5" y="68.5" width="3.0" height="3.0" /><rect x="95.5" y="68.5" width="3.0" height="3.0" /><rect x="101.5" y="68.5" width="3.0" height="3.0" /><rect x="110.5" y="68.5" width="3.0" height="3.0" /><rect x="113.5" y="68.5" width="3.0" height="3.0" /><rect x="116.5" y="68.5" width="3.0" height="3.0" /><rect x="119.5" y="68.5" width="3.0" height="3.0" /><rect x="122.5" y="68.5" width="3.0" height="3.0" /><rect x="125.5" y="68.5" width="3.0" height="3.0" /><rect x="128.5" y="68.5" width="3.0" height="3.0" /><rect x="68.5" y="71.5" width="3.0" height="3.0" /><rect x="86.5" y="71.5" width="3.0" height="3.0" /><rect x="92.5" y="71.5" width="3.0" height="3.0" /><rect x="95.5" y="71.5" width="3.0" height="3.0" /><rect x="101.5" y="71.5" width="3.0" height="3.0" /><rect x="104.5" y="71.5" width="3.0" height="3.0" /><rect x="110.5" y="71.5" width="3.0" height="3.0" /><rect x="128.5" y="71.5" width="3.0" height="3.0" /><rect x="68.5" y="74.5" width="3.0" height="3.0" /><rect x="74.5" y="74.5" width="3.0" height="3.0" /><rect x="77.5" y="74.5" width="3.0" height="3.0" /><rect x="80.5" y="74.5" width="3.0" height="3.0" /><rect x="86.5" y="74.5" width="3.0" height="3.0" /><rect x="92.5" y="74.5" width="3.0" height="3.0" /><rect x="95.5" y="74.5" width="3.0" height="3.0" /><rect x="98.5" y="74.5" width="3.0" height="3.0" /><rect x="104.5" y="74.5" width="3.0" height="3.0" /><rect x="110.5" y="74.5" width="3.0" height="3.0" /><rect x="116.5" y="74.5" width="3.0" height="3.0" /><rect x="119.5" y="74.5" width="3.0" height="3.0" /><rect x="122.5" y="74.5" width="3.0" height="3.0" /><rect x="128.5" y="74.5" width="3.0" height="3.0" /><rect x="68.5" y="77.5" width="3.0" height="3.0" /><rect x="74.5" y="77.5" width="3.0" height="3.0" /><rect x="77.5" y="77.5" width="3.0" height="3.0" /><rect x="80.5" y="77.5" width="3.0" height="3.0" /><rect x="86.5" y="77.5" width="3.0" height="3.0" /><rect x="92.5" y="77.5" width="3.0" height="3.0" /><rect x="104.5" y="77.5" width="3.0" height="3.0" /><rect x="110.5" y="77.5" width="3.0" height="3.0" /><rect x="116.5" y="77.5" width="3.0" height="3.0" /><rect x="119.5" y="77.5" width="3.0" height="3.0" /><rect x="122.5" y="77.5" width="3.0" height="3.0" /><rect x="128.5" y="77.5" width="3.0" height="3.0" /><rect x="68.5" y="80.5" width="3.0" height="3.0" /><rect x="74.5" y="80.5" width="3.0" height="3.0" /><rect x="77.5" y="80.5" width="3.0" height="3.0" /><rect x="80.5" y="80.5" width="3.0" height="3.0" /><rect x="86.5" y="80.5" width="3.0" height="3.0" /><rect x="95.5" y="80.5" width="3.0" height="3.0" /><rect x="101.5" y="80.5" width="3.0" height="3.0" /><rect x="104.5" y="80.5" width="3.0" height="3.0" /><rect x="110.5" y="80.5" width="3.0" height="3.0" /><rect x="116.5" y="80.5" width="3.0" height="3.0" /><rect x="119.5" y="80.5" width="3.0" height="3.0" /><rect x="122.5" y="80.5" width="3.0" height="3.0" /><rect x="128.5" y="80.5" width="3.0" height="3.0" /><rect x="68.5" y="83.5" width="3.0" height="3.0" /><rect x="86.5" y="83.5" width="3.0" height="3.0" /><rect x="92.5" y="83.5" width="3.0" height="3.0" /><rect x="95.5" y="83.5" width="3.0" height="3.0" /><rect x="101.5" y="83.5" width="3.0" height="3.0" /><rect x="110.5" y="83.5" width="3.0" height="3.0" /><rect x="128.5" y="83.5" width="3.0" height="3.0" /><rect x="68.5" y="86.5" width="3.0" height="3.0" /><rect x="71.5" y="86.5" width="3.0" height="3.0" /><rect x="74.5" y="86.5" width="3.0" height="3.0" /><rect x="77.5" y="86.5" width="3.0" height="3.0" /><rect x="80.5" y="86.5" width="3.0" height="3.0" /><rect x="83.5" y="86.5" width="3.0" height="3.0" /><rect x="86.5" y="86.5" width="3.0" height="3.0" /><rect x="95.5" y="86.5" width="3.0" height="3.0" /><rect x="101.5" y="86.5" width="3.0" height="3.0" /><rect x="104.5" y="86.5" width="3.0" height="3.0" /><rect x="110.5" y="86.5" width="3.0" height="3.0" /><rect x="113.5" y="86.5" width="3.0" height="3.0" /><rect x="116.5" y="86.5" width="3.0" height="3.0" /><rect x="119.5" y="86.5" width="3.0" height="3.0" /><rect x="122.5" y="86.5" width="3.0" height="3.0" /><rect x="125.5" y="86.5" width="3.0" height="3.0" /><rect x="128.5" y="86.5" width="3.0" height="3.0" /><rect x="92.5" y="89.5" width="3.0" height="3.0" /><rect x="98.5" y="89.5" width="3.0" height="3.0" /><rect x="101.5" y="89.5" width="3.0" height="3.0" /><rect x="68.5" y="92.5" width="3.0" height="3.0" /><rect x="71.5" y="92.5" width="3.0" height="3.0" /><rect x="80.5" y="92.5" width="3.0" height="3.0" /><rect x="95.5" y="92.5" width="3.0" height="3.0" /><rect x="101.5" y="92.5" width="3.0" height="3.0" /><rect x="104.5" y="92.5" width="3.0" height="3.0" /><rect x="110.5" y="92.5" width="3.0" height="3.0" /><rect x="113.5" y="92.5" width="3.0" height="3.0" /><rect x="116.5" y="92.5" width="3.0" height="3.0" /><rect x="68.5" y="95.5" width="3.0" height="3.0" /><rect x="80.5" y="95.5" width="3.0" height="3.0" /><rect x="89.5" y="95.5" width="3.0" height="3.0" /><rect x="95.5" y="95.5" width="3.0" height="3.0" /><rect x="110.5" y="95.5" width="3.0" height="3.0" /><rect x="113.5" y="95.5" width="3.0" height="3.0" /><rect x="119.5" y="95.5" width="3.0" height="3.0" /><rect x="122.5" y="95.5" width="3.0" height="3.0" /><rect x="125.5" y="95.5" width="3.0" height="3.0" /><rect x="128.5" y="95.5" width="3.0" height="3.0" /><rect x="68.5" y="98.5" width="3.0" height="3.0" /><rect x="74.5" y="98.5" width="3.0" height="3.0" /><rect x="77.5" y="98.5" width="3.0" height="3.0" /><rect x="80.5" y="98.5" width="3.0" height="3.0" /><rect x="86.5" y="98.5" width="3.0" height="3.0" /><rect x="89.5" y="98.5" width="3.0" height="3.0" /><rect x="104.5" y="98.5" width="3.0" height="3.0" /><rect x="107.5" y="98.5" width="3.0" height="3.0" /><rect x="110.5" y="98.5" width="3.0" height="3.0" /><rect x="119.5" y="98.5" width="3.0" height="3.0" /><rect x="122.5" y="98.5" width="3.0" height="3.0" /><rect x="125.5" y="98.5" width="3.0" height="3.0" /><rect x="128.5" y="98.5" width="3.0" height="3.0" /><rect x="68.5" y="101.5" width="3.0" height="3.0" /><rect x="74.5" y="101.5" width="3.0" height="3.0" /><rect x="77.5" y="101.5" width="3.0" height="3.0" /><rect x="80.5" y="101.5" width="3.0" height="3.0" /><rect x="83.5" y="101.5" width="3.0" height="3.0" /><rect x="104.5" y="101.5" width="3.0" height="3.0" /><rect x="119.5" y="101.5" width="3.0" height="3.0" /><rect x="122.5" y="101.5" width="3.0" height="3.0" /><rect x="125.5" y="101.5" width="3.0" height="3.0" /><rect x="68.5" y="104.5" width="3.0" height="3.0" /><rect x="71.5" y="104.5" width="3.0" height="3.0" /><rect x="74.5" y="104.5" width="3.0" height="3.0" /><rect x="77.5" y="104.5" width="3.0" height="3.0" /><rect x="80.5" y="104.5" width="3.0" height="3.0" /><rect x="83.5" y="104.5" width="3.0" height="3.0" /><rect x="86.5" y="104.5" width="3.0" height="3.0" /><rect x="89.5" y="104.5" width="3.0" height="3.0" /><rect x="92.5" y="104.5" width="3.0" height="3.0" /><rect x="95.5" y="104.5" width="3.0" height="3.0" /><rect x="98.5" y="104.5" width="3.0" height="3.0" /><rect x="107.5" y="104.5" width="3.0" height="3.0" /><rect x="110.5" y="104.5" width="3.0" height="3.0" /><rect x="113.5" y="104.5" width="3.0" height="3.0" /><rect x="116.5" y="104.5" width="3.0" height="3.0" /><rect x="119.5" y="104.5" width="3.0" height="3.0" /><rect x="128.5" y="104.5" width="3.0" height="3.0" /><rect x="92.5" y="107.5" width="3.0" height="3.0" /><rect x="95.5" y="107.5" width="3.0" height="3.0" /><rect x="98.5" y="107.5" width="3.0" height="3.0" /><rect x="101.5" y="107.5" width="3.0" height="3.0" /><rect x="104.5" y="107.5" width="3.0" height="3.0" /><rect x="110.5" y="107.5" width="3.0" height="3.0" /><rect x="113.5" y="107.5" width="3.0" height="3.0" /><rect x="122.5" y="107.5" width="3.0" height="3.0" /><rect x="128.5" y="107.5" width="3.0" height="3.0" /><rect x="68.5" y="110.5" width="3.0" height="3.0" /><rect x="71.5" y="110.5" width="3.0" height="3.0" /><rect x="74.5" y="110.5" width="3.0" height="3.0" /><rect x="77.5" y="110.5" width="3.0" height="3.0" /><rect x="80.5" y="110.5" width="3.0" height="3.0" /><rect x="83.5" y="110.5" width="3.0" height="3.0" /><rect x="86.5" y="110.5" width="3.0" height="3.0" /><rect x="104.5" y="110.5" width="3.0" height="3.0" /><rect x="107.5" y="110.5" width="3.0" height="3.0" /><rect x="110.5" y="110.5" width="3.0" height="3.0" /><rect x="122.5" y="110.5" width="3.0" height="3.0" /><rect x="125.5" y="110.5" width="3.0" height="3.0" /><rect x="68.5" y="113.5" width="3.0" height="3.0" /><rect x="86.5" y="113.5" width="3.0" height="3.0" /><rect x="107.5" y="113.5" width="3.0" height="3.0" /><rect x="113.5" y="113.5" width="3.0" height="3.0" /><rect x="116.5" y="113.5" width="3.0" height="3.0" /><rect x="119.5" y="113.5" width="3.0" height="3.0" /><rect x="122.5" y="113.5" width="3.0" height="3.0" /><rect x="125.5" y="113.5" width="3.0" height="3.0" /><rect x="68.5" y="116.5" width="3.0" height="3.0" /><rect x="74.5" y="116.5" width="3.0" height="3.0" /><rect x="77.5" y="116.5" width="3.0" height="3.0" /><rect x="80.5" y="116.5" width="3.0" height="3.0" /><rect x="86.5" y="116.5" width="3.0" height="3.0" /><rect x="95.5" y="116.5" width="3.0" height="3.0" /><rect x="107.5" y="116.5" width="3.0" height="3.0" /><rect x="110.5" y="116.5" width="3.0" height="3.0" /><rect x="113.5" y="116.5" width="3.0" height="3.0" /><rect x="116.5" y="116.5" width="3.0" height="3.0" /><rect x="119.5" y="116.5" width="3.0" height="3.0" /><rect x="68.5" y="119.5" width="3.0" height="3.0" /><rect x="74.5" y="119.5" width="3.0" height="3.0" /><rect x="77.5" y="119.5" width="3.0" height="3.0" /><rect x="80.5" y="119.5" width="3.0" height="3.0" /><rect x="86.5" y="119.5" width="3.0" height="3.0" /><rect x="92.5" y="119.5" width="3.0" height="3.0" /><rect x="101.5" y="119.5" width="3.0" height="3.0" /><rect x="116.5" y="119.5" width="3.0" height="3.0" /><rect x="119.5" y="119.5" width="3.0" height="3.0" /><rect x="125.5" y="119.5" width="3.0" height="3.0" /><rect x="68.5" y="122.5" width="3.0" height="3.0" /><rect x="74.5" y="122.5" width="3.0" height="3.0" /><rect x="77.5" y="122.5" width="3.0" height="3.0" /><rect x="80.5" y="122.5" width="3.0" height="3.0" /><rect x="86.5" y="122.5" width="3.0" height="3.0" /><rect x="95.5" y="122.5" width="3.0" height="3.0" /><rect x="98.5" y="122.5" width="3.0" height="3.0" /><rect x="107.5" y="122.5" width="3.0" height="3.0" /><rect x="110.5" y="122.5" width="3.0" height="3.0" /><rect x="113.5" y="122.5" width="3.0" height="3.0" /><rect x="122.5" y="122.5" width="3.0" height="3.0" /><rect x="68.5" y="125.5" width="3.0" height="3.0" /><rect x="86.5" y="125.5" width="3.0" height="3.0" /><rect x="95.5" y="125.5" width="3.0" height="3.0" /><rect x="101.5" y="125.5" width="3.0" height="3.0" /><rect x="104.5" y="125.5" width="3.0" height="3.0" /><rect x="119.5" y="125.5" width="3.0" height="3.0" /><rect x="128.5" y="125.5" width="3.0" height="3.0" /><rect x="68.5" y="128.5" width="3.0" height="3.0" /><rect x="71.5" y="128.5" width="3.0" height="3.0" /><rect x="74.5" y="128.5" width="3.0" height="3.0" /><rect x="77.5" y="128.5" width="3.0" height="3.0" /><rect x="80.5" y="128.5" width="3.0" height="3.0" /><rect x="83.5" y="128.5" width="3.0" height="3.0" /><rect x="86.5" y="128.5" width="3.0" height="3.0" /><rect x="92.5" y="128.5" width="3.0" height="3.0" /><rect x="95.5" y="128.5" width="3.0" height="3.0" /><rect x="98.5" y="128.5" width="3.0" height="3.0" /><rect x="104.5" y="128.5" width="3.0" height="3.0" /><rect x="107.5" y="128.5" width="3.0" height="3.0" /><rect x="110.5" y="128.5" width="3.0" height="3.0" /><rect x="116.5" y="128.5" width="3.0" height="3.0" /><rect x="119.5" y="128.5" width="3.0" height="3.0" /><rect x="128.5" y="128.5" width="3.0" height="3.0" /></g>
-            </g>
-          </svg>
-          <dl class="docs-meta">
-            <div><dt>Куратори</dt><dd>Петро Чекаль, Юрій Рассоха</dd></div>
-            <div><dt>Дати</dt><dd>17.10.2025 — 07.12.2025</dd></div>
-            <div><dt>Місце</dt><dd>ЄрміловЦентр, Харків</dd></div>
-          </dl>
-          <NuxtLink class="docs-site" to="/mytsi">
-            <span>Митці виставки</span>
-            <span aria-hidden="true">→</span>
-          </NuxtLink>
-        </aside>
-      </div>
+        <div class="form-field form-field--title">
+          <span class="form-field__label">{{ t('Назва', 'Title') }}</span>
+          <h1 class="form-title">{{ t('Покажіть свої документи…', 'May I see your documents…') }}</h1>
+        </div>
 
-      <div class="docs-rule docs-rule--bottom" aria-hidden="true"><span /><span /></div>
+        <div class="form-sheet__body">
+          <figure class="form-photo">
+            <img v-if="photo" :src="photo.src" :alt="photo.alt">
+            <figcaption>{{ t('Фото 3×4', 'Photo 3×4') }}</figcaption>
+            <DocsStamp class="form-photo__stamp" />
+          </figure>
+
+          <dl class="form-fields">
+            <div v-for="(field, index) in fields" :key="field.label" class="form-field" :class="{ 'form-field--half': field.half }" :style="{ '--i': index }">
+              <dt class="form-field__label">{{ field.label }}</dt>
+              <dd class="form-field__value">{{ field.value }}</dd>
+            </div>
+            <div class="form-field form-signature" :style="{ '--i': fields.length }">
+              <dt class="form-field__label">{{ t('Підпис кураторів', 'Curators’ signature') }}</dt>
+              <dd class="form-field__value">
+                <a :href="symbolPersonUrl('petro-chekal')">{{ t('Петро Чекаль', 'Petro Chekal') }}</a>,
+                <a :href="symbolPersonUrl('yurii-rassokha')">{{ t('Юрій Рассоха', 'Yurii Rassokha') }}</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <p class="form-mrz" aria-hidden="true">
+          <span>P&lt;UKRPOKAZHIT&lt;SVOI&lt;DOKUMENTY&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>
+          <span>20ARTISTS&lt;&lt;251017&lt;251207&lt;KHARKIV&lt;YERMILOV&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>
+        </p>
+      </article>
+
+      <nav class="form-actions" :aria-label="t('Розділи', 'Sections')">
+        <NuxtLink class="docs-site" :to="localePath('/mytsi')">{{ t('Митці виставки', 'The artists') }}</NuxtLink>
+        <NuxtLink class="form-actions__more" :to="localePath('/podii')">{{ t('Програма подій', 'Events') }}</NuxtLink>
+        <NuxtLink class="form-actions__more" :to="localePath('/kontseptsiia')">{{ t('Кураторська концепція', 'Curatorial concept') }}</NuxtLink>
+      </nav>
     </div>
   </header>
 </template>
 
 <style scoped>
-.docs-hero { overflow: hidden; padding: 12px 0 56px; }
-.docs-rule { display: grid; gap: 6px; margin: 16px 0 40px; }
-.docs-rule span { height: 12px; background: repeating-linear-gradient(90deg, var(--docs-ink) 0 2px, transparent 2px 6px); opacity: .5; transform-origin: left; animation: docs-rule .9s cubic-bezier(.6, 0, .2, 1) both; }
-.docs-rule span + span { animation-delay: .15s; }
-.docs-rule--bottom { margin: 48px 0 0; }
-.docs-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: clamp(24px, 4vw, 64px); align-items: center; }
-.docs-kicker { display: grid; gap: 4px; margin: 0 0 28px; font-family: var(--docs-display); text-transform: uppercase; font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1; }
-.docs-kicker span { background: var(--docs-ink); color: var(--docs-paper); padding: 5px 10px 3px; width: fit-content; animation: docs-pop .5s cubic-bezier(.3, 1.6, .5, 1) both; }
-.docs-kicker span:nth-child(2) { animation-delay: .1s; } .docs-kicker span:nth-child(3) { animation-delay: .2s; }
-.docs-title { margin: 0; display: grid; font-family: var(--docs-display); font-weight: 400; text-transform: uppercase; line-height: .9; font-size: clamp(3.4rem, 10.5vw, 9.5rem); }
-.docs-word { position: relative; display: block; width: fit-content; padding: 0 .12em; isolation: isolate; animation: docs-type .7s steps(9, end) both; }
-.docs-word::before { content: ''; position: absolute; z-index: -1; inset: 18% -6% 8% -4%; background: color-mix(in srgb, var(--docs-ink) 24%, transparent); transform: rotate(-1.5deg); transform-origin: left; animation: docs-tape .7s cubic-bezier(.6, 0, .2, 1) both; animation-delay: inherit; }
-.docs-word--1 { animation-delay: .2s; }
-.docs-word--2 { justify-self: center; margin-top: -.06em; font-size: 1.12em; animation-delay: .45s; }
-.docs-word--2::before { transform: rotate(-5deg); inset: 22% -10% 10% -10%; }
-.docs-word--3 { margin-top: .04em; margin-left: 4%; font-size: .6em; animation-delay: .7s; }
-.docs-word--3::before { transform: rotate(2deg); inset: 12% -8% 4% -6%; }
-.docs-hero__side { display: grid; gap: 24px; justify-items: center; }
-.docs-stamp { width: min(100%, 230px); color: var(--docs-stamp); mix-blend-mode: var(--docs-stamp-blend, multiply); animation: docs-stamp-land 1.2s cubic-bezier(.5, 0, .3, 1.6) 1s both; }
-.docs-meta { width: 100%; margin: 0; display: grid; gap: 10px; font-family: var(--docs-mono); font-size: .88rem; }
-.docs-meta dt { display: inline-block; background: var(--docs-ink); color: var(--docs-paper); padding: 1px 6px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
-.docs-meta dd { margin: 0; }
-.docs-site { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px 14px; background: var(--docs-ink); color: var(--docs-paper); text-decoration: none; font-family: var(--docs-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; border: 3px solid var(--docs-ink); box-shadow: 6px 6px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease; animation: docs-pop .6s cubic-bezier(.3, 1.6, .5, 1) 1.3s both; }
-.docs-site:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--docs-stamp); background: var(--docs-paper); color: var(--docs-ink); }
-@keyframes docs-rule { from { transform: scaleX(0); } }
-@keyframes docs-tape { from { transform: scaleX(0) rotate(-3deg); } }
-@keyframes docs-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-@keyframes docs-pop { from { transform: scale(1.5); opacity: 0; } }
-@keyframes docs-stamp-land { 0% { transform: translateY(-80px) scale(1.8) rotate(-30deg); opacity: 0; } 55% { transform: scale(.94) rotate(-14deg); opacity: 1; } 100% { transform: rotate(-12deg); opacity: .92; } }
-@media (max-width: 820px) {
-  .docs-hero__grid { grid-template-columns: 1fr; }
-  .docs-hero__side { grid-template-columns: 120px 1fr; align-items: center; justify-items: stretch; }
-  .docs-site { grid-column: 1 / -1; }
+.form-hero { padding: 32px 0 56px; overflow: hidden; }
+.form-sheet { position: relative; padding: clamp(18px, 3vw, 36px); background: var(--docs-sheet); border: 2px solid var(--docs-ink); box-shadow: 10px 10px 0 color-mix(in srgb, var(--docs-ink) 14%, transparent); animation: form-in .7s cubic-bezier(.2, .8, .2, 1) both; }
+.form-sheet__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding-bottom: 12px; border-bottom: 1px solid var(--docs-ink); font-family: var(--docs-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; }
+.form-sheet__serial { color: var(--docs-stamp); }
+.form-field { display: grid; gap: 4px; padding: 10px 0 8px; border-bottom: 1px dashed color-mix(in srgb, var(--docs-ink) 45%, transparent); animation: form-type .5s steps(12, end) both; animation-delay: calc(.5s + var(--i, 0) * .12s); }
+.form-field__label { font-family: var(--docs-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--docs-muted); }
+.form-field__value { margin: 0; font-family: var(--docs-mono); font-size: clamp(.95rem, calc(.85rem + .4vw), 1.15rem); }
+.form-field--title { border-bottom: 2px solid var(--docs-ink); padding: 18px 0 14px; animation-delay: .2s; }
+.form-title { margin: 0; font-family: var(--docs-display); font-weight: 400; text-transform: uppercase; line-height: .92; font-size: clamp(2.6rem, 8.4vw, 7.6rem); }
+.form-sheet__body { display: grid; grid-template-columns: minmax(150px, 280px) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); padding-top: 24px; align-items: start; }
+.form-photo { position: relative; margin: 0; }
+.form-photo img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 2px solid var(--docs-ink); filter: grayscale(1) contrast(1.1); }
+.form-photo figcaption { margin-top: 6px; font-family: var(--docs-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--docs-muted); }
+.form-photo__stamp { position: absolute; right: -22%; bottom: 4%; width: 70%; color: var(--docs-stamp); mix-blend-mode: var(--docs-stamp-blend, multiply); animation: form-stamp 1s cubic-bezier(.5, 0, .3, 1.6) 1.4s both; }
+.form-fields { margin: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; }
+.form-fields .form-field { grid-column: 1 / -1; }
+.form-fields .form-field--half { grid-column: auto; }
+.form-signature .form-field__value { font-family: var(--docs-display); font-size: clamp(1.3rem, calc(1rem + 1vw), 1.9rem); text-transform: uppercase; }
+.form-signature a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--docs-stamp); }
+.form-mrz { margin: 28px 0 0; display: grid; gap: 2px; padding-top: 12px; border-top: 1px solid var(--docs-ink); font-family: var(--docs-mono); font-size: clamp(.62rem, calc(.4rem + .9vw), 1.05rem); letter-spacing: .14em; white-space: nowrap; overflow: hidden; opacity: .75; }
+.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 32px; }
+.docs-site { display: inline-flex; padding: 16px 22px 12px; background: var(--docs-ink); color: var(--docs-paper); text-decoration: none; font-family: var(--docs-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; box-shadow: 6px 6px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease; }
+.docs-site:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--docs-stamp); }
+.form-actions__more { font-family: var(--docs-mono); font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--docs-ink); }
+@keyframes form-in { from { transform: translateY(24px) rotate(-.6deg); opacity: 0; } }
+@keyframes form-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes form-stamp { 0% { transform: translateY(-60px) scale(1.8) rotate(-30deg); opacity: 0; } 55% { transform: scale(.94) rotate(-14deg); opacity: 1; } 100% { transform: rotate(-12deg); opacity: .9; } }
+@media (max-width: 720px) {
+  .form-sheet__body { grid-template-columns: 1fr; }
+  .form-photo { width: 62%; }
+  .form-photo__stamp { right: -45%; width: 80%; }
+  .form-fields { grid-template-columns: 1fr 1fr; }
 }
+@media (prefers-reduced-motion: reduce) { .form-sheet, .form-field, .form-photo__stamp { animation: none; } }
 </style>

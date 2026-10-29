@@ -12,8 +12,8 @@ defineProps<{ items: { org: Organization; projects: { slug: string; title: strin
   <ul class="partners">
     <li v-for="{ org, projects: list } in items" :key="org.slug">
       <component :is="org.url ? 'a' : 'div'" class="partner" :class="{ 'partner--text': !org.logo }" :href="org.url" :target="org.url ? '_blank' : undefined" :rel="org.url ? 'noreferrer' : undefined">
-        <PartnerLogo v-if="org.logo" :src="org.logo" :name="org.name" :slug="org.slug" :motion="org.motion" />
-        <span class="partner__name">{{ org.name }}<template v-if="org.url">&nbsp;<SocialIcon v-if="isSocialUrl(org.url)" class="partner__network" :network="networkOf(org.url).network" /><template v-else>↗</template></template></span>
+        <PartnerLogo v-if="org.logo" :src="org.logo" :src-dark="org.logoDark" :name="org.name" :slug="org.slug" :motion="org.motion" />
+        <span class="partner__name">{{ org.name }}<template v-if="org.url">&nbsp;<SocialIcon v-if="isSocialUrl(org.url)" class="partner__network" :network="networkOf(org.url).network" /></template></span>
         <span class="partner__projects">{{ list.map(project => project.title).join(' · ') }}</span>
       </component>
     </li>

@@ -37,7 +37,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutside))
         <p>{{ en ? 'New events appear in your calendar by themselves.' : 'Нові події самі з’являтимуться у вашому календарі.' }}</p>
         <ul>
           <li v-for="(option, index) in options" :key="option.label" :style="{ '--i': index }">
-            <a :href="option.href" :target="option.href.startsWith('https://') ? '_blank' : undefined" :rel="option.href.startsWith('https://') ? 'noreferrer' : undefined" @click="open = false">{{ option.label }} ↗</a>
+            <a :href="option.href" :target="option.href.startsWith('https://') ? '_blank' : undefined" :rel="option.href.startsWith('https://') ? 'noreferrer' : undefined" @click="open = false">{{ option.label }}</a>
           </li>
           <li :style="{ '--i': options.length }">
             <button type="button" @click="copy">{{ copied ? (en ? 'Link copied ✓' : 'Посилання скопійовано ✓') : (en ? 'Copy the feed link' : 'Скопіювати посилання на календар') }}</button>

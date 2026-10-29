@@ -9,13 +9,19 @@
   --docs-stamp: #3a6fd2;
   --docs-muted: color-mix(in srgb, var(--docs-ink) 62%, var(--docs-paper));
   --docs-line: color-mix(in srgb, var(--docs-ink) 22%, var(--docs-paper));
+  /* A sheet of the case file, a shade lighter than the desk paper (darker at night). */
+  --docs-sheet: #f6f6f3;
+  --docs-folder: #d9c9a3;
   --docs-display: 'EXDocument', 'Arial Narrow', sans-serif;
   --docs-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   color-scheme: light;
 }
+/* Night: carbon paper with off-white ink. Chosen in the header (data-theme) or, without a choice, by the system. */
+:root[data-theme="dark"] { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; --docs-sheet: #222220; --docs-folder: #3a3324; color-scheme: dark; }
 @media (prefers-color-scheme: dark) {
-  :root { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; --docs-sheet: #222220; --docs-folder: #3a3324; color-scheme: dark; }
 }
+body { transition: background-color .3s ease, color .3s ease; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 120px; }
@@ -66,3 +72,21 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Crossing to and from symbol.ngo (utils/crossing.ts). Arriving: a sheet of the exhibition's paper with a barcode
+   lifts off the page. Leaving: Symbol's violet with its round mark drops over the page before symbol.ngo opens. */
+html[data-cross] body::after { content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+html[data-cross="enter"] body::after { background: repeating-linear-gradient(90deg, var(--docs-ink) 0 2px, transparent 2px 7px) center / min(70vw, 520px) 72px no-repeat, var(--docs-paper); animation: cross-lift .75s cubic-bezier(.7, 0, .2, 1) .15s both; }
+html[data-cross="leave"] body::after { background: #9280a6 url(/favicon.svg) center / 76px no-repeat; animation: cross-drop .55s cubic-bezier(.7, 0, .3, 1) both; }
+@keyframes cross-lift { to { transform: translateY(-100%); } }
+@keyframes cross-drop { from { transform: translateY(-100%); } }
+
+/* Room for the folder tabs at the bottom on phones (DocsTabs). */
+@media (max-width: 640px) { .docs-site-shell { padding-bottom: 76px; } }
+
+/* Moving between artists' files: the open file turns away like a page and the next one settles in (pages/mytsi/[slug]). */
+.case-turn-leave-active { transition: transform .38s cubic-bezier(.55, 0, .8, .2), opacity .38s ease; transform-origin: left center; }
+.case-turn-leave-to { transform: perspective(1800px) rotateY(-70deg) translateX(-3%); opacity: 0; }
+.case-turn-enter-active { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s ease; transform-origin: left center; }
+.case-turn-enter-from { transform: perspective(1800px) rotateY(18deg) translateX(2%); opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .case-turn-leave-active, .case-turn-enter-active { transition: opacity .2s ease; } .case-turn-leave-to, .case-turn-enter-from { transform: none; } }

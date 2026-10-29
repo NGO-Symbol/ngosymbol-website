@@ -43,6 +43,8 @@ export interface EventItem {
   end?: string
   venue: Venue
   isProject: boolean
+  /** Card picture: the event's first photo, otherwise its project's poster or first photo. */
+  cover?: string
 }
 
 export const eventItems: EventItem[] = [
@@ -55,7 +57,8 @@ export const eventItems: EventItem[] = [
     start: event.start,
     end: event.end,
     venue: event.venue,
-    isProject: false
+    isProject: false,
+    cover: event.gallery?.[0]?.src ?? projectMap.get(event.project)?.poster ?? projectMap.get(event.project)?.gallery?.[0]?.src
   })),
   ...projects
     .filter(project => project.kind === 'single' && project.start)
@@ -68,7 +71,8 @@ export const eventItems: EventItem[] = [
       start: project.start!,
       end: project.end,
       venue: project.venue ?? { city: project.city, country: project.country },
-      isProject: true
+      isProject: true,
+      cover: project.poster ?? project.gallery?.[0]?.src
     }))
 ].sort((a, b) => b.start.localeCompare(a.start))
 
@@ -104,7 +108,7 @@ export const creditsByRole = (credits: Credit[] = []) => {
 }
 
 /** Backlinks for a person page: the projects the person took part in, with their roles, newest first.
- *  A role in one of a project's events counts as taking part in that project, so events are not listed on their own. */
+ *  A role in one of a project's events counts as taking part in that project; the events themselves are listed by eventsOfPerson. */
 export const appearancesOf = (slug: string) => {
   const result: { title: string; to: string; byline: string; roles: string[]; year: number }[] = []
   for (const project of projects) {
@@ -118,10 +122,21 @@ export const appearancesOf = (slug: string) => {
   return result.sort((a, b) => b.year - a.year)
 }
 
+/** The events a person is credited in or mentioned by, with their roles, newest first. */
+export const eventsOfPerson = (slug: string) => events
+  .map(event => {
+    const roles = [...new Set((event.people ?? []).filter(credit => credit.person === slug).map(credit => credit.role))]
+    const mentioned = references(event).some(ref => ref.type === 'person' && ref.slug === slug)
+    return { event, roles: roles.length ? roles : mentioned ? ['Згадка'] : [] }
+  })
+  .filter(item => item.roles.length)
+  .sort((a, b) => b.event.start.localeCompare(a.event.start))
+
 // Inline references: [[type:slug]] or [[type:slug|label]].
 const referencePattern = /\[\[(project|event|person):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g
 
-export type Segment = { text: string } | { text: string; to: string }
+// `key`: a key phrase written **like this** in the data — dates, places, numbers, the essence of a project.
+export type Segment = { text: string; key?: boolean } | { text: string; to: string; key?: boolean }
 
 export const resolveReference = (type: string, slug: string): { label: string; to?: string } | undefined => {
   if (type === 'project') {
@@ -150,8 +165,17 @@ export const parseRichText = (text: string): Segment[] => {
     last = match.index! + whole.length
   }
   if (last < text.length) segments.push({ text: text.slice(last) })
-  return segments
+  return segments.flatMap(splitKeys)
 }
+
+// **…** inside a segment marks a key phrase; a reference inside the stars ([[…]]) stays a link and is emphasised too.
+function splitKeys(segment: Segment): Segment[] {
+  if (!segment.text.includes('**')) return [segment]
+  return segment.text.split(/\*\*/).map((part, index) => ({ ...segment, text: part, key: index % 2 === 1 || segment.key })).filter(part => part.text)
+}
+
+/** Text without reference and emphasis markup, for search, meta descriptions and feeds. */
+export const plainText = (text: string) => text.replace(/\[\[[a-z]+:[a-z0-9-]+\|?([^\]]*)\]\]/g, '$1').replace(/\*\*/g, '')
 
 function textsOf(record: { body?: string[]; concept?: string[]; description?: string[]; bio?: string[] }) {
   return [...(record.body ?? []), ...(record.concept ?? []), ...(record.description ?? []), ...(record.bio ?? [])]

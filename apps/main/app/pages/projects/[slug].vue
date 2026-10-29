@@ -27,7 +27,9 @@ const team = creditsByRole(project.people)
 const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: projects.filter(p => p.partners?.includes(org!.slug) || p.donors?.includes(org!.slug)) }))
 const partners = toTiles(project.partners)
 const donors = toTiles(project.donors)
-const mentions = pressOfProject(project.slug)
+// Newest first; mentions without a stated date after the dated ones.
+const mentions = [...pressOfProject(project.slug)].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+const pressKinds = { review: 'Огляд', announcement: 'Анонс', listing: 'Добірка', 'open-call': 'Опен-кол', video: 'Відео', radio: 'Радіо', post: 'Допис' } as const
 const calls = opportunitiesOfProject(project.slug)
 const related = relatedProjects(project)
 const others = projects.filter(other => other.slug !== project.slug && !related.includes(other)).slice(0, 3)
@@ -51,7 +53,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </div>
         <h1>{{ text.title }}</h1>
         <p>{{ text.summary }}</p>
-        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту ↗</a>
+        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту</a>
       </div>
     </header>
 
@@ -68,6 +70,11 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
       </aside>
 
       <div class="project-sections">
+        <section v-if="project.gallery?.length">
+          <h2 class="section-title">Фото</h2>
+          <PhotoGallery :photos="project.gallery" />
+        </section>
+
         <section v-if="project.body">
           <h2 class="section-title">Про проєкт</h2>
           <RichText class="lead-text" :paragraphs="project.body" />
@@ -76,11 +83,6 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         <section v-if="project.concept">
           <h2 class="section-title">Кураторська концепція</h2>
           <RichText :paragraphs="project.concept" />
-        </section>
-
-        <section v-if="project.gallery?.length">
-          <h2 class="section-title">Фото</h2>
-          <PhotoGallery :photos="project.gallery" />
         </section>
 
         <section v-if="projectEvents.length">
@@ -123,6 +125,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
             </div>
           </div>
           <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>
+          <p v-if="project.fundingNotice" class="donor-credit donor-credit--notice">{{ project.fundingNotice }}</p>
           <figure v-if="project.programLogo" class="program-logo">
             <img :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
             <figcaption>{{ project.programLogo.name }}</figcaption>
@@ -133,8 +136,10 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <h2 class="section-title">Преса</h2>
           <ul class="press-list">
             <li v-for="item in mentions" :key="item.url">
-              <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }} ↗</a>
-              <span v-if="item.date">{{ formatDate(item.date) }}</span>
+              <a :href="item.url" target="_blank" rel="noreferrer">
+                <span class="press-list__meta"><span v-if="item.kind" class="press-list__kind">{{ pressKinds[item.kind] }}</span><strong>{{ item.outlet }}</strong><span v-if="item.author">{{ item.author }}</span><time v-if="item.date" :datetime="item.date">{{ formatDate(item.date) }}</time></span>
+                <span class="press-list__title">{{ item.title }}</span>
+              </a>
             </li>
           </ul>
         </section>
@@ -142,7 +147,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         <section v-if="calls.length">
           <h2 class="section-title">Можливості</h2>
           <a v-for="call in calls" :key="call.slug" class="open-call" :href="call.applyUrl" target="_blank" rel="noreferrer">
-            <strong>{{ call.title }}</strong><span>Дедлайн: {{ formatDate(call.deadline) }}</span><span class="open-call__cta">Подати заявку ↗</span>
+            <strong>{{ call.title }}</strong><span>Дедлайн: {{ formatDate(call.deadline) }}</span><span class="open-call__cta">Подати заявку</span>
           </a>
         </section>
       </div>

@@ -23,15 +23,16 @@ const labels: Record<string, [string, string]> = {
       </div>
       <div>
         <span class="label">{{ isEn ? 'Contact' : 'Зв’язок' }}</span>
-        <CopyValue :value="contactEmail" :en="isEn" />
+        <a class="footer-icon-link" :href="`mailto:${contactEmail}`"><SocialIcon network="email" /><span>{{ contactEmail }}</span></a>
+        <CopyValue :value="contactEmail" :en="isEn" plain button-only />
         <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
-        <NuxtLink :to="isEn ? '/en/events' : '/events'">{{ isEn ? 'Subscribe to the events calendar' : 'Підписатися на календар подій' }}</NuxtLink>
+        <NuxtLink class="footer-icon-link" :to="isEn ? '/en/events' : '/events'"><SocialIcon network="calendar" /><span>{{ isEn ? 'Events calendar' : 'Календар подій' }}</span></NuxtLink>
       </div>
       <div>
         <span class="label">{{ isEn ? 'Where we work' : 'Географія' }}</span>
         <p v-if="isEn">Kharkiv · Kyiv · Zakarpattia<br>Ukraine and international projects</p>
         <p v-else>Харків · Київ · Закарпаття<br>Україна та міжнародні проєкти</p>
-        <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} <CopyValue value="45221328" :en="isEn" /></p>
+        <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} <CopyValue value="45221328" :en="isEn" plain /></p>
       </div>
     </div>
   </footer>

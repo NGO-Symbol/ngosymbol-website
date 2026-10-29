@@ -1,14 +1,15 @@
 <script setup lang="ts">
-// The parallel programme of the exhibition, from the main site's events (one source of truth).
-useSeoMeta({ title: 'Події', description: 'Паралельна програма виставки «Покажіть свої документи…»: екскурсії, розмови, дискусії, перформанси.' })
+// The parallel programme of the exhibition, from the main site's events (one source of truth). Texts are in Ukrainian.
+const { isEn, t } = useLang()
+useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Паралельна програма виставки «Покажіть свої документи…»: екскурсії, розмови, дискусії, перформанси.', 'The programme of the exhibition «May I See Your Documents…»: tours, talks, discussions, performances.') })
 </script>
 
 <template>
   <section class="docs-container docs-page">
     <div class="docs-page-title">
-      <span class="docs-label">Паралельна програма · {{ programme.length }} подій</span>
-      <h1>Події</h1>
-      <p>Екскурсії, розмови з митцями, лекція й дискусії з Центром прав людини ZMINA, плейбек-театр і музичний перформанс. Усі події відбулися в ЄрміловЦентрі (майдан Свободи, 4, Харків).</p>
+      <span class="docs-label">{{ t('Паралельна програма', 'Programme') }} · {{ programme.length }}</span>
+      <h1>{{ t('Події', 'Events') }}</h1>
+      <p>{{ t('Екскурсії, розмови з митцями, лекція й дискусії з Центром прав людини ZMINA, плейбек-театр і музичний перформанс. Усі події відбулися в ЄрміловЦентрі (майдан Свободи, 4, Харків).', 'Curators’ tours, artist talks, a lecture and discussions with the ZMINA Human Rights Centre, playback theatre and a music performance. All events took place at YermilovCentre (4 Svobody Square, Kharkiv). Descriptions are in Ukrainian.') }}</p>
     </div>
     <ol class="programme">
       <li v-for="event in programme" :id="event.slug" :key="event.slug" class="event">
@@ -22,7 +23,7 @@ useSeoMeta({ title: 'Події', description: 'Паралельна прогр�
           <ul v-if="event.gallery?.length" class="docs-photos event__photos">
             <li v-for="photo in event.gallery" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
           </ul>
-          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}`">Подія на symbol.ngo ↗</a>
+          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}`">{{ t('Подія на symbol.ngo', 'Event on symbol.ngo') }}</a>
         </div>
       </li>
     </ol>

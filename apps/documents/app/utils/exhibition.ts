@@ -3,6 +3,7 @@
 import { projects } from '#symbol/projects'
 import { people } from '#symbol/people'
 import { events } from '#symbol/events'
+import { organizations } from '#symbol/organizations'
 import type { Person, SymbolEvent } from '#symbol/types'
 import { artists, type Artist } from '~/data/artists'
 
@@ -31,6 +32,11 @@ export function getArtist(slug: string) {
   return exhibitionArtists.find(artist => artist.slug === slug)
 }
 
+/** Partners and donors of the exhibition, with their logos from symbol.ngo. */
+export const exhibitionPartners = [...(exhibition.partners ?? []), ...(exhibition.donors ?? [])]
+  .map(slug => organizations.find(org => org.slug === slug))
+  .filter(org => !!org)
+
 /** Credits of the exhibition other than the artists: curators, manager, design, coordination. */
 export const team = (exhibition.people ?? [])
   .filter(credit => credit.role !== 'Митці')
@@ -53,7 +59,9 @@ export function formatDay(iso: string) {
  * parts: artists open their page here, everyone and everything else opens on symbol.ngo.
  */
 export type TextPart = { text: string; href?: string; internal?: boolean }
-export function textParts(paragraph: string): TextPart[] {
+export function textParts(source: string): TextPart[] {
+  // Key-phrase stars (**…**) are a symbol.ngo styling cue; this site shows the plain words.
+  const paragraph = source.replace(/\*\*/g, '')
   const parts: TextPart[] = []
   const pattern = /\[\[(person|project|event):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g
   let last = 0

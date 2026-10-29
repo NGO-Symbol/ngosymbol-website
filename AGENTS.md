@@ -6,6 +6,7 @@ This repository contains both source code and the durable knowledge base for Г�
 
 1. Run `pnpm task:status` and follow `.agents/skills/site-workflow/SKILL.md`: it tells you how to start a task branch, save progress in small commits, and publish through a pull request. The people you work with are not developers; run these commands for them.
 2. Never edit on `main`, never force-push, never bypass checks.
+3. Source materials (photos, CVs, logos, documents) the team sends are collected in `media-inbox/` in this folder (local, not in git), sorted by kind (`people/`, `cv/`, `logos/`, `projects/`…). Copy files there from Downloads or elsewhere first; only processed web versions go into `apps/*/public`.
 
 ## Repository skills
 
@@ -37,6 +38,8 @@ When the user says “онови контекст”, “синхронізуй 
 - Pages are assembled **only** from `Sym*` components and `var(--sym-*)` tokens. No hex colours, raw `px` font sizes, durations, `z-index` numbers, or own flex/grid CSS in pages. A missing piece becomes a new component (SFC + registry entry + examples), never page CSS.
 - Colour comes from the section's `tone` (`paper | white | lilac | violet | apricot | plum`). Motion follows the ladder in `packages/ui/docs/foundations/motion.md`. Mobile first: check 390 px before 1280 px.
 - Live gallery: `pnpm dev:design` (http://localhost:3002), published at `https://symbol.ngo/design/`. Enforced by `pnpm ds:lint` (part of `pnpm check`).
+
+- No decorative arrows (↗) after links or labels on any site: a link is clickable without them. Arrows stay only where they move you somewhere (← → pagers, sliders, back links). Enforced by `pnpm lint:arrows` (part of `pnpm check`).
 
 ## Product invariants
 

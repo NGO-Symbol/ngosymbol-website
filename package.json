@@ -14,7 +14,7 @@
     "generate": "pnpm -r generate",
     "typecheck": "pnpm -r typecheck",
     "kb:validate": "node scripts/kb-validate.mjs",
-    "check": "pnpm kb:validate && pnpm ds:contrast && pnpm ds:lint && pnpm typecheck && pnpm build",
+    "check": "pnpm kb:validate && pnpm ds:contrast && pnpm ds:lint && pnpm lint:arrows && pnpm typecheck && pnpm build",
     "task:status": "node scripts/task.mjs status",
     "task:new": "node scripts/task.mjs new",
     "task:save": "node scripts/task.mjs save",
@@ -23,6 +23,7 @@
     "ds:meta": "node scripts/ds-meta.mjs",
     "ds:shot": "node scripts/ds-shot.mjs",
     "ds:lint": "node scripts/ds-lint.mjs",
+    "lint:arrows": "node scripts/no-decorative-arrows.mjs",
     "ds:contrast": "node scripts/ds-contrast.mjs",
     "ds:crawl": "node scripts/ds-crawl.mjs",
     "ds:font": "node scripts/font-check.mjs"

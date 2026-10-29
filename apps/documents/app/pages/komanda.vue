@@ -1,15 +1,17 @@
 <script setup lang="ts">
 // Team page of the original site: the exhibition credits (from the main site's project data) and the NGO.
-import { aboutSymbol } from '~/data/concept'
+import { aboutSymbol, aboutSymbolEn } from '~/data/concept'
 
-useSeoMeta({ title: 'Команда', description: 'Команда виставки «Покажіть свої документи…» та ГО «Символ».' })
+const { isEn, t } = useLang()
+useSeoMeta({ title: () => t('Команда', 'Team'), description: () => t('Команда виставки «Покажіть свої документи…» та ГО «Символ».', 'The team of «May I See Your Documents…» and NGO Symbol.') })
+const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Менеджерка проєкту': 'Project manager', 'Дизайн айдентики та шрифт EXDocument': 'Identity design and the EXDocument typeface', 'Координація від ЄрміловЦентру': 'Coordination, YermilovCentre' }
 </script>
 
 <template>
   <section class="docs-container docs-page">
     <div class="docs-page-title">
-      <span class="docs-label">Хто зробив виставку</span>
-      <h1>Команда</h1>
+      <span class="docs-label">{{ t('Хто зробив виставку', 'Who made the exhibition') }}</span>
+      <h1>{{ t('Команда', 'Team') }}</h1>
     </div>
     <ul class="team">
       <li v-for="credit in team" :key="credit.person.slug + credit.role">
@@ -17,18 +19,18 @@ useSeoMeta({ title: 'Команда', description: 'Команда вистав�
           <img v-if="credit.person.photo" :src="credit.person.photo" :alt="credit.person.name" loading="lazy">
           <span v-else class="member__blank" aria-hidden="true" />
           <span class="member__name">{{ credit.person.name }}</span>
-          <span class="docs-label">{{ credit.role }}</span>
+          <span class="docs-label">{{ isEn ? (roleEn[credit.role] ?? credit.role) : credit.role }}</span>
         </a>
       </li>
     </ul>
 
     <div class="docs-barcode" aria-hidden="true" />
-    <h2 class="docs-section-title">ГО «Символ»</h2>
+    <h2 class="docs-section-title">{{ t('ГО «Символ»', 'NGO Symbol') }}</h2>
     <div class="docs-text">
-      <p v-for="paragraph in aboutSymbol" :key="paragraph">{{ paragraph }}</p>
-      <p><a class="docs-button" :href="SYMBOL">symbol.ngo ↗</a></p>
+      <p v-for="paragraph in (isEn ? aboutSymbolEn : aboutSymbol)" :key="paragraph">{{ paragraph }}</p>
+      <p><a class="docs-button" :href="SYMBOL">symbol.ngo</a></p>
     </div>
-    <p class="partners">Партнери виставки: <a href="https://yermilovcentre.org">ЄрміловЦентр</a>, <a href="https://karazin.ua">ХНУ ім. В. Н. Каразіна</a>, <a href="https://zmina.info">Центр прав людини ZMINA</a>.</p>
+    <p class="partners">{{ isEn ? 'Organised by NGO «Symbol», YermilovCentre and V. N. Karazin Kharkiv National University. Supported by the Ministry of Culture of Ukraine within the Grant of the President of Ukraine for young artists, and by Grynyov Art Collection. Partner: ZMINA Human Rights Centre.' : exhibition.donorCredit }}</p>
   </section>
 </template>
 

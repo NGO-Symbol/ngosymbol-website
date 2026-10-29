@@ -9,6 +9,10 @@ if (!event) {
 const project = getProject(event.project)!
 const speakers = creditsByRole(event.people)
 const siblings = eventsOfProject(project.slug).filter(other => other.slug !== event.slug)
+const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: [{ slug: project.slug, title: project.title }] }))
+// Partners of this particular event; donor credits of the project repeat on each of its events (funders ask for them in every event description).
+const partners = toTiles(event.partners)
+const donors = toTiles(project.donors)
 
 useSeoMeta({ title: event.title, description: `${formatRange(event.start, event.end)} · ${venueLine(event.venue)}` })
 
@@ -52,18 +56,21 @@ const googleUrl = computed(() => {
           <div><dt>Проєкт</dt><dd><NuxtLink :to="`/projects/${project.slug}`">{{ project.title }}</NuxtLink></dd></div>
         </dl>
         <div class="button-stack">
-          <a v-if="event.registrationUrl && isUpcoming(event)" class="button button--dark" :href="event.registrationUrl" target="_blank" rel="noreferrer">Зареєструватися ↗</a>
-          <a class="button" :href="googleUrl" target="_blank" rel="noreferrer">Додати в Google Calendar ↗</a>
+          <a v-if="event.registrationUrl && isUpcoming(event)" class="button button--dark" :href="event.registrationUrl" target="_blank" rel="noreferrer">Зареєструватися</a>
+          <a class="button" :href="googleUrl" target="_blank" rel="noreferrer">Додати в Google Calendar</a>
         </div>
       </aside>
       <div class="project-sections">
-        <section v-if="event.description"><RichText class="lead-text" :paragraphs="event.description" /></section>
         <section v-if="event.gallery?.length">
-          <span class="label">Фото</span>
+          <h2 class="section-title">Фото</h2>
           <PhotoGallery :photos="event.gallery" />
         </section>
+        <section v-if="event.description">
+          <h2 class="section-title">Про подію</h2>
+          <RichText class="lead-text" :paragraphs="event.description" />
+        </section>
         <section v-if="speakers.length">
-          <span class="label">Люди</span>
+          <h2 class="section-title">Люди</h2>
           <div class="credits">
             <div v-for="group in speakers" :key="group.role" class="credits__group">
               <h3>{{ group.role }}</h3>
@@ -77,8 +84,23 @@ const googleUrl = computed(() => {
             </div>
           </div>
         </section>
+        <section v-if="partners.length || donors.length">
+          <h2 class="section-title">Партнери й донори</h2>
+          <div class="credits">
+            <div v-if="partners.length" class="credits__group">
+              <h3>Партнери</h3>
+              <PartnerTiles :items="partners" />
+            </div>
+            <div v-if="donors.length" class="credits__group">
+              <h3>За підтримки</h3>
+              <PartnerTiles :items="donors" />
+            </div>
+          </div>
+          <p v-if="project.donorCredit" class="donor-credit">{{ project.donorCredit }}</p>
+          <p v-if="project.fundingNotice" class="donor-credit donor-credit--notice">{{ project.fundingNotice }}</p>
+        </section>
         <section v-if="siblings.length">
-          <span class="label">Інші події проєкту</span>
+          <h2 class="section-title">Інші події проєкту</h2>
           <div class="event-list">
             <NuxtLink v-for="other in siblings" :key="other.slug" class="event-row" :to="`/events/${other.slug}`">
               <time class="event-row__date" :datetime="other.start">{{ formatRange(other.start, other.end) }}</time>

@@ -2,7 +2,7 @@
 // Minimal line icons of social networks, drawn in one stroke style (24-unit grid, currentColor) so they sit with the text.
 import type { Network } from '~/utils/social'
 
-defineProps<{ network: Network }>()
+defineProps<{ network: Network | 'calendar' | 'copy' | 'check' }>()
 </script>
 
 <template>
@@ -17,6 +17,9 @@ defineProps<{ network: Network }>()
     <template v-else-if="network === 'x'"><path d="m4.5 4.5 15 15M19.5 4.5l-15 15" /></template>
     <template v-else-if="network === 'behance'"><path d="M3.5 7h4.5a2.5 2.5 0 0 1 0 5H3.5zM3.5 12h5a2.5 2.5 0 0 1 0 5h-5zM14 13.5h6.5a3.2 3.2 0 1 0-1 2.6M15 8h4.5" /></template>
     <template v-else-if="network === 'vimeo'"><path d="M3.5 9c2-1.8 3.3-3 4.2-1.2.8 1.8 1.4 6.7 2.6 6.7 1.3 0 5.4-5.4 3.8-6.6-1-.7-2.2.4-2.6 1 1-4.7 8.5-5 7.6-.3-.8 4.6-6.4 11-8.5 10-2-1-2.6-9-4.4-9" /></template>
+    <template v-else-if="network === 'calendar'"><rect x="3.5" y="5" width="17" height="15" rx="2" /><path d="M3.5 10h17M8 3v4M16 3v4" /></template>
+    <template v-else-if="network === 'copy'"><rect x="8.5" y="8.5" width="11" height="11" rx="2" /><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5" /></template>
+    <template v-else-if="network === 'check'"><path d="m5 12.5 4.5 4.5L19 7.5" /></template>
     <template v-else-if="network === 'email'"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4 6.5 8 6.5 8-6.5" /></template>
     <template v-else><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17" /></template>
   </svg>

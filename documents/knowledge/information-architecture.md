@@ -13,7 +13,7 @@ Accepted model: [ADR-0008](decisions/ADR-0008-linked-content-model.md). `USER_CO
 /events.ics             Calendar subscription feed
 /opportunities          Open calls, residencies, vacancies
 /people                 People in two sections: the Symbol team first (by teamOrder), then project participants A–Z
-/people/{slug}          Person page with automatic backlinks to projects (a role in a project's event counts as the project; events are not listed separately)
+/people/{slug}          Person page with automatic backlinks to projects and, separately, to the events the person is credited in or mentioned by
 /about                  Mission, values, team, partners and donors, reports
 /support                Join and support
 /contact                Contacts
@@ -59,7 +59,11 @@ Initial format vocabulary (grows with projects): виставка, онлайн-
 
 ## Project page
 
-Order (empty blocks are hidden): title · years · city · status · formats → subsite button → description and curatorial concept → media → events → people by role → partners and donors → press → open opportunities → related and other projects.
+Order (empty blocks are hidden): title · years · city · status · formats → subsite button → photos → description and curatorial concept → events → people by role → partners and donors → press → open opportunities → related and other projects.
+
+## Event page
+
+`USER_CONFIRMED` 2026-10-29 — project and event pages share one structure: title; facts at the side (when, where, project); photos; «Про подію» text with concrete details (who led it and where they come from, who took part and from which communities); «Люди» by role (everyone credited, mentioned in the text or not); «Партнери й донори» — partners of this particular event (`event.partners`) and the project's donors with its donor credit; other events of the project.
 
 ## Home
 

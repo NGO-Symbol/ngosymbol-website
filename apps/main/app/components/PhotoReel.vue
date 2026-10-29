@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // A strip of photographs that scrolls sideways (swipe, trackpad, arrows), with a full-screen view:
 // swipe or ← → to go through, Esc or a tap outside to close. Each photo links to its project.
-import type { Highlight } from '~/data/highlights'
+import { thumbOf, type Highlight } from '~/data/highlights'
 
-const props = defineProps<{ photos: Highlight[] }>()
+// placeholders: empty frames shown until the selection is made (keeps the layout still while it loads).
+const props = defineProps<{ photos: Highlight[]; placeholders?: number }>()
 const track = ref<HTMLElement>()
 const atStart = ref(true)
 const atEnd = ref(false)
@@ -54,9 +55,10 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
 <template>
   <div class="reel">
     <ul ref="track" class="reel__track" @scroll.passive="updateEnds">
+      <li v-for="n in (photos.length ? 0 : placeholders ?? 0)" :key="`p${n}`" class="reel__item" aria-hidden="true"><span class="reel__photo reel__photo--empty" /></li>
       <li v-for="(photo, index) in photos" :key="photo.src" class="reel__item">
         <button type="button" class="reel__photo" :aria-label="`Відкрити фото: ${photo.alt}`" @click="open = index">
-          <img :src="photo.src" :alt="photo.alt" loading="lazy" decoding="async">
+          <img :src="thumbOf(photo.src)" :alt="photo.alt" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')">
         </button>
         <NuxtLink class="reel__caption" :to="photo.to">{{ photo.project }}</NuxtLink>
       </li>
@@ -96,7 +98,9 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
 .reel__item:nth-child(3n + 2) { width: clamp(200px, 24vw, 330px); }
 .reel__photo { padding: 0; border: 0; background: var(--symbol-lilac); overflow: hidden; cursor: zoom-in; aspect-ratio: 3 / 2; }
 .reel__item:nth-child(3n + 2) .reel__photo { aspect-ratio: 4 / 5; }
-.reel__photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.reel__photo img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .4s ease; }
+.reel__photo img.is-loaded { opacity: 1; }
+.reel__photo--empty { display: block; height: 100%; }
 .reel__photo:hover img { transform: scale(1.04); }
 .reel__caption { font-size: .8rem; line-height: 1.3; color: color-mix(in srgb, var(--symbol-plum) 75%, transparent); text-decoration: none; width: fit-content; }
 .reel__caption:hover { color: var(--symbol-plum); text-decoration: underline; }

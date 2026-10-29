@@ -22,7 +22,7 @@ const archive = opportunities.filter(item => !isActive(item)).sort((a, b) => b.d
         <strong>{{ call.title }}</strong>
         <RichText :paragraphs="call.description" />
         <span>Дедлайн: {{ formatDate(call.deadline) }}</span>
-        <span class="open-call__cta">Подати заявку ↗</span>
+        <span class="open-call__cta">Подати заявку</span>
       </a>
     </div>
     <div v-else class="empty-state">
