@@ -215,7 +215,7 @@ export const events: SymbolEvent[] = [
       { person: 'yurii-rassokha', role: 'Куратори' }
     ]
   },
-  // Тренінги mhGAP на Київщині: dates from the @symbol.ngo posts of 28.02, 28.04, 02.05 and 25.06.2025.
+  // Тренінги mhGAP на Київщині: dates from the @symbol.ngo posts of 28.02, 28.04, 02.05 and 25.06.2025; trainers from the service acts.
   {
     slug: 'mhgap-kyiv-trening-1',
     title: 'Тренінг mhGAP у Білій Церкві',
@@ -229,6 +229,10 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/mhgap-kyiv-trening-1/hall.jpg', alt: 'Зала тренінгу в Центральній міській бібліотеці' },
       { src: '/media/events/mhgap-kyiv-trening-1/trainer.jpg', alt: 'Тренерка пояснює матеріал учасникам' },
       { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах', people: true }
+    ],
+    people: [
+      { person: 'olena-lemeshko', role: 'Тренери' },
+      { person: 'nataliia-opryshko', role: 'Тренери' }
     ],
     description: ['**Перший тренінг «Символу»** за програмою ВООЗ mhGAP (частина 1) для медпрацівників первинної ланки. Програма включала й **модулі допомоги за гуманітарних надзвичайних станів**: горе, гострий стрес, посттравматичний стресовий розлад.']
   },
@@ -244,6 +248,10 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Учасники другого тренінгу з посібниками mhGAP', people: true },
       { src: '/media/events/mhgap-kyiv-trening-2/session.jpg', alt: 'Робота учасників у залі' },
       { src: '/media/events/mhgap-kyiv-trening-2/flipchart.jpg', alt: 'Робота з фліпчартом' }
+    ],
+    people: [
+      { person: 'yurii-sich', role: 'Тренери' },
+      { person: 'viktoriia-myroniuk-danko', role: 'Тренери' }
     ],
     description: ['Другий тренінг mhGAP (частина 1) для працівників первинної ланки охорони здоров’я.']
   },
@@ -261,6 +269,10 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер біля презентації' },
       { src: '/media/events/mhgap-kyiv-trening-3/manual.jpg', alt: 'Посібник mhGAP' }
     ],
+    people: [
+      { person: 'alesia-lysenko', role: 'Тренери' },
+      { person: 'ivan-kutchak', role: 'Тренери' }
+    ],
     description: ['Тренінг mhGAP (частина 1) для **33 учасників** — переважно медичних працівників, а також кількох соціальних працівників. Усі учасники отримали **посібники mhGAP**.']
   },
   {
@@ -277,9 +289,13 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту', people: true }
     ],
+    people: [
+      { person: 'ivan-kutchak', role: 'Тренери' },
+      { person: 'olha-klymovska', role: 'Тренери' }
+    ],
     description: [
       '**Останній тренінг проєкту** — програма **другої частини mhGAP**: психози, епілепсія, дитячі та підліткові психічні й поведінкові розлади, деменція. Спочатку планували лише першу частину, але учасники просили продовження, і **всі місця в залі були зайняті**.',
-      'Тренери приїхали із Закарпаття. Після тренінгу учасники продовжили онлайн-супервізії зі спеціалістами з психічного здоров’я та сімейної медицини.'
+      'Тренінг вели [[person:ivan-kutchak]] та [[person:olha-klymovska]]. Після тренінгу учасники продовжили онлайн-супервізії зі спеціалістами з психічного здоров’я та сімейної медицини.'
     ]
   },
   // Голоси у русі: playback performances of the theatre «Серденьки» (posts of @serdenky.playback, 2026).

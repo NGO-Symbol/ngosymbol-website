@@ -203,13 +203,18 @@ const entries: Project[] = [
       'mhGAP — **програма дій ВООЗ** з подолання прогалин у галузі психічного здоров’я на первинній ланці охорони здоров’я.',
       '**З лютого по травень 2025 року** «Символ» провів **чотири тренінги** — три п’ятиденні й один чотириденний — для **медпрацівників первинної ланки Київщини** — сімейних лікарів, медсестер, педіатрів, фельдшерів, терапевтів — з проживанням, харчуванням і посібниками для учасників. Після навчання учасники отримували **онлайн-супервізію** від кваліфікованих спеціалістів.',
       'В Україні досі поширена стигма щодо звернення до фахівців з психічного здоров’я, тож значна частина допомоги людям із психічними, неврологічними розладами та розладами через вживання психоактивних речовин лягає на інших медиків. mhGAP дає їм **навички діагностики й ведення таких станів**.',
-      'Тренінги вели тренери із Закарпаття [[person:ivan-kutchak]] та [[person:olha-klymovska]]. Фотографував [[person:petro-chekal]].',
+      'Кожен тренінг вели **двоє тренерів mhGAP**: [[person:olena-lemeshko]] і [[person:nataliia-opryshko]], [[person:yurii-sich]] і [[person:viktoriia-myroniuk-danko]], [[person:alesia-lysenko]] і [[person:ivan-kutchak]], [[person:ivan-kutchak]] і [[person:olha-klymovska]]. Онлайн-супервізії вели Іван Кутчак та Ольга Климовська. Фотографував [[person:petro-chekal]].',
       'Це **перший грантовий проєкт «Символу»**. Організація — **офіційний партнер ініціативи mhGAP в Україні**. Останній тренінг, на прохання учасників, охопив другу частину програми й відбувся в книгарні-кав’ярні «Сенс» на Хрещатику.'
     ],
-    // Team and trainers as credited in the @symbol.ngo post of 26.06.2025 (training 13–16.05.2025 in «Сенс»).
+    // Trainers by training from Symbol's service contracts and acts (2025); team as credited in the @symbol.ngo post of 26.06.2025.
     partners: ['bila-tserkva-library', 'sens'],
     people: [
       { person: 'yurii-rassokha', role: 'Менеджер проєкту' },
+      { person: 'olena-lemeshko', role: 'Тренери' },
+      { person: 'nataliia-opryshko', role: 'Тренери' },
+      { person: 'yurii-sich', role: 'Тренери' },
+      { person: 'viktoriia-myroniuk-danko', role: 'Тренери' },
+      { person: 'alesia-lysenko', role: 'Тренери' },
       { person: 'ivan-kutchak', role: 'Тренери' },
       { person: 'olha-klymovska', role: 'Тренери' },
       { person: 'petro-chekal', role: 'Фотограф' }

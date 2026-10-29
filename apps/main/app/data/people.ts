@@ -506,18 +506,55 @@ export const people: Person[] = [
   },
 
   // Trainers of the mhGAP trainings (named in the @symbol.ngo post of 26.06.2025; profiles linked there).
+  // mhGAP trainers: who led which training, from Symbol's service contracts and acts of 2025 (no personal data).
   {
     slug: 'ivan-kutchak',
     name: 'Іван Кутчак',
-    shortBio: 'Тренер програми ВООЗ mhGAP, Закарпаття.',
-    bio: ['Тренер програми ВООЗ mhGAP із Закарпаття. Разом з [[person:olha-klymovska]] вів тренінги [[project:mhgap-kyiv]] для медпрацівників первинної ланки (2025).'],
+    shortBio: 'Тренер і супервізор програми ВООЗ mhGAP.',
+    bio: [
+      'Тренер і супервізор програми ВООЗ mhGAP. У проєкті [[project:mhgap-kyiv]] разом з [[person:alesia-lysenko]] вів тренінг **31 березня — 4 квітня 2025**, а разом з [[person:olha-klymovska]] — другу частину програми **13–16 травня 2025** у Києві.',
+      'Улітку 2025 року проводив **онлайн-супервізії** для учасників тренінгів.'
+    ],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/ivan_kutchak/' }]
   },
   {
     slug: 'olha-klymovska',
     name: 'Ольга Климовська',
-    shortBio: 'Психологиня, тренерка програми ВООЗ mhGAP, Закарпаття.',
-    bio: ['Психологиня, тренерка програми ВООЗ mhGAP із Закарпаття. Разом з [[person:ivan-kutchak]] вела тренінги [[project:mhgap-kyiv]] для медпрацівників первинної ланки (2025).'],
+    shortBio: 'Психологиня, тренерка й супервізорка програми ВООЗ mhGAP.',
+    bio: [
+      'Психологиня, випускниця Харківського національного університету імені В. Н. Каразіна. У проєкті [[project:mhgap-kyiv]] разом з [[person:ivan-kutchak]] вела другу частину програми mhGAP **13–16 травня 2025** у Києві та **онлайн-супервізії** для учасників.',
+      'Працювала в Харківському обласному центрі соціальних служб для сім’ї, дітей та молоді (психологічна робота, програми «Психологічний центр», «Гаряча лінія», «Волонтерський центр»), у **ЮНІСЕФ Україна** — у сферах захисту дітей, освіти в надзвичайних ситуаціях і психосоціальної підтримки, а в ГО «Проліска» — координаторкою психосоціальної підтримки й фахівчинею з психічного здоров’я, де **планувала й викладала тренінги mhGAP**, першої психологічної допомоги та запобігання самогубствам у громадах.'
+    ],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/klymovska.psychologist/' }]
+  },
+  {
+    slug: 'olena-lemeshko',
+    name: 'Олена Лемешко',
+    shortBio: 'Тренерка програми ВООЗ mhGAP.',
+    bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:nataliia-opryshko]] вела **перший тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **10–14 лютого 2025**.']
+  },
+  {
+    slug: 'nataliia-opryshko',
+    name: 'Наталія Опришко',
+    shortBio: 'Тренерка програми ВООЗ mhGAP.',
+    bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:olena-lemeshko]] вела **перший тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **10–14 лютого 2025**.']
+  },
+  {
+    slug: 'yurii-sich',
+    name: 'Юрій Січ',
+    shortBio: 'Тренер програми ВООЗ mhGAP.',
+    bio: ['Тренер програми ВООЗ mhGAP. Разом з [[person:viktoriia-myroniuk-danko]] вів **другий тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **24–28 лютого 2025**.']
+  },
+  {
+    slug: 'viktoriia-myroniuk-danko',
+    name: 'Вікторія Миронюк-Данко',
+    shortBio: 'Тренерка програми ВООЗ mhGAP.',
+    bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:yurii-sich]] вела **другий тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **24–28 лютого 2025**.']
+  },
+  {
+    slug: 'alesia-lysenko',
+    name: 'Алеся Лисенко',
+    shortBio: 'Тренерка програми ВООЗ mhGAP.',
+    bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:ivan-kutchak]] вела **третій тренінг** проєкту [[project:mhgap-kyiv]], **31 березня — 4 квітня 2025**.']
   }
 ]
