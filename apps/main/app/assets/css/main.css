@@ -300,10 +300,8 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .lead-text { max-width: 64ch; font-size: 1rem; line-height: 1.7; }
 /* The opening paragraph is a calm lead, not a block of large type. */
 .lead-text p:first-child { font-family: var(--font-display); font-size: clamp(1.05rem, calc(.95rem + .3vw), 1.2rem); line-height: 1.55; }
-/* Key phrases (**…** in the data): small capitals on a soft marker, so the eye finds the essence of a text at once. */
-.key-phrase { font-weight: 600; text-transform: uppercase; letter-spacing: .05em; font-size: .86em; padding: 0 .15em; background: linear-gradient(transparent 58%, color-mix(in srgb, var(--symbol-apricot) 75%, transparent) 58%); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-a.key-phrase { text-decoration: none; }
-:root[data-theme="dark"] .key-phrase { background: linear-gradient(transparent 58%, color-mix(in srgb, var(--symbol-violet) 70%, transparent) 58%); }
+/* Key phrases (**…** in the data) read as ordinary text: no capitals, marker or bold. */
+.key-phrase { font-weight: inherit; }
 /* Section titles on project pages: calm, sentence case — large type is kept for the page title only. */
 .project-content section h2.section-title, .project-related h2.section-title, h2.section-title { margin: 0 0 16px; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; line-height: 1.2; max-width: none; }
 
