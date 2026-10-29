@@ -108,7 +108,7 @@ export const creditsByRole = (credits: Credit[] = []) => {
 }
 
 /** Backlinks for a person page: the projects the person took part in, with their roles, newest first.
- *  A role in one of a project's events counts as taking part in that project, so events are not listed on their own. */
+ *  A role in one of a project's events counts as taking part in that project; the events themselves are listed by eventsOfPerson. */
 export const appearancesOf = (slug: string) => {
   const result: { title: string; to: string; byline: string; roles: string[]; year: number }[] = []
   for (const project of projects) {
@@ -121,6 +121,16 @@ export const appearancesOf = (slug: string) => {
   }
   return result.sort((a, b) => b.year - a.year)
 }
+
+/** The events a person is credited in or mentioned by, with their roles, newest first. */
+export const eventsOfPerson = (slug: string) => events
+  .map(event => {
+    const roles = [...new Set((event.people ?? []).filter(credit => credit.person === slug).map(credit => credit.role))]
+    const mentioned = references(event).some(ref => ref.type === 'person' && ref.slug === slug)
+    return { event, roles: roles.length ? roles : mentioned ? ['Згадка'] : [] }
+  })
+  .filter(item => item.roles.length)
+  .sort((a, b) => b.event.start.localeCompare(a.event.start))
 
 // Inline references: [[type:slug]] or [[type:slug|label]].
 const referencePattern = /\[\[(project|event|person):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g

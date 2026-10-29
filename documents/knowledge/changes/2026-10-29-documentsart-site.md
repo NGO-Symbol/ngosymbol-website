@@ -13,6 +13,7 @@ Affected: `project-registry.md`, `team-cv.md`, `open-questions.md`, `documents/o
 - Home «Кадри» shows a random selection of 14 from a curated pool of 23 on every visit.
 - «Ті, хто побачили світ»: the gallery leads with the exhibited photographs (Drive «Мілан (Ті, що побачили світ)»).
 - Decorative «↗» arrows removed site-wide; footer contacts use one set of thin icons.
+- Project and event pages share one order (photos → text → people → partners and donors); events have their own partners; person pages list events. Third mhGAP training: hotel «Україна», Kyiv (USER_CONFIRMED).
 - Key phrases (`**…**`) render as ordinary text again: the capitals and marker were rejected by the user.
 - Exhibition site: prominent way back to Symbol, UA/EN mirror (/en), day/night switch, home sections, press page (media mentions checked online), works photos from the saved Wix pages, artist pager.
 - Partners: «Збирач конвалій» (Gwara Media, Media Development Foundation, MOKSOP), «2, 10, 300 років потому» (Egyesek, Artéria, Union Forum), mhGAP venue «Сенс», Bila Tserkva library logo, «Нема» on PSD; white backgrounds removed; every logo has its own motion.

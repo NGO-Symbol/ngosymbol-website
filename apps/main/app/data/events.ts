@@ -15,6 +15,7 @@ export const events: SymbolEvent[] = [
     start: '2025-10-17T18:00',
     end: '2025-10-17T20:00',
     venue: yermilov,
+    partners: ['yermilov-centre'],
     description: [
       '**Урочисте відкриття виставки**: промови кураторів, менеджерки, керівниці ЄрміловЦентру, ректора ХНУ ім. В. Н. Каразіна та перформанс [[person:oleksii-chekal]].'
     ],
@@ -55,6 +56,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/walk.jpg', alt: 'Глядачі йдуть експозицією разом із кураторами' },
       { src: '/media/events/pokazhit-svoi-dokumenty-ekskursiia/interactive.jpg', alt: 'Інтерактив із роботою на екскурсії' }
     ],
+    partners: ['yermilov-centre'],
     description: [
       '**Перша подія паралельної програми.** Куратори розповіли про ідеї, що лягли в основу проєкту, і про представлені роботи. До екскурсії долучилися митці [[person:hanna-franyk]] та [[person:andrii-skrypka]], які презентували свої твори.'
     ],
@@ -70,6 +72,7 @@ export const events: SymbolEvent[] = [
     format: 'tour',
     start: '2025-10-28',
     venue: yermilov,
+    partners: ['yermilov-centre'],
     description: ['Друга кураторська екскурсія виставкою.'],
     people: [
       { person: 'petro-chekal', role: 'Куратори' },
@@ -83,6 +86,7 @@ export const events: SymbolEvent[] = [
     format: 'tour',
     start: '2025-11-01T17:00',
     venue: yermilov,
+    partners: ['yermilov-centre'],
     description: ['Кураторська екскурсія від співкуратора Юрія Рассохи.'],
     people: [{ person: 'yurii-rassokha', role: 'Куратор' }]
   },
@@ -93,6 +97,7 @@ export const events: SymbolEvent[] = [
     format: 'lecture',
     start: '2025-11-08',
     venue: yermilov,
+    partners: ['yermilov-centre', 'zmina'],
     description: [
       'Робота з **мешканцями окупованих територій та внутрішньо переміщеними особами** у правовому полі з 2014 року до сьогодні; висвітлення діяльності правозахисників.'
     ]
@@ -110,6 +115,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/makov.jpg', alt: 'Павло Маков відповідає на запитання', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/listeners.jpg', alt: 'Слухачі розмови', people: true }
     ],
+    partners: ['yermilov-centre'],
     description: [
       'На виставці представлено проєкт [[person:pavlo-makov]] **«Утопія. Хроніки»**, що досліджує **документування мистецтва**. Документ тут — не папір і не архів, а форма пам’яті, жест, який промовляє: «Ми тут були».',
       'Розмова про те, як зберігати пам’ять про сучасне українське мистецтво і як документувати **не події, а стан присутності**.'
@@ -129,6 +135,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket.jpg', alt: 'Відбиток квитка з серії «Квитки Харкова»' },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/talk.jpg', alt: 'Андрій Скрипка розповідає про проєкт', people: true }
     ],
+    partners: ['yermilov-centre'],
     description: [
       '[[person:andrii-skrypka]] розповів історію проєкту **«Квитки Харкова»** — від перших ідей до фінальної реалізації: ліногравюрні відбитки квитків від 1 до 6 гривень, робота з дощечками, з яких друкувалися квитки, і власний тираж квитків для Харкова.'
     ],
@@ -148,6 +155,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/hall.jpg', alt: 'Зала ЄрміловЦентру під час дискусії' },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience.jpg', alt: 'Глядачі дискусії', people: true }
     ],
+    partners: ['yermilov-centre', 'zmina'],
     description: [
       'Під час повномасштабного вторгнення правозахисна діяльність стала **частиною щоденного виживання**, документування війни, захисту цивільних, допомоги переселеним і мобілізованим. Розмова про **ціну активізму, моральну стійкість**, репрезентацію в медіа й спільну мову між правозахисними, культурними та академічними середовищами.',
       'Спікери: Максим Потапович, Анна Шаригіна, Ірина Юзик. Модераторка — Інна Ільченко, менеджерка проєктів Центру прав людини ZMINA.'
@@ -166,6 +174,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/gesture.jpg', alt: 'Сцена перформансу' },
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/story.jpg', alt: 'Оповідачка розповідає історію', people: true }
     ],
+    partners: ['yermilov-centre', 'nema-playback'],
     description: [
       'Перформанс плейбек-театру «Нема» (Харків). Глядачі розповідають історії, актори тут і зараз відтворюють їх на сцені під живу музику. Тема — **ідентичність**: що б ви розповіли, якби замість документів вас попросили надати історію?',
       'За вечір прозвучало й було відіграно **9 історій для понад 50 глядачів**. **Третину зібраних коштів** театр передав на збір на дві машини для 47 ОМБр і НГУ «Спартан».',
@@ -179,6 +188,7 @@ export const events: SymbolEvent[] = [
     format: 'discussion',
     start: '2025-11-29',
     venue: yermilov,
+    partners: ['yermilov-centre'],
     description: [
       'Розмова з митцями виставки та культурними менеджерами. Перша частина — **документ як матеріал, символ, традиція, пам’ять**.',
       'Друга — **практичне «буття митцем»**: сайт і портфоліо, мистецька діяльність через ФОП, подача на опен-коли й гранти, комунікація з кураторами та інституціями. Питання з залу, вільна дискусія.'
@@ -197,6 +207,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass.jpg', alt: 'Контрабасист на тлі робіт виставки' },
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/audience.jpg', alt: 'Слухачки з бумвекерами долучаються до ритму', people: true }
     ],
+    partners: ['yermilov-centre'],
     description: [
       'Музично-просторовий перформанс: годинне виконання **In C Террі Райлі** — твору, з якого почався **музичний мінімалізм**. 53 мелодичні патерни переплітаються й нашаровуються в медитативний звуковий ландшафт; **слухачі могли долучитися й задавати ритм**.',
       '**Чи може партитура бути документом?** Перформанс досліджує свободу виконавців усередині чітко заданої структури.'
@@ -209,6 +220,7 @@ export const events: SymbolEvent[] = [
     format: 'tour',
     start: '2025-12-07T14:00',
     venue: yermilov,
+    partners: ['yermilov-centre'],
     description: ['**Остання подія паралельної програми** в день завершення виставки: кураторська концепція, роботи митців та інтерактиви з інсталяціями, серед них — «Їстівний паспорт».'],
     people: [
       { person: 'petro-chekal', role: 'Куратори' },
@@ -234,7 +246,8 @@ export const events: SymbolEvent[] = [
       { person: 'olena-lemeshko', role: 'Тренери' },
       { person: 'nataliia-opryshko', role: 'Тренери' }
     ],
-    description: ['**Перший тренінг «Символу»** за програмою ВООЗ mhGAP (частина 1) для медпрацівників первинної ланки. Програма включала й **модулі допомоги за гуманітарних надзвичайних станів**: горе, гострий стрес, посттравматичний стресовий розлад.']
+    partners: ['bila-tserkva-library'],
+    description: ['**Перший тренінг «Символу»** за програмою ВООЗ mhGAP (частина 1) для медпрацівників первинної ланки **Білоцерківського району** — переважно сімейних лікарів, медсестер і педіатрів міського центру первинної медико-санітарної допомоги Білої Церкви. П’ять днів навчання: депресія, суїцид, уживання психоактивних речовин, інші скарги щодо психічного здоров’я, а також **модулі допомоги за гуманітарних надзвичайних станів** — горе, гострий стрес, посттравматичний стресовий розлад.', 'Вели тренінг [[person:olena-lemeshko]], лікарка загальної практики — сімейної медицини, та [[person:nataliia-opryshko]]. Після навчання учасники мали **щомісячні онлайн-супервізії** з тренерками.']
   },
   {
     slug: 'mhgap-kyiv-trening-2',
@@ -253,16 +266,17 @@ export const events: SymbolEvent[] = [
       { person: 'yurii-sich', role: 'Тренери' },
       { person: 'viktoriia-myroniuk-danko', role: 'Тренери' }
     ],
-    description: ['Другий тренінг mhGAP (частина 1) для працівників первинної ланки охорони здоров’я.']
+    partners: ['bila-tserkva-library'],
+    description: ['Другий тренінг mhGAP (частина 1) для працівників первинної ланки охорони здоров’я **Білої Церкви та району**: сімейних лікарів, педіатрів, медсестер.', 'Вели тренінг [[person:yurii-sich]] та [[person:viktoriia-myroniuk-danko]], які потім проводили для учасників онлайн-супервізії.']
   },
   {
     slug: 'mhgap-kyiv-trening-3',
-    title: 'Тренінг mhGAP',
+    title: 'Тренінг mhGAP у Києві',
     project: 'mhgap-kyiv',
     format: 'training',
     start: '2025-03-31',
     end: '2025-04-04',
-    venue: { city: 'Київська область' },
+    venue: { name: 'Готель «Україна»', city: 'Київ' },
     gallery: [
       { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Спільне фото учасників тренінгу з посібниками', people: true },
       { src: '/media/events/mhgap-kyiv-trening-3/hall.jpg', alt: 'Тренер веде заняття для повної зали' },
@@ -273,7 +287,7 @@ export const events: SymbolEvent[] = [
       { person: 'alesia-lysenko', role: 'Тренери' },
       { person: 'ivan-kutchak', role: 'Тренери' }
     ],
-    description: ['Тренінг mhGAP (частина 1) для **33 учасників** — переважно медичних працівників, а також кількох соціальних працівників. Усі учасники отримали **посібники mhGAP**.']
+    description: ['Тренінг mhGAP (частина 1) у **готелі «Україна» в Києві** для **33 учасників** — переважно медичних працівників, а також кількох соціальних працівників. На навчання зголосилися медики з **громад усієї Київщини**: Ірпеня, Вишневого, Переяслава, Березані, Калитянської громади та інших. Усі учасники отримали **посібники mhGAP**.', 'Вели тренінг [[person:alesia-lysenko]] та [[person:ivan-kutchak]], які потім проводили для учасників онлайн-супервізії.']
   },
   {
     slug: 'mhgap-kyiv-trening-4',
@@ -293,9 +307,10 @@ export const events: SymbolEvent[] = [
       { person: 'ivan-kutchak', role: 'Тренери' },
       { person: 'olha-klymovska', role: 'Тренери' }
     ],
+    partners: ['sens'],
     description: [
       '**Останній тренінг проєкту** — програма **другої частини mhGAP**: психози, епілепсія, дитячі та підліткові психічні й поведінкові розлади, деменція. Спочатку планували лише першу частину, але учасники просили продовження, і **всі місця в залі були зайняті**.',
-      'Тренінг вели [[person:ivan-kutchak]] та [[person:olha-klymovska]]. Після тренінгу учасники продовжили онлайн-супервізії зі спеціалістами з психічного здоров’я та сімейної медицини.'
+      'Тренінг вели [[person:ivan-kutchak]] та [[person:olha-klymovska]]; учасники отримали сертифікати ВООЗ на 20 годин навчання. Після тренінгу учасники продовжили онлайн-супервізії зі спеціалістами з психічного здоров’я та сімейної медицини.'
     ]
   },
   // Голоси у русі: playback performances of the theatre «Серденьки» (posts of @serdenky.playback, 2026).
@@ -311,6 +326,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/holosy-u-rusi-uzhhorod/scene.jpg', alt: 'Сцена плейбек-перформансу' },
       { src: '/media/events/holosy-u-rusi-uzhhorod/audience.jpg', alt: 'Глядачі перформансу на «Станції Уж»', people: true }
     ],
+    partners: ['serdenky-playback', 'uzh-station'],
     description: ['Перформанс плейбек-театру «Серденьки», що **відкрив тур Закарпатською областю**. Глядачі розповідали історії, актори миттєво їх відтворювали; більшість історій були **про дітей і батьків**.']
   },
   {
@@ -320,6 +336,7 @@ export const events: SymbolEvent[] = [
     format: 'playback',
     start: '2026-10-13T11:00',
     venue: { city: 'Берегове' },
+    partners: ['serdenky-playback'],
     description: ['Зупинка туру плейбек-театру «Серденьки» Закарпаттям. **Вхід вільний за реєстрацією**, пріоритет — студентам навчальних закладів.']
   },
   {

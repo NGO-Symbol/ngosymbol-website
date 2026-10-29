@@ -84,6 +84,8 @@ export interface SymbolEvent {
   description?: Paragraphs
   registrationUrl?: string
   people?: Credit[]
+  /** Organizations that took part in this particular event (slugs from organizations.ts). */
+  partners?: string[]
   gallery?: Photo[]
 }
 

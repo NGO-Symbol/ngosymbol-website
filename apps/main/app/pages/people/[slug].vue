@@ -7,6 +7,7 @@ if (!person || person.hasPage === false) {
 }
 
 const appearances = appearancesOf(person.slug)
+const personEvents = eventsOfPerson(person.slug)
 
 // The short bio is shown as the lead under the name; when the biography opens with the same sentence, it is not repeated.
 const bioParagraphs = computed(() => {
@@ -73,6 +74,16 @@ useHead({
               <NuxtLink :to="item.to">{{ item.title }}</NuxtLink>
               <span>{{ item.byline }}</span>
               <span class="appearances__role">{{ item.roles.join(', ') }}</span>
+            </li>
+          </ul>
+        </section>
+        <section v-if="personEvents.length">
+          <h2 class="person-section">Події</h2>
+          <ul class="appearances">
+            <li v-for="{ event, roles } in personEvents" :key="event.slug">
+              <NuxtLink :to="`/events/${event.slug}`">{{ event.title }}</NuxtLink>
+              <span>{{ formatRange(event.start, event.end) }} · {{ venueLine(event.venue) }}</span>
+              <span class="appearances__role">{{ roles.join(', ') }}</span>
             </li>
           </ul>
         </section>
