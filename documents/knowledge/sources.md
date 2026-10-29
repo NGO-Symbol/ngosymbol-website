@@ -38,3 +38,7 @@ Conversation on 2026-10-10 supplied corrections and current decisions, including
 
 Public sources can become stale. Record the check date when using them for a production claim.
 
+
+## Instagram @symbol.ngo (read 2026-10-29)
+
+All 62 posts (including collaborations with @yermilovcentre, @nema_pbt, @serdenky.playback, @more_kha, @ucrainapiu_milano_aps) were read in the team's signed-in browser. Used for: «Покажіть свої документи…» event dates and times, the four mhGAP trainings (Біла Церква 10–14.02 and 24–28.02.2025 in the Central city library; 31.03–04.04.2025; 13–16.05.2025 part 2 in «Сенс», Kyiv), «Голоси у русі» playback tour by «Серденьки» (Ужгород 22.08.2026, Бакош — date not stated, Берегове 13.10.2026), and project texts. Open: the ZMINA lecture 08.11.2025 and the «Бюрократія» discussion 29.11.2025 appear only in the planned programme; the «Уявні» curator tour and the Бакош performance have no exact date; location of the 31.03–04.04.2025 training not stated.

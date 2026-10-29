@@ -14,5 +14,6 @@ export const organizations: Organization[] = [
   { slug: 'khust-theatre', name: 'Хустський Закарпатський обласний театр драми та комедії' },
   { slug: 'uzh-station', name: 'Uzh Station' },
   { slug: 'ucraina-piu', name: 'Ucraina Più – Milano APS' },
+  { slug: 'bila-tserkva-library', name: 'Центральна міська бібліотека м. Біла Церква' },
   { slug: 'nema-playback', name: 'Плейбек-театр «Нема»', logo: '/media/partners/nema.png', motion: 'curtain' }
 ]
