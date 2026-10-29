@@ -26,6 +26,14 @@ const nav = computed(() => isEn.value
 
 // Active-tab ink: a bar slides under the current section; the clicked tab gives a small spring.
 const navEl = ref<HTMLElement>()
+// Phones: the sections row scrolls sideways; its edge fade goes once the end («Підтримати») is in view.
+const navEnd = ref(false)
+function checkNavEnd() {
+  const el = navEl.value
+  if (el) navEnd.value = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4
+}
+onMounted(() => { checkNavEnd(); navEl.value?.addEventListener('scroll', checkNavEnd, { passive: true }); window.addEventListener('resize', checkNavEnd) })
+onBeforeUnmount(() => { navEl.value?.removeEventListener('scroll', checkNavEnd); window.removeEventListener('resize', checkNavEnd) })
 const ink = ref({ left: 0, top: 0, width: 0, visible: false })
 const pressed = ref('')
 function moveInk() {
@@ -109,12 +117,15 @@ function toggleTheme() {
     <NuxtLink class="wordmark" :to="isEn ? '/en' : '/'" :aria-label="isEn ? 'NGO Symbol — home' : 'ГО «Символ» — головна'" @click="animateMark">
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
-    <nav ref="navEl" :aria-label="isEn ? 'Main navigation' : 'Основна навігація'">
+    <nav ref="navEl" :class="{ 'is-end': navEnd }" :aria-label="isEn ? 'Main navigation' : 'Основна навігація'">
       <span class="nav-ink" :class="{ 'is-visible': ink.visible }" :style="{ transform: `translate(${ink.left}px, ${ink.top}px)`, width: `${ink.width}px` }" aria-hidden="true" />
       <NuxtLink v-for="item in nav" :key="item.to" :to="item.to" class="nav-tab" :class="{ 'is-pressed': pressed === item.to }" @click="press(item.to)" @animationend="pressed = ''">
         <span class="nav-tab__label"><span class="nav-tab__roll" :data-label="item.label">{{ item.label }}</span></span>
       </NuxtLink>
       <NuxtLink class="nav-support" :to="isEn ? '/en/support' : '/support'">{{ isEn ? 'Support' : 'Підтримати' }}</NuxtLink>
+    </nav>
+    <!-- Switches: beside the logo on phones, after the sections on wide screens. -->
+    <div class="header-tools">
       <div class="lang-switch" role="group" :aria-label="isEn ? 'Language' : 'Мова'" :class="{ 'is-en': isEn }">
         <span class="lang-switch__thumb" aria-hidden="true" />
         <NuxtLink :to="otherLang(false)" lang="uk" :aria-current="!isEn ? 'true' : undefined" @click="choose">UA</NuxtLink>
@@ -124,6 +135,6 @@ function toggleTheme() {
       <button type="button" class="theme-toggle" :aria-label="theme === 'dark' ? (isEn ? 'Light mode' : 'Світлий режим') : (isEn ? 'Dark mode' : 'Темний режим')" :aria-pressed="theme === 'dark'" @click="toggleTheme">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18z" /></svg>
       </button>
-    </nav>
+    </div>
   </header>
 </template>
