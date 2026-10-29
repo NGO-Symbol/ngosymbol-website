@@ -62,9 +62,7 @@ const sections = computed(() => [
     <section class="docs-container">
       <div class="docs-barcode" aria-hidden="true" />
       <h2 class="docs-section-title">{{ t('Виставка', 'The exhibition') }}</h2>
-      <ul class="docs-photos">
-        <li v-for="photo in homePhotos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
-      </ul>
+      <DocsPhotoGallery :photos="homePhotos" />
       <p class="photo-credits">
         {{ t('Фото', 'Photos') }}:
         <template v-for="(person, index) in photographers" :key="person.slug"><a v-if="personOf(person.slug)" :href="symbolPersonUrl(person.slug)">{{ isEn ? person.nameEn : person.name }}</a><template v-else>{{ isEn ? person.nameEn : person.name }}</template><template v-if="index < photographers.length - 1">, </template></template>

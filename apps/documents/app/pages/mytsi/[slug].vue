@@ -2,7 +2,7 @@
 // An artist of the exhibition as a personal case file: a folder cover with the 3×4 portrait clipped on and the case
 // fields, then sheets — the biography, the curatorial text of each work, the photographs as an appendix — and the full
 // page on symbol.ngo (biography, links, other projects). Texts are in Ukrainian.
-import { chekalPhotos, osipovPhotos, workPhotos } from '~/data/workPhotos'
+import { artistPhotoGroups } from '~/data/artistPhotos.generated'
 
 const { isEn, t, localePath } = useLang()
 const route = useRoute()
@@ -13,21 +13,25 @@ useSeoMeta({ title: artist.name, description: artist.bio[0] })
 const index = exhibitionArtists.indexOf(artist)
 const prev = exhibitionArtists[(index - 1 + exhibitionArtists.length) % exhibitionArtists.length]!
 const next = exhibitionArtists[(index + 1) % exhibitionArtists.length]!
-// Photographs of the works: Петро Чекаль's exhibition shots where there are any, otherwise the pictures from the
-// original site and the person's works on symbol.ngo; plus exhibition photos of symbol.ngo that show this artist's work.
+// The curator-sorted local archive is authoritative for photographs of the works. Its generated manifest contains
+// every non-duplicate source image, grouped by work where the archive has separate folders.
 const alt = `${artist.name}: ${t('робота на виставці', 'work at the exhibition')}`
-const byChekal = chekalPhotos(artist.slug).map(src => ({ src, alt, credit: 'Петро Чекаль' }))
-const exhibitionShots = (exhibition.gallery ?? []).filter(photo => artist.works.some(work => photo.alt.includes(`«${work.title}»`)))
-const photos = [
-  ...(osipovPhotos[artist.slug] ?? []).map(src => ({ src, alt, credit: 'Олександр Осіпов' })),
-  ...(byChekal.length ? byChekal : [
-    ...workPhotos(artist.slug).map(src => ({ src, alt })),
-    ...(artist.person?.works ?? []),
-    ...artist.coAuthors.flatMap(person => person.works ?? [])
-  ]),
-  ...exhibitionShots
-]
+const photoGroups = (artistPhotoGroups[artist.slug] ?? []).map(group => ({
+  title: group.title,
+  photos: group.photos.map(photo => ({ ...photo, alt: `${artist.name}: «${group.title}»` }))
+}))
+const photos = photoGroups.flatMap(group => group.photos)
 const credits = [...new Set(photos.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
+const separateWorkFiles = ['kinich-azla', 'oleksii-sai'].includes(artist.slug)
+const normalTitle = (title: string) => title.toLocaleLowerCase('uk').replace(/[«»"'’.:\s-]/g, '')
+const workFiles = separateWorkFiles
+  ? artist.works.map((work, workIndex) => ({
+      work,
+      photos: photoGroups.find(group => normalTitle(group.title) === normalTitle(work.title))?.photos ?? photoGroups[workIndex]?.photos ?? []
+    }))
+  : []
+const sheetCount = 1 + artist.works.length + (separateWorkFiles ? workFiles.filter(file => file.photos.length).length : photos.length ? 1 : 0)
+const photoCredits = (items: typeof photos) => [...new Set(items.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
 // Marks of use on some files, placed differently on each: a coffee ring on one sheet, a tea splash on another.
 const stainOf = (sheet: number) => {
   const turn = (index * 47 + sheet * 31) % 360
@@ -80,7 +84,7 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
             <div class="case-cover__name"><dt>{{ t('Прізвище, ім’я', 'Name') }}</dt><dd><h1>{{ artist.name }}</h1></dd></div>
             <div><dt>{{ artist.works.length > 1 ? t('Роботи', 'Works') : t('Робота', 'Work') }}</dt><dd>{{ artist.works.map(work => `«${work.title}»`).join(', ') }}</dd></div>
             <div><dt>{{ t('Статус', 'Status') }}</dt><dd>{{ artist.coAuthors.length ? t('Митці виставки', 'Artists of the exhibition') : t('Митець виставки', 'Artist of the exhibition') }}</dd></div>
-            <div><dt>{{ t('Аркушів', 'Sheets') }}</dt><dd>{{ 1 + artist.works.length + (photos.length ? 1 : 0) }}</dd></div>
+            <div><dt>{{ t('Аркушів', 'Sheets') }}</dt><dd>{{ sheetCount }}</dd></div>
             <div v-if="links.length"><dt>{{ t('Посилання', 'Links') }}</dt><dd class="case-cover__social"><a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer">{{ link.label }}</a></dd></div>
           </dl>
         </div>
@@ -98,17 +102,37 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
         <div class="docs-text"><p v-for="paragraph in artist.bio" :key="paragraph">{{ paragraph }}</p></div>
       </DocsSheet>
 
-      <DocsSheet v-for="(work, workIndex) in artist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex + 2)">
-        <h2 class="case-work">«{{ work.title }}»</h2>
-        <div class="docs-text"><p v-for="paragraph in work.text" :key="paragraph">{{ paragraph }}</p></div>
-      </DocsSheet>
+      <!-- Sai and Azla have two independent work files inside their personal file: each keeps its text and photos together. -->
+      <template v-if="separateWorkFiles">
+        <section v-for="(file, workIndex) in workFiles" :key="file.work.title" class="work-file">
+          <header class="work-file__tab">
+            <span>{{ t('Файл роботи', 'Work file') }} {{ String(workIndex + 1).padStart(2, '0') }}</span>
+            <strong>«{{ file.work.title }}»</strong>
+          </header>
+          <DocsSheet :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${file.work.year ? ` · ${file.work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex * 2 + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex * 2 + 2)">
+            <h2 class="case-work">«{{ file.work.title }}»</h2>
+            <div class="docs-text"><p v-for="paragraph in file.work.text" :key="paragraph">{{ paragraph }}</p></div>
+          </DocsSheet>
+          <DocsSheet v-if="file.photos.length" :case-no="caseNo" :doc-no="t('Файл роботи', 'Work file')" :kind="t('Фотографії роботи', 'Photographs of the work')" :sheet="workIndex * 2 + 3" :tilt="workIndex % 2 ? 0.15 : -0.15">
+            <h3 class="case-work">«{{ file.work.title }}»</h3>
+            <DocsPhotoGallery class="case-photos" :photos="file.photos" />
+            <p v-if="photoCredits(file.photos).length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ photoCredits(file.photos).join(', ') }}</p>
+          </DocsSheet>
+        </section>
+      </template>
 
-      <DocsSheet v-if="photos.length" :case-no="caseNo" :kind="t('Додаток: фотографії робіт', 'Appendix: photographs of the works')" :sheet="artist.works.length + 2" :tilt="0.15">
-        <ul class="docs-photos case-photos">
-          <li v-for="photo in photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
-        </ul>
-        <p v-if="credits.length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ credits.join(', ') }}</p>
-      </DocsSheet>
+      <template v-else>
+        <DocsSheet v-for="(work, workIndex) in artist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex + 2)">
+          <h2 class="case-work">«{{ work.title }}»</h2>
+          <div class="docs-text"><p v-for="paragraph in work.text" :key="paragraph">{{ paragraph }}</p></div>
+        </DocsSheet>
+
+        <DocsSheet v-if="photos.length" :case-no="caseNo" :kind="t('Додаток: фотографії робіт', 'Appendix: photographs of the works')" :sheet="artist.works.length + 2" :tilt="0.15">
+          <h3 class="case-work">«{{ photoGroups[0]?.title }}»</h3>
+          <DocsPhotoGallery class="case-photos" :photos="photos" />
+          <p v-if="credits.length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ credits.join(', ') }}</p>
+        </DocsSheet>
+      </template>
     </div>
 
     <nav class="pager" :aria-label="t('Інші митці', 'Other artists')">
@@ -162,6 +186,10 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 .case-cover__name h1 { margin: 0; font-size: clamp(2rem, calc(1rem + 3.6vw), 3.8rem); line-height: .95; }
 .case-cover__links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
 .case-papers { display: grid; margin-top: 36px; }
+.work-file { display: grid; position: relative; margin: 28px 0 44px; padding: 28px 14px 14px; border: 2px solid color-mix(in srgb, var(--docs-ink) 42%, transparent); background: color-mix(in srgb, var(--docs-folder) 56%, transparent); }
+.work-file__tab { position: absolute; left: -2px; bottom: 100%; display: flex; align-items: baseline; gap: 14px; max-width: calc(100% + 4px); padding: 8px 16px 6px; border: 2px solid color-mix(in srgb, var(--docs-ink) 42%, transparent); border-bottom: 0; background: var(--docs-folder); font-family: var(--docs-mono); text-transform: uppercase; }
+.work-file__tab span { font-size: .68rem; letter-spacing: .09em; white-space: nowrap; }
+.work-file__tab strong { overflow: hidden; font-family: var(--docs-display); font-size: 1.05rem; line-height: 1; text-overflow: ellipsis; white-space: nowrap; }
 .case-work { margin: 0 0 16px; font-size: clamp(1.6rem, calc(1rem + 2vw), 2.6rem); }
 .case-photos { margin: 0; }
 .case-credits { margin: 14px 0 0; font-family: var(--docs-mono); font-size: .78rem; color: var(--docs-muted); }
@@ -185,5 +213,8 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
   .case-tabs__tab.is-open .case-tabs__name { display: none; }
   .case-cover__photos { width: 56%; max-width: 220px; }
   .case-cover__photos.is-duo { width: 80%; max-width: 320px; }
+  .work-file { margin-top: 34px; padding: 18px 6px 6px; }
+  .work-file__tab { gap: 8px; padding-inline: 10px; }
+  .work-file__tab strong { font-size: .9rem; }
 }
 </style>

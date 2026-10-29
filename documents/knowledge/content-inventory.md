@@ -47,4 +47,4 @@ Folder names only; no private links. Rights and selection still need confirmatio
 
 ## Media on the site (2026-10-29)
 
-Selected, web-compressed copies live in `apps/main/public/media/` (projects/{slug}/, people/{slug}.jpg). Only a selection is published, never whole folders. «Покажіть свої документи…»: 6 exhibition photos (cover first) and 5 opening photos from the saved project site; 23 portraits and 17 artist bios from the saved project site.
+Selected, web-compressed copies generally live in `apps/main/public/media/` (projects/{slug}/, people/{slug}.jpg). Exception: for «Покажіть свої документи…», the curator-sorted `ПСД/Фото/Митці` folders are published in full after exact deduplication (246 photos on 2026-10-29), with optimized copies under `projects/pokazhit-svoi-dokumenty/artist-works/`; the source archive is not changed. The project also has 6 exhibition photos (cover first), 5 opening photos, 23 portraits and 17 artist bios from the saved project site.
