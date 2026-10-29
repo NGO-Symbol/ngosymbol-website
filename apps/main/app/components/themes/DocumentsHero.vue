@@ -50,9 +50,9 @@ defineProps<{ project: Project }>()
             <div><dt>Дати</dt><dd>17.10.2025 — 07.12.2025</dd></div>
             <div><dt>Місце</dt><dd>ЄрміловЦентр, Харків</dd></div>
           </dl>
-          <a v-if="project.subsiteUrl" class="docs-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer">
+          <a v-if="project.subsiteUrl" class="docs-site" :href="project.subsiteUrl">
             <span>Перейти на сайт проєкту</span>
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">→</span>
           </a>
         </aside>
       </div>
@@ -85,7 +85,7 @@ defineProps<{ project: Project }>()
 .docs-meta { width: 100%; margin: 0; display: grid; gap: 10px; font-family: var(--docs-mono); font-size: .88rem; }
 .docs-meta dt { display: inline-block; background: var(--docs-ink); color: var(--docs-paper); padding: 1px 6px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
 .docs-meta dd { margin: 0; }
-.docs-site { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px 14px; background: var(--docs-ink); color: var(--docs-paper); text-decoration: none; font-family: var(--docs-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; border: 3px solid var(--docs-ink); box-shadow: 6px 6px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease; animation: docs-pop .6s cubic-bezier(.3, 1.6, .5, 1) 1.3s both; }
+.docs-site { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px 14px; background: var(--docs-ink); color: var(--docs-paper); text-decoration: none; font-family: var(--docs-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; border: 3px solid var(--docs-ink); box-shadow: 6px 6px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease; }
 .docs-site:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--docs-stamp); background: var(--docs-paper); color: var(--docs-ink); }
 @keyframes docs-rule { from { transform: scaleX(0); } }
 @keyframes docs-tape { from { transform: scaleX(0) rotate(-3deg); } }
