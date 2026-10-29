@@ -87,7 +87,10 @@ function jump(year: number) {
         >{{ option.label }}</button>
         </span>
       </div>
-      <button v-if="hasFilters" type="button" class="text-button" @click="clear">Скинути фільтри</button>
+      <div v-if="hasFilters" class="filter-panel__result">
+        <span>Знайдено: {{ visible.length }}</span>
+        <button type="button" class="text-button" @click="clear">Скинути фільтри</button>
+      </div>
     </div>
 
     <div class="chronology">

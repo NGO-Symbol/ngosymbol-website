@@ -43,7 +43,7 @@ html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 .nav-tab:hover .nav-tab__roll, .nav-tab:focus-visible .nav-tab__roll { transform: translateY(-100%); }
 .nav-tab.is-pressed { animation: nav-press .5s cubic-bezier(.3, 1.6, .5, 1); }
 @keyframes nav-press { 0% { transform: scale(1); } 30% { transform: scale(.88) rotate(-2deg); } 100% { transform: none; } }
-.nav-ink { position: absolute; left: 0; bottom: -6px; height: 3px; border-radius: 3px; background: var(--symbol-violet); opacity: 0; transform-origin: left; transition: transform .55s cubic-bezier(.3, 1.3, .4, 1), width .55s cubic-bezier(.3, 1.3, .4, 1), opacity .3s ease; pointer-events: none; }
+.nav-ink { position: absolute; left: 0; top: 0; height: 3px; border-radius: 3px; background: var(--symbol-violet); opacity: 0; transform-origin: left; transition: transform .55s cubic-bezier(.3, 1.3, .4, 1), width .55s cubic-bezier(.3, 1.3, .4, 1), opacity .3s ease; pointer-events: none; }
 .nav-ink.is-visible { opacity: 1; }
 .nav-ink::after { content: ''; position: absolute; right: -4px; top: -2.5px; width: 8px; height: 8px; border-radius: 50%; background: var(--symbol-apricot); animation: nav-ink-dot 2.4s ease-in-out infinite; }
 @keyframes nav-ink-dot { 50% { transform: translateX(-6px) scale(.7); } }
@@ -229,11 +229,16 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .filter-panel .filters { display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: baseline; gap: 4px 12px; margin: 0; }
 .filter-panel .filters__name { font-size: .85rem; color: var(--symbol-violet); }
 .filter-panel .filters button { display: inline; margin: 0 2px 0 0; padding: 2px 8px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: .95rem; line-height: 1.6; color: var(--symbol-plum); cursor: pointer; transition: background .2s ease, color .2s ease; }
-.filter-panel .filters button:not(:last-child)::after { content: ' ·'; margin-left: 8px; color: color-mix(in srgb, var(--symbol-plum) 40%, transparent); }
 .filter-panel .filters button:hover { text-decoration: underline; text-underline-offset: 3px; }
-.filter-panel .filters button.active { background: var(--symbol-plum); color: var(--symbol-cream); }
-.filter-panel .filters button.active::after { color: color-mix(in srgb, var(--symbol-cream) 50%, transparent); }
-.filter-panel .text-button { justify-self: start; margin-top: 4px; font-size: .85rem; }
+.filter-panel .filters__options { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+.filter-panel .filters button { border: 1px solid transparent; }
+.filter-panel .filters button.active { background: var(--symbol-violet); border-color: var(--symbol-violet); color: var(--symbol-white); text-decoration: none; }
+.filter-panel .filters button.active::before { content: '✓ '; }
+.filter-panel .text-button { justify-self: start; margin-top: 10px; padding: 7px 14px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; font-size: .9rem; text-decoration: none; cursor: pointer; transition: background .2s ease, color .2s ease; }
+.filter-panel .text-button::before { content: '× '; }
+.filter-panel__result { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: .9rem; color: var(--symbol-violet); }
+.filter-panel__result .text-button { margin-top: 0; }
+.filter-panel .text-button:hover { background: var(--symbol-plum); color: var(--symbol-cream); }
 @media (max-width: 560px) { .filter-panel .filters { grid-template-columns: 1fr; gap: 0; } .filter-panel .filters + .filters { margin-top: 8px; } }
 .chronology { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 40px; }
 .year-rail { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
@@ -478,6 +483,7 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .home-hero,.support-band__grid,.subscribe__grid { grid-template-columns: 1fr; }
   .home-hero__orbit { order: -1; }
   .chronology { grid-template-columns: 1fr; gap: 10px; }
+  .year-block__title { display: none; }
   .year-rail { flex-direction: row; overflow-x: auto; gap: 18px; padding: 10px 0; background: var(--symbol-cream); z-index: 5; width: 100%; top: env(safe-area-inset-top, 0px); }
   .event-row { grid-template-columns: 1fr; gap: 6px; }
   .appearances li { grid-template-columns: 1fr; gap: 2px; }
