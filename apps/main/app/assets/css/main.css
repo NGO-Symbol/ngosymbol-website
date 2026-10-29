@@ -269,8 +269,8 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
    inverted with the hue kept, like partner logos. */
 :root[data-theme="dark"] .program-logo img { filter: invert(.92) hue-rotate(180deg); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .program-logo img { filter: invert(.92) hue-rotate(180deg); } }
-.project-hero__program { display: block; height: clamp(84px, 9vw, 120px); width: auto; margin-top: 26px; animation: program-logo-in 1.2s .3s cubic-bezier(.6, 0, .2, 1) both; }
-.project-card__program { position: absolute; z-index: 1; left: 14px; top: 14px; height: 80px; width: auto; transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
+.project-hero__program { display: block; height: clamp(130px, 15vw, 200px); width: auto; margin-top: 30px; animation: program-logo-in 1.2s .3s cubic-bezier(.6, 0, .2, 1) both; }
+.project-card__program { position: absolute; z-index: 1; left: 16px; top: 16px; height: 128px; width: auto; transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
 .project-card:hover .project-card__program { transform: translateY(-4px) rotate(-3deg); }
 @media (prefers-reduced-motion: reduce) { .project-hero__program { animation: none; } }
 .donor-credit { margin-top: 20px; padding: 16px 18px; background: var(--symbol-white); border-left: 3px solid var(--symbol-violet); font-size: .9rem; line-height: 1.55; max-width: 680px; }
