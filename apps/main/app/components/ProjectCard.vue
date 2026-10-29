@@ -3,7 +3,9 @@ import type { Project } from '~/data/types'
 import { projectsEn } from '~/data/projects-en'
 
 const props = defineProps<{ project: Project }>()
-const cover = computed(() => props.project.poster ?? props.project.gallery?.[0]?.src)
+const cover = computed(() => props.project.cardCover === false
+  ? undefined
+  : (props.project.cardCover ?? props.project.poster ?? props.project.gallery?.[0]?.src))
 const { isEn } = useLang()
 const text = computed(() => (isEn.value && projectsEn[props.project.slug]) || props.project)
 </script>

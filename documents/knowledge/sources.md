@@ -34,7 +34,7 @@ Conversation on 2026-10-10 supplied corrections and current decisions, including
 - Kyiv training, 13–16.05.2025 (folder «Київ 2»): https://drive.google.com/drive/folders/1NZRVgsHb2D34GjUmVeoz1G2ccwXoZRJj
 - First Bila Tserkva training, 10–14.02.2025: https://photos.app.goo.gl/juzrPPryNMWiM6YR6
 
-The Kyiv originals use filenames ending in `_Chekal.jpg`; the project content and Drive inventory also credit Петро Чекаль as photographer. These albums supplied the expanded event galleries and the selected project overview gallery. Only optimized web copies are committed; public source albums are not mirrored into the repository.
+The Kyiv originals use filenames ending in `_Chekal.jpg` and are credited to Петро Чекаль. The organization confirmed on 2026-10-30 that all photos from both Bila Tserkva trainings were made by Юрій Рассоха; this correction overrides the earlier blanket attribution to Петро Чекаль. These albums supplied the expanded event galleries and the selected project overview gallery. Only optimized web copies are committed; public source albums are not mirrored into the repository.
 
 ## Product and architecture references
 

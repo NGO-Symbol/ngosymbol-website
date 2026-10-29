@@ -52,6 +52,8 @@ export interface Project {
   theme?: 'documents'
   /** Poster or key visual, used as the card cover when present. */
   poster?: string
+  /** Explicit project-card cover; false keeps the card visual free of photography. */
+  cardCover?: string | false
   /** Selected photos only; the first is the cover. Files live in public/media/projects/{slug}/. */
   gallery?: Photo[]
   people?: Credit[]

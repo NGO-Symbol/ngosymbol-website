@@ -37,7 +37,7 @@ Folder names only; no private links. Rights and selection still need confirmatio
 | Project | Where (Drive → Символ → Проєкти) | What |
 | --- | --- | --- |
 | Історії різних | 2025 → Історії різних → Фото, Відео з перформансу | ~98 performance photos (≈4 MB each), video |
-| Тренінги mhGAP | 2025 → mhGAP Kyiv → Фотографії | ~69 photos by Петро Чекаль (11–18 MB each) |
+| Тренінги mhGAP | 2025 → mhGAP Kyiv → Фотографії | ~69 photos: Біла Церква — Юрій Рассоха; Київ — Петро Чекаль (11–18 MB each) |
 | Покажіть свої документи… | 2025 → Покажіть свої документи… → Фото (shortcuts: Відкриття 17.10, Монтаж, експозиція, ZMINA, Скрипка), Айдентика (logo, poster) | event and exhibition photos; local copy of the former site also has artist portraits and works |
 | Голоси у русі | 2026 → Voices in Motion → Фотографії (+ «Перф 22.08.2026»), Комунікаційні матеріали | Instagram-saved photos, performance folder |
 | Історія моєї вулиці | 2026 → Історія моєї вулиці → Візуальні матеріали ІМВ → Будинки, Логотипи, Шрифти | historical photos of streets (archive rights to check) |
@@ -49,4 +49,4 @@ Folder names only; no private links. Rights and selection still need confirmatio
 
 Selected, web-compressed copies generally live in `apps/main/public/media/` (projects/{slug}/, people/{slug}.jpg). Exception: for «Покажіть свої документи…», the curator-sorted `ПСД/Фото/Митці` folders are published in full after exact deduplication (246 photos on 2026-10-29), with optimized copies under `projects/pokazhit-svoi-dokumenty/artist-works/`; the source archive is not changed. The project also has 6 exhibition photos (cover first), 5 opening photos, 23 portraits and 17 artist bios from the saved project site.
 
-The mhGAP project has a curated 9-photo overview gallery assembled from the event media. Its event pages currently show 12 photos for the first Bila Tserkva training, 3 for the second Bila Tserkva training, 14 for the first Kyiv training and 14 for the second Kyiv training. New copies were selected from the anonymously accessible albums supplied by the organization, checked visually for near-duplicates, resized to at most 2000 px and credited to Петро Чекаль. The original albums are unchanged.
+The mhGAP project has a curated 9-photo overview gallery assembled from the event media. Its event pages currently show 12 photos for the first Bila Tserkva training, 3 for the second Bila Tserkva training, 14 for the first Kyiv training and 14 for the second Kyiv training. New copies were selected from the anonymously accessible albums supplied by the organization, checked visually for near-duplicates and resized to at most 2000 px. The Bila Tserkva photos are credited to Юрій Рассоха (`USER_CONFIRMED`, 2026-10-30); the Kyiv photos are credited to Петро Чекаль. The original albums are unchanged.
