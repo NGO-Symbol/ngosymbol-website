@@ -69,3 +69,14 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Crossing to and from symbol.ngo (utils/crossing.ts). Arriving: a sheet of the exhibition's paper with a barcode
+   lifts off the page. Leaving: Symbol's violet with its round mark drops over the page before symbol.ngo opens. */
+html[data-cross] body::after { content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+html[data-cross="enter"] body::after { background: repeating-linear-gradient(90deg, var(--docs-ink) 0 2px, transparent 2px 7px) center / min(70vw, 520px) 72px no-repeat, var(--docs-paper); animation: cross-lift .75s cubic-bezier(.7, 0, .2, 1) .15s both; }
+html[data-cross="leave"] body::after { background: #9280a6 url(/favicon.svg) center / 76px no-repeat; animation: cross-drop .55s cubic-bezier(.7, 0, .3, 1) both; }
+@keyframes cross-lift { to { transform: translateY(-100%); } }
+@keyframes cross-drop { from { transform: translateY(-100%); } }
+
+/* Room for the folder tabs at the bottom on phones (DocsTabs). */
+@media (max-width: 640px) { .docs-site-shell { padding-bottom: 76px; } }

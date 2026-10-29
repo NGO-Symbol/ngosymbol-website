@@ -1,7 +1,10 @@
 <script setup lang="ts">
 const { isEn, t, localePath } = useLang()
+const backHref = ref(isEn.value ? `${SYMBOL}/en` : SYMBOL)
+onMounted(() => { backHref.value = returnUrl(isEn.value) })
 const links = computed(() => [
-  { to: '/', label: t('Концепція', 'Concept') },
+  { to: '/', label: t('Про виставку', 'About') },
+  { to: '/kontseptsiia', label: t('Концепція', 'Concept') },
   { to: '/mytsi', label: t('Митці', 'Artists') },
   { to: '/podii', label: t('Події', 'Events') },
   { to: '/presa', label: t('Преса', 'Press') },
@@ -20,7 +23,7 @@ const links = computed(() => [
         <NuxtLink v-for="link in links" :key="link.to" :to="localePath(link.to)">{{ link.label }}</NuxtLink>
       </nav>
       <div class="docs-footer__symbol">
-        <a class="docs-footer__back" :href="isEn ? `${SYMBOL}/en` : SYMBOL">← {{ t('Сайт ГО «Символ»', 'NGO Symbol website') }}</a>
+        <a class="docs-footer__back" :href="backHref" @click="leaveTo($event, backHref)">← {{ t('Сайт ГО «Символ»', 'NGO Symbol website') }}</a>
         <a :href="`${SYMBOL}/projects/pokazhit-svoi-dokumenty`">{{ t('Проєкт на symbol.ngo', 'The project on symbol.ngo') }}</a>
       </div>
     </div>

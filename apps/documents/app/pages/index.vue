@@ -1,14 +1,14 @@
 <script setup lang="ts">
-// Home: the hero, the exhibition in brief with a way into every section, the curatorial concept, the exhibition in photographs.
-import { concept, conceptEn, conceptLead, conceptLeadEn } from '~/data/concept'
+// Home: the exhibition as a dossier, then the general things — what was done, where, with whom — a way into every
+// section, the partners and the exhibition in photographs. The curatorial concept has its own tab (/kontseptsiia).
 import { press } from '~/data/press'
 
 const { isEn, t, localePath } = useLang()
-useSeoMeta({ title: () => t('Кураторська концепція', 'Curatorial concept') })
+useSeoMeta({ title: () => t('Про виставку', 'About the exhibition') })
 const photos = (exhibition.gallery ?? []).filter(photo => !photo.people)
-const blocks = computed(() => (isEn.value ? conceptEn : concept))
 
 const sections = computed(() => [
+  { to: '/kontseptsiia', count: '01', label: t('кураторська концепція', 'curatorial concept'), text: t('Документ як інструмент влади, пам’яті й ідентичності', 'The document as a tool of power, memory and identity') },
   { to: '/mytsi', count: '20', label: t('митців і мисткинь', 'artists'), text: t('Фотографія, текст, живопис, колаж, перформанс', 'Photography, text, painting, collage, performance') },
   { to: '/podii', count: String(programme.length), label: t('подій програми', 'programme events'), text: t('Екскурсії, розмови, дискусії, перформанси', 'Tours, talks, discussions, performances') },
   { to: '/presa', count: String(press.length), label: t('публікацій у медіа', 'media mentions'), text: t('Анонси, огляди, опен-кол', 'Announcements, reviews, open call') },
@@ -36,18 +36,27 @@ const sections = computed(() => [
 
     <div class="docs-container"><div class="docs-barcode" aria-hidden="true" /></div>
 
-    <section id="concept" class="docs-container concept">
-      <div class="concept__head">
-        <span class="docs-label">{{ t('Кураторська концепція', 'Curatorial concept') }}</span>
-        <p class="docs-lead">{{ isEn ? conceptLeadEn : conceptLead }}</p>
+    <section id="about" class="docs-container about">
+      <div class="about__head">
+        <span class="docs-label">{{ t('Про виставку', 'About') }}</span>
+        <h2 class="docs-section-title">{{ t('Що відбулося', 'What happened') }}</h2>
       </div>
       <div class="docs-text">
-        <template v-for="(block, index) in blocks" :key="index">
-          <p v-if="block.text">{{ block.text }}</p>
-          <ol v-else-if="block.list"><li v-for="item in block.list" :key="item">{{ item }}</li></ol>
-        </template>
-        <p class="docs-signature">{{ t('Куратори', 'Curators') }}: <a :href="symbolPersonUrl('petro-chekal')">{{ t('Петро Чекаль', 'Petro Chekal') }}</a>, <a :href="symbolPersonUrl('yurii-rassokha')">{{ t('Юрій Рассоха', 'Yurii Rassokha') }}</a></p>
+        <p v-if="isEn" class="lang-note">Texts about the exhibition are available in Ukrainian.</p>
+        <DocText v-for="paragraph in exhibition.body" :key="paragraph" :text="paragraph" />
       </div>
+    </section>
+
+    <section v-if="exhibitionPartners.length" class="docs-container partners">
+      <h2 class="docs-section-title">{{ t('Партнери', 'Partners') }}</h2>
+      <ul>
+        <li v-for="org in exhibitionPartners" :key="org!.slug">
+          <a :href="org!.url" target="_blank" rel="noreferrer">
+            <img v-if="org!.logo" :src="org!.logo" :alt="org!.name" loading="lazy">
+            <span>{{ org!.name }}</span>
+          </a>
+        </li>
+      </ul>
     </section>
 
     <section class="docs-container">
@@ -72,13 +81,18 @@ const sections = computed(() => [
 .section-card__label { font-family: var(--docs-display); text-transform: uppercase; font-size: 1.05rem; line-height: 1.05; }
 .section-card__text { font-size: .76rem; line-height: 1.4; opacity: .75; }
 .section-card__go { position: absolute; top: 12px; right: 14px; font-size: 1.2rem; }
-.concept { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 40px; align-items: start; }
-.concept__head { position: sticky; top: 140px; display: grid; gap: 14px; justify-items: start; }
-.concept__head .docs-lead { margin: 0; font-size: 1.05rem; }
-.docs-signature { font-size: .85rem; color: var(--docs-muted); }
+.about { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 40px; align-items: start; margin-top: 56px; }
+.about__head { display: grid; gap: 14px; justify-items: start; }
+.about__head h2 { margin: 0; }
+.lang-note { font-size: .8rem; color: var(--docs-muted); }
+.partners { margin-top: 56px; }
+.partners ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.partners a { display: grid; gap: 10px; align-content: start; height: 100%; padding: 16px; border: 2px solid var(--docs-ink); text-decoration: none; color: var(--docs-ink); font-family: var(--docs-mono); font-size: .78rem; line-height: 1.35; transition: transform .2s ease, box-shadow .2s ease; }
+.partners a:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--docs-stamp); }
+.partners img { height: 48px; width: auto; max-width: 100%; object-fit: contain; object-position: left; }
+:root[data-theme="dark"] .partners img { filter: invert(1) hue-rotate(180deg); }
 @media (max-width: 860px) {
-  .brief, .concept { grid-template-columns: 1fr; gap: 20px; }
-  .concept__head { position: static; }
+  .brief, .about { grid-template-columns: 1fr; gap: 20px; }
 }
 @media (max-width: 420px) { .sections { grid-template-columns: 1fr; } }
 </style>

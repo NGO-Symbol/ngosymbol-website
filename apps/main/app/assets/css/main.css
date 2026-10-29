@@ -549,3 +549,11 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 
 
 .footer-icon-link { display: inline-flex; align-items: center; gap: .45em; width: fit-content; }
+
+/* Crossing to and from a project site (plugins/project-crossing.client.ts). Leaving: the exhibition's paper with a
+   barcode rises over the page. Back from the project site: Symbol's violet curtain with the mark slides away. */
+html[data-cross] body::after { content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+html[data-cross="leave"] body::after { background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 7px) center / min(70vw, 520px) 72px no-repeat, #e8e8e5; animation: cross-rise .55s cubic-bezier(.7, 0, .3, 1) both; }
+html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) center / 76px no-repeat; animation: cross-away .75s cubic-bezier(.7, 0, .2, 1) .15s both; }
+@keyframes cross-rise { from { transform: translateY(100%); } }
+@keyframes cross-away { to { transform: translateY(100%); } }

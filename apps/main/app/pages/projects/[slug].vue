@@ -53,7 +53,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </div>
         <h1>{{ text.title }}</h1>
         <p>{{ text.summary }}</p>
-        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту</a>
+        <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту</a>
       </div>
     </header>
 

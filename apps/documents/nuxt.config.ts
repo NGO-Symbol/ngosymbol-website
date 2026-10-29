@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     publicAssets: [
       { dir: main('public/fonts'), baseURL: '/fonts' },
       { dir: main('public/media/people'), baseURL: '/media/people' },
+      { dir: main('public/media/partners'), baseURL: '/media/partners' },
       { dir: main('public/media/projects/pokazhit-svoi-dokumenty'), baseURL: '/media/projects/pokazhit-svoi-dokumenty' },
       ...eventMedia
     ],

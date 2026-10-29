@@ -3,6 +3,7 @@
 import { projects } from '#symbol/projects'
 import { people } from '#symbol/people'
 import { events } from '#symbol/events'
+import { organizations } from '#symbol/organizations'
 import type { Person, SymbolEvent } from '#symbol/types'
 import { artists, type Artist } from '~/data/artists'
 
@@ -30,6 +31,11 @@ export const exhibitionArtists: ExhibitionArtist[] = artists
 export function getArtist(slug: string) {
   return exhibitionArtists.find(artist => artist.slug === slug)
 }
+
+/** Partners and donors of the exhibition, with their logos from symbol.ngo. */
+export const exhibitionPartners = [...(exhibition.partners ?? []), ...(exhibition.donors ?? [])]
+  .map(slug => organizations.find(org => org.slug === slug))
+  .filter(org => !!org)
 
 /** Credits of the exhibition other than the artists: curators, manager, design, coordination. */
 export const team = (exhibition.people ?? [])

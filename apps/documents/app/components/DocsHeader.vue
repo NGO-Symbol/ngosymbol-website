@@ -1,10 +1,14 @@
 <script setup lang="ts">
-// Header of the project site: a clear way back to symbol.ngo (the organization behind the exhibition), the project
-// mark, the sections, the language switch and the day/night switch. On phones the sections scroll sideways in one row.
+// Header of the project site: a bright way back to symbol.ngo (the organization behind the exhibition) that returns
+// to the very page the visitor came from, the project mark, the sections, the language switch and the day/night
+// switch. On phones the sections scroll sideways in one row.
 const { isEn, localePath, switchPath, t } = useLang()
+const backHref = ref(isEn.value ? `${SYMBOL}/en` : SYMBOL)
+onMounted(() => { backHref.value = returnUrl(isEn.value) })
 const route = useRoute()
 const links = computed(() => [
-  { to: '/', label: t('Концепція', 'Concept') },
+  { to: '/', label: t('Про виставку', 'About') },
+  { to: '/kontseptsiia', label: t('Концепція', 'Concept') },
   { to: '/mytsi', label: t('Митці', 'Artists') },
   { to: '/podii', label: t('Події', 'Events') },
   { to: '/presa', label: t('Преса', 'Press') },
@@ -28,9 +32,9 @@ function toggleTheme() {
   <header class="docs-header">
     <div class="docs-back">
       <div class="docs-container docs-back__inner">
-        <a class="docs-back__link" :href="isEn ? `${SYMBOL}/en` : SYMBOL">
-          <span aria-hidden="true">←</span>
-          <span>{{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span>
+        <a class="docs-back__link" :href="backHref" @click="leaveTo($event, backHref)">
+          <img class="docs-back__mark" src="/favicon.svg" alt="" width="28" height="28">
+          <span class="docs-back__text"><span aria-hidden="true">←</span> {{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span>
         </a>
         <div class="docs-back__tools">
           <NuxtLink class="docs-lang" :to="switchPath" :aria-label="t('English version', 'Українська версія')">
@@ -57,12 +61,14 @@ function toggleTheme() {
 
 <style scoped>
 .docs-header { position: sticky; top: 0; z-index: 40; background: var(--docs-paper); border-bottom: 3px solid var(--docs-ink); }
-/* The way back to Symbol: in Symbol's own violet, so it reads as «the organization», not as part of the exhibition. */
+/* The way back to Symbol: a bright band in Symbol's own colours (violet with the apricot button and the round mark),
+   so it reads at once as «the organization», not as part of the exhibition. */
 .docs-back { background: #9280a6; color: #fff7eb; }
-.docs-back__inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; }
-.docs-back__link { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 10px; border-radius: 999px; background: #fff7eb; color: #302738; font-family: var(--docs-mono); font-size: .82rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, background .2s ease; }
-.docs-back__link:hover { transform: translateX(-3px); background: #fdd08f; }
-.docs-back__link span:first-child { font-size: 1.1em; }
+.docs-back__inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.docs-back__link { display: inline-flex; align-items: center; gap: 12px; padding: 6px 20px 6px 6px; border-radius: 999px; background: #fdd08f; color: #302738; font-family: var(--docs-mono); font-size: .95rem; font-weight: 600; text-decoration: none; box-shadow: 0 0 0 0 rgba(253, 208, 143, .7); animation: docs-back-call 2.4s ease-out 1.5s 2; transition: transform .2s ease, background .2s ease; }
+.docs-back__link:hover { transform: translateX(-4px); background: #fff7eb; }
+.docs-back__mark { width: 28px; height: 28px; border-radius: 50%; box-shadow: 0 0 0 2px #fff7eb; }
+@keyframes docs-back-call { 0% { box-shadow: 0 0 0 0 rgba(253, 208, 143, .75); } 100% { box-shadow: 0 0 0 14px rgba(253, 208, 143, 0); } }
 .docs-back__tools { display: flex; align-items: center; gap: 8px; }
 .docs-lang { display: inline-flex; border: 1px solid #fff7eb; border-radius: 999px; overflow: hidden; font-family: var(--docs-mono); font-size: .75rem; text-decoration: none; color: #fff7eb; }
 .docs-lang span { padding: 4px 9px; }
@@ -77,8 +83,10 @@ function toggleTheme() {
 .docs-nav a:hover { border-color: var(--docs-ink); }
 .docs-nav a.is-active { background: var(--docs-ink); color: var(--docs-paper); }
 @media (max-width: 640px) {
-  .docs-back__link { font-size: .74rem; padding: 5px 10px 5px 8px; }
-  .docs-header__main { flex-direction: column; align-items: flex-start; padding-block: 8px; }
-  .docs-nav { margin-inline: -10px; }
+  .docs-back__link { font-size: .8rem; gap: 8px; padding: 4px 12px 4px 4px; }
+  .docs-back__mark { width: 24px; height: 24px; }
+  .docs-header__main { padding-block: 8px; }
+  /* On phones the sections are the folder tabs at the bottom (DocsTabs). */
+  .docs-nav { display: none; }
 }
 </style>

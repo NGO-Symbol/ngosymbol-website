@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // An artist of the exhibition: portrait, biography from the original site, the work(s) with their texts and
 // photographs, and the full page on symbol.ngo (biography, links, other projects). Texts are in Ukrainian.
-import { workPhotos } from '~/data/workPhotos'
+import { chekalPhotos, workPhotos } from '~/data/workPhotos'
 
 const { isEn, t, localePath } = useLang()
 const route = useRoute()
@@ -12,10 +12,18 @@ useSeoMeta({ title: artist.name, description: artist.bio[0] })
 const index = exhibitionArtists.indexOf(artist)
 const prev = exhibitionArtists[(index - 1 + exhibitionArtists.length) % exhibitionArtists.length]!
 const next = exhibitionArtists[(index + 1) % exhibitionArtists.length]!
+// Photographs of the works: Петро Чекаль's exhibition shots where there are any, otherwise the pictures from the
+// original site and the person's works on symbol.ngo; plus exhibition photos of symbol.ngo that show this artist's work.
+const alt = `${artist.name}: ${t('робота на виставці', 'work at the exhibition')}`
+const byChekal = chekalPhotos(artist.slug).map(src => ({ src, alt, credit: 'Петро Чекаль' }))
+const exhibitionShots = (exhibition.gallery ?? []).filter(photo => artist.works.some(work => photo.alt.includes(`«${work.title}»`)))
 const photos = [
-  ...workPhotos(artist.slug).map(src => ({ src, alt: `${artist.name}: ${t('робота на виставці', 'work at the exhibition')}` })),
-  ...(artist.person?.works ?? []),
-  ...artist.coAuthors.flatMap(person => person.works ?? [])
+  ...(byChekal.length ? byChekal : [
+    ...workPhotos(artist.slug).map(src => ({ src, alt })),
+    ...(artist.person?.works ?? []),
+    ...artist.coAuthors.flatMap(person => person.works ?? [])
+  ]),
+  ...exhibitionShots
 ]
 </script>
 
@@ -41,17 +49,21 @@ const photos = [
 
     <div class="docs-barcode" aria-hidden="true" />
 
+    <h2 class="docs-section-title">{{ t('Кураторський текст', 'Curatorial text') }}</h2>
     <section v-for="work in artist.works" :key="work.title" class="work">
       <div class="work__title">
-        <span v-if="work.year" class="docs-label">{{ work.year }}</span>
+        <span class="docs-label">{{ t('Робота', 'Work') }}<template v-if="work.year"> · {{ work.year }}</template></span>
         <h2 class="docs-section-title">«{{ work.title }}»</h2>
       </div>
       <div class="docs-text"><p v-for="paragraph in work.text" :key="paragraph">{{ paragraph }}</p></div>
     </section>
 
-    <ul v-if="photos.length" class="docs-photos">
-      <li v-for="photo in photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
-    </ul>
+    <template v-if="photos.length">
+      <h2 class="docs-section-title">{{ t('Роботи на виставці', 'Works at the exhibition') }}</h2>
+      <ul class="docs-photos">
+        <li v-for="photo in photos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"><figcaption v-if="'credit' in photo && photo.credit">{{ t('Фото', 'Photo') }}: {{ photo.credit }}</figcaption></figure></li>
+      </ul>
+    </template>
 
     <nav class="pager" :aria-label="t('Інші митці', 'Other artists')">
       <NuxtLink :to="localePath(`/mytsi/${prev.slug}`)"><span class="docs-label">← {{ t('Попередній', 'Previous') }}</span><span>{{ prev.name }}</span></NuxtLink>
