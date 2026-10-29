@@ -4,7 +4,6 @@
 import { contactEmail, socials } from '~/data/social'
 import { projectsEn as en } from '~/data/projects-en'
 
-definePageMeta({ pageTransition: { name: 'zoom', mode: 'out-in' } })
 useHead({ htmlAttrs: { lang: 'en' } })
 useSeoMeta({ title: 'NGO Symbol', description: 'Independent Ukrainian NGO from Kharkiv: contemporary art, culture, and care for mental health.' })
 

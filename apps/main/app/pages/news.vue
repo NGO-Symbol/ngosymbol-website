@@ -1,5 +1,4 @@
 <script setup lang="ts">
-definePageMeta({ pageTransition: { name: 'rise', mode: 'out-in' } })
 useSeoMeta({ title: 'Новини', description: 'Новини ГО «Символ»: виставки, гранти, події.' })
 const items = [...news].sort((a, b) => b.date.localeCompare(a.date))
 </script>

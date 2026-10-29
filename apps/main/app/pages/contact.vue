@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { socials } from '~/data/social'
-definePageMeta({ pageTransition: { name: 'fade', mode: 'out-in' } })
 useSeoMeta({ title: 'Контакти' })
 </script>
 

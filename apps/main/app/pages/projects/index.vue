@@ -1,5 +1,4 @@
 <script setup lang="ts">
-definePageMeta({ pageTransition: { name: 'rise', mode: 'out-in' } })
 useSeoMeta({ title: 'Проєкти', description: 'Усі проєкти ГО «Символ» за роками: виставки, фільми, плейбек-театр, тренінги, фестивалі.' })
 
 const route = useRoute()
@@ -76,7 +75,8 @@ function jump(year: number) {
 
     <div class="filter-panel" aria-label="Фільтри проєктів">
       <div v-for="(group, key) in options" :key="key" class="filters">
-        <span class="label">{{ key === 'format' ? 'Формат' : key === 'direction' ? 'Напрям' : 'Статус' }}</span>
+        <span class="filters__name">{{ key === 'format' ? 'Формат' : key === 'direction' ? 'Напрям' : 'Статус' }}:</span>
+        <span class="filters__options">
         <button
           v-for="option in group"
           :key="option.value"
@@ -85,6 +85,7 @@ function jump(year: number) {
           :class="{ active: selected(key as FilterKey).includes(option.value) }"
           @click="toggle(key as FilterKey, option.value)"
         >{{ option.label }}</button>
+        </span>
       </div>
       <button v-if="hasFilters" type="button" class="text-button" @click="clear">Скинути фільтри</button>
     </div>

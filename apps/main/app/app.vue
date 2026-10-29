@@ -20,7 +20,6 @@ useHead({
   <div class="site-shell">
     <IntroSplash />
     <ClickEffects />
-    <RouteWipe />
     <a class="skip-link" href="#main">{{ isEn ? 'Skip to content' : 'Перейти до змісту' }}</a>
     <SiteHeader />
     <EnNotice />

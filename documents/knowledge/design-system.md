@@ -108,3 +108,7 @@ On touch screens every tap leaves a short mark from the identity, different by t
 ## Person pages (2026-10-29)
 
 `USER_CONFIRMED`: person pages read like an article. Calm name (smaller than project titles), the short bio as a one-or-two-sentence lead in the display face, then the biography in body text (~66 characters per line), section titles in sentence case («Біографія», «Резюме», «У проєктах «Символу»»), not uppercase labels. When the biography starts with the lead sentence, it is not repeated. Tap marks on phones were made a little larger and longer (still under one second).
+
+## Calmer motion (2026-10-29)
+
+`USER_CONFIRMED`: less animation overall, so motion never pulls focus while people look for information. Tap marks on phones removed entirely; no route wipe between pages; every page uses one quiet fade (≈0.2 s, 6 px lift); scroll reveal is a short 12 px fade; project card hover lifts 4 px without tilt. The intro on first visit stays. Project filters are a compact list («Формат: Плейбек · Перформанс · …») instead of pills. Headings use `text-wrap: balance`, paragraphs `pretty`, to avoid lonely last words; page titles are smaller on phones. Orbit titles on phones are larger, years hidden there.

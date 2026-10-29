@@ -43,7 +43,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       if ('reveal' in el.dataset) return
       el.dataset.reveal = ''
       const siblings = el.parentElement ? [...el.parentElement.children] : []
-      el.style.setProperty('--reveal-delay', `${Math.min(siblings.indexOf(el), 6) * 70}ms`)
+      el.style.setProperty('--reveal-delay', `${Math.min(siblings.indexOf(el), 4) * 40}ms`)
       observer.observe(el)
     })
   }
