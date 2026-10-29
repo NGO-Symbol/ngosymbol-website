@@ -203,6 +203,17 @@ const entries: Project[] = [
     tone: 'lilac',
     motif: 'breath',
     summary: 'Навчання медпрацівників первинної ланки за програмою ВООЗ з психічного здоров’я.',
+    gallery: [
+      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/group-work-1.jpg', alt: 'Практична робота в малих групах у Білій Церкві', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/trainer-session.jpg', alt: 'Навчальна сесія першого тренінгу mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/welcome-sign.jpg', alt: 'Навігаційна табличка «Символ» на тренінгу в Києві', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-3/workshop-wide.jpg', alt: 'Практична робота учасників тренінгу в готелі «Україна»', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/training-material.jpg', alt: 'Навчальний матеріал із модуля mhGAP', credit: 'Петро Чекаль' },
+      { src: '/media/events/mhgap-kyiv-trening-4/trainer-1.jpg', alt: 'Тренерка веде другу частину програми mhGAP', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання під час тренінгу', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту в Києві', credit: 'Петро Чекаль', people: true }
+    ],
     body: [
       'mhGAP — **програма дій ВООЗ** з подолання прогалин у галузі психічного здоров’я на первинній ланці охорони здоров’я.',
       '**З лютого по травень 2025 року** «Символ» провів **чотири тренінги** — три п’ятиденні й один чотириденний — для **медпрацівників первинної ланки Київщини** — сімейних лікарів, медсестер, педіатрів, фельдшерів, терапевтів — з проживанням, харчуванням і посібниками для учасників. Після навчання учасники отримували **онлайн-супервізію** від кваліфікованих спеціалістів.',

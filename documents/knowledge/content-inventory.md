@@ -45,6 +45,8 @@ Folder names only; no private links. Rights and selection still need confirmatio
 | 2, 10, 300 років потому | 2024 → 2, 10, 300 років потому → Репортаж з виставки, exhibition | exhibition report photos |
 | Харківське море | 2026 → Харківське море 2026 → 2026 Фотографії (by day) | festival photos (partner project) |
 
-## Media on the site (2026-10-29)
+## Media on the site (2026-10-30)
 
 Selected, web-compressed copies generally live in `apps/main/public/media/` (projects/{slug}/, people/{slug}.jpg). Exception: for «Покажіть свої документи…», the curator-sorted `ПСД/Фото/Митці` folders are published in full after exact deduplication (246 photos on 2026-10-29), with optimized copies under `projects/pokazhit-svoi-dokumenty/artist-works/`; the source archive is not changed. The project also has 6 exhibition photos (cover first), 5 opening photos, 23 portraits and 17 artist bios from the saved project site.
+
+The mhGAP project has a curated 9-photo overview gallery assembled from the event media. Its event pages currently show 12 photos for the first Bila Tserkva training, 3 for the second Bila Tserkva training, 14 for the first Kyiv training and 14 for the second Kyiv training. New copies were selected from the anonymously accessible albums supplied by the organization, checked visually for near-duplicates, resized to at most 2000 px and credited to Петро Чекаль. The original albums are unchanged.
