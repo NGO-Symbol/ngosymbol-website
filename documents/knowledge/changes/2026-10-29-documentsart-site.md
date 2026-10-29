@@ -6,3 +6,5 @@
 - «Голоси у русі»: credit corrected to «Culture Helps Solidarity», co-funded by the European Union (Creative Europe removed, `USER_CONFIRMED`); partners from the project's Instagram posts.
 
 Affected: `project-registry.md`, `team-cv.md`, `open-questions.md`, `documents/operations/deployment.md`.
+
+- Home page «Кадри»: 14 selected photos (Петро Чекаль, Іван Самойлов, performances) in `apps/main/app/data/highlights.ts`, shown as a swipeable strip with a full-screen viewer (`PhotoReel.vue`). Credits only where the author is recorded.
