@@ -24,6 +24,23 @@ function shift(delta: number) {
   month.value = { year: date.getFullYear(), month: date.getMonth() }
 }
 
+// A multi-day event (a festival, a tour) is marked in each of its days: start, «триває», last day.
+function spanLabel(item: { start: string; end?: string }, iso: string) {
+  const first = item.start.slice(0, 10)
+  const last = (item.end ?? item.start).slice(0, 10)
+  if (first === last) return item.start.length > 10 ? item.start.slice(11, 16) : 'увесь день'
+  if (iso === first) return item.start.length > 10 ? `з ${item.start.slice(11, 16)} · початок` : 'початок'
+  if (iso === last) return 'завершення'
+  return 'триває'
+}
+
+const monthEvents = computed(() => {
+  const { year, month: m } = month.value
+  const first = `${year}-${String(m + 1).padStart(2, '0')}-01`
+  const last = `${year}-${String(m + 1).padStart(2, '0')}-${String(new Date(year, m + 1, 0).getDate()).padStart(2, '0')}`
+  return filtered.value.filter(item => item.start.slice(0, 10) <= last && (item.end ?? item.start).slice(0, 10) >= first).sort((a, b) => a.start.localeCompare(b.start))
+})
+
 const days = computed(() => {
   const { year, month: m } = month.value
   const first = new Date(year, m, 1)
@@ -79,9 +96,24 @@ const days = computed(() => {
         <span v-for="weekday in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд']" :key="weekday" class="calendar__weekday">{{ weekday }}</span>
         <div v-for="(cell, index) in days" :key="index" class="calendar__cell" :class="{ 'has-events': cell.items.length, 'is-today': cell.iso === todayIso() }">
           <span v-if="cell.day" class="calendar__day">{{ cell.day }}</span>
-          <NuxtLink v-for="item in cell.items" :key="item.slug" class="calendar__event" :to="item.to">{{ item.title }}</NuxtLink>
+          <NuxtLink v-for="item in cell.items" :key="item.slug" class="calendar__event" :class="[`tone-${item.project.tone}`, { 'is-past': !isUpcoming(item), 'is-continued': cell.iso !== item.start.slice(0, 10) }]" :to="item.to" :title="item.title">
+            <img v-if="item.cover && cell.iso === item.start.slice(0, 10)" class="calendar__thumb" :src="item.cover" alt="" loading="lazy">
+            <span class="calendar__when">{{ spanLabel(item, cell.iso!) }}</span>
+            <span class="calendar__title">{{ item.title }}</span>
+            <span class="calendar__format">{{ formats[item.format] }}</span>
+          </NuxtLink>
         </div>
       </div>
+      <!-- On phones the cells only carry coloured marks; the month's events are listed here in full. -->
+      <ul v-if="monthEvents.length" class="calendar__list">
+        <li v-for="item in monthEvents" :key="item.slug">
+          <NuxtLink class="calendar__event" :class="[`tone-${item.project.tone}`, { 'is-past': !isUpcoming(item) }]" :to="item.to">
+            <span class="calendar__when">{{ formatRange(item.start, item.end) }}</span>
+            <span class="calendar__title">{{ item.title }}</span>
+            <span class="calendar__format">{{ formats[item.format] }} · {{ item.project.title }}</span>
+          </NuxtLink>
+        </li>
+      </ul>
     </section>
   </section>
 </template>

@@ -228,10 +228,27 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .calendar__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--symbol-plum); border-left: 1px solid var(--symbol-plum); }
 .calendar__weekday { padding: 8px; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; border-right: 1px solid var(--symbol-plum); border-bottom: 1px solid var(--symbol-plum); }
 .calendar__cell { min-height: 110px; padding: 8px; display: flex; flex-direction: column; gap: 6px; border-right: 1px solid var(--symbol-plum); border-bottom: 1px solid var(--symbol-plum); min-width: 0; }
-.calendar__cell.has-events { background: color-mix(in srgb, var(--symbol-apricot) 45%, transparent); }
+.calendar__cell.has-events { background: color-mix(in srgb, var(--symbol-lilac) 22%, transparent); }
 .calendar__cell.is-today .calendar__day { background: var(--symbol-plum); color: var(--symbol-cream); border-radius: 50%; }
 .calendar__day { width: 26px; height: 26px; display: grid; place-items: center; font-size: .82rem; font-variant-numeric: tabular-nums; }
-.calendar__event { font-size: .78rem; line-height: 1.25; overflow-wrap: anywhere; }
+.calendar__event { position: relative; display: grid; gap: 2px; padding: 6px 7px 7px 10px; border-radius: 6px; font-size: .78rem; line-height: 1.2; overflow-wrap: anywhere; text-decoration: none; color: var(--symbol-plum); background: var(--symbol-white); box-shadow: inset 4px 0 0 var(--event-tone, var(--symbol-violet)), 0 1px 0 color-mix(in srgb, var(--symbol-plum) 20%, transparent); transition: transform .2s ease, box-shadow .2s ease; }
+/* The project's own colour marks its events (strip on the left), so a glance shows which project a day belongs to. */
+.calendar__event.tone-apricot { --event-tone: var(--symbol-apricot); background: color-mix(in srgb, var(--symbol-apricot) 35%, var(--symbol-white)); }
+.calendar__event.tone-lilac { --event-tone: var(--symbol-violet); background: color-mix(in srgb, var(--symbol-lilac) 55%, var(--symbol-white)); }
+.calendar__event.tone-violet { --event-tone: var(--symbol-plum); background: color-mix(in srgb, var(--symbol-violet) 30%, var(--symbol-white)); }
+.calendar__event.tone-plum { --event-tone: var(--symbol-plum); background: color-mix(in srgb, var(--symbol-plum) 14%, var(--symbol-white)); }
+.calendar__event.tone-cream { --event-tone: var(--symbol-apricot); background: var(--symbol-white); }
+.calendar__event:hover { transform: translateY(-2px); box-shadow: inset 4px 0 0 var(--event-tone, var(--symbol-violet)), 0 6px 14px -8px color-mix(in srgb, var(--symbol-plum) 60%, transparent); }
+.calendar__event.is-past { opacity: .72; }
+.calendar__event.is-continued { padding-block: 4px; }
+.calendar__event.is-continued .calendar__title, .calendar__event.is-continued .calendar__format { display: none; }
+.calendar__thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; margin-bottom: 3px; }
+.calendar__when { font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: color-mix(in srgb, var(--symbol-plum) 75%, transparent); }
+.calendar__title { font-family: var(--font-display); font-size: .95rem; line-height: 1.15; }
+.calendar__format { font-size: .68rem; color: color-mix(in srgb, var(--symbol-plum) 70%, transparent); }
+.calendar__list { display: none; list-style: none; margin: 16px 0 0; padding: 0; gap: 8px; }
+.calendar__list .calendar__event { padding: 10px 12px 10px 16px; }
+.calendar__list .calendar__title { font-size: 1.05rem; }
 
 /* Projects: filters and chronology */
 .filter-panel { display: grid; gap: 6px; margin-bottom: 40px; padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--symbol-plum) 30%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--symbol-plum) 30%, transparent); }
@@ -505,7 +522,10 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .appearances li { grid-template-columns: 1fr; gap: 2px; }
   .requisites dl > div { grid-template-columns: 1fr; }
   .calendar__cell { min-height: 70px; padding: 4px; }
-  .calendar__event { font-size: .68rem; }
+  /* Phone: a cell shows a coloured mark per event; the list under the grid carries the titles. */
+  .calendar__cell .calendar__event { min-height: 8px; padding: 0; border-radius: 4px; box-shadow: none; background: var(--event-tone, var(--symbol-violet)); }
+  .calendar__cell .calendar__event > * { display: none; }
+  .calendar__list { display: grid; }
   .project-card { min-height: 470px; }
   .statement-index { display: none; }
 }

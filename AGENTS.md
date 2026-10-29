@@ -38,6 +38,8 @@ When the user says “онови контекст”, “синхронізуй 
 - Colour comes from the section's `tone` (`paper | white | lilac | violet | apricot | plum`). Motion follows the ladder in `packages/ui/docs/foundations/motion.md`. Mobile first: check 390 px before 1280 px.
 - Live gallery: `pnpm dev:design` (http://localhost:3002), published at `https://symbol.ngo/design/`. Enforced by `pnpm ds:lint` (part of `pnpm check`).
 
+- No decorative arrows (↗) after links or labels on any site: a link is clickable without them. Arrows stay only where they move you somewhere (← → pagers, sliders, back links). Enforced by `pnpm lint:arrows` (part of `pnpm check`).
+
 ## Product invariants
 
 - Small projects live under `symbol.ngo/projects/{slug}`.
