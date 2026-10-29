@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "pnpm --filter @symbol/main dev",
     "dev:street": "pnpm --filter @symbol/istoriia-vulytsi dev",
+    "dev:documents": "pnpm --filter @symbol/documents dev",
     "build": "pnpm -r build",
     "generate": "pnpm -r generate",
     "typecheck": "pnpm -r typecheck",

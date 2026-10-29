@@ -24,7 +24,7 @@ const entries: Project[] = [
     people: [
       { person: 'yurii-rassokha', role: 'Менеджер проєкту, куратор' },
       { person: 'petro-chekal', role: 'Програмний менеджер, куратор' },
-      { person: 'alina-voitiuk', role: 'Асистентка проєкту' },
+      { person: 'hanna-franyk', role: 'Асистентка проєкту' },
       { person: 'maksym-rozenfeld', role: 'Голова експертної ради' },
       { person: 'larysa-chaika', role: 'Головна ілюстраторка' },
       { person: 'oleksii-chekal', role: 'Головний дизайнер' },
@@ -58,12 +58,14 @@ const entries: Project[] = [
     summary: 'Плейбек-театр на Закарпатті: живі історії людей, зіграні тут і зараз.',
     body: [
       'Voices in Motion — проєкт про плейбек-театр і живі історії на Закарпатті. Плейбек-театр — інтерактивний театр імпровізації, у якому актори відіграють історії, розказані глядачами під час перформансу.',
-      'Перформанси грає плейбек-театр «Серденьки» в турі Закарпатською областю: Ужгород, ліцей у селищі Бакош, Берегове. Події проєкту — нижче на сторінці.',
+      'Перформанси грає плейбек-театр «Серденьки» в турі Закарпатською областю: арт-простір «Станція Уж» в Ужгороді, ліцей у селищі Бакош, Берегове. Події проєкту — нижче на сторінці.',
       'Проєкт продовжує роботу «Символу» з плейбек-театром після перформансу [[project:istorii-riznykh]].'
     ],
-    partners: ['zdybanka', 'khust-theatre', 'uzh-station'],
-    donors: ['ecf', 'creative-europe'],
-    donorCredit: 'Проєкт співфінансується в межах програми «Культура допомагає: Солідарність» (Culture Helps Solidarity), яку реалізує консорціум на чолі з European Cultural Foundation за підтримки програми ЄС «Креативна Європа».',
+    // Credits as in the project's Instagram posts (@serdenky.playback, 2026); USER_CONFIRMED 2026-10-29: supported by
+    // «Культура допомагає: Солідарність», co-funded by the European Union (not a Creative Europe project of ours).
+    partners: ['serdenky-playback', 'uzh-station', 'zdybanka', 'khust-theatre', 'ecf', 'insha-osvita', 'zusa', 'veteranka'],
+    donors: ['culture-helps-solidarity', 'eu'],
+    donorCredit: 'Проєкт реалізується за підтримки проєкту «Culture Helps Solidarity / Культура допомагає: Солідарність», що співфінансується Європейським Союзом та реалізується European Cultural Foundation (NL), Інша Освіта (UA), zusa (DE) та рухом VETERANKA (UA). Фінансується Європейським Союзом. Висловлені погляди та думки належать виключно автору(ам) і не обов’язково відображають позицію Європейського Союзу або Європейського виконавчого агентства з питань освіти та культури (EACEA). Ані Європейський Союз, ані орган, що надає фінансування, не несуть відповідальності за них.',
     related: ['istorii-riznykh']
   },
   {
@@ -80,7 +82,8 @@ const entries: Project[] = [
     motif: 'documents',
     theme: 'documents',
     poster: '/media/projects/pokazhit-svoi-dokumenty/poster.jpg',
-    subsiteUrl: 'https://pokazhit-dokumenty.symbol.ngo',
+    // Served at symbol.ngo/documentsart/ until documentsart.symbol.ngo is connected (deployment.md §4a).
+    subsiteUrl: 'https://symbol.ngo/documentsart/',
     summary: 'Виставка про документ як мистецький феномен: 20 митців у ЄрміловЦентрі.',
     body: [
       'Виставка досліджує документ як мистецький феномен, що виходить за межі його функціональної ролі. Документ тут — не лише механізм бюрократичного контролю, а й естетичний, ритуальний та соціальний артефакт.',
@@ -254,13 +257,19 @@ const entries: Project[] = [
     body: [
       'Перша виставка «Символу» — просто неба на площі Civitas Fortissima в Балашшадьярматі, Угорщина, приурочена до десятиліття окупації Донецька. Роботи митців зі сходу України, насамперед Харківщини й Донеччини, розповідали жителям містечка про незламність українського мистецтва часів війни.',
       'Ми помітили, що в невеликих угорських містах мало знають про Україну, але цікавляться українським мистецтвом; контакт з українською культурою — важлива підтримка євроінтеграції України.',
-      'Учасники: Алла Пасічник, [[person:hanna-franyk]], Магран Тата, [[person:olena-mordyk]], [[person:petro-chekal]], Руслана Ключко, [[person:yurii-rassokha]].',
+      'Кураторка — [[person:hanna-franyk]]. Митці: [[person:alla-pasichnyk]] (акварелі, ікона святого Миколая), [[person:olena-mordyk]] (ескізи «вихід ні»), [[person:magran-tata]] (піксель-арт), [[person:petro-chekal]] (фотосерії «Між тінню і світлом» та «Інші світи» — з кладовища розстріляних автомобілів у Бучі), [[person:ruslana-kliuchko]] (суха голка «Розмиваючи межу»), [[person:yurii-rassokha]] (фотографії «За мотивами Г. Крюдсона», «Сутінки»).',
       'Виставка відбулася в межах волонтерства Європейського корпусу солідарності у співпраці з ГО «Символ».'
     ],
     people: [
       { person: 'hanna-franyk', role: 'Кураторка' },
       { person: 'petro-chekal', role: 'Співавтор проєкту' },
-      { person: 'yurii-rassokha', role: 'Учасник, асистент кураторки' }
+      { person: 'yurii-rassokha', role: 'Асистент кураторки' },
+      { person: 'alla-pasichnyk', role: 'Митці' },
+      { person: 'olena-mordyk', role: 'Митці' },
+      { person: 'magran-tata', role: 'Митці' },
+      { person: 'petro-chekal', role: 'Митці' },
+      { person: 'ruslana-kliuchko', role: 'Митці' },
+      { person: 'yurii-rassokha', role: 'Митці' }
     ],
     start: '2024-04-26',
     end: '2024-04-28',

@@ -30,7 +30,8 @@ Items here are unresolved and must not be silently assumed.
 ## Покажіть свої документи… (2026-10-29)
 
 - Which November programme events took place as planned, their times, and speakers (ZMINA, artist talk guests).
-- Subdomain name for the restored project site (proposed `pokazhit-dokumenty.symbol.ngo`).
+- Project site `documentsart.symbol.ngo` is built (`apps/documents`); owner still has to create `NGO-Symbol/documentsart`, the deploy key, `DOCS_*` variables and the Cloudflare CNAME (`documents/operations/deployment.md` §4a).
+- «Голоси у русі»: official «Funded by the European Union» emblem file for the donor tile (now text only).
 - Photographer credits for event photos and for photos not marked «Chekal».
 - Partner and donor logo files and permission to show them.
 - Team: see `team-cv.md` → Open (Олена Мордик bio, Ганна Франик public name, PSD volunteers, Kharkiv Sea role wording).
@@ -39,7 +40,6 @@ Items here are unresolved and must not be silently assumed.
 - Zakon font: confirm the web-embedding licence.
 - Kharkiv Sea 2026: confirm dates (14–23.08 from photo folders) and programme.
 - Full English translation of page texts (URL pattern decided in ADR-0009; interface and project titles are translated, page bodies are not).
-- Uzh Station (partner of «Голоси у русі»): no website or social profile found (2026-10-29); the tile has no link until the team gives one.
 - Logo files for partners without one (Grynyov Art Collection, President's grant, Здибанка, Khust theatre, Uzh Station, Ucraina Più) and confirmation that partners agree to logo use; current logos come from the shared Drive (Nema) and the organizations' own websites.
 
 ## Design
