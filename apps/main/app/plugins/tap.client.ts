@@ -35,6 +35,6 @@ export default defineNuxtPlugin(() => {
     mark.innerHTML = shapes[kind]
     document.body.appendChild(mark)
     // The mark and its parts animate separately, so it is removed after the longest of them.
-    window.setTimeout(() => mark.remove(), 950)
+    window.setTimeout(() => mark.remove(), 1050)
   }, { passive: true })
 })

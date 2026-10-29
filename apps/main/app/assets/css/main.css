@@ -291,6 +291,13 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .press-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--symbol-plum); }
 .press-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding: 14px 0; border-bottom: 1px solid var(--symbol-plum); }
 .press-list a { text-underline-offset: 4px; }
+/* Person pages read like an article: a calm name, one or two key sentences larger, then the biography as plain text. */
+.person-page .page-title h1 { font-size: clamp(2.4rem, calc(1.2rem + 3.6vw), 4.4rem); line-height: 1.05; }
+.person-page .eyebrow { text-transform: none; letter-spacing: .01em; font-size: .9rem; }
+.person-page .page-title .person-lead { max-width: 40ch; margin: 18px 0 0; font-family: var(--font-display); font-size: clamp(1.25rem, calc(.9rem + 1vw), 1.75rem); line-height: 1.3; }
+.person-page h2.person-section { margin: 0 0 14px; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; line-height: 1.2; }
+.person-bio { max-width: 66ch; font-size: 1.05rem; line-height: 1.7; }
+.person-bio p { margin: 0 0 1em; }
 .appearances { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--symbol-plum); }
 .appearances li { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--symbol-plum); }
 .appearances a { font-family: var(--font-display); font-size: 1.35rem; text-underline-offset: 4px; }
@@ -480,17 +487,17 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 
 /* Touch marks (plugins/tap.client.ts): the native grey tap flash is replaced by marks from the identity. */
 .tap-marks, .tap-marks * { -webkit-tap-highlight-color: transparent; }
-.tap-mark { position: fixed; z-index: 200; width: 64px; height: 64px; margin: -32px 0 0 -32px; pointer-events: none; }
+.tap-mark { position: fixed; z-index: 200; width: 76px; height: 76px; margin: -38px 0 0 -38px; pointer-events: none; }
 .tap-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.tap-mark--logo { width: 46px; height: 46px; margin: -23px 0 0 -23px; animation: tap-logo .85s cubic-bezier(.2, 1.4, .4, 1) forwards; }
+.tap-mark--logo { width: 58px; height: 58px; margin: -29px 0 0 -29px; filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--symbol-plum) 35%, transparent)); animation: tap-logo .95s cubic-bezier(.2, 1.4, .4, 1) forwards; }
 .tap-mark--logo circle { fill: var(--symbol-violet); }
 .tap-mark--logo path { fill: var(--symbol-apricot); }
-.tap-mark--orbit { width: 84px; height: 84px; margin: -42px 0 0 -42px; animation: tap-fade .85s ease-out forwards; }
-.tap-mark__ring { fill: none; stroke: var(--symbol-violet); stroke-width: 3; transform-origin: 50px 50px; animation: tap-ring .7s cubic-bezier(.2, 1, .3, 1) forwards; }
-.tap-mark__moon { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform-origin: 50px 50px; animation: tap-moon .85s cubic-bezier(.4, 0, .2, 1) forwards; }
-.tap-mark--spiral { width: 54px; height: 54px; margin: -27px 0 0 -27px; animation: tap-fade .9s ease-in forwards; }
-.tap-mark--spiral path { fill: none; stroke: var(--symbol-violet); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; animation: tap-draw .7s cubic-bezier(.3, 0, .2, 1) forwards; }
-.tap-mark--drop { width: 40px; height: 40px; margin: -20px 0 0 -20px; animation: tap-drop .6s cubic-bezier(.2, 1, .3, 1) forwards; }
+.tap-mark--orbit { width: 104px; height: 104px; margin: -52px 0 0 -52px; animation: tap-fade .95s ease-out forwards; }
+.tap-mark__ring { fill: none; stroke: var(--symbol-violet); stroke-width: 4; transform-origin: 50px 50px; animation: tap-ring .7s cubic-bezier(.2, 1, .3, 1) forwards; }
+.tap-mark__moon { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform-origin: 50px 50px; animation: tap-moon .95s cubic-bezier(.4, 0, .2, 1) forwards; }
+.tap-mark--spiral { width: 66px; height: 66px; margin: -33px 0 0 -33px; animation: tap-spiral 1s ease-in-out forwards; }
+.tap-mark--spiral path { fill: none; stroke: var(--symbol-violet); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; animation: tap-draw .7s cubic-bezier(.3, 0, .2, 1) forwards; }
+.tap-mark--drop { width: 50px; height: 50px; margin: -25px 0 0 -25px; animation: tap-drop .75s cubic-bezier(.2, 1, .3, 1) forwards; }
 .tap-mark--drop circle { fill: color-mix(in srgb, var(--symbol-apricot) 70%, transparent); }
 @keyframes tap-logo { 0% { opacity: 0; transform: scale(.3) rotate(-120deg); } 35% { opacity: 1; transform: scale(1.05) rotate(0); } 70% { opacity: 1; transform: scale(.95) rotate(20deg); } 100% { opacity: 0; transform: scale(.5) rotate(200deg); } }
 @keyframes tap-ring { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.1); opacity: .2; } }
@@ -498,4 +505,5 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 @keyframes tap-draw { to { stroke-dashoffset: 0; } }
 @keyframes tap-drop { from { transform: scale(.2); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
 @keyframes tap-fade { 70% { opacity: 1; } to { opacity: 0; } }
+@keyframes tap-spiral { 0% { transform: rotate(-40deg) scale(.8); } 60% { opacity: 1; transform: rotate(0) scale(1.05); } 100% { opacity: 0; transform: rotate(25deg) scale(1.15); } }
 
