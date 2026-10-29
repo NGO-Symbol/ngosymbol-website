@@ -136,6 +136,12 @@ export const projects: Project[] = [
     ],
     start: '2025-09-20',
     venue: { name: 'Арсенал ідей', city: 'Київ' },
+    people: [
+      { person: 'yurii-rassokha', role: 'Команда проєкту' },
+      { person: 'petro-chekal', role: 'Команда проєкту' },
+      { person: 'hanna-franyk', role: 'Команда проєкту' },
+      { person: 'olena-mordyk', role: 'Команда проєкту' }
+    ],
     related: ['holosy-u-rusi']
   },
   {
