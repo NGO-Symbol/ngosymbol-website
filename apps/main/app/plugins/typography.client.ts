@@ -7,9 +7,19 @@ const beforeDash = / (?=[\u2014\u2013] )/g
 const beforeArrow = / (?=[→↗←↑↓](?:\s|$))/g
 const skip = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg'])
 
+// A hyphen or en dash standing between words is a dash: always the long one (—).
+const spacedDash = /(?<=[А-ЩЬЮЯҐЄІЇа-щьюяґєії»)\.,!?’0-9]) [-\u2013] (?=[«(А-ЩЬЮЯҐЄІЇа-щьюяґєії0-9])/g
+// Quotes in Ukrainian text are «ялинки»: straight and English quotes around Cyrillic words become «…»
+// (inner quotes inside «…» are written „…“ in the sources and are left as they are).
+const plainQuotes = /["“]([^"“”„«»\n]*[А-ЩЬЮЯҐЄІЇа-щьюяґєії][^"“”„«»\n]*)["”]/g
+
 function fix(text: string) {
-  // Twice, so that runs of short words («і в до») are all tied.
-  return text.replace(shortWord, `$1$2${NBSP}`).replace(shortWord, `$1$2${NBSP}`).replace(beforeDash, NBSP).replace(beforeArrow, NBSP)
+  return text
+    .replace(spacedDash, ' \u2014 ')
+    .replace(plainQuotes, '«$1»')
+    // Twice, so that runs of short words («і в до») are all tied.
+    .replace(shortWord, `$1$2${NBSP}`).replace(shortWord, `$1$2${NBSP}`)
+    .replace(beforeDash, NBSP).replace(beforeArrow, NBSP)
 }
 
 function apply(root: Node) {
