@@ -69,7 +69,7 @@ defineProps<{ project: Project }>()
 .docs-word--3 { margin-top: .04em; margin-left: 4%; font-size: .6em; animation-delay: .7s; }
 .docs-word--3::before { transform: rotate(2deg); inset: 12% -8% 4% -6%; }
 .docs-hero__side { display: grid; gap: 24px; justify-items: center; }
-.docs-stamp { width: min(100%, 230px); color: var(--docs-stamp); mix-blend-mode: multiply; animation: docs-stamp-land 1.2s cubic-bezier(.5, 0, .3, 1.6) 1s both; }
+.docs-stamp { width: min(100%, 230px); color: var(--docs-stamp); mix-blend-mode: var(--docs-stamp-blend, multiply); animation: docs-stamp-land 1.2s cubic-bezier(.5, 0, .3, 1.6) 1s both; }
 .docs-meta { width: 100%; margin: 0; display: grid; gap: 10px; font-family: var(--docs-mono); font-size: .88rem; }
 .docs-meta dt { display: inline-block; background: var(--docs-ink); color: var(--docs-paper); padding: 1px 6px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
 .docs-meta dd { margin: 0; }

@@ -3,10 +3,24 @@
 
 /* Project identity: «Покажіть свої документи…» (black/white/grey stencil lettering, mono text, tape strips,
    barcode rules, blue stamp). Applied to the project page through .theme-documents. */
-.theme-documents {
+/* Palette is shared with the header on this page (html[data-page-theme="documents"], main.css).
+   Dark mode keeps the identity: carbon paper, off-white ink, a brighter stamp blue. */
+.theme-documents, html[data-page-theme="documents"] .site-header {
   --docs-paper: #e8e8e5;
   --docs-ink: #111111;
   --docs-stamp: #3a6fd2;
+  --symbol-cream: var(--docs-paper);
+  --symbol-white: color-mix(in srgb, var(--docs-paper) 60%, #fff);
+  --symbol-plum: var(--docs-ink);
+  --symbol-ink: var(--docs-ink);
+  --symbol-lilac: color-mix(in srgb, var(--docs-ink) 18%, var(--docs-paper));
+  --symbol-violet: var(--docs-stamp);
+}
+:root[data-theme="dark"] :is(.theme-documents, [data-page-theme="documents"] .site-header) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) :is(.theme-documents, [data-page-theme="documents"] .site-header) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; }
+}
+.theme-documents {
   --docs-display: 'EXDocument', 'Arial Narrow', sans-serif;
   --docs-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --font-display: var(--docs-display);
