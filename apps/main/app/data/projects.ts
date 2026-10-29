@@ -40,8 +40,11 @@ const entries: Project[] = [
       { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-1.jpg', alt: 'Житловий будинок на вулиці Чичибабіна: архівна світлина' },
       { src: '/media/projects/istoriia-moiei-vulytsi/chychybabina-9.jpg', alt: 'Вулиця Чичибабіна: архівна панорама забудови' },
       { src: '/media/projects/istoriia-moiei-vulytsi/staromoskovska-98.jpg', alt: 'Будинок на вулиці Старомосковській, 98: фасад і план' }
-    ]
+    ],
     // The project site (my-street.symbol.ngo) is hidden while it is being built; add subsiteUrl back when it opens.
+    // Winner of the «Тисячовесна» competition (Symbol's letters to the Centre, 23.10.2026).
+    donors: ['mincult', 'tysyachovesna', 'czipu'],
+    donorCredit: 'Проєкт — переможець конкурсного відбору ініціативи Президента України «Тисячовесна». Донори: Міністерство культури України, «Тисячовесна», Центр захисту інформаційного простору України.'
   },
   {
     slug: 'holosy-u-rusi',

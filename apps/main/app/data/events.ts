@@ -2,8 +2,8 @@ import type { SymbolEvent } from './types'
 
 // Every event belongs to a project (ADR-0008). Projects of kind 'single' are listed as events automatically.
 // «Покажіть свої документи…»: dates and times checked against the Instagram posts of @symbol.ngo, @yermilovcentre
-// and @nema_pbt (2026-10-29). The ZMINA lecture (08.11) and the «Бюрократія» discussion (29.11) have no post, but the
-// team confirmed they took place (USER_CONFIRMED 2026-10-29).
+// and @nema_pbt (2026-10-29). The ZMINA lecture (08.11) has no post, but the team confirmed it took place; the planned
+// «Бюрократія в мистецьких практиках» discussion (29.11) did not take place and is not listed (USER_CONFIRMED 2026-10-29).
 const yermilov = { name: 'ЄрміловЦентр', address: 'майдан Свободи, 4', city: 'Харків' }
 
 export const events: SymbolEvent[] = [
@@ -179,19 +179,6 @@ export const events: SymbolEvent[] = [
       'Перформанс плейбек-театру «Нема» (Харків). Глядачі розповідають історії, актори тут і зараз відтворюють їх на сцені під живу музику. Тема — **ідентичність**: що б ви розповіли, якби замість документів вас попросили надати історію?',
       'За вечір прозвучало й було відіграно **9 історій для понад 50 глядачів**. **Третину зібраних коштів** театр передав на збір на дві машини для 47 ОМБр і НГУ «Спартан».',
       'Плейбек-театр — напрям, який «Символ» розвиває й далі в проєктах [[project:istorii-riznykh]] та [[project:holosy-u-rusi]].'
-    ]
-  },
-  {
-    slug: 'pokazhit-svoi-dokumenty-biurokratiia',
-    title: 'Панельна дискусія «Бюрократія в мистецьких практиках»',
-    project: 'pokazhit-svoi-dokumenty',
-    format: 'discussion',
-    start: '2025-11-29',
-    venue: yermilov,
-    partners: ['yermilov-centre'],
-    description: [
-      'Розмова з митцями виставки та культурними менеджерами. Перша частина — **документ як матеріал, символ, традиція, пам’ять**.',
-      'Друга — **практичне «буття митцем»**: сайт і портфоліо, мистецька діяльність через ФОП, подача на опен-коли й гранти, комунікація з кураторами та інституціями. Питання з залу, вільна дискусія.'
     ]
   },
   {

@@ -7,6 +7,11 @@ export const organizations: Organization[] = [
   { slug: 'karazin-university', name: 'Харківський національний університет імені В. Н. Каразіна', url: 'https://karazin.ua', logo: '/media/partners/karazin-university.svg', motion: 'unfold' },
   { slug: 'zmina', name: 'Центр прав людини ZMINA', url: 'https://zmina.info', logo: '/media/partners/zmina.svg', motion: 'shift' },
   { slug: 'mincult', name: 'Міністерство культури України', url: 'https://mincult.gov.ua', logo: '/media/partners/mincult.svg', motion: 'rise' },
+  // «Тисячовесна»: the President of Ukraine's initiative for Ukrainian cultural product, run by the Ministry of Culture;
+  // logo with the bird from the Symbol Drive («лого з птахом.svg»); website given by the team (2026-10-29).
+  { slug: 'tysyachovesna', name: 'Тисячовесна — ініціатива Президента України зі створення українського культурного продукту', url: 'https://www.culture.gov.ua/', logo: '/media/partners/tysyachovesna.svg', motion: 'rise' },
+  // The state body that contracts the «Тисячовесна» winners (Symbol's letters of 23.10.2026); no public logo found.
+  { slug: 'czipu', name: 'Центр захисту інформаційного простору України' },
   { slug: 'grynyov-art-foundation', name: 'Grynyov Art Collection', url: 'https://grynyov.art', logo: '/media/partners/grynyov-art-collection.png', motion: 'wipe' },
   { slug: 'mh4u', name: 'Українсько-швейцарський проєкт «Психічне здоров’я для України»', url: 'https://www.mh4u.in.ua', logo: '/media/partners/mh4u.svg', motion: 'bloom' },
   { slug: 'eu', name: 'Співфінансовано Європейським Союзом', url: 'https://european-union.europa.eu', logo: '/media/partners/eu-cofunded.png', logoDark: '/media/partners/eu-cofunded-white.png', motion: 'fade' },
@@ -40,6 +45,7 @@ export const organizations: Organization[] = [
 export const significance = [
   'mincult', 'mh4u',
   'culture-helps-solidarity', 'eu', 'ecf', 'insha-osvita', 'zusa', 'veteranka',
+  'tysyachovesna', 'czipu',
   'media-development-foundation', 'grynyov-art-foundation',
   'yermilov-centre', 'karazin-university', 'moksop', 'zmina', 'gwara-media', 'ucraina-piu', 'egyesek', 'arteria', 'union-forum',
   'khust-theatre', 'uzh-station', 'zdybanka', 'bila-tserkva-library', 'sens', 'serdenky-playback', 'nema-playback'
