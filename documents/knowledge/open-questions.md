@@ -17,9 +17,33 @@ Items here are unresolved and must not be silently assumed.
 - Decide whether the English locale uses `/en/...` on each host or a language switch stored in local state.
 - Decide whether events and opportunities are one page or two when enough content exists.
 
+## Site content model (2026-10-29)
+
+- «Покажіть свої документи…»: restore as a subsite from the saved copy or migrate into a large main-site project page?
+- Section name: «Люди» or «Автори»? Team as a separate tab or a block in «Про нас»?
+- Donations: which account of ГО «Символ» (UAH and foreign currency), which card acquiring, non-profit register status.
+- Patron tiers and what patrons receive.
+- Newsletter service (or Telegram channel only).
+- Which donor names, credit lines, and logos may be published for each project (Voices in Motion has EU / European Cultural Foundation visibility requirements to check in the grant agreement).
+- Public status, dates, and roles for «Ті, що побачили світ (Мілан)» and «Відкрита книга: поліаморія».
+- Vector (SVG) version of the logo for the intro animation.
+
+## Покажіть свої документи… (2026-10-29)
+
+- Which November programme events took place as planned, their times, and speakers (ZMINA, artist talk guests).
+- Subdomain name for the restored project site (proposed `pokazhit-dokumenty.symbol.ngo`).
+- Photographer credits for event photos and for photos not marked «Chekal».
+- Partner and donor logo files and permission to show them.
+- Team: see `team-cv.md` → Open (Олена Мордик bio, Ганна Франик public name, PSD volunteers, Kharkiv Sea role wording).
+- Which PSD artworks are shown in the photos (captions are generic until confirmed).
+
+- Zakon font: confirm the web-embedding licence.
+- Kharkiv Sea 2026: confirm dates (14–23.08 from photo folders) and programme.
+- Full English version of all pages and the URL pattern (`/en/...`).
+
 ## Design
 
-- Design pass: exact tone values (type pair is decided: Playfair Display + Commissioner + logo face for labels), whether a dark theme is wanted, square vs softer card shapes, photo treatment, hero animation personality.
+- Design pass: exact tone values (type pair from the design-system branch: Playfair Display + Commissioner + logo face for labels; on 2026-10-29 Петро asked for the team-supplied Zakon on the main site — reconcile), dark theme — decided 2026-10-29: light and dark modes with a toggle (see design-system.md), square vs softer card shapes, photo treatment, hero animation personality.
 - Choose how widely to use the logo typeface (options A–D in the artifact «Шрифт Символу»; recommended: wordmark and name, plus navigation, eyebrows, tags and button labels). Confirm the font author's permission (Oleksii Chekal) to publish it as a web font on a public site.
 - Migrate `apps/main` and `apps/istoriia-vulytsi` to the design system (page by page, using the gallery templates).
 

@@ -1,0 +1,36 @@
+/* Project font of «Покажіть свої документи…»: EXDocument by Олексій Чекаль, created for the exhibition. */
+@font-face { font-family: 'EXDocument'; src: url('/fonts/EXDocument.otf') format('opentype'); font-display: swap; }
+
+/* Project identity: «Покажіть свої документи…» (black/white/grey stencil lettering, mono text, tape strips,
+   barcode rules, blue stamp). Applied to the project page through .theme-documents. */
+.theme-documents {
+  --docs-paper: #e8e8e5;
+  --docs-ink: #111111;
+  --docs-stamp: #3a6fd2;
+  --docs-display: 'EXDocument', 'Arial Narrow', sans-serif;
+  --docs-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: var(--docs-display);
+  --font-body: var(--docs-mono);
+  background: var(--docs-paper);
+  color: var(--docs-ink);
+}
+.theme-documents .project-content { font-family: var(--docs-mono); }
+.theme-documents .project-content h2, .theme-documents .project-content h3 { font-family: var(--docs-display); text-transform: uppercase; }
+.theme-documents .label, .theme-documents .facts dt { font-family: var(--docs-mono); color: var(--docs-ink); background: var(--docs-ink); color: var(--docs-paper); padding: 2px 8px; width: fit-content; letter-spacing: .08em; }
+.theme-documents .facts dt { display: inline-block; }
+.theme-documents .rich-text p { font-family: var(--docs-mono); font-size: .98rem; }
+.theme-documents .lead-text p:first-child { font-family: var(--docs-mono); font-size: 1.25rem; line-height: 1.5; }
+.theme-documents .press-list, .theme-documents .press-list li { border-color: var(--docs-ink); border-style: dashed; }
+.theme-documents .event-row__title { font-family: var(--docs-display); text-transform: uppercase; }
+.theme-documents .event-row:hover { background: color-mix(in srgb, var(--docs-ink) 10%, transparent); }
+.theme-documents .gallery__item img { filter: grayscale(1) contrast(1.05); }
+.theme-documents .gallery__item:hover img { filter: none; }
+.theme-documents .donor-credit { background: transparent; border: 2px solid var(--docs-stamp); color: var(--docs-ink); border-left-width: 2px; font-family: var(--docs-mono); }
+.theme-documents .credits__group a { text-decoration-style: dashed; }
+
+/* Events: one calm rule per row, content centred in the column. */
+.theme-documents .event-list { border-top: 2px solid var(--docs-ink); }
+.theme-documents .event-row { border-bottom: 1px dashed color-mix(in srgb, var(--docs-ink) 45%, transparent); grid-template-columns: 170px minmax(0, 1fr) minmax(0, .7fr); align-items: center; padding: 22px 12px; }
+.theme-documents .event-row__date { font-family: var(--docs-mono); font-size: .78rem; }
+.theme-documents .event-row__title { font-size: 1.7rem; line-height: 1; }
+.theme-documents .event-row__meta { font-family: var(--docs-mono); font-size: .78rem; }

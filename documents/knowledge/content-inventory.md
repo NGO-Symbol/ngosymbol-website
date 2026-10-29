@@ -29,3 +29,22 @@ Most source material is stored in a private Google Drive accessible only to staf
 - Decide project web type: small page, extended internal section, or autonomous subdomain.
 - Define Ukrainian and English publication readiness.
 
+
+## Project media found on the Drive (2026-10-29)
+
+Folder names only; no private links. Rights and selection still need confirmation.
+
+| Project | Where (Drive → Символ → Проєкти) | What |
+| --- | --- | --- |
+| Історії різних | 2025 → Історії різних → Фото, Відео з перформансу | ~98 performance photos (≈4 MB each), video |
+| Тренінги mhGAP | 2025 → mhGAP Kyiv → Фотографії | ~69 photos by Петро Чекаль (11–18 MB each) |
+| Покажіть свої документи… | 2025 → Покажіть свої документи… → Фото (shortcuts: Відкриття 17.10, Монтаж, експозиція, ZMINA, Скрипка), Айдентика (logo, poster) | event and exhibition photos; local copy of the former site also has artist portraits and works |
+| Голоси у русі | 2026 → Voices in Motion → Фотографії (+ «Перф 22.08.2026»), Комунікаційні матеріали | Instagram-saved photos, performance folder |
+| Історія моєї вулиці | 2026 → Історія моєї вулиці → Візуальні матеріали ІМВ → Будинки, Логотипи, Шрифти | historical photos of streets (archive rights to check) |
+| Збирач конвалій | 2023 → Збирач конвалій → Фото, Лого партнерів | a few stills |
+| 2, 10, 300 років потому | 2024 → 2, 10, 300 років потому → Репортаж з виставки, exhibition | exhibition report photos |
+| Харківське море | 2026 → Харківське море 2026 → 2026 Фотографії (by day) | festival photos (partner project) |
+
+## Media on the site (2026-10-29)
+
+Selected, web-compressed copies live in `apps/main/public/media/` (projects/{slug}/, people/{slug}.jpg). Only a selection is published, never whole folders. «Покажіть свої документи…»: 6 exhibition photos (cover first) and 5 opening photos from the saved project site; 23 portraits and 17 artist bios from the saved project site.

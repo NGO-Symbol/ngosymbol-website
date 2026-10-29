@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import type { Project } from '~/data/projects'
+import type { Project } from '~/data/types'
 
-defineProps<{ project: Project }>()
+const props = defineProps<{ project: Project }>()
+const cover = computed(() => props.project.poster ?? props.project.gallery?.[0]?.src)
 </script>
 
 <template>
-  <NuxtLink class="project-card" :class="`tone-${project.tone}`" :to="project.href" :external="project.external">
-    <div class="project-card__meta"><span>{{ project.period }}</span><span>{{ project.statusLabel }}</span></div>
-    <div class="project-card__visual"><span class="orbit" /><span class="project-card__type">{{ project.external ? 'Окремий сайт ↗' : 'Сторінка проєкту →' }}</span></div>
-    <div class="project-card__body"><p>{{ project.direction }}</p><h2>{{ project.title }}</h2><span>{{ project.summary }}</span></div>
+  <NuxtLink class="project-card" :class="`tone-${project.tone}`" :to="`/projects/${project.slug}`">
+    <div class="project-card__meta">
+      <span>{{ projectByline(project) }}</span>
+      <span>{{ statusLabels[project.status] }}</span>
+    </div>
+    <div class="project-card__visual" :class="{ 'has-cover': cover }">
+      <img v-if="cover" class="project-card__cover" :src="cover" alt="" loading="lazy">
+      <ProjectMotif class="project-card__motif" :motif="project.motif" />
+      <span v-if="project.role === 'partner'" class="project-card__badge">Символ — партнер</span>
+      <span v-if="project.subsiteUrl" class="project-card__badge project-card__badge--site">Є сайт проєкту ↗</span>
+    </div>
+    <div class="project-card__body">
+      <p>{{ project.formats.map(format => formats[format]).join(' · ') }}</p>
+      <h2>{{ project.title }}</h2>
+      <span>{{ project.summary }}</span>
+    </div>
   </NuxtLink>
 </template>

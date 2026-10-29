@@ -9,6 +9,7 @@
 - Head/director: **Юрій Рассоха**. `USER_CONFIRMED` and `EXTRACTED`
 - Website domain: **symbol.ngo**. `USER_CONFIRMED`
 - Instagram: **@symbol.ngo**. `EXTRACTED`
+- Official channels (linktr.ee/symbol.ngo, `USER_CONFIRMED` 2026-10-29): Instagram `instagram.com/symbol.ngo`, Telegram `t.me/symbolngo`, Facebook `facebook.com/61561875005703`, WhatsApp channel, LinkedIn `linkedin.com/company/symbol-ngo`. The documentsart.com link on Linktree is outdated. Site source: `apps/main/app/data/social.ts`.
 
 ## One-sentence positioning
 

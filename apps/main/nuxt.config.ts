@@ -5,8 +5,9 @@ export default defineNuxtConfig({
   extends: ['@symbol/brand'],
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
-  css: ['@symbol/brand/tokens.css', '~/assets/css/main.css'],
+  css: ['@symbol/brand/tokens.css', '~/assets/css/main.css', '~/assets/css/theme-documents.css'],
   app: {
+    pageTransition: { name: 'fade', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'uk' },
       titleTemplate: '%s · ГО «Символ»',
@@ -19,7 +20,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      crawlLinks: true
+      crawlLinks: true,
+      routes: ['/events.ics', '/sitemap.xml']
     }
   }
 })

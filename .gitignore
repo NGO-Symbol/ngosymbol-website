@@ -12,3 +12,7 @@ dist
 .idea/
 .vscode/
 .claude/settings.local.json
+
+# Local working material (not for the repository)
+media-inbox/
+Сайт_*/

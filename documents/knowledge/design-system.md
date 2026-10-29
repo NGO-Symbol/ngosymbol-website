@@ -38,6 +38,37 @@ The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` 
 - Project sites may define their own typography and layout.
 - The institutional connection can shrink to a compact “A project by NGO Symbol” bar on autonomous sites.
 
+## Typography
+
+The main site uses the **Zakon** family (Regular, Italic, Bold, Bold Italic) supplied by the team in `fonts/` (served from `apps/main/public/fonts/zakon/`) for both display and text, through `--font-display` and `--font-body`. Project pages with their own identity override these variables. `USER_CONFIRMED` 2026-10-29. Web-embedding licence of Zakon to be confirmed.
+
+## Light and dark mode
+
+Light and dark themes follow the system setting; a toggle in the header (half-filled circle that turns) stores the visitor's choice. In dark mode page surfaces become dark, while brand-coloured blocks (project cards and heroes, support band, open calls, subscribe band) stay as light «islands» so the violet/apricot palette keeps its contrast. `USER_CONFIRMED` 2026-10-29.
+
+## Logo
+
+The official logo (mark + «СИМВОЛ» + «громадська організація») comes from the organization's Drive folder «Актуальні логотипи Символу» and is stored as `packages/brand/assets/symbol-logo.svg`. `apps/main/app/components/SymbolLogo.vue` renders it inline: the inscription takes `currentColor` (ink on light, cream on dark), the mark keeps violet `#9280A6` and apricot `#FDD08F`. Parts: `full`, `mark`, `wordmark`. Generic arcs/“C” shapes are not used as a stand-in for the mark. `USER_CONFIRMED` 2026-10-29.
+
+## Motion
+
+Motion follows the identity: Symbol as a whole moves along the spiral and the orbit (movement, attention, return, collected stories); every project moves in its own way, taken from what the project is about. `USER_CONFIRMED` 2026-10-29 (principle, more expressive motion); concrete motions `PROPOSED`.
+
+- **Intro**: once per browser session, ≈2.4 s, click or key skips, off for `prefers-reduced-motion`. Four variants rotate per visit (sweep reveal, spin-in, iris, drop with rings); the official inscription is revealed under the mark, then the circle spirals (two turns along a curved path) straight into the mark of the header logo, which appears only when the circle lands. `USER_CONFIRMED` 2026-10-29.
+- **Everywhere**: section labels carry a small spiral arc that turns when the section appears; link underlines draw in like the logo's arc; every page has its own transition; lists, cards, stats, gallery items and CV sections rise in on scroll.
+- **Home hook**: project titles with years orbit the mark; the orbit tilts toward the pointer, turns further on scroll, pauses on hover, and spins away when a title is clicked.
+- **Project motifs** (`ProjectMotif.vue`, `motif` field of a project) on cards and project heroes: Історія моєї вулиці — streets drawn like a map with a walker; Голоси у русі — sound waves; Покажіть свої документи — shuffling sheets and a landing stamp; Тренінги mhGAP — breathing circles; Історії різних — playback curtains opening on a spotlight; Збирач конвалій — a running film strip; 2, 10, 300 років потому — three rings of time; Харківське море — waves.
+- **Between sections**: a disc in the target section's colour spreads from the click with the logo turning in it, then closes over the new page; each section also has its own page transition (rise, zoom, slide, blur, curtain, tilt).
+- **On scroll**: blocks rise into place one after another.
+- **Clicks**: a shape at the pointer by control type (diamond, spiral arc, dot burst, ring, wave, spark); buttons and cards press in.
+- **Header logo**: each click plays the next mark animation (spin, bounce, flip, wobble, pulse).
+
+## Project identities on the main site
+
+Every project page carries its project's own identity where one exists (`theme` field of a project, `apps/main/app/assets/css/theme-*.css`). `USER_CONFIRMED` 2026-10-29.
+
+- **Покажіть свої документи…** (`theme: 'documents'`), from the exhibition's logo, banner, and invitation: black/white/grey paper, the project font **EXDocument** by Олексій Чекаль (created for the exhibition; `apps/main/public/fonts/EXDocument.otf`, from the Drive), IBM Plex Mono text (as on the former project site), translucent grey tape strips behind the title, barcode-like rules, and a round blue stamp with the title around a QR-like centre. Motion: rules draw, tapes slide in, words are «typed», the stamp lands. Photos are greyscale until hovered.
+
 ## Shared versus project identity
 
 Shared: original mark, organization name, backlink pattern, accessibility baseline, and institutional metadata.
