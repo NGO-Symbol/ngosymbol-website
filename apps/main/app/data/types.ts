@@ -52,9 +52,6 @@ export interface Project {
   theme?: 'documents'
   /** Poster or key visual, used as the card cover when present. */
   poster?: string
-  /** A wide identity banner shown whole across the card instead of a photo (e.g. a partner festival), on a
-   *  background (CSS) that continues the banner's own colours above and below it. */
-  cardBanner?: { src: string; name: string; background: string }
   /** Selected photos only; the first is the cover. Files live in public/media/projects/{slug}/. */
   gallery?: Photo[]
   people?: Credit[]

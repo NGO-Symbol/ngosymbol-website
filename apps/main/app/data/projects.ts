@@ -319,7 +319,7 @@ const entries: Project[] = [
     formats: ['festival'],
     directions: ['culture', 'art'],
     tone: 'plum',
-    cardBanner: { src: '/media/projects/kharkivske-more/banner.jpg', name: 'Айдентика фестивалю «Харківське море»: риба, хвилі й човни', background: 'linear-gradient(#b1d6d3, #96cad7)' },
+    poster: '/media/projects/kharkivske-more/card.jpg',
     motif: 'sea',
     summary: 'Незалежний мультидисциплінарний фестиваль локальної культури. «Символ» — партнер фестивалю.',
     body: [
@@ -341,7 +341,7 @@ const entries: Project[] = [
     formats: ['festival'],
     directions: ['culture', 'art'],
     tone: 'violet',
-    cardBanner: { src: '/media/projects/kharkivske-more/banner.jpg', name: 'Айдентика фестивалю «Харківське море»: риба, хвилі й човни', background: 'linear-gradient(#b1d6d3, #96cad7)' },
+    poster: '/media/projects/kharkivske-more/card.jpg',
     motif: 'sea',
     summary: 'Фестиваль локальної культури 2026 року. Партнерський проєкт: організатор — ГО «Платформа театральних ініціатив».',
     body: [
