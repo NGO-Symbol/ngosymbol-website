@@ -220,15 +220,22 @@ const entries: Project[] = [
     directions: ['art'],
     tone: 'apricot',
     gallery: [
-      // The exhibited photographs first (prints from the Drive folder «Мілан (Ті, що побачили світ)»), then the exhibition.
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-04.jpg', alt: 'Чорно-біла фотографія: вікно крізь сплетіння гілок' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-13.jpg', alt: 'Нічний парк із ліхтарями' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-20.jpg', alt: 'Світні літери на фасаді вночі' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-03.jpg', alt: 'Ящик із розсипаними дитячими іграшками' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-21.jpg', alt: 'Постать у смугах світла й тіні' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/work-02.jpg', alt: 'Абстрактна фотографія: світла пляма в темряві' },
+      // Mostly Петро Чекаль's exhibited photographs (his archive «Milan/Photo/1. A2»), a few graphic works by Юрій Рассоха
+      // (Drive «Мілан (Ті, що побачили світ)», attributed by «Опис робіт Мілан 2026») and photos of the exhibition itself.
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-1.jpg', alt: 'Силуети військових на тлі синього неба', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-4.jpg', alt: 'Постать із прапором України в нічній темряві', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-5.jpg', alt: 'Зграя птахів над деревом', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-04.jpg', alt: 'Чорно-біла фотографія: вікно крізь сплетіння гілок', credit: 'Юрій Рассоха' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-7.jpg', alt: 'Річка з висоти: графічний чорно-білий візерунок', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-8.jpg', alt: 'Багатоповерхівка й люди на стежці серед зелені', credit: 'Петро Чекаль' },
       { src: '/media/projects/ti-khto-pobachyly-svit/exhibition.jpg', alt: 'Роботи виставки на стендах у залі в Мілані' },
-      { src: '/media/projects/ti-khto-pobachyly-svit/flute.jpg', alt: 'Музичний виступ на відкритті виставки', people: true }
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-2.jpg', alt: 'Засніжений пейзаж із деревами й будинком', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-3.jpg', alt: 'Бірюзова вода крупним планом', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-14.jpg', alt: 'Графічна фотографія: силует на тлі місяця', credit: 'Юрій Рассоха' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/talk.jpg', alt: 'Розмова на відкритті виставки в Мілані', people: true },
+      { src: '/media/projects/ti-khto-pobachyly-svit/petro-9.jpg', alt: 'Степовий пагорб під хмарним небом', credit: 'Петро Чекаль' },
+      { src: '/media/projects/ti-khto-pobachyly-svit/audience.jpg', alt: 'Глядачі на відкритті', people: true },
+      { src: '/media/projects/ti-khto-pobachyly-svit/work-label.jpg', alt: 'Фотографія Петра Чекаля з підписом трьома мовами' }
     ],
     motif: 'aperture',
     summary: 'Фотовиставка Петра Чекаля та Юрія Рассохи на Фестивалі української книги в Мілані.',
@@ -326,7 +333,9 @@ const entries: Project[] = [
       'Мета фільму — популяризація харківського мистецтва та його творців. 90% фільму знято ручною камерою.',
       'Нагорода: найкраща операторська робота на практичному курсі зі створення документального кіно від Media Development Foundation.'
     ],
-    donors: ['grynyov-art-foundation'],
+    // Supporters as credited in «Опис проєкту Збирач конвалій» (Drive): Gwara Media, Media Development Foundation (the film was made in its programme), Grynyov Art Collection, MOKSOP.
+    partners: ['moksop', 'gwara-media'],
+    donors: ['media-development-foundation', 'grynyov-art-foundation'],
     people: [
       { person: 'petro-chekal', role: 'Продюсер, оператор' },
       { person: 'vero-yuzepchuk', role: 'Режисерка' },

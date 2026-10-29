@@ -55,4 +55,3 @@ Items here are unresolved and must not be silently assumed.
 - Decide whether pull requests need a human approval before going live (currently CI only).
 - Configure GitHub CLI authentication on each editor's computer.
 
-- «Ті, хто побачили світ»: which of the exhibited photographs on the project page are by Петро Чекаль and which by Юрій Рассоха (the Drive folder «Юрій Фото Мілан» mixes them; no per-photo credit shown yet).

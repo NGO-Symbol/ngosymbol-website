@@ -15,6 +15,10 @@ export const organizations: Organization[] = [
   { slug: 'zusa', name: 'zusa (Берлін)', url: 'https://zusaculture.org', logo: '/media/partners/zusa.png', motion: 'wipe' },
   { slug: 'veteranka', name: 'Жіночий ветеранський рух VETERANKA', url: 'https://veteranka.org.ua', logo: '/media/partners/veteranka.png', motion: 'wipe' },
   { slug: 'serdenky-playback', name: 'Плейбек-театр «Серденьки»', url: 'https://www.instagram.com/serdenky.playback/' },
+  // «Збирач конвалій» supporters (Drive «Опис проєкту Збирач конвалій», 2024).
+  { slug: 'gwara-media', name: 'Gwara Media', url: 'https://gwaramedia.com', logo: '/media/partners/gwara-media.svg', motion: 'shift' },
+  { slug: 'media-development-foundation', name: 'Media Development Foundation', url: 'https://www.mediadevelopmentfoundation.org', logo: '/media/partners/media-development-foundation.svg', motion: 'unfold' },
+  { slug: 'moksop', name: 'MOKSOP — Музей Харківської школи фотографії', url: 'https://moksop.org', logo: '/media/partners/moksop.svg', motion: 'wave' },
   { slug: 'ecf', name: 'European Cultural Foundation', url: 'https://culturalfoundation.eu', logo: '/media/partners/ecf.svg', motion: 'wave' },
   { slug: 'zdybanka', name: 'Молодіжний центр «Здибанка», Батьово', url: 'https://www.facebook.com/mc.zdybanka' },
   { slug: 'khust-theatre', name: 'Хустський Закарпатський обласний театр драми та комедії', url: 'https://teatr-khust.com.ua' },
