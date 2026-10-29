@@ -23,12 +23,12 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 
 /* Project pages with their own identity recolour the header (html[data-page-theme] set by the project page). */
-html[data-page-theme="documents"] .site-header { --symbol-cream: #e8e8e5; --symbol-white: #f4f4f2; --symbol-plum: #111111; --symbol-ink: #111111; --symbol-lilac: #cfcfca; --symbol-violet: #3a6fd2; color: #111111; border-bottom: 3px solid #111111; }
+html[data-page-theme="documents"] .site-header { color: var(--docs-ink); border-bottom: 3px solid var(--docs-ink); }
 html[data-page-theme="documents"] .site-header nav { font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; font-size: .76rem; letter-spacing: .04em; }
-html[data-page-theme="documents"] .nav-support { background: #111111; color: #e8e8e5; border-radius: 0; box-shadow: 3px 3px 0 #3a6fd2; }
-html[data-page-theme="documents"] .nav-support:hover { background: #3a6fd2; color: #fff; }
+html[data-page-theme="documents"] .nav-support { background: var(--docs-ink); color: var(--docs-paper); border-radius: 0; box-shadow: 3px 3px 0 var(--docs-stamp); }
+html[data-page-theme="documents"] .nav-support:hover { background: var(--docs-stamp); color: #fff; }
 html[data-page-theme="documents"] .lang-switch, html[data-page-theme="documents"] .lang-switch__thumb, html[data-page-theme="documents"] .theme-toggle { border-radius: 0; }
-html[data-page-theme="documents"] .lang-switch a[aria-current] { color: #e8e8e5; }
+html[data-page-theme="documents"] .lang-switch a[aria-current] { color: var(--docs-paper); }
 html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; letter-spacing: .12em; }
 .site-header nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 32px); font-size: .85rem; }

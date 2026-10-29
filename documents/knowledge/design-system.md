@@ -81,6 +81,9 @@ Every project page carries its project's own identity where one exists (`theme` 
 
 - **Покажіть свої документи…** (`theme: 'documents'`), from the exhibition's logo, banner, and invitation: black/white/grey paper, the project font **EXDocument** by Олексій Чекаль (created for the exhibition; `apps/main/public/fonts/EXDocument.otf`, from the Drive), IBM Plex Mono text (as on the former project site), translucent grey tape strips behind the title, barcode-like rules, and a round blue stamp with the title around a QR-like centre. Motion: rules draw, tapes slide in, words are «typed», the stamp lands. Photos are greyscale until hovered.
 
+
+Dark mode on a themed project page stays in the project's identity instead of switching to the site's dark palette. «Покажіть свої документи…»: carbon paper `#151515`, off-white ink `#e8e8e5`, brighter stamp blue `#6f9bff` (the stamp blends with `screen` instead of `multiply`); the header on that page uses the same palette. `USER_CONFIRMED` 2026-10-29.
+
 ## Shared versus project identity
 
 Shared: original mark, organization name, backlink pattern, accessibility baseline, and institutional metadata.
