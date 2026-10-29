@@ -2,10 +2,10 @@
 // Home: the exhibition as a dossier, then the general things — what was done, where, with whom — a way into every
 // section, the partners and the exhibition in photographs. The curatorial concept has its own tab (/kontseptsiia).
 import { press } from '~/data/press'
+import { homePhotos, photographers } from '~/data/homePhotos'
 
 const { isEn, t, localePath } = useLang()
 useSeoMeta({ title: () => t('Про виставку', 'About the exhibition') })
-const photos = (exhibition.gallery ?? []).filter(photo => !photo.people)
 
 const sections = computed(() => [
   { to: '/kontseptsiia', count: '01', label: t('кураторська концепція', 'curatorial concept'), text: t('Документ як інструмент влади, пам’яті й ідентичності', 'The document as a tool of power, memory and identity') },
@@ -63,10 +63,12 @@ const sections = computed(() => [
       <div class="docs-barcode" aria-hidden="true" />
       <h2 class="docs-section-title">{{ t('Виставка', 'The exhibition') }}</h2>
       <ul class="docs-photos">
-        <li v-for="photo in photos" :key="photo.src">
-          <figure><img :src="photo.src" :alt="photo.alt" loading="lazy"><figcaption v-if="photo.credit">{{ t('Фото', 'Photo') }}: {{ photo.credit }}</figcaption></figure>
-        </li>
+        <li v-for="photo in homePhotos" :key="photo.src"><figure><img :src="photo.src" :alt="photo.alt" loading="lazy"></figure></li>
       </ul>
+      <p class="photo-credits">
+        {{ t('Фото', 'Photos') }}:
+        <template v-for="(person, index) in photographers" :key="person.slug"><a v-if="personOf(person.slug)" :href="symbolPersonUrl(person.slug)">{{ isEn ? person.nameEn : person.name }}</a><template v-else>{{ isEn ? person.nameEn : person.name }}</template><template v-if="index < photographers.length - 1">, </template></template>
+      </p>
     </section>
   </div>
 </template>
@@ -86,6 +88,8 @@ const sections = computed(() => [
 .about__head h2 { margin: 0; }
 .lang-note { font-size: .8rem; color: var(--docs-muted); }
 .partners { margin-top: 56px; }
+.photo-credits { margin: 16px 0 0; font-family: var(--docs-mono); font-size: .8rem; color: var(--docs-muted); }
+.photo-credits a { color: inherit; }
 .partners ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 12px; }
 .partners a { display: grid; gap: 10px; align-content: start; height: 100%; padding: 16px; border: 2px solid var(--docs-ink); text-decoration: none; color: var(--docs-ink); font-family: var(--docs-mono); font-size: .78rem; line-height: 1.35; transition: transform .2s ease, box-shadow .2s ease; }
 .partners a:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--docs-stamp); }

@@ -49,8 +49,11 @@ function toggleTheme() {
     </div>
     <div class="docs-container docs-header__main">
       <NuxtLink class="docs-mark" :to="localePath('/')" :aria-label="t('Покажіть свої документи… — головна', 'May I See Your Documents… — home')">
-        <template v-if="isEn"><span>May I see</span><span>your documents…</span></template>
-        <template v-else><span>Покажіть</span><span>свої документи…</span></template>
+        <DocsStamp class="docs-mark__stamp" />
+        <span class="docs-mark__words">
+          <span class="docs-mark__top">{{ t('Покажіть', 'May I see') }}</span>
+          <span class="docs-mark__tape">{{ t('свої документи…', 'your documents…') }}</span>
+        </span>
       </NuxtLink>
       <nav class="docs-nav" :aria-label="t('Розділи сайту виставки', 'Exhibition site sections')">
         <NuxtLink v-for="link in links" :key="link.to" :to="localePath(link.to)" :class="{ 'is-active': isActive(link.to) }">{{ link.label }}</NuxtLink>
@@ -76,8 +79,13 @@ function toggleTheme() {
 .docs-theme { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #fff7eb; border-radius: 50%; background: transparent; color: #fff7eb; cursor: pointer; }
 .docs-theme svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
 .docs-header__main { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 12px; flex-wrap: wrap; }
-.docs-mark { display: grid; font-family: var(--docs-display); text-transform: uppercase; line-height: .95; font-size: 1.15rem; color: var(--docs-ink); text-decoration: none; }
-.docs-mark span:last-child { font-size: .78em; }
+/* The project mark: the blue stamp beside the title in EXDocument, the second line typed on a strip of ink tape. */
+.docs-mark { display: flex; align-items: center; gap: 12px; font-family: var(--docs-display); text-transform: uppercase; color: var(--docs-ink); text-decoration: none; }
+.docs-mark__stamp { width: 52px; height: 52px; flex: none; color: var(--docs-stamp); mix-blend-mode: var(--docs-stamp-blend, multiply); transform: rotate(-12deg); transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
+.docs-mark:hover .docs-mark__stamp { transform: rotate(8deg) scale(1.08); }
+.docs-mark__words { display: grid; justify-items: start; gap: 3px; }
+.docs-mark__top { font-size: 1.9rem; line-height: .85; letter-spacing: .01em; }
+.docs-mark__tape { padding: 3px 7px 1px; background: var(--docs-ink); color: var(--docs-paper); font-size: 1.05rem; line-height: 1; transform: rotate(-1.5deg); transform-origin: left; }
 .docs-nav { display: flex; gap: 4px; font-family: var(--docs-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
 .docs-nav a { flex: none; padding: 6px 10px 5px; color: var(--docs-ink); text-decoration: none; border: 1px solid transparent; transition: background .2s ease, color .2s ease; }
 .docs-nav a:hover { border-color: var(--docs-ink); }
@@ -86,6 +94,9 @@ function toggleTheme() {
   .docs-back__link { font-size: .8rem; gap: 8px; padding: 4px 12px 4px 4px; }
   .docs-back__mark { width: 24px; height: 24px; }
   .docs-header__main { padding-block: 8px; }
+  .docs-mark__stamp { width: 40px; height: 40px; }
+  .docs-mark__top { font-size: 1.5rem; }
+  .docs-mark__tape { font-size: .9rem; }
   /* On phones the sections are the folder tabs at the bottom (DocsTabs). */
   .docs-nav { display: none; }
 }
