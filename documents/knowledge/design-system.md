@@ -20,6 +20,16 @@ Combine:
 
 The two original logo colors have insufficient contrast against each other for ordinary body text. Use deep plum/ink on apricot and cream on deep plum. Keep violet/apricot pairings for large marks, backgrounds, and decorative geometry.
 
+## Implementation
+
+The design system is implemented in `packages/ui` (tokens, tones, motion, `Sym*` components) and documented in `packages/ui/docs/CONTEXT.md`; the live gallery is `symbol.ngo/design/` ([ADR-0007](decisions/ADR-0007-design-system.md)). This file keeps the direction; the handbook keeps the rules.
+The logo (`packages/brand/assets/symbol-logo.svg`), the mark (`symbol-mark.svg`) and the spiral (`symbol-spiral.svg`) are vector, taken from the organization's logo file; `SymOrbit` is the logo's real spiral. The logo typeface (`packages/brand/fonts`) sets the wordmark and organization name only.
+Typography (USER_CONFIRMED 2026-10-29): Playfair Display for headlines, Commissioner for text, the logo face EXDocument for labels, navigation, meta and big numerals (variant C). Chosen from six measured pairs; method in `packages/ui/docs/foundations/font-selection.md`, check a new candidate with `pnpm ds:font`. Newsreader and DM Sans (still imported by the not-yet-migrated main and street apps) have no Cyrillic. Final tone values are decided in the design pass.
+
+## Icons
+
+The tab icon is the mark (circle with the spiral): `favicon.svg`, `favicon.ico` (16/32/48), `apple-touch-icon.png`, Android icons and a web manifest, all generated from `packages/brand/assets/symbol-mark.svg` by `scripts/build-icons.mjs` and served by the `@symbol/brand` layer (every app extends it, so the links are added automatically, with the app's base path).
+
 ## Visual principles
 
 - The spiral means movement, attention, return, and collected stories.

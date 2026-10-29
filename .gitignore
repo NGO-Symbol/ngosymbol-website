@@ -11,6 +11,7 @@ dist
 .DS_Store
 .idea/
 .vscode/
+.claude/settings.local.json
 
 # Local working material (not for the repository)
 media-inbox/

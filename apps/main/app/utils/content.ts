@@ -1,4 +1,4 @@
-// Relations between content records and reference validation (ADR-0006).
+// Relations between content records and reference validation (ADR-0008).
 import { events } from '~/data/events'
 import { formats, directions, statusLabels } from '~/data/formats'
 import { opportunities } from '~/data/opportunities'

@@ -10,8 +10,9 @@ This directory is the canonical memory for the institutional website and its pro
 | --- | --- |
 | Understand the organization | [`organization.md`](organization.md), [`project-registry.md`](project-registry.md) |
 | Plan pages or content | [`website-strategy.md`](website-strategy.md), [`information-architecture.md`](information-architecture.md) |
-| Design UI | [`design-system.md`](design-system.md), [`content-inventory.md`](content-inventory.md) |
-| Change code or deployment | [`technical-architecture.md`](technical-architecture.md), [`decisions/`](decisions/) |
+| Design UI | [`design-system.md`](design-system.md), [`content-inventory.md`](content-inventory.md), [`../../packages/ui/docs/CONTEXT.md`](../../packages/ui/docs/CONTEXT.md) (components, tokens, motion) |
+| Change code or deployment | [`technical-architecture.md`](technical-architecture.md), [`decisions/`](decisions/), [`../operations/deployment.md`](../operations/deployment.md) |
+| Save or publish work | [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md), `.agents/skills/site-workflow` |
 | Verify a claim | [`sources.md`](sources.md), [`schema.md`](schema.md) |
 | Team bios and CVs | [`team-cv.md`](team-cv.md) |
 | Find unresolved choices | [`open-questions.md`](open-questions.md) |
@@ -25,11 +26,13 @@ Repository boundaries are summarized in [`../../ARCHITECTURE.md`](../../ARCHITEC
 - Small projects: `symbol.ngo/projects/{slug}` with one focused page and optional internal child pages.
 - Large autonomous projects: separate apps on `{project}.symbol.ngo`.
 - First autonomous project: `istoriia-vulytsi.symbol.ngo`.
-- Every project has a main-site page; projects with a subsite link to it from there (ADR-0006).
+- Every project has a main-site page; projects with a subsite link to it from there (ADR-0008).
 - Linked content model: projects, events (each belongs to a project), people, opportunities, press, organizations.
 - No CMS; project content is maintained in code.
 - Framework: Nuxt 4 / Vue 3, static-first.
-- Repository: pnpm monorepo with independently deployable applications.
+- Repository: public pnpm monorepo with independently deployable applications.
+- Hosting: GitHub Pages; autonomous apps publish to deploy-only repositories.
+- Workflow: `task/*` branches and pull requests only; agents use `pnpm task:*`.
 - Main visual direction: “Orbit” composition and palette with “Index” editorial-serif typography.
 
 ## Maintenance

@@ -1,0 +1,1780 @@
+{
+ "SymAccordion": {
+  "props": [
+   {
+    "name": "items",
+    "type": "AccordionItemData[]",
+    "required": false,
+    "description": "Questions with answers. Alternative to the default slot."
+   },
+   {
+    "name": "single",
+    "type": "false | true",
+    "required": false,
+    "default": "true",
+    "description": "Only one item open at a time (default true). false lets several stay open."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4 | 5",
+    "required": false,
+    "default": "3",
+    "description": "Outline level of the item titles (2–5)."
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "required": false,
+    "description": "Group name shared by the <details>; generated when omitted."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymAccordionItem": {
+  "props": [
+   {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "Question / heading of the item."
+   },
+   {
+    "name": "open",
+    "type": "false | true",
+    "required": false,
+    "description": "Open on load."
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "required": false,
+    "description": "Group name: items with the same name close each other. Set automatically by SymAccordion."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4 | 5",
+    "required": false,
+    "description": "Outline level of the title (2–5). Set automatically by SymAccordion."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymBanner": {
+  "props": [
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "default": "\"apricot\"",
+    "description": "Tone of the strip: apricot (default) | violet | plum | lilac | white | paper."
+   },
+   {
+    "name": "dismissible",
+    "type": "false | true",
+    "required": false,
+    "description": "Adds a close button."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link target; the message becomes a link with an arrow."
+   },
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target."
+   },
+   {
+    "name": "dismissLabel",
+    "type": "string",
+    "required": false,
+    "default": "\"Закрити оголошення\"",
+    "description": "Accessible name of the close button."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": [
+   {
+    "name": "dismiss",
+    "type": "[]",
+    "description": ""
+   }
+  ]
+ },
+ "SymBrand": {
+  "props": [
+   {
+    "name": "caps",
+    "type": "false | true",
+    "required": false,
+    "description": "Set in capitals (СИМВОЛ), as in the logo; the face has capital-like lowercase either way."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymBreadcrumb": {
+  "props": [
+   {
+    "name": "items",
+    "type": "{ label: string; to?: string; }[]",
+    "required": true,
+    "description": "Trail from the top: label plus optional router target. The last item is the current page; earlier items without `to` are plain text."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "description": "Accessible name of the navigation landmark."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymButton": {
+  "props": [
+   {
+    "name": "variant",
+    "type": "\"solid\" | \"outline\" | \"text\"",
+    "required": false,
+    "default": "\"solid\"",
+    "description": "solid (the one main action) | outline (secondary) | text (tertiary, looks like a link with an arrow)."
+   },
+   {
+    "name": "size",
+    "type": "\"m\" | \"l\"",
+    "required": false,
+    "default": "\"m\"",
+    "description": "m = 48 px, l = 56 px (hero actions, mobile primary)."
+   },
+   {
+    "name": "icon",
+    "type": "string",
+    "required": false,
+    "description": "Trailing icon name from SymIcon. Off-site links get arrow-up-right automatically."
+   },
+   {
+    "name": "block",
+    "type": "false | true",
+    "required": false,
+    "description": "Fill the available width (mobile forms, drawers)."
+   },
+   {
+    "name": "disabled",
+    "type": "false | true",
+    "required": false,
+    "description": "Disables the button (ignored for links)."
+   },
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target (inside the app)."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link. http(s) addresses on another site open in a new tab."
+   },
+   {
+    "name": "type",
+    "type": "\"button\" | \"submit\" | \"reset\"",
+    "required": false,
+    "default": "\"button\"",
+    "description": "Native button type; \"button\" by default so it never submits a form by accident."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymCallout": {
+  "props": [
+   {
+    "name": "eyebrow",
+    "type": "string",
+    "required": false,
+    "description": "Small label above the title."
+   },
+   {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "The invitation, one line to two."
+   },
+   {
+    "name": "text",
+    "type": "string",
+    "required": false,
+    "description": "Supporting sentence."
+   },
+   {
+    "name": "orbit",
+    "type": "false | true",
+    "required": false,
+    "description": "Show the orbit mark."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4",
+    "required": false,
+    "default": "2",
+    "description": "Outline level of the title (2–4)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "actions",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymCard": {
+  "props": [
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "default": "\"white\"",
+    "description": "Tone of the card: white (default) | paper | lilac | violet | apricot | plum."
+   },
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target; makes the whole card a link."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link; off-site addresses open in a new tab."
+   },
+   {
+    "name": "pad",
+    "type": "\"md\" | \"none\" | \"lg\"",
+    "required": false,
+    "default": "\"md\"",
+    "description": "Padding: md (default) | lg | none (media goes edge to edge, use SymCard parts yourself)."
+   },
+   {
+    "name": "outline",
+    "type": "false | true",
+    "required": false,
+    "default": "true",
+    "description": "Hairline border (default true)."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element when the card is not a link."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymChip": {
+  "props": [
+   {
+    "name": "selected",
+    "type": "false | true",
+    "required": false,
+    "description": "Currently chosen."
+   },
+   {
+    "name": "toggle",
+    "type": "false | true",
+    "required": false,
+    "description": "Behaves as an on/off button: announces aria-pressed. Leave off for plain actions, links and chips inside SymFilterBar."
+   },
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target (inside the app)."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link. http(s) addresses on another site open in a new tab."
+   },
+   {
+    "name": "disabled",
+    "type": "false | true",
+    "required": false,
+    "description": "Disables the chip (ignored for links)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymCluster": {
+  "props": [
+   {
+    "name": "gap",
+    "type": "\"m\" | \"l\" | \"inline\" | \"3xs\" | \"2xs\" | \"xs\" | \"s\" | \"grid\"",
+    "required": false,
+    "default": "\"inline\"",
+    "description": "Space between items (default inline = 8 px)."
+   },
+   {
+    "name": "align",
+    "type": "\"center\" | \"start\" | \"end\" | \"baseline\"",
+    "required": false,
+    "default": "\"center\"",
+    "description": "Vertical alignment of items on a line."
+   },
+   {
+    "name": "justify",
+    "type": "\"center\" | \"start\" | \"end\" | \"between\"",
+    "required": false,
+    "default": "\"start\"",
+    "description": "Horizontal distribution. between pushes first and last apart (header rows)."
+   },
+   {
+    "name": "scroll",
+    "type": "false | true",
+    "required": false,
+    "description": "Phones (< 600 px): one scrolling line with a fading edge instead of wrapping into a tall block."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element to render, e.g. 'ul', 'nav'."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymContainer": {
+  "props": [
+   {
+    "name": "size",
+    "type": "\"page\" | \"wide\" | \"narrow\" | \"prose\"",
+    "required": false,
+    "default": "\"page\"",
+    "description": "page = 1180 px (default content), wide = 1440 px (media bands), narrow = 760 px (one-column pages), prose = 66 characters (articles)."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element to render."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymDivider": {
+  "props": [
+   {
+    "name": "strong",
+    "type": "false | true",
+    "required": false,
+    "description": "Thicker line (2 px) for the main break of a page."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "description": "Caption at the start of the line."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymEmptyState": {
+  "props": [
+   {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "What is missing, in plain words."
+   },
+   {
+    "name": "text",
+    "type": "string",
+    "required": false,
+    "description": "Why, or what to do next."
+   },
+   {
+    "name": "orbit",
+    "type": "false | true",
+    "required": false,
+    "default": "true",
+    "description": "Show the orbit mark (default true)."
+   },
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "description": "Tone of the block; omitted: a light tint of the surrounding tone."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4",
+    "required": false,
+    "default": "2",
+    "description": "Outline level of the title (2–4)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "actions",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymEyebrow": {
+  "props": [
+   {
+    "name": "index",
+    "type": "string",
+    "required": false,
+    "description": "Optional leading number, e.g. \"01\"."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"span\"",
+    "description": "HTML element to render."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymFilterBar": {
+  "props": [
+   {
+    "name": "options",
+    "type": "{ value: string; label: string; }[]",
+    "required": true,
+    "description": "Choices in order."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": true,
+    "description": "Accessible name of the group, e.g. «Фільтр проєктів за напрямом»."
+   },
+   {
+    "name": "all",
+    "type": "string",
+    "required": false,
+    "description": "Text of an extra first option that clears the filter (value \"\"), e.g. «Усі». Omit for no such option."
+   },
+   {
+    "name": "modelValue",
+    "type": "string",
+    "required": false,
+    "default": "\"\"",
+    "description": "The chosen value; \"\" means «all»."
+   }
+  ],
+  "slots": [],
+  "events": [
+   {
+    "name": "update:modelValue",
+    "type": "[value: string]",
+    "description": ""
+   }
+  ]
+ },
+ "SymGallery": {
+  "props": [
+   {
+    "name": "items",
+    "type": "GalleryItem[]",
+    "required": true,
+    "description": "The pictures."
+   },
+   {
+    "name": "layout",
+    "type": "\"grid\" | \"masonry-lite\"",
+    "required": false,
+    "default": "\"grid\"",
+    "description": "grid (equal cells) | masonry-lite (columns, own ratios)."
+   },
+   {
+    "name": "ratio",
+    "type": "\"4:3\" | \"16:9\" | \"1:1\" | \"3:4\" | \"21:9\" | \"auto\"",
+    "required": false,
+    "default": "\"4:3\"",
+    "description": "Shape of every picture in `grid` when an item has no ratio of its own."
+   },
+   {
+    "name": "min",
+    "type": "\"240\" | \"160\" | \"200\" | \"320\"",
+    "required": false,
+    "default": "\"240\"",
+    "description": "Minimum cell width in px: the gallery fits as many columns as it can."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "description": "Accessible name of the list, e.g. «Фотографії з події»."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymGrid": {
+  "props": [
+   {
+    "name": "min",
+    "type": "\"240\" | \"160\" | \"200\" | \"320\" | \"280\" | \"400\"",
+    "required": false,
+    "default": "\"280\"",
+    "description": "Minimum cell width in px for the self-sizing grid (ignored when `cols` is set)."
+   },
+   {
+    "name": "cols",
+    "type": "3 | 2 | 4",
+    "required": false,
+    "description": "Fixed number of columns on wide containers; collapses on narrow ones."
+   },
+   {
+    "name": "gap",
+    "type": "\"m\" | \"l\" | \"inline\" | \"3xs\" | \"2xs\" | \"xs\" | \"s\" | \"grid\" | \"xl\" | \"stack\"",
+    "required": false,
+    "default": "\"grid\"",
+    "description": "Space between cells (default grid = 16 → 24 px fluid)."
+   },
+   {
+    "name": "align",
+    "type": "\"center\" | \"start\" | \"stretch\"",
+    "required": false,
+    "default": "\"stretch\"",
+    "description": "Vertical alignment of cells in a row (default stretch = equal heights)."
+   },
+   {
+    "name": "phoneCols",
+    "type": "1 | 2",
+    "required": false,
+    "description": "Columns when the grid is narrower than 600 px: 2 for small tiles (stats), default 1."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element of the grid itself, e.g. 'ul' (children must then be <li>)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymHeading": {
+  "props": [
+   {
+    "name": "level",
+    "type": "3 | 1 | 2 | 4 | 5 | 6",
+    "required": false,
+    "default": "2",
+    "description": "Outline level 1–6. One h1 per page."
+   },
+   {
+    "name": "size",
+    "type": "\"title\" | \"headline\" | \"display-xl\" | \"display\" | \"headline-lg\" | \"title-lg\"",
+    "required": false,
+    "default": "\"headline\"",
+    "description": "Look: display-xl (hero) > display (section title) > headline-lg > headline > title-lg (card title) > title."
+   },
+   {
+    "name": "muted",
+    "type": "false | true",
+    "required": false,
+    "description": "Muted colour of the tone (secondary headings)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymIcon": {
+  "props": [
+   {
+    "name": "name",
+    "type": "\"arrow-right\" | \"arrow-left\" | \"arrow-up-right\" | \"arrow-down\" | \"menu\" | \"close\" | \"plus\" | \"minus\" | \"chevron-down\" | \"chevron-right\" | \"check\" | \"mail\" | \"phone\" | \"map-pin\" | \"calendar\" | \"download\" | \"link\" | \"globe\" | \"play\" | \"instagram\" | \"facebook\" | \"telegram\" | \"youtube\"",
+    "required": true,
+    "description": "Icon name."
+   },
+   {
+    "name": "size",
+    "type": "number",
+    "required": false,
+    "description": "Size in px (default follows the surrounding text: 1.25em)."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "description": "Accessible name when the icon is the only content; otherwise leave empty."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymIconButton": {
+  "props": [
+   {
+    "name": "icon",
+    "type": "string",
+    "required": true,
+    "description": "Icon name from SymIcon."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": true,
+    "description": "Required text alternative: aria-label and tooltip. Describe the action («Відкрити меню»), not the picture."
+   },
+   {
+    "name": "size",
+    "type": "\"m\" | \"l\"",
+    "required": false,
+    "default": "\"m\"",
+    "description": "m = 44 px (default), l = 56 px (primary phone actions)."
+   },
+   {
+    "name": "variant",
+    "type": "\"outline\" | \"plain\"",
+    "required": false,
+    "default": "\"plain\"",
+    "description": "plain (just the icon) | outline (a hairline ring that fills on hover)."
+   },
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target (inside the app)."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link. http(s) addresses on another site open in a new tab."
+   },
+   {
+    "name": "type",
+    "type": "\"button\" | \"submit\" | \"reset\"",
+    "required": false,
+    "default": "\"button\"",
+    "description": "Native button type; \"button\" by default so it never submits a form by accident."
+   },
+   {
+    "name": "disabled",
+    "type": "false | true",
+    "required": false,
+    "description": "Disables the button (ignored for links)."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymLink": {
+  "props": [
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target (inside the app)."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link; http(s) on another site opens in a new tab with an arrow-up-right."
+   },
+   {
+    "name": "arrow",
+    "type": "\"none\" | \"forward\"",
+    "required": false,
+    "default": "\"none\"",
+    "description": "Trailing arrow: forward | none. External links always show the up-right arrow."
+   },
+   {
+    "name": "quiet",
+    "type": "false | true",
+    "required": false,
+    "description": "Remove the underline until hover (navigation, footers). The text must still look like a link."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymLogoWall": {
+  "props": [
+   {
+    "name": "items",
+    "type": "LogoItem[]",
+    "required": true,
+    "description": "The organisations."
+   },
+   {
+    "name": "cols",
+    "type": "3 | 4 | 5",
+    "required": false,
+    "default": "4",
+    "description": "Columns on wide containers (3–5); two on phones."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "description": "Accessible name of the list, e.g. «Партнери»."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymMark": {
+  "props": [
+   {
+    "name": "size",
+    "type": "number",
+    "required": false,
+    "default": "40",
+    "description": "Diameter in px."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "description": "Accessible name; leave empty when a visible wordmark sits next to the mark."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymMedia": {
+  "props": [
+   {
+    "name": "src",
+    "type": "string",
+    "required": false,
+    "description": "Image address. Omit it to show the tonal placeholder."
+   },
+   {
+    "name": "alt",
+    "type": "string",
+    "required": true,
+    "description": "What the picture shows. Required; an empty string is allowed only together with `decorative`."
+   },
+   {
+    "name": "decorative",
+    "type": "false | true",
+    "required": false,
+    "description": "The picture is only decoration: no text alternative is announced."
+   },
+   {
+    "name": "ratio",
+    "type": "\"4:3\" | \"16:9\" | \"1:1\" | \"3:4\" | \"21:9\" | \"auto\"",
+    "required": false,
+    "default": "\"4:3\"",
+    "description": "Shape of the frame: 16:9 | 4:3 | 1:1 | 3:4 | 21:9 | auto (natural shape of the image; give width and height)."
+   },
+   {
+    "name": "caption",
+    "type": "string",
+    "required": false,
+    "description": "Caption under the picture."
+   },
+   {
+    "name": "credit",
+    "type": "string",
+    "required": false,
+    "description": "Author / source of the picture, shown after the caption."
+   },
+   {
+    "name": "fit",
+    "type": "\"cover\" | \"contain\"",
+    "required": false,
+    "default": "\"cover\"",
+    "description": "cover fills the frame and crops; contain shows the whole picture."
+   },
+   {
+    "name": "loading",
+    "type": "\"lazy\" | \"eager\"",
+    "required": false,
+    "default": "\"lazy\"",
+    "description": "lazy (default, below the fold) | eager (the first picture on the page)."
+   },
+   {
+    "name": "width",
+    "type": "number",
+    "required": false,
+    "description": "Natural width in px (needed for `ratio=\"auto\"` so the browser can reserve space)."
+   },
+   {
+    "name": "height",
+    "type": "number",
+    "required": false,
+    "description": "Natural height in px (needed for `ratio=\"auto\"`)."
+   },
+   {
+    "name": "reveal",
+    "type": "false | true",
+    "required": false,
+    "description": "Uncover the picture from the top when it scrolls into view."
+   },
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "description": "Tone of the placeholder: paper | white | lilac | violet | apricot | plum. Omitted: a light tint of the surrounding tone."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymMetaList": {
+  "props": [
+   {
+    "name": "items",
+    "type": "{ label: string; value: string; }[]",
+    "required": true,
+    "description": "Pairs to show, in order."
+   },
+   {
+    "name": "cols",
+    "type": "1 | 2",
+    "required": false,
+    "default": "2",
+    "description": "Columns on wide containers (≥ 600 px): 2 (default) or 1."
+   }
+  ],
+  "slots": [
+   {
+    "name": "value",
+    "type": "{ item: { label: string; value: string; }; index: number; }",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymOrbit": {
+  "props": [
+   {
+    "name": "size",
+    "type": "\"md\" | \"lg\" | \"xs\" | \"sm\" | \"hero\"",
+    "required": false,
+    "default": "\"lg\"",
+    "description": "xs 56 px · sm 140 · md 260 · lg 420 · hero fluid 240 → 760 px."
+   },
+   {
+    "name": "rotate",
+    "type": "number",
+    "required": false,
+    "default": "0",
+    "description": "Static rotation in degrees (0 = as in the logo)."
+   },
+   {
+    "name": "anchor",
+    "type": "\"center\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"",
+    "required": false,
+    "description": "Where it sits inside the nearest positioned parent; omit to place it in the flow."
+   },
+   {
+    "name": "bleed",
+    "type": "number",
+    "required": false,
+    "default": "0.25",
+    "description": "Share of the size that sticks out past the anchored corner (0–0.6)."
+   },
+   {
+    "name": "color",
+    "type": "\"accent\" | \"fg\" | \"bg\"",
+    "required": false,
+    "default": "\"accent\"",
+    "description": "Colour: accent (the tone's accent, default) | fg | bg."
+   },
+   {
+    "name": "spin",
+    "type": "false | true",
+    "required": false,
+    "description": "Very slow ambient rotation."
+   },
+   {
+    "name": "soft",
+    "type": "false | true",
+    "required": false,
+    "default": "true",
+    "description": "Pale (30 %) version that stays behind text without hurting its contrast (default true). Set false only when nothing is written over the shape."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymPageHeader": {
+  "props": [
+   {
+    "name": "eyebrow",
+    "type": "string",
+    "required": false,
+    "description": "Small uppercase label above the title."
+   },
+   {
+    "name": "title",
+    "type": "string",
+    "required": false,
+    "description": "The page title (rendered as h1). For manual line breaks use the `title` slot."
+   },
+   {
+    "name": "lead",
+    "type": "string",
+    "required": false,
+    "description": "Lead paragraph under the title."
+   },
+   {
+    "name": "size",
+    "type": "\"lg\" | \"xl\"",
+    "required": false,
+    "default": "\"xl\"",
+    "description": "xl = display-xl (home, big hero) | lg = display (inner pages)."
+   },
+   {
+    "name": "flush",
+    "type": "false | true",
+    "required": false,
+    "description": "Remove the built-in top and bottom spacing."
+   }
+  ],
+  "slots": [
+   {
+    "name": "title",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "lead",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "meta",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "actions",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymPersonCard": {
+  "props": [
+   {
+    "name": "name",
+    "type": "string",
+    "required": true,
+    "description": "Full name."
+   },
+   {
+    "name": "role",
+    "type": "string",
+    "required": false,
+    "description": "Role in the organisation, only if confirmed."
+   },
+   {
+    "name": "bio",
+    "type": "string",
+    "required": false,
+    "description": "Two or three sentences."
+   },
+   {
+    "name": "photo",
+    "type": "PersonPhoto",
+    "required": false,
+    "description": "Photo (Media props). Omit for the orbit placeholder."
+   },
+   {
+    "name": "links",
+    "type": "PersonLink[]",
+    "required": false,
+    "description": "Contact links."
+   },
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "description": "Tone of the placeholder circle; omitted: a light tint of the surrounding tone."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4",
+    "required": false,
+    "default": "3",
+    "description": "Outline level of the name (2–4)."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymProjectBar": {
+  "props": [
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "default": "\"plum\"",
+    "description": "Tone of the strip: plum (default) | ink-on-light tones when the project theme is dark."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "default": "\"https://symbol.ngo\"",
+    "description": "Where the link leads: the main site."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "default": "\"symbol.ngo\"",
+    "description": "Link text."
+   },
+   {
+    "name": "text",
+    "type": "string",
+    "required": false,
+    "default": "\"Проєкт ГО «Символ»\"",
+    "description": "The statement on the left."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymProjectCard": {
+  "props": [
+   {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "Project name."
+   },
+   {
+    "name": "summary",
+    "type": "string",
+    "required": false,
+    "description": "One or two sentences under the title."
+   },
+   {
+    "name": "period",
+    "type": "string",
+    "required": false,
+    "description": "Period as text, e.g. «2025 — триває»."
+   },
+   {
+    "name": "status",
+    "type": "\"launching\" | \"ongoing\" | \"completed\"",
+    "required": false,
+    "description": "launching (запускається) | ongoing (триває) | completed (завершено)."
+   },
+   {
+    "name": "statusLabel",
+    "type": "string",
+    "required": false,
+    "description": "Overrides the default status wording."
+   },
+   {
+    "name": "direction",
+    "type": "string",
+    "required": false,
+    "description": "Direction / theme shown above the title."
+   },
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link."
+   },
+   {
+    "name": "external",
+    "type": "false | true",
+    "required": false,
+    "description": "The project has its own website: shows «Окремий сайт ↗»."
+   },
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "default": "\"white\"",
+    "description": "Card tone: white | paper | lilac | violet | apricot | plum."
+   },
+   {
+    "name": "orbit",
+    "type": "false | true",
+    "required": false,
+    "default": "true",
+    "description": "Show the orbit in the picture area (default true)."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4",
+    "required": false,
+    "default": "3",
+    "description": "Outline level of the title (2–4)."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymProse": {
+  "props": [
+   {
+    "name": "wide",
+    "type": "false | true",
+    "required": false,
+    "description": "Remove the 66-character line limit (the parent column decides the width)."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element to render."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymQuote": {
+  "props": [
+   {
+    "name": "cite",
+    "type": "string",
+    "required": false,
+    "description": "Who said it: name and role as a plain string."
+   },
+   {
+    "name": "source",
+    "type": "string",
+    "required": false,
+    "description": "Where it was said or published: book, interview, event."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymReveal": {
+  "props": [
+   {
+    "name": "kind",
+    "type": "\"rise\" | \"fade\" | \"wipe\"",
+    "required": false,
+    "default": "\"rise\"",
+    "description": "rise (default) | fade | wipe."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element to render."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymSection": {
+  "props": [
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "description": "Colour set of the band: paper (page default, cream) | white | lilac | violet | apricot | plum. Inherits the page tone when omitted."
+   },
+   {
+    "name": "space",
+    "type": "\"md\" | \"none\" | \"lg\" | \"sm\"",
+    "required": false,
+    "default": "\"md\"",
+    "description": "Vertical padding: none | sm | md (default) | lg."
+   },
+   {
+    "name": "width",
+    "type": "\"page\" | \"wide\" | \"narrow\" | \"prose\" | \"full\"",
+    "required": false,
+    "default": "\"page\"",
+    "description": "Inner width: page | wide | narrow | prose, or full (no inner container: the content spans the band)."
+   },
+   {
+    "name": "rule",
+    "type": "\"top\" | \"bottom\" | \"both\"",
+    "required": false,
+    "description": "Hairline rule on the top and/or bottom edge of the band."
+   },
+   {
+    "name": "clip",
+    "type": "false | true",
+    "required": false,
+    "description": "Cut off decorative shapes at the band edge (set when the band contains a bleeding SymOrbit)."
+   },
+   {
+    "name": "fill",
+    "type": "false | true",
+    "required": false,
+    "description": "Fill most of the screen height and centre the content vertically (contact / closing screens)."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"section\"",
+    "description": "HTML element to render."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "decor",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymSectionHeading": {
+  "props": [
+   {
+    "name": "eyebrow",
+    "type": "string",
+    "required": false,
+    "description": "Small uppercase label above the title."
+   },
+   {
+    "name": "index",
+    "type": "string",
+    "required": false,
+    "description": "Section number shown before the eyebrow, e.g. \"01\"."
+   },
+   {
+    "name": "title",
+    "type": "string",
+    "required": false,
+    "description": "The title text. For manual line breaks use the `title` slot instead."
+   },
+   {
+    "name": "level",
+    "type": "3 | 1 | 2 | 4 | 5 | 6",
+    "required": false,
+    "default": "2",
+    "description": "Outline level of the title (h2 by default); the look is always display size."
+   }
+  ],
+  "slots": [
+   {
+    "name": "title",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "intro",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "action",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymSiteFooter": {
+  "props": [
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "default": "\"plum\"",
+    "description": "Tone of the footer: plum (default) | paper | white | lilac | violet | apricot."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "default": "\"Додаткова навігація\"",
+    "description": "Accessible name of the footer navigation landmark."
+   }
+  ],
+  "slots": [
+   {
+    "name": "brand",
+    "type": "any",
+    "description": "Organisation block; default is SymWordmark. Add one short sentence about the organisation under it."
+   },
+   {
+    "name": "nav",
+    "type": "any",
+    "description": "Secondary navigation: h2 + <ul role=\"list\"> groups. Rendered inside a <nav>."
+   },
+   {
+    "name": "contact",
+    "type": "any",
+    "description": "Contacts: h2 + lines or links. Rendered inside an <address>."
+   },
+   {
+    "name": "legal",
+    "type": "any",
+    "description": "The bottom line: copyright, privacy, accessibility statement."
+   }
+  ],
+  "events": []
+ },
+ "SymSiteHeader": {
+  "props": [
+   {
+    "name": "items",
+    "type": "NavItem[]",
+    "required": true,
+    "description": "Main navigation, in order. The item matching the current page gets aria-current=\"page\"."
+   },
+   {
+    "name": "languages",
+    "type": "Language[]",
+    "required": false,
+    "description": "Language versions; omit when the site has one language."
+   },
+   {
+    "name": "cta",
+    "type": "{ label: string; to?: string | undefined; href?: string | undefined; }",
+    "required": false,
+    "description": "The one call to action (a solid button): «Підтримати»."
+   },
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\"",
+    "required": false,
+    "description": "Tone of the header surface (it must be opaque: content scrolls under it). Default: the page's tone."
+   },
+   {
+    "name": "current",
+    "type": "string",
+    "required": false,
+    "description": "Path (or #hash) treated as the current page; default is the router's current path. For the gallery and tests."
+   },
+   {
+    "name": "scrolled",
+    "type": "false | true",
+    "required": false,
+    "default": "undefined",
+    "description": "Force the scrolled look (hairline + shadow); default follows the page scroll. For the gallery."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": false,
+    "default": "\"Основна навігація\"",
+    "description": "Accessible name of the navigation landmark."
+   }
+  ],
+  "slots": [
+   {
+    "name": "logo",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymSkipLink": {
+  "props": [
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "default": "\"#main\"",
+    "description": "Hash of the element to jump to; the page's <main id=\"main\">."
+   },
+   {
+    "name": "visible",
+    "type": "false | true",
+    "required": false,
+    "description": "Keep the link visible in the flow (gallery and documentation only)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymSplit": {
+  "props": [
+   {
+    "name": "ratio",
+    "type": "\"1:1\" | \"1:2\" | \"2:1\" | \"5:7\" | \"7:5\" | \"aside\"",
+    "required": false,
+    "default": "\"1:1\"",
+    "description": "Column proportions start:end — 1:1, 1:2, 2:1, 5:7, 7:5, or aside (a 260 px side column + the rest)."
+   },
+   {
+    "name": "stackBelow",
+    "type": "\"760\" | \"600\" | \"900\"",
+    "required": false,
+    "default": "\"760\"",
+    "description": "Container width below which the columns stack."
+   },
+   {
+    "name": "gap",
+    "type": "\"m\" | \"l\" | \"s\" | \"grid\" | \"xl\"",
+    "required": false,
+    "default": "\"xl\"",
+    "description": "Space between columns."
+   },
+   {
+    "name": "align",
+    "type": "\"center\" | \"start\" | \"end\" | \"stretch\"",
+    "required": false,
+    "default": "\"start\"",
+    "description": "Vertical alignment of the columns when side by side."
+   },
+   {
+    "name": "reverse",
+    "type": "false | true",
+    "required": false,
+    "description": "When stacked, show the end column first (e.g. an image above the text)."
+   },
+   {
+    "name": "sticky",
+    "type": "false | true",
+    "required": false,
+    "description": "Keep the start column in view while the end column scrolls (side navigation, project facts)."
+   }
+  ],
+  "slots": [
+   {
+    "name": "start",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "end",
+    "type": "any",
+    "description": ""
+   },
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymStack": {
+  "props": [
+   {
+    "name": "gap",
+    "type": "\"m\" | \"l\" | \"inline\" | \"3xs\" | \"2xs\" | \"xs\" | \"s\" | \"grid\" | \"xl\" | \"stack\" | \"2xl\" | \"3xl\"",
+    "required": false,
+    "default": "\"stack\"",
+    "description": "Space between children: a space step (3xs … 3xl, fluid) or a semantic gap (stack = default rhythm, inline, grid)."
+   },
+   {
+    "name": "align",
+    "type": "\"center\" | \"start\" | \"end\" | \"stretch\"",
+    "required": false,
+    "default": "\"stretch\"",
+    "description": "Cross-axis alignment (default stretch = full width)."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"div\"",
+    "description": "HTML element to render, e.g. 'ul', 'article', 'header'."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymStat": {
+  "props": [
+   {
+    "name": "value",
+    "type": "string",
+    "required": true,
+    "description": "The figure as text, e.g. \"12\" or \"2020–2025\". Formatting (spaces, %) is up to the caller."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": true,
+    "description": "What the figure counts."
+   },
+   {
+    "name": "source",
+    "type": "string",
+    "required": true,
+    "description": "Where the number comes from (report, year, \"приклад, не реальні дані\" in demos). Shown as a footnote."
+   },
+   {
+    "name": "unit",
+    "type": "string",
+    "required": false,
+    "description": "Smaller text right after the figure: «%», «тис.», «років»."
+   },
+   {
+    "name": "size",
+    "type": "\"m\" | \"l\"",
+    "required": false,
+    "default": "\"m\"",
+    "description": "m = headline-lg numeral (grids of 3–4) | l = display numeral (one or two big facts)."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymTag": {
+  "props": [
+   {
+    "name": "tone",
+    "type": "\"apricot\" | \"paper\" | \"white\" | \"lilac\" | \"violet\" | \"plum\" | \"inherit\"",
+    "required": false,
+    "description": "Fill the pill with a tone's colours instead of an outline. Omit (or \"inherit\") to keep the surface."
+   },
+   {
+    "name": "status",
+    "type": "\"launching\" | \"ongoing\" | \"completed\" | \"planned\"",
+    "required": false,
+    "description": "Project status: launching (запуск) | ongoing (триває) | completed (завершено) | planned (заплановано). Adds a marker; text from the slot or a default."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymText": {
+  "props": [
+   {
+    "name": "size",
+    "type": "\"caption\" | \"sm\" | \"lead\" | \"body\"",
+    "required": false,
+    "default": "\"body\"",
+    "description": "lead (intro paragraph) | body (default) | sm (secondary) | caption (image credits, dates)."
+   },
+   {
+    "name": "muted",
+    "type": "false | true",
+    "required": false,
+    "description": "Muted colour of the tone."
+   },
+   {
+    "name": "measure",
+    "type": "false | true",
+    "required": false,
+    "description": "Limit the line length to 66 characters (set for any paragraph wider than a column)."
+   },
+   {
+    "name": "as",
+    "type": "string",
+    "required": false,
+    "default": "\"p\"",
+    "description": "HTML element to render."
+   }
+  ],
+  "slots": [
+   {
+    "name": "default",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ },
+ "SymTimeline": {
+  "props": [
+   {
+    "name": "items",
+    "type": "TimelineItem[]",
+    "required": true,
+    "description": "The events."
+   },
+   {
+    "name": "level",
+    "type": "3 | 2 | 4 | 5",
+    "required": false,
+    "default": "3",
+    "description": "Outline level of the event titles (2–5); the list itself carries no heading."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
+ "SymWordmark": {
+  "props": [
+   {
+    "name": "to",
+    "type": "string",
+    "required": false,
+    "description": "Router link target, usually \"/\" (makes the lockup a link home)."
+   },
+   {
+    "name": "href",
+    "type": "string",
+    "required": false,
+    "description": "Plain link (e.g. https://symbol.ngo from a project site)."
+   },
+   {
+    "name": "size",
+    "type": "\"md\" | \"sm\"",
+    "required": false,
+    "default": "\"md\"",
+    "description": "sm = 32 px mark (footer, project bar) | md = 44 px mark (header)."
+   },
+   {
+    "name": "subtitle",
+    "type": "string",
+    "required": false,
+    "description": "Second line under the word, as in the logo («Громадська організація»). Off by default; use it on large lockups only."
+   }
+  ],
+  "slots": [
+   {
+    "name": "label",
+    "type": "any",
+    "description": ""
+   }
+  ],
+  "events": []
+ }
+}

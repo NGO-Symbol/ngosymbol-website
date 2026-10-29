@@ -1,4 +1,4 @@
-// Content model: see documents/knowledge/information-architecture.md and ADR-0006.
+// Content model: see documents/knowledge/information-architecture.md and ADR-0008.
 // Rich text is a list of paragraphs; inline references use [[project:slug]], [[event:slug]], [[person:slug]]
 // with an optional label: [[person:pavlo-makov|Павла Макова]].
 

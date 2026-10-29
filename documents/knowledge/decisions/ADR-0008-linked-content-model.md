@@ -1,4 +1,4 @@
-# ADR-0006: Linked content model and a main-site page for every project
+# ADR-0008: Linked content model and a main-site page for every project
 
 - Status: Accepted
 - Date: 2026-10-29

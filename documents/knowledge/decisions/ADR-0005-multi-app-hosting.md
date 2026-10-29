@@ -1,21 +1,30 @@
 # ADR-0005: Multi-app hosting platform
 
-- Status: Proposed
-- Date: 2026-10-10
+- Status: Accepted
+- Date: 2026-10-10 (proposed), 2026-10-28 (accepted)
 
 ## Context
 
-One repository must deploy at least two independent static applications to `symbol.ngo` and `istoriia-vulytsi.symbol.ngo`.
+One repository must deploy at least two independent static applications to `symbol.ngo` and `istoriia-vulytsi.symbol.ngo`. GitHub Pages serves one site per repository and, on the free plan, only from public repositories. The repository was moved from the `ngosymbol` personal account to the `NGO-Symbol` organization (free plan) on 2026-10-28 so several people can hold admin rights. `symbol.ngo` is registered at Cloudflare and its DNS is managed there, alongside Google Workspace mail records.
 
-## Proposal
+## Decision
 
-Use separate Cloudflare Pages projects connected to the same monorepo. Each project has its own build command, output, domain, and watch paths.
+`USER_CONFIRMED` (2026-10-28): host on **GitHub Pages** and make `NGO-Symbol/ngosymbol-website` public.
 
-## Alternative
+- `apps/main` deploys to this repository's Pages site through GitHub Actions.
+- Each autonomous app deploys its build output to a deploy-only public repository (first: `NGO-Symbol/istoriia-vulytsi`, `gh-pages` branch) using a write-scoped deploy key.
+- DNS records stay in Cloudflare in DNS-only (unproxied) mode; mail records are untouched.
 
-Keep the main site on GitHub Pages and publish each autonomous site from a separate deployment repository. This preserves GitHub Pages but adds synchronization and repository overhead.
+Setup and DNS records: [`../../operations/deployment.md`](../../operations/deployment.md).
 
-## Decision needed
+## Alternatives considered
 
-Confirm the DNS provider, repository visibility/plan, and preferred hosting account before accepting this ADR.
+- **Cloudflare Pages/Workers** — free, keeps the repository private, multiple projects from one monorepo, per-branch preview URLs; DNS already lives there. Not chosen: the team prefers to keep hosting on GitHub.
+- **GitHub Pro + private repository** — same Pages limitations for $4/month.
 
+## Consequences
+
+- The source code and `documents/knowledge` are public; nothing private may be committed.
+- Every new autonomous project needs a deploy-only repository, a deploy key, a workflow job, and a DNS `CNAME`.
+- Pull requests have no hosted preview; reviewers rely on CI and local `pnpm dev`.
+- Revisit this ADR if previews, private source, or server runtime features become necessary.

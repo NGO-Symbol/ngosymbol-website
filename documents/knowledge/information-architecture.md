@@ -1,6 +1,6 @@
 # Information architecture
 
-Accepted model: [ADR-0006](decisions/ADR-0006-linked-content-model.md). `USER_CONFIRMED`, conversation 2026-10-29.
+Accepted model: [ADR-0008](decisions/ADR-0008-linked-content-model.md). `USER_CONFIRMED`, conversation 2026-10-29.
 
 ## Institutional site: `symbol.ngo`
 
@@ -22,7 +22,7 @@ Accepted model: [ADR-0006](decisions/ADR-0006-linked-content-model.md). `USER_CO
 
 Header: official logo · Проєкти · Події · Можливості · Люди · Про нас · [Підтримати] · UA/EN switch (sliding pill; the header speaks the page's language) · light/dark toggle.
 
-Added 2026-10-29: `/news` (short news, latest three on Home), `/press` (press kit: logo files, UA/EN boilerplate, press contact, project photos), `/en` (first English page for international partners: intro, indicators, projects with English titles and summaries), archived open calls on `/opportunities`, `/sitemap.xml`, `/robots.txt`, a skip link. The full English version of every page is still open.
+Added 2026-10-29: `/news` (short news, latest three on Home), `/press` (press kit: logo files, UA/EN boilerplate, press contact, project photos), `/en` (first English page for international partners: intro, indicators, projects with English titles and summaries), archived open calls on `/opportunities`, `/sitemap.xml`, a skip link. The full English version of every page is still open.
 
 Every page except Home shows a path (breadcrumbs) at the top, like a Finder path: «Головна › Люди › Павло Маков». An event's path goes through its project: «Головна › Проєкти › {project · year} › {event}». `USER_CONFIRMED` 2026-10-29.
 

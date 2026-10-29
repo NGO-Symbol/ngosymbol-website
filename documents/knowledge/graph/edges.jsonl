@@ -22,5 +22,5 @@
 {"source":"app:main","target":"project:street-history","relation":"links_directly_to_autonomous_site_for","confidence":"USER_CONFIRMED","source_ref":"documents/knowledge/information-architecture.md"}
 {"source":"app:street-history","target":"project:street-history","relation":"presents","confidence":"USER_CONFIRMED","source_ref":"documents/knowledge/information-architecture.md"}
 {"source":"app:main","target":"design:orbit-index","relation":"uses","confidence":"USER_CONFIRMED","source_ref":"documents/knowledge/design-system.md"}
-{"source":"app:main","target":"platform:cloudflare-pages","relation":"may_deploy_to","confidence":"PROPOSED","source_ref":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}
-{"source":"app:street-history","target":"platform:cloudflare-pages","relation":"may_deploy_to","confidence":"PROPOSED","source_ref":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}
+{"source":"app:main","target":"platform:github-pages","relation":"deploys_to","confidence":"USER_CONFIRMED","source_ref":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}
+{"source":"app:street-history","target":"platform:github-pages","relation":"deploys_to","confidence":"USER_CONFIRMED","source_ref":"documents/knowledge/decisions/ADR-0005-multi-app-hosting.md"}

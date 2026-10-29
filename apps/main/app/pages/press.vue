@@ -28,8 +28,8 @@ async function copy(text: string, key: string) {
         <span class="label">Логотип</span>
         <div class="press-asset__preview"><SymbolLogo /></div>
         <div class="button-row">
-          <a class="button button--dark" href="/press/symbol-logo.svg" download>SVG з написом</a>
-          <a class="button" href="/press/symbol-mark.png" download>PNG знак</a>
+          <a class="button button--dark" href="/press-kit/symbol-logo.svg" download>SVG з написом</a>
+          <a class="button" href="/press-kit/symbol-mark.png" download>PNG знак</a>
         </div>
         <p class="footer-small">Кольори: фіолетовий #9280A6, абрикосовий #FDD08F.</p>
       </article>

@@ -22,5 +22,5 @@ This is the current planning registry, not a substitute for verified project pag
 
 ## Code registry rule
 
-Only publish a project in `apps/main/app/data/projects.ts` when minimum public metadata is available. Every published project has a `slug` and a main-site page; projects with a subsite also set `subsiteUrl` (ADR-0006).
+Only publish a project in `apps/main/app/data/projects.ts` when minimum public metadata is available. Every published project has a `slug` and a main-site page; projects with a subsite also set `subsiteUrl` (ADR-0008).
 

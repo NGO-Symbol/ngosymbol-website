@@ -1,4 +1,4 @@
-// Calendar subscription feed (prerendered). Includes events and 'single' projects (ADR-0006).
+// Calendar subscription feed (prerendered). Includes events and 'single' projects (ADR-0008).
 import { eventItems, venueLine } from '../../app/utils/content'
 
 const escape = (text: string) => text.replace(/[\\;,]/g, match => `\\${match}`).replace(/\n/g, '\\n')

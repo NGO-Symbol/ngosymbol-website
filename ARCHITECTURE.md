@@ -10,6 +10,7 @@ ngosymbol-website
 ├── packages/
 │   └── brand/                shared source palette and logo asset
 ├── documents/knowledge/          canonical project memory
+├── documents/operations/         deployment runbook
 ├── .agents/skills/              repository-local agent workflows
 └── scripts/                     deterministic repository checks
 ```
@@ -31,7 +32,7 @@ symbol.ngo/projects
                                       └── visible link back to symbol.ngo
 ```
 
-The applications are developed together but deployed independently. See
+The applications are developed together but deployed independently by `.github/workflows/deploy.yml` to GitHub Pages. See
 [`documents/knowledge/technical-architecture.md`](documents/knowledge/technical-architecture.md)
 and the ADRs in [`documents/knowledge/decisions`](documents/knowledge/decisions).
 

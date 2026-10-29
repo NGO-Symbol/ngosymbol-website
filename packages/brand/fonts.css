@@ -1,0 +1,10 @@
+/* The logo typeface (file name EXDocument, designer Oleksii Chekal). Used for the wordmark «СИМВОЛ» and the organization name wherever it is set as
+   the brand («Символ»). Display face: capital-like lowercase, ukrainian letters (і ї є ґ ю ь я …) and the apostrophe ’ are present; Ъ Ы Э Ё and № ₴ are not.
+   Do not use it for running text. Handbook: packages/ui/docs/foundations/brand-font.md */
+@font-face {
+  font-family: 'Symbol Brand';
+  src: url('./fonts/ex-document.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

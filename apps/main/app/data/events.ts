@@ -1,6 +1,6 @@
 import type { SymbolEvent } from './types'
 
-// Every event belongs to a project (ADR-0006). Projects of kind 'single' are listed as events automatically.
+// Every event belongs to a project (ADR-0008). Projects of kind 'single' are listed as events automatically.
 // «Покажіть свої документи…»: October events come from the project site; November events from the programme
 // «Розклад Листопад» (Drive). Photo folders on the Drive confirm the ZMINA event, the artist talk with
 // Андрій Скрипка and the playback performance. Exact times of the November events still need confirmation.

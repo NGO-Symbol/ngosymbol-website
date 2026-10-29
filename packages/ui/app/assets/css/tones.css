@@ -1,0 +1,51 @@
+/* Tones: a tone is a complete, contrast-checked colour set for a surface and everything on it. Putting data-tone="x" on a
+   section or card recolours its text, rules, links, focus ring and buttons at once; components never pick brand colours.
+   Raw hex lives only here and in packages/brand. `pnpm ds:contrast` verifies every pair (WCAG AA).
+   Handbook: packages/ui/docs/foundations/color-tones.md */
+@layer sym-tokens {
+  :root, [data-tone='paper'] {
+    --sym-bg: var(--symbol-cream);
+    --sym-fg: var(--symbol-ink);
+    --sym-fg-large: var(--symbol-ink);       /* text >= 24 px (or 19 px bold) only; some tones allow a livelier colour here */
+    --sym-fg-muted: #5b4f66;
+    --sym-rule: var(--symbol-plum);          /* structural hairline */
+    --sym-rule-soft: var(--symbol-lilac);    /* decorative divider, never the only signal */
+    --sym-accent: var(--symbol-violet);      /* orbits, marks, large geometry (3:1 graphic contrast) */
+    --sym-link: var(--symbol-ink);
+    --sym-focus: var(--symbol-ink);
+    color-scheme: light;
+  }
+  [data-tone='white'] {
+    --sym-bg: var(--symbol-white); --sym-fg: var(--symbol-ink); --sym-fg-large: var(--symbol-ink); --sym-fg-muted: #5b4f66;
+    --sym-rule: var(--symbol-plum); --sym-rule-soft: var(--symbol-lilac); --sym-accent: var(--symbol-violet);
+    --sym-link: var(--symbol-ink); --sym-focus: var(--symbol-ink);
+  }
+  [data-tone='lilac'] {
+    --sym-bg: var(--symbol-lilac); --sym-fg: var(--symbol-ink); --sym-fg-large: var(--symbol-ink); --sym-fg-muted: #4a3f55;
+    --sym-rule: var(--symbol-plum); --sym-rule-soft: var(--symbol-violet); --sym-accent: var(--symbol-apricot);
+    --sym-link: var(--symbol-ink); --sym-focus: var(--symbol-ink);
+  }
+  [data-tone='violet'] {
+    /* violet is mid-tone: ink on it is 4.68:1 (body OK) but cream is only 3.37:1, so cream is allowed for large text only
+       and there is no separate muted level (hierarchy comes from size and weight). */
+    --sym-bg: var(--symbol-violet); --sym-fg: var(--symbol-ink); --sym-fg-large: var(--symbol-cream); --sym-fg-muted: var(--symbol-ink);
+    --sym-rule: var(--symbol-ink); --sym-rule-soft: color-mix(in srgb, var(--symbol-ink) 35%, transparent); --sym-accent: var(--symbol-apricot);
+    --sym-link: var(--symbol-ink); --sym-focus: var(--symbol-ink);
+  }
+  [data-tone='apricot'] {
+    --sym-bg: var(--symbol-apricot); --sym-fg: var(--symbol-ink); --sym-fg-large: var(--symbol-ink); --sym-fg-muted: #5a4338;
+    --sym-rule: var(--symbol-ink); --sym-rule-soft: color-mix(in srgb, var(--symbol-ink) 25%, transparent); --sym-accent: var(--symbol-violet);
+    --sym-link: var(--symbol-ink); --sym-focus: var(--symbol-ink);
+  }
+  [data-tone='plum'] {
+    --sym-bg: var(--symbol-plum); --sym-fg: var(--symbol-cream); --sym-fg-large: var(--symbol-cream); --sym-fg-muted: var(--symbol-lilac);
+    --sym-rule: var(--symbol-cream); --sym-rule-soft: color-mix(in srgb, var(--symbol-cream) 30%, transparent); --sym-accent: var(--symbol-apricot);
+    --sym-link: var(--symbol-cream); --sym-focus: var(--symbol-apricot);
+    color-scheme: dark;
+  }
+}
+
+@layer sym-utilities {
+  /* every tone element paints itself; text inside inherits */
+  [data-tone] { background-color: var(--sym-bg); color: var(--sym-fg); }
+}

@@ -41,11 +41,16 @@ Items here are unresolved and must not be silently assumed.
 - Kharkiv Sea 2026: confirm dates (14–23.08 from photo folders) and programme.
 - Full English version of all pages and the URL pattern (`/en/...`).
 
+## Design
+
+- Design pass: exact tone values (type pair from the design-system branch: Playfair Display + Commissioner + logo face for labels; on 2026-10-29 Петро asked for the team-supplied Zakon on the main site — reconcile), dark theme — decided 2026-10-29: light and dark modes with a toggle (see design-system.md), square vs softer card shapes, photo treatment, hero animation personality.
+- Choose how widely to use the logo typeface (options A–D in the artifact «Шрифт Символу»; recommended: wordmark and name, plus navigation, eyebrows, tags and button labels). Confirm the font author's permission (Oleksii Chekal) to publish it as a web font on a public site.
+- Migrate `apps/main` and `apps/istoriia-vulytsi` to the design system (page by page, using the gallery templates).
+
 ## Infrastructure
 
-- Select DNS provider and deployment platform.
-- Confirm whether the GitHub repository is private and which organization plan is available.
-- Decide whether main and project sites deploy as separate Cloudflare Pages projects, separate GitHub Pages repositories, or another multi-project host.
-- Configure GitHub authentication on development computers.
-- Activate DNS for `symbol.ngo` and create explicit subdomain records; avoid an unmanaged wildcard.
+- Launch: both sites are hidden from search engines (`noindex, nofollow` meta tag, flag `indexable` in `apps/*/nuxt.config.ts`). Set it to `true` in both apps when the organization approves the public launch; add a sitemap and `robots.txt` at that time.
+- Invite remaining editors to the `NGO-Symbol` organization with Write access.
+- Decide whether pull requests need a human approval before going live (currently CI only).
+- Configure GitHub CLI authentication on each editor's computer.
 

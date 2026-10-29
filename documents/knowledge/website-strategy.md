@@ -17,7 +17,7 @@ Support (donations, patronage, membership, volunteering) and newsletter/calendar
 
 - Institutional home with a logo intro animation and a visual hook. `USER_CONFIRMED` 2026-10-29
 - Project gallery with a year chronology and filters by format, direction, and status.
-- A main-site page for every project, with a link to the subsite when one exists (ADR-0006).
+- A main-site page for every project, with a link to the subsite when one exists (ADR-0008).
 - Events with list and calendar views and a calendar subscription feed; every event belongs to a project.
 - Opportunities (open calls); active ones are shown on Home.
 - People pages with automatic links to projects and events.
