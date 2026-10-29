@@ -75,9 +75,9 @@ onMounted(() => {
   const set = document.documentElement.getAttribute('data-theme')
   theme.value = set === 'dark' || (!set && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'
 })
-// The whole page (header and background together) switches as one picture: the new theme spreads as a circle
-// from the button. Browsers without View Transitions cross-fade colours instead.
-function toggleTheme(event: MouseEvent) {
+// The whole page (header and background together) cross-fades to the new theme as one picture.
+// Browsers without View Transitions cross-fade colours instead.
+function toggleTheme() {
   const next = theme.value === 'dark' ? 'light' : 'dark'
   const root = document.documentElement
   const apply = () => {
@@ -92,15 +92,8 @@ function toggleTheme(event: MouseEvent) {
     window.setTimeout(() => root.classList.remove('theme-switching'), 700)
     return
   }
-  const x = event.clientX || innerWidth - 40
-  const y = event.clientY || 40
-  const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
   root.classList.add('theme-wipe')
-  const transition = document.startViewTransition(apply)
-  transition.ready.then(() => {
-    root.animate({ clipPath: [`circle(0 at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] }, { duration: 650, easing: 'cubic-bezier(.6, 0, .25, 1)', pseudoElement: '::view-transition-new(root)' })
-  })
-  transition.finished.finally(() => root.classList.remove('theme-wipe'))
+  document.startViewTransition(apply).finished.finally(() => root.classList.remove('theme-wipe'))
 }
 </script>
 

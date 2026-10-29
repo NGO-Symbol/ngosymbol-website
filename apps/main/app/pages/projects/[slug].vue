@@ -38,7 +38,8 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="`tone-${project.tone}`">
-      <ProjectMotif class="project-hero__motif" :motif="project.motif" live />
+      <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
+      <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
         <Breadcrumbs :items="[{ label: 'Проєкти', to: '/projects' }, { label: project.title }]" />
         <div class="project-kicker">
@@ -50,7 +51,6 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         </div>
         <h1>{{ text.title }}</h1>
         <p>{{ text.summary }}</p>
-        <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
         <a v-if="project.subsiteUrl" class="hero-site" :href="project.subsiteUrl" target="_blank" rel="noreferrer"><span class="hero-site__dot" aria-hidden="true" />Перейти на сайт проєкту ↗</a>
       </div>
     </header>
