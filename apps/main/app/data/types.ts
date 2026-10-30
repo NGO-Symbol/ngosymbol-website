@@ -110,6 +110,8 @@ export interface Person {
   hasPage?: boolean
   /** Photographs of the person's works shown in Symbol projects. */
   works?: Photo[]
+  /** Heading of the works section when they are not from Symbol exhibitions (e.g. book illustration). */
+  worksTitle?: string
   /** Structured CV for the team (no contacts or personal data). Sources: documents/knowledge/team-cv.md */
   cv?: CvSection[]
 }
