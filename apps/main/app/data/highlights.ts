@@ -2,7 +2,7 @@ import type { Photo } from './types'
 import { events } from './events'
 
 // «Кадри»: a curated pool of the strongest photographs of Symbol's work for the home page (chosen 2026-10-29 at the
-// team's request): by Петро Чекаль and Іван Самойлов (mhGAP trainings, «Покажіть свої документи…», stills of
+// team's request): by Петро Чекаль and Іван Самойлов (Kyiv mhGAP trainings; Bila Tserkva ones by Юрій Рассоха; «Покажіть свої документи…», stills of
 // «Збирач конвалій») and performances. Each visit shows a different random selection from this pool, so only
 // photos good enough to stand alone belong here. A credit is shown only where the author is recorded.
 // A photo from a particular event names the event (its slug in `event`) before the project, so a caption like
@@ -22,7 +22,7 @@ export const highlights: Highlight[] = [
   { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/projects/zbyrach-konvalii/archive.jpg', alt: 'Фотограф гортає свої знімки', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
-  { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах на тренінгу mhGAP', credit: 'Петро Чекаль', to: '/events/mhgap-kyiv-trening-1', event: 'mhgap-kyiv-trening-1', project: 'Тренінги mhGAP' },
+  { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах на тренінгу mhGAP', credit: 'Юрій Рассоха', to: '/events/mhgap-kyiv-trening-1', event: 'mhgap-kyiv-trening-1', project: 'Тренінги mhGAP' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: 'Ряди червоних паспортів на стіні', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/events/pokazhit-svoi-dokumenty-kvero/violin.jpg', alt: 'Скрипалька серед паперових аркушів під час перформансу In C', to: '/events/pokazhit-svoi-dokumenty-kvero', event: 'pokazhit-svoi-dokumenty-kvero', project: 'Покажіть свої документи…' },
   { src: '/media/projects/zbyrach-konvalii/silhouette.jpg', alt: 'Силует у кімнаті з червоним світлом', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
@@ -33,7 +33,7 @@ export const highlights: Highlight[] = [
   { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер mhGAP біля презентації', credit: 'Петро Чекаль', to: '/events/mhgap-kyiv-trening-3', event: 'mhgap-kyiv-trening-3', project: 'Тренінги mhGAP' },
   { src: '/media/projects/zbyrach-konvalii/room.jpg', alt: 'Стіна з фотографіями й предметами в квартирі фотографа', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/tv.jpg', alt: 'Два телевізори з відеороботами', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Петро Чекаль', to: '/events/mhgap-kyiv-trening-1', event: 'mhgap-kyiv-trening-1', project: 'Тренінги mhGAP' },
+  { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', to: '/events/mhgap-kyiv-trening-1', event: 'mhgap-kyiv-trening-1', project: 'Тренінги mhGAP' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/sealed.jpg', alt: 'Бетонний блок із замурованими документами', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Перформанс на відкритті виставки «Покажіть свої документи…»', to: '/events/pokazhit-svoi-dokumenty-vidkryttia', event: 'pokazhit-svoi-dokumenty-vidkryttia', project: 'Покажіть свої документи…' },
