@@ -64,7 +64,7 @@ useHead({
           </div>
         </section>
         <section v-if="person.works?.length">
-          <h2 class="person-section">Роботи на виставках «Символу»</h2>
+          <h2 class="person-section">{{ person.worksTitle ?? 'Роботи на виставках «Символу»' }}</h2>
           <PhotoGallery :photos="person.works" />
         </section>
         <section v-if="appearances.length">
