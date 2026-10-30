@@ -30,6 +30,15 @@ const workFiles = separateWorkFiles
       photos: photoGroups.find(group => normalTitle(group.title) === normalTitle(work.title))?.photos ?? photoGroups[workIndex]?.photos ?? []
     }))
   : []
+// Two work files are switched like folders in a drawer: only the chosen one is open, so the page stays short.
+const activeWork = ref(0)
+const openFile = computed(() => workFiles[activeWork.value])
+const workTabs = ref<HTMLElement>()
+// From the bottom of an open file: open the other one and bring its tabs into view.
+function openWork(workIndex: number) {
+  activeWork.value = workIndex
+  workTabs.value?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
+}
 const sheetCount = 1 + artist.works.length + (separateWorkFiles ? workFiles.filter(file => file.photos.length).length : photos.length ? 1 : 0)
 const photoCredits = (items: typeof photos) => [...new Set(items.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
 // Marks of use on some files, placed differently on each: a coffee ring on one sheet, a tea splash on another.
@@ -102,24 +111,43 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
         <div class="docs-text"><p v-for="paragraph in artist.bio" :key="paragraph">{{ paragraph }}</p></div>
       </DocsSheet>
 
-      <!-- Sai and Azla have two independent work files inside their personal file: each keeps its text and photos together. -->
-      <template v-if="separateWorkFiles">
-        <section v-for="(file, workIndex) in workFiles" :key="file.work.title" class="work-file">
-          <header class="work-file__tab">
+      <!-- Sai and Azla have two independent work files inside their personal file: each keeps its text and photos together,
+           and the folder tabs switch between them. -->
+      <section v-if="separateWorkFiles" class="work-files">
+        <div ref="workTabs" class="work-files__tabs" role="tablist" :aria-label="t('Файли робіт', 'Work files')">
+          <button
+            v-for="(file, workIndex) in workFiles"
+            :id="`work-tab-${workIndex}`"
+            :key="file.work.title"
+            type="button"
+            role="tab"
+            class="work-file__tab"
+            :class="{ 'is-active': activeWork === workIndex }"
+            :aria-selected="activeWork === workIndex"
+            aria-controls="work-file-panel"
+            @click="activeWork = workIndex"
+          >
             <span>{{ t('Файл роботи', 'Work file') }} {{ String(workIndex + 1).padStart(2, '0') }}</span>
             <strong>«{{ file.work.title }}»</strong>
-          </header>
-          <DocsSheet :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${file.work.year ? ` · ${file.work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex * 2 + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex * 2 + 2)">
-            <h2 class="case-work">«{{ file.work.title }}»</h2>
-            <div class="docs-text"><p v-for="paragraph in file.work.text" :key="paragraph">{{ paragraph }}</p></div>
+          </button>
+        </div>
+        <Transition name="work-file" mode="out-in">
+        <div v-if="openFile" id="work-file-panel" :key="openFile.work.title" class="work-file" role="tabpanel" :aria-labelledby="`work-tab-${activeWork}`">
+          <DocsSheet :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${openFile.work.year ? ` · ${openFile.work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="activeWork * 2 + 2" :tilt="activeWork % 2 ? -0.25 : 0.25" :stain="stainOf(activeWork * 2 + 2)">
+            <h2 class="case-work">«{{ openFile.work.title }}»</h2>
+            <div class="docs-text"><p v-for="paragraph in openFile.work.text" :key="paragraph">{{ paragraph }}</p></div>
           </DocsSheet>
-          <DocsSheet v-if="file.photos.length" :case-no="caseNo" :doc-no="t('Файл роботи', 'Work file')" :kind="t('Фотографії роботи', 'Photographs of the work')" :sheet="workIndex * 2 + 3" :tilt="workIndex % 2 ? 0.15 : -0.15">
-            <h3 class="case-work">«{{ file.work.title }}»</h3>
-            <DocsPhotoGallery class="case-photos" :photos="file.photos" />
-            <p v-if="photoCredits(file.photos).length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ photoCredits(file.photos).join(', ') }}</p>
+          <DocsSheet v-if="openFile.photos.length" :case-no="caseNo" :doc-no="t('Файл роботи', 'Work file')" :kind="t('Фотографії роботи', 'Photographs of the work')" :sheet="activeWork * 2 + 3" :tilt="activeWork % 2 ? 0.15 : -0.15">
+            <h3 class="case-work">«{{ openFile.work.title }}»</h3>
+            <DocsPhotoGallery class="case-photos" :photos="openFile.photos" />
+            <p v-if="photoCredits(openFile.photos).length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ photoCredits(openFile.photos).join(', ') }}</p>
           </DocsSheet>
-        </section>
-      </template>
+          <button v-for="(other, otherIndex) in workFiles" v-show="otherIndex !== activeWork" :key="other.work.title" type="button" class="work-files__next" @click="openWork(otherIndex)">
+            {{ t('Інший файл роботи', 'Other work file') }}: <strong>«{{ other.work.title }}»</strong>
+          </button>
+        </div>
+        </Transition>
+      </section>
 
       <template v-else>
         <DocsSheet v-for="(work, workIndex) in artist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex + 2)">
@@ -186,8 +214,19 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
 .case-cover__name h1 { margin: 0; font-size: clamp(2rem, calc(1rem + 3.6vw), 3.8rem); line-height: .95; }
 .case-cover__links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
 .case-papers { display: grid; margin-top: 36px; }
-.work-file { display: grid; position: relative; margin: 28px 0 44px; padding: 28px 14px 14px; border: 2px solid color-mix(in srgb, var(--docs-ink) 42%, transparent); background: color-mix(in srgb, var(--docs-folder) 56%, transparent); }
-.work-file__tab { position: absolute; left: -2px; bottom: 100%; display: flex; align-items: baseline; gap: 14px; max-width: calc(100% + 4px); padding: 8px 16px 6px; border: 2px solid color-mix(in srgb, var(--docs-ink) 42%, transparent); border-bottom: 0; background: var(--docs-folder); font-family: var(--docs-mono); text-transform: uppercase; }
+.work-files { margin: 28px 0 44px; }
+/* Folder tabs: the open file's tab joins its folder, the other one sits a step lower, behind. */
+.work-files__tabs { display: flex; gap: 6px; align-items: flex-end; position: relative; z-index: 1; margin-bottom: -2px; }
+.work-file { display: grid; position: relative; padding: 28px 14px 14px; border: 2px solid color-mix(in srgb, var(--docs-ink) 42%, transparent); background: color-mix(in srgb, var(--docs-folder) 56%, transparent); }
+.work-file-enter-active, .work-file-leave-active { transition: opacity .22s ease, transform .3s cubic-bezier(.3, 1, .4, 1); }
+.work-file-enter-from { opacity: 0; transform: translateY(14px) rotate(.4deg); }
+.work-file-leave-to { opacity: 0; transform: translateY(-8px); }
+.work-file__tab { display: flex; align-items: baseline; gap: 14px; min-width: 0; padding: 8px 16px 6px; border: 2px solid color-mix(in srgb, var(--docs-ink) 42%, transparent); border-bottom: 0; background: color-mix(in srgb, var(--docs-folder) 70%, var(--docs-paper)); color: color-mix(in srgb, var(--docs-ink) 60%, transparent); font-family: var(--docs-mono); text-transform: uppercase; cursor: pointer; transform: translateY(5px); transition: transform .25s cubic-bezier(.3, 1.3, .5, 1), background .2s ease, color .2s ease; }
+.work-file__tab:hover { transform: translateY(1px); color: var(--docs-ink); }
+.work-file__tab.is-active { background: var(--docs-folder); color: var(--docs-ink); transform: none; padding-bottom: 8px; cursor: default; }
+.work-files__next { justify-self: end; margin-top: 10px; padding: 10px 14px; border: 2px solid var(--docs-ink); background: var(--docs-sheet); color: var(--docs-ink); font-family: var(--docs-mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; cursor: pointer; box-shadow: 4px 4px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease; }
+.work-files__next strong { font-family: var(--docs-display); font-weight: 400; font-size: 1rem; }
+.work-files__next:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--docs-stamp); }
 .work-file__tab span { font-size: .68rem; letter-spacing: .09em; white-space: nowrap; }
 .work-file__tab strong { overflow: hidden; font-family: var(--docs-display); font-size: 1.05rem; line-height: 1; text-overflow: ellipsis; white-space: nowrap; }
 .case-work { margin: 0 0 16px; font-size: clamp(1.6rem, calc(1rem + 2vw), 2.6rem); }
@@ -213,8 +252,9 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
   .case-tabs__tab.is-open .case-tabs__name { display: none; }
   .case-cover__photos { width: 56%; max-width: 220px; }
   .case-cover__photos.is-duo { width: 80%; max-width: 320px; }
-  .work-file { margin-top: 34px; padding: 18px 6px 6px; }
-  .work-file__tab { gap: 8px; padding-inline: 10px; }
+  .work-file { padding: 18px 6px 6px; }
+  .work-file__tab { flex: 1 1 0; flex-direction: column; gap: 2px; padding-inline: 10px; }
+  .work-files__next { justify-self: stretch; }
   .work-file__tab strong { font-size: .9rem; }
 }
 </style>
