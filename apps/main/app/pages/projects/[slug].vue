@@ -70,11 +70,6 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
       </aside>
 
       <div class="project-sections">
-        <section v-if="project.gallery?.length">
-          <h2 class="section-title">Фото</h2>
-          <PhotoGallery :photos="project.gallery" />
-        </section>
-
         <section v-if="project.body">
           <h2 class="section-title">Про проєкт</h2>
           <RichText class="lead-text" :paragraphs="project.body" />
@@ -83,6 +78,11 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         <section v-if="project.concept">
           <h2 class="section-title">Кураторська концепція</h2>
           <RichText :paragraphs="project.concept" />
+        </section>
+
+        <section v-if="project.gallery?.length">
+          <h2 class="section-title">Фото</h2>
+          <PhotoGallery :photos="project.gallery" />
         </section>
 
         <section v-if="projectEvents.length">

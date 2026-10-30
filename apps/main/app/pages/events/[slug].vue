@@ -61,13 +61,13 @@ const googleUrl = computed(() => {
         </div>
       </aside>
       <div class="project-sections">
-        <section v-if="event.gallery?.length">
-          <h2 class="section-title">Фото</h2>
-          <PhotoGallery :photos="event.gallery" />
-        </section>
         <section v-if="event.description">
           <h2 class="section-title">Про подію</h2>
           <RichText class="lead-text" :paragraphs="event.description" />
+        </section>
+        <section v-if="event.gallery?.length">
+          <h2 class="section-title">Фото</h2>
+          <PhotoGallery :photos="event.gallery" />
         </section>
         <section v-if="speakers.length">
           <h2 class="section-title">Люди</h2>
