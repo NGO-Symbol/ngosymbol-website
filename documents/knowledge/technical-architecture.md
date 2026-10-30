@@ -28,7 +28,7 @@ Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). T
 
 ## Search visibility
 
-While in development both apps emit `<meta name="robots" content="noindex, nofollow">` on every page (`indexable = false` in each `nuxt.config.ts`). This is a request, not access control: the sites are publicly reachable, and `robots.txt` is deliberately not used because it would stop crawlers from seeing the tag. Already-indexed pages drop out only after being recrawled.
+Indexing: since 2026-10-30 the main site and the exhibition site are open to search engines (`indexable = true` in their `nuxt.config.ts`; `apps/main/public/robots.txt` allows all crawlers and names the sitemap). The «Історія моєї вулиці» app keeps `indexable = false` (`noindex, nofollow` on every page) until its launch.
 
 ## Change workflow
 

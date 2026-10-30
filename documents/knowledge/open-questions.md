@@ -50,7 +50,7 @@ Items here are unresolved and must not be silently assumed.
 
 ## Infrastructure
 
-- Launch: both sites are hidden from search engines (`noindex, nofollow` meta tag, flag `indexable` in `apps/*/nuxt.config.ts`). Set it to `true` in both apps when the organization approves the public launch; add a sitemap and `robots.txt` at that time.
+- Launch: resolved 2026-10-30 (`USER_CONFIRMED`) — symbol.ngo and the exhibition site (/documentsart/) are open to search engines (`indexable = true`), `robots.txt` points to the sitemap. «Історія моєї вулиці» (my-street) stays hidden until its own launch. Next: complete the sitemap (exhibition site, news), Search Console, structured data — see the SEO stage of the site plan.
 - Invite remaining editors to the `NGO-Symbol` organization with Write access.
 - Decide whether pull requests need a human approval before going live (currently CI only).
 - Configure GitHub CLI authentication on each editor's computer.
