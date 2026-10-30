@@ -10,8 +10,6 @@ const paused = ref(false)
 const launching = ref(false)
 const current = computed(() => items[active.value]!)
 
-const tilt = ref({ x: 0, y: 0 })
-const scrollTurn = ref(0)
 const root = ref<HTMLElement>()
 
 function select(index: number) {
@@ -70,27 +68,32 @@ const targets = computed(() => {
   return start.map(position => ((position % CIRCUMFERENCE) + CIRCUMFERENCE) % CIRCUMFERENCE)
 })
 
-// Glide each title the short way round the circle to its target.
-const offsets = ref([...targets.value])
+// Glide each title the short way round the circle to its target. Positions are written straight to the
+// <textPath> elements on each frame: kept reactive, they re-rendered the whole orbit 60 times a second.
+const initialOffsets = [...targets.value]
+let offsets = [...initialOffsets]
+const paths: SVGTextPathElement[] = []
+function place() { paths.forEach((path, index) => path.setAttribute('startOffset', String(offsets[index]))) }
 let frame = 0
 function glide() {
   cancelAnimationFrame(frame)
-  const from = [...offsets.value]
+  const from = [...offsets]
   const to = targets.value.map((target, index) => {
     let delta = target - from[index]!
     if (delta > CIRCUMFERENCE / 2) delta -= CIRCUMFERENCE
     if (delta < -CIRCUMFERENCE / 2) delta += CIRCUMFERENCE
     return from[index]! + delta
   })
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { offsets.value = targets.value; return }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { offsets = [...targets.value]; place(); return }
   const began = performance.now()
   const tick = (now: number) => {
     const t = Math.min((now - began) / 450, 1)
     const eased = 1 - (1 - t) ** 3
-    offsets.value = from.map((value, index) => {
+    offsets = from.map((value, index) => {
       const position = value + (to[index]! - value) * eased
       return ((position % CIRCUMFERENCE) + CIRCUMFERENCE) % CIRCUMFERENCE
     })
+    place()
     if (t < 1) frame = requestAnimationFrame(tick)
   }
   frame = requestAnimationFrame(tick)
@@ -114,17 +117,20 @@ function open(slug: string) {
   window.setTimeout(() => navigateTo(`/projects/${slug}`), 260)
 }
 
+// Pointer tilt and scroll turn change on every frame, so they go to CSS variables on the root element rather
+// than through Vue (a reactive value re-rendered the whole orbit at each step).
+function setTilt(x: number, y: number) {
+  root.value?.style.setProperty('--tilt-x', String(x))
+  root.value?.style.setProperty('--tilt-y', String(y))
+}
 function onPointerMove(event: PointerEvent) {
   const box = root.value?.getBoundingClientRect()
   if (!box) return
-  tilt.value = {
-    x: ((event.clientX - box.left) / box.width - 0.5) * 2,
-    y: ((event.clientY - box.top) / box.height - 0.5) * 2
-  }
+  setTilt(((event.clientX - box.left) / box.width - 0.5) * 2, ((event.clientY - box.top) / box.height - 0.5) * 2)
 }
 
 function onScroll() {
-  scrollTurn.value = window.scrollY * 0.12
+  root.value?.style.setProperty('--scroll-turn', `${window.scrollY * 0.12}deg`)
 }
 
 // Phones use larger type with the years hidden, so the titles are measured again when the layout switches.
@@ -146,14 +152,14 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
     class="orbit-hook"
     :class="{ 'is-paused': paused, 'is-launching': launching, 'is-measuring': measuring }"
     @pointermove="onPointerMove"
-    @mouseleave="paused = false; hovering = false; tilt = { x: 0, y: 0 }"
+    @mouseleave="paused = false; hovering = false; setTilt(0, 0)"
   >
     <svg
       class="orbit-hook__svg"
       viewBox="0 0 1000 1000"
       role="group"
       aria-label="Проєкти «Символу» на орбіті"
-      :style="{ transform: `perspective(1400px) rotateY(${tilt.x * 10}deg) rotateX(${-tilt.y * 10}deg)`, '--orbit-fit': measuring ? 1 : fit }"
+      :style="{ '--orbit-fit': measuring ? 1 : fit }"
     >
       <defs>
         <!-- The circle is traced twice so a title that starts near the end of the loop continues instead of being cut. -->
@@ -161,10 +167,10 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
       </defs>
       <circle cx="500" cy="500" r="470" class="orbit-hook__ring" />
       <circle cx="500" cy="500" r="390" class="orbit-hook__ring orbit-hook__ring--dashed" />
-      <g :transform="`rotate(${scrollTurn} 500 500)`">
+      <g class="orbit-hook__turn">
         <g class="orbit-hook__spin">
           <text v-for="(project, index) in items" :key="project.slug" class="orbit-hook__title" :class="{ 'is-active': index === active && !measuring }">
-            <textPath href="#orbit-path" :startOffset="offsets[index]">
+            <textPath :ref="el => { if (el) paths[index] = el as SVGTextPathElement }" href="#orbit-path" :startOffset="initialOffsets[index]">
               <a
                 :href="`/projects/${project.slug}`"
                 @mouseenter="select(index)"
@@ -177,7 +183,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
         </g>
       </g>
       <g class="orbit-hook__satellite"><rect x="-9" y="-9" width="18" height="18" transform="rotate(45)" /></g>
-      <g :style="{ transform: `translate(${tilt.x * -18}px, ${tilt.y * -18}px)` }" class="orbit-hook__parallax">
+      <g class="orbit-hook__parallax">
         <g class="orbit-hook__core">
           <SymbolLogo part="mark" x="290" y="290" width="420" height="420" />
         </g>
@@ -193,7 +199,8 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 
 <style scoped>
 .orbit-hook { display: grid; gap: 18px; justify-items: center; }
-.orbit-hook__svg { width: 100%; max-width: 640px; height: auto; overflow: visible; transition: transform .25s ease-out; }
+.orbit-hook__svg { width: 100%; max-width: 640px; height: auto; overflow: visible; transform: perspective(1400px) rotateY(calc(var(--tilt-x, 0) * 10deg)) rotateX(calc(var(--tilt-y, 0) * -10deg)); transition: transform .25s ease-out; }
+.orbit-hook__turn { transform-origin: 500px 500px; transform: rotate(var(--scroll-turn, 0deg)); }
 .orbit-hook__ring { fill: none; stroke: var(--symbol-plum); stroke-width: 1.2; opacity: .35; }
 .orbit-hook__ring--dashed { stroke-dasharray: 3 9; opacity: .5; transform-origin: 500px 500px; animation: orbit-spin 60s linear infinite reverse; }
 .orbit-hook__spin { transform-origin: 500px 500px; animation: orbit-spin 45s linear infinite; }
@@ -201,7 +208,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 .orbit-hook.is-launching .orbit-hook__spin { animation: orbit-launch .3s ease-in forwards; }
 .orbit-hook.is-launching .orbit-hook__core { animation: orbit-core-launch .3s ease-in forwards; }
 .orbit-hook__core { transform-origin: 500px 500px; animation: orbit-breathe 7s ease-in-out infinite; }
-.orbit-hook__parallax { transition: transform .3s ease-out; }
+.orbit-hook__parallax { transform: translate(calc(var(--tilt-x, 0) * -18px), calc(var(--tilt-y, 0) * -18px)); transition: transform .3s ease-out; }
 .orbit-hook__satellite { transform-origin: 500px 500px; animation: orbit-satellite 12s linear infinite; }
 .orbit-hook__satellite rect { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform: translate(500px, 30px) rotate(45deg); transform-box: fill-box; transform-origin: center; }
 .orbit-hook__title { font-family: var(--font-display); font-size: calc(23px * var(--orbit-fit, 1)); fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1), fill .25s ease; }

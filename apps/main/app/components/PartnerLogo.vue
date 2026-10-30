@@ -181,7 +181,8 @@ onMounted(async () => {
    Logos with an official dark variant (the EU emblem) switch to it instead and are never filtered.
    JPG logos have a white field: it melts into the page (multiply on light, screen once inverted on dark).
    Unscoped: in a scoped block :global(...) would drop the rest of the selector and filter the whole page. */
-.partner-logo .partner-logo__dark { display: none; }
+/* Doubled class: outranks the scoped `.partner-logo img { display: block }`, which otherwise showed both variants side by side. */
+.partner-logo.partner-logo img.partner-logo__dark { display: none; }
 .partner-logo--opaque img { mix-blend-mode: multiply; }
 :root[data-theme="dark"] .partner-logo:not(.partner-logo--official, .partner-logo--keep) img, :root[data-theme="dark"] .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
 :root[data-theme="dark"] .partner-logo--opaque img { mix-blend-mode: screen; filter: invert(1); }
