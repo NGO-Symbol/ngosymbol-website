@@ -8,6 +8,7 @@ const parsed = computed(() => (props.paragraphs ?? []).map(parseRichText))
     <p v-for="(segments, index) in parsed" :key="index">
       <template v-for="(segment, i) in segments" :key="i">
         <NuxtLink v-if="'to' in segment" :to="segment.to" :class="{ 'key-phrase': segment.key }">{{ segment.text }}</NuxtLink>
+        <a v-else-if="'href' in segment" :href="segment.href" target="_blank" rel="noreferrer" class="rich-text__source">{{ segment.text }}</a>
         <strong v-else-if="segment.key" class="key-phrase">{{ segment.text }}</strong>
         <template v-else>{{ segment.text }}</template>
       </template>

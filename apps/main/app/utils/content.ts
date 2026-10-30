@@ -134,9 +134,11 @@ export const eventsOfPerson = (slug: string) => events
 
 // Inline references: [[type:slug]] or [[type:slug|label]].
 const referencePattern = /\[\[(project|event|person):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g
+// A source cited in a biography: [label](https://…), opened in a new tab. Use sparingly — one or two per bio.
+const sourcePattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
 
 // `key`: a key phrase written **like this** in the data — dates, places, numbers, the essence of a project.
-export type Segment = { text: string; key?: boolean } | { text: string; to: string; key?: boolean }
+export type Segment = { text: string; key?: boolean } | { text: string; to: string; key?: boolean } | { text: string; href: string; key?: boolean }
 
 export const resolveReference = (type: string, slug: string): { label: string; to?: string } | undefined => {
   if (type === 'project') {
@@ -165,7 +167,20 @@ export const parseRichText = (text: string): Segment[] => {
     last = match.index! + whole.length
   }
   if (last < text.length) segments.push({ text: text.slice(last) })
-  return segments.flatMap(splitKeys)
+  return segments.flatMap(splitSources).flatMap(splitKeys)
+}
+
+function splitSources(segment: Segment): Segment[] {
+  if ('to' in segment || 'href' in segment || !segment.text.includes('](')) return [segment]
+  const parts: Segment[] = []
+  let last = 0
+  for (const match of segment.text.matchAll(sourcePattern)) {
+    if (match.index! > last) parts.push({ ...segment, text: segment.text.slice(last, match.index) })
+    parts.push({ text: match[1]!, href: match[2]!, key: segment.key })
+    last = match.index! + match[0].length
+  }
+  if (last < segment.text.length) parts.push({ ...segment, text: segment.text.slice(last) })
+  return parts
 }
 
 // **…** inside a segment marks a key phrase; a reference inside the stars ([[…]]) stays a link and is emphasised too.
@@ -175,7 +190,7 @@ function splitKeys(segment: Segment): Segment[] {
 }
 
 /** Text without reference and emphasis markup, for search, meta descriptions and feeds. */
-export const plainText = (text: string) => text.replace(/\[\[[a-z]+:[a-z0-9-]+\|?([^\]]*)\]\]/g, '$1').replace(/\*\*/g, '')
+export const plainText = (text: string) => text.replace(/\[\[[a-z]+:[a-z0-9-]+\|?([^\]]*)\]\]/g, '$1').replace(sourcePattern, '$1').replace(/\*\*/g, '')
 
 function textsOf(record: { body?: string[]; concept?: string[]; description?: string[]; bio?: string[] }) {
   return [...(record.body ?? []), ...(record.concept ?? []), ...(record.description ?? []), ...(record.bio ?? [])]

@@ -86,7 +86,11 @@ const fields = computed(() => [
 .form-fields .form-field { grid-column: 1 / -1; }
 .form-fields .form-field--half { grid-column: auto; }
 .form-signature .form-field__value { font-family: var(--docs-display); font-size: clamp(1.3rem, calc(1rem + 1vw), 1.9rem); text-transform: uppercase; }
-.form-signature a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--docs-stamp); }
+/* Curators' signatures: on hover a pen underlines the name once more in stamp ink, a quick wavy stroke drawn left to right. */
+.form-signature a { position: relative; color: inherit; text-decoration: none; border-bottom: 2px solid var(--docs-stamp); transition: border-color .3s ease; }
+.form-signature a::after { content: ''; position: absolute; left: -2%; right: -2%; bottom: -9px; height: 9px; background: var(--docs-stamp); mix-blend-mode: var(--docs-stamp-blend, multiply); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 9' preserveAspectRatio='none'%3E%3Cpath d='M1 5.5C12 2.5 20 7.5 31 4.8S50 2.2 61 5.2 82 7.6 93 4.4 110 3 119 5' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 9' preserveAspectRatio='none'%3E%3Cpath d='M1 5.5C12 2.5 20 7.5 31 4.8S50 2.2 61 5.2 82 7.6 93 4.4 110 3 119 5' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat; clip-path: inset(0 100% 0 0); transform: rotate(-1deg); transition: clip-path .45s cubic-bezier(.6, 0, .3, 1); pointer-events: none; }
+.form-signature a:hover::after, .form-signature a:focus-visible::after { clip-path: inset(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) { .form-signature a::after { transition: none; } }
 .form-mrz { margin: 28px 0 0; display: grid; gap: 2px; padding-top: 12px; border-top: 1px solid var(--docs-ink); font-family: var(--docs-mono); font-size: clamp(.62rem, calc(.4rem + .9vw), 1.05rem); letter-spacing: .14em; white-space: nowrap; overflow: hidden; opacity: .75; }
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 32px; }
 .docs-site { display: inline-flex; padding: 16px 22px 12px; background: var(--docs-ink); color: var(--docs-paper); text-decoration: none; font-family: var(--docs-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; box-shadow: 6px 6px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease; }

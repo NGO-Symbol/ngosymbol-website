@@ -41,3 +41,11 @@ Expanded bios (2026-10-30, at the team's request):
 - Олексій Чекаль: co-designer of the national typeface Zakon (presented 29.10.2026, Kyiv; Mincult, mincult.gov.ua/zakon; zaxid.net), OCU graphic style from the 2018 Unification Council, international commissions and the 2024 UCU exhibition (RISU interview 29.06.2024). `EXTRACTED`, public sources.
 - Максим Розенфельд: «Фасади. Харків» — winner of «Найкраща книга Форуму видавців» 2017, nomination «Місто — Харків» (zaxid.net, slovoidilo.ua); 2024 edition shortlisted for «Книга року BBC-2024» in the essay category (acca.ua; the earlier «non-fiction» wording was corrected). 2003 dissertation and the Foster working group from «Люк», 28.11.2022; video projects from his CV. `EXTRACTED`.
 - Іван Самойлов: portrait supplied by the team (`USER_CONFIRMED`).
+
+Bios expanded from open sources (2026-10-30, at the team's request; each fact checked against the cited page, `EXTRACTED`):
+- Петро Чекаль — UAPP profile, Ukraїner photo diary (02.05.2022), UAPP story of 03.08.2025, subjektiv.art, antikvar.ua.
+- Юрій Рассоха — no public profile online; bio from his CV only.
+- Наталія Іванова — e-flux / igorzabel.org (Igor Zabel Award 2026), founding director of ЄрміловЦентр since 2012.
+- Павло Маков, Олег Тістол, Роман Пятковка — Wikipedia (EN); Маков's academy rank differs between sources, so the text says «член».
+- Олексій Сай — Voloshyn Gallery, Wikipedia (EN), «Українська правда» (steel phoenix in Kyiv); Сергій Мельниченко — «Українська правда», lb.ua; Володимир Кузнецов — zaxid.net, «Українська правда» (2013 mural case).
+Bios may now cite a source inline as `[label](https://…)` (utils/content.ts → RichText): at most one or two links per bio.
