@@ -4,12 +4,11 @@ useSeoMeta({ title: 'Доєднатися і підтримати', description:
 const route = useRoute()
 const tab = ref<'patron' | 'community'>(route.hash === '#community' ? 'community' : 'patron')
 
-// The NGO's own current account (ПриватБанк statements 2025; USER_CONFIRMED for publication 2026-10-30).
-// Donations go only to an account of the NGO.
+// Donations go only to an account of the NGO. The IBAN is left empty on purpose until the team adds it (2026-10-30).
 const requisites = [
   { label: 'Отримувач', value: 'ГО «Символ»' },
   { label: 'ЄДРПОУ', value: '45221328' },
-  { label: 'IBAN (UAH)', value: 'UA743052990000026001003612282' },
+  { label: 'IBAN (UAH)', value: '' },
   { label: 'Банк', value: 'АТ КБ «ПриватБанк»' },
   { label: 'Призначення платежу', value: 'Благодійний внесок на статутну діяльність' }
 ]
@@ -50,7 +49,7 @@ const requisites = [
     <div v-else id="community" class="support-options" role="tabpanel" aria-labelledby="tab-community">
       <div class="support-option"><h3>Волонтерство</h3><p>Допомога на виставках, подіях і фестивалях: монтаж, зустріч гостей, документація. Відкриті набори — у розділі <NuxtLink to="/opportunities">Можливості</NuxtLink>, а написати можна вже зараз: <span class="selectable">ngo.symbol@gmail.com</span></p></div>
       <div class="support-option"><h3>Членство в ГО</h3><p>Для тих, хто хоче розвивати організацію разом із командою.</p></div>
-      <div class="support-option"><h3>Інформаційна підтримка</h3><p>Розкажіть про наші проєкти й події. Підписка на календар: <a href="/events.ics">events.ics</a></p></div>
+      <div class="support-option"><h3>Інформаційна підтримка</h3><p>Розкажіть про наші проєкти й події. Підписка на календар: <a href="/events/?view=calendar">events.ics</a></p></div>
     </div>
     </Transition>
 
@@ -60,8 +59,7 @@ const requisites = [
         <div v-for="item in requisites" :key="item.label">
           <dt>{{ item.label }}</dt>
           <dd>
-            <CopyValue v-if="item.value !== 'уточнюється'" :value="item.value" />
-            <span v-else>{{ item.value }}</span>
+            <CopyValue v-if="item.value" :value="item.value" />
           </dd>
         </div>
       </dl>

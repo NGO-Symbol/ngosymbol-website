@@ -1,7 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({ title: 'Події', description: 'Події ГО «Символ»: відкриття, екскурсії, перформанси, лекції. Список і календар.' })
 
-const view = ref<'list' | 'calendar'>('list')
+// «Підписатися на календар подій» elsewhere on the site opens this page straight in the calendar (?view=calendar).
+const route = useRoute()
+const view = ref<'list' | 'calendar'>(route.query.view === 'calendar' ? 'calendar' : 'list')
 const projectFilter = ref('')
 
 const eventProjects = [...new Map(eventItems.map(item => [item.project.slug, item.project])).values()]

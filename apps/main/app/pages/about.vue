@@ -63,7 +63,7 @@ const supporters = organizations
       <div class="section-heading">
         <div><span class="label">Партнери й донори</span><h2>З ким ми працюємо</h2></div>
       </div>
-      <PartnerTiles :items="supporters" />
+      <PartnerTiles :items="supporters" compact />
     </section>
 
     <section id="press" class="section section--tight">
