@@ -73,24 +73,22 @@ useHead({
           <RichText v-if="bioParagraphs.length" class="person-bio" :paragraphs="bioParagraphs" />
           <p v-else-if="!person.shortBio" class="empty-note">Біографія готується.</p>
         </section>
+        <!-- Résumé blocks (education, experience…) fold everywhere; works, projects and events fold on phones only. -->
         <section v-if="person.cv?.length" class="cv">
           <h2 class="person-section">Резюме</h2>
-          <div v-for="section in person.cv" :key="section.title" class="cv__section">
-            <h3>{{ section.title }}</h3>
+          <Fold v-for="section in person.cv" :key="section.title" class="cv__section" :title="section.title" level="h3" heading-class="" :open="false">
             <ul>
               <li v-for="(item, index) in section.items" :key="index">
                 <span class="cv__period">{{ item.period ?? '' }}</span>
                 <span>{{ item.text }}</span>
               </li>
             </ul>
-          </div>
+          </Fold>
         </section>
-        <section v-if="person.works?.length">
-          <h2 class="person-section">{{ person.worksTitle ?? 'Роботи на виставках «Символу»' }}</h2>
+        <Fold v-if="person.works?.length" :title="person.worksTitle ?? 'Роботи на виставках «Символу»'" heading-class="person-section">
           <PhotoGallery :photos="person.works" />
-        </section>
-        <section v-if="appearances.length">
-          <h2 class="person-section">У проєктах «Символу»</h2>
+        </Fold>
+        <Fold v-if="appearances.length" title="У проєктах «Символу»" heading-class="person-section">
           <ul class="appearances">
             <li v-for="item in appearances" :key="item.to">
               <NuxtLink :to="item.to">{{ item.title }}</NuxtLink>
@@ -98,9 +96,8 @@ useHead({
               <span class="appearances__role">{{ item.roles.join(', ') }}</span>
             </li>
           </ul>
-        </section>
-        <section v-if="personEvents.length">
-          <h2 class="person-section">Події</h2>
+        </Fold>
+        <Fold v-if="personEvents.length" title="Події" heading-class="person-section">
           <ul class="appearances">
             <li v-for="{ event, roles } in personEvents" :key="event.slug">
               <NuxtLink :to="`/events/${event.slug}`">{{ event.title }}</NuxtLink>
@@ -108,7 +105,7 @@ useHead({
               <span class="appearances__role">{{ roles.join(', ') }}</span>
             </li>
           </ul>
-        </section>
+        </Fold>
       </div>
     </div>
   </article>
@@ -117,7 +114,7 @@ useHead({
 <style scoped>
 /* Who the person is: small outline labels at the top right, on the breadcrumbs line (they wrap under it on phones). */
 .person-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 24px; }
-.person-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.person-tags { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
 .person-tags li { padding: 4px 12px; border: 1px solid currentColor; border-radius: 999px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--symbol-violet); white-space: nowrap; }
 @media (max-width: 720px) { .person-tags { justify-content: flex-start; } }
 </style>

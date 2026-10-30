@@ -108,8 +108,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <PhotoGallery :photos="project.gallery" />
         </section>
 
-        <section v-if="projectEvents.length">
-          <h2 class="section-title">Події проєкту</h2>
+        <Fold v-if="projectEvents.length" title="Події проєкту">
           <div class="event-list">
             <NuxtLink v-for="event in [...upcomingEvents, ...pastEvents]" :key="event.slug" class="event-row" :to="`/events/${event.slug}`">
               <time class="event-row__date" :datetime="event.start">{{ formatRange(event.start, event.end) }}</time>
@@ -117,10 +116,9 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
               <span class="event-row__meta"><span>{{ formats[event.format] }}</span><span>{{ venueLine(event.venue) }}</span></span>
             </NuxtLink>
           </div>
-        </section>
+        </Fold>
 
-        <section v-if="team.length">
-          <h2 class="section-title">Люди</h2>
+        <Fold v-if="team.length" title="Люди">
           <div class="credits">
             <div v-for="group in team" :key="group.role" class="credits__group">
               <h3>{{ group.role }}</h3>
@@ -138,10 +136,9 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
               </ul>
             </div>
           </div>
-        </section>
+        </Fold>
 
-        <section v-if="partners.length || donors.length || project.programLogo">
-          <h2 class="section-title">Партнери й донори</h2>
+        <Fold v-if="partners.length || donors.length || project.programLogo" title="Партнери й донори">
           <div class="credits">
             <div v-if="partners.length" class="credits__group">
               <h3>Партнери</h3>
@@ -158,10 +155,9 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
             <img :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
             <figcaption>{{ project.programLogo.name }}</figcaption>
           </figure>
-        </section>
+        </Fold>
 
-        <section v-if="mentions.length">
-          <h2 class="section-title">Преса</h2>
+        <Fold v-if="mentions.length" title="Преса">
           <ul class="press-list">
             <li v-for="item in mentions" :key="item.url">
               <a :href="item.url" target="_blank" rel="noreferrer">
@@ -170,14 +166,13 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
               </a>
             </li>
           </ul>
-        </section>
+        </Fold>
 
-        <section v-if="calls.length">
-          <h2 class="section-title">Можливості</h2>
+        <Fold v-if="calls.length" title="Можливості">
           <a v-for="call in calls" :key="call.slug" class="open-call" :href="call.applyUrl" target="_blank" rel="noreferrer">
             <strong>{{ call.title }}</strong><span>Дедлайн: {{ formatDate(call.deadline) }}</span><span class="open-call__cta">Подати заявку</span>
           </a>
-        </section>
+        </Fold>
       </div>
     </div>
 
