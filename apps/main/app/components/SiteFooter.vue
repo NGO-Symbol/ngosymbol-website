@@ -25,7 +25,7 @@ const labels: Record<string, [string, string]> = {
         <span class="label">{{ isEn ? 'Contact' : 'Зв’язок' }}</span>
         <a class="footer-icon-link" :href="`mailto:${contactEmail}`"><SocialIcon network="email" /><span>{{ contactEmail }}</span></a>
         <CopyValue :value="contactEmail" :en="isEn" plain button-only />
-        <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
+        <div class="footer-socials"><SocialLink v-for="item in socials" :key="item.url" :url="item.url" /></div>
         <NuxtLink class="footer-icon-link" :to="isEn ? '/en/events' : '/events'"><SocialIcon network="calendar" /><span>{{ isEn ? 'Events calendar' : 'Календар подій' }}</span></NuxtLink>
       </div>
       <div>

@@ -54,6 +54,14 @@ onMounted(() => {
 })
 onBeforeUnmount(() => window.removeEventListener('resize', moveInk))
 
+// Phones: the sections live behind a menu button (always a button, never a gesture); the menu closes on navigation,
+// on Escape and on a second tap. Wide screens keep the sections in the header row.
+const menuOpen = ref(false)
+watch(() => route.path, () => { menuOpen.value = false })
+function onKey(event: KeyboardEvent) { if (event.key === 'Escape') menuOpen.value = false }
+onMounted(() => window.addEventListener('keydown', onKey))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+
 // Sticky header: hides while scrolling down, comes back as soon as the visitor scrolls up.
 const hidden = ref(false)
 const scrolled = ref(false)
@@ -113,11 +121,11 @@ function toggleTheme() {
 </script>
 
 <template>
-  <header class="site-header container" :class="{ 'is-hidden': hidden, 'is-scrolled': scrolled }" @focusin="hidden = false">
+  <header class="site-header container" :class="{ 'is-hidden': hidden && !menuOpen, 'is-scrolled': scrolled, 'is-menu-open': menuOpen }" @focusin="hidden = false">
     <NuxtLink class="wordmark" :to="isEn ? '/en' : '/'" :aria-label="isEn ? 'NGO Symbol — home' : 'ГО «Символ» — головна'" @click="animateMark">
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
-    <nav ref="navEl" :class="{ 'is-end': navEnd }" :aria-label="isEn ? 'Main navigation' : 'Основна навігація'">
+    <nav id="site-nav" ref="navEl" :class="{ 'is-end': navEnd, 'is-open': menuOpen }" :aria-label="isEn ? 'Main navigation' : 'Основна навігація'">
       <span class="nav-ink" :class="{ 'is-visible': ink.visible }" :style="{ transform: `translate(${ink.left}px, ${ink.top}px)`, width: `${ink.width}px` }" aria-hidden="true" />
       <NuxtLink v-for="item in nav" :key="item.to" :to="item.to" class="nav-tab" :class="{ 'is-pressed': pressed === item.to }" @click="press(item.to)" @animationend="pressed = ''">
         <span class="nav-tab__label"><span class="nav-tab__roll" :data-label="item.label">{{ item.label }}</span></span>
@@ -134,6 +142,9 @@ function toggleTheme() {
       <SiteSearch :en="isEn" />
       <button type="button" class="theme-toggle" :aria-label="theme === 'dark' ? (isEn ? 'Light mode' : 'Світлий режим') : (isEn ? 'Dark mode' : 'Темний режим')" :aria-pressed="theme === 'dark'" @click="toggleTheme">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18z" /></svg>
+      </button>
+      <button type="button" class="menu-toggle" :class="{ 'is-open': menuOpen }" aria-controls="site-nav" :aria-expanded="menuOpen" :aria-label="menuOpen ? (isEn ? 'Close menu' : 'Закрити меню') : (isEn ? 'Menu' : 'Меню')" @click="menuOpen = !menuOpen">
+        <span /><span /><span />
       </button>
     </div>
   </header>
