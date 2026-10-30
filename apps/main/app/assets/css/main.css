@@ -143,6 +143,7 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .footer-grid a:hover { color: var(--symbol-cream); text-decoration: underline; }
 .footer-grid .label { opacity: .7; margin-bottom: 2px; }
 .footer-socials { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.footer-consent { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: .78rem; opacity: .75; text-decoration: underline; cursor: pointer; }
 .footer-mark { display: flex; align-items: center; gap: 10px; }
 /* Little space above a page: the header line is enough of a gap; generous space stays at the bottom. */
 .page { padding-block: clamp(28px, 3.5vw, 52px) clamp(70px, 10vw, 130px); }

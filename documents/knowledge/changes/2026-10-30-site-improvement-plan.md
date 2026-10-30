@@ -27,3 +27,9 @@ Status: `USER_CONFIRMED` — the team agreed the stages below; they are worked t
 8. Search: hints and example queries in the empty search.
 9. Analytics: Google Analytics 4 (audience, country, age where available, goals: support, calendar, project site, applications), Microsoft Clarity (click maps, recordings), consent banner, Search Console.
 10. Content: IBAN row emptied.
+
+## Progress (2026-10-30)
+
+- Done in pull requests #47–#56: open to search engines; speed (AVIF previews, no redirects, WOFF2); photo fix; quick wins (IBAN row empty, calendar links, focus rings, logos on hover/tap, home text, numbers after «Кадри», reel captions on one line, compact partners); SEO (canonical, hreflang, share cards, schema.org, full sitemap with images, alt names); navigation (phone menu, calmer footer, theme icon); layout (gaps, phone rhythm, overlaps, folds, portraits, two cards per row); orbit runner; motion tiers, 0.4 s crossing on phones, search hints; analytics and consent banner ready.
+- Waiting for the team: GA4 and Clarity IDs (`apps/main/app/data/analytics.ts`), DNS access for Search Console, the IBAN.
+- Not covered yet: analytics and consent on the exhibition site (/documentsart/); breadcrumbs in the phone header (optional).

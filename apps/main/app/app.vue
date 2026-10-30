@@ -60,5 +60,6 @@ useHead({
     </main>
     <SiteFooter />
     <BackToTop />
+    <CookieConsent />
   </div>
 </template>
