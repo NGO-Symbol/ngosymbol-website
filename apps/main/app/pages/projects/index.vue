@@ -41,12 +41,14 @@ const byYear = (year: number) => visible.value.filter(project => project.yearSta
 
 const currentYear = ref<number>()
 let observer: IntersectionObserver | undefined
+// While a click scrolls the page to a year, the years passed on the way do not flicker in the rail.
+let jumping = 0
 
 function observe() {
   observer?.disconnect()
   observer = new IntersectionObserver((entries) => {
     const top = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
-    if (top) currentYear.value = Number((top.target as HTMLElement).dataset.year)
+    if (top && Date.now() > jumping) currentYear.value = Number((top.target as HTMLElement).dataset.year)
   }, { rootMargin: '-20% 0px -60% 0px' })
   document.querySelectorAll<HTMLElement>('[data-year]').forEach(el => observer!.observe(el))
 }
@@ -59,9 +61,27 @@ watch(years, () => nextTick(observe))
 onBeforeUnmount(() => observer?.disconnect())
 
 function jump(year: number) {
+  jumping = Date.now() + 900
   document.getElementById(`year-${year}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   currentYear.value = year
 }
+
+// One underline glides from year to year (instead of jumping), measured from the active button.
+const rail = ref<HTMLElement>()
+const ink = ref({ x: 0, y: 0, width: 0, ready: false })
+function placeInk() {
+  const button = rail.value?.querySelector<HTMLElement>('button.active')
+  if (!button) return
+  // The active year is drawn 8% larger from its left edge (see .year-rail button.active).
+  ink.value = { x: button.offsetLeft, y: button.offsetTop + button.offsetHeight - 3, width: button.offsetWidth * 1.08, ready: true }
+  // Phones: the rail scrolls sideways, so the active year is brought into view.
+  if (rail.value && rail.value.scrollWidth > rail.value.clientWidth) {
+    rail.value.scrollTo({ left: button.offsetLeft - rail.value.clientWidth / 2 + button.offsetWidth / 2, behavior: 'smooth' })
+  }
+}
+watch(currentYear, () => nextTick(placeInk))
+onMounted(() => { nextTick(placeInk); window.addEventListener('resize', placeInk) })
+onBeforeUnmount(() => window.removeEventListener('resize', placeInk))
 </script>
 
 <template>
@@ -94,7 +114,8 @@ function jump(year: number) {
     </div>
 
     <div class="chronology">
-      <nav class="year-rail" aria-label="Роки">
+      <nav ref="rail" class="year-rail" aria-label="Роки">
+        <span class="year-rail__ink" :class="{ 'is-ready': ink.ready }" :style="{ transform: `translate(${ink.x}px, ${ink.y}px)`, width: `${ink.width}px` }" aria-hidden="true" />
         <button
           v-for="year in years"
           :key="year"
