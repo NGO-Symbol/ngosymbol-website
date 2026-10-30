@@ -1,7 +1,8 @@
 <script setup lang="ts">
-// Home visual hook: project titles with years circle the spiral mark. The orbit tilts toward the pointer,
-// turns further as the page scrolls, pauses on hover/focus and shows the project's line below.
-// Clicking a title spins the orbit once before opening the project page.
+// Home visual hook: project titles circle the spiral mark (years only in the line below, to keep the ring light).
+// A runner travels slowly round the ring; the project it reaches lights up and its title and short description
+// show below. Hovering or focusing a title sends the runner to it. The orbit tilts toward the pointer and turns a
+// little as the page scrolls. Clicking a title spins the orbit once before opening the project page.
 const items = [...projects].sort((a, b) => b.yearStart - a.yearStart)
 
 const active = ref(0)
@@ -16,6 +17,8 @@ function select(index: number) {
   active.value = index
   paused.value = true
   hovering.value = true
+  // The runner flies to the chosen title (its centre once the titles have made room for it).
+  nextTick(() => { runnerTarget = centreDeg(index) })
 }
 
 // Layout along the orbit. Titles are measured, the free space is shared out as equal gaps, and the
@@ -31,7 +34,7 @@ const NEIGHBOUR_ROOM = 14
 const MIN_GAP = 28
 // Before fonts are measured: an estimate from the number of letters.
 const titleLengths = ref(items.map(project => project.title.length * 11))
-const yearLengths = ref(items.map(() => 40))
+const yearLengths = ref<number[]>(items.map(() => 0))
 const measuring = ref(false)
 
 const fit = computed(() => {
@@ -100,6 +103,45 @@ function glide() {
 }
 watch(targets, glide)
 
+// Runner: an angle in degrees, clockwise from the left end of the ring — the same measure as the titles' offsets
+// along the path (offset / radius). Driven by requestAnimationFrame only while the orbit is on screen.
+const RUNNER_SPEED = 6 // degrees per second: one round in a minute
+const runner = ref<SVGGElement>()
+let runnerDeg = 90
+let runnerTarget: number | null = null
+let runnerFrame = 0
+let runnerLast = 0
+let onScreen = false
+const toDeg = (offset: number) => offset / RADIUS * 180 / Math.PI
+const titleSpan = (index: number) => (titleLengths.value[index] ?? 0) * fit.value * (index === active.value ? ACTIVE_SCALE : 1)
+function centreDeg(index: number) { return ((toDeg(targets.value[index]! + titleSpan(index) / 2) % 360) + 360) % 360 }
+function titleAt(deg: number) {
+  return offsets.findIndex((offset, index) => {
+    const start = toDeg(offset), length = toDeg(titleSpan(index))
+    return ((deg - start) % 360 + 360) % 360 <= length
+  })
+}
+function placeRunner() { runner.value?.setAttribute('transform', `rotate(${runnerDeg} 500 500)`) }
+function runnerTick(now: number) {
+  const dt = Math.min((now - (runnerLast || now)) / 1000, .5)
+  runnerLast = now
+  if (runnerTarget !== null) {
+    let diff = runnerTarget - runnerDeg
+    if (diff > 180) diff -= 360
+    if (diff < -180) diff += 360
+    runnerDeg += diff * Math.min(1, dt * 7)
+    if (Math.abs(diff) < .3) { runnerDeg = runnerTarget; runnerTarget = null }
+  }
+  else if (!hovering.value && !launching.value) {
+    runnerDeg = (runnerDeg + RUNNER_SPEED * dt) % 360
+    const index = titleAt(runnerDeg)
+    if (index !== -1 && index !== active.value) active.value = index
+  }
+  placeRunner()
+  if (onScreen) runnerFrame = requestAnimationFrame(runnerTick)
+}
+function startRunner() { cancelAnimationFrame(runnerFrame); runnerLast = 0; runnerFrame = requestAnimationFrame(runnerTick) }
+
 const titleSpans: SVGTSpanElement[] = []
 const yearSpans: SVGTSpanElement[] = []
 async function measure() {
@@ -140,10 +182,19 @@ onMounted(async () => {
   await measure()
   phone = matchMedia('(max-width: 600px)')
   phone.addEventListener('change', measure)
+  runnerDeg = centreDeg(active.value)
+  placeRunner()
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  runnerObserver = new IntersectionObserver(([entry]) => {
+    onScreen = !!entry?.isIntersecting
+    if (onScreen) startRunner()
+    else cancelAnimationFrame(runnerFrame)
+  })
+  if (root.value) runnerObserver.observe(root.value)
   window.addEventListener('scroll', onScroll, { passive: true })
 })
-onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.removeEventListener('change', measure); cancelAnimationFrame(frame) })
+let runnerObserver: IntersectionObserver | undefined
+onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.removeEventListener('change', measure); cancelAnimationFrame(frame); cancelAnimationFrame(runnerFrame); runnerObserver?.disconnect() })
 </script>
 
 <template>
@@ -177,12 +228,13 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
                 @focus="select(index)"
                 @blur="paused = false; hovering = false"
                 @click.prevent="open(project.slug)"
-              ><tspan :ref="el => { if (el) titleSpans[index] = el as SVGTSpanElement }">{{ project.title }}</tspan><tspan :ref="el => { if (el) yearSpans[index] = el as SVGTSpanElement }" class="orbit-hook__year" :dx="YEAR_GAP">{{ project.yearStart }}</tspan></a>
+              ><tspan :ref="el => { if (el) titleSpans[index] = el as SVGTSpanElement }">{{ project.title }}</tspan></a>
             </textPath>
           </text>
         </g>
+        <!-- The runner sits on the outer ring at the left end and is turned round the centre (see runnerTick). -->
+        <g ref="runner" class="orbit-hook__runner" transform="rotate(90 500 500)"><rect x="21" y="491" width="18" height="18" transform="rotate(45 30 500)" /></g>
       </g>
-      <g class="orbit-hook__satellite"><rect x="-9" y="-9" width="18" height="18" transform="rotate(45)" /></g>
       <g class="orbit-hook__parallax">
         <g class="orbit-hook__core">
           <SymbolLogo part="mark" x="290" y="290" width="420" height="420" />
@@ -203,24 +255,20 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 .orbit-hook__turn { transform-origin: 500px 500px; transform: rotate(var(--scroll-turn, 0deg)); }
 .orbit-hook__ring { fill: none; stroke: var(--symbol-plum); stroke-width: 1.2; opacity: .35; }
 .orbit-hook__ring--dashed { stroke-dasharray: 3 9; opacity: .5; transform-origin: 500px 500px; animation: orbit-spin 60s linear infinite reverse; }
-.orbit-hook__spin { transform-origin: 500px 500px; animation: orbit-spin 45s linear infinite; }
-.orbit-hook.is-paused .orbit-hook__spin { animation-play-state: paused; }
+.orbit-hook__spin { transform-origin: 500px 500px; }
 .orbit-hook.is-launching .orbit-hook__spin { animation: orbit-launch .3s ease-in forwards; }
 .orbit-hook.is-launching .orbit-hook__core { animation: orbit-core-launch .3s ease-in forwards; }
 .orbit-hook__core { transform-origin: 500px 500px; animation: orbit-breathe 7s ease-in-out infinite; }
 .orbit-hook__parallax { transform: translate(calc(var(--tilt-x, 0) * -18px), calc(var(--tilt-y, 0) * -18px)); transition: transform .3s ease-out; }
-.orbit-hook__satellite { transform-origin: 500px 500px; animation: orbit-satellite 12s linear infinite; }
-.orbit-hook__satellite rect { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; transform: translate(500px, 30px) rotate(45deg); transform-box: fill-box; transform-origin: center; }
+.orbit-hook__runner rect { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; }
 .orbit-hook__title { font-family: var(--font-display); font-size: calc(23px * var(--orbit-fit, 1)); fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1), fill .25s ease; }
 .orbit-hook.is-measuring .orbit-hook__title { transition: none; }
 .orbit-hook__title a { cursor: pointer; outline: none; }
 .orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: calc(27px * var(--orbit-fit, 1)); text-decoration: underline; }
-.orbit-hook__year { font-family: var(--font-body); font-size: calc(15px * var(--orbit-fit, 1)); letter-spacing: .1em; fill: var(--symbol-violet); }
 /* Phones: the orbit is drawn small, so titles get larger type and the years step aside to make room. */
 @media (max-width: 600px) {
   .orbit-hook__title { font-size: calc(30px * var(--orbit-fit, 1)); }
   .orbit-hook__title.is-active { font-size: calc(33px * var(--orbit-fit, 1)); }
-  .orbit-hook__year { display: none; }
 }
 .orbit-hook__caption { width: min(100%, 460px); display: grid; gap: 6px; text-align: center; text-decoration: none; min-height: 7.5em; animation: caption-in .45s cubic-bezier(.2, 1.2, .4, 1); }
 .orbit-hook__caption strong { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
@@ -228,7 +276,6 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 .orbit-hook__caption .label { color: var(--symbol-violet); }
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 @keyframes orbit-breathe { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(-14deg) scale(1.06); } }
-@keyframes orbit-satellite { to { transform: rotate(-360deg); } }
 @keyframes orbit-launch { to { transform: rotate(60deg); opacity: 0; } }
 @keyframes orbit-core-launch { to { transform: scale(.92); opacity: 0; } }
 @keyframes caption-in { from { opacity: 0; transform: translateY(14px) scale(.97); } }
