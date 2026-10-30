@@ -21,11 +21,28 @@ const bioParagraphs = computed(() => {
   return paragraphs
 })
 
-useSeoMeta({ title: person.name, description: person.shortBio ?? `${person.name} у проєктах ГО «Символ».` })
+useSeoMeta({
+  title: person.name,
+  description: person.shortBio ?? `${person.name} у проєктах ГО «Символ».`,
+  // The portrait is the share image, so a search or a shared link shows the person's own photo.
+  ogImage: person.photo ? `https://symbol.ngo${person.photo}` : undefined,
+  ogImageAlt: person.photo ? person.name : undefined
+})
+// schema.org Person: name, portrait, links, role in the team — helps search engines match the person and the photo.
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: person.name, description: person.shortBio })
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: person.name,
+      description: person.shortBio,
+      url: `https://symbol.ngo/people/${person.slug}/`,
+      image: person.photo ? `https://symbol.ngo${person.photo}` : undefined,
+      jobTitle: person.teamRole ?? person.tags?.join(', '),
+      sameAs: person.links?.map(link => link.url),
+      affiliation: person.team ? { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' } : undefined
+    })
   }]
 })
 </script>

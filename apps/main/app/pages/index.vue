@@ -6,6 +6,26 @@ useSeoMeta({
   ogTitle: 'ГО «Символ» — культура в русі',
   ogDescription: 'Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.'
 })
+// schema.org Organization: who we are, for search engines (facts from documents/knowledge/organization.md).
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'NGO',
+      name: 'ГО «Символ»',
+      alternateName: ['Громадська організація «Символ»', 'NGO Symbol'],
+      url: 'https://symbol.ngo/',
+      logo: 'https://symbol.ngo/press-kit/symbol-mark.png',
+      description: 'Незалежна українська організація, що розвиває сучасну українську культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.',
+      foundingDate: '2023-10-11',
+      address: { '@type': 'PostalAddress', addressLocality: 'Харків', addressCountry: 'UA' },
+      areaServed: ['Харків', 'Закарпаття', 'Київ'],
+      email: 'ngo.symbol@gmail.com',
+      sameAs: socials.map(item => item.url)
+    })
+  }]
+})
 
 // A different selection from the curated pool on every visit, chosen in the browser before any photo loads.
 const reel = ref<typeof highlights>([])
