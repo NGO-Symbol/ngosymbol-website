@@ -50,3 +50,11 @@
 .theme-documents .event-row__date { font-family: var(--docs-mono); font-size: .78rem; }
 .theme-documents .event-row__title { font-size: 1.7rem; line-height: 1; }
 .theme-documents .event-row__meta { font-family: var(--docs-mono); font-size: .78rem; }
+
+/* Phones: the event rows of the exhibition theme stack (date, title, place) instead of three squeezed columns,
+   which made the title and the place run into each other. */
+@media (max-width: 820px) {
+  .theme-documents .event-row { grid-template-columns: 1fr; gap: 6px; align-items: start; }
+  .theme-documents .event-row__title { font-size: 1.3rem; line-height: 1.05; }
+  .theme-documents .event-row__meta { flex-direction: row; flex-wrap: wrap; gap: 2px 10px; }
+}

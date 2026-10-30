@@ -2,6 +2,11 @@
 import { contactEmail, socials } from '~/data/social'
 
 const { isEn, localePath } = useLang()
+const { $consent } = useNuxtApp()
+const reopened = useState('consent-reopened', () => false)
+// Shown after hydration only (the consent plugin is client-side), so server and browser render the same footer.
+const consentEnabled = ref(false)
+onMounted(() => { consentEnabled.value = !!$consent?.enabled })
 const sections = ['/projects', '/events', '/opportunities', '/people', '/news', '/press', '/support']
 const labels: Record<string, [string, string]> = {
   '/projects': ['Проєкти', 'Projects'], '/events': ['Події', 'Events'], '/opportunities': ['Можливості', 'Opportunities'], '/people': ['Люди', 'People'],
@@ -33,6 +38,7 @@ const labels: Record<string, [string, string]> = {
         <p v-if="isEn">Kharkiv · Kyiv · Zakarpattia<br>Ukraine and international projects</p>
         <p v-else>Харків · Київ · Закарпаття<br>Україна та міжнародні проєкти</p>
         <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} <CopyValue value="45221328" :en="isEn" plain /></p>
+        <button v-if="consentEnabled" type="button" class="footer-consent" @click="reopened = true">{{ isEn ? 'Cookie settings' : 'Налаштування кукі' }}</button>
       </div>
     </div>
   </footer>

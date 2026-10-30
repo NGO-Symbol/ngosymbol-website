@@ -143,8 +143,10 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .footer-grid a:hover { color: var(--symbol-cream); text-decoration: underline; }
 .footer-grid .label { opacity: .7; margin-bottom: 2px; }
 .footer-socials { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.footer-consent { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: .78rem; opacity: .75; text-decoration: underline; cursor: pointer; }
 .footer-mark { display: flex; align-items: center; gap: 10px; }
-.page { padding-block: clamp(70px, 10vw, 130px); }
+/* Little space above a page: the header line is enough of a gap; generous space stays at the bottom. */
+.page { padding-block: clamp(28px, 3.5vw, 52px) clamp(70px, 10vw, 130px); }
 .page-title { max-width: 800px; margin-bottom: 58px; }
 .page-title:has(h1) { max-width: 1000px; }
 .page-title--wide { max-width: 1000px; }
@@ -561,10 +563,10 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .site-header nav .nav-tab.router-link-active { color: var(--symbol-violet); }
   .site-header nav .nav-support { align-self: flex-start; margin-top: 14px; padding: 9px 18px; font-size: 1rem; }
   .site-header.is-menu-open { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 18px 30px -18px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
-  .page { padding-block: 28px 64px; }
-  .page-title { margin-bottom: 36px; }
+  .page { padding-block: 18px 64px; }
   .hero-bottom,.section-heading,.statement-grid,.footer-grid,.about-grid,.project-content { grid-template-columns: 1fr; }
-  .project-grid,.project-grid--archive { grid-template-columns: 1fr; }
+  /* Phones: two project cards to a row, compact (title and years; the summary stays on the project page). */
+  .project-grid,.project-grid--archive { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .home-hero,.support-band__grid,.subscribe__grid { grid-template-columns: 1fr; }
   .home-hero__orbit { order: -1; }
   .chronology { grid-template-columns: 1fr; gap: 10px; }
@@ -578,7 +580,23 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .calendar__cell .calendar__event { min-height: 8px; padding: 0; border-radius: 4px; box-shadow: none; background: var(--event-tone, var(--symbol-violet)); }
   .calendar__cell .calendar__event > * { display: none; }
   .calendar__list { display: grid; }
-  .project-card { min-height: 470px; }
+  .project-card { min-height: 0; }
+  .project-card__meta { padding: 8px; font-size: .58rem; flex-direction: column; gap: 2px; }
+  .project-card__visual { min-height: 0; aspect-ratio: 1; flex: none; }
+  .project-card__body { padding: 10px 10px 12px; }
+  .project-card__body p, .project-card__body > span { display: none; }
+  .project-card__body h2 { font-size: 1.05rem; margin: 0; }
+  .project-card__badge { left: 6px; bottom: 6px; padding: 4px 6px; font-size: .56rem; }
+  .project-card__badge--site { display: none; }
+  /* Phones: smaller portraits on person pages and in the people lists. */
+  .person-portrait { max-width: 150px; margin-bottom: 16px; }
+  .project-sections { gap: 28px; }
+  /* One rhythm for phones: 24 px between the title block, the aside (portrait, links) and the sections. */
+  .project-content { gap: 24px; padding-block: 24px 40px; }
+  .page-title { margin-bottom: 24px; }
+  .project-content aside a { margin-top: 12px; }
+  .person-card--team .person-card__avatar { width: 64px; height: 64px; }
+  .person-card__avatar { width: 46px; height: 46px; }
   .statement-index { display: none; }
 }
 
@@ -600,6 +618,8 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 /* Crossing to and from a project site (plugins/project-crossing.client.ts). Leaving: the exhibition's paper with a
    barcode rises over the page. Back from the project site: Symbol's violet curtain with the mark slides away. */
 html[data-cross] body::after { content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+/* Phones: the crossing between symbol.ngo and a project site takes about 0.4 s in all. */
+@media (max-width: 820px) { html[data-cross="leave"] body::after { animation-duration: .28s; } html[data-cross="enter"] body::after { animation-duration: .35s; animation-delay: .05s; } }
 html[data-cross="leave"] body::after { background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 7px) center / min(70vw, 520px) 72px no-repeat, #e8e8e5; animation: cross-rise .55s cubic-bezier(.7, 0, .3, 1) both; }
 html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) center / 76px no-repeat; animation: cross-away .75s cubic-bezier(.7, 0, .2, 1) .15s both; }
 @keyframes cross-rise { from { transform: translateY(100%); } }
@@ -627,3 +647,11 @@ html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) cen
 .social-link.is-tapped, .footer-icon-link.is-tapped { animation: tap-hop .4s cubic-bezier(.3, 1.4, .5, 1); }
 .site-header nav a.is-tapped, .text-link.is-tapped, .subscribe__links a.is-tapped { animation: tap-ink .5s ease-out; }
 @media (prefers-reduced-motion: reduce) { .is-tapped, .is-tapped * { animation: none !important; } }
+
+/* Motion tier «lite» (plugins/motion.client.ts): weak or busy devices keep the content, lose the decoration. */
+html[data-motion="lite"] .orbit-hook__ring--dashed, html[data-motion="lite"] .orbit-hook__core { animation: none; }
+html[data-motion="lite"] .orbit-hook__svg, html[data-motion="lite"] .orbit-hook__parallax { transition: none; transform: none; }
+html[data-motion="lite"].reveal-ready [data-reveal] { transition: opacity .2s ease; transform: none; }
+html[data-motion="lite"] .partner-logo *, html[data-motion="lite"] .partner-logo :is(img, svg) { animation: none !important; }
+html[data-motion="lite"] .is-tapped, html[data-motion="lite"] .is-tapped * { animation: none !important; }
+html[data-motion="lite"] .reel__photo, html[data-motion="lite"] .reel__photo img, html[data-motion="lite"] .project-card { transition: none !important; }

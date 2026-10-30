@@ -78,6 +78,8 @@ p { text-wrap: pretty; }
 /* Crossing to and from symbol.ngo (utils/crossing.ts). Arriving: a sheet of the exhibition's paper with a barcode
    lifts off the page. Leaving: Symbol's violet with its round mark drops over the page before symbol.ngo opens. */
 html[data-cross] body::after { content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+/* Phones: the crossing between symbol.ngo and a project site takes about 0.4 s in all. */
+@media (max-width: 820px) { html[data-cross="leave"] body::after { animation-duration: .28s; } html[data-cross="enter"] body::after { animation-duration: .35s; animation-delay: .05s; } }
 html[data-cross="enter"] body::after { background: repeating-linear-gradient(90deg, var(--docs-ink) 0 2px, transparent 2px 7px) center / min(70vw, 520px) 72px no-repeat, var(--docs-paper); animation: cross-lift .75s cubic-bezier(.7, 0, .2, 1) .15s both; }
 html[data-cross="leave"] body::after { background: #9280a6 url(/favicon.svg) center / 76px no-repeat; animation: cross-drop .55s cubic-bezier(.7, 0, .3, 1) both; }
 @keyframes cross-lift { to { transform: translateY(-100%); } }
