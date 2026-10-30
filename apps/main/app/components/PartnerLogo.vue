@@ -112,7 +112,7 @@ onMounted(async () => {
 .partner-logo.is-playing.partner-logo--wipe img { animation: pl-wipe 1s cubic-bezier(.7, 0, .2, 1) both; }
 @keyframes pl-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
-/* Mental health for Ukraine (raster fallback): a calm double heartbeat. */
+/* Плейбек-театр «Серденьки»: three hearts — a calm double heartbeat. */
 .partner-logo.is-playing.partner-logo--beat img { animation: pl-beat 1.4s ease-in-out both; transform-origin: left center; }
 @keyframes pl-beat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.08); } 28% { transform: scale(1); } 42% { transform: scale(1.05); } 70% { transform: scale(1); } }
 
@@ -125,7 +125,7 @@ onMounted(async () => {
 
 /* Each logo below moves as one piece, in the spirit of its own identity (raster files and SVGs alike). */
 .partner-logo.is-playing :is(img, .partner-logo__svg) { transform-origin: left center; }
-/* Мінкульт: the emblem rises into place. */
+/* A plain rise for a logo without a motif of its own yet. */
 .partner-logo.is-playing.partner-logo--rise :is(img, .partner-logo__svg) { animation: pl-rise-whole .8s cubic-bezier(.2, .9, .3, 1) both; }
 @keyframes pl-rise-whole { from { opacity: 0; transform: translateY(14px); } }
 /* Culture Helps Solidarity: two languages, two sides — the mark turns over like a page. */
@@ -168,6 +168,38 @@ onMounted(async () => {
 .partner-logo.is-playing.partner-logo--shutter :is(img, .partner-logo__svg) { animation: pl-shutter .6s cubic-bezier(.7, 0, .2, 1) both; }
 @keyframes pl-shutter { from { clip-path: inset(50% 0 50% 0); } to { clip-path: inset(0 0 0 0); } }
 
+/* Мінкульт: the tryzub rises first, upright and steady, then the two lines of the name are set letter by letter. */
+.partner-logo.is-playing.partner-logo--trident :deep(path:last-of-type) { animation: pl-trident .8s cubic-bezier(.2, 1.1, .3, 1) both; transform-origin: center bottom; }
+.partner-logo.is-playing.partner-logo--trident :deep(path:not(:last-of-type)) { animation: pl-letter .45s ease-out both; animation-delay: calc(.35s + var(--n, 0) * 22ms); }
+@keyframes pl-trident { 0% { opacity: 0; transform: translateY(40%) scaleY(.6); } 60% { opacity: 1; transform: translateY(-4%) scaleY(1.04); } }
+@keyframes pl-letter { from { opacity: 0; transform: translateX(-3px); } }
+
+/* «Тисячовесна»: the bird flies in on an arc, beating its wings, and the word blooms after it letter by letter. */
+.partner-logo.is-playing.partner-logo--fly :deep(path[fill^="url(#"]) { animation: pl-fly 1.1s cubic-bezier(.3, .8, .3, 1) both; transform-origin: 30% 60%; }
+.partner-logo.is-playing.partner-logo--fly :deep(path[fill="#282828"]) { animation: pl-bloom-letter .5s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(.4s + var(--n, 0) * 45ms); transform-origin: center bottom; }
+@keyframes pl-fly {
+  0% { opacity: 0; transform: translate(-40%, 30%) rotate(-18deg) scaleY(1); }
+  25% { opacity: 1; transform: translate(-22%, 8%) rotate(-8deg) scaleY(.55); }
+  45% { transform: translate(-10%, -4%) rotate(-2deg) scaleY(1.05); }
+  65% { transform: translate(-3%, 0) rotate(0) scaleY(.75); }
+  100% { transform: none; }
+}
+@keyframes pl-bloom-letter { from { opacity: 0; transform: translateY(30%) scale(.6); } }
+
+/* «Станція Уж», named after the river Uzh: the mark is uncovered left to right while it ripples like water. */
+.partner-logo.is-playing.partner-logo--river img { animation: pl-river 1.2s cubic-bezier(.4, 0, .2, 1) both; transform-origin: left bottom; }
+@keyframes pl-river {
+  0% { clip-path: inset(0 100% 0 0); transform: translateY(0) skewY(0); }
+  25% { transform: translateY(-3px) skewY(-2deg); }
+  50% { transform: translateY(2px) skewY(1.5deg); }
+  75% { clip-path: inset(0 0 0 0); transform: translateY(-1px) skewY(-.5deg); }
+  100% { clip-path: inset(0 0 0 0); transform: none; }
+}
+
+/* Центр захисту інформаційного простору: a message badge with an «i» — it pops up like a notification and nudges. */
+.partner-logo.is-playing.partner-logo--notify img { animation: pl-notify .9s cubic-bezier(.3, 1.5, .5, 1) both; transform-origin: 20% 90%; }
+@keyframes pl-notify { 0% { opacity: 0; transform: scale(.3); } 45% { opacity: 1; transform: scale(1.08); } 60% { transform: scale(1) rotate(-6deg); } 75% { transform: rotate(4deg); } 88% { transform: rotate(-2deg); } 100% { transform: none; } }
+
 /* Playback theatre «Нема»: a stage curtain parts and the logo is revealed. */
 .partner-logo--curtain .partner-logo__fx { inset: 0; background: linear-gradient(90deg, var(--symbol-violet) 50%, var(--symbol-plum) 50%); }
 .partner-logo.is-playing.partner-logo--curtain .partner-logo__fx { animation: pl-curtain 1.1s cubic-bezier(.6, 0, .2, 1) both; }
@@ -181,7 +213,8 @@ onMounted(async () => {
    Logos with an official dark variant (the EU emblem) switch to it instead and are never filtered.
    JPG logos have a white field: it melts into the page (multiply on light, screen once inverted on dark).
    Unscoped: in a scoped block :global(...) would drop the rest of the selector and filter the whole page. */
-.partner-logo .partner-logo__dark { display: none; }
+/* Doubled class: outranks the scoped `.partner-logo img { display: block }`, which otherwise showed both variants side by side. */
+.partner-logo.partner-logo img.partner-logo__dark { display: none; }
 .partner-logo--opaque img { mix-blend-mode: multiply; }
 :root[data-theme="dark"] .partner-logo:not(.partner-logo--official, .partner-logo--keep) img, :root[data-theme="dark"] .partner-logo__svg { filter: invert(.92) hue-rotate(180deg); }
 :root[data-theme="dark"] .partner-logo--opaque img { mix-blend-mode: screen; filter: invert(1); }

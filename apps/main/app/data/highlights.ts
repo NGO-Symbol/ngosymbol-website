@@ -5,44 +5,45 @@ import { events } from './events'
 // team's request): by Петро Чекаль and Іван Самойлов (Kyiv mhGAP trainings; Bila Tserkva ones by Юрій Рассоха; «Покажіть свої документи…», stills of
 // «Збирач конвалій») and performances. Each visit shows a different random selection from this pool, so only
 // photos good enough to stand alone belong here. A credit is shown only where the author is recorded.
-// A photo from a particular event names the event (its slug in `event`) before the project, so a caption like
-// «Плейбек-перформанс» is never shown without the project it belongs to (USER_CONFIRMED 2026-10-29).
-export interface Highlight extends Photo { to: string; project: string; event?: string }
+// Every caption names what the frame shows first and then the project it belongs to (USER_CONFIRMED 2026-10-29/30):
+// an event by its slug in `event` (title taken from the events), otherwise a `label`: the artist and work for
+// exhibition views (matched against the artist archive of the exhibition site), «Кадр із фільму» for film stills.
+export interface Highlight extends Photo { to: string; project: string; event?: string; label?: string }
 
-/** Caption under a frame: «Event · Project» for event photos, the project alone otherwise. */
+/** Caption under a frame: «Event or work · Project». */
 export const highlightCaption = (photo: Highlight) => {
-  const event = photo.event ? events.find(item => item.slug === photo.event) : undefined
-  return event ? `${event.title} · ${photo.project}` : photo.project
+  const what = (photo.event && events.find(item => item.slug === photo.event)?.title) || photo.label
+  return what ? `${what} · ${photo.project}` : photo.project
 }
 
 export const highlights: Highlight[] = [
-  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/zbyrach-konvalii/archive.jpg', alt: 'Фотограф гортає свої знімки', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', label: 'Анна Гареєва, «Житлово-комунальна вічність»', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', label: 'Костянтин Гливляс, «Документ»', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', label: 'Kinich Azla, «Сучасна мода»', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', to: '/projects/pokazhit-svoi-dokumenty', label: 'Експозиція в ЄрміловЦентрі', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', label: 'Костянтин Гливляс, «Документ»', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/zbyrach-konvalii/archive.jpg', alt: 'Фотограф гортає свої знімки', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', label: 'Кадр із фільму', project: 'Збирач конвалій' },
   { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах на тренінгу mhGAP', credit: 'Юрій Рассоха', to: '/events/mhgap-kyiv-trening-1', event: 'mhgap-kyiv-trening-1', project: 'Тренінги mhGAP' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: 'Ряди червоних паспортів на стіні', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: 'Ряди червоних паспортів на стіні', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', label: 'Антон Карюк, «Імперія розпалася»', project: 'Покажіть свої документи…' },
   { src: '/media/events/pokazhit-svoi-dokumenty-kvero/violin.jpg', alt: 'Скрипалька серед паперових аркушів під час перформансу In C', to: '/events/pokazhit-svoi-dokumenty-kvero', event: 'pokazhit-svoi-dokumenty-kvero', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/zbyrach-konvalii/silhouette.jpg', alt: 'Силует у кімнаті з червоним світлом', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
+  { src: '/media/projects/zbyrach-konvalii/silhouette.jpg', alt: 'Силует у кімнаті з червоним світлом', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', label: 'Кадр із фільму', project: 'Збирач конвалій' },
   { src: '/media/events/mhgap-kyiv-trening-4/lecture.jpg', alt: 'Тренер пояснює модуль mhGAP біля презентації', credit: 'Петро Чекаль', to: '/events/mhgap-kyiv-trening-4', event: 'mhgap-kyiv-trening-4', project: 'Тренінги mhGAP' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/strips.jpg', alt: 'Підвішені прозорі смуги зі світлом і тінями', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/strips.jpg', alt: 'Підвішені прозорі смуги зі світлом і тінями', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', label: 'Єва Фоміцкі, «Спільний код»', project: 'Покажіть свої документи…' },
   { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/actors.jpg', alt: 'Актори плейбек-театру «Нема» відіграють історію глядача', to: '/events/pokazhit-svoi-dokumenty-pleibek', event: 'pokazhit-svoi-dokumenty-pleibek', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', label: 'Анна Гареєва, «Житлово-комунальна вічність»', project: 'Покажіть свої документи…' },
   { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер mhGAP біля презентації', credit: 'Петро Чекаль', to: '/events/mhgap-kyiv-trening-3', event: 'mhgap-kyiv-trening-3', project: 'Тренінги mhGAP' },
-  { src: '/media/projects/zbyrach-konvalii/room.jpg', alt: 'Стіна з фотографіями й предметами в квартирі фотографа', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/tv.jpg', alt: 'Два телевізори з відеороботами', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/zbyrach-konvalii/room.jpg', alt: 'Стіна з фотографіями й предметами в квартирі фотографа', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', label: 'Кадр із фільму', project: 'Збирач конвалій' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/tv.jpg', alt: 'Два телевізори з відеороботами', credit: 'Петро Чекаль', to: '/projects/pokazhit-svoi-dokumenty', label: 'Володимир Кузнецов, «Відкритий архів: „Коліївщина: Страшний суд“»', project: 'Покажіть свої документи…' },
   { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', to: '/events/mhgap-kyiv-trening-1', event: 'mhgap-kyiv-trening-1', project: 'Тренінги mhGAP' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/pokazhit-svoi-dokumenty/sealed.jpg', alt: 'Бетонний блок із замурованими документами', to: '/projects/pokazhit-svoi-dokumenty', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу', to: '/projects/pokazhit-svoi-dokumenty', label: 'Аліна Прокопенко (Apris), «Паспортний стіл»', project: 'Покажіть свої документи…' },
+  { src: '/media/projects/pokazhit-svoi-dokumenty/sealed.jpg', alt: 'Бетонний блок із замурованими документами', to: '/projects/pokazhit-svoi-dokumenty', label: 'Наталія Охман, «Закрита справа»', project: 'Покажіть свої документи…' },
   { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Перформанс на відкритті виставки «Покажіть свої документи…»', to: '/events/pokazhit-svoi-dokumenty-vidkryttia', event: 'pokazhit-svoi-dokumenty-vidkryttia', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/istorii-riznykh/reach.jpg', alt: 'Акторки тягнуться одна до одної в сцені', to: '/projects/istorii-riznykh', project: 'Історії різних' },
-  { src: '/media/projects/istorii-riznykh/performance.jpg', alt: 'Плейбек-перформанс «Історії різних»: акторка відіграє історію глядача', to: '/projects/istorii-riznykh', project: 'Історії різних' },
-  { src: '/media/projects/istorii-riznykh/care.jpg', alt: 'Сцена турботи між акторами', to: '/projects/istorii-riznykh', project: 'Історії різних' },
+  { src: '/media/projects/istorii-riznykh/reach.jpg', alt: 'Акторки тягнуться одна до одної в сцені', to: '/projects/istorii-riznykh', label: 'Плейбек-перформанс', project: 'Історії різних' },
+  { src: '/media/projects/istorii-riznykh/performance.jpg', alt: 'Плейбек-перформанс «Історії різних»: акторка відіграє історію глядача', to: '/projects/istorii-riznykh', label: 'Плейбек-перформанс', project: 'Історії різних' },
+  { src: '/media/projects/istorii-riznykh/care.jpg', alt: 'Сцена турботи між акторами', to: '/projects/istorii-riznykh', label: 'Плейбек-перформанс', project: 'Історії різних' },
   { src: '/media/events/pokazhit-svoi-dokumenty-kvero/flute.jpg', alt: 'Флейтистка під час виконання In C', to: '/events/pokazhit-svoi-dokumenty-kvero', event: 'pokazhit-svoi-dokumenty-kvero', project: 'Покажіть свої документи…' },
   { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass.jpg', alt: 'Контрабасист на тлі робіт виставки', to: '/events/pokazhit-svoi-dokumenty-kvero', event: 'pokazhit-svoi-dokumenty-kvero', project: 'Покажіть свої документи…' },
-  { src: '/media/projects/zbyrach-konvalii/newspapers.jpg', alt: 'Газети й знімки з архіву фотографа', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', project: 'Збирач конвалій' }
+  { src: '/media/projects/zbyrach-konvalii/newspapers.jpg', alt: 'Газети й знімки з архіву фотографа', credit: 'кадр із фільму, оператор Іван Самойлов', to: '/projects/zbyrach-konvalii', label: 'Кадр із фільму', project: 'Збирач конвалій' }
 ]
 
 /** How many photos the home page shows at once. */

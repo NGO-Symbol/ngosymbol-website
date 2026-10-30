@@ -2,22 +2,34 @@
 // Partners and donors as interactive tiles: each opens the organisation's site (or social profile).
 // Logos are transparent and move in the rhythm of their own identity (PartnerLogo): once when the tile
 // scrolls into view and again on hover (both handled by PartnerLogo). Organizations without a logo file show their name only.
+// Phones: a compact ledger of logos, three to a row with hairline rules and no captions (the name stays the link's
+// accessible label); long lists show the first rows and open the rest with one button.
 import type { Organization } from '~/data/types'
 import { isSocialUrl, networkOf } from '~/utils/social'
 
-defineProps<{ items: { org: Organization; projects: { slug: string; title: string }[] }[] }>()
+const props = defineProps<{ items: { org: Organization; projects: { slug: string; title: string }[] }[] }>()
+
+/** Tiles a phone shows before «show all»: three full rows. */
+const PHONE_FIRST = 9
+const open = ref(false)
+const collapsible = computed(() => props.items.length > PHONE_FIRST + 3)
 </script>
 
 <template>
-  <ul class="partners">
-    <li v-for="{ org, projects: list } in items" :key="org.slug">
-      <component :is="org.url ? 'a' : 'div'" class="partner" :class="{ 'partner--text': !org.logo }" :href="org.url" :target="org.url ? '_blank' : undefined" :rel="org.url ? 'noreferrer' : undefined">
-        <PartnerLogo v-if="org.logo" :src="org.logo" :src-dark="org.logoDark" :name="org.name" :slug="org.slug" :motion="org.motion" />
-        <span class="partner__name">{{ org.name }}<template v-if="org.url">&nbsp;<SocialIcon v-if="isSocialUrl(org.url)" class="partner__network" :network="networkOf(org.url).network" /></template></span>
-        <span class="partner__projects">{{ list.map(project => project.title).join(' · ') }}</span>
-      </component>
-    </li>
-  </ul>
+  <div class="partners-wrap">
+    <ul class="partners" :class="{ 'is-collapsed': collapsible && !open }">
+      <li v-for="{ org, projects: list } in items" :key="org.slug">
+        <component :is="org.url ? 'a' : 'div'" class="partner" :class="{ 'partner--text': !org.logo }" :href="org.url" :target="org.url ? '_blank' : undefined" :rel="org.url ? 'noreferrer' : undefined" :title="org.name">
+          <PartnerLogo v-if="org.logo" :src="org.logo" :src-dark="org.logoDark" :name="org.name" :slug="org.slug" :motion="org.motion" />
+          <span class="partner__name">{{ org.name }}<template v-if="org.url">&nbsp;<SocialIcon v-if="isSocialUrl(org.url)" class="partner__network" :network="networkOf(org.url).network" /></template></span>
+          <span class="partner__projects">{{ list.map(project => project.title).join(' · ') }}</span>
+        </component>
+      </li>
+    </ul>
+    <button v-if="collapsible" type="button" class="partners__more" :aria-expanded="open" @click="open = !open">
+      {{ open ? 'Згорнути' : `Усі ${items.length}` }}
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -28,4 +40,22 @@ a.partner:hover { background: var(--symbol-white); transform: translateY(-3px); 
 .partner--text .partner__name { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; line-height: 1.15; padding-top: 6px; border-top: 3px solid var(--symbol-lilac); }
 .partner__network { vertical-align: -.15em; }
 .partner__projects { font-size: .8rem; line-height: 1.4; color: color-mix(in srgb, var(--symbol-plum) 75%, transparent); align-self: start; }
+.partners__more { display: none; }
+
+@media (max-width: 600px) {
+  /* Hairline ledger: cells share their rules, so it sits on any section tone. */
+  .partners { --rule: color-mix(in srgb, currentColor 22%, transparent); grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+  .partners li { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .partners.is-collapsed li:nth-child(n + 10) { display: none; }
+  .partner { aspect-ratio: 1; grid-template-rows: 1fr; place-items: center; padding: 14px 10px; border: 0; }
+  a.partner:hover { transform: none; }
+  .partner :deep(.partner-logo) { height: 100%; width: 100%; min-width: 0; justify-content: center; }
+  .partner :deep(.partner-logo img) { width: 100%; height: 56px; max-height: none; object-position: center; }
+  .partner :deep(.partner-logo__svg) { width: 100%; height: 56px; }
+  .partner :deep(.partner-logo__svg svg) { width: 100%; height: 100%; max-width: none; max-height: none; }
+  .partner__projects, .partner:not(.partner--text) .partner__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .partner--text .partner__name { font-size: .78rem; line-height: 1.2; text-align: center; padding: 0; border: 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .partner--text .partner__network { display: none; }
+  .partners__more { display: flex; width: 100%; justify-content: center; margin-top: 10px; min-height: 44px; padding: 10px 18px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; font-size: .9rem; cursor: pointer; }
+}
 </style>

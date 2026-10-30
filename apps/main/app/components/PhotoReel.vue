@@ -60,7 +60,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
         <button type="button" class="reel__photo" :aria-label="`Відкрити фото: ${photo.alt}`" @click="open = index">
           <img :src="thumbOf(photo.src)" :alt="photo.alt" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')">
         </button>
-        <NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo) }}</NuxtLink>
+        <p class="reel__meta"><span class="reel__index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo) }}</NuxtLink></p>
       </li>
     </ul>
     <div class="reel__controls">
@@ -92,16 +92,22 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
 
 <style scoped>
 .reel { display: grid; gap: 14px; }
-.reel__track { display: flex; gap: 10px; margin: 0; padding: 0 0 6px; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0; overscroll-behavior-x: contain; scrollbar-width: none; }
+.reel__track { display: flex; gap: 14px; margin: 0; padding: 0 8px 6px 0; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0; overscroll-behavior-x: contain; scrollbar-width: none; }
 .reel__track::-webkit-scrollbar { display: none; }
 .reel__item { flex: none; width: clamp(240px, 34vw, 460px); display: grid; gap: 8px; scroll-snap-align: start; }
 .reel__item:nth-child(3n + 2) { width: clamp(200px, 24vw, 330px); }
-.reel__photo { padding: 0; border: 0; background: var(--symbol-lilac); overflow: hidden; cursor: zoom-in; aspect-ratio: 3 / 2; }
+.reel__item { padding-top: 6px; align-content: start; }
+/* A printed photograph in a passe-partout: a light mat with a hairline edge; on hover it lifts off an apricot shadow. */
+.reel__photo { padding: 7px; border: 1px solid color-mix(in srgb, var(--symbol-plum) 16%, transparent); background: var(--symbol-white); overflow: hidden; cursor: zoom-in; aspect-ratio: 3 / 2; box-shadow: 0 0 0 0 var(--symbol-apricot); transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s cubic-bezier(.2, .8, .2, 1); }
+.reel__photo:hover, .reel__photo:focus-visible { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 0 var(--symbol-apricot); }
+.reel__photo--empty { background: color-mix(in srgb, var(--symbol-lilac) 40%, var(--symbol-white)); }
 .reel__item:nth-child(3n + 2) .reel__photo { aspect-ratio: 4 / 5; }
-.reel__photo img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .4s ease; }
+.reel__photo img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; background: var(--symbol-lilac); transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .4s ease; }
 .reel__photo img.is-loaded { opacity: 1; }
 .reel__photo--empty { display: block; height: 100%; }
-.reel__photo:hover img { transform: scale(1.04); }
+.reel__photo:hover img { transform: scale(1.03); }
+.reel__meta { margin: 0; display: flex; gap: 10px; align-items: baseline; }
+.reel__index { font-size: .7rem; letter-spacing: .12em; font-variant-numeric: tabular-nums; color: var(--symbol-violet); flex: none; }
 .reel__caption { font-size: .8rem; line-height: 1.3; color: color-mix(in srgb, var(--symbol-plum) 75%, transparent); text-decoration: none; width: fit-content; }
 .reel__caption:hover { color: var(--symbol-plum); text-decoration: underline; }
 .reel__controls { display: flex; gap: 8px; justify-content: flex-end; }
