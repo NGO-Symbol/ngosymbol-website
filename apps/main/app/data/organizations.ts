@@ -6,13 +6,13 @@ export const organizations: Organization[] = [
   { slug: 'yermilov-centre', name: 'ЄрміловЦентр', url: 'https://yermilovcentre.org', logo: '/media/partners/yermilov-centre.svg', motion: 'blink' },
   { slug: 'karazin-university', name: 'Харківський національний університет імені В. Н. Каразіна', url: 'https://karazin.ua', logo: '/media/partners/karazin-university.svg', motion: 'unfold' },
   { slug: 'zmina', name: 'Центр прав людини ZMINA', url: 'https://zmina.info', logo: '/media/partners/zmina.svg', motion: 'shift' },
-  { slug: 'mincult', name: 'Міністерство культури України', url: 'https://mincult.gov.ua', logo: '/media/partners/mincult.svg', motion: 'rise' },
+  { slug: 'mincult', name: 'Міністерство культури України', url: 'https://mincult.gov.ua', logo: '/media/partners/mincult.svg', motion: 'trident' },
   // «Тисячовесна»: the President of Ukraine's initiative for Ukrainian cultural product, run by the Ministry of Culture;
   // logo with the bird from the Symbol Drive («лого з птахом.svg»); website given by the team (2026-10-29).
-  { slug: 'tysyachovesna', name: 'Тисячовесна — ініціатива Президента України зі створення українського культурного продукту', url: 'https://www.culture.gov.ua/', logo: '/media/partners/tysyachovesna.svg', motion: 'rise' },
+  { slug: 'tysyachovesna', name: 'Тисячовесна — ініціатива Президента України зі створення українського культурного продукту', url: 'https://www.culture.gov.ua/', logo: '/media/partners/tysyachovesna.svg', motion: 'fly' },
   // The state body that contracts the «Тисячовесна» winners (Symbol's letters of 23.10.2026); logo given by the team
   // (2026-10-29). It is a coloured badge on its own blue, so it is shown as is in both themes.
-  { slug: 'czipu', name: 'Центр захисту інформаційного простору України', logo: '/media/partners/czipu.png', logoDark: '/media/partners/czipu.png', motion: 'pulse' },
+  { slug: 'czipu', name: 'Центр захисту інформаційного простору України', logo: '/media/partners/czipu.png', logoDark: '/media/partners/czipu.png', motion: 'notify' },
   { slug: 'grynyov-art-foundation', name: 'Grynyov Art Collection', url: 'https://grynyov.art', logo: '/media/partners/grynyov-art-collection.png', motion: 'wipe' },
   { slug: 'mh4u', name: 'Українсько-швейцарський проєкт «Психічне здоров’я для України»', url: 'https://www.mh4u.in.ua', logo: '/media/partners/mh4u.svg', motion: 'bloom' },
   { slug: 'eu', name: 'Співфінансовано Європейським Союзом', url: 'https://european-union.europa.eu', logo: '/media/partners/eu-cofunded.png', logoDark: '/media/partners/eu-cofunded-white.png', motion: 'fade' },
@@ -33,7 +33,7 @@ export const organizations: Organization[] = [
   { slug: 'ecf', name: 'European Cultural Foundation', url: 'https://culturalfoundation.eu', logo: '/media/partners/ecf.svg', motion: 'wave' },
   { slug: 'zdybanka', name: 'Молодіжний центр «Здибанка», Батьово', url: 'https://www.facebook.com/mc.zdybanka' },
   { slug: 'khust-theatre', name: 'Хустський Закарпатський обласний театр драми та комедії', url: 'https://teatr-khust.com.ua' },
-  { slug: 'uzh-station', name: 'Арт-простір «Станція Уж», Ужгород', url: 'https://www.instagram.com/stantsiia.uzh/', logo: '/media/partners/uzh-station.png', motion: 'rise' },
+  { slug: 'uzh-station', name: 'Арт-простір «Станція Уж», Ужгород', url: 'https://www.instagram.com/stantsiia.uzh/', logo: '/media/partners/uzh-station.png', motion: 'river' },
   { slug: 'ucraina-piu', name: 'Ucraina Più – Milano APS', url: 'https://www.instagram.com/ucrainapiu_milano_aps/' },
   { slug: 'bila-tserkva-library', name: 'Білоцерківська централізована бібліотечна система імені П. Красножона', url: 'https://biblioteka.com.ua', logo: '/media/partners/bila-tserkva-library.png', motion: 'shoot' },
   { slug: 'nema-playback', name: 'Плейбек-театр «Нема»', url: 'https://www.instagram.com/nema_pbt/', logo: '/media/partners/nema.png', motion: 'curtain' }
