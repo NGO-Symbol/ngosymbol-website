@@ -3,7 +3,7 @@
 // to the very page the visitor came from, the project mark, the sections, the language switch and the day/night
 // switch. On phones the sections scroll sideways in one row.
 const { isEn, localePath, switchPath, t } = useLang()
-const backHref = ref(isEn.value ? `${SYMBOL}/en` : SYMBOL)
+const backHref = ref(isEn.value ? `${SYMBOL}/en/` : SYMBOL)
 onMounted(() => { backHref.value = returnUrl(isEn.value) })
 
 // While reading down the header slides away to give the page the room; any scroll up brings it back.

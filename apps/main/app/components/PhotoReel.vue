@@ -58,7 +58,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
       <li v-for="n in (photos.length ? 0 : placeholders ?? 0)" :key="`p${n}`" class="reel__item" aria-hidden="true"><span class="reel__photo reel__photo--empty" /></li>
       <li v-for="(photo, index) in photos" :key="photo.src" class="reel__item">
         <button type="button" class="reel__photo" :aria-label="`Відкрити фото: ${photo.alt}`" @click="open = index">
-          <img :src="thumbOf(photo.src)" :alt="photo.alt" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')">
+          <MediaImg :src="photo.src" :fallback="thumbOf(photo.src)" :alt="photo.alt" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')" />
         </button>
         <p class="reel__meta"><span class="reel__index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo) }}</NuxtLink></p>
       </li>

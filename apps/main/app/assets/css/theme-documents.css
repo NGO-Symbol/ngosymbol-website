@@ -1,5 +1,5 @@
 /* Project font of «Покажіть свої документи…»: EXDocument by Олексій Чекаль, created for the exhibition. */
-@font-face { font-family: 'EXDocument'; src: url('/fonts/EXDocument.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'EXDocument'; src: url('/fonts/EXDocument.woff2') format('woff2'), url('/fonts/EXDocument.otf') format('opentype'); font-display: swap; }
 
 /* Project identity: «Покажіть свої документи…» (black/white/grey stencil lettering, mono text, tape strips,
    barcode rules, blue stamp). Applied to the project page through .theme-documents. */

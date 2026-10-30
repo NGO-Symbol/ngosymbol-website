@@ -1,7 +1,7 @@
 /* Identity of «Покажіть свої документи…» (logo, banner and invitation by Олексій Чекаль): grey paper, black ink,
    the stencil font EXDocument for headings, typewriter mono for text, black tape labels, barcode rules, blue stamp.
    Dark mode is carbon paper with off-white ink. */
-@font-face { font-family: 'EXDocument'; src: url('/fonts/EXDocument.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'EXDocument'; src: url('/fonts/EXDocument.woff2') format('woff2'), url('/fonts/EXDocument.otf') format('opentype'); font-display: swap; }
 
 :root {
   --docs-paper: #e8e8e5;

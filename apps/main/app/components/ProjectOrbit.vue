@@ -172,7 +172,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
           <text v-for="(project, index) in items" :key="project.slug" class="orbit-hook__title" :class="{ 'is-active': index === active && !measuring }">
             <textPath :ref="el => { if (el) paths[index] = el as SVGTextPathElement }" href="#orbit-path" :startOffset="initialOffsets[index]">
               <a
-                :href="`/projects/${project.slug}`"
+                :href="`/projects/${project.slug}/`"
                 @mouseenter="select(index)"
                 @focus="select(index)"
                 @blur="paused = false; hovering = false"

@@ -16,7 +16,7 @@ export function personOf(slug: string): Person | undefined {
 
 /** Link to a person's page on symbol.ngo (the source for biographies, links and all other projects). */
 export function symbolPersonUrl(slug: string) {
-  return `${SYMBOL}/people/${slug}`
+  return `${SYMBOL}/people/${slug}/`
 }
 
 export interface ExhibitionArtist extends Artist { person?: Person; coAuthors: Person[] }
@@ -87,7 +87,7 @@ export function textParts(source: string): TextPart[] {
       const artist = getArtist(slug)
       parts.push(artist ? { text: label ?? artist.person?.name ?? artist.name, href: `/mytsi/${slug}`, internal: true } : { text: label ?? personOf(slug)?.name ?? slug, href: symbolPersonUrl(slug) })
     } else if (kind === 'project') {
-      parts.push(slug === exhibition.slug ? { text: label ?? exhibition.title, href: '/', internal: true } : { text: label ?? projects.find(p => p.slug === slug)?.title ?? slug, href: `${SYMBOL}/projects/${slug}` })
+      parts.push(slug === exhibition.slug ? { text: label ?? exhibition.title, href: '/', internal: true } : { text: label ?? projects.find(p => p.slug === slug)?.title ?? slug, href: `${SYMBOL}/projects/${slug}/` })
     } else {
       parts.push({ text: label ?? events.find(e => e.slug === slug)?.title ?? slug, href: `/podii#${slug}`, internal: true })
     }

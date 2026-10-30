@@ -73,7 +73,7 @@ defineProps<{ project: Project }>()
 .docs-kicker span { background: var(--docs-ink); color: var(--docs-paper); padding: 5px 10px 3px; width: fit-content; animation: docs-pop .5s cubic-bezier(.3, 1.6, .5, 1) both; }
 .docs-kicker span:nth-child(2) { animation-delay: .1s; } .docs-kicker span:nth-child(3) { animation-delay: .2s; }
 .docs-title { margin: 0; display: grid; font-family: var(--docs-display); font-weight: 400; text-transform: uppercase; line-height: .9; font-size: clamp(3.4rem, 10.5vw, 9.5rem); }
-.docs-word { position: relative; display: block; width: fit-content; padding: 0 .12em; isolation: isolate; animation: docs-type .7s steps(9, end) both; }
+.docs-word { position: relative; display: block; width: fit-content; padding: 0 .12em; isolation: isolate; animation: docs-type .7s cubic-bezier(.2, .9, .3, 1) both; }
 .docs-word::before { content: ''; position: absolute; z-index: -1; inset: 18% -6% 8% -4%; background: color-mix(in srgb, var(--docs-ink) 24%, transparent); transform: rotate(-1.5deg); transform-origin: left; animation: docs-tape .7s cubic-bezier(.6, 0, .2, 1) both; animation-delay: inherit; }
 .docs-word--1 { animation-delay: .2s; }
 .docs-word--2 { justify-self: center; margin-top: -.06em; font-size: 1.12em; animation-delay: .45s; }
@@ -89,7 +89,9 @@ defineProps<{ project: Project }>()
 .docs-site:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--docs-stamp); background: var(--docs-paper); color: var(--docs-ink); }
 @keyframes docs-rule { from { transform: scaleX(0); } }
 @keyframes docs-tape { from { transform: scaleX(0) rotate(-3deg); } }
-@keyframes docs-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+/* The words are visible from the first paint (a clip-path reveal kept the page «unpainted» for search and speed
+   metrics); they only settle in while the tape under them unrolls. */
+@keyframes docs-type { from { transform: translateX(-.08em); } }
 @keyframes docs-pop { from { transform: scale(1.5); opacity: 0; } }
 /* The stamp is pressed onto the page: it comes down from above, hits, squeezes the ink out, and settles at a tilt. */
 @keyframes docs-stamp-land { 0% { transform: translateY(-40px) scale(1.6) rotate(-24deg); opacity: 0; filter: blur(3px); } 45% { transform: translateY(0) scale(.92) rotate(-12deg); opacity: 1; filter: blur(0); } 55% { transform: scale(.97) rotate(-12deg); } 62% { transform: scale(1.01) rotate(-12deg); } 100% { transform: rotate(-12deg); opacity: .94; } }

@@ -97,7 +97,7 @@ const days = computed(() => {
         <div v-for="(cell, index) in days" :key="index" class="calendar__cell" :class="{ 'has-events': cell.items.length, 'is-today': cell.iso === todayIso() }">
           <span v-if="cell.day" class="calendar__day">{{ cell.day }}</span>
           <NuxtLink v-for="item in cell.items" :key="item.slug" class="calendar__event" :class="[`tone-${item.project.tone}`, { 'is-past': !isUpcoming(item), 'is-continued': cell.iso !== item.start.slice(0, 10) }]" :to="item.to" :title="item.title">
-            <img v-if="item.cover && cell.iso === item.start.slice(0, 10)" class="calendar__thumb" :src="item.cover" alt="" loading="lazy">
+            <MediaImg v-if="item.cover && cell.iso === item.start.slice(0, 10)" class="calendar__thumb" :src="item.cover" loading="lazy" />
             <span class="calendar__when">{{ spanLabel(item, cell.iso!) }}</span>
             <span class="calendar__title">{{ item.title }}</span>
             <span class="calendar__format">{{ formats[item.format] }}</span>

@@ -32,7 +32,7 @@ const fields = computed(() => [
 
         <div class="form-sheet__body">
           <figure class="form-photo">
-            <img v-if="photo" :src="photo.src" :alt="photo.alt">
+            <MediaImg v-if="photo" :src="photo.src" :alt="photo.alt" />
             <figcaption>{{ t('Фото 3×4', 'Photo 3×4') }}</figcaption>
             <DocsStamp class="form-photo__stamp" />
           </figure>
@@ -72,7 +72,7 @@ const fields = computed(() => [
 .form-sheet { position: relative; padding: clamp(18px, 3vw, 36px); background: var(--docs-sheet); border: 2px solid var(--docs-ink); box-shadow: 10px 10px 0 color-mix(in srgb, var(--docs-ink) 14%, transparent); animation: form-in .7s cubic-bezier(.2, .8, .2, 1) both; }
 .form-sheet__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding-bottom: 12px; border-bottom: 1px solid var(--docs-ink); font-family: var(--docs-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; }
 .form-sheet__serial { color: var(--docs-stamp); }
-.form-field { display: grid; gap: 4px; padding: 10px 0 8px; border-bottom: 1px dashed color-mix(in srgb, var(--docs-ink) 45%, transparent); animation: form-type .5s steps(12, end) both; animation-delay: calc(.5s + var(--i, 0) * .12s); }
+.form-field { display: grid; gap: 4px; padding: 10px 0 8px; border-bottom: 1px dashed color-mix(in srgb, var(--docs-ink) 45%, transparent); animation: form-type .5s cubic-bezier(.2, .9, .3, 1) both; animation-delay: calc(.5s + var(--i, 0) * .12s); }
 .form-field__label { font-family: var(--docs-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--docs-muted); }
 .form-field__value { margin: 0; font-family: var(--docs-mono); font-size: clamp(.95rem, calc(.85rem + .4vw), 1.15rem); }
 .form-field--title { border-bottom: 2px solid var(--docs-ink); padding: 18px 0 14px; animation-delay: .2s; }
@@ -96,8 +96,10 @@ const fields = computed(() => [
 .docs-site { display: inline-flex; padding: 16px 22px 12px; background: var(--docs-ink); color: var(--docs-paper); text-decoration: none; font-family: var(--docs-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; box-shadow: 6px 6px 0 var(--docs-stamp); transition: transform .2s ease, box-shadow .2s ease; }
 .docs-site:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--docs-stamp); }
 .form-actions__more { font-family: var(--docs-mono); font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--docs-ink); }
-@keyframes form-in { from { transform: translateY(24px) rotate(-.6deg); opacity: 0; } }
-@keyframes form-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+/* The sheet and its title are visible from the first paint (hidden starts held back the page's main element);
+   they only settle into place. */
+@keyframes form-in { from { transform: translateY(24px) rotate(-.6deg); } }
+@keyframes form-type { from { transform: translateX(-.06em); } }
 @keyframes form-stamp { 0% { transform: translateY(-60px) scale(1.8) rotate(-30deg); opacity: 0; } 55% { transform: scale(.94) rotate(-14deg); opacity: 1; } 100% { transform: rotate(-12deg); opacity: .9; } }
 @media (max-width: 720px) {
   .form-sheet__body { grid-template-columns: 1fr; }
