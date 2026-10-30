@@ -64,7 +64,7 @@ Share only stable, truly institutional concerns: source color tokens, the origin
 - GitHub Pages custom domains: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages
 
 Performance (2026-10-30, stage 1 of the site plan):
-- Photographs are shown through light AVIF previews (≤960 px) in `public/media/previews/` with `previews.json`; components use `<MediaImg>` (picture + JPEG fallback), the full file opens only in the viewer. After adding photos run `pnpm media:previews` on a Mac (uses `sips`).
+- Photographs are shown through light AVIF previews (≤960 px) in `public/media/previews/` with `previews.json`; components use `<MediaImg>`: a single `<img>` (so each component's scoped image styles still apply) with the AVIF preview and a fallback to the original if the browser cannot open it; the full file opens only in the viewer. After adding photos run `pnpm media:previews` on a Mac (uses `sips`).
 - Internal links carry a trailing slash (`experimental.defaults.nuxtLink.trailingSlash: 'append'`, sitemap and links to symbol.ngo from the exhibition site too): GitHub Pages serves pages as folders and otherwise redirects every visit.
 - Fonts are WOFF2 first (Zakon, EXDocument), OTF as fallback; Zakon Regular is preloaded. The deploy copies fonts into /documentsart/: the built CSS points there, and without them the exhibition font returned 404 in production.
 - Headings of the exhibition theme are visible from the first paint (no clip-path or opacity-0 starts), so the largest element is not held back by animation.

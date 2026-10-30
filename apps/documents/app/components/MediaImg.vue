@@ -1,20 +1,14 @@
 <script setup lang="ts">
-// A photograph shown through its light AVIF preview when one exists; the original (or `fallback`) stays as the
-// <img> for browsers without AVIF. `display: contents` keeps the <picture> out of layout, so existing image styles apply.
+// A photograph shown through its light AVIF preview when one exists. It renders a single <img> (so the parent
+// component's own styles apply to it, as to any image); if the browser cannot open the preview, it falls back to
+// the original file (or `fallback`).
 import { previewOf } from '#symbol/previews'
 
-defineOptions({ inheritAttrs: false })
 const props = defineProps<{ src: string; alt?: string; fallback?: string }>()
-const preview = computed(() => previewOf(props.src))
+const failed = ref(false)
+const shown = computed(() => (!failed.value && previewOf(props.src)) || props.fallback || props.src)
 </script>
 
 <template>
-  <picture class="media-img">
-    <source v-if="preview" :srcset="preview" type="image/avif">
-    <img v-bind="$attrs" :src="fallback ?? src" :alt="alt ?? ''">
-  </picture>
+  <img :src="shown" :alt="alt ?? ''" @error="failed = true">
 </template>
-
-<style>
-.media-img { display: contents; }
-</style>
