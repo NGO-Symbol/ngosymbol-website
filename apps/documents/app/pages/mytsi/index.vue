@@ -20,10 +20,10 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
           <span class="artist__media">
             <!-- Co-authors share one frame: their portraits side by side. -->
             <span v-if="artist.coAuthors.length" class="artist__portrait artist__duo">
-              <img v-for="person in [artist.person, ...artist.coAuthors].filter(p => p?.photo)" :key="person!.slug" :src="person!.photo" :alt="person!.name" loading="lazy">
+              <MediaImg v-for="person in [artist.person, ...artist.coAuthors].filter(p => p?.photo)" :key="person!.slug" :src="person!.photo!" :alt="person!.name" loading="lazy" />
             </span>
-            <img v-else-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artist.name" loading="lazy">
-            <img v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)" alt="" loading="lazy">
+            <MediaImg v-else-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artist.name" loading="lazy" />
+            <MediaImg v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)!" loading="lazy" />
           </span>
           <span class="artist__name">{{ artist.name }}</span>
           <span class="artist__works">{{ artist.works.map(work => `«${work.title}»`).join(', ') }}</span>

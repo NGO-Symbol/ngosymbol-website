@@ -16,7 +16,7 @@ const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Мен
     <ul class="team">
       <li v-for="credit in team" :key="credit.person.slug + credit.role">
         <a class="member" :href="symbolPersonUrl(credit.person.slug)">
-          <img v-if="credit.person.photo" :src="credit.person.photo" :alt="credit.person.name" loading="lazy">
+          <MediaImg v-if="credit.person.photo" :src="credit.person.photo" :alt="credit.person.name" loading="lazy" />
           <span v-else class="member__blank" aria-hidden="true" />
           <span class="member__name">{{ credit.person.name }}</span>
           <span class="docs-label">{{ isEn ? (roleEn[credit.role] ?? credit.role) : credit.role }}</span>

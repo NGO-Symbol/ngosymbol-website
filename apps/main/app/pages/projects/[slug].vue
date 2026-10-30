@@ -39,7 +39,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="[`tone-${project.tone}`, { 'has-backdrop': project.backdrop }]">
-      <img v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" alt="">
+      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" />
       <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
       <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
@@ -104,11 +104,11 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
               <ul class="project-people">
                 <li v-for="person in group.people" :key="person.slug">
                   <NuxtLink v-if="person.hasPage !== false" class="project-person" :to="`/people/${person.slug}`">
-                    <img v-if="person.photo" :src="person.photo" :alt="person.name" loading="lazy">
+                    <MediaImg v-if="person.photo" :src="person.photo" :alt="person.name" loading="lazy" />
                     <span>{{ person.name }}</span>
                   </NuxtLink>
                   <span v-else class="project-person">
-                    <img v-if="person.photo" :src="person.photo" :alt="person.name" loading="lazy">
+                    <MediaImg v-if="person.photo" :src="person.photo" :alt="person.name" loading="lazy" />
                     <span>{{ person.name }}</span>
                   </span>
                 </li>

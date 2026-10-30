@@ -85,7 +85,7 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
         <div class="case-cover__grid">
           <div v-if="portraits.length" class="case-cover__photos" :class="{ 'is-duo': portraits.length > 1 }">
             <figure v-for="person in portraits" :key="person.slug" class="case-cover__photo">
-              <img :src="person.photo" :alt="person.name">
+              <MediaImg :src="person.photo!" :alt="person.name" />
               <span class="case-cover__clip" aria-hidden="true" />
             </figure>
           </div>

@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
   <ul class="docs-photos docs-gallery" v-bind="$attrs">
     <li v-for="(photo, index) in photos" :key="photo.src">
       <button type="button" class="docs-gallery__open" :aria-label="t(`Відкрити фото: ${photo.alt}`, `Open photo: ${photo.alt}`)" @click="openAt(index, $event)">
-        <figure><img :src="photo.src" :alt="photo.alt" loading="lazy" decoding="async"></figure>
+        <figure><MediaImg :src="photo.src" :alt="photo.alt" loading="lazy" decoding="async" /></figure>
       </button>
     </li>
   </ul>

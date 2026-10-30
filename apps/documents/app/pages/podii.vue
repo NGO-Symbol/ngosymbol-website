@@ -21,7 +21,7 @@ useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Па�
           <h2>{{ event.title }}</h2>
           <div v-if="event.description" class="docs-text"><DocText v-for="paragraph in event.description" :key="paragraph" :text="paragraph" /></div>
           <DocsPhotoGallery v-if="event.gallery?.length" class="event__photos" :photos="event.gallery" />
-          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}`">{{ t('Подія на symbol.ngo', 'Event on symbol.ngo') }}</a>
+          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}/`">{{ t('Подія на symbol.ngo', 'Event on symbol.ngo') }}</a>
         </div>
       </li>
     </ol>

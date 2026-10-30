@@ -15,6 +15,9 @@ const indexable = true
 
 export default defineNuxtConfig({
   extends: ['@symbol/brand'],
+  // GitHub Pages serves every page as a folder (/projects/x/) and redirects /projects/x there; internal links
+  // carry the slash so no visit pays for that redirect.
+  experimental: { defaults: { nuxtLink: { trailingSlash: 'append' } } },
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
   alias: { '#symbol': main('app/data') },
@@ -40,6 +43,7 @@ export default defineNuxtConfig({
     publicAssets: [
       { dir: main('public/fonts'), baseURL: '/fonts' },
       { dir: main('public/media/people'), baseURL: '/media/people' },
+      { dir: main('public/media/previews'), baseURL: '/media/previews' },
       { dir: main('public/media/partners'), baseURL: '/media/partners' },
       { dir: main('public/media/projects/pokazhit-svoi-dokumenty'), baseURL: '/media/projects/pokazhit-svoi-dokumenty' },
       ...eventMedia

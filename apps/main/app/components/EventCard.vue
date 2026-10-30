@@ -8,7 +8,7 @@ defineProps<{ item: EventItem }>()
 <template>
   <NuxtLink class="event-card" :to="item.to">
     <span class="event-card__media">
-      <img v-if="item.cover" :src="item.cover" alt="" loading="lazy">
+      <MediaImg v-if="item.cover" :src="item.cover" loading="lazy" />
     </span>
     <time class="event-card__date" :datetime="item.start">{{ formatRange(item.start, item.end) }}</time>
     <span class="event-card__title">{{ item.title }}</span>

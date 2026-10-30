@@ -51,7 +51,7 @@ const supporters = organizations
       </div>
       <div class="team-list">
         <NuxtLink v-for="(person, index) in team" :key="person.slug" :to="`/people/${person.slug}`">
-          <img v-if="person.photo" class="team-photo" :src="person.photo" alt="" loading="lazy">
+          <MediaImg v-if="person.photo" class="team-photo" :src="person.photo" loading="lazy" />
           <span v-else>{{ String(index + 1).padStart(2, '0') }}</span>
           <strong>{{ person.name }}</strong>
           <p>{{ person.teamRole ?? person.shortBio ?? '' }}</p>

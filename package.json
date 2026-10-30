@@ -14,6 +14,7 @@
     "generate": "pnpm -r generate",
     "typecheck": "pnpm -r typecheck",
     "kb:validate": "node scripts/kb-validate.mjs",
+    "media:previews": "node scripts/make-previews.mjs",
     "media:import-psd-artists": "node scripts/import-psd-artist-photos.mjs",
     "check": "pnpm kb:validate && pnpm ds:contrast && pnpm ds:lint && pnpm lint:arrows && pnpm typecheck && pnpm build",
     "task:status": "node scripts/task.mjs status",

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { isEn, t, localePath } = useLang()
-const backHref = ref(isEn.value ? `${SYMBOL}/en` : SYMBOL)
+const backHref = ref(isEn.value ? `${SYMBOL}/en/` : SYMBOL)
 onMounted(() => { backHref.value = returnUrl(isEn.value) })
 const links = computed(() => [
   { to: '/', label: t('Про виставку', 'About') },
@@ -24,7 +24,7 @@ const links = computed(() => [
       </nav>
       <div class="docs-footer__symbol">
         <a class="docs-footer__back" :href="backHref" @click="leaveTo($event, backHref)">← {{ t('Сайт ГО «Символ»', 'NGO Symbol website') }}</a>
-        <a :href="`${SYMBOL}/projects/pokazhit-svoi-dokumenty`">{{ t('Проєкт на symbol.ngo', 'The project on symbol.ngo') }}</a>
+        <a :href="`${SYMBOL}/projects/pokazhit-svoi-dokumenty/`">{{ t('Проєкт на symbol.ngo', 'The project on symbol.ngo') }}</a>
       </div>
     </div>
   </footer>

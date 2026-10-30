@@ -3,6 +3,9 @@ const indexable = true
 
 export default defineNuxtConfig({
   extends: ['@symbol/brand'],
+  // GitHub Pages serves every page as a folder (/projects/x/) and redirects /projects/x there; internal links
+  // carry the slash so no visit pays for that redirect.
+  experimental: { defaults: { nuxtLink: { trailingSlash: 'append' } } },
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
   css: ['@symbol/brand/tokens.css', '~/assets/css/main.css', '~/assets/css/theme-documents.css'],
@@ -10,6 +13,8 @@ export default defineNuxtConfig({
     pageTransition: { name: 'fade', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'uk' },
+      // The text face is needed for the first paint, so it starts loading with the page.
+      link: [{ rel: 'preload', href: '/fonts/zakon/Zakon-Regular.woff2', as: 'font', type: 'font/woff2', crossorigin: '' }],
       titleTemplate: '%s · ГО «Символ»',
       meta: [
         ...(indexable ? [] : [{ name: 'robots', content: 'noindex, nofollow' }]),

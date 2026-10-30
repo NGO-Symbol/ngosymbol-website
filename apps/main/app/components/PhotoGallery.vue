@@ -25,7 +25,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 <template>
   <div class="gallery" :class="`gallery--${Math.min(photos.length, 6)}`">
     <button v-for="(photo, index) in photos" :key="photo.src" type="button" class="gallery__item" :aria-label="`Відкрити фото: ${photo.alt}`" @click="open = index">
-      <img :src="photo.src" :alt="photo.alt" loading="lazy" decoding="async">
+      <MediaImg :src="photo.src" :alt="photo.alt" loading="lazy" decoding="async" />
     </button>
   </div>
   <Teleport to="body">
