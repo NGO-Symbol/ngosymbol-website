@@ -32,7 +32,12 @@ useHead({
 
 <template>
   <article v-if="person" class="page container person-page">
-    <Breadcrumbs :items="[{ label: 'Люди', to: '/people' }, { label: person.name }]" />
+    <div class="person-top">
+      <Breadcrumbs :items="[{ label: 'Люди', to: '/people' }, { label: person.name }]" />
+      <ul v-if="person.tags?.length" class="person-tags" aria-label="Хто це">
+        <li v-for="tag in person.tags" :key="tag">{{ tag }}</li>
+      </ul>
+    </div>
     <div class="page-title page-title--wide">
       <span class="eyebrow">{{ person.team ? 'Команда «Символу»' : 'Учасники проєктів' }}<template v-if="person.teamRole"> · {{ person.teamRole }}</template></span>
       <h1>{{ person.name }}</h1>
@@ -91,3 +96,11 @@ useHead({
     </div>
   </article>
 </template>
+
+<style scoped>
+/* Who the person is: small outline labels at the top right, on the breadcrumbs line (they wrap under it on phones). */
+.person-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 24px; }
+.person-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.person-tags li { padding: 4px 12px; border: 1px solid currentColor; border-radius: 999px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--symbol-violet); white-space: nowrap; }
+@media (max-width: 720px) { .person-tags { justify-content: flex-start; } }
+</style>
