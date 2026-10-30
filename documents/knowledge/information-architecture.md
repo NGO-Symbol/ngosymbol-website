@@ -78,7 +78,7 @@ Order (empty blocks are hidden): title · years · city · status · formats →
 
 ## Support page
 
-Modelled on the UAPP support page: why support Symbol; tabs “Стати меценатом” (one-off, regular with tiers, project sponsorship, corporate partnership) and “Доєднатися до спільноти” (volunteering, membership, information support); bank details with copy buttons; patron list with consent. Donations go only to an account of ГО «Символ», never a personal card. Details, tiers, and acquiring are open questions.
+Modelled on the UAPP support page: why support Symbol; tabs “Стати меценатом” (one-off, regular with tiers, project sponsorship, corporate partnership) and “Доєднатися до спільноти” (volunteering, membership, information support); bank details with copy buttons; patron list with consent. Donations go only to an account of ГО «Символ», never a personal card. Bank details: ПриватБанк, IBAN UA743052990000026001003612282 (UAH), published 2026-10-30 (`USER_CONFIRMED`). Tiers and acquiring are open questions.
 
 ## Autonomous project sites
 

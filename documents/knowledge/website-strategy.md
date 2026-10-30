@@ -11,7 +11,7 @@ The site must be informative and must convincingly present the organization to p
 3. **Artists and beneficiaries** — apply to open calls and remember the organization.
 4. **Partner institutions** — recognize relevant experience and retain Symbol as a potential collaborator.
 
-Support (donations, patronage, membership, volunteering) and newsletter/calendar subscription are now part of the site scope: a «Доєднатися і підтримати» page and a band on Home. `USER_CONFIRMED`, 2026-10-29. Bank details, patron tiers, and payment acquiring remain open questions.
+Support (donations, patronage, membership, volunteering) and newsletter/calendar subscription are now part of the site scope: a «Доєднатися і підтримати» page and a band on Home. `USER_CONFIRMED`, 2026-10-29. Bank details are published (ПриватБанк IBAN, 2026-10-30, `USER_CONFIRMED`); patron tiers and payment acquiring remain open questions.
 
 ## MVP
 

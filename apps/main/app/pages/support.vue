@@ -4,11 +4,13 @@ useSeoMeta({ title: 'Доєднатися і підтримати', description:
 const route = useRoute()
 const tab = ref<'patron' | 'community'>(route.hash === '#community' ? 'community' : 'patron')
 
-// Bank details are not confirmed yet (documents/knowledge/open-questions.md). Donations go only to an account of the NGO.
+// The NGO's own current account (ПриватБанк statements 2025; USER_CONFIRMED for publication 2026-10-30).
+// Donations go only to an account of the NGO.
 const requisites = [
   { label: 'Отримувач', value: 'ГО «Символ»' },
   { label: 'ЄДРПОУ', value: '45221328' },
-  { label: 'IBAN (UAH)', value: 'уточнюється' },
+  { label: 'IBAN (UAH)', value: 'UA743052990000026001003612282' },
+  { label: 'Банк', value: 'АТ КБ «ПриватБанк»' },
   { label: 'Призначення платежу', value: 'Благодійний внесок на статутну діяльність' }
 ]
 
