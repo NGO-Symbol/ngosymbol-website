@@ -16,6 +16,7 @@ export default defineNuxtPlugin(() => {
     event.preventDefault()
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { location.href = url.href; return }
     document.documentElement.dataset.cross = 'leave'
-    setTimeout(() => { location.href = url.href }, 560)
+    // Phones: a quicker curtain (about 0.4 s in all with the arrival), USER_CONFIRMED 2026-10-30.
+    setTimeout(() => { location.href = url.href }, matchMedia('(max-width: 820px)').matches ? 300 : 560)
   })
 })

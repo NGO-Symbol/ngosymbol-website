@@ -25,6 +25,18 @@ const query = ref('')
 const active = ref(0)
 const input = ref<HTMLInputElement>()
 
+// Examples for the empty search: words that lead to real pages (a project, a person, a format, a city, a topic).
+const examples = computed(() => props.en
+  ? ['mhGAP', 'Makov', 'playback', 'Kharkiv', 'exhibition', 'open call']
+  : ['mhGAP', 'Маков', 'плейбек', 'Харків', 'виставка', 'опен-кол'])
+const sections = computed(() => props.en
+  ? [{ to: '/en/projects', label: 'Projects' }, { to: '/en/events', label: 'Events' }, { to: '/en/people', label: 'People' }, { to: '/en/opportunities', label: 'Opportunities' }]
+  : [{ to: '/projects', label: 'Проєкти' }, { to: '/events', label: 'Події' }, { to: '/people', label: 'Люди' }, { to: '/opportunities', label: 'Можливості' }])
+function tryExample(word: string) {
+  query.value = word
+  input.value?.focus()
+}
+
 const results = computed(() => {
   const words = normalize(query.value).split(/\s+/).filter(Boolean)
   if (!words.length) return []
@@ -96,7 +108,19 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKey))
             </li>
           </ul>
           <p v-else-if="query.trim()" class="site-search__empty">{{ en ? 'Nothing found. Try another word.' : 'Нічого не знайшли. Спробуйте інше слово.' }}</p>
-          <p v-else class="site-search__hint">{{ en ? 'Tip: press / anywhere to search.' : 'Порада: натисніть / на будь-якій сторінці, щоб шукати.' }}</p>
+          <!-- Empty search: what can be found here, a few example queries to try and the main sections. -->
+          <div v-else class="site-search__intro">
+            <p class="site-search__hint">{{ en ? 'Search projects, events, people, opportunities and news of NGO Symbol — by a title, a name, a city or a topic.' : 'Шукайте проєкти, події, людей, можливості й новини «Символу» — за назвою, іменем, містом чи темою.' }}</p>
+            <span class="site-search__label">{{ en ? 'Try' : 'Спробуйте' }}</span>
+            <div class="site-search__examples">
+              <button v-for="example in examples" :key="example" type="button" @click="tryExample(example)">{{ example }}</button>
+            </div>
+            <span class="site-search__label">{{ en ? 'Sections' : 'Розділи' }}</span>
+            <div class="site-search__sections">
+              <NuxtLink v-for="section in sections" :key="section.to" :to="section.to" @click="hide">{{ section.label }}</NuxtLink>
+            </div>
+            <p class="site-search__tip">{{ en ? 'Tip: press / anywhere to search.' : 'Порада: натисніть / на будь-якій сторінці, щоб шукати.' }}</p>
+          </div>
         </div>
       </div>
     </Transition>
@@ -123,6 +147,15 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .site-search__kind { grid-row: span 2; font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--symbol-violet); padding-top: 5px; }
 .site-search__meta { font-size: .82rem; opacity: .75; }
 .site-search__empty, .site-search__hint { margin: 0; padding: 18px; font-size: .9rem; opacity: .75; }
+.site-search__intro { padding: 0 0 16px; overflow-y: auto; }
+.site-search__intro .site-search__hint { opacity: .9; padding-bottom: 8px; }
+.site-search__label { display: block; padding: 10px 18px 6px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--symbol-violet); }
+.site-search__examples, .site-search__sections { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px; }
+.site-search__examples button { padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: .85rem; cursor: pointer; transition: background .2s ease, color .2s ease; }
+.site-search__examples button:hover { background: var(--symbol-plum); color: var(--symbol-cream); }
+.site-search__sections a { font-family: var(--font-display); font-size: 1.15rem; text-decoration: none; margin-right: 10px; }
+.site-search__sections a:hover { text-decoration: underline; }
+.site-search__tip { margin: 14px 18px 0; font-size: .78rem; opacity: .6; }
 @keyframes search-row { from { opacity: 0; transform: translateY(8px); } }
 
 .site-search-enter-active, .site-search-leave-active { transition: opacity .25s ease; }

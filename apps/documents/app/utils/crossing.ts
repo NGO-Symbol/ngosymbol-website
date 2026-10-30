@@ -19,5 +19,5 @@ export function leaveTo(event: MouseEvent, href: string) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   event.preventDefault()
   document.documentElement.dataset.cross = 'leave'
-  setTimeout(() => { location.href = href }, 560)
+  setTimeout(() => { location.href = href }, matchMedia('(max-width: 820px)').matches ? 300 : 560)
 }

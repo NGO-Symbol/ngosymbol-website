@@ -166,6 +166,7 @@ function setTilt(x: number, y: number) {
   root.value?.style.setProperty('--tilt-y', String(y))
 }
 function onPointerMove(event: PointerEvent) {
+  if (document.documentElement.dataset.motion === 'lite') return
   const box = root.value?.getBoundingClientRect()
   if (!box) return
   setTilt(((event.clientX - box.left) / box.width - 0.5) * 2, ((event.clientY - box.top) / box.height - 0.5) * 2)

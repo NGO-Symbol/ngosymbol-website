@@ -617,6 +617,8 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 /* Crossing to and from a project site (plugins/project-crossing.client.ts). Leaving: the exhibition's paper with a
    barcode rises over the page. Back from the project site: Symbol's violet curtain with the mark slides away. */
 html[data-cross] body::after { content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+/* Phones: the crossing between symbol.ngo and a project site takes about 0.4 s in all. */
+@media (max-width: 820px) { html[data-cross="leave"] body::after { animation-duration: .28s; } html[data-cross="enter"] body::after { animation-duration: .35s; animation-delay: .05s; } }
 html[data-cross="leave"] body::after { background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 7px) center / min(70vw, 520px) 72px no-repeat, #e8e8e5; animation: cross-rise .55s cubic-bezier(.7, 0, .3, 1) both; }
 html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) center / 76px no-repeat; animation: cross-away .75s cubic-bezier(.7, 0, .2, 1) .15s both; }
 @keyframes cross-rise { from { transform: translateY(100%); } }
@@ -644,3 +646,11 @@ html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) cen
 .social-link.is-tapped, .footer-icon-link.is-tapped { animation: tap-hop .4s cubic-bezier(.3, 1.4, .5, 1); }
 .site-header nav a.is-tapped, .text-link.is-tapped, .subscribe__links a.is-tapped { animation: tap-ink .5s ease-out; }
 @media (prefers-reduced-motion: reduce) { .is-tapped, .is-tapped * { animation: none !important; } }
+
+/* Motion tier «lite» (plugins/motion.client.ts): weak or busy devices keep the content, lose the decoration. */
+html[data-motion="lite"] .orbit-hook__ring--dashed, html[data-motion="lite"] .orbit-hook__core { animation: none; }
+html[data-motion="lite"] .orbit-hook__svg, html[data-motion="lite"] .orbit-hook__parallax { transition: none; transform: none; }
+html[data-motion="lite"].reveal-ready [data-reveal] { transition: opacity .2s ease; transform: none; }
+html[data-motion="lite"] .partner-logo *, html[data-motion="lite"] .partner-logo :is(img, svg) { animation: none !important; }
+html[data-motion="lite"] .is-tapped, html[data-motion="lite"] .is-tapped * { animation: none !important; }
+html[data-motion="lite"] .reel__photo, html[data-motion="lite"] .reel__photo img, html[data-motion="lite"] .project-card { transition: none !important; }
