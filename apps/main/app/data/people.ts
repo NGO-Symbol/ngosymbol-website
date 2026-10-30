@@ -6,6 +6,7 @@ export const people: Person[] = [
   {
     slug: 'yurii-rassokha',
     name: 'Юрій Рассоха',
+    tags: ['Менеджер проєктів', 'Куратор', 'Фотограф'],
     photo: '/media/people/yurii-rassokha.jpg',
     team: true,
     teamOrder: 1,
@@ -49,6 +50,7 @@ export const people: Person[] = [
   {
     slug: 'petro-chekal',
     name: 'Петро Чекаль',
+    tags: ['Фотограф', 'Куратор', 'Оператор'],
     photo: '/media/people/petro-chekal.jpg',
     team: true,
     teamOrder: 2,
@@ -89,6 +91,7 @@ export const people: Person[] = [
     slug: 'hanna-franyk',
     // Ганна Франик is the artistic name of Аліна Войтюк (USER_CONFIRMED 2026-10-29): one person, one page.
     name: 'Ганна Франик (Аліна Войтюк)',
+    tags: ['Артменеджерка', 'Мисткиня'],
     photo: '/media/people/hanna-franyk.jpg',
     team: true,
     teamOrder: 3,
@@ -105,6 +108,7 @@ export const people: Person[] = [
   {
     slug: 'olena-mordyk',
     name: 'Олена Мордик',
+    tags: ['Акторка плейбек-театру', 'Мисткиня'],
     photo: '/media/people/olena-mordyk.jpg',
     team: true,
     teamOrder: 4,
@@ -164,6 +168,7 @@ export const people: Person[] = [
     slug: 'pavlo-makov',
     photo: '/media/people/pavlo-makov.jpg',
     name: 'Павло Маков',
+    tags: ['Художник-графік'],
     shortBio: 'Український художник-графік, академік НАМ України, лауреат Шевченківської премії (2018), автор «Фонтану виснаження» на Венеційській бієнале 2022 року.',
     // Bio sources (2026-10-30): Wikipedia (EN); Academy membership per adamovskiy.foundation (corresponding 2007, full 2021) —
     // other profiles still list him as a corresponding member, so the text says «член» without the rank.
@@ -180,6 +185,7 @@ export const people: Person[] = [
   {
     slug: 'oleh-tistol',
     name: 'Олег Тістол',
+    tags: ['Художник'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/tistololegart' }, { label: 'Вікіпедія', url: 'https://uk.wikipedia.org/wiki/%D0%A2%D1%96%D1%81%D1%82%D0%BE%D0%BB_%D0%9E%D0%BB%D0%B5%D0%B3_%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D0%B8%D1%87' }],
     photo: '/media/people/oleh-tistol.jpg',
     shortBio: 'Олег Тістол — один із лідерів Нової української хвилі, співавтор «Нацпрому», член-кореспондент НАМ України; живе й працює в Києві.',
@@ -195,6 +201,7 @@ export const people: Person[] = [
   {
     slug: 'roman-piatkovka',
     name: 'Роман Пятковка',
+    tags: ['Фотограф'],
     photo: '/media/people/roman-piatkovka.jpg',
     shortBio: 'Роман Пятковка — український фотограф, народжений в Харкові, один із найяскравіших представників харківської школи фотографії.',
     // Bio sources (2026-10-30): grynyov.art, PinchukArtCentre research platform (Дар’я Шевцова), UAPP, MYPH, Wikipedia (EN).
@@ -209,6 +216,7 @@ export const people: Person[] = [
   {
     slug: 'serhii-melnychenko',
     name: 'Сергій Мельниченко',
+    tags: ['Фотограф'],
     links: [{ label: 'Сайт', url: 'https://melnitchenko.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/sergey_melnitchenko' }],
     photo: '/media/people/serhii-melnychenko.jpg',
     shortBio: 'Сергій Мельниченко — український фотограф, танцюрист, майстер спорту міжнародного класу з бальних танців та засновник платформи концептуальної та арт-фотографії «MYPH» та член творчого об’єднання «Українська фотографічна альтернатива».',
@@ -228,6 +236,7 @@ export const people: Person[] = [
   {
     slug: 'oleksii-sai',
     name: 'Олексій Сай',
+    tags: ['Художник'],
     photo: '/media/people/oleksii-sai.jpg',
     shortBio: 'Олексій Сай — український художник, автор Excel-Art, номінант PinchukArtCentre Prize (2009); живе й працює в Києві.',
     // Bio sources (2026-10-30): HEK Basel (share.hek.ch), Voloshyn Gallery, Wikipedia (EN, incl. Burning Man pages),
@@ -243,6 +252,7 @@ export const people: Person[] = [
   {
     slug: 'volodymyr-kuznietsov',
     name: 'Володимир Кузнецов',
+    tags: ['Художник'],
     links: [{ label: 'Сайт', url: 'https://volodymyrkuznetsov.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/kuznetsov_kraftworks' }],
     photo: '/media/people/volodymyr-kuznietsov.jpg',
     shortBio: 'Володимир Кузнецов — український митець родом із Луцька, живе й працює в Києві.',
@@ -263,6 +273,7 @@ export const people: Person[] = [
   {
     slug: 'alina-prokopenko',
     name: 'Аліна Прокопенко (Apris)',
+    tags: ['Фуд-дизайнерка', 'Мисткиня'],
     links: [{ label: 'Сайт', url: 'https://www.apris.art/' }, { label: 'Instagram', url: 'https://www.instagram.com/a.pr.is' }],
     photo: '/media/people/alina-prokopenko.jpg',
     shortBio: 'Аліна Прокопенко (Apris) — фуд-дизайнерка, що працює в Парижі.',
@@ -274,6 +285,7 @@ export const people: Person[] = [
   {
     slug: 'andrii-skrypka',
     name: 'Андрій Скрипка',
+    tags: ['Митець', 'Дизайнер'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/a_r___t_s' }, { label: 'Facebook', url: 'https://www.facebook.com/a.skripohcka' }, { label: 'Telegram', url: 'https://t.me/arts_daily' }],
     photo: '/media/people/andrii-skrypka.jpg',
     shortBio: 'Андрій Скрипка — міждисциплінарний митець і дизайнер, народився в Керчі, Крим.',
@@ -290,6 +302,7 @@ export const people: Person[] = [
   {
     slug: 'anna-hareieva',
     name: 'Анна Гареєва',
+    tags: ['Фотографка'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/_anny.gareeva_photo.art_' }],
     photo: '/media/people/anna-hareieva.jpg',
     shortBio: 'Анна Гареєва — фотограф з Харкова, наразі мешкає в Чернівцях.',
@@ -305,6 +318,7 @@ export const people: Person[] = [
   {
     slug: 'anton-kariuk',
     name: 'Антон Карюк',
+    tags: ['Митець'],
     links: [{ label: 'Сайт', url: 'https://antonkaryuk.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/antonkaryuk' }],
     photo: '/media/people/anton-kariuk.jpg',
     shortBio: 'Антон Карюк — український міждисциплінарний митець родом з Дніпра, що живе у Вільнюсі, Литва.',
@@ -321,6 +335,7 @@ export const people: Person[] = [
   {
     slug: 'vira-pakosh',
     name: 'Віра Пакош',
+    tags: ['Мисткиня'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/piravakosh' }],
     photo: '/media/people/vira-pakosh.jpg',
     shortBio: 'Віра Пакош — міждисциплінарна мисткиня, яка працює з темами сприйняття реальності, памʼяті та спогадів.',
@@ -336,6 +351,7 @@ export const people: Person[] = [
   {
     slug: 'dara-sholokh',
     name: 'Дара Шолох',
+    tags: ['Мисткиня'],
     photo: '/media/people/dara-sholokh.jpg',
     shortBio: 'Дара Шолох — українська мисткиня.',
     bio: [
@@ -346,6 +362,7 @@ export const people: Person[] = [
   {
     slug: 'yeva-fomitski',
     name: 'Єва Фоміцкі',
+    tags: ['Мисткиня', 'Кураторка'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/eva_fomitski' }],
     photo: '/media/people/yeva-fomitski.jpg',
     shortBio: 'Єва Фоміцкі — мисткиня та кураторка родом з Харкова, що наразі проживає в Берліні, Німеччина.',
@@ -357,6 +374,7 @@ export const people: Person[] = [
   {
     slug: 'kinich-azla',
     name: 'Kinich Azla (Вероніка Ліпатова)',
+    tags: ['Митець', 'Астроном'],
     photo: '/media/people/kinich-azla.jpg',
     shortBio: 'Kinich Azla (Вероніка Ліпатова) є астрономом, що навчається та викладає на аспірантурі в Гайдельберзькому університеті в Німеччині.',
     bio: [
@@ -367,6 +385,7 @@ export const people: Person[] = [
   {
     slug: 'kostiantyn-hlyvlias',
     name: 'Костянтин Гливляс',
+    tags: ['Митець'],
     links: [{ label: 'Сайт', url: 'https://hlyvlias.myportfolio.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/hlyvliass' }],
     photo: '/media/people/kostiantyn-hlyvlias.jpg',
     shortBio: 'Костянтин Гливляс живе і працює у Львові.',
@@ -378,6 +397,7 @@ export const people: Person[] = [
   {
     slug: 'mariia-matiashova',
     name: 'Марія Матяшова',
+    tags: ['Художниця'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/maria.matiashova' }],
     photo: '/media/people/mariia-matiashova.jpg',
     shortBio: 'Міждисциплінарна художниця з Києва (нар. 1993), лауреатка SEED Award фонду Prince Claus (2025).',
@@ -393,6 +413,7 @@ export const people: Person[] = [
   {
     slug: 'mariia-prokopenko',
     name: 'Марія Прокопенко',
+    tags: ['Дизайнерка', 'Мисткиня'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/chambosatori' }],
     photo: '/media/people/mariia-prokopenko.jpg',
     shortBio: 'Марія Прокопенко — графічна дизайнерка та мисткиня з Харкова.',
@@ -409,6 +430,7 @@ export const people: Person[] = [
   {
     slug: 'nataliia-okhman',
     name: 'Наталія Охман',
+    tags: ['Художниця'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/nata_okhman' }],
     photo: '/media/people/nataliia-okhman.jpg',
     shortBio: 'Наталія Охман — українська київська мисткиня, що працює в техніках аналогового колажу, лендарту та фотографії.',
@@ -423,6 +445,7 @@ export const people: Person[] = [
   {
     slug: 'senora-serpiente',
     name: 'Señora Serpiente',
+    tags: ['Мисткиня'],
     photo: '/media/people/senora-serpiente.jpg',
     shortBio: 'Чилійська мисткиня, живе в Парижі; працює з текстилем, вишивкою й тілом.',
     bio: ['Чилійська мисткиня, яка живе в Парижі. Працює з текстилем, вишивкою, тілом і образом, досліджуючи ідентичність, кордони й спадок колоніалізму з феміністичної та деколоніальної перспективи.', 'На виставці [[project:pokazhit-svoi-dokumenty]] — робота «La visa es un dispositivo colonial» (2023): вишита сторінка старого паспорта з візою.']
@@ -430,6 +453,7 @@ export const people: Person[] = [
   {
     slug: 'nataliia-ivanova',
     name: 'Наталія Іванова',
+    tags: ['Кураторка', 'ЄрміловЦентр'],
     photo: '/media/people/nataliia-ivanova.jpg',
     shortBio: 'Кураторка й освітянка, засновниця і директорка ЄрміловЦентру в Харкові, лауреатка премії Ігоря Забеля (2026).',
     // Bio sources (2026-10-30): e-flux and igorzabel.org (Igor Zabel Award 2026); her published profile (60+ exhibitions, ART KUZEMYN).
@@ -444,12 +468,14 @@ export const people: Person[] = [
   {
     slug: 'sofiia-hurilova',
     name: 'Софія Гурільова',
+    tags: ['ЄрміловЦентр'],
     photo: '/media/people/sofiia-hurilova.jpg',
     shortBio: 'Координація виставки «Покажіть свої документи…» від ЄрміловЦентру.'
   },
   {
     slug: 'oleksii-chekal',
     name: 'Олексій Чекаль',
+    tags: ['Дизайнер', 'Типограф', 'Каліграф'],
     // Portrait: his own Behance profile picture (behance.net/PaLaMa), found 2026-10-29.
     photo: '/media/people/oleksii-chekal.jpg',
     // Bio sources (2026-10-30): his CV in «Портфоліо команди проєкту.pdf»; mincult.gov.ua/zakon and zaxid.net (Zakon,
@@ -468,6 +494,7 @@ export const people: Person[] = [
   {
     slug: 'larysa-chaika',
     name: 'Лариса Чайка',
+    tags: ['Художниця-графікиня', 'Ілюстраторка'],
     photo: '/media/people/larysa-chaika.jpg',
     team: true,
     teamOrder: 5,
@@ -498,6 +525,7 @@ export const people: Person[] = [
   {
     slug: 'maksym-rozenfeld',
     name: 'Максим Розенфельд',
+    tags: ['Архітектор', 'Історик архітектури'],
     // Portrait: photo by Denis Vėjas for NARA (nara.lt, «A Frontier City»), found 2026-10-29.
     photo: '/media/people/maksym-rozenfeld.jpg',
     // Bio sources (2026-10-30): his CV in «Портфоліо команди проєкту.pdf»; acca.ua (book, BBC-2024 shortlist, essay);
@@ -516,12 +544,14 @@ export const people: Person[] = [
   {
     slug: 'vero-yuzepchuk',
     name: 'Вероніка Юзепчук',
+    tags: ['Режисерка'],
     shortBio: 'Режисерка документального фільму «Збирач конвалій» (2023).',
     bio: ['Режисерка фільму [[project:zbyrach-konvalii]] про фотографа Харківської школи фотографії Олександра Супруна. Фільм отримав нагороду за найкращу операторську роботу на практичному курсі документального кіно Media Development Foundation.']
   },
   {
     slug: 'ivan-samoilov',
     name: 'Іван Самойлов',
+    tags: ['Оператор', 'Фотограф'],
     photo: '/media/people/ivan-samoilov.jpg',
     shortBio: 'Оператор і фотограф, оператор фільму «Збирач конвалій».',
     bio: [
@@ -532,12 +562,14 @@ export const people: Person[] = [
   {
     slug: 'maksym-koval',
     name: 'Максим Коваль',
+    tags: ['Звукорежисер'],
     shortBio: 'Звукорежисер фільму «Збирач конвалій» (2023).',
     bio: ['Звукорежисер документального фільму [[project:zbyrach-konvalii]] про фотографа Олександра Супруна.']
   },
   {
     slug: 'diana-horbenko',
     name: 'Діана Горбенко',
+    tags: ['Дизайнерка'],
     shortBio: 'Дизайнерка й дослідниця, дизайнерка фільму «Збирач конвалій».',
     bio: [
       'Дизайнерка фільму [[project:zbyrach-konvalii]] (2023).',
@@ -550,6 +582,7 @@ export const people: Person[] = [
   {
     slug: 'alla-pasichnyk',
     name: 'Алла Пасічник',
+    tags: ['Художниця'],
     shortBio: 'Художниця з Дніпра: акварель, олійний живопис, іконопис.',
     bio: [
       'Художниця з Дніпра. Після завершення кар’єри (зокрема викладання у Фінансовому інституті) почала писати олією, а з початком повномасштабної війни опанувала акварель: «Акварель складніша за олію, але вона як життя: сказане й зроблене вже не скасуєш».',
@@ -565,6 +598,7 @@ export const people: Person[] = [
   {
     slug: 'magran-tata',
     name: 'Магран Тата',
+    tags: ['Мисткиня піксель-арту'],
     shortBio: 'Мисткиня піксель-арту.',
     bio: [
       'Працює в техніці піксель-арту. На виставці [[project:2-10-300]] (Угорщина, 2024) показала серію робіт 2022–2023 років із написами «60 днів смерті», «зберегти культурний код», «Кров стікає в Чорне море Дніпром», «жовта стрічка», «кривава хвиля», «повернення».'
@@ -578,6 +612,7 @@ export const people: Person[] = [
   {
     slug: 'ruslana-kliuchko',
     name: 'Руслана Ключко',
+    tags: ['Художниця'],
     photo: '/media/people/ruslana-kliuchko.jpg',
     shortBio: 'Мультидисциплінарна художниця (нар. 2002): книжки художника, графіка, фотографія, об’єкти та інсталяції.',
     // Bio from her CV on ruslanakliuchko.net.ua (2026-10-30); portrait from her site (photo by an unnamed photographer).
@@ -600,6 +635,7 @@ export const people: Person[] = [
   {
     slug: 'ivan-kutchak',
     name: 'Іван Кутчак',
+    tags: ['Тренер mhGAP'],
     photo: '/media/people/ivan-kutchak.jpg',
     shortBio: 'Тренер і супервізор програми ВООЗ mhGAP.',
     bio: [
@@ -611,6 +647,7 @@ export const people: Person[] = [
   {
     slug: 'olha-klymovska',
     name: 'Ольга Климовська',
+    tags: ['Тренерка mhGAP', 'Психологиня'],
     photo: '/media/people/olha-klymovska.jpg',
     shortBio: 'Психологиня, тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: [
@@ -622,6 +659,7 @@ export const people: Person[] = [
   {
     slug: 'olena-lemeshko',
     name: 'Олена Лемешко',
+    tags: ['Тренерка mhGAP'],
     photo: '/media/people/olena-lemeshko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Лікарка загальної практики — сімейної медицини, тренерка програми ВООЗ mhGAP. Разом з [[person:nataliia-opryshko|Наталією Опришко]] вела **перший тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **10–14 лютого 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
@@ -629,6 +667,7 @@ export const people: Person[] = [
   {
     slug: 'nataliia-opryshko',
     name: 'Наталія Опришко',
+    tags: ['Тренерка mhGAP'],
     photo: '/media/people/nataliia-opryshko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:olena-lemeshko|Оленою Лемешко]] вела **перший тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **10–14 лютого 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
@@ -636,6 +675,7 @@ export const people: Person[] = [
   {
     slug: 'yurii-sich',
     name: 'Юрій Січ',
+    tags: ['Тренер mhGAP'],
     photo: '/media/people/yurii-sich.jpg',
     shortBio: 'Тренер і супервізор програми ВООЗ mhGAP.',
     bio: ['Тренер програми ВООЗ mhGAP. Разом з [[person:viktoriia-myroniuk-danko|Вікторією Миронюк-Данко]] вів **другий тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **24–28 лютого 2025**. Після тренінгу вів **онлайн-супервізії** для учасників.']
@@ -643,6 +683,7 @@ export const people: Person[] = [
   {
     slug: 'viktoriia-myroniuk-danko',
     name: 'Вікторія Миронюк-Данко',
+    tags: ['Тренерка mhGAP'],
     photo: '/media/people/viktoriia-myroniuk-danko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:yurii-sich|Юрієм Січем]] вела **другий тренінг** проєкту [[project:mhgap-kyiv]] у Білій Церкві, **24–28 лютого 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']
@@ -650,6 +691,7 @@ export const people: Person[] = [
   {
     slug: 'alesia-lysenko',
     name: 'Алеся Лисенко',
+    tags: ['Тренерка mhGAP'],
     photo: '/media/people/alesia-lysenko.jpg',
     shortBio: 'Тренерка й супервізорка програми ВООЗ mhGAP.',
     bio: ['Тренерка програми ВООЗ mhGAP. Разом з [[person:ivan-kutchak|Іваном Кутчаком]] вела **третій тренінг** проєкту [[project:mhgap-kyiv]], **31 березня — 4 квітня 2025**. Після тренінгу вела **онлайн-супервізії** для учасників.']

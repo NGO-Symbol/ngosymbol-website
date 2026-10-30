@@ -101,6 +101,8 @@ export interface Person {
   name: string
   /** Portrait in public/media/people/{slug}.jpg */
   photo?: string
+  /** Who the person is, shown as small labels at the top right of their page: «Фотограф», «Тренерка mhGAP»… */
+  tags?: string[]
   shortBio?: string
   bio?: Paragraphs
   links?: { label: string; url: string }[]
