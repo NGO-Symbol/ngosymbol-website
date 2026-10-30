@@ -1,0 +1,5 @@
+# symbol.ngo is open to search engines (2026-10-30).
+User-agent: *
+Allow: /
+
+Sitemap: https://symbol.ngo/sitemap.xml

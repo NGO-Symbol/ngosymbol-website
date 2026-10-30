@@ -10,8 +10,8 @@ const eventMedia = readdirSync(main('public/media/events'))
   .filter(dir => dir.startsWith('pokazhit-svoi-dokumenty'))
   .map(dir => ({ dir: main(`public/media/events/${dir}`), baseURL: `/media/events/${dir}` }))
 
-// Set to true at launch to let search engines index the site (see open-questions.md).
-const indexable = false
+// Open to search engines since 2026-10-30 (USER_CONFIRMED); false puts `noindex, nofollow` on every page.
+const indexable = true
 
 export default defineNuxtConfig({
   extends: ['@symbol/brand'],
