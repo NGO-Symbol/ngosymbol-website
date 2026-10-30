@@ -1,5 +1,29 @@
 <script setup lang="ts">
 const { isEn } = useLang()
+const route = useRoute()
+
+// Canonical address of each exhibition page under symbol.ngo/documentsart/ and a default share card.
+const BASE = 'https://symbol.ngo/documentsart'
+const withSlash = (path: string) => (path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`)
+const canonical = computed(() => BASE + withSlash(route.path))
+const ukPath = computed(() => withSlash(route.path.replace(/^\/en(?=\/|$)/, '') || '/'))
+const enPath = computed(() => withSlash(ukPath.value === '/' ? '/en' : `/en${ukPath.value}`))
+useHead({
+  link: [
+    { rel: 'canonical', href: canonical },
+    { rel: 'alternate', hreflang: 'uk', href: () => BASE + ukPath.value },
+    { rel: 'alternate', hreflang: 'en', href: () => BASE + enPath.value },
+    { rel: 'alternate', hreflang: 'x-default', href: () => BASE + ukPath.value }
+  ]
+})
+useSeoMeta({
+  ogSiteName: () => (isEn.value ? 'May I See Your Documents… · NGO Symbol' : 'Покажіть свої документи… · ГО «Символ»'),
+  ogType: 'website',
+  ogUrl: canonical,
+  ogLocale: () => (isEn.value ? 'en_US' : 'uk_UA'),
+  ogImage: 'https://symbol.ngo/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg',
+  twitterCard: 'summary_large_image'
+})
 useHead({
   htmlAttrs: { lang: () => (isEn.value ? 'en' : 'uk') },
   titleTemplate: title => (isEn.value

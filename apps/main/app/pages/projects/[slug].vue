@@ -10,7 +10,30 @@ if (!project) {
 
 const { isEn } = useLang()
 const text = computed(() => (isEn.value && projectsEn[project.slug]) || project)
-useSeoMeta({ title: () => `${text.value.title} · ${projectYears(project)}`, description: () => text.value.summary })
+const shareImage = project.poster ?? project.gallery?.[0]?.src ?? project.backdrop
+useSeoMeta({
+  title: () => `${text.value.title} · ${projectYears(project)}`,
+  description: () => text.value.summary,
+  ogImage: shareImage ? `https://symbol.ngo${shareImage}` : undefined
+})
+// schema.org CreativeWork: the project with its years, place, image and the people credited in it.
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: project.title,
+      description: project.summary,
+      url: `https://symbol.ngo/projects/${project.slug}/`,
+      image: shareImage ? `https://symbol.ngo${shareImage}` : undefined,
+      dateCreated: String(project.yearStart),
+      locationCreated: project.city ? { '@type': 'Place', name: project.city } : undefined,
+      creator: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' },
+      contributor: project.people?.map(credit => ({ '@type': 'Person', name: getPerson(credit.person)?.name, url: `https://symbol.ngo/people/${credit.person}/` })).filter(item => item.name)
+    })
+  }]
+})
 
 // The header takes the project's colours on themed pages (html[data-page-theme], main.css).
 if (project.theme) useHead({ htmlAttrs: { 'data-page-theme': project.theme } })
@@ -39,7 +62,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="[`tone-${project.tone}`, { 'has-backdrop': project.backdrop }]">
-      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" />
+      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="project.title" />
       <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
       <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">

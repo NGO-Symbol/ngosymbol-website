@@ -3,6 +3,33 @@
 // When it plays, pick the next of the intro variants (rotates on every new visit).
 // Theme: the visitor's choice (light/dark) is stored; without a choice the system setting applies.
 const { isEn } = useLang()
+const route = useRoute()
+
+// Search engines and social cards: one canonical address per page (with the trailing slash GitHub Pages uses),
+// the Ukrainian and English versions linked to each other, and a default share card that pages override.
+const SITE = 'https://symbol.ngo'
+const withSlash = (path: string) => (path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`)
+const canonical = computed(() => SITE + withSlash(route.path))
+const ukPath = computed(() => withSlash(switchLangPath(route.path, false)))
+const enPath = computed(() => withSlash(switchLangPath(route.path, true)))
+useHead({
+  link: [
+    { rel: 'canonical', href: canonical },
+    { rel: 'alternate', hreflang: 'uk', href: () => SITE + ukPath.value },
+    { rel: 'alternate', hreflang: 'en', href: () => SITE + enPath.value },
+    { rel: 'alternate', hreflang: 'x-default', href: () => SITE + ukPath.value }
+  ]
+})
+useSeoMeta({
+  ogSiteName: () => (isEn.value ? 'NGO Symbol' : 'ГО «Символ»'),
+  ogType: 'website',
+  ogUrl: canonical,
+  ogLocale: () => (isEn.value ? 'en_US' : 'uk_UA'),
+  ogImage: `${SITE}/og-default.jpg`,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  twitterCard: 'summary_large_image'
+})
 useHead({
   htmlAttrs: { lang: () => (isEn.value ? 'en' : 'uk') },
   titleTemplate: title => (isEn.value ? (title && title !== 'NGO Symbol' ? `${title} · NGO Symbol` : 'NGO Symbol') : (title && title !== 'ГО «Символ»' ? `${title} · ГО «Символ»` : 'ГО «Символ»')),

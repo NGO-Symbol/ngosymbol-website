@@ -14,7 +14,12 @@ const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org 
 const partners = toTiles([...(event.partners ?? [])].sort(bySignificance))
 const donors = toTiles(project.donors)
 
-useSeoMeta({ title: event.title, description: `${formatRange(event.start, event.end)} · ${venueLine(event.venue)}` })
+const shareImage = event.gallery?.[0]?.src ?? project.poster ?? project.gallery?.[0]?.src
+useSeoMeta({
+  title: event.title,
+  description: `${formatRange(event.start, event.end)} · ${venueLine(event.venue)}`,
+  ogImage: shareImage ? `https://symbol.ngo${shareImage}` : undefined
+})
 
 // schema.org Event for search engines.
 useHead({
@@ -27,7 +32,13 @@ useHead({
       startDate: event.start,
       endDate: event.end,
       location: { '@type': 'Place', name: event.venue.name ?? event.venue.city, address: venueLine(event.venue) },
-      organizer: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo' }
+      organizer: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' },
+      url: `https://symbol.ngo/events/${event.slug}/`,
+      description: event.description?.map(plainText).join(' ').slice(0, 500),
+      image: shareImage ? [`https://symbol.ngo${shareImage}`] : undefined,
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      eventStatus: 'https://schema.org/EventScheduled',
+      superEvent: { '@type': 'CreativeWork', name: project.title, url: `https://symbol.ngo/projects/${project.slug}/` }
     })
   }]
 })
