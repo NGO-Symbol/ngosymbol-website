@@ -11,6 +11,11 @@ useSeoMeta({
 const reel = ref<typeof highlights>([])
 onMounted(() => { reel.value = pickHighlights() })
 
+// Facts from documents/knowledge/organization.md (USER_CONFIRMED positioning, registration 2023, places).
+const about = [
+  'ГО «Символ» — незалежна громадська організація з Харкова, заснована 2023 року. Ми розвиваємо сучасну українську культуру й мистецтво та сприяємо уважному ставленню до психічного здоров’я.',
+  'Робимо виставки сучасного мистецтва, як-от [[project:pokazhit-svoi-dokumenty]] у ЄрміловЦентрі, документальне кіно [[project:zbyrach-konvalii]], плейбек-театр [[project:holosy-u-rusi]], навчання медиків за програмою ВООЗ — [[project:mhgap-kyiv]] — і проєкт міської пам’яті [[project:istoriia-moiei-vulytsi]]. Працюємо в Харкові, на Закарпатті, в Києві та за кордоном.'
+]
 const openCalls = activeOpportunities()
 const upcoming = eventItems.filter(isUpcoming).reverse().slice(0, 4)
 const recent = eventItems.filter(item => !isUpcoming(item)).slice(0, 3)
@@ -37,7 +42,12 @@ const supporters = organizations
       <ProjectOrbit class="home-hero__orbit" />
     </section>
 
-    <StatsCounters />
+    <!-- Who we are, in words: the home page is found in search by the organization, its projects and places. -->
+    <section class="section section--tight container home-about">
+      <span class="label">Про «Символ»</span>
+      <RichText class="lead-text" :paragraphs="about" />
+      <NuxtLink class="text-link" to="/about">Більше про організацію</NuxtLink>
+    </section>
 
     <section class="section section--tight container home-reel">
       <div class="section-heading">
@@ -46,6 +56,8 @@ const supporters = organizations
       </div>
       <PhotoReel :photos="reel" :placeholders="14" />
     </section>
+
+    <StatsCounters />
 
     <section v-if="openCalls.length" class="open-calls">
       <div class="container">
@@ -100,14 +112,14 @@ const supporters = organizations
 
     <section v-if="supporters.length" class="section section--tight container">
       <span class="label">Партнери й донори проєктів</span>
-      <PartnerTiles :items="supporters" />
+      <PartnerTiles :items="supporters" compact />
     </section>
 
     <section class="subscribe">
       <div class="container subscribe__grid">
         <h2>Стежте за «Символом»</h2>
         <div class="subscribe__links">
-          <a href="/events.ics">Підписатися на календар подій</a>
+          <NuxtLink :to="{ path: '/events', query: { view: 'calendar' } }">Підписатися на календар подій</NuxtLink>
           <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
           <p>Розсилка запуститься згодом.</p>
         </div>

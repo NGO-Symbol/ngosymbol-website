@@ -106,6 +106,8 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .section-heading { display: grid; grid-template-columns: 1.2fr .7fr; gap: 30px; align-items: end; margin-bottom: 48px; }
 .section-heading h2 { font-size: clamp(1.6rem, calc(0.9rem + 3.2vw), 4.2rem); line-height: 1.06; letter-spacing: -.015em; margin: 16px 0 0; }
 .section-heading > p { font-size: 1rem; line-height: 1.6; }
+.home-about { display: grid; gap: 14px; max-width: 860px; }
+.home-about .lead-text p { margin: 0 0 .6em; }
 .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .project-grid--archive { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .project-card { display: flex; flex-direction: column; min-height: 530px; color: var(--symbol-ink); text-decoration: none; border: 1px solid color-mix(in srgb, currentColor 45%, transparent); transition: transform .2s ease; }
@@ -179,6 +181,10 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .nav-support { padding: 7px 14px; border-radius: 999px; background: var(--symbol-apricot); color: #211b28; border-bottom: 0 !important; }
 .nav-support:hover, .nav-support.router-link-active { background: var(--symbol-violet); color: #211b28; }
 :focus-visible { outline: 2px solid var(--symbol-violet); outline-offset: 3px; }
+/* No browser rings or blue tap flashes for mouse and touch; a tidy ring stays for keyboard navigation (above).
+   Elements focused by the site itself (the main area after a page change) never show a ring. */
+html { -webkit-tap-highlight-color: transparent; }
+:focus:not(:focus-visible), [tabindex="-1"]:focus { outline: none; }
 .empty-note { color: color-mix(in srgb, var(--symbol-plum) 75%, transparent); }
 .section--tight { padding-block: clamp(50px, 6vw, 90px); }
 .section--tight > .label { margin-bottom: 20px; }
@@ -186,7 +192,7 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 
 /* Home hero with the project orbit */
 .home-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(20px, 4vw, 60px); align-items: center; padding-block: clamp(40px, 6vw, 90px) clamp(40px, 6vw, 80px); }
-.home-hero h1 { font-size: clamp(1.8rem, calc(0.9rem + 3.9vw), 5rem); letter-spacing: -.02em; line-height: .96; margin-bottom: 28px; }
+.home-hero h1 { font-size: clamp(1.6rem, calc(0.8rem + 3vw), 3.8rem); letter-spacing: -.02em; line-height: .96; margin-bottom: 28px; }
 .home-hero__text > p { font-size: 1.12rem; line-height: 1.6; max-width: 520px; margin-bottom: 28px; }
 
 /* Open calls */

@@ -94,8 +94,10 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
 .reel { display: grid; gap: 14px; }
 .reel__track { display: flex; gap: 14px; margin: 0; padding: 0 8px 6px 0; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0; overscroll-behavior-x: contain; scrollbar-width: none; }
 .reel__track::-webkit-scrollbar { display: none; }
-.reel__item { flex: none; width: clamp(240px, 34vw, 460px); display: grid; gap: 8px; scroll-snap-align: start; }
-.reel__item:nth-child(3n + 2) { width: clamp(200px, 24vw, 330px); }
+/* Every frame has the same height (wide 3:2 and upright 4:5 alike), so all captions sit on one line. */
+.reel { --reel-h: clamp(200px, 21vw, 300px); }
+.reel__item { flex: none; width: calc(var(--reel-h) * 1.5); display: grid; gap: 8px; scroll-snap-align: start; }
+.reel__item:nth-child(3n + 2) { width: calc(var(--reel-h) * .8); }
 .reel__item { padding-top: 6px; align-content: start; }
 /* A printed photograph in a passe-partout: a light mat with a hairline edge; on hover it lifts off an apricot shadow. */
 .reel__photo { padding: 7px; border: 1px solid color-mix(in srgb, var(--symbol-plum) 16%, transparent); background: var(--symbol-white); overflow: hidden; cursor: zoom-in; aspect-ratio: 3 / 2; box-shadow: 0 0 0 0 var(--symbol-apricot); transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s cubic-bezier(.2, .8, .2, 1); }
@@ -132,8 +134,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
 .reel-photo-enter-active, .reel-photo-leave-active { transition: opacity .18s ease; }
 .reel-photo-enter-from, .reel-photo-leave-to { opacity: 0; }
 @media (max-width: 640px) {
-  .reel__item { width: 78vw; }
-  .reel__item:nth-child(3n + 2) { width: 58vw; }
+  .reel { --reel-h: 50vw; }
   .reel-view { padding-inline: 8px; }
   .reel-view__nav { top: auto; bottom: max(16px, env(safe-area-inset-bottom)); margin-top: 0; }
   .reel-view img { max-height: calc(100dvh - 190px); }

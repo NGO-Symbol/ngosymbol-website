@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // A partner logo on a transparent background. SVG logos are inlined so every letter or shape can move
-// on its own, following the logo's rhythm (motion); PNG logos move as a whole. The motion plays when the
-// tile scrolls into view and again on hover (PartnerTiles calls replay()).
+// on its own, following the logo's rhythm (motion); PNG logos move as a whole. The logo stays still until the
+// visitor hovers its tile (or taps it on a touch screen); only then the motion plays (USER_CONFIRMED 2026-10-30).
 // srcDark: the organization's own variant for dark backgrounds (the EU emblem may not be recoloured, so it is never inverted).
 // srcDark equal to src: a coloured badge on its own background, shown unchanged in both themes.
 const props = defineProps<{ src: string; srcDark?: string; name: string; slug: string; motion?: string }>()
@@ -24,25 +24,22 @@ function scope(svg: string) {
 
 const root = ref<HTMLElement>()
 
-// Each logo starts its own motion when it scrolls into view (it does not depend on the page-wide reveal, which can
-// miss tiles after client-side navigation) and replays it whenever the pointer enters its tile.
+// The motion plays only on intent: the pointer entering the tile, or a tap on touch screens.
 const playing = ref(false)
-let observer: IntersectionObserver | undefined
 function replay() {
   playing.value = false
   requestAnimationFrame(() => requestAnimationFrame(() => { playing.value = true }))
 }
+function onPointerDown(event: PointerEvent) { if (event.pointerType !== 'mouse') replay() }
+let tile: Element | null | undefined
 onMounted(() => {
-  const tile = root.value?.closest('.partner') ?? root.value
+  tile = root.value?.closest('.partner') ?? root.value
   tile?.addEventListener('mouseenter', replay)
-  observer = new IntersectionObserver((entries) => {
-    if (entries.some(entry => entry.isIntersecting)) { playing.value = true; observer?.disconnect() }
-  }, { rootMargin: '0px 0px -5% 0px' })
-  if (root.value) observer.observe(root.value)
+  tile?.addEventListener('pointerdown', onPointerDown as EventListener, { passive: true })
 })
 onBeforeUnmount(() => {
-  observer?.disconnect()
-  root.value?.closest('.partner')?.removeEventListener('mouseenter', replay)
+  tile?.removeEventListener('mouseenter', replay)
+  tile?.removeEventListener('pointerdown', onPointerDown as EventListener)
 })
 
 onMounted(async () => {
