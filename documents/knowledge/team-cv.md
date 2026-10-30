@@ -49,3 +49,6 @@ Bios expanded from open sources (2026-10-30, at the team's request; each fact ch
 - Павло Маков, Олег Тістол, Роман Пятковка — Wikipedia (EN); Маков's academy rank differs between sources, so the text says «член».
 - Олексій Сай — Voloshyn Gallery, Wikipedia (EN), «Українська правда» (steel phoenix in Kyiv); Сергій Мельниченко — «Українська правда», lb.ua; Володимир Кузнецов — zaxid.net, «Українська правда» (2013 mural case).
 Bios may now cite a source inline as `[label](https://…)` (utils/content.ts → RichText): at most one or two links per bio.
+- Андрій Скрипка — «Люк» migration story; Марія Матяшова — Prince Claus Fund (SEED Award 2025), M17; Антон Карюк — HIAP residency page (2022); Руслана Ключко — her CV on ruslanakliuchko.net.ua, portrait from her site.
+- No public information found for Віра Пакош, Наталія Охман, Анна Гареєва, Костянтин Гливляс, Kinich Azla, Señora Serpiente, Магран Тата (no portrait either); their bios stay as on the exhibition site.
+- The exhibition site (apps/documents) now shows each artist's biography from the symbol.ngo person (utils/exhibition.ts → plainBio), without the paragraph about this exhibition; artists.ts bios are only a fallback.

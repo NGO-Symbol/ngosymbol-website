@@ -21,11 +21,26 @@ export function symbolPersonUrl(slug: string) {
 
 export interface ExhibitionArtist extends Artist { person?: Person; coAuthors: Person[] }
 
+// The biography is kept once, on the person's symbol.ngo page; here it is shown as plain text, without the paragraph
+// about this exhibition (its curatorial texts follow on the next sheets). Falls back to the original site's text.
+function plainBio(person: Person | undefined, fallback: string[]) {
+  const label = (type: string, slug: string, custom?: string) => custom
+    ?? (type === 'person' ? people.find(item => item.slug === slug)?.name : type === 'project' ? `«${projects.find(item => item.slug === slug)?.title ?? slug}»` : events.find(item => item.slug === slug)?.title)
+    ?? slug
+  const paragraphs = (person?.bio ?? [])
+    .filter(text => !text.includes('[[project:pokazhit-svoi-dokumenty'))
+    .map(text => text
+      .replace(/\[\[(project|event|person):([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g, (_, type: string, slug: string, custom?: string) => label(type, slug, custom))
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '$1')
+      .replace(/\*\*/g, ''))
+  return paragraphs.length ? paragraphs : fallback
+}
+
 // «Блокпост» is one work by Дара Шолох and Ганна Франик; the original site lists them on one page.
 const coAuthors: Record<string, string[]> = { 'dara-sholokh': ['hanna-franyk'] }
 
 export const exhibitionArtists: ExhibitionArtist[] = artists
-  .map(artist => ({ ...artist, person: personOf(artist.slug), coAuthors: (coAuthors[artist.slug] ?? []).map(personOf).filter(Boolean) as Person[] }))
+  .map(artist => ({ ...artist, bio: plainBio(personOf(artist.slug), artist.bio), person: personOf(artist.slug), coAuthors: (coAuthors[artist.slug] ?? []).map(personOf).filter(Boolean) as Person[] }))
   .sort((a, b) => a.name.localeCompare(b.name, 'uk'))
 
 export function getArtist(slug: string) {
