@@ -108,7 +108,7 @@ export const psdArtistsEn: Record<string, ApprovedArtistEn> = {
   'dara-sholokh': {
     name: "Dara Sholokh and Ana Franyk",
     bio: [
-      "Dara Sholokh and Hanna Franyk form an artistic duo. Both were born in Donetsk and have seen checkpoints since childhood.",
+      "Dara Sholokh and Ana Franyk form an artistic duo. Both were born in Donetsk and have seen checkpoints since childhood.",
       "Ana Franyk — artist, cultural manager, and exhibition manager of “Show Your Documents…”. Born in Donetsk, after 2014 she lived in Dobropillia, where she joined the “RePost” community space. Studied cultural management at Karazin University. Resident of the Her Gaze program (2023, Truskavets), participant of the exhibition “No One Is Superfluous” (2023, Lviv), curator of “2, 10, 300 years later” (2024, Hungary), and performance “An Air Alert in Ukraine” (2023, Tbilisi).",
       "Dara Sholokh — Ukrainian artist. After the start of the war in 2014, she moved to Zaporizhzhia, and in 2022 to Kyiv. She studies at the Mykhailo Boichuk Academy of Arts. In her practice, Dara works with the theme of the loss of home and explores human relationships. For her, home is found in familiar smells, sounds, and objects, while art becomes a way to preserve it despite change. She works mainly with painting, installation, and mosaic, and has participated in group and exhibition projects in Kyiv, including Ukraïnka Gallery and the M17 Contemporary Art Center."
     ],

@@ -3,7 +3,14 @@
 // A runner travels slowly round the ring; the project it reaches lights up and its title and short description
 // show below. Hovering or focusing a title sends the runner to it. The orbit tilts toward the pointer and turns a
 // little as the page scrolls. Clicking a title spins the orbit once before opening the project page.
+import { projectsEn } from '~/data/projects-en'
+
 const items = [...projects].sort((a, b) => b.yearStart - a.yearStart)
+const { isEn, localePath } = useLang()
+const projectText = (project: (typeof projects)[number]) => isEn.value ? projectsEn[project.slug] ?? project : project
+const projectMeta = (project: (typeof projects)[number]) => isEn.value
+  ? `${projectYears(project)} · ${translatePlace(project.city, true)} · ${translate(statusLabels[project.status]!, true)}`
+  : `${projectByline(project)} · ${statusLabels[project.status]}`
 
 const active = ref(0)
 const hovering = ref(false)
@@ -33,7 +40,7 @@ const NEIGHBOUR_ROOM = 14
 // the larger phone type), all titles are set smaller together, so they never run into each other.
 const MIN_GAP = 28
 // Before fonts are measured: an estimate from the number of letters.
-const titleLengths = ref(items.map(project => project.title.length * 11))
+const titleLengths = ref(items.map(project => projectText(project).title.length * 11))
 const yearLengths = ref<number[]>(items.map(() => 0))
 const measuring = ref(false)
 
@@ -154,9 +161,9 @@ async function measure() {
 
 function open(slug: string) {
   if (launching.value) return
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return navigateTo(`/projects/${slug}`)
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return navigateTo(localePath(`/projects/${slug}`))
   launching.value = true
-  window.setTimeout(() => navigateTo(`/projects/${slug}`), 260)
+  window.setTimeout(() => navigateTo(localePath(`/projects/${slug}`)), 260)
 }
 
 // Pointer tilt and scroll turn change on every frame, so they go to CSS variables on the root element rather
@@ -210,7 +217,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
       class="orbit-hook__svg"
       viewBox="0 0 1000 1000"
       role="group"
-      aria-label="Проєкти «Символу» на орбіті"
+      :aria-label="isEn ? 'Symbol projects in orbit' : 'Проєкти «Символу» на орбіті'"
       :style="{ '--orbit-fit': measuring ? 1 : fit }"
     >
       <defs>
@@ -224,12 +231,12 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
           <text v-for="(project, index) in items" :key="project.slug" class="orbit-hook__title" :class="{ 'is-active': index === active && !measuring }">
             <textPath :ref="el => { if (el) paths[index] = el as SVGTextPathElement }" href="#orbit-path" :startOffset="initialOffsets[index]">
               <a
-                :href="`/projects/${project.slug}/`"
+                :href="localePath(`/projects/${project.slug}/`)"
                 @mouseenter="select(index)"
                 @focus="select(index)"
                 @blur="paused = false; hovering = false"
                 @click.prevent="open(project.slug)"
-              ><tspan :ref="el => { if (el) titleSpans[index] = el as SVGTSpanElement }">{{ project.title }}</tspan></a>
+              ><tspan :ref="el => { if (el) titleSpans[index] = el as SVGTSpanElement }">{{ projectText(project).title }}</tspan></a>
             </textPath>
           </text>
         </g>
@@ -242,10 +249,10 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
         </g>
       </g>
     </svg>
-    <NuxtLink :key="current.slug" class="orbit-hook__caption" :to="`/projects/${current.slug}`" aria-live="polite">
-      <span class="label">{{ projectByline(current) }} · {{ statusLabels[current.status] }}</span>
-      <strong>{{ current.title }}</strong>
-      <span>{{ current.summary }}</span>
+    <NuxtLink :key="current.slug" class="orbit-hook__caption" :to="localePath(`/projects/${current.slug}`)" aria-live="polite">
+      <span class="label">{{ projectMeta(current) }}</span>
+      <strong>{{ projectText(current).title }}</strong>
+      <span>{{ projectText(current).summary }}</span>
     </NuxtLink>
   </div>
 </template>

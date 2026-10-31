@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { psdPeopleEn } from '~/data/psd-artists-en'
+import { peopleEn } from '~/data/people-en'
+import { projectsEn } from '~/data/projects-en'
 
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
-const displayName = (person: (typeof people)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? person.name) : person.name
+const displayName = (person: (typeof people)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
+const displayTeamRole = (person: (typeof people)[number]) => isEn.value ? peopleEn[person.slug]?.teamRole ?? person.teamRole : person.teamRole
+const appearanceName = (item: { title: string; to: string }) => {
+  if (!isEn.value) return item.title
+  const slug = item.to.match(/\/projects\/([^/]+)/)?.[1]
+  return slug ? projectsEn[slug]?.title ?? item.title : item.title
+}
 useSeoMeta({ title: () => t('Люди', 'People'), description: () => t('Митці, куратори, лектори й команда проєктів ГО «Символ».', 'Artists, curators, educators and the teams behind NGO Symbol projects.') })
 
 const query = ref('')
@@ -23,7 +31,7 @@ const groups = computed(() => [
 ].filter(group => group.items.length))
 
 // The search hint names a different artist on every visit (never the same twice in a row).
-const hint = ref('Наприклад, Маков')
+const hint = ref(t('Наприклад, Маков', 'For example, Makov'))
 onMounted(() => {
   const artists = listed.value.filter(({ person, appearances }) => !person.team && appearances.length).map(({ person }) => displayName(person).replace(/\s*\(.*\)$/, ''))
   if (!artists.length) return
@@ -60,8 +68,8 @@ const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => par
             <MediaImg v-if="person.photo" class="person-card__avatar person-card__avatar--photo" :src="person.photo" :alt="displayName(person)" loading="lazy" />
             <span v-else class="person-card__avatar" aria-hidden="true">{{ initials(displayName(person)) }}</span>
             <span class="person-card__name">{{ displayName(person) }}</span>
-            <span v-if="person.team && person.teamRole" class="person-card__team">{{ person.teamRole }}</span>
-            <span class="person-card__projects">{{ appearances.map(item => item.title).join(' · ') }}</span>
+            <span v-if="person.team && displayTeamRole(person)" class="person-card__team">{{ displayTeamRole(person) }}</span>
+            <span class="person-card__projects">{{ appearances.map(appearanceName).join(' · ') }}</span>
           </NuxtLink>
         </li>
       </ul>

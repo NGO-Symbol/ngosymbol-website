@@ -22,7 +22,7 @@ const fields = computed(() => [
         <div class="form-sheet__head">
           <span>{{ t('Форма № ПСД-2025', 'Form No. PSD-2025') }}</span>
           <span>{{ t('Проєкт ГО «Символ»', 'A project of NGO Symbol') }}</span>
-          <span class="form-sheet__serial">{{ t('Серія', 'Series') }} ЄЦ 171025</span>
+          <span class="form-sheet__serial">{{ t('Серія ЄЦ', 'Series YC') }} 171025</span>
         </div>
 
         <div class="form-field form-field--title">

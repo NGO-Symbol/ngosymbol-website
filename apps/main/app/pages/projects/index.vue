@@ -1,5 +1,7 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Проєкти', description: 'Усі проєкти ГО «Символ» за роками: виставки, фільми, плейбек-театр, тренінги, фестивалі.' })
+const { isEn } = useLang()
+const t = (uk: string, en: string) => isEn.value ? en : uk
+useSeoMeta({ title: () => t('Проєкти', 'Projects'), description: () => t('Усі проєкти ГО «Символ» за роками: виставки, фільми, плейбек-театр, тренінги, фестивалі.', 'All NGO Symbol projects by year: exhibitions, films, playback theatre, training, and festivals.') })
 
 const route = useRoute()
 const router = useRouter()
@@ -19,9 +21,9 @@ function clear() {
 
 // Only values that occur in projects are offered as filters.
 const options = {
-  format: [...new Set(projects.flatMap(project => project.formats))].map(value => ({ value, label: formats[value]! })),
-  direction: [...new Set(projects.flatMap(project => project.directions))].map(value => ({ value, label: directions[value]! })),
-  status: [...new Set(projects.map(project => project.status))].map(value => ({ value, label: statusLabels[value]! }))
+  format: [...new Set(projects.flatMap(project => project.formats))].map(value => ({ value, label: translate(formats[value]!, isEn.value) })),
+  direction: [...new Set(projects.flatMap(project => project.directions))].map(value => ({ value, label: translate(directions[value]!, isEn.value) })),
+  status: [...new Set(projects.map(project => project.status))].map(value => ({ value, label: translate(statusLabels[value]!, isEn.value) }))
 }
 
 const visible = computed(() => projects.filter((project) => {
@@ -86,16 +88,16 @@ onBeforeUnmount(() => window.removeEventListener('resize', placeInk))
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: 'Проєкти' }]" />
+    <Breadcrumbs :items="[{ label: t('Проєкти', 'Projects') }]" />
     <div class="page-title">
-      <span class="eyebrow">Архів та актуальні ініціативи</span>
-      <h1>Проєкти</h1>
-      <p>Усі проєкти «Символу» за роками. Кожен має сторінку з описом, людьми, партнерами й пресою. Великі проєкти мають ще й власні сайти.</p>
+      <span class="eyebrow">{{ t('Архів та актуальні ініціативи', 'Archive and current initiatives') }}</span>
+      <h1>{{ t('Проєкти', 'Projects') }}</h1>
+      <p>{{ t('Усі проєкти «Символу» за роками. Кожен має сторінку з описом, людьми, партнерами й пресою. Великі проєкти мають ще й власні сайти.', 'All Symbol projects by year. Each page includes its story, people, partners, and press coverage. Larger projects may also have dedicated websites.') }}</p>
     </div>
 
-    <div class="filter-panel" aria-label="Фільтри проєктів">
+    <div class="filter-panel" :aria-label="t('Фільтри проєктів', 'Project filters')">
       <div v-for="(group, key) in options" :key="key" class="filters">
-        <span class="filters__name">{{ key === 'format' ? 'Формат' : key === 'direction' ? 'Напрям' : 'Статус' }}:</span>
+        <span class="filters__name">{{ key === 'format' ? t('Формат', 'Format') : key === 'direction' ? t('Напрям', 'Field') : t('Статус', 'Status') }}:</span>
         <span class="filters__options">
         <button
           v-for="option in group"
@@ -108,13 +110,13 @@ onBeforeUnmount(() => window.removeEventListener('resize', placeInk))
         </span>
       </div>
       <div class="filter-panel__result" :class="{ 'is-empty': !hasFilters }" :aria-hidden="!hasFilters">
-        <span aria-live="polite">Знайдено: {{ visible.length }}</span>
-        <button type="button" class="text-button" :tabindex="hasFilters ? undefined : -1" @click="clear">Скинути фільтри</button>
+        <span aria-live="polite">{{ t('Знайдено', 'Found') }}: {{ visible.length }}</span>
+        <button type="button" class="text-button" :tabindex="hasFilters ? undefined : -1" @click="clear">{{ t('Скинути фільтри', 'Clear filters') }}</button>
       </div>
     </div>
 
     <div class="chronology">
-      <nav ref="rail" class="year-rail" aria-label="Роки">
+      <nav ref="rail" class="year-rail" :aria-label="t('Роки', 'Years')">
         <span class="year-rail__ink" :class="{ 'is-ready': ink.ready }" :style="{ transform: `translate(${ink.x}px, ${ink.y}px)`, width: `${ink.width}px` }" aria-hidden="true" />
         <button
           v-for="year in years"
@@ -132,7 +134,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', placeInk))
             <ProjectCard v-for="project in byYear(year)" :key="project.slug" :project="project" />
           </div>
         </section>
-        <p v-if="!visible.length" class="empty-note">За цими фільтрами проєктів немає. <button type="button" class="text-button" @click="clear">Скинути фільтри</button></p>
+        <p v-if="!visible.length" class="empty-note">{{ t('За цими фільтрами проєктів немає.', 'No projects match these filters.') }} <button type="button" class="text-button" @click="clear">{{ t('Скинути фільтри', 'Clear filters') }}</button></p>
       </div>
     </div>
   </section>

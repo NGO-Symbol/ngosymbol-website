@@ -1,10 +1,13 @@
 <script setup lang="ts">
 // Team page of the original site: the exhibition credits (from the main site's project data) and the NGO.
 import { aboutSymbol, aboutSymbolEn } from '~/data/concept'
+import { psdPeopleEn } from '#symbol/psd-artists-en'
+import { peopleEn } from '#symbol/people-en'
 
 const { isEn, t } = useLang()
 useSeoMeta({ title: () => t('Команда', 'Team'), description: () => t('Команда виставки «Покажіть свої документи…» та ГО «Символ».', 'The team of «May I See Your Documents…» and NGO Symbol.') })
 const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Менеджерка проєкту': 'Project manager', 'Дизайн айдентики та шрифт EXDocument': 'Identity design and the EXDocument typeface', 'Координація від ЄрміловЦентру': 'Coordination, YermilovCentre' }
+const personName = (person: (typeof team)[number]['person']) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
 </script>
 
 <template>
@@ -15,10 +18,10 @@ const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Мен
     </div>
     <ul class="team">
       <li v-for="credit in team" :key="credit.person.slug + credit.role">
-        <a class="member" :href="symbolPersonUrl(credit.person.slug)">
-          <MediaImg v-if="credit.person.photo" :src="credit.person.photo" :alt="credit.person.name" loading="lazy" />
+        <a class="member" :href="symbolPersonUrl(credit.person.slug, isEn)">
+          <MediaImg v-if="credit.person.photo" :src="credit.person.photo" :alt="personName(credit.person)" loading="lazy" />
           <span v-else class="member__blank" aria-hidden="true" />
-          <span class="member__name">{{ credit.person.name }}</span>
+          <span class="member__name">{{ personName(credit.person) }}</span>
           <span class="docs-label">{{ isEn ? (roleEn[credit.role] ?? credit.role) : credit.role }}</span>
         </a>
       </li>

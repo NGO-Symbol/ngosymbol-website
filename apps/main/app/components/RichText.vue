@@ -1,6 +1,26 @@
 <script setup lang="ts">
+import type { Segment } from '~/utils/content'
+import { projectsEn } from '~/data/projects-en'
+import { eventsEn } from '~/data/events-en'
+import { psdPeopleEn } from '~/data/psd-artists-en'
+import { peopleEn } from '~/data/people-en'
+
 const props = defineProps<{ paragraphs?: string[] }>()
-const parsed = computed(() => (props.paragraphs ?? []).map(parseRichText))
+const { isEn, localePath } = useLang()
+
+function localizeSegment(segment: Segment): Segment {
+  if (!('to' in segment)) return segment
+  const match = segment.to.match(/^\/(projects|events|people)\/([^/]+)$/)
+  if (!match) return { ...segment, to: localePath(segment.to) }
+  const [, type, slug] = match
+  let text = segment.text
+  if (isEn.value && type === 'projects') text = `«${projectsEn[slug!]?.title ?? text.replace(/[«»]/g, '')}»`
+  if (isEn.value && type === 'events') text = eventsEn[slug!]?.title ?? text
+  if (isEn.value && type === 'people') text = psdPeopleEn[slug!]?.name ?? peopleEn[slug!]?.name ?? text
+  return { ...segment, text, to: localePath(segment.to) }
+}
+
+const parsed = computed(() => (props.paragraphs ?? []).map(paragraph => parseRichText(paragraph).map(localizeSegment)))
 </script>
 
 <template>

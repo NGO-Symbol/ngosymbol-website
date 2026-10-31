@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { psdPeopleEn } from '~/data/psd-artists-en'
+import { peopleEn } from '~/data/people-en'
 import { projectsEn } from '~/data/projects-en'
+import { eventsEn } from '~/data/events-en'
 
 const route = useRoute()
 const person = getPerson(String(route.params.slug))
@@ -13,17 +15,17 @@ if (!person || person.hasPage === false) {
 const appearances = appearancesOf(person.slug)
 const personEvents = eventsOfPerson(person.slug)
 const approved = computed(() => isEn.value ? psdPeopleEn[person.slug] : undefined)
-const displayPerson = computed(() => approved.value ? {
-  ...person,
-  name: approved.value.name,
-  shortBio: approved.value.bio[0],
-  bio: approved.value.bio
-} : person)
+const generalEn = computed(() => isEn.value ? peopleEn[person.slug] : undefined)
+const displayPerson = computed(() => {
+  if (approved.value) return { ...person, name: approved.value.name, shortBio: approved.value.bio[0], bio: approved.value.bio, cv: undefined, teamRole: generalEn.value?.teamRole ?? person.teamRole }
+  if (generalEn.value) return { ...person, ...generalEn.value, bio: generalEn.value.bio ?? (generalEn.value.shortBio ? [generalEn.value.shortBio] : undefined), cv: undefined }
+  return person
+})
 const t = (uk: string, en: string) => isEn.value ? en : uk
 const tagEn: Record<string, string> = {
   'Художник': 'Artist', 'Художниця': 'Artist', 'Художник-графік': 'Graphic artist', 'Митець': 'Artist', 'Мисткиня': 'Artist',
   'Фотограф': 'Photographer', 'Дизайнер': 'Designer', 'Дизайнерка': 'Designer', 'Кураторка': 'Curator', 'Астроном': 'Astronomer',
-  'Артменеджерка': 'Art manager'
+  'Артменеджерка': 'Art manager', 'Менеджер проєктів': 'Project manager', 'Куратор': 'Curator'
 }
 const roleEn: Record<string, string> = { 'Митці': 'Artists', 'Згадка': 'Mention', 'Куратори': 'Curators', 'Фотографи': 'Photographers' }
 const appearanceTitle = (item: (typeof appearances)[number]) => {
@@ -31,9 +33,12 @@ const appearanceTitle = (item: (typeof appearances)[number]) => {
   const slug = item.to.match(/\/projects\/([^/]+)/)?.[1]
   return (slug && projectsEn[slug]?.title) || item.title
 }
-const appearanceByline = (byline: string) => isEn.value
-  ? byline.replace('Харків', 'Kharkiv').replace('Київ', 'Kyiv').replace('Закарпаття', 'Zakarpattia')
-  : byline
+const appearanceByline = (byline: string) => {
+  if (!isEn.value) return byline
+  const placeMap: Record<string, string> = { 'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Київська область': 'Kyiv Region', 'Закарпаття': 'Zakarpattia', 'Мілан': 'Milan', 'Балашадьярмат': 'Balassagyarmat' }
+  const parts = byline.split(' · ')
+  return `${parts[0]} · ${placeMap[parts[1] ?? ''] ?? parts[1] ?? ''}`
+}
 
 // The short bio is shown as the lead under the name; when the biography opens with the same sentence, it is not repeated.
 const bioParagraphs = computed(() => {
@@ -82,7 +87,7 @@ useHead({
       </ul>
     </div>
     <div class="page-title page-title--wide">
-      <span class="eyebrow">{{ person.team ? t('Команда «Символу»', 'NGO Symbol team') : t('Учасники проєктів', 'Project participants') }}<template v-if="person.teamRole"> · {{ person.teamRole }}</template></span>
+      <span class="eyebrow">{{ person.team ? t('Команда «Символу»', 'NGO Symbol team') : t('Учасники проєктів', 'Project participants') }}<template v-if="displayPerson.teamRole"> · {{ displayPerson.teamRole }}</template></span>
       <h1>{{ displayPerson.name }}</h1>
       <p v-if="displayPerson.shortBio" class="person-lead">{{ displayPerson.shortBio }}</p>
     </div>
@@ -100,9 +105,9 @@ useHead({
           <p v-else-if="!displayPerson.shortBio" class="empty-note">{{ t('Біографія готується.', 'Biography coming soon.') }}</p>
         </section>
         <!-- Résumé blocks (education, experience…) fold everywhere; works, projects and events fold on phones only. -->
-        <section v-if="person.cv?.length" class="cv">
+        <section v-if="displayPerson.cv?.length" class="cv">
           <h2 class="person-section">{{ t('Резюме', 'CV') }}</h2>
-          <Fold v-for="section in person.cv" :key="section.title" class="cv__section" :title="section.title" level="h3" heading-class="" :open="false">
+          <Fold v-for="section in displayPerson.cv" :key="section.title" class="cv__section" :title="section.title" level="h3" heading-class="" :open="false">
             <ul>
               <li v-for="(item, index) in section.items" :key="index">
                 <span class="cv__period">{{ item.period ?? '' }}</span>
@@ -119,16 +124,16 @@ useHead({
             <li v-for="item in appearances" :key="item.to">
               <NuxtLink :to="localePath(item.to)">{{ appearanceTitle(item) }}</NuxtLink>
               <span>{{ appearanceByline(item.byline) }}</span>
-              <span class="appearances__role">{{ item.roles.map(role => isEn ? (roleEn[role] ?? role) : role).join(', ') }}</span>
+              <span class="appearances__role">{{ item.roles.map(role => isEn ? (roleEn[role] ?? translate(role, true)) : role).join(', ') }}</span>
             </li>
           </ul>
         </Fold>
         <Fold v-if="personEvents.length" :title="t('Події', 'Events')" heading-class="person-section">
           <ul class="appearances">
             <li v-for="{ event, roles } in personEvents" :key="event.slug">
-              <NuxtLink :to="`/events/${event.slug}`">{{ event.title }}</NuxtLink>
-              <span>{{ formatRange(event.start, event.end) }} · {{ venueLine(event.venue) }}</span>
-              <span class="appearances__role">{{ roles.join(', ') }}</span>
+              <NuxtLink :to="`/events/${event.slug}`">{{ isEn ? eventsEn[event.slug]?.title ?? event.title : event.title }}</NuxtLink>
+              <span>{{ isEn ? formatRangeEn(event.start, event.end) : formatRange(event.start, event.end) }} · {{ isEn ? [event.venue.name, event.venue.address, event.venue.city, event.venue.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : venueLine(event.venue) }}</span>
+              <span class="appearances__role">{{ roles.map(role => isEn ? translate(role, true) : role).join(', ') }}</span>
             </li>
           </ul>
         </Fold>

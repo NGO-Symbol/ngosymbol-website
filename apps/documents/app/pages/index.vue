@@ -3,9 +3,13 @@
 // section, the partners and the exhibition in photographs. The curatorial concept has its own tab (/kontseptsiia).
 import { press } from '~/data/press'
 import { homePhotos, photographers } from '~/data/homePhotos'
+import { projectsEn } from '#symbol/projects-en'
+import { organizationsEn } from '#symbol/organizations-en'
 
 const { isEn, t, localePath } = useLang()
 useSeoMeta({ title: () => t('Про виставку', 'About the exhibition') })
+const exhibitionBody = computed(() => isEn.value ? projectsEn[exhibition.slug]?.body ?? exhibition.body : exhibition.body)
+const orgName = (org: NonNullable<(typeof exhibitionPartners)[number]>) => isEn.value ? organizationsEn[org.slug] ?? org.name : org.name
 
 const sections = computed(() => [
   { to: '/kontseptsiia', count: '01', label: t('кураторська концепція', 'curatorial concept'), text: t('Документ як інструмент влади, пам’яті й ідентичності', 'The document as a tool of power, memory and identity') },
@@ -42,8 +46,7 @@ const sections = computed(() => [
         <h2 class="docs-section-title">{{ t('Що відбулося', 'What happened') }}</h2>
       </div>
       <div class="docs-text">
-        <p v-if="isEn" class="lang-note">Texts about the exhibition are available in Ukrainian.</p>
-        <DocText v-for="paragraph in exhibition.body" :key="paragraph" :text="paragraph" />
+        <DocText v-for="paragraph in exhibitionBody" :key="paragraph" :text="paragraph" />
       </div>
     </section>
 
@@ -52,8 +55,8 @@ const sections = computed(() => [
       <ul>
         <li v-for="org in exhibitionPartners" :key="org!.slug">
           <a :href="org!.url" target="_blank" rel="noreferrer">
-            <img v-if="org!.logo" :src="org!.logo" :alt="org!.name" loading="lazy">
-            <span :class="{ 'partners__name--logo': org!.logo }">{{ org!.name }}</span>
+            <img v-if="org!.logo" :src="org!.logo" :alt="orgName(org!)" loading="lazy">
+            <span :class="{ 'partners__name--logo': org!.logo }">{{ orgName(org!) }}</span>
           </a>
         </li>
       </ul>

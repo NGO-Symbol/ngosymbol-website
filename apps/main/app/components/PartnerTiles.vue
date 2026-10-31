@@ -7,6 +7,8 @@
 // first rows and open the rest with one button.
 import type { Organization } from '~/data/types'
 import { isSocialUrl, networkOf } from '~/utils/social'
+import { organizationsEn } from '~/data/organizations-en'
+import { projectsEn } from '~/data/projects-en'
 
 const props = defineProps<{ items: { org: Organization; projects: { slug: string; title: string }[] }[]; compact?: boolean }>()
 
@@ -15,21 +17,24 @@ const PHONE_FIRST = 9
 const DESKTOP_FIRST = 12
 const open = ref(false)
 const collapsible = computed(() => props.items.length > PHONE_FIRST + 3)
+const { isEn } = useLang()
+const orgName = (org: Organization) => isEn.value ? organizationsEn[org.slug] ?? org.name : org.name
+const projectName = (project: { slug: string; title: string }) => isEn.value ? projectsEn[project.slug]?.title ?? project.title : project.title
 </script>
 
 <template>
   <div class="partners-wrap" :class="{ 'partners-wrap--compact': compact }">
     <ul class="partners" :class="{ 'is-collapsed': collapsible && !open, 'is-desktop-collapsed': compact && items.length > DESKTOP_FIRST && !open }">
       <li v-for="{ org, projects: list } in items" :key="org.slug">
-        <component :is="org.url ? 'a' : 'div'" class="partner" :class="{ 'partner--text': !org.logo }" :href="org.url" :target="org.url ? '_blank' : undefined" :rel="org.url ? 'noreferrer' : undefined" :title="org.name">
-          <PartnerLogo v-if="org.logo" :src="org.logo" :src-dark="org.logoDark" :name="org.name" :slug="org.slug" :motion="org.motion" />
-          <span class="partner__name">{{ org.name }}<template v-if="org.url">&nbsp;<SocialIcon v-if="isSocialUrl(org.url)" class="partner__network" :network="networkOf(org.url).network" /></template></span>
-          <span class="partner__projects">{{ list.map(project => project.title).join(' · ') }}</span>
+        <component :is="org.url ? 'a' : 'div'" class="partner" :class="{ 'partner--text': !org.logo }" :href="org.url" :target="org.url ? '_blank' : undefined" :rel="org.url ? 'noreferrer' : undefined" :title="orgName(org)">
+          <PartnerLogo v-if="org.logo" :src="org.logo" :src-dark="org.logoDark" :name="orgName(org)" :slug="org.slug" :motion="org.motion" />
+          <span class="partner__name">{{ orgName(org) }}<template v-if="org.url">&nbsp;<SocialIcon v-if="isSocialUrl(org.url)" class="partner__network" :network="networkOf(org.url).network" /></template></span>
+          <span class="partner__projects">{{ list.map(projectName).join(' · ') }}</span>
         </component>
       </li>
     </ul>
     <button v-if="collapsible || (compact && items.length > DESKTOP_FIRST)" type="button" class="partners__more" :class="{ 'partners__more--desktop': compact }" :aria-expanded="open" @click="open = !open">
-      {{ open ? 'Згорнути' : `Усі ${items.length}` }}
+      {{ open ? (isEn ? 'Show less' : 'Згорнути') : (isEn ? `All ${items.length}` : `Усі ${items.length}`) }}
     </button>
   </div>
 </template>

@@ -1,19 +1,24 @@
 <script setup lang="ts">
 // An event as a card, like a person on the People page: picture, date, short title, format and place, project.
 import type { EventItem } from '~/utils/content'
+import { eventsEn } from '~/data/events-en'
+import { projectsEn } from '~/data/projects-en'
 
-defineProps<{ item: EventItem }>()
+const props = defineProps<{ item: EventItem }>()
+const { isEn, localePath } = useLang()
+const title = computed(() => isEn.value ? (props.item.isProject ? projectsEn[props.item.slug]?.title : eventsEn[props.item.slug]?.title) ?? props.item.title : props.item.title)
+const projectTitle = computed(() => isEn.value ? projectsEn[props.item.project.slug]?.title ?? props.item.project.title : props.item.project.title)
 </script>
 
 <template>
-  <NuxtLink class="event-card" :to="item.to">
+  <NuxtLink class="event-card" :to="localePath(item.to)">
     <span class="event-card__media">
-      <MediaImg v-if="item.cover" :src="item.cover" :alt="item.title" loading="lazy" />
+      <MediaImg v-if="item.cover" :src="item.cover" :alt="title" loading="lazy" />
     </span>
-    <time class="event-card__date" :datetime="item.start">{{ formatRange(item.start, item.end) }}</time>
-    <span class="event-card__title">{{ item.title }}</span>
-    <span class="event-card__meta">{{ formats[item.format] }} · {{ item.venue.city }}</span>
-    <span v-if="!item.isProject" class="event-card__project">{{ item.project.title }}</span>
+    <time class="event-card__date" :datetime="item.start">{{ isEn ? formatRangeEn(item.start, item.end) : formatRange(item.start, item.end) }}</time>
+    <span class="event-card__title">{{ title }}</span>
+    <span class="event-card__meta">{{ translate(formats[item.format]!, isEn) }} · {{ translatePlace(item.venue.city, isEn) }}</span>
+    <span v-if="!item.isProject" class="event-card__project">{{ projectTitle }}</span>
   </NuxtLink>
 </template>
 

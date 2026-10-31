@@ -1,5 +1,6 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Доєднатися і підтримати', description: 'Як підтримати ГО «Символ»: внески, меценатство, партнерство, волонтерство.' })
+const { isEn } = useLang()
+useSeoMeta({ title: () => isEn.value ? 'Join and support us' : 'Доєднатися і підтримати', description: () => isEn.value ? 'Support NGO Symbol through donations, patronage, partnership, or volunteering.' : 'Як підтримати ГО «Символ»: внески, меценатство, партнерство, волонтерство.' })
 
 const route = useRoute()
 const tab = ref<'patron' | 'community'>(route.hash === '#community' ? 'community' : 'patron')
@@ -17,6 +18,48 @@ const requisites = [
 
 <template>
   <section class="page container support-page">
+    <template v-if="isEn">
+      <Breadcrumbs :items="[{ label: 'Support' }]" />
+      <div class="page-title page-title--wide"><span class="eyebrow">Join and support us</span><h1>Become part of Symbol</h1></div>
+      <div class="support-why">
+        <h2>Why support us</h2>
+        <div class="values">
+          <div><h3>Art as support</h3><p>Playback theatre, exhibitions, and films that engage with people’s lived experience, not only aesthetics.</p></div>
+          <div><h3>Kharkiv and beyond</h3><p>We work with Kharkiv’s urban memory and create projects in Kyiv, Zakarpattia, and abroad.</p></div>
+          <div><h3>Mental health</h3><p>We train professionals and create spaces where mental health is discussed with care.</p></div>
+          <div><h3>Transparency</h3><p>We publish reports and name the partners and donors of every project.</p></div>
+        </div>
+      </div>
+      <div class="segmented segmented--large" role="tablist" aria-label="Way to participate">
+        <button id="tab-patron-en" type="button" role="tab" :aria-selected="tab === 'patron'" :class="{ active: tab === 'patron' }" @click="tab = 'patron'">Become a patron</button>
+        <button id="tab-community-en" type="button" role="tab" :aria-selected="tab === 'community'" :class="{ active: tab === 'community' }" @click="tab = 'community'">Join the community</button>
+      </div>
+      <Transition name="swap" mode="out-in">
+        <div v-if="tab === 'patron'" class="support-options" role="tabpanel" aria-labelledby="tab-patron-en">
+          <div class="support-option"><h3>One-off donation</h3><p>Any amount supporting the organisation’s statutory activities.</p></div>
+          <div class="support-option"><h3>Regular support</h3><p>A monthly contribution that helps us plan ahead. Patronage tiers are in development.</p></div>
+          <div class="support-option"><h3>Support a project</h3><p>Contribute to a specific project, such as The Story of My Street.</p></div>
+          <div class="support-option"><h3>Corporate partnership</h3><p>Sponsor a project or event and give your company meaningful visibility. Write to <span class="selectable">ngo.symbol@gmail.com</span>.</p></div>
+        </div>
+        <div v-else id="community" class="support-options" role="tabpanel" aria-labelledby="tab-community-en">
+          <div class="support-option"><h3>Volunteer</h3><p>Help with exhibitions, events, and festivals: installation, welcoming guests, and documentation. Open calls are listed under <NuxtLink to="/en/opportunities">Opportunities</NuxtLink>, or write to us now at <span class="selectable">ngo.symbol@gmail.com</span>.</p></div>
+          <div class="support-option"><h3>NGO membership</h3><p>For people who want to develop the organisation together with the team.</p></div>
+          <div class="support-option"><h3>Share our work</h3><p>Tell others about our projects and events. Subscribe to the <a href="/en/events/?view=calendar">event calendar</a>.</p></div>
+        </div>
+      </Transition>
+      <section class="requisites">
+        <span class="label">Bank details</span>
+        <dl>
+          <div><dt>Recipient</dt><dd><CopyValue value="NGO Symbol" en /></dd></div>
+          <div><dt>Registration code (EDRPOU)</dt><dd><CopyValue value="45221328" en /></dd></div>
+          <div><dt>IBAN (UAH)</dt><dd /></div>
+          <div><dt>Bank</dt><dd>JSC CB PrivatBank</dd></div>
+          <div><dt>Payment purpose</dt><dd>Charitable contribution to statutory activities</dd></div>
+        </dl>
+        <p class="footer-small">Card payments and foreign-currency bank details will appear after the organisation’s account is configured.</p>
+      </section>
+    </template>
+    <template v-else>
     <Breadcrumbs :items="[{ label: 'Підтримати' }]" />
     <div class="page-title page-title--wide">
       <span class="eyebrow">Доєднатися і підтримати</span>
@@ -65,5 +108,6 @@ const requisites = [
       </dl>
       <p class="footer-small">Оплата карткою на сайті й валютні реквізити з’являться після налаштування рахунку організації.</p>
     </section>
+    </template>
   </section>
 </template>
