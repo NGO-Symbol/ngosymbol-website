@@ -92,7 +92,7 @@ export const osipovPhotos: Record<string, string[]> = {
 const chekal = (slug: string, n: number) => `/media/projects/pokazhit-svoi-dokumenty/works/${slug}-${n}.jpg`
 export const coverPhoto: Record<string, string> = {
   'alina-prokopenko': chekal('alina-prokopenko', 2),
-  'andrii-skrypka': '/media/projects/pokazhit-svoi-dokumenty/osipov-464.jpg',
+  'andrii-skrypka': '/media/projects/pokazhit-svoi-dokumenty/artist-works/andrii-skrypka/work/003.jpg',
   'anna-hareieva': chekal('anna-hareieva', 2),
   'anton-kariuk': '/media/projects/pokazhit-svoi-dokumenty/artist-works/anton-kariuk/work/004.jpg',
   'kostiantyn-hlyvlias': chekal('kostiantyn-hlyvlias', 1),
@@ -100,7 +100,7 @@ export const coverPhoto: Record<string, string> = {
   'mariia-prokopenko': '/media/projects/pokazhit-svoi-dokumenty/artist-works/mariia-prokopenko/work/018.jpg',
   'nataliia-okhman': chekal('nataliia-okhman', 2),
   'oleh-tistol': chekal('oleh-tistol', 2),
-  'pavlo-makov': '/media/projects/pokazhit-svoi-dokumenty/osipov-211.jpg',
+  'pavlo-makov': '/media/projects/pokazhit-svoi-dokumenty/artist-works/pavlo-makov/work/005.jpg',
   'oleksii-sai': chekal('oleksii-sai', 1),
   'senora-serpiente': chekal('senora-serpiente', 1),
   'serhii-melnychenko': '/media/projects/pokazhit-svoi-dokumenty/artist-works/serhii-melnychenko/work/006.jpg',
