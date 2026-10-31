@@ -92,6 +92,7 @@ export const people: Person[] = [
     // Ганна Франик is the artistic name of Аліна Войтюк (USER_CONFIRMED 2026-10-29): one person, one page.
     name: 'Ганна Франик (Аліна Войтюк)',
     tags: ['Артменеджерка', 'Мисткиня'],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/ana_voltfranka/' }],
     photo: '/media/people/hanna-franyk.jpg',
     team: true,
     teamOrder: 3,
@@ -169,7 +170,7 @@ export const people: Person[] = [
     photo: '/media/people/pavlo-makov.jpg',
     name: 'Павло Маков',
     tags: ['Художник-графік'],
-    links: [{ label: 'Сайт', url: 'https://www.makov.com.ua/' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Pavlo_Makov' }],
+    links: [{ label: 'Сайт', url: 'https://www.makov.com.ua/' }, { label: 'Instagram', url: 'https://www.instagram.com/pavlomakov/' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Pavlo_Makov' }],
     shortBio: 'Український художник-графік, академік НАМ України, лауреат Шевченківської премії (2018), автор «Фонтану виснаження» на Венеційській бієнале 2022 року.',
     // Bio sources (2026-10-30): Wikipedia (EN); Academy membership per adamovskiy.foundation (corresponding 2007, full 2021) —
     // other profiles still list him as a corresponding member, so the text says «член» without the rank.
@@ -203,7 +204,7 @@ export const people: Person[] = [
     slug: 'roman-piatkovka',
     name: 'Роман Пятковка',
     tags: ['Фотограф'],
-    links: [{ label: 'Сайт', url: 'https://pyatkovka.com/' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Roman_Pyatkovka' }],
+    links: [{ label: 'Сайт', url: 'https://pyatkovka.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/pyatkovka/' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Roman_Pyatkovka' }],
     photo: '/media/people/roman-piatkovka.jpg',
     shortBio: 'Роман Пятковка — український фотограф, народжений в Харкові, один із найяскравіших представників харківської школи фотографії.',
     // Bio sources (2026-10-30): grynyov.art, PinchukArtCentre research platform (Дар’я Шевцова), UAPP, MYPH, Wikipedia (EN).
@@ -239,7 +240,7 @@ export const people: Person[] = [
     slug: 'oleksii-sai',
     name: 'Олексій Сай',
     tags: ['Художник'],
-    links: [{ label: 'Сайт', url: 'https://oleksiysai.com/' }, { label: 'Facebook', url: 'https://www.facebook.com/liosha.say' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Oleksiy_Sai' }],
+    links: [{ label: 'Сайт', url: 'https://oleksiysai.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/oleksiysai/' }, { label: 'Facebook', url: 'https://www.facebook.com/liosha.say' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Oleksiy_Sai' }],
     photo: '/media/people/oleksii-sai.jpg',
     shortBio: 'Олексій Сай — український художник, автор Excel-Art, номінант PinchukArtCentre Prize (2009); живе й працює в Києві.',
     // Bio sources (2026-10-30): HEK Basel (share.hek.ch), Voloshyn Gallery, Wikipedia (EN, incl. Burning Man pages),
@@ -292,7 +293,7 @@ export const people: Person[] = [
     slug: 'andrii-skrypka',
     name: 'Андрій Скрипка',
     tags: ['Митець', 'Дизайнер'],
-    links: [{ label: 'Instagram', url: 'https://www.instagram.com/a_r___t_s' }, { label: 'Facebook', url: 'https://www.facebook.com/a.skripohcka' }, { label: 'Telegram', url: 'https://t.me/arts_daily' }],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/andrewskripka/' }, { label: 'Facebook', url: 'https://www.facebook.com/a.skripohcka' }, { label: 'Telegram', url: 'https://t.me/arts_daily' }],
     photo: '/media/people/andrii-skrypka.jpg',
     shortBio: 'Андрій Скрипка — міждисциплінарний митець і дизайнер, народився в Керчі, Крим.',
     bio: [
@@ -360,6 +361,7 @@ export const people: Person[] = [
     slug: 'dara-sholokh',
     name: 'Дара Шолох',
     tags: ['Мисткиня'],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/darrmara/' }],
     photo: '/media/people/dara-sholokh.jpg',
     shortBio: 'Дара Шолох — українська мисткиня.',
     // Bio sources (2026-10-30): the exhibition site text; M17 artist page (born 2005 Donetsk, Boychuk academy 2023, KultMotiv 2024).
@@ -388,7 +390,7 @@ export const people: Person[] = [
     slug: 'kinich-azla',
     name: 'Kinich Azla (Вероніка Ліпатова)',
     tags: ['Митець', 'Астроном'],
-    links: [{ label: 'Сайт', url: 'https://www.kinichazla.eu/' }, { label: 'Instagram', url: 'https://www.instagram.com/emptademer/' }, { label: 'Facebook', url: 'https://www.facebook.com/spica.omega' }],
+    links: [{ label: 'Сайт', url: 'https://www.kinichazla.eu/' }, { label: 'Instagram', url: 'https://www.instagram.com/kinich_azla/' }, { label: 'Facebook', url: 'https://www.facebook.com/spica.omega' }],
     photo: '/media/people/kinich-azla.jpg',
     shortBio: 'Kinich Azla (Вероніка Ліпатова) є астрономом, що навчається та викладає на аспірантурі в Гайдельберзькому університеті в Німеччині.',
     bio: [
