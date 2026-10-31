@@ -1,10 +1,12 @@
 <script setup lang="ts">
 // Path at the top of a page, like a Finder path: Головна › Розділ › Сторінка. The last item is the current page.
-const props = defineProps<{ items: { label: string; to?: string }[] }>()
+// On phones the path moves into the header (`in-header`, one line, the current page shortened if needed) and the
+// copy in the page is hidden; the page copy keeps the structured data for search engines.
+const props = defineProps<{ items: { label: string; to?: string }[]; inHeader?: boolean }>()
 const { isEn, localePath } = useLang()
 const trail = computed(() => [{ label: 'Головна', to: '/' }, ...props.items].map(item => ({ label: translate(item.label, isEn.value), to: item.to && localePath(item.to) })))
 
-useHead({
+if (!props.inHeader) useHead({
   script: [{
     type: 'application/ld+json',
     innerHTML: JSON.stringify({
@@ -17,14 +19,15 @@ useHead({
 </script>
 
 <template>
-  <nav class="breadcrumbs" :aria-label="isEn ? 'Breadcrumbs' : 'Шлях до сторінки'">
+  <!-- In the header it is a div with the navigation role: the header styles its own <nav> as the section menu. -->
+  <component :is="inHeader ? 'div' : 'nav'" class="breadcrumbs" :class="{ 'breadcrumbs--header': inHeader }" :role="inHeader ? 'navigation' : undefined" :aria-label="isEn ? 'Breadcrumbs' : 'Шлях до сторінки'">
     <ol>
       <li v-for="(item, index) in trail" :key="index">
         <NuxtLink v-if="item.to && index < trail.length - 1" :to="item.to">{{ item.label }}</NuxtLink>
         <span v-else aria-current="page">{{ item.label }}</span>
       </li>
     </ol>
-  </nav>
+  </component>
 </template>
 
 <style scoped>
@@ -35,4 +38,13 @@ useHead({
 .breadcrumbs a { text-decoration: none; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--symbol-lilac) 55%, transparent); transition: background .2s ease; }
 .breadcrumbs a:hover { background: var(--symbol-apricot); }
 .breadcrumbs [aria-current] { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 46ch; }
+.breadcrumbs--header { margin: 0; font-size: .78rem; min-width: 0; }
+.breadcrumbs--header ol { flex-wrap: nowrap; }
+.breadcrumbs--header li + li::before { margin: 0 6px; }
+.breadcrumbs--header li { flex: 0 1 auto; min-width: 0; max-width: 30vw; }
+.breadcrumbs--header li:nth-child(-n + 2):not(:last-child) { flex: none; max-width: none; }
+.breadcrumbs--header li:last-child { flex: 1 1 auto; max-width: none; min-width: 22%; }
+.breadcrumbs--header a { display: block; min-width: 0; padding: 2px 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.breadcrumbs--header [aria-current] { max-width: none; }
+@media (max-width: 820px) { .breadcrumbs:not(.breadcrumbs--header) { display: none; } }
 </style>
