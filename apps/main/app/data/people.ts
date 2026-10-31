@@ -169,6 +169,7 @@ export const people: Person[] = [
     photo: '/media/people/pavlo-makov.jpg',
     name: 'Павло Маков',
     tags: ['Художник-графік'],
+    links: [{ label: 'Сайт', url: 'https://www.makov.com.ua/' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Pavlo_Makov' }],
     shortBio: 'Український художник-графік, академік НАМ України, лауреат Шевченківської премії (2018), автор «Фонтану виснаження» на Венеційській бієнале 2022 року.',
     // Bio sources (2026-10-30): Wikipedia (EN); Academy membership per adamovskiy.foundation (corresponding 2007, full 2021) —
     // other profiles still list him as a corresponding member, so the text says «член» without the rank.
@@ -202,6 +203,7 @@ export const people: Person[] = [
     slug: 'roman-piatkovka',
     name: 'Роман Пятковка',
     tags: ['Фотограф'],
+    links: [{ label: 'Сайт', url: 'https://pyatkovka.com/' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Roman_Pyatkovka' }],
     photo: '/media/people/roman-piatkovka.jpg',
     shortBio: 'Роман Пятковка — український фотограф, народжений в Харкові, один із найяскравіших представників харківської школи фотографії.',
     // Bio sources (2026-10-30): grynyov.art, PinchukArtCentre research platform (Дар’я Шевцова), UAPP, MYPH, Wikipedia (EN).
@@ -217,7 +219,7 @@ export const people: Person[] = [
     slug: 'serhii-melnychenko',
     name: 'Сергій Мельниченко',
     tags: ['Фотограф'],
-    links: [{ label: 'Сайт', url: 'https://melnitchenko.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/sergey_melnitchenko' }],
+    links: [{ label: 'Сайт', url: 'https://melnitchenko.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/sergey_melnitchenko' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Serhii_Melnychenko' }],
     photo: '/media/people/serhii-melnychenko.jpg',
     shortBio: 'Сергій Мельниченко — український фотограф, танцюрист, майстер спорту міжнародного класу з бальних танців та засновник платформи концептуальної та арт-фотографії «MYPH» та член творчого об’єднання «Українська фотографічна альтернатива».',
     // Bio sources (2026-10-30): MOKSOP, Rodovid Press, Les presses du réel, UFDA article, «Українська правда» (Leica interview), lb.ua (MYPH).
@@ -237,6 +239,7 @@ export const people: Person[] = [
     slug: 'oleksii-sai',
     name: 'Олексій Сай',
     tags: ['Художник'],
+    links: [{ label: 'Сайт', url: 'https://oleksiysai.com/' }, { label: 'Facebook', url: 'https://www.facebook.com/liosha.say' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Oleksiy_Sai' }],
     photo: '/media/people/oleksii-sai.jpg',
     shortBio: 'Олексій Сай — український художник, автор Excel-Art, номінант PinchukArtCentre Prize (2009); живе й працює в Києві.',
     // Bio sources (2026-10-30): HEK Basel (share.hek.ch), Voloshyn Gallery, Wikipedia (EN, incl. Burning Man pages),
@@ -385,6 +388,7 @@ export const people: Person[] = [
     slug: 'kinich-azla',
     name: 'Kinich Azla (Вероніка Ліпатова)',
     tags: ['Митець', 'Астроном'],
+    links: [{ label: 'Сайт', url: 'https://www.kinichazla.eu/' }, { label: 'Instagram', url: 'https://www.instagram.com/emptademer/' }, { label: 'Facebook', url: 'https://www.facebook.com/spica.omega' }],
     photo: '/media/people/kinich-azla.jpg',
     shortBio: 'Kinich Azla (Вероніка Ліпатова) є астрономом, що навчається та викладає на аспірантурі в Гайдельберзькому університеті в Німеччині.',
     bio: [
@@ -460,6 +464,7 @@ export const people: Person[] = [
     slug: 'senora-serpiente',
     name: 'Señora Serpiente',
     tags: ['Мисткиня'],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/senoraserpiente/' }],
     photo: '/media/people/senora-serpiente.jpg',
     shortBio: 'Чилійська мисткиня, живе в Парижі; працює з текстилем, вишивкою й тілом.',
     // Bio sources (2026-10-30): the exhibition site text; france-chili.com agenda 04/2023 («Textile Politique»).
