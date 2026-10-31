@@ -24,11 +24,11 @@ export default defineNuxtConfig({
     }
   },
   hooks: {
-    // English mirror: every Ukrainian page also lives under /en/... so the UA/EN switch keeps the visitor on
-    // the same page (ADR-0009). /en itself is the English home page (pages/en.vue).
+    // English mirror: every Ukrainian page, the home page included, also lives under /en/... so the UA/EN switch
+    // keeps the visitor on the same page and both languages always show the same content (ADR-0009).
     'pages:extend'(pages) {
-      const mirrored = pages.filter(page => page.path !== '/' && page.path !== '/en' && !page.path.startsWith('/en/'))
-      for (const page of mirrored) pages.push({ ...page, name: `en-${String(page.name)}`, path: `/en${page.path}` })
+      const mirrored = pages.filter(page => !page.path.startsWith('/en'))
+      for (const page of mirrored) pages.push({ ...page, name: `en-${String(page.name)}`, path: page.path === '/' ? '/en' : `/en${page.path}` })
     }
   },
   // Former page: Аліна Войтюк is Ганна Франик (one person).

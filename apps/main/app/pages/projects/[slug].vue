@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { opportunitiesEn } from '~/data/editorial-en'
 import { projectsEn } from '~/data/projects-en'
 import { eventsEn } from '~/data/events-en'
 import { psdPeopleEn } from '~/data/psd-artists-en'
@@ -16,7 +17,7 @@ const t = (uk: string, en: string) => isEn.value ? en : uk
 const text = computed(() => (isEn.value && projectsEn[project.slug]) || project)
 const programName = computed(() => isEn.value ? projectsEn[project.slug]?.programName ?? project.programLogo?.name : project.programLogo?.name)
 const personName = (person: (typeof people)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
-const place = computed(() => isEn.value ? [project.venue?.name, project.venue?.address, project.venue?.city ?? project.city, project.venue?.country ?? project.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : (project.venue ? venueLine(project.venue) : projectPlace(project)))
+const place = computed(() => isEn.value ? [project.venue?.nameEn ?? project.venue?.name, project.venue?.addressEn ?? project.venue?.address, project.venue?.city ?? project.city, project.venue?.country ?? project.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : (project.venue ? venueLine(project.venue) : projectPlace(project)))
 const shareImage = project.poster ?? project.gallery?.[0]?.src ?? project.backdrop
 useSeoMeta({
   title: () => `${text.value.title} · ${projectYears(project)}`,
@@ -69,11 +70,11 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="[`tone-${project.tone}`, { 'has-backdrop': project.backdrop }]">
-      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="project.title" />
-      <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="project.programLogo.name">
+      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="projectTitleIn(project, isEn)" />
+      <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="programName">
       <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
-        <Breadcrumbs :items="[{ label: t('Проєкти', 'Projects'), to: '/projects' }, { label: text.title }]" />
+        <Breadcrumbs />
         <div class="project-kicker">
           <span>{{ projectYears(project) }}</span>
           <span>{{ place }}</span>
@@ -120,7 +121,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
             <NuxtLink v-for="event in [...upcomingEvents, ...pastEvents]" :key="event.slug" class="event-row" :to="localePath(`/events/${event.slug}`)">
               <time class="event-row__date" :datetime="event.start">{{ isEn ? formatRangeEn(event.start, event.end) : formatRange(event.start, event.end) }}</time>
               <span class="event-row__title">{{ isEn ? eventsEn[event.slug]?.title ?? event.title : event.title }}</span>
-              <span class="event-row__meta"><span>{{ translate(formats[event.format]!, isEn) }}</span><span>{{ isEn ? [event.venue.name, event.venue.address, event.venue.city, event.venue.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : venueLine(event.venue) }}</span></span>
+              <span class="event-row__meta"><span>{{ translate(formats[event.format]!, isEn) }}</span><span>{{ venueLineIn(event.venue, isEn) }}</span></span>
             </NuxtLink>
           </div>
         </Fold>
@@ -159,7 +160,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
           <p v-if="text.donorCredit" class="donor-credit">{{ text.donorCredit }}</p>
           <p v-if="text.fundingNotice" class="donor-credit donor-credit--notice">{{ text.fundingNotice }}</p>
           <figure v-if="project.programLogo" class="program-logo">
-            <img :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
+            <img :src="project.programLogo.src" :alt="programName" loading="lazy">
             <figcaption>{{ programName }}</figcaption>
           </figure>
         </Fold>
@@ -167,7 +168,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
         <Fold v-if="mentions.length" :title="t('Преса', 'Press')">
           <ul class="press-list">
             <li v-for="item in mentions" :key="item.url">
-              <a :href="item.url" target="_blank" rel="noreferrer">
+              <a :href="item.url" target="_blank" rel="noreferrer" :lang="originalLang(item.outlet + item.title, isEn)">
                 <span class="press-list__meta"><span v-if="item.kind" class="press-list__kind">{{ pressKinds[item.kind][isEn ? 1 : 0] }}</span><strong>{{ item.outlet }}</strong><span v-if="item.author">{{ item.author }}</span><time v-if="item.date" :datetime="item.date">{{ isEn ? formatDateEn(item.date) : formatDate(item.date) }}</time></span>
                 <span class="press-list__title">{{ item.title }}</span>
               </a>
@@ -177,7 +178,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
 
         <Fold v-if="calls.length" :title="t('Можливості', 'Opportunities')">
           <a v-for="call in calls" :key="call.slug" class="open-call" :href="call.applyUrl" target="_blank" rel="noreferrer">
-            <strong>{{ call.title }}</strong><span>{{ t('Дедлайн', 'Deadline') }}: {{ isEn ? formatDateEn(call.deadline) : formatDate(call.deadline) }}</span><span class="open-call__cta">{{ t('Подати заявку', 'Apply') }}</span>
+            <strong>{{ isEn ? opportunitiesEn[call.slug]?.title ?? call.title : call.title }}</strong><span>{{ t('Дедлайн', 'Deadline') }}: {{ isEn ? formatDateEn(call.deadline) : formatDate(call.deadline) }}</span><span class="open-call__cta">{{ t('Подати заявку', 'Apply') }}</span>
           </a>
         </Fold>
       </div>

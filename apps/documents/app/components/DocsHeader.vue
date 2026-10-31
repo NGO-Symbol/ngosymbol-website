@@ -50,7 +50,7 @@ function toggleTheme() {
           <span class="docs-back__text"><span aria-hidden="true">←</span> <span class="docs-back__long">{{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span><span class="docs-back__short">{{ t('Сайт «Символу»', 'NGO Symbol') }}</span></span>
         </a>
         <div class="docs-back__tools">
-          <NuxtLink class="docs-lang" :to="switchPath" :aria-label="t('English version', 'Українська версія')">
+          <NuxtLink class="docs-lang" :to="switchPath" :lang="isEn ? 'uk' : 'en'" :aria-label="t('English version', 'Українська версія')">
             <span :class="{ 'is-on': !isEn }">UA</span><span :class="{ 'is-on': isEn }">EN</span>
           </NuxtLink>
           <button type="button" class="docs-theme" :aria-pressed="dark" :aria-label="t('Денний або нічний режим', 'Day or night mode')" @click="toggleTheme">

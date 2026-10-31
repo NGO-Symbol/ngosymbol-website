@@ -12,7 +12,7 @@ const title = computed(() => isEn.value ? projectsEn[props.project.slug]?.title 
 <template>
   <header class="docs-hero">
     <div class="container docs-hero__inner">
-      <Breadcrumbs :items="[{ label: isEn ? 'Projects' : 'Проєкти', to: localePath('/projects') }, { label: title }]" />
+      <Breadcrumbs />
       <div class="docs-rule" aria-hidden="true"><span /><span /></div>
 
       <div class="docs-hero__grid">
@@ -105,5 +105,9 @@ const title = computed(() => isEn.value ? projectsEn[props.project.slug]?.title 
   .docs-hero__grid { grid-template-columns: 1fr; }
   .docs-hero__side { grid-template-columns: 120px 1fr; align-items: center; justify-items: stretch; }
   .docs-site { grid-column: 1 / -1; }
+  /* Phones: the closing barcode sits close to the content, no empty band before the facts. */
+  .docs-hero { padding-bottom: 20px; }
+  .docs-rule { margin: 12px 0 24px; }
+  .docs-rule--bottom { margin: 28px 0 0; }
 }
 </style>

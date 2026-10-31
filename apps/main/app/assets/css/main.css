@@ -410,14 +410,9 @@ a.news-item:hover::after { transform: scaleX(1); }
 .press-asset p { line-height: 1.6; margin: 0; }
 .press-asset__preview { padding: 22px; background: var(--symbol-white); }
 .press-asset__email { font-size: 1.2rem; }
-.en-projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--symbol-plum); }
-.en-projects a { display: grid; grid-template-columns: 120px minmax(0, .9fr) minmax(0, 1.2fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--symbol-plum); text-decoration: none; transition: padding .3s ease, background .3s ease; }
-.en-projects a:hover { padding-left: 14px; background: color-mix(in srgb, var(--symbol-apricot) 30%, transparent); }
-.en-projects strong { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; line-height: 1.15; }
-.en-projects__year { color: var(--symbol-violet); font-size: .85rem; padding-top: 5px; }
 .skip-link { position: absolute; left: 16px; top: -60px; z-index: 120; padding: 10px 16px; background: var(--symbol-plum); color: var(--symbol-cream); border-radius: 999px; transition: top .2s ease; }
 .skip-link:focus { top: calc(12px + env(safe-area-inset-top, 0px)); }
-@media (max-width: 700px) { .news-item, .en-projects a { grid-template-columns: 1fr; gap: 6px; } }
+@media (max-width: 700px) { .news-item { grid-template-columns: 1fr; gap: 6px; } }
 
 /* Spiral motion on links: the underline draws in like the logo's arc. */
 .text-link, .rich-text a, .credits__group a, .breadcrumbs a { background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .45s cubic-bezier(.2, .8, .2, 1); }
@@ -600,7 +595,17 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .year-block__title { display: none; }
   .year-rail { flex-direction: row; overflow-x: auto; gap: 18px; padding: 10px 0; background: var(--symbol-cream); z-index: 5; width: 100%; top: env(safe-area-inset-top, 0px); }
   html[data-header="shown"] .year-rail { top: var(--header-h, 0px); }
-  .event-row { grid-template-columns: 1fr; gap: 6px; }
+  /* Phones: each event is a card — the date, the title, then its facts as separate marks: the format (filled),
+     the place (with a pin), the project (tinted). */
+  .event-row { grid-template-columns: 1fr; gap: 8px; padding: 16px; margin-bottom: 10px; border: 1px solid color-mix(in srgb, var(--symbol-plum) 22%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--symbol-white) 55%, transparent); }
+  .event-row__title { font-size: 1.3rem; }
+  .event-row__meta { flex-direction: row; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .event-list { border-top: 0; }
+  .event-row__meta > :is(.event-row__format, .event-row__place, .event-row__project) { padding: 3px 10px; border-radius: 999px; font-size: .78rem; line-height: 1.35; }
+  .event-row__format { background: var(--symbol-violet); color: var(--symbol-white); }
+  .event-row__place { display: inline-flex; align-items: center; gap: 4px; border: 1px solid color-mix(in srgb, var(--symbol-plum) 25%, transparent); }
+  .event-row__place::before { content: ''; flex: none; width: .8em; height: .95em; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 15'%3E%3Cpath d='M6 0a6 6 0 0 0-6 6c0 4.5 6 9 6 9s6-4.5 6-9a6 6 0 0 0-6-6zm0 8.2A2.2 2.2 0 1 1 6 3.8a2.2 2.2 0 0 1 0 4.4z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 15'%3E%3Cpath d='M6 0a6 6 0 0 0-6 6c0 4.5 6 9 6 9s6-4.5 6-9a6 6 0 0 0-6-6zm0 8.2A2.2 2.2 0 1 1 6 3.8a2.2 2.2 0 0 1 0 4.4z'/%3E%3C/svg%3E") center / contain no-repeat; opacity: .7; }
+  .event-row__project { background: color-mix(in srgb, var(--symbol-apricot) 55%, transparent); }
   .appearances li { grid-template-columns: 1fr; gap: 2px; }
   .requisites dl > div { grid-template-columns: 1fr; }
   .calendar__cell { min-height: 70px; padding: 4px; }
@@ -628,6 +633,8 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .project-content { gap: 24px; padding-block: 24px 40px; }
   .page-title { margin-bottom: 24px; }
   .project-content aside a { margin-top: 12px; }
+  /* Phones: the project facts (years, place, field, role) two to a row, so they take half the height. */
+  .project-content aside .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
   .person-card--team .person-card__avatar { width: 64px; height: 64px; }
   .person-card__avatar { width: 46px; height: 46px; }
   .statement-index { display: none; }

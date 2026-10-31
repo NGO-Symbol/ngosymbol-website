@@ -5,6 +5,8 @@ import { highlightCaption, thumbOf, type Highlight } from '~/data/highlights'
 
 // placeholders: empty frames shown until the selection is made (keeps the layout still while it loads).
 const props = defineProps<{ photos: Highlight[]; placeholders?: number }>()
+const { isEn } = useLang()
+const altOf = (photo: Highlight) => isEn.value ? photo.altEn : photo.alt
 const track = ref<HTMLElement>()
 const atStart = ref(true)
 const atEnd = ref(false)
@@ -57,34 +59,34 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
     <ul ref="track" class="reel__track" @scroll.passive="updateEnds">
       <li v-for="n in (photos.length ? 0 : placeholders ?? 0)" :key="`p${n}`" class="reel__item" aria-hidden="true"><span class="reel__photo reel__photo--empty" /></li>
       <li v-for="(photo, index) in photos" :key="photo.src" class="reel__item">
-        <button type="button" class="reel__photo" :aria-label="`Відкрити фото: ${photo.alt}`" @click="open = index">
-          <MediaImg :src="photo.src" :fallback="thumbOf(photo.src)" :alt="photo.alt" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')" />
+        <button type="button" class="reel__photo" :aria-label="`${isEn ? 'Open photo' : 'Відкрити фото'}: ${altOf(photo)}`" @click="open = index">
+          <MediaImg :src="photo.src" :fallback="thumbOf(photo.src)" :alt="altOf(photo)" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')" />
         </button>
-        <p class="reel__meta"><span class="reel__index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo) }}</NuxtLink></p>
+        <p class="reel__meta"><span class="reel__index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo, isEn) }}</NuxtLink></p>
       </li>
     </ul>
     <div class="reel__controls">
-      <button type="button" class="reel__arrow" aria-label="Попередні фото" :disabled="atStart" @click="scrollBy(-1)">←</button>
-      <button type="button" class="reel__arrow" aria-label="Наступні фото" :disabled="atEnd" @click="scrollBy(1)">→</button>
+      <button type="button" class="reel__arrow" :aria-label="isEn ? 'Previous photos' : 'Попередні фото'" :disabled="atStart" @click="scrollBy(-1)">←</button>
+      <button type="button" class="reel__arrow" :aria-label="isEn ? 'Next photos' : 'Наступні фото'" :disabled="atEnd" @click="scrollBy(1)">→</button>
     </div>
   </div>
 
   <Teleport to="body">
     <Transition name="reel-view">
-      <div v-if="current" class="reel-view" role="dialog" aria-modal="true" :aria-label="current.alt" @click.self="close" @touchstart.passive="onTouchStart" @touchend.passive="onTouchEnd">
+      <div v-if="current" class="reel-view" role="dialog" aria-modal="true" :aria-label="altOf(current)" @click.self="close" @touchstart.passive="onTouchStart" @touchend.passive="onTouchEnd">
         <figure>
           <Transition name="reel-photo" mode="out-in">
-            <img :key="current.src" :src="current.src" :alt="current.alt">
+            <img :key="current.src" :src="current.src" :alt="altOf(current)">
           </Transition>
           <figcaption>
             <span class="reel-view__count">{{ (open ?? 0) + 1 }} / {{ photos.length }}</span>
-            <span>{{ current.alt }}<template v-if="current.credit"> · Фото: {{ current.credit }}</template></span>
-            <NuxtLink :to="current.to" @click="open = null">{{ highlightCaption(current) }} →</NuxtLink>
+            <span>{{ altOf(current) }}<template v-if="current.credit"> · {{ isEn ? 'Photo' : 'Фото' }}: {{ creditIn(current.credit, isEn) }}</template></span>
+            <NuxtLink :to="current.to" @click="open = null">{{ highlightCaption(current, isEn) }}</NuxtLink>
           </figcaption>
         </figure>
-        <button type="button" class="reel-view__close" aria-label="Закрити" @click="close">×</button>
-        <button type="button" class="reel-view__nav reel-view__nav--prev" aria-label="Попереднє фото" @click="step(-1)">←</button>
-        <button type="button" class="reel-view__nav reel-view__nav--next" aria-label="Наступне фото" @click="step(1)">→</button>
+        <button type="button" class="reel-view__close" :aria-label="isEn ? 'Close' : 'Закрити'" @click="close">×</button>
+        <button type="button" class="reel-view__nav reel-view__nav--prev" :aria-label="isEn ? 'Previous photo' : 'Попереднє фото'" @click="step(-1)">←</button>
+        <button type="button" class="reel-view__nav reel-view__nav--next" :aria-label="isEn ? 'Next photo' : 'Наступне фото'" @click="step(1)">→</button>
       </div>
     </Transition>
   </Teleport>

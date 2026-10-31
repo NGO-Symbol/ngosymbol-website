@@ -48,7 +48,7 @@ const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => par
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: t('Люди', 'People') }]" />
+    <Breadcrumbs />
     <div class="page-title">
       <span class="eyebrow">{{ t('Автори · митці · команда', 'Authors · artists · team') }}</span>
       <h1>{{ t('Люди', 'People') }}</h1>

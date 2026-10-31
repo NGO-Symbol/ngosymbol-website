@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { altIn } from '#symbol/alt-en'
 // Home of the project site, composed as a filled-in document — unlike the project page on symbol.ngo, which shows the
 // title on tape strips beside a side column: the exhibition «issued» as a form with a 3×4 photo, typed-in fields, the
 // stamp over the photo, the curators' signature and a machine-readable zone at the bottom, as in a passport.
-const { t, localePath } = useLang()
+const { t, localePath, isEn } = useLang()
 const photo = (exhibition.gallery ?? []).find(item => !item.people) ?? exhibition.gallery?.[0]
 
 const fields = computed(() => [
@@ -32,7 +33,7 @@ const fields = computed(() => [
 
         <div class="form-sheet__body">
           <figure class="form-photo">
-            <MediaImg v-if="photo" :src="photo.src" :alt="photo.alt" />
+            <MediaImg v-if="photo" :src="photo.src" :alt="altIn(photo.alt, isEn)" />
             <figcaption>{{ t('Фото 3×4', 'Photo 3×4') }}</figcaption>
             <DocsStamp class="form-photo__stamp" />
           </figure>

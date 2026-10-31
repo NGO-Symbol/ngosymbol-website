@@ -2,9 +2,11 @@
 // Path at the top of a page, like a Finder path: Головна › Розділ › Сторінка. The last item is the current page.
 // On phones the path moves into the header (`in-header`, one line, the current page shortened if needed) and the
 // copy in the page is hidden; the page copy keeps the structured data for search engines.
-const props = defineProps<{ items: { label: string; to?: string }[]; inHeader?: boolean }>()
+// The items come from the page address (utils/trail.ts) unless a page passes its own.
+const props = defineProps<{ items?: { label: string; to?: string }[]; inHeader?: boolean }>()
 const { isEn, localePath } = useLang()
-const trail = computed(() => [{ label: 'Головна', to: '/' }, ...props.items].map(item => ({ label: translate(item.label, isEn.value), to: item.to && localePath(item.to) })))
+const route = useRoute()
+const trail = computed(() => [{ label: 'Головна', to: '/' }, ...(props.items ?? trailFor(route.path) ?? [])].map(item => ({ label: translate(item.label, isEn.value), to: item.to && localePath(item.to) })))
 
 if (!props.inHeader) useHead({
   script: [{

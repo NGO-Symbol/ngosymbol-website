@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { coverPhoto, workPhotos } from '~/data/workPhotos'
+import { psdPeopleEn } from '#symbol/psd-artists-en'
+import { peopleEn } from '#symbol/people-en'
 
 const { isEn, t, localePath } = useLang()
 useSeoMeta({ title: () => t('Митці', 'Artists'), description: () => t('Митці виставки «Покажіть свої документи…» та їхні роботи.', 'Artists of the exhibition «May I See Your Documents…» and their works.') })
@@ -20,7 +22,7 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
           <span class="artist__media">
             <!-- Co-authors share one frame: their portraits side by side. -->
             <span v-if="artist.coAuthors.length" class="artist__portrait artist__duo">
-              <MediaImg v-for="person in [artist.person, ...artist.coAuthors].filter(p => p?.photo)" :key="person!.slug" :src="person!.photo!" :alt="person!.name" loading="lazy" />
+              <MediaImg v-for="person in [artist.person, ...artist.coAuthors].filter(p => p?.photo)" :key="person!.slug" :src="person!.photo!" :alt="(isEn && (psdPeopleEn[person!.slug]?.name ?? peopleEn[person!.slug]?.name)) || person!.name" loading="lazy" />
             </span>
             <MediaImg v-else-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artistName(artist, isEn)" loading="lazy" />
             <MediaImg v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)!" loading="lazy" />

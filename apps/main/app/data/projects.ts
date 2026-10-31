@@ -181,7 +181,7 @@ const entries: Project[] = [
       'Роботу з плейбек-театром продовжує проєкт [[project:holosy-u-rusi]].'
     ],
     start: '2025-09-20T17:20',
-    venue: { name: 'Мистецький арсенал, фестиваль «Арсенал ідей»', city: 'Київ' },
+    venue: { name: 'Мистецький арсенал, фестиваль «Арсенал ідей»', nameEn: 'Mystetskyi Arsenal, Arsenal of Ideas festival', city: 'Київ' },
     people: [
       { person: 'yurii-rassokha', role: 'Актор' },
       { person: 'petro-chekal', role: 'Музика' },

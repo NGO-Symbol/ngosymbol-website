@@ -21,6 +21,10 @@ useHead({
   ]
 })
 useSeoMeta({
+  // Default description in the page's language (pages with their own description override it).
+  description: () => (isEn.value
+    ? 'An independent Ukrainian organisation that develops contemporary culture and art and promotes attentive care for mental health.'
+    : 'Незалежна українська організація, що розвиває сучасну культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.'),
   ogSiteName: () => (isEn.value ? 'NGO Symbol' : 'ГО «Символ»'),
   ogType: 'website',
   ogUrl: canonical,

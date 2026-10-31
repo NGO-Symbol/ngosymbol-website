@@ -51,4 +51,14 @@ When the user says “онови контекст”, “синхронізуй 
 - The current main-site direction combines the color/composition of “Orbit” with the editorial serif character of “Index”.
 - Ukrainian is the primary language; English is required as the next locale.
 
+## Ukrainian ↔ English sync (both sites)
+
+- Every text exists in both languages, in the same change. Every Ukrainian page has an English mirror at `/en/…` with the same content: the same sections, photos and links (ADR-0009).
+- Pages use `t('український', 'English')` for interface text. Content records keep their English in `apps/main/app/data/*-en.ts`: `projectsEn`, `eventsEn`, `peopleEn` (with full `bio` and `cv`), `psdArtistsEn`, `editorial-en`, and photo descriptions in `alt-en.ts`. Shared helpers are in `apps/main/app/utils/l10n.ts`.
+- When you add or change a text, a photo or a record in Ukrainian, add or change its English in the same commit. Never invent the English: translate the Ukrainian.
+- `pnpm i18n:check` (part of `pnpm check`) generates both sites and fails when:
+  - an English page has less content than its Ukrainian page;
+  - Ukrainian text is left in what an English visitor or a search engine reads.
+- Headlines and names that stay in the original Ukrainian on purpose are marked `lang="uk"`.
+
 Never invent impact metrics, donor relationships, project roles, quotes, or team biographies.
