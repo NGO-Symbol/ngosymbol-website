@@ -280,22 +280,25 @@ html { -webkit-tap-highlight-color: transparent; }
 .filter-panel .filters__options { display: flex; flex-wrap: wrap; gap: 4px 6px; }
 .filter-panel .filters button { border: 1px solid transparent; }
 .filter-panel .filters button.active { background: var(--symbol-violet); border-color: var(--symbol-violet); color: var(--symbol-white); text-decoration: none; }
-.filter-panel .filters button.active::before { content: '✓ '; }
 .filter-panel .text-button { justify-self: start; margin-top: 10px; padding: 7px 14px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; font-size: .9rem; text-decoration: none; cursor: pointer; transition: background .2s ease, color .2s ease; }
 .filter-panel .text-button::before { content: '× '; }
-.filter-panel__result { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: .9rem; color: var(--symbol-violet); }
+.filter-panel__result { min-height: 36px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: .9rem; color: var(--symbol-violet); }
 .filter-panel__result .text-button { margin-top: 0; }
+/* The result row always keeps its place, so turning a filter on or off never pushes the page below it. */
+.filter-panel__result.is-empty { visibility: hidden; }
 .filter-panel .text-button:hover { background: var(--symbol-plum); color: var(--symbol-cream); }
 @media (max-width: 560px) { .filter-panel .filters { grid-template-columns: 1fr; gap: 0; } .filter-panel .filters + .filters { margin-top: 8px; } }
 .chronology { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 40px; }
-.year-rail { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.year-rail { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; transition: top .6s cubic-bezier(.22, .61, .36, 1); }
+/* While the sticky header is shown, the rail stays below it instead of sliding under it (SiteHeader sets both). */
+html[data-header="shown"] .year-rail { top: calc(var(--header-h, 0px) + 24px); }
 .year-rail button { border: 0; background: none; padding: 2px 0 5px; font-size: 1.35rem; color: color-mix(in srgb, var(--symbol-plum) 55%, transparent); cursor: pointer; font-variant-numeric: tabular-nums; transform-origin: left center; transition: color .35s ease, transform .45s cubic-bezier(.2, .9, .3, 1); }
 .year-rail button:hover { color: var(--symbol-plum); }
 /* No weight change on the active year (it would make the text jump); it darkens and grows a little instead. */
 .year-rail button.active { color: var(--symbol-ink); transform: scale(1.08); }
 .year-rail__ink { position: absolute; left: 0; top: 0; height: 3px; background: var(--symbol-ink); opacity: 0; pointer-events: none; transition: transform .5s cubic-bezier(.3, 1.2, .4, 1), width .5s cubic-bezier(.3, 1.2, .4, 1), opacity .3s ease; }
 .year-rail__ink.is-ready { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .year-rail button, .year-rail__ink { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .year-rail, .year-rail button, .year-rail__ink { transition: none; } }
 .year-block { margin-bottom: 70px; scroll-margin-top: 24px; }
 .year-block__title { font-size: clamp(1.6rem, calc(0.9rem + 3.2vw), 3.8rem); letter-spacing: -.015em; line-height: 1.1; margin: 0 0 20px; color: var(--symbol-violet); }
 .project-card__motif { position: absolute; inset: 14px 14px 14px auto; width: auto !important; height: calc(100% - 28px) !important; aspect-ratio: 1; transition: transform .5s cubic-bezier(.2, 1.3, .4, 1); }
@@ -565,13 +568,15 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .site-header.is-menu-open { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 18px 30px -18px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
   .page { padding-block: 18px 64px; }
   .hero-bottom,.section-heading,.statement-grid,.footer-grid,.about-grid,.project-content { grid-template-columns: 1fr; }
-  /* Phones: two project cards to a row, compact (title and years; the summary stays on the project page). */
-  .project-grid,.project-grid--archive { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  /* Phones: one project card to a row across the full width, so every photo reads at a steady 4:3 (see the card
+     block below). */
+  .project-grid,.project-grid--archive { grid-template-columns: 1fr; gap: 14px; }
   .home-hero,.support-band__grid,.subscribe__grid { grid-template-columns: 1fr; }
   .home-hero__orbit { order: -1; }
   .chronology { grid-template-columns: 1fr; gap: 10px; }
   .year-block__title { display: none; }
   .year-rail { flex-direction: row; overflow-x: auto; gap: 18px; padding: 10px 0; background: var(--symbol-cream); z-index: 5; width: 100%; top: env(safe-area-inset-top, 0px); }
+  html[data-header="shown"] .year-rail { top: var(--header-h, 0px); }
   .event-row { grid-template-columns: 1fr; gap: 6px; }
   .appearances li { grid-template-columns: 1fr; gap: 2px; }
   .requisites dl > div { grid-template-columns: 1fr; }
@@ -580,14 +585,18 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .calendar__cell .calendar__event { min-height: 8px; padding: 0; border-radius: 4px; box-shadow: none; background: var(--event-tone, var(--symbol-violet)); }
   .calendar__cell .calendar__event > * { display: none; }
   .calendar__list { display: grid; }
+  /* Phone card system: years and status on one line, the photo full width at 4:3 (every card the same frame, the
+     project's emblem small in the corner so it never covers the picture), then the title and a two-line summary. */
   .project-card { min-height: 0; }
-  .project-card__meta { padding: 8px; font-size: .58rem; flex-direction: column; gap: 2px; }
-  .project-card__visual { min-height: 0; aspect-ratio: 1; flex: none; }
-  .project-card__body { padding: 10px 10px 12px; }
-  .project-card__body p, .project-card__body > span { display: none; }
-  .project-card__body h2 { font-size: 1.05rem; margin: 0; }
-  .project-card__badge { left: 6px; bottom: 6px; padding: 4px 6px; font-size: .56rem; }
-  .project-card__badge--site { display: none; }
+  .project-card__meta { padding: 10px 12px; font-size: .62rem; }
+  .project-card__visual, .project-card__visual.has-cover { min-height: 0; aspect-ratio: 4 / 3; flex: none; }
+  .project-card__visual.has-cover .project-card__motif { width: 48px !important; height: 48px !important; padding: 6px; inset: auto 10px 10px auto; }
+  .project-card__body { padding: 14px 14px 16px; }
+  .project-card__body p { display: none; }
+  .project-card__body h2 { font-size: 1.45rem; margin: 0 0 6px; }
+  .project-card__body > span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: .85rem; line-height: 1.45; }
+  .project-card__badge { left: 10px; bottom: 10px; padding: 5px 8px; font-size: .64rem; }
+  .project-card__badge--site { right: auto; left: 10px; top: 10px; bottom: auto; }
   /* Phones: smaller portraits on person pages and in the people lists. */
   .person-portrait { max-width: 150px; margin-bottom: 16px; }
   .project-sections { gap: 28px; }

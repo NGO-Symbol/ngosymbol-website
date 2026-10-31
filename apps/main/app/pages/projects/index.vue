@@ -107,9 +107,9 @@ onBeforeUnmount(() => window.removeEventListener('resize', placeInk))
         >{{ option.label }}</button>
         </span>
       </div>
-      <div v-if="hasFilters" class="filter-panel__result">
-        <span>Знайдено: {{ visible.length }}</span>
-        <button type="button" class="text-button" @click="clear">Скинути фільтри</button>
+      <div class="filter-panel__result" :class="{ 'is-empty': !hasFilters }" :aria-hidden="!hasFilters">
+        <span aria-live="polite">Знайдено: {{ visible.length }}</span>
+        <button type="button" class="text-button" :tabindex="hasFilters ? undefined : -1" @click="clear">Скинути фільтри</button>
       </div>
     </div>
 

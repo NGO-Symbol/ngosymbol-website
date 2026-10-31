@@ -91,6 +91,17 @@ function onScroll() {
 onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 watch(() => route.path, () => { hidden.value = false })
+// Other sticky bars (the year rail on /projects) sit below the header while it is shown and move up
+// when it hides: the header's height and state are published on <html> as --header-h and data-header.
+const headerEl = ref<HTMLElement>()
+let headerSize: ResizeObserver | undefined
+onMounted(() => {
+  const root = document.documentElement
+  headerSize = new ResizeObserver(() => root.style.setProperty('--header-h', `${headerEl.value?.offsetHeight ?? 0}px`))
+  if (headerEl.value) headerSize.observe(headerEl.value)
+  watch(() => hidden.value && !menuOpen.value, isHidden => { root.dataset.header = isHidden ? 'hidden' : 'shown' }, { immediate: true })
+})
+onBeforeUnmount(() => headerSize?.disconnect())
 
 // Theme: light ↔ dark; the first click flips from whatever the system shows.
 const theme = ref<'light' | 'dark'>('light')
@@ -121,7 +132,7 @@ function toggleTheme() {
 </script>
 
 <template>
-  <header class="site-header container" :class="{ 'is-hidden': hidden && !menuOpen, 'is-scrolled': scrolled, 'is-menu-open': menuOpen }" @focusin="hidden = false">
+  <header ref="headerEl" class="site-header container" :class="{ 'is-hidden': hidden && !menuOpen, 'is-scrolled': scrolled, 'is-menu-open': menuOpen }" @focusin="hidden = false">
     <NuxtLink class="wordmark" :to="isEn ? '/en' : '/'" :aria-label="isEn ? 'NGO Symbol — home' : 'ГО «Символ» — головна'" @click="animateMark">
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
