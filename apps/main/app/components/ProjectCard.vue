@@ -19,7 +19,7 @@ const byline = computed(() => isEn.value ? `${projectYears(props.project)} · ${
     </div>
     <div class="project-card__visual" :class="{ 'has-cover': cover }">
       <MediaImg v-if="cover" class="project-card__cover" :src="cover" :alt="text.title" loading="lazy" />
-      <img v-if="project.programLogo" class="project-card__program" :src="project.programLogo.src" :alt="project.programLogo.name" loading="lazy">
+      <img v-if="project.programLogo" class="project-card__program" :src="project.programLogo.src" :alt="isEn ? projectsEn[project.slug]?.programName ?? project.programLogo.name : project.programLogo.name" loading="lazy">
       <ProjectMotif v-else class="project-card__motif" :motif="project.motif" />
       <span v-if="project.role === 'partner'" class="project-card__badge">{{ isEn ? 'Symbol is a partner' : 'Символ — партнер' }}</span>
       <span v-if="project.subsiteUrl" class="project-card__badge project-card__badge--site">{{ isEn ? 'Project website' : 'Є сайт проєкту' }}</span>

@@ -19,7 +19,7 @@ const requisites = [
 <template>
   <section class="page container support-page">
     <template v-if="isEn">
-      <Breadcrumbs :items="[{ label: 'Support' }]" />
+      <Breadcrumbs />
       <div class="page-title page-title--wide"><span class="eyebrow">Join and support us</span><h1>Become part of Symbol</h1></div>
       <div class="support-why">
         <h2>Why support us</h2>
@@ -60,7 +60,7 @@ const requisites = [
       </section>
     </template>
     <template v-else>
-    <Breadcrumbs :items="[{ label: 'Підтримати' }]" />
+    <Breadcrumbs />
     <div class="page-title page-title--wide">
       <span class="eyebrow">Доєднатися і підтримати</span>
       <h1>Станьте частиною «Символу»</h1>

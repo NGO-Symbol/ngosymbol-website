@@ -9,7 +9,7 @@ const display = (item: (typeof news)[number]) => isEn.value ? newsEn[item.slug] 
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: t('Новини', 'News') }]" />
+    <Breadcrumbs />
     <div class="page-title">
       <span class="eyebrow">{{ t('Що відбувається', 'What is happening') }}</span>
       <h1>{{ t('Новини', 'News') }}</h1>

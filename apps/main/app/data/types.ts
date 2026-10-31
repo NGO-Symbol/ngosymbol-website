@@ -27,6 +27,9 @@ export interface Credit {
 export interface Venue {
   name?: string
   address?: string
+  /** English name and address (city and country are translated through the places list in utils/i18n.ts). */
+  nameEn?: string
+  addressEn?: string
   city: string
   country?: string
 }

@@ -29,7 +29,8 @@ const en: Record<string, string> = {
   'Режисерка': 'Director', 'Оператор': 'Cinematographer', 'Звукорежисер': 'Sound engineer', 'Дизайнерка': 'Designer',
   'Співавтор проєкту': 'Project co-author', 'Асистент кураторки': 'Assistant curator',
   'Дизайн айдентики та шрифт EXDocument': 'Identity design and EXDocument typeface',
-  'Координація від ЄрміловЦентру': 'YermilovCentre coordination', 'Згадка': 'Mention'
+  'Координація від ЄрміловЦентру': 'YermilovCentre coordination', 'Згадка': 'Mention',
+  'Вікіпедія': 'Wikipedia', 'Сайт': 'Website'
 }
 
 /** English for a known interface word, or the Ukrainian original. */

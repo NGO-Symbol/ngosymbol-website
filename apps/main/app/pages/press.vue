@@ -17,7 +17,7 @@ async function copy(text: string, key: string) {
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: t('Для медіа', 'Press') }]" />
+    <Breadcrumbs />
     <div class="page-title">
       <span class="eyebrow">{{ t('Прес-кіт', 'Press kit') }}</span>
       <h1>{{ t('Для медіа', 'Press') }}</h1>

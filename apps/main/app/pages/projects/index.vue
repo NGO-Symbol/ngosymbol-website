@@ -88,7 +88,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', placeInk))
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: t('Проєкти', 'Projects') }]" />
+    <Breadcrumbs />
     <div class="page-title">
       <span class="eyebrow">{{ t('Архів та актуальні ініціативи', 'Archive and current initiatives') }}</span>
       <h1>{{ t('Проєкти', 'Projects') }}</h1>

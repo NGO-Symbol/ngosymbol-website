@@ -292,7 +292,7 @@ export const events: SymbolEvent[] = [
     format: 'training',
     start: '2025-02-10',
     end: '2025-02-14',
-    venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
+    venue: { name: 'Центральна міська бібліотека', nameEn: 'Central City Library', city: 'Біла Церква' },
     gallery: [
       { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Тренерки Олена Лемешко та Наталія Опришко з учасниками першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-1/hall.jpg', alt: 'Зала тренінгу в Центральній міській бібліотеці', credit: 'Юрій Рассоха', people: true },
@@ -321,7 +321,7 @@ export const events: SymbolEvent[] = [
     format: 'training',
     start: '2025-02-24',
     end: '2025-02-28',
-    venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
+    venue: { name: 'Центральна міська бібліотека', nameEn: 'Central City Library', city: 'Біла Церква' },
     gallery: [
       { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Тренери Юрій Січ та Вікторія Миронюк-Данько з учасниками другого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-2/session.jpg', alt: 'Робота учасників у залі', credit: 'Юрій Рассоха', people: true },
@@ -341,7 +341,7 @@ export const events: SymbolEvent[] = [
     format: 'training',
     start: '2025-03-31',
     end: '2025-04-04',
-    venue: { name: 'Готель «Україна»', city: 'Київ' },
+    venue: { name: 'Готель «Україна»', nameEn: 'Ukraine Hotel', city: 'Київ' },
     gallery: [
       { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Тренери Алеся Лисенко та Іван Кутчак з учасниками тренінгу mhGAP у Києві', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-3/hall.jpg', alt: 'Тренер веде заняття для повної зали', credit: 'Петро Чекаль', people: true },
@@ -371,7 +371,7 @@ export const events: SymbolEvent[] = [
     format: 'training',
     start: '2025-05-13',
     end: '2025-05-16',
-    venue: { name: 'Книгарня-кав’ярня «Сенс»', address: 'Хрещатик', city: 'Київ' },
+    venue: { name: 'Книгарня-кав’ярня «Сенс»', nameEn: 'Sens bookshop-café', address: 'Хрещатик', addressEn: 'Khreshchatyk', city: 'Київ' },
     gallery: [
       { src: '/media/events/mhgap-kyiv-trening-4/trainer.jpg', alt: 'Тренерка веде другу частину тренінгу mhGAP', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/lecture.jpg', alt: 'Тренер пояснює модуль біля презентації', credit: 'Петро Чекаль', people: true },
@@ -405,7 +405,7 @@ export const events: SymbolEvent[] = [
     project: 'holosy-u-rusi',
     format: 'playback',
     start: '2026-08-22T18:00',
-    venue: { name: 'Арт-простір «Станція Уж»', address: 'вул. Новака, 20', city: 'Ужгород' },
+    venue: { name: 'Арт-простір «Станція Уж»', nameEn: 'Stantsiia Uzh art space', address: 'вул. Новака, 20', addressEn: '20 Novaka Street', city: 'Ужгород' },
     gallery: [
       { src: '/media/events/holosy-u-rusi-uzhhorod/ensemble.jpg', alt: 'Актори театру «Серденьки» після перформансу в Ужгороді', people: true },
       { src: '/media/events/holosy-u-rusi-uzhhorod/scene.jpg', alt: 'Сцена плейбек-перформансу' },

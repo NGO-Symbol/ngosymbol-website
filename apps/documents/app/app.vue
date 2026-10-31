@@ -17,6 +17,10 @@ useHead({
   ]
 })
 useSeoMeta({
+  // Default description in the page's language (pages with their own description override it).
+  description: () => (isEn.value
+    ? 'May I See Your Documents?..: the document as an artistic phenomenon. 20 artists, YermilovCentre, Kharkiv, 17.10–07.12.2025.'
+    : 'Виставка «Покажіть свої документи…»: документ як мистецький феномен. 20 митців, ЄрміловЦентр, Харків, 17.10–07.12.2025.'),
   ogSiteName: () => (isEn.value ? 'May I See Your Documents… · NGO Symbol' : 'Покажіть свої документи… · ГО «Символ»'),
   ogType: 'website',
   ogUrl: canonical,

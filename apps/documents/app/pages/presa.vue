@@ -22,7 +22,8 @@ const formatDate = (iso: string) => new Date(iso).toLocaleDateString(isEn.value 
     <DocsSheet :case-no="t('Справа № ПСД-2025', 'Case No. PSD-2025')" :kind="t('Реєстр згадок у медіа', 'Register of media mentions')" :sheet="1">
       <ol class="register">
         <li v-for="(item, index) in items" :key="item.url" :class="{ 'is-interview': item.interview }">
-          <a class="entry" :href="item.url" target="_blank" rel="noreferrer">
+          <!-- Headlines and outlets stay in the original language; on the English page they are marked as Ukrainian. -->
+          <a class="entry" :href="item.url" target="_blank" rel="noreferrer" :lang="isEn && /[А-Яа-яЄєІіЇїҐґ]/.test(item.outlet + item.title) ? 'uk' : undefined">
             <span class="entry__no">{{ String(index + 1).padStart(2, '0') }}</span>
             <span class="entry__body">
               <span class="entry__outlet"><mark>{{ item.outlet }}</mark></span>

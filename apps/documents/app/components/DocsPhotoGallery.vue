@@ -1,11 +1,15 @@
 <script setup lang="ts">
 // The exhibition site's dossier-style equivalent of the main site's PhotoGallery: every thumbnail opens the original
 // in a modal viewer; Esc closes it and the arrow keys move through the current gallery.
+import { altIn, creditIn } from '#symbol/alt-en'
+
 interface GalleryPhoto { src: string, alt: string, credit?: string }
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<{ photos: GalleryPhoto[] }>()
-const { t } = useLang()
+const { t, isEn } = useLang()
+// Descriptions and credits in the page's language (English lines shared with symbol.ngo).
+const alt = (photo: GalleryPhoto) => altIn(photo.alt, isEn.value)
 const open = ref<number | null>(null)
 const closeButton = ref<HTMLButtonElement | null>(null)
 let opener: HTMLElement | null = null
@@ -52,18 +56,18 @@ onBeforeUnmount(() => {
 <template>
   <ul class="docs-photos docs-gallery" v-bind="$attrs">
     <li v-for="(photo, index) in photos" :key="photo.src">
-      <button type="button" class="docs-gallery__open" :aria-label="t(`Відкрити фото: ${photo.alt}`, `Open photo: ${photo.alt}`)" @click="openAt(index, $event)">
-        <figure><MediaImg :src="photo.src" :alt="photo.alt" loading="lazy" decoding="async" /></figure>
+      <button type="button" class="docs-gallery__open" :aria-label="t(`Відкрити фото: ${photo.alt}`, `Open photo: ${alt(photo)}`)" @click="openAt(index, $event)">
+        <figure><MediaImg :src="photo.src" :alt="alt(photo)" loading="lazy" decoding="async" /></figure>
       </button>
     </li>
   </ul>
 
   <Teleport to="body">
-    <div v-if="current" class="docs-lightbox" role="dialog" aria-modal="true" :aria-label="current.alt" @click.self="close">
+    <div v-if="current" class="docs-lightbox" role="dialog" aria-modal="true" :aria-label="alt(current)" @click.self="close">
       <p class="docs-lightbox__file" aria-live="polite">{{ t('Фотодокумент', 'Photo document') }} {{ String((open ?? 0) + 1).padStart(2, '0') }} / {{ String(photos.length).padStart(2, '0') }}</p>
       <figure>
-        <img :src="current.src" :alt="current.alt">
-        <figcaption>{{ current.alt }}<template v-if="current.credit"> · {{ t('Фото', 'Photo') }}: {{ current.credit }}</template></figcaption>
+        <img :src="current.src" :alt="alt(current)">
+        <figcaption>{{ alt(current) }}<template v-if="current.credit"> · {{ t('Фото', 'Photo') }}: {{ creditIn(current.credit, isEn) }}</template></figcaption>
       </figure>
       <button ref="closeButton" type="button" class="docs-lightbox__close" :aria-label="t('Закрити', 'Close')" @click="close">×</button>
       <button v-if="photos.length > 1" type="button" class="docs-lightbox__nav docs-lightbox__nav--prev" :aria-label="t('Попереднє фото', 'Previous photo')" @click="step(-1)">←</button>

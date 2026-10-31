@@ -99,7 +99,7 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
             <div><dt>{{ displayArtist.works.length > 1 ? t('Роботи', 'Works') : t('Робота', 'Work') }}</dt><dd>{{ displayArtist.works.map(work => `«${work.title}»`).join(', ') }}</dd></div>
             <div><dt>{{ t('Статус', 'Status') }}</dt><dd>{{ artist.coAuthors.length ? t('Митці виставки', 'Artists of the exhibition') : t('Митець виставки', 'Artist of the exhibition') }}</dd></div>
             <div><dt>{{ t('Аркушів', 'Sheets') }}</dt><dd>{{ sheetCount }}</dd></div>
-            <div v-if="links.length"><dt>{{ t('Посилання', 'Links') }}</dt><dd class="case-cover__social"><a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer">{{ isEn && link.label === 'Сайт' ? 'Website' : link.label }}</a></dd></div>
+            <div v-if="links.length"><dt>{{ t('Посилання', 'Links') }}</dt><dd class="case-cover__social"><a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer">{{ isEn ? ({ 'Сайт': 'Website', 'Вікіпедія': 'Wikipedia' } as Record<string, string>)[link.label] ?? link.label : link.label }}</a></dd></div>
           </dl>
         </div>
         <p class="case-cover__links">

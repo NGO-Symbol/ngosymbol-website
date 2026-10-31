@@ -17,15 +17,22 @@ const personEvents = eventsOfPerson(person.slug)
 const approved = computed(() => isEn.value ? psdPeopleEn[person.slug] : undefined)
 const generalEn = computed(() => isEn.value ? peopleEn[person.slug] : undefined)
 const displayPerson = computed(() => {
-  if (approved.value) return { ...person, name: approved.value.name, shortBio: approved.value.bio[0], bio: approved.value.bio, cv: undefined, teamRole: generalEn.value?.teamRole ?? person.teamRole }
-  if (generalEn.value) return { ...person, ...generalEn.value, bio: generalEn.value.bio ?? (generalEn.value.shortBio ? [generalEn.value.shortBio] : undefined), cv: undefined }
+  // Approved catalogue copy: the lead comes from the short English line when there is one, so the biography keeps
+  // its own section as on the Ukrainian page.
+  if (approved.value) return { ...person, name: approved.value.name, shortBio: generalEn.value?.shortBio ?? (approved.value.bio.length > 1 ? approved.value.bio[0] : undefined), bio: approved.value.bio, cv: undefined, teamRole: generalEn.value?.teamRole ?? person.teamRole }
+  if (generalEn.value) return { ...person, ...generalEn.value, bio: generalEn.value.bio ?? (generalEn.value.shortBio ? [generalEn.value.shortBio] : undefined), cv: generalEn.value.cv }
   return person
 })
 const t = (uk: string, en: string) => isEn.value ? en : uk
 const tagEn: Record<string, string> = {
   'Художник': 'Artist', 'Художниця': 'Artist', 'Художник-графік': 'Graphic artist', 'Митець': 'Artist', 'Мисткиня': 'Artist',
   'Фотограф': 'Photographer', 'Дизайнер': 'Designer', 'Дизайнерка': 'Designer', 'Кураторка': 'Curator', 'Астроном': 'Astronomer',
-  'Артменеджерка': 'Art manager', 'Менеджер проєктів': 'Project manager', 'Куратор': 'Curator'
+  'Артменеджерка': 'Art manager', 'Менеджер проєктів': 'Project manager', 'Куратор': 'Curator',
+  'ЄрміловЦентр': 'YermilovCentre', 'Ілюстраторка': 'Illustrator', 'Історик архітектури': 'Architectural historian',
+  'Акторка плейбек-театру': 'Playback theatre actor', 'Архітектор': 'Architect', 'Звукорежисер': 'Sound engineer',
+  'Каліграф': 'Calligrapher', 'Мисткиня піксель-арту': 'Pixel artist', 'Оператор': 'Cinematographer', 'Психологиня': 'Psychologist',
+  'Режисерка': 'Director', 'Типограф': 'Type designer', 'Тренер mhGAP': 'mhGAP trainer', 'Тренерка mhGAP': 'mhGAP trainer',
+  'Фотографка': 'Photographer', 'Фуд-дизайнерка': 'Food designer', 'Художниця-графікиня': 'Graphic artist'
 }
 const roleEn: Record<string, string> = { 'Митці': 'Artists', 'Згадка': 'Mention', 'Куратори': 'Curators', 'Фотографи': 'Photographers' }
 const appearanceTitle = (item: (typeof appearances)[number]) => {
@@ -81,7 +88,7 @@ useHead({
 <template>
   <article v-if="person" class="page container person-page">
     <div class="person-top">
-      <Breadcrumbs :items="[{ label: t('Люди', 'People'), to: '/people' }, { label: displayPerson.name }]" />
+      <Breadcrumbs />
       <ul v-if="person.tags?.length" class="person-tags" :aria-label="t('Хто це', 'Roles')">
         <li v-for="tag in person.tags" :key="tag">{{ isEn ? (tagEn[tag] ?? tag) : tag }}</li>
       </ul>
@@ -95,7 +102,7 @@ useHead({
       <aside>
         <MediaImg v-if="person.photo" class="person-portrait" :src="person.photo" :alt="displayPerson.name" />
         <ul v-if="person.links?.length" class="link-list">
-          <li v-for="link in person.links" :key="link.url"><SocialLink :url="link.url" :label="isSocialUrl(link.url) ? undefined : (isEn && link.label === 'Сайт' ? 'Website' : link.label)" /></li>
+          <li v-for="link in person.links" :key="link.url"><SocialLink :url="link.url" :label="isSocialUrl(link.url) ? undefined : translate(link.label, isEn)" /></li>
         </ul>
       </aside>
       <div class="project-sections">
@@ -132,7 +139,7 @@ useHead({
           <ul class="appearances">
             <li v-for="{ event, roles } in personEvents" :key="event.slug">
               <NuxtLink :to="`/events/${event.slug}`">{{ isEn ? eventsEn[event.slug]?.title ?? event.title : event.title }}</NuxtLink>
-              <span>{{ isEn ? formatRangeEn(event.start, event.end) : formatRange(event.start, event.end) }} · {{ isEn ? [event.venue.name, event.venue.address, event.venue.city, event.venue.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : venueLine(event.venue) }}</span>
+              <span>{{ isEn ? formatRangeEn(event.start, event.end) : formatRange(event.start, event.end) }} · {{ venueLineIn(event.venue, isEn) }}</span>
               <span class="appearances__role">{{ roles.map(role => isEn ? translate(role, true) : role).join(', ') }}</span>
             </li>
           </ul>

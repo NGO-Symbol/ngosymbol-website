@@ -19,7 +19,7 @@ const supporters = organizations
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: t('Про нас', 'About us') }]" />
+    <Breadcrumbs />
     <div class="page-title page-title--wide">
       <span class="eyebrow">{{ t('ГО «Символ»', 'NGO Symbol') }}</span>
       <h1>{{ t('Незалежна організація про культуру, мистецтво й уважність', 'An independent organisation for culture, art, and attentive care') }}</h1>
@@ -79,7 +79,7 @@ const supporters = organizations
       </div>
       <ul class="press-list">
         <li v-for="item in press" :key="item.url">
-          <a :href="item.url" target="_blank" rel="noreferrer"><strong>{{ item.outlet }}</strong> — {{ item.title }}</a>
+          <a :href="item.url" target="_blank" rel="noreferrer" :lang="originalLang(item.outlet + item.title, isEn)"><strong>{{ item.outlet }}</strong> — {{ item.title }}</a>
           <span>
             <template v-for="(slug, index) in item.projects" :key="slug">
               <NuxtLink :to="`/projects/${slug}`">{{ isEn ? projectsEn[slug]?.title ?? getProject(slug)?.title : getProject(slug)?.title }}</NuxtLink><template v-if="index < item.projects.length - 1">, </template>

@@ -1,18 +1,14 @@
 <script setup lang="ts">
 // Selected photos in a loose grid; click opens a full-screen view (Esc, ← → to browse).
 import type { Photo } from '~/data/types'
+import { altIn } from '~/data/alt-en'
 
 const props = defineProps<{ photos: Photo[] }>()
 const { isEn } = useLang()
 const open = ref<number | null>(null)
 const current = computed(() => (open.value === null ? null : props.photos[open.value]))
-const photoLabel = (index: number) => isEn.value ? `Photo ${index + 1} of ${props.photos.length}` : props.photos[index]?.alt ?? `Фото ${index + 1}`
-const creditsEn: Record<string, string> = {
-  'Олександр Осіпов': 'Oleksandr Osipov',
-  'Петро Чекаль': 'Petro Chekal',
-  'Юрій Рассоха': 'Yurii Rassokha'
-}
-const photoCredit = (credit?: string) => isEn.value && credit ? credit.split(', ').map(name => creditsEn[name] ?? name).join(', ') : credit
+const photoLabel = (index: number) => altIn(props.photos[index]?.alt ?? '', isEn.value) || `${isEn.value ? 'Photo' : 'Фото'} ${index + 1}`
+const photoCredit = (credit?: string) => creditIn(credit, isEn.value)
 
 function step(delta: number) {
   if (open.value === null) return
@@ -32,15 +28,15 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
 <template>
   <div class="gallery" :class="`gallery--${Math.min(photos.length, 6)}`">
-    <button v-for="(photo, index) in photos" :key="photo.src" type="button" class="gallery__item" :aria-label="isEn ? `Open photo ${index + 1}` : `Відкрити фото: ${photo.alt}`" @click="open = index">
-      <MediaImg :src="photo.src" :alt="isEn ? photoLabel(index) : photo.alt" loading="lazy" decoding="async" />
+    <button v-for="(photo, index) in photos" :key="photo.src" type="button" class="gallery__item" :aria-label="`${isEn ? 'Open photo' : 'Відкрити фото'}: ${photoLabel(index)}`" @click="open = index">
+      <MediaImg :src="photo.src" :alt="photoLabel(index)" loading="lazy" decoding="async" />
     </button>
   </div>
   <Teleport to="body">
-    <div v-if="current" class="lightbox" role="dialog" aria-modal="true" :aria-label="isEn ? photoLabel(open!) : current.alt" @click.self="open = null">
+    <div v-if="current" class="lightbox" role="dialog" aria-modal="true" :aria-label="photoLabel(open!)" @click.self="open = null">
       <figure>
-        <img :src="current.src" :alt="isEn ? photoLabel(open!) : current.alt">
-        <figcaption>{{ isEn ? photoLabel(open!) : current.alt }}<template v-if="current.credit"> · {{ isEn ? 'Photo' : 'Фото' }}: {{ photoCredit(current.credit) }}</template></figcaption>
+        <img :src="current.src" :alt="photoLabel(open!)">
+        <figcaption>{{ photoLabel(open!) }}<template v-if="current.credit"> · {{ isEn ? 'Photo' : 'Фото' }}: {{ photoCredit(current.credit) }}</template></figcaption>
       </figure>
       <button type="button" class="lightbox__close" :aria-label="isEn ? 'Close' : 'Закрити'" @click="open = null">×</button>
       <button v-if="photos.length > 1" type="button" class="lightbox__nav lightbox__nav--prev" :aria-label="isEn ? 'Previous photo' : 'Попереднє фото'" @click="step(-1)">←</button>

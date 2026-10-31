@@ -16,7 +16,7 @@ const project = getProject(event.project)!
 const eventText = computed(() => isEn.value ? eventsEn[event.slug] ?? event : event)
 const projectText = computed(() => isEn.value ? projectsEn[project.slug] ?? project : project)
 const personName = (person: (typeof people)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
-const placeLine = computed(() => isEn.value ? [event.venue.name, event.venue.address, event.venue.city, event.venue.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : venueLine(event.venue))
+const placeLine = computed(() => venueLineIn(event.venue, isEn.value))
 const speakers = creditsByRole(event.people)
 const siblings = eventsOfProject(project.slug).filter(other => other.slug !== event.slug)
 const toTiles = (slugs: string[] = []) => slugs.map(getOrganization).filter(org => !!org).map(org => ({ org: org!, projects: [{ slug: project.slug, title: project.title }] }))
@@ -64,7 +64,7 @@ const googleUrl = computed(() => {
 
 <template>
   <article v-if="event" class="page container event-page">
-    <Breadcrumbs :items="[{ label: t('Проєкти', 'Projects'), to: '/projects' }, { label: `${projectText.title} · ${projectYears(project)}`, to: `/projects/${project.slug}` }, { label: eventText.title }]" />
+    <Breadcrumbs />
     <div class="page-title page-title--wide">
       <span class="eyebrow">{{ translate(formats[event.format]!, isEn) }}</span>
       <h1>{{ eventText.title }}</h1>

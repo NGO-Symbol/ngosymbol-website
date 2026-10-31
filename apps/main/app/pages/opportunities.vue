@@ -15,7 +15,7 @@ const projectTitle = (slug: string) => isEn.value ? projectsEn[slug]?.title ?? g
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: t('Можливості', 'Opportunities') }]" />
+    <Breadcrumbs />
     <div class="page-title">
       <span class="eyebrow">{{ t('Опен-коли · резиденції · волонтерство', 'Open calls · residencies · volunteering') }}</span>
       <h1>{{ t('Можливості', 'Opportunities') }}</h1>

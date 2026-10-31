@@ -3,7 +3,10 @@
 // Works on phones too: falls back to a hidden textarea where the Clipboard API is unavailable.
 // plain: a text-style button with the same thin icon as the links around it (footer), instead of the outlined pill.
 // buttonOnly: just the button, when the value is already shown next to it (e.g. as a mailto link).
+// The button speaks the page's language (`en` forces English, e.g. on the exhibition site).
 const props = defineProps<{ value: string; en?: boolean; plain?: boolean; buttonOnly?: boolean }>()
+const { isEn } = useLang()
+const english = computed(() => props.en || isEn.value)
 const copied = ref(false)
 
 async function copy() {
@@ -28,9 +31,9 @@ async function copy() {
 <template>
   <span class="copy-value" :class="{ 'copy-value--plain': plain }">
     <span v-if="!buttonOnly" class="selectable"><slot>{{ value }}</slot></span>
-    <button type="button" class="copy-value__button" :class="{ 'is-copied': copied }" :aria-label="(en ? 'Copy ' : 'Скопіювати ') + value" @click="copy">
+    <button type="button" class="copy-value__button" :class="{ 'is-copied': copied }" :aria-label="(english ? 'Copy ' : 'Скопіювати ') + value" @click="copy">
       <SocialIcon :network="copied ? 'check' : 'copy'" />
-      <span>{{ copied ? (en ? 'Copied' : 'Скопійовано') : (en ? 'Copy' : 'Скопіювати') }}</span>
+      <span>{{ copied ? (english ? 'Copied' : 'Скопійовано') : (english ? 'Copy' : 'Скопіювати') }}</span>
     </button>
   </span>
 </template>
