@@ -1,8 +1,14 @@
 <script setup lang="ts">
 // On English mirror pages whose texts are not translated yet, says so plainly and offers the Ukrainian page.
+import { psdPeopleEn } from '~/data/psd-artists-en'
+
 const route = useRoute()
 const { isEn } = useLang()
-const show = computed(() => isEn.value && route.path !== '/en')
+const translatedPerson = computed(() => {
+  const slug = route.path.match(/^\/en\/people\/([^/]+)\/?$/)?.[1]
+  return slug ? !!psdPeopleEn[slug] : false
+})
+const show = computed(() => isEn.value && route.path !== '/en' && !translatedPerson.value)
 </script>
 
 <template>

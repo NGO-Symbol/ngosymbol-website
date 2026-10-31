@@ -5,6 +5,7 @@ import { people } from '#symbol/people'
 import { events } from '#symbol/events'
 import { bySignificance, organizations } from '#symbol/organizations'
 import type { Person, SymbolEvent } from '#symbol/types'
+import { psdArtistsEn } from '#symbol/psd-artists-en'
 import { artists, type Artist } from '~/data/artists'
 
 export const SYMBOL = 'https://symbol.ngo'
@@ -15,8 +16,8 @@ export function personOf(slug: string): Person | undefined {
 }
 
 /** Link to a person's page on symbol.ngo (the source for biographies, links and all other projects). */
-export function symbolPersonUrl(slug: string) {
-  return `${SYMBOL}/people/${slug}/`
+export function symbolPersonUrl(slug: string, english = false) {
+  return `${SYMBOL}${english ? '/en' : ''}/people/${slug}/`
 }
 
 export interface ExhibitionArtist extends Artist { person?: Person; coAuthors: Person[] }
@@ -45,6 +46,27 @@ export const exhibitionArtists: ExhibitionArtist[] = artists
 
 export function getArtist(slug: string) {
   return exhibitionArtists.find(artist => artist.slug === slug)
+}
+
+/** Approved English copy from the organisation's bilingual exhibition catalogue. */
+export function artistCopy(artist: ExhibitionArtist, english: boolean): ExhibitionArtist {
+  if (!english) return artist
+  const approved = psdArtistsEn[artist.slug]
+  if (!approved) return artist
+  return {
+    ...artist,
+    name: approved.name,
+    bio: approved.bio,
+    works: artist.works.map((work, index) => ({
+      ...work,
+      title: approved.works[index]?.title ?? work.title,
+      text: approved.works[index]?.text ?? work.text
+    }))
+  }
+}
+
+export function artistName(artist: ExhibitionArtist, english: boolean) {
+  return english ? (psdArtistsEn[artist.slug]?.name ?? artist.name) : artist.name
 }
 
 /** Donors and partners of the exhibition, most significant first, with their logos from symbol.ngo. */
