@@ -3,29 +3,32 @@
 // fields, then sheets — the biography, the curatorial text of each work, the photographs as an appendix — and the full
 // page on symbol.ngo (biography, links, other projects). Texts are in Ukrainian.
 import { artistPhotoGroups } from '~/data/artistPhotos.generated'
+import { psdPeopleEn } from '#symbol/psd-artists-en'
 
 const { isEn, t, localePath } = useLang()
 const route = useRoute()
 const artist = getArtist(String(route.params.slug))
 if (!artist) throw createError({ statusCode: 404, statusMessage: 'Сторінку не знайдено' })
+const displayArtist = artistCopy(artist, isEn.value)
 
-useSeoMeta({ title: artist.name, description: artist.bio[0] })
+useSeoMeta({ title: displayArtist.name, description: displayArtist.bio[0] })
 const index = exhibitionArtists.indexOf(artist)
 const prev = exhibitionArtists[(index - 1 + exhibitionArtists.length) % exhibitionArtists.length]!
 const next = exhibitionArtists[(index + 1) % exhibitionArtists.length]!
 // The curator-sorted local archive is authoritative for photographs of the works. Its generated manifest contains
 // every non-duplicate source image, grouped by work where the archive has separate folders.
-const alt = `${artist.name}: ${t('робота на виставці', 'work at the exhibition')}`
-const photoGroups = (artistPhotoGroups[artist.slug] ?? []).map(group => ({
-  title: group.title,
-  photos: group.photos.map(photo => ({ ...photo, alt: `${artist.name}: «${group.title}»` }))
+const photoGroups = (artistPhotoGroups[artist.slug] ?? []).map((group, groupIndex) => ({
+  title: displayArtist.works[groupIndex]?.title ?? group.title,
+  photos: group.photos.map(photo => ({ ...photo, alt: `${displayArtist.name}: «${displayArtist.works[groupIndex]?.title ?? group.title}»` }))
 }))
 const photos = photoGroups.flatMap(group => group.photos)
-const credits = [...new Set(photos.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
+const creditEn: Record<string, string> = { 'Олександр Осіпов': 'Oleksandr Osipov', 'Петро Чекаль': 'Petro Chekal' }
+const translateCredit = (credit: string | undefined) => credit && isEn.value ? (creditEn[credit] ?? credit) : credit
+const credits = [...new Set(photos.map(photo => translateCredit('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
 const separateWorkFiles = ['kinich-azla', 'oleksii-sai'].includes(artist.slug)
 const normalTitle = (title: string) => title.toLocaleLowerCase('uk').replace(/[«»"'’.:\s-]/g, '')
 const workFiles = separateWorkFiles
-  ? artist.works.map((work, workIndex) => ({
+  ? displayArtist.works.map((work, workIndex) => ({
       work,
       photos: photoGroups.find(group => normalTitle(group.title) === normalTitle(work.title))?.photos ?? photoGroups[workIndex]?.photos ?? []
     }))
@@ -39,8 +42,10 @@ function openWork(workIndex: number) {
   activeWork.value = workIndex
   workTabs.value?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
 }
-const sheetCount = 1 + artist.works.length + (separateWorkFiles ? workFiles.filter(file => file.photos.length).length : photos.length ? 1 : 0)
+const sheetCount = 1 + displayArtist.works.length + (separateWorkFiles ? workFiles.filter(file => file.photos.length).length : photos.length ? 1 : 0)
 const photoCredits = (items: typeof photos) => [...new Set(items.map(photo => ('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
+  .map(translateCredit)
+const personName = (person: (typeof portraits)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? person.name) : person.name
 // Marks of use on some files, placed differently on each: a coffee ring on one sheet, a tea splash on another.
 const stainOf = (sheet: number) => {
   const turn = (index * 47 + sheet * 31) % 360
@@ -75,9 +80,9 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
       <DocsStain v-if="index % 3 === 1" kind="coffee" :seed="index" class="case-cover__stain" />
       <!-- The cabinet: a tab for every file, the open one joined to its folder; any tab opens that file. -->
       <nav class="case-tabs" :aria-label="t('Особові справи митців', 'Artists’ personal files')">
-        <NuxtLink v-for="(other, otherIndex) in exhibitionArtists" :key="other.slug" :to="localePath(`/mytsi/${other.slug}`)" class="case-tabs__tab" :class="{ 'is-open': other.slug === artist.slug }" :title="other.name" :aria-current="other.slug === artist.slug ? 'page' : undefined" :style="{ '--n': otherIndex }">
+        <NuxtLink v-for="(other, otherIndex) in exhibitionArtists" :key="other.slug" :to="localePath(`/mytsi/${other.slug}`)" class="case-tabs__tab" :class="{ 'is-open': other.slug === artist.slug }" :title="artistName(other, isEn)" :aria-current="other.slug === artist.slug ? 'page' : undefined" :style="{ '--n': otherIndex }">
           <span class="case-tabs__no"><template v-if="other.slug === artist.slug">№ </template>{{ String(otherIndex + 1).padStart(2, '0') }}</span>
-          <span class="case-tabs__name">{{ other.name }}</span>
+          <span class="case-tabs__name">{{ artistName(other, isEn) }}</span>
         </NuxtLink>
       </nav>
       <div class="case-cover__label">
@@ -85,30 +90,29 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
         <div class="case-cover__grid">
           <div v-if="portraits.length" class="case-cover__photos" :class="{ 'is-duo': portraits.length > 1 }">
             <figure v-for="person in portraits" :key="person.slug" class="case-cover__photo">
-              <MediaImg :src="person.photo!" :alt="person.name" />
+              <MediaImg :src="person.photo!" :alt="personName(person)" />
               <span class="case-cover__clip" aria-hidden="true" />
             </figure>
           </div>
           <dl class="case-cover__fields">
-            <div class="case-cover__name"><dt>{{ t('Прізвище, ім’я', 'Name') }}</dt><dd><h1>{{ artist.name }}</h1></dd></div>
-            <div><dt>{{ artist.works.length > 1 ? t('Роботи', 'Works') : t('Робота', 'Work') }}</dt><dd>{{ artist.works.map(work => `«${work.title}»`).join(', ') }}</dd></div>
+            <div class="case-cover__name"><dt>{{ t('Прізвище, ім’я', 'Name') }}</dt><dd><h1>{{ displayArtist.name }}</h1></dd></div>
+            <div><dt>{{ displayArtist.works.length > 1 ? t('Роботи', 'Works') : t('Робота', 'Work') }}</dt><dd>{{ displayArtist.works.map(work => `«${work.title}»`).join(', ') }}</dd></div>
             <div><dt>{{ t('Статус', 'Status') }}</dt><dd>{{ artist.coAuthors.length ? t('Митці виставки', 'Artists of the exhibition') : t('Митець виставки', 'Artist of the exhibition') }}</dd></div>
             <div><dt>{{ t('Аркушів', 'Sheets') }}</dt><dd>{{ sheetCount }}</dd></div>
-            <div v-if="links.length"><dt>{{ t('Посилання', 'Links') }}</dt><dd class="case-cover__social"><a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer">{{ link.label }}</a></dd></div>
+            <div v-if="links.length"><dt>{{ t('Посилання', 'Links') }}</dt><dd class="case-cover__social"><a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer">{{ isEn && link.label === 'Сайт' ? 'Website' : link.label }}</a></dd></div>
           </dl>
         </div>
         <p class="case-cover__links">
-          <a v-if="!artist.coAuthors.length" class="docs-button" :href="symbolPersonUrl(artist.slug)">{{ t('Сторінка на symbol.ngo', 'Profile on symbol.ngo') }}</a>
+          <a v-if="!artist.coAuthors.length" class="docs-button" :href="symbolPersonUrl(artist.slug, isEn)">{{ t('Сторінка на symbol.ngo', 'Profile on symbol.ngo') }}</a>
           <!-- A shared file: one button per author, each named, alike. -->
-          <a v-for="person in artist.coAuthors.length ? portraits : []" :key="person.slug" class="docs-button" :href="symbolPersonUrl(person.slug)">{{ person.name.replace(/\s*\(.*\)$/, '') }} · symbol.ngo</a>
+          <a v-for="person in artist.coAuthors.length ? portraits : []" :key="person.slug" class="docs-button" :href="symbolPersonUrl(person.slug, isEn)">{{ personName(person).replace(/\s*\(.*\)$/, '') }} · symbol.ngo</a>
         </p>
       </div>
     </header>
 
     <div class="case-papers">
-      <p v-if="isEn" class="lang-note">Texts about the artists are available in Ukrainian.</p>
       <DocsSheet :case-no="caseNo" :kind="t('Біографія', 'Biography')" :sheet="1" :tilt="-0.3" :stain="stainOf(1)">
-        <div class="docs-text"><p v-for="paragraph in artist.bio" :key="paragraph">{{ paragraph }}</p></div>
+        <div class="docs-text"><p v-for="paragraph in displayArtist.bio" :key="paragraph">{{ paragraph }}</p></div>
       </DocsSheet>
 
       <!-- Sai and Azla have two independent work files inside their personal file: each keeps its text and photos together,
@@ -150,12 +154,12 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
       </section>
 
       <template v-else>
-        <DocsSheet v-for="(work, workIndex) in artist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex + 2)">
+        <DocsSheet v-for="(work, workIndex) in displayArtist.works" :key="work.title" :case-no="caseNo" :doc-no="`${t('Робота', 'Work')}${work.year ? ` · ${work.year}` : ''}`" :kind="t('Кураторський текст', 'Curatorial text')" :sheet="workIndex + 2" :tilt="workIndex % 2 ? -0.25 : 0.25" :stain="stainOf(workIndex + 2)">
           <h2 class="case-work">«{{ work.title }}»</h2>
           <div class="docs-text"><p v-for="paragraph in work.text" :key="paragraph">{{ paragraph }}</p></div>
         </DocsSheet>
 
-        <DocsSheet v-if="photos.length" :case-no="caseNo" :kind="t('Додаток: фотографії робіт', 'Appendix: photographs of the works')" :sheet="artist.works.length + 2" :tilt="0.15">
+        <DocsSheet v-if="photos.length" :case-no="caseNo" :kind="t('Додаток: фотографії робіт', 'Appendix: photographs of the works')" :sheet="displayArtist.works.length + 2" :tilt="0.15">
           <h3 class="case-work">«{{ photoGroups[0]?.title }}»</h3>
           <DocsPhotoGallery class="case-photos" :photos="photos" />
           <p v-if="credits.length" class="case-credits">{{ t('Фото', 'Photos') }}: {{ credits.join(', ') }}</p>
@@ -164,8 +168,8 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
     </div>
 
     <nav class="pager" :aria-label="t('Інші митці', 'Other artists')">
-      <NuxtLink :to="localePath(`/mytsi/${prev.slug}`)"><span class="docs-label">← {{ t('Попередній', 'Previous') }}</span><span>{{ prev.name }}</span></NuxtLink>
-      <NuxtLink class="pager__next" :to="localePath(`/mytsi/${next.slug}`)"><span class="docs-label">{{ t('Наступний', 'Next') }} →</span><span>{{ next.name }}</span></NuxtLink>
+      <NuxtLink :to="localePath(`/mytsi/${prev.slug}`)"><span class="docs-label">← {{ t('Попередній', 'Previous') }}</span><span>{{ artistName(prev, isEn) }}</span></NuxtLink>
+      <NuxtLink class="pager__next" :to="localePath(`/mytsi/${next.slug}`)"><span class="docs-label">{{ t('Наступний', 'Next') }} →</span><span>{{ artistName(next, isEn) }}</span></NuxtLink>
     </nav>
   </article>
 </template>

@@ -6,15 +6,16 @@ const props = defineProps<{ project: Project }>()
 const cover = computed(() => props.project.cardCover === false
   ? undefined
   : (props.project.cardCover ?? props.project.poster ?? props.project.gallery?.[0]?.src))
-const { isEn } = useLang()
+const { isEn, localePath } = useLang()
 const text = computed(() => (isEn.value && projectsEn[props.project.slug]) || props.project)
+const byline = computed(() => isEn.value ? `${projectYears(props.project)} · ${translatePlace(props.project.city, true)}` : projectByline(props.project))
 </script>
 
 <template>
-  <NuxtLink class="project-card" :class="`tone-${project.tone}`" :to="`/projects/${project.slug}`">
+  <NuxtLink class="project-card" :class="`tone-${project.tone}`" :to="localePath(`/projects/${project.slug}`)">
     <div class="project-card__meta">
-      <span>{{ projectByline(project) }}</span>
-      <span>{{ statusLabels[project.status] }}</span>
+      <span>{{ byline }}</span>
+      <span>{{ translate(statusLabels[project.status]!, isEn) }}</span>
     </div>
     <div class="project-card__visual" :class="{ 'has-cover': cover }">
       <MediaImg v-if="cover" class="project-card__cover" :src="cover" :alt="text.title" loading="lazy" />
@@ -24,7 +25,7 @@ const text = computed(() => (isEn.value && projectsEn[props.project.slug]) || pr
       <span v-if="project.subsiteUrl" class="project-card__badge project-card__badge--site">{{ isEn ? 'Project website' : 'Є сайт проєкту' }}</span>
     </div>
     <div class="project-card__body">
-      <p>{{ project.formats.map(format => formats[format]).join(' · ') }}</p>
+      <p>{{ project.formats.map(format => translate(formats[format]!, isEn)).join(' · ') }}</p>
       <h2>{{ text.title }}</h2>
       <span>{{ text.summary }}</span>
     </div>

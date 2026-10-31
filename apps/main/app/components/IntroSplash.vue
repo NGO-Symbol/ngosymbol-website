@@ -3,6 +3,7 @@
 // inscription is revealed, then the circle spirals — turning twice along a curved path — straight into the mark
 // of the header logo, which takes over seamlessly. Shown once per browser session; skipped for reduced motion.
 const visible = ref(true)
+const { isEn } = useLang()
 const root = ref<HTMLElement>()
 const mark = ref<SVGSVGElement>()
 let flying = false
@@ -68,7 +69,7 @@ onMounted(() => {
       </svg>
       <SymbolLogo class="intro__word" part="wordmark" />
     </div>
-    <span class="intro__skip">Натисніть, щоб пропустити</span>
+    <span class="intro__skip">{{ isEn ? 'Click to skip' : 'Натисніть, щоб пропустити' }}</span>
   </div>
 </template>
 

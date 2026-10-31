@@ -54,7 +54,6 @@ useHead({
     <HomeWipe />
     <a class="skip-link" href="#main">{{ isEn ? 'Skip to content' : 'Перейти до змісту' }}</a>
     <SiteHeader />
-    <EnNotice />
     <main id="main" tabindex="-1">
       <NuxtPage />
     </main>

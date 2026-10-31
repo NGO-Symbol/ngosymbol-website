@@ -30,7 +30,7 @@ const list = [...projects].sort((a, b) => b.yearStart - a.yearStart)
     <section id="projects" class="section container">
       <div class="section-heading">
         <div><span class="label">Projects</span><h2>What we have done</h2></div>
-        <p>Project titles are in English; the full project texts are being translated.</p>
+        <p>Explore our work in contemporary art, urban memory, playback theatre, documentary film, and mental health.</p>
       </div>
       <ul class="en-projects">
         <li v-for="project in list" :key="project.slug">

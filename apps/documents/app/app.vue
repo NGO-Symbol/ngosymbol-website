@@ -41,7 +41,7 @@ useHead({
 
 <template>
   <div class="docs-site-shell">
-    <a class="skip-link" href="#main">Перейти до змісту</a>
+    <a class="skip-link" href="#main">{{ isEn ? 'Skip to content' : 'Перейти до змісту' }}</a>
     <DocsHeader />
     <main id="main" tabindex="-1"><NuxtPage /></main>
     <DocsFooter />

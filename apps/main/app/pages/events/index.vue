@@ -1,5 +1,11 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Події', description: 'Події ГО «Символ»: відкриття, екскурсії, перформанси, лекції. Список і календар.' })
+import { projectsEn } from '~/data/projects-en'
+import { eventsEn } from '~/data/events-en'
+const { isEn } = useLang()
+const t = (uk: string, en: string) => isEn.value ? en : uk
+useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Події ГО «Символ»: відкриття, екскурсії, перформанси, лекції. Список і календар.', 'NGO Symbol events: openings, tours, performances, and lectures. List and calendar views.') })
+const eventTitle = (item: (typeof eventItems)[number]) => isEn.value ? (item.isProject ? projectsEn[item.slug]?.title : eventsEn[item.slug]?.title) ?? item.title : item.title
+const projectTitle = (project: (typeof projects)[number]) => isEn.value ? projectsEn[project.slug]?.title ?? project.title : project.title
 
 // «Підписатися на календар подій» elsewhere on the site opens this page straight in the calendar (?view=calendar).
 const route = useRoute()
@@ -30,10 +36,10 @@ function shift(delta: number) {
 function spanLabel(item: { start: string; end?: string }, iso: string) {
   const first = item.start.slice(0, 10)
   const last = (item.end ?? item.start).slice(0, 10)
-  if (first === last) return item.start.length > 10 ? item.start.slice(11, 16) : 'увесь день'
-  if (iso === first) return item.start.length > 10 ? `з ${item.start.slice(11, 16)} · початок` : 'початок'
-  if (iso === last) return 'завершення'
-  return 'триває'
+  if (first === last) return item.start.length > 10 ? item.start.slice(11, 16) : t('увесь день', 'all day')
+  if (iso === first) return item.start.length > 10 ? `${t('з', 'from')} ${item.start.slice(11, 16)} · ${t('початок', 'starts')}` : t('початок', 'starts')
+  if (iso === last) return t('завершення', 'ends')
+  return t('триває', 'continues')
 }
 
 const monthEvents = computed(() => {
@@ -60,27 +66,27 @@ const days = computed(() => {
 
 <template>
   <section class="page container">
-    <Breadcrumbs :items="[{ label: 'Події' }]" />
+    <Breadcrumbs :items="[{ label: t('Події', 'Events') }]" />
     <div class="page-title">
-      <span class="eyebrow">Календар</span>
-      <h1>Події</h1>
-      <p>Відкриття, екскурсії, перформанси й лекції. Кожна подія належить проєкту «Символу».</p>
+      <span class="eyebrow">{{ t('Календар', 'Calendar') }}</span>
+      <h1>{{ t('Події', 'Events') }}</h1>
+      <p>{{ t('Відкриття, екскурсії, перформанси й лекції. Кожна подія належить проєкту «Символу».', 'Openings, tours, performances, and lectures. Every event belongs to a Symbol project.') }}</p>
     </div>
 
     <div class="events-toolbar">
-      <div class="segmented" role="group" aria-label="Вигляд">
-        <button type="button" :class="{ active: view === 'list' }" :aria-pressed="view === 'list'" @click="view = 'list'">Список</button>
-        <button type="button" :class="{ active: view === 'calendar' }" :aria-pressed="view === 'calendar'" @click="view = 'calendar'">Календар</button>
+      <div class="segmented" role="group" :aria-label="t('Вигляд', 'View')">
+        <button type="button" :class="{ active: view === 'list' }" :aria-pressed="view === 'list'" @click="view = 'list'">{{ t('Список', 'List') }}</button>
+        <button type="button" :class="{ active: view === 'calendar' }" :aria-pressed="view === 'calendar'" @click="view = 'calendar'">{{ t('Календар', 'Calendar') }}</button>
       </div>
-      <ProjectPicker v-model="projectFilter" label="Проєкт" all-label="Усі проєкти" :options="eventProjects.map(project => ({ value: project.slug, label: project.title }))" />
-      <CalendarSubscribe />
+      <ProjectPicker v-model="projectFilter" :label="t('Проєкт', 'Project')" :all-label="t('Усі проєкти', 'All projects')" :options="eventProjects.map(project => ({ value: project.slug, label: projectTitle(project) }))" />
+      <CalendarSubscribe :en="isEn" />
     </div>
 
     <template v-if="view === 'list'">
       <section class="events-block">
-        <h2 class="block-title">Майбутні</h2>
+        <h2 class="block-title">{{ t('Майбутні', 'Upcoming') }}</h2>
         <ul v-if="upcoming.length" class="people-grid"><li v-for="item in upcoming" :key="item.slug"><EventCard :item="item" /></li></ul>
-        <p v-else class="empty-note">Нові анонси готуються. Підпишіться на календар, щоб не пропустити.</p>
+        <p v-else class="empty-note">{{ t('Нові анонси готуються. Підпишіться на календар, щоб не пропустити.', 'New announcements are on the way. Subscribe to the calendar so you do not miss them.') }}</p>
       </section>
       <section v-for="year in pastYears" :key="year.year" class="events-block">
         <h2 class="block-title">{{ year.year }}</h2>
@@ -90,19 +96,19 @@ const days = computed(() => {
 
     <section v-else class="calendar">
       <div class="calendar__head">
-        <button type="button" aria-label="Попередній місяць" @click="shift(-1)">←</button>
-        <h2>{{ monthNames[month.month] }} {{ month.year }}</h2>
-        <button type="button" aria-label="Наступний місяць" @click="shift(1)">→</button>
+        <button type="button" :aria-label="t('Попередній місяць', 'Previous month')" @click="shift(-1)">←</button>
+        <h2>{{ isEn ? ['January','February','March','April','May','June','July','August','September','October','November','December'][month.month] : monthNames[month.month] }} {{ month.year }}</h2>
+        <button type="button" :aria-label="t('Наступний місяць', 'Next month')" @click="shift(1)">→</button>
       </div>
       <div class="calendar__grid">
-        <span v-for="weekday in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд']" :key="weekday" class="calendar__weekday">{{ weekday }}</span>
+        <span v-for="weekday in (isEn ? ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] : ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])" :key="weekday" class="calendar__weekday">{{ weekday }}</span>
         <div v-for="(cell, index) in days" :key="index" class="calendar__cell" :class="{ 'has-events': cell.items.length, 'is-today': cell.iso === todayIso() }">
           <span v-if="cell.day" class="calendar__day">{{ cell.day }}</span>
-          <NuxtLink v-for="item in cell.items" :key="item.slug" class="calendar__event" :class="[`tone-${item.project.tone}`, { 'is-past': !isUpcoming(item), 'is-continued': cell.iso !== item.start.slice(0, 10) }]" :to="item.to" :title="item.title">
-            <MediaImg v-if="item.cover && cell.iso === item.start.slice(0, 10)" class="calendar__thumb" :src="item.cover" :alt="item.title" loading="lazy" />
+          <NuxtLink v-for="item in cell.items" :key="item.slug" class="calendar__event" :class="[`tone-${item.project.tone}`, { 'is-past': !isUpcoming(item), 'is-continued': cell.iso !== item.start.slice(0, 10) }]" :to="item.to" :title="eventTitle(item)">
+            <MediaImg v-if="item.cover && cell.iso === item.start.slice(0, 10)" class="calendar__thumb" :src="item.cover" :alt="eventTitle(item)" loading="lazy" />
             <span class="calendar__when">{{ spanLabel(item, cell.iso!) }}</span>
-            <span class="calendar__title">{{ item.title }}</span>
-            <span class="calendar__format">{{ formats[item.format] }}</span>
+            <span class="calendar__title">{{ eventTitle(item) }}</span>
+            <span class="calendar__format">{{ translate(formats[item.format]!, isEn) }}</span>
           </NuxtLink>
         </div>
       </div>
@@ -110,9 +116,9 @@ const days = computed(() => {
       <ul v-if="monthEvents.length" class="calendar__list">
         <li v-for="item in monthEvents" :key="item.slug">
           <NuxtLink class="calendar__event" :class="[`tone-${item.project.tone}`, { 'is-past': !isUpcoming(item) }]" :to="item.to">
-            <span class="calendar__when">{{ formatRange(item.start, item.end) }}</span>
-            <span class="calendar__title">{{ item.title }}</span>
-            <span class="calendar__format">{{ formats[item.format] }} · {{ item.project.title }}</span>
+            <span class="calendar__when">{{ isEn ? formatRangeEn(item.start, item.end) : formatRange(item.start, item.end) }}</span>
+            <span class="calendar__title">{{ eventTitle(item) }}</span>
+            <span class="calendar__format">{{ translate(formats[item.format]!, isEn) }} · {{ projectTitle(item.project) }}</span>
           </NuxtLink>
         </li>
       </ul>

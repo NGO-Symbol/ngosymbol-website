@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // A paragraph from the shared data with its inline references turned into links (see textParts).
 const props = defineProps<{ text: string }>()
-const parts = computed(() => textParts(props.text))
-const { localePath } = useLang()
+const { isEn, localePath } = useLang()
+const parts = computed(() => textParts(props.text, isEn.value))
 </script>
 
 <template>

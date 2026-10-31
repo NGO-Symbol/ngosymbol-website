@@ -1,7 +1,8 @@
 <script setup lang="ts">
-// The parallel programme of the exhibition, from the main site's events (one source of truth). Texts are in Ukrainian.
+import { eventsEn } from '#symbol/events-en'
 const { isEn, t } = useLang()
 useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Паралельна програма виставки «Покажіть свої документи…»: екскурсії, розмови, дискусії, перформанси.', 'The programme of the exhibition «May I See Your Documents…»: tours, talks, discussions, performances.') })
+const eventCopy = (event: (typeof programme)[number]) => isEn.value ? eventsEn[event.slug] ?? event : event
 </script>
 
 <template>
@@ -9,7 +10,7 @@ useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Па�
     <div class="docs-page-title">
       <span class="docs-label">{{ t('Паралельна програма', 'Programme') }} · {{ programme.length }}</span>
       <h1>{{ t('Події', 'Events') }}</h1>
-      <p>{{ t('Екскурсії, розмови з митцями, лекція й дискусії з Центром прав людини ZMINA, плейбек-театр і музичний перформанс. Усі події відбулися в ЄрміловЦентрі (майдан Свободи, 4, Харків).', 'Curators’ tours, artist talks, a lecture and discussions with the ZMINA Human Rights Centre, playback theatre and a music performance. All events took place at YermilovCentre (4 Svobody Square, Kharkiv). Descriptions are in Ukrainian.') }}</p>
+      <p>{{ t('Екскурсії, розмови з митцями, лекція й дискусії з Центром прав людини ZMINA, плейбек-театр і музичний перформанс. Усі події відбулися в ЄрміловЦентрі (майдан Свободи, 4, Харків).', 'Curators’ tours, artist talks, a lecture and discussions with the ZMINA Human Rights Centre, playback theatre and a music performance. All events took place at YermilovCentre (4 Svobody Square, Kharkiv).') }}</p>
     </div>
     <ol class="programme">
       <li v-for="event in programme" :id="event.slug" :key="event.slug" class="event">
@@ -18,10 +19,10 @@ useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Па�
           <span v-if="formatDay(event.start).time" class="docs-label">{{ formatDay(event.start).time }}</span>
         </div>
         <div class="event__body">
-          <h2>{{ event.title }}</h2>
-          <div v-if="event.description" class="docs-text"><DocText v-for="paragraph in event.description" :key="paragraph" :text="paragraph" /></div>
+          <h2>{{ eventCopy(event).title }}</h2>
+          <div v-if="eventCopy(event).description" class="docs-text"><DocText v-for="paragraph in eventCopy(event).description" :key="paragraph" :text="paragraph" /></div>
           <DocsPhotoGallery v-if="event.gallery?.length" class="event__photos" :photos="event.gallery" />
-          <a class="event__more" :href="`${SYMBOL}/events/${event.slug}/`">{{ t('Подія на symbol.ngo', 'Event on symbol.ngo') }}</a>
+          <a class="event__more" :href="`${SYMBOL}${isEn ? '/en' : ''}/events/${event.slug}/`">{{ t('Подія на symbol.ngo', 'Event on symbol.ngo') }}</a>
         </div>
       </li>
     </ol>

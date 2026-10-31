@@ -1,0 +1,23 @@
+export const organizationsEn: Record<string, string> = {
+  'yermilov-centre': 'YermilovCentre',
+  'karazin-university': 'V. N. Karazin Kharkiv National University',
+  zmina: 'ZMINA Human Rights Centre',
+  mincult: 'Ministry of Culture of Ukraine',
+  tysyachovesna: 'Tysiachovesna — the President of Ukraine’s initiative for Ukrainian cultural production',
+  czipu: 'Centre for the Protection of Ukraine’s Information Space',
+  mh4u: 'Mental Health for Ukraine',
+  eu: 'Co-funded by the European Union',
+  'culture-helps-solidarity': 'Culture Helps Solidarity',
+  'insha-osvita': 'Insha Osvita',
+  zusa: 'zusa (Berlin)',
+  veteranka: 'VETERANKA Women’s Veteran Movement',
+  'serdenky-playback': 'Serdenky Playback Theatre',
+  arteria: 'Artéria Gallery, Balassagyarmat',
+  sens: 'Sens bookshop on Khreshchatyk Street',
+  moksop: 'MOKSOP — Museum of the Kharkiv School of Photography',
+  zdybanka: 'Zdybanka Youth Centre, Batiovo',
+  'khust-theatre': 'Khust Regional Drama and Comedy Theatre',
+  'uzh-station': 'Station Uzh Art Space, Uzhhorod',
+  'bila-tserkva-library': 'P. Krasnozhon Bila Tserkva Centralised Library System',
+  'nema-playback': 'Nema Playback Theatre'
+}

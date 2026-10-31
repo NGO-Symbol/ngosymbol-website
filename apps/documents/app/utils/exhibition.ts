@@ -5,6 +5,10 @@ import { people } from '#symbol/people'
 import { events } from '#symbol/events'
 import { bySignificance, organizations } from '#symbol/organizations'
 import type { Person, SymbolEvent } from '#symbol/types'
+import { psdArtistsEn } from '#symbol/psd-artists-en'
+import { projectsEn } from '#symbol/projects-en'
+import { eventsEn } from '#symbol/events-en'
+import { peopleEn } from '#symbol/people-en'
 import { artists, type Artist } from '~/data/artists'
 
 export const SYMBOL = 'https://symbol.ngo'
@@ -15,8 +19,8 @@ export function personOf(slug: string): Person | undefined {
 }
 
 /** Link to a person's page on symbol.ngo (the source for biographies, links and all other projects). */
-export function symbolPersonUrl(slug: string) {
-  return `${SYMBOL}/people/${slug}/`
+export function symbolPersonUrl(slug: string, english = false) {
+  return `${SYMBOL}${english ? '/en' : ''}/people/${slug}/`
 }
 
 export interface ExhibitionArtist extends Artist { person?: Person; coAuthors: Person[] }
@@ -47,6 +51,27 @@ export function getArtist(slug: string) {
   return exhibitionArtists.find(artist => artist.slug === slug)
 }
 
+/** Approved English copy from the organisation's bilingual exhibition catalogue. */
+export function artistCopy(artist: ExhibitionArtist, english: boolean): ExhibitionArtist {
+  if (!english) return artist
+  const approved = psdArtistsEn[artist.slug]
+  if (!approved) return artist
+  return {
+    ...artist,
+    name: approved.name,
+    bio: approved.bio,
+    works: artist.works.map((work, index) => ({
+      ...work,
+      title: approved.works[index]?.title ?? work.title,
+      text: approved.works[index]?.text ?? work.text
+    }))
+  }
+}
+
+export function artistName(artist: ExhibitionArtist, english: boolean) {
+  return english ? (psdArtistsEn[artist.slug]?.name ?? artist.name) : artist.name
+}
+
 /** Donors and partners of the exhibition, most significant first, with their logos from symbol.ngo. */
 export const exhibitionPartners = [...(exhibition.donors ?? []), ...(exhibition.partners ?? [])].sort(bySignificance)
   .map(slug => organizations.find(org => org.slug === slug))
@@ -74,7 +99,7 @@ export function formatDay(iso: string) {
  * parts: artists open their page here, everyone and everything else opens on symbol.ngo.
  */
 export type TextPart = { text: string; href?: string; internal?: boolean }
-export function textParts(source: string): TextPart[] {
+export function textParts(source: string, english = false): TextPart[] {
   // Key-phrase stars (**…**) are a symbol.ngo styling cue; this site shows the plain words.
   const paragraph = source.replace(/\*\*/g, '')
   const parts: TextPart[] = []
@@ -85,11 +110,13 @@ export function textParts(source: string): TextPart[] {
     const [, kind, slug, label] = match as unknown as [string, string, string, string | undefined]
     if (kind === 'person') {
       const artist = getArtist(slug)
-      parts.push(artist ? { text: label ?? artist.person?.name ?? artist.name, href: `/mytsi/${slug}`, internal: true } : { text: label ?? personOf(slug)?.name ?? slug, href: symbolPersonUrl(slug) })
+      const name = english ? psdArtistsEn[slug]?.name ?? peopleEn[slug]?.name : undefined
+      parts.push(artist ? { text: label ?? name ?? artist.person?.name ?? artist.name, href: `/mytsi/${slug}`, internal: true } : { text: label ?? name ?? personOf(slug)?.name ?? slug, href: symbolPersonUrl(slug, english) })
     } else if (kind === 'project') {
-      parts.push(slug === exhibition.slug ? { text: label ?? exhibition.title, href: '/', internal: true } : { text: label ?? projects.find(p => p.slug === slug)?.title ?? slug, href: `${SYMBOL}/projects/${slug}/` })
+      const title = english ? projectsEn[slug]?.title : undefined
+      parts.push(slug === exhibition.slug ? { text: label ?? title ?? exhibition.title, href: '/', internal: true } : { text: label ?? title ?? projects.find(p => p.slug === slug)?.title ?? slug, href: `${SYMBOL}${english ? '/en' : ''}/projects/${slug}/` })
     } else {
-      parts.push({ text: label ?? events.find(e => e.slug === slug)?.title ?? slug, href: `/podii#${slug}`, internal: true })
+      parts.push({ text: label ?? (english ? eventsEn[slug]?.title : undefined) ?? events.find(e => e.slug === slug)?.title ?? slug, href: `/podii#${slug}`, internal: true })
     }
     last = match.index! + match[0].length
   }

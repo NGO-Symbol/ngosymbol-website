@@ -5,23 +5,30 @@ const artists = people.filter(person => projects.some(project => project.people?
 const places = new Set([...projects.map(project => project.city), ...eventItems.map(item => item.venue.city)])
 const countries = new Set(projects.map(project => project.country ?? 'Україна'))
 const partners = organizations.filter(org => projects.some(project => project.partners?.includes(org.slug) || project.donors?.includes(org.slug)))
+const { isEn } = useLang()
 
-const stats = [
+const stats = computed(() => isEn.value ? [
+  { value: projects.length, label: 'projects', hint: 'exhibitions, films, playback, training, festivals', to: '/projects' },
+  { value: eventItems.length, label: 'events', hint: 'openings, tours, lectures, performances', to: '/events' },
+  { value: artists.length, label: 'artists in our exhibitions', hint: 'from Pavlo Makov to debut artists', to: '/people' },
+  { value: partners.length, label: 'partners and donors', hint: 'institutions, foundations, programmes', to: '/about#partners' },
+  { value: places.size, label: 'cities', hint: `${countries.size} countries`, to: '/projects' }
+] : [
   { value: projects.length, label: 'проєктів', hint: 'виставки, фільми, плейбек, тренінги, фестивалі', to: '/projects' },
   { value: eventItems.length, label: 'подій', hint: 'відкриття, екскурсії, лекції, перформанси', to: '/events' },
   { value: artists.length, label: 'митців у наших виставках', hint: 'від Павла Макова до дебютантів', to: '/people' },
   { value: partners.length, label: 'партнерів і донорів', hint: 'інституції, фонди, програми', to: '/about#partners' },
   { value: places.size, label: 'міст', hint: `${countries.size} країни`, to: '/projects' }
-]
-const max = Math.max(...stats.map(stat => stat.value))
+])
+const max = Math.max(...stats.value.map(stat => stat.value))
 
 const root = ref<HTMLElement>()
-const shown = ref(stats.map(stat => stat.value))
+const shown = ref(stats.value.map(stat => stat.value))
 const started = ref(false)
 
 onMounted(() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  shown.value = stats.map(() => 0)
+  shown.value = stats.value.map(() => 0)
   const observer = new IntersectionObserver(([entry]) => {
     if (!entry?.isIntersecting || started.value) return
     started.value = true
@@ -29,7 +36,7 @@ onMounted(() => {
     const tick = (now: number) => {
       const p = Math.min((now - t0) / 1400, 1)
       const eased = 1 - Math.pow(1 - p, 3)
-      shown.value = stats.map(stat => Math.round(stat.value * eased))
+      shown.value = stats.value.map(stat => Math.round(stat.value * eased))
       if (p < 1) requestAnimationFrame(tick)
     }
     requestAnimationFrame(tick)
@@ -40,7 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="root" class="stats container" aria-label="«Символ» у цифрах">
+  <section ref="root" class="stats container" :aria-label="isEn ? 'Symbol in numbers' : '«Символ» у цифрах'">
     <NuxtLink v-for="(stat, index) in stats" :key="stat.label" class="stat" :to="stat.to">
       <svg class="stat__ring" viewBox="0 0 120 120" aria-hidden="true">
         <circle cx="60" cy="60" r="52" class="stat__track" />
