@@ -25,7 +25,7 @@ export const projectsEn: Record<string, ProjectEn> = {
     body: [
       'Voices in Motion is a project about **playback theatre and lived stories in Zakarpattia**. Playback theatre is an interactive form of improvisational theatre in which actors perform stories shared by audience members during the event.',
       'The Serdenky playback theatre company presents the performances during a **tour of Zakarpattia Oblast**: at Station Uzh art space in Uzhhorod, a lyceum in Bakosh, and in Berehove. The project events are listed below.',
-      'The project continues Symbol’s work with playback theatre following [[project:istorii-riznykh|Stories of Different People]].'
+      'The project continues Symbol’s work with playback theatre following [[project:istorii-riznykh|Stories of the Different]].'
     ],
     donorCredit: 'Voices in Motion is implemented within Culture Helps Solidarity. Culture Helps Solidarity is co-funded by the European Union and implemented by the European Cultural Foundation (Amsterdam), Insha Osvita (Kyiv), zusa (Berlin), and the VETERANKA movement (Kyiv).',
     fundingNotice: 'Funded by the European Union. Views and opinions expressed are, however, those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them.'
@@ -46,7 +46,7 @@ export const projectsEn: Record<string, ProjectEn> = {
     donorCredit: 'Organisers: NGO Symbol, YermilovCentre, and V. N. Karazin Kharkiv National University. Donors: Ministry of Culture of Ukraine (President of Ukraine Grant for Young Artists) and Grynyov Art Collection.'
   },
   'istorii-riznykh': {
-    title: 'Stories of Different People',
+    title: 'Stories of the Different',
     summary: 'A playback performance in which actors played back the audience’s own stories.',
     body: [
       'A playback performance **for teenagers and young people aged 12–21** at the Arsenal of Ideas: Different Together festival at Mystetskyi Arsenal. Playback theatre is an interactive form of improvisational theatre: actors transform audience members’ stories into artistic and symbolic scenes. It creates a **space of safety and dialogue** where every voice matters.',

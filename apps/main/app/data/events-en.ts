@@ -42,7 +42,7 @@ export const eventsEn: Record<string, EventEn> = {
     description: [
       'A performance by Nema playback theatre from Kharkiv. Audience members tell stories and the actors immediately recreate them on stage with live music. The theme was **identity**: what would you tell if you were asked to provide a story instead of a document?',
       'During the evening, **nine stories were shared and performed for more than 50 audience members**. The theatre donated **one third of the funds raised** to a campaign for two vehicles for Ukraine’s 47th Mechanised Brigade and the Spartan Brigade of the National Guard.',
-      'Symbol continues to develop playback theatre through [[project:istorii-riznykh|Stories of Different People]] and [[project:holosy-u-rusi|Voices in Motion]].'
+      'Symbol continues to develop playback theatre through [[project:istorii-riznykh|Stories of the Different]] and [[project:holosy-u-rusi|Voices in Motion]].'
     ]
   },
   'pokazhit-svoi-dokumenty-kvero': {
