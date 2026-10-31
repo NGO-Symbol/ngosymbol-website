@@ -21,7 +21,7 @@ button { font: inherit; }
 /* The full-bleed background reaches 12px below the header (clip-path), so hiding moves it that much further. */
 .site-header.is-hidden { transform: translateY(calc(-100% - 14px)); opacity: .2; transition: transform .7s cubic-bezier(.22, .61, .36, 1), opacity .7s ease, background .4s ease, box-shadow .4s ease, color .4s ease; }
 .site-header.is-scrolled { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
-@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .site-header, .site-header nav, .site-header nav > a { transition: none !important; } }
 
 /* Project pages with their own identity recolour the header (html[data-page-theme] set by the project page). */
 html[data-page-theme="documents"] .site-header { color: var(--docs-ink); border-bottom: 3px solid var(--docs-ink); }
@@ -53,7 +53,7 @@ html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 .lang-switch { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--symbol-plum); border-radius: 999px; padding: 2px; font-size: .78rem; }
 .lang-switch a { position: relative; z-index: 1; padding: 4px 10px; border: 0 !important; text-align: center; transition: color .35s ease; }
 .lang-switch a[aria-current] { color: var(--symbol-cream); }
-.lang-switch__thumb { position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc(50% - 2px); border-radius: 999px; background: var(--symbol-plum); transition: transform .45s cubic-bezier(.3, 1.4, .5, 1); }
+.lang-switch__thumb { position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc(50% - 2px); border-radius: 999px; background: var(--symbol-plum); transition: transform .45s cubic-bezier(.4, 0, .2, 1); }
 .lang-switch.is-en .lang-switch__thumb { transform: translateX(100%); }
 /* Theme toggle: the half-filled circle turns like the logo spiral */
 .theme-toggle { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--symbol-plum); border-radius: 50%; background: transparent; color: var(--symbol-plum); cursor: pointer; }
@@ -423,9 +423,11 @@ a.news-item:hover::after { transform: scaleX(1); }
 .text-link, .rich-text a, .credits__group a, .breadcrumbs a { background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .45s cubic-bezier(.2, .8, .2, 1); }
 .text-link:hover, .rich-text a:hover, .credits__group a:hover { background-size: 100% 1px; text-decoration-color: transparent; }
 
-/* Section labels get a small spiral mark that turns when the section appears. */
-.label::before { content: ''; display: inline-block; width: 1.25em; height: 1.25em; margin-right: .55em; vertical-align: -.3em; background: url('/press-kit/symbol-mark.svg') center / contain no-repeat; transform: rotate(-90deg) scale(.6); opacity: 0; transition: transform .9s cubic-bezier(.2, 1.3, .3, 1), opacity .4s ease; }
-.is-visible .label::before, .label.is-visible::before, html:not(.reveal-ready) .label::before { transform: none; opacity: 1; }
+/* Section labels get a small spiral mark that turns when the section appears — only a label that opens a section
+   (directly above its heading). Form labels, footer columns, cards and press items stay plain, so the mark does not
+   repeat all over a page. */
+.label:has(+ h1, + h2)::before { content: ''; display: inline-block; width: 1.25em; height: 1.25em; margin-right: .55em; vertical-align: -.3em; background: url('/press-kit/symbol-mark.svg') center / contain no-repeat; transform: rotate(-90deg) scale(.6); opacity: 0; transition: transform .9s cubic-bezier(.2, 1.3, .3, 1), opacity .4s ease; }
+.is-visible .label:has(+ h1, + h2)::before, .label.is-visible:has(+ h1, + h2)::before, html:not(.reveal-ready) .label:has(+ h1, + h2)::before { transform: none; opacity: 1; }
 section:hover > .label::before, section:hover > div > .label::before { transform: rotate(360deg); }
 .theme-documents .label::before, .requisites .label::before, .open-calls .label::before { display: none; }
 
@@ -546,6 +548,7 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 @keyframes mark-wobble { 15% { transform: rotate(32deg); } 35% { transform: rotate(-26deg); } 55% { transform: rotate(16deg); } 75% { transform: rotate(-8deg); } }
 @keyframes mark-pulse { 30% { transform: scale(1.25); } 60% { transform: scale(.9); } }
 @keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } }
+@keyframes menu-dim { from { opacity: 0; } }
 @keyframes mark-unwind { 40% { transform: rotate(180deg) scale(.6); } }
 
 @media (max-width: 820px) {
@@ -561,18 +564,36 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .menu-toggle { display: grid; }
   .header-trail { display: block; order: 4; flex: 1 0 100%; padding-top: 2px; }
   .header-tools .menu-toggle { width: 30px; height: 30px; }
-  .site-header nav { display: none; order: 3; flex: 1 0 100%; margin-left: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 4px 0 12px; font-size: 1.2rem; }
-  .site-header nav.is-open { display: flex; animation: menu-in .3s cubic-bezier(.2, .9, .3, 1); }
+  /* The menu unfolds and folds back smoothly (height, then the items one after another), instead of popping in. */
+  .site-header nav { order: 3; flex: 1 0 100%; margin-left: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 0; font-size: 1.2rem; max-height: 0; overflow: hidden; visibility: hidden; transition: max-height .45s cubic-bezier(.4, 0, .2, 1), padding .45s cubic-bezier(.4, 0, .2, 1), visibility 0s linear .45s; }
+  .site-header nav.is-open { max-height: 460px; padding: 4px 0 12px; visibility: visible; transition: max-height .55s cubic-bezier(.2, .9, .3, 1), padding .55s cubic-bezier(.2, .9, .3, 1), visibility 0s; }
+  .site-header nav > a { opacity: 0; transform: translateY(-10px); transition: opacity .2s ease, transform .3s cubic-bezier(.4, 0, .2, 1); }
+  .site-header nav.is-open > a { opacity: 1; transform: none; transition: opacity .35s ease, transform .45s cubic-bezier(.2, .9, .3, 1); }
+  .site-header nav.is-open > a:nth-of-type(2) { transition-delay: .04s; }
+  .site-header nav.is-open > a:nth-of-type(3) { transition-delay: .08s; }
+  .site-header nav.is-open > a:nth-of-type(4) { transition-delay: .12s; }
+  .site-header nav.is-open > a:nth-of-type(5) { transition-delay: .16s; }
+  .site-header nav.is-open > a:nth-of-type(6) { transition-delay: .2s; }
+  .site-header nav.is-open > a:nth-of-type(7) { transition-delay: .24s; }
   .site-header nav .nav-tab { padding: 12px 0; border-bottom: 1px solid color-mix(in srgb, var(--symbol-plum) 14%, transparent); }
   .site-header nav .nav-ink { display: none; }
   .site-header nav .nav-tab.router-link-active { color: var(--symbol-violet); }
   .site-header nav .nav-support { align-self: flex-start; margin-top: 14px; padding: 9px 18px; font-size: 1rem; }
   .site-header.is-menu-open { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 18px 30px -18px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
+  /* The menu lies over the page instead of pushing it down (a tap on the dimmed page closes it): it hangs below the header line (absolute). The header's
+     full-bleed background is a ::before here (not the clipped spread shadow), so nothing clips the open menu. */
+  .site-header, .site-header.is-scrolled, .site-header.is-menu-open { box-shadow: none; clip-path: none; }
+  .site-header::before { content: ''; position: absolute; z-index: -1; inset: 0 -100vmax; background: inherit; transition: box-shadow .4s ease; }
+  .site-header.is-scrolled::before { box-shadow: 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
+  .site-header nav { position: absolute; z-index: 1; top: 100%; left: 0; right: 0; background: inherit; overflow: visible; clip-path: inset(0 -100vmax); }
+  .site-header nav::before { content: ''; position: absolute; z-index: -1; inset: 0 -100vmax; background: inherit; }
+  .site-header nav.is-open { border-bottom: 1px solid var(--symbol-plum); }
+  .site-header.is-menu-open::after { content: ''; position: absolute; z-index: -2; top: 100%; left: -100vmax; right: -100vmax; height: 100vh; background: color-mix(in srgb, var(--symbol-ink) 28%, transparent); animation: menu-dim .45s ease both; cursor: pointer; }
   .page { padding-block: 18px 64px; }
   .hero-bottom,.section-heading,.statement-grid,.footer-grid,.about-grid,.project-content { grid-template-columns: 1fr; }
-  /* Phones: one project card to a row across the full width, so every photo reads at a steady 4:3 (see the card
-     block below). */
-  .project-grid,.project-grid--archive { grid-template-columns: 1fr; gap: 14px; }
+  /* Phones: two project cards to a row; every photo in the same square frame (see the card block below). */
+  .project-grid,.project-grid--archive { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .year-block { margin-bottom: 32px; }
   .home-hero,.support-band__grid,.subscribe__grid { grid-template-columns: 1fr; }
   .home-hero__orbit { order: -1; }
   .chronology { grid-template-columns: 1fr; gap: 10px; }
@@ -587,18 +608,19 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .calendar__cell .calendar__event { min-height: 8px; padding: 0; border-radius: 4px; box-shadow: none; background: var(--event-tone, var(--symbol-violet)); }
   .calendar__cell .calendar__event > * { display: none; }
   .calendar__list { display: grid; }
-  /* Phone card system: years and status on one line, the photo full width at 4:3 (every card the same frame, the
-     project's emblem small in the corner so it never covers the picture), then the title and a two-line summary. */
+  /* Phone card system (two to a row): years and place in one small line, the photo in a square frame (the same
+     for every card, so the grid reads calmly), the emblem small in the corner so it never covers the picture, then
+     the title. Status and summary stay on the project page. */
   .project-card { min-height: 0; }
-  .project-card__meta { padding: 10px 12px; font-size: .62rem; }
-  .project-card__visual, .project-card__visual.has-cover { min-height: 0; aspect-ratio: 4 / 3; flex: none; }
-  .project-card__visual.has-cover .project-card__motif { width: 48px !important; height: 48px !important; padding: 6px; inset: auto 10px 10px auto; }
-  .project-card__body { padding: 14px 14px 16px; }
-  .project-card__body p { display: none; }
-  .project-card__body h2 { font-size: 1.45rem; margin: 0 0 6px; }
-  .project-card__body > span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: .85rem; line-height: 1.45; }
-  .project-card__badge { left: 10px; bottom: 10px; padding: 5px 8px; font-size: .64rem; }
-  .project-card__badge--site { right: auto; left: 10px; top: 10px; bottom: auto; }
+  .project-card__meta { padding: 7px 8px; font-size: .56rem; letter-spacing: .06em; }
+  .project-card__meta > :last-child { display: none; }
+  .project-card__visual, .project-card__visual.has-cover { min-height: 0; aspect-ratio: 1; flex: none; }
+  .project-card__visual.has-cover .project-card__motif { width: 34px !important; height: 34px !important; padding: 4px; inset: auto 6px 6px auto; }
+  .project-card__body { padding: 9px 9px 11px; }
+  .project-card__body p, .project-card__body > span { display: none; }
+  .project-card__body h2 { font-size: 1.02rem; line-height: 1.15; margin: 0; }
+  .project-card__badge { left: 6px; bottom: 6px; padding: 3px 6px; font-size: .56rem; }
+  .project-card__badge--site { display: none; }
   /* Phones: smaller portraits on person pages and in the people lists. */
   .person-portrait { max-width: 150px; margin-bottom: 16px; }
   .project-sections { gap: 28px; }

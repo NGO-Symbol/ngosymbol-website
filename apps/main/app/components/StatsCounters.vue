@@ -67,4 +67,14 @@ onMounted(() => {
 .stat__hint { font-size: .8rem; color: color-mix(in srgb, var(--symbol-plum) 70%, transparent); opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
 .stat:hover .stat__hint, .stat:focus-visible .stat__hint { opacity: 1; transform: none; }
 @media (hover: none) { .stat__hint { opacity: 1; transform: none; } }
+/* Phones: all the numbers on one screen — two to a row, smaller rings, the hint in small type. */
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding-block: 28px; }
+  .stat { gap: 2px; padding: 14px 8px; }
+  .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .stat__ring { width: 78px; height: 78px; }
+  .stat__value { top: 14px; width: 78px; height: 78px; font-size: 1.9rem; }
+  .stat__label { margin-top: 6px; font-size: .9rem; line-height: 1.25; }
+  .stat__hint { font-size: .7rem; line-height: 1.35; }
+}
 </style>
