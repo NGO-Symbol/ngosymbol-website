@@ -1,10 +1,13 @@
 <script setup lang="ts">
 // Going home (logo or any link to / or /en from another page): a violet disc spreads from the click over the
-// whole screen, then shrinks back into the disc of the header logo. Other page changes keep the light fade.
+// whole screen, then shrinks back into the disc of the header logo. Other page changes keep the light fade, and so
+// does the language switch (/ ↔ /en is the same page in the other language, in either direction).
 const state = ref<'idle' | 'cover' | 'reveal'>('idle')
 const origin = ref({ x: '50%', y: '50%' })
 const target = ref({ x: '40px', y: '40px', r: '0px' })
-const isHome = (path: string) => path === '/' || path === '/en'
+const trim = (path: string) => path.replace(/(.)\/$/, '$1')
+const isHome = (path: string) => trim(path) === '/' || trim(path) === '/en'
+const isLanguageSwitch = (from: string, to: string) => trim(switchLangPath(trim(from), !isEnPath(trim(from)))) === trim(to)
 let pointer = { x: 0, y: 0 }
 
 // Centre and radius of the violet disc in the header logo (the mark is 178.22 of the logo's 900.93 width).
@@ -22,7 +25,7 @@ const nuxtApp = useNuxtApp()
 onMounted(() => {
   document.addEventListener('pointerdown', event => { pointer = { x: event.clientX, y: event.clientY } }, { passive: true })
   router.beforeEach((to, from) => {
-    if (!from.matched.length || !isHome(to.path) || isHome(from.path)) return
+    if (!from.matched.length || !isHome(to.path) || isHome(from.path) || isLanguageSwitch(from.path, to.path)) return
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     origin.value = { x: `${pointer.x || innerWidth / 2}px`, y: `${pointer.y || innerHeight / 2}px` }
     state.value = 'cover'

@@ -36,4 +36,10 @@ Status: `USER_CONFIRMED` — the team agreed the stages below; they are worked t
 - Added on 2026-10-31 (the review found these two were missed):
   - No hover effects on touch screens: a PostCSS step in the brand layer (`packages/brand/postcss-hover-only.mjs`) moves every `:hover` rule of every app into `@media (hover: hover) and (pointer: fine)`.
   - On phones the path to the page («Головна › Проєкти › …») is a second line of the sticky header (`utils/trail.ts` + `<Breadcrumbs in-header>`); the copy in the page is hidden on phones.
+- Revised again on 2026-10-31 (team feedback, same day):
+  - Phone project cards are back to two to a row. Each has a square photo, a small emblem, a one-line meta (years · place) and the title; status and summary stay on the project page.
+  - The Symbol spiral mark appears only on labels that open a section (directly above a heading).
+  - The home numbers fit one phone screen (two to a row).
+  - The phone menu lies over the page with a dim backdrop and unfolds smoothly.
+  - The home «wipe» no longer plays on the language switch.
 - Not covered yet: analytics and consent on the exhibition site (/documentsart/).

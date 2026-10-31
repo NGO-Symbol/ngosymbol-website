@@ -135,7 +135,7 @@ function toggleTheme() {
 </script>
 
 <template>
-  <header ref="headerEl" class="site-header container" :class="{ 'is-hidden': hidden && !menuOpen, 'is-scrolled': scrolled, 'is-menu-open': menuOpen }" @focusin="hidden = false">
+  <header ref="headerEl" class="site-header container" :class="{ 'is-hidden': hidden && !menuOpen, 'is-scrolled': scrolled, 'is-menu-open': menuOpen }" @focusin="hidden = false" @click.self="menuOpen = false">
     <NuxtLink class="wordmark" :to="isEn ? '/en' : '/'" :aria-label="isEn ? 'NGO Symbol — home' : 'ГО «Символ» — головна'" @click="animateMark">
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
@@ -161,7 +161,7 @@ function toggleTheme() {
         <span /><span /><span />
       </button>
     </div>
-    <!-- Phones: the path to the current page, as a second line of the header (hidden while the menu is open). -->
-    <Breadcrumbs v-if="trail" v-show="!menuOpen" class="header-trail" in-header :items="trail" />
+    <!-- Phones: the path to the current page, as a second line of the header (the open menu lies below it). -->
+    <Breadcrumbs v-if="trail" class="header-trail" in-header :items="trail" />
   </header>
 </template>
