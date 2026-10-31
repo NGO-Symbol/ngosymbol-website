@@ -28,16 +28,16 @@ export const events: SymbolEvent[] = [
       // Opening photos by Олександр Осіпов (ЄрміловЦентр Drive «Фото_Саша Осіпов»).
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-032.jpg', alt: 'Відкриття виставки: глядачі слухають промови в залі ЄрміловЦентру', credit: 'Олександр Осіпов', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-064.jpg', alt: 'Глядачі колом у залі під час відкриття', credit: 'Олександр Осіпов', people: true },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля роботи «Сучасна мода» Kinich Azla (Вероніки Ліпатової)', credit: 'Олександр Осіпов', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-140.jpg', alt: 'Синє світло інсталяції в темряві', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-052.jpg', alt: 'Глядачка біля килима з прикріпленими документами', credit: 'Олександр Осіпов', people: true },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція «Житлово-комунальна вічність» Анни Гареєвої на виставці «Покажіть свої документи…»', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-hall.jpg', alt: 'Глядачі заповнили зал ЄрміловЦентру на відкритті виставки' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-curators.jpg', alt: 'Куратори виставки виступають на відкритті', people: true },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Перформанс на відкритті: художник друкує напис на довгому аркуші' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance-banner.jpg', alt: 'Учасники перформансу піднімають надрукований банер' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-curators.jpg', alt: 'Співкуратори Петро Чекаль та Юрій Рассоха виступають на відкритті виставки «Покажіть свої документи…»', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance.jpg', alt: 'Олексій Чекаль друкує напис під час перформансу «Шредер Шредінґера» на відкритті виставки' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/opening-performance-banner.jpg', alt: 'Олексій Чекаль та учасники перформансу «Шредер Шредінґера» розгортають надрукований банер' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/opening-team.jpg', alt: 'Спільне фото команди, митців і гостей на відкритті', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/balcony-guests.jpg', alt: 'Гості відкриття розмовляють на верхньому рівні ЄрміловЦентру', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-vidkryttia/visitor-speaking.jpg', alt: 'Відвідувачка розповідає про роботу під час відкриття', people: true },
@@ -159,12 +159,12 @@ export const events: SymbolEvent[] = [
     start: '2025-11-14T18:00',
     venue: yermilov,
     gallery: [
-      { src: '/media/events/pokazhit-svoi-dokumenty-makov/stage.jpg', alt: 'Павло Маков і модератори розмови', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-makov/talk.jpg', alt: 'Розмова про документ і пам’ять', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/stage.jpg', alt: 'Павло Маков із модераторами Петром Чекалем та Юрієм Рассохою під час розмови про документ і пам’ять', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/talk.jpg', alt: 'Петро Чекаль та Юрій Рассоха модерують розмову з Павлом Маковим про документ і пам’ять', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/makov.jpg', alt: 'Павло Маков відповідає на запитання', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-makov/listeners.jpg', alt: 'Слухачі розмови', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-makov/overview.jpg', alt: 'Розмова з Павлом Маковим — вигляд на зал згори', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-makov/audience-wide.jpg', alt: 'Павло Маков і глядачі під час розмови — вигляд на зал згори', people: true }
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/overview.jpg', alt: 'Павло Маков, Петро Чекаль та Юрій Рассоха під час розмови про документ і пам’ять — вигляд на зал згори', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-makov/audience-wide.jpg', alt: 'Павло Маков відповідає на запитання глядачів під час розмови про документ і пам’ять', people: true }
     ],
     partners: ['yermilov-centre'],
     description: [
@@ -184,10 +184,10 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/artist.jpg', alt: 'Андрій Скрипка показує ліногравюру квитка', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/prints.jpg', alt: 'Гості розглядають відбитки «Квитків Харкова»', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket.jpg', alt: 'Відбиток квитка з серії «Квитки Харкова»' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/talk.jpg', alt: 'Андрій Скрипка розповідає про проєкт', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/talk.jpg', alt: 'Андрій Скрипка розповідає про створення проєкту «Квитки Харкова»', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/audience-close.jpg', alt: 'Гості слухають розповідь Андрія Скрипки', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/workshop.jpg', alt: 'Учасники розглядають і розкладають відбитки квитків', credit: 'Петро Чекаль', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket-portrait.jpg', alt: 'Учасниця приміряє відбиток квитка', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/ticket-portrait.jpg', alt: 'Учасниця приміряє ліногравюрний відбиток із проєкту Андрія Скрипки «Квитки Харкова»', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-artist-talk/conversation.jpg', alt: 'Андрій Скрипка спілкується з учасницею артисттоку', credit: 'Петро Чекаль', people: true }
     ],
     partners: ['yermilov-centre'],
@@ -205,8 +205,8 @@ export const events: SymbolEvent[] = [
     end: '2025-11-15T17:30',
     venue: yermilov,
     gallery: [
-      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel.jpg', alt: 'Спікери панельної дискусії', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/speaker.jpg', alt: 'Модераторка й спікери дискусії', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel.jpg', alt: 'Максим Потапович, Анна Шаригіна та Ірина Юзик під час панельної дискусії «Правозахисна спільнота в Україні під час війни: як ми змінюємось?»', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/speaker.jpg', alt: 'Модераторка Інна Ільченко зі спікерами Максимом Потаповичем, Анною Шаригіною та Іриною Юзик', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/hall.jpg', alt: 'Зала ЄрміловЦентру під час дискусії' },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/audience-side.jpg', alt: 'Учасники панельної дискусії в залі', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-zmina-dyskusiia/panel-speaker.jpg', alt: 'Спікерка панельної дискусії відповідає на запитання', credit: 'Петро Чекаль', people: true },
@@ -230,8 +230,8 @@ export const events: SymbolEvent[] = [
     venue: yermilov,
     gallery: [
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/actors.jpg', alt: 'Актори плейбек-театру «Нема» на сцені', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/scene.jpg', alt: 'Актори відіграють історію глядача' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/gesture.jpg', alt: 'Сцена перформансу' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/scene.jpg', alt: 'Актори плейбек-театру «Нема» відіграють історію глядача під час перформансу про ідентичність' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/gesture.jpg', alt: 'Фрагмент плейбек-перформансу театру «Нема» в межах виставки «Покажіть свої документи…»' },
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/story.jpg', alt: 'Оповідачка розповідає історію', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/audience-wide.jpg', alt: 'Глядачі плейбек-перформансу в залі', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-pleibek/vertical-scene.jpg', alt: 'Вертикальна мізансцена акторок плейбек-театру', people: true },
@@ -258,10 +258,10 @@ export const events: SymbolEvent[] = [
     venue: yermilov,
     gallery: [
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/violin.jpg', alt: 'Скрипалька серед паперових аркушів — вигляд згори' },
-      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/flute.jpg', alt: 'Флейтистка під час виконання In C' },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/flute.jpg', alt: 'Учасниця KVERO contemporary music ensemble виконує «In C» Террі Райлі' },
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass.jpg', alt: 'Контрабасист на тлі робіт виставки' },
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/audience.jpg', alt: 'Слухачки з бумвекерами долучаються до ритму', people: true },
-      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass-close.jpg', alt: 'Контрабасист виконує In C', people: true },
+      { src: '/media/events/pokazhit-svoi-dokumenty-kvero/double-bass-close.jpg', alt: 'Учасник KVERO contemporary music ensemble виконує «In C» Террі Райлі', people: true },
       { src: '/media/events/pokazhit-svoi-dokumenty-kvero/guitar.jpg', alt: 'Гітарист під час музично-просторового перформансу', people: true }
     ],
     partners: ['yermilov-centre'],
@@ -294,7 +294,7 @@ export const events: SymbolEvent[] = [
     end: '2025-02-14',
     venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Тренерки Олена Лемешко та Наталія Опришко з учасниками першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-1/hall.jpg', alt: 'Зала тренінгу в Центральній міській бібліотеці', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-1/trainer.jpg', alt: 'Тренерка пояснює матеріал учасникам', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-1/practice.jpg', alt: 'Практична вправа в парах', credit: 'Юрій Рассоха', people: true },
@@ -323,7 +323,7 @@ export const events: SymbolEvent[] = [
     end: '2025-02-28',
     venue: { name: 'Центральна міська бібліотека', city: 'Біла Церква' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Учасники другого тренінгу з посібниками mhGAP', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-2/group.jpg', alt: 'Тренери Юрій Січ та Вікторія Миронюк-Данько з учасниками другого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-2/session.jpg', alt: 'Робота учасників у залі', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-2/flipchart.jpg', alt: 'Робота з фліпчартом', credit: 'Юрій Рассоха', people: true }
     ],
@@ -343,7 +343,7 @@ export const events: SymbolEvent[] = [
     end: '2025-04-04',
     venue: { name: 'Готель «Україна»', city: 'Київ' },
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Спільне фото учасників тренінгу з посібниками', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-3/group.jpg', alt: 'Тренери Алеся Лисенко та Іван Кутчак з учасниками тренінгу mhGAP у Києві', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-3/hall.jpg', alt: 'Тренер веде заняття для повної зали', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-3/trainer.jpg', alt: 'Тренер біля презентації', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-3/manual.jpg', alt: 'Посібник mhGAP', credit: 'Петро Чекаль' },
@@ -376,7 +376,7 @@ export const events: SymbolEvent[] = [
       { src: '/media/events/mhgap-kyiv-trening-4/trainer.jpg', alt: 'Тренерка веде другу частину тренінгу mhGAP', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/lecture.jpg', alt: 'Тренер пояснює модуль біля презентації', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання', credit: 'Петро Чекаль', people: true },
-      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту', credit: 'Петро Чекаль', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Тренери Іван Кутчак та Ольга Климовська з учасниками другої частини тренінгу mhGAP у Києві', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/participants-1.jpg', alt: 'Учасниці слухають презентацію тренерів', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/trainer-1.jpg', alt: 'Тренерка пояснює матеріал другої частини mhGAP', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/note-taking.jpg', alt: 'Учасниця занотовує матеріали тренінгу', credit: 'Петро Чекаль', people: true },

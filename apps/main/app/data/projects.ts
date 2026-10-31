@@ -134,18 +134,18 @@ const entries: Project[] = [
     donors: ['mincult', 'grynyov-art-foundation'],
     donorCredit: 'Організатори: ГО «Символ», ЄрміловЦентр і Харківський національний університет імені В. Н. Каразіна. Донори: Міністерство культури України (Грант Президента України для молодих митців) і Grynyov Art Collection.',
     gallery: [
-      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція: розлітні аркуші документів над кріслом і килимом', credit: 'Олександр Осіпов' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-024.jpg', alt: 'Інсталяція «Житлово-комунальна вічність» Анни Гареєвої на виставці «Покажіть свої документи…»', credit: 'Олександр Осіпов' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-128.jpg', alt: 'Світлова інсталяція «Документ» Костянтина Гливляса в темному залі', credit: 'Олександр Осіпов' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля манекена в сукні з проєкту «Сучасна мода»', credit: 'Олександр Осіпов', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-104.jpg', alt: 'Глядачка біля роботи «Сучасна мода» Kinich Azla (Вероніки Ліпатової)', credit: 'Олександр Осіпов', people: true },
       { src: '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg', alt: 'Виставка в ЄрміловЦентрі — вигляд згори', credit: 'Олександр Осіпов', people: true },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція: килим на стіні, крісло й розлітні аркуші документів', credit: 'Петро Чекаль' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Паспорти на тарілках уздовж довгого столу' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/carpet.jpg', alt: 'Інсталяція «Житлово-комунальна вічність» Анни Гареєвої', credit: 'Петро Чекаль' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/plates.jpg', alt: 'Їстівна інсталяція «Паспортний стіл» Аліни Прокопенко (Apris)' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/light.jpg', alt: 'Світлова інсталяція в темному залі', credit: 'Петро Чекаль' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/viewers.jpg', alt: 'Глядачі перед стіною з чорно-білими фотографіями', people: true },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: 'Ряди червоних паспортів на стіні', credit: 'Петро Чекаль' },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/viewers.jpg', alt: 'Глядачі розглядають фотографії із серії «Пасажири» Сергія Мельниченка', people: true },
+      { src: '/media/projects/pokazhit-svoi-dokumenty/passports-wall.jpg', alt: '«Імперія розпалася», Антон Карюк', credit: 'Петро Чекаль' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/sealed.jpg', alt: 'Бетонний блок із замурованими документами' },
       { src: '/media/projects/pokazhit-svoi-dokumenty/strips.jpg', alt: 'Підвішені прозорі смуги зі світлом і тінями', credit: 'Петро Чекаль' },
-      { src: '/media/projects/pokazhit-svoi-dokumenty/tv.jpg', alt: 'Два телевізори з відеороботами', credit: 'Петро Чекаль' }
+      { src: '/media/projects/pokazhit-svoi-dokumenty/tv.jpg', alt: 'Робота Володимира Кузнецова «Відкритий архів — Страшний суд: Коліївщина»', credit: 'Петро Чекаль' }
     ]
   },
   {
@@ -205,7 +205,7 @@ const entries: Project[] = [
     cardCover: false,
     summary: 'Навчання медпрацівників первинної ланки за програмою ВООЗ з психічного здоров’я.',
     gallery: [
-      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Учасники першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
+      { src: '/media/events/mhgap-kyiv-trening-1/group.jpg', alt: 'Тренерки Олена Лемешко та Наталія Опришко з учасниками першого тренінгу mhGAP у Білій Церкві', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-1/group-work-1.jpg', alt: 'Практична робота в малих групах у Білій Церкві', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-1/trainer-session.jpg', alt: 'Навчальна сесія першого тренінгу mhGAP', credit: 'Юрій Рассоха', people: true },
       { src: '/media/events/mhgap-kyiv-trening-3/welcome-sign.jpg', alt: 'Навігаційна табличка «Символ» на тренінгу в Києві', credit: 'Петро Чекаль' },
@@ -213,7 +213,7 @@ const entries: Project[] = [
       { src: '/media/events/mhgap-kyiv-trening-3/training-material.jpg', alt: 'Навчальний матеріал із модуля mhGAP', credit: 'Петро Чекаль' },
       { src: '/media/events/mhgap-kyiv-trening-4/trainer-1.jpg', alt: 'Тренерка веде другу частину програми mhGAP', credit: 'Петро Чекаль', people: true },
       { src: '/media/events/mhgap-kyiv-trening-4/questions.jpg', alt: 'Учасники ставлять запитання під час тренінгу', credit: 'Петро Чекаль', people: true },
-      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Учасники останнього тренінгу проєкту в Києві', credit: 'Петро Чекаль', people: true }
+      { src: '/media/events/mhgap-kyiv-trening-4/group.jpg', alt: 'Тренери Іван Кутчак та Ольга Климовська з учасниками другої частини тренінгу mhGAP у Києві', credit: 'Петро Чекаль', people: true }
     ],
     body: [
       'mhGAP — **програма дій ВООЗ** з подолання прогалин у галузі психічного здоров’я на первинній ланці охорони здоров’я.',
