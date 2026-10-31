@@ -59,6 +59,7 @@ html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
 .theme-toggle { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--symbol-plum); border-radius: 50%; background: transparent; color: var(--symbol-plum); cursor: pointer; }
 .theme-toggle svg { width: 18px; height: 18px; transition: transform .6s cubic-bezier(.4, 0, .2, 1); }
 /* Menu button (phones only): three bars that fold into a cross. */
+.header-trail { display: none; }
 .menu-toggle { display: none; width: 34px; height: 34px; padding: 0; border: 1px solid var(--symbol-plum); border-radius: 50%; background: transparent; color: var(--symbol-plum); cursor: pointer; place-content: center; gap: 3px; }
 .menu-toggle span { display: block; width: 14px; height: 1.5px; margin-inline: auto; background: currentColor; border-radius: 1px; transition: transform .35s cubic-bezier(.4, 0, .2, 1), opacity .2s ease; }
 .menu-toggle.is-open span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
@@ -558,6 +559,7 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .header-tools .theme-toggle, .header-tools .search-toggle { width: 30px; height: 30px; }
   /* Sections behind the menu button: one compact header line; the menu opens below it as a list. */
   .menu-toggle { display: grid; }
+  .header-trail { display: block; order: 4; flex: 1 0 100%; padding-top: 2px; }
   .header-tools .menu-toggle { width: 30px; height: 30px; }
   .site-header nav { display: none; order: 3; flex: 1 0 100%; margin-left: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 4px 0 12px; font-size: 1.2rem; }
   .site-header nav.is-open { display: flex; animation: menu-in .3s cubic-bezier(.2, .9, .3, 1); }

@@ -62,6 +62,9 @@ function onKey(event: KeyboardEvent) { if (event.key === 'Escape') menuOpen.valu
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
+// The path to the current page for the phone header (pages show their own copy on wide screens).
+const trail = computed(() => trailFor(route.path))
+
 // Sticky header: hides while scrolling down, comes back as soon as the visitor scrolls up.
 const hidden = ref(false)
 const scrolled = ref(false)
@@ -158,5 +161,7 @@ function toggleTheme() {
         <span /><span /><span />
       </button>
     </div>
+    <!-- Phones: the path to the current page, as a second line of the header (hidden while the menu is open). -->
+    <Breadcrumbs v-if="trail" v-show="!menuOpen" class="header-trail" in-header :items="trail" />
   </header>
 </template>
