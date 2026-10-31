@@ -109,5 +109,5 @@ export const coverPhoto: Record<string, string> = {
   'yeva-fomitski': '/media/projects/pokazhit-svoi-dokumenty/osipov-446.jpg',
   'kinich-azla': '/media/projects/pokazhit-svoi-dokumenty/artist-works/kinich-azla/suchasna-moda/007.jpg',
   'roman-piatkovka': '/media/projects/pokazhit-svoi-dokumenty/artist-works/roman-piatkovka/work/004.jpg',
-  'dara-sholokh': '/media/projects/pokazhit-svoi-dokumenty/artist-works/dara-sholokh/work/003.jpg'
+  'dara-sholokh': '/media/projects/pokazhit-svoi-dokumenty/hover-covers/dara-sholokh-hanna-franyk.jpg'
 }
