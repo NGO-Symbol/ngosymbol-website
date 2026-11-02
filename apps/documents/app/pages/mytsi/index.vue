@@ -49,4 +49,8 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
 .artist__name { font-family: var(--docs-display); text-transform: uppercase; font-size: 1.3rem; line-height: 1.05; }
 .artist:hover .artist__name { text-decoration: underline; text-decoration-thickness: 2px; }
 .artist__works { font-size: .8rem; color: var(--docs-muted); line-height: 1.4; }
+
+@media (max-width: 600px) {
+  .artists { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
+}
 </style>
