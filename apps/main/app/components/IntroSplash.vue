@@ -77,6 +77,9 @@ onMounted(() => {
 .intro {
   position: fixed;
   inset: 0;
+  /* In-app browsers (Instagram, Telegram) let the page run under their translucent bottom bar, beyond the fixed
+     box: a spread shadow in the same colour covers everything around it, so no page text shows through. */
+  box-shadow: 0 0 0 100vmax var(--symbol-cream);
   z-index: 100;
   display: grid;
   place-items: center;
