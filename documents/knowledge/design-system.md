@@ -126,3 +126,11 @@ On touch screens every tap leaves a short mark from the identity, different by t
 ## PSD stamp and page titles (2026-10-29)
 
 The PSD stamp on the project page carries a working QR code to `https://documentsart.symbol.ngo/` (generated in-house, verified with a QR reader; grain is applied only to rings and lettering so the code stays readable) and links to the project site; it lands on the page with a stamping motion. Page titles: at most 6.4rem (wide titles 6rem) so single long words such as «Можливості» never break; the nav underline follows the active tab across wrapped rows on phones; the active project filter is a violet pill with a check mark, the reset is a bordered button next to the result count.
+
+## Screen fitting on large monitors (2026-11-03, team request)
+
+- Up to 1440 px wide, the main site keeps its designed layout: a 1180 px column.
+- Above 1440 px, the page grows with the screen. The column keeps 82 % of the width, and the root font size is 1.1111vw, so all rem-based type and the orbit scale by the same ratio. A 1920 px monitor shows the 1440 px layout about 1.33× larger.
+- Growth stops at 2560 px.
+- The rules are `:root { --page }` and `.container` in `apps/main/app/assets/css/main.css`.
+- New layout sizes should use `rem` or the `--page` width, not fixed `px`, so they follow the screen.

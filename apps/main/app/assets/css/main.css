@@ -12,9 +12,18 @@ html { background: var(--symbol-cream); color: var(--symbol-plum); font-family: 
 body { margin: 0; }
 a { color: inherit; }
 button { font: inherit; }
-.container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+/* Screen fitting: up to 1440 px wide the page is laid out as designed (1180 px column). Above that, the page grows
+   with the screen instead of leaving a narrow column with empty sides: the column keeps the same share of the width
+   (82 %) and the type (all rem-based) scales by the same ratio — a 1920 px monitor shows the 1440 px layout 1.33×
+   larger. The growth stops at 2560 px, so very wide screens do not get oversized type. */
+:root { --page: 1180px; }
+@media (min-width: 1440px) {
+  html { font-size: min(1.1111vw, 28.44px); }
+  :root { --page: min(81.94vw, 2098px); }
+}
+.container { width: min(var(--page), calc(100% - 40px)); margin-inline: auto; }
 .site-shell { min-height: 100vh; overflow: clip; }
-.site-header { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--symbol-plum); }
+.site-header { min-height: 5.25rem; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--symbol-plum); }
 /* Sticky header (always reachable): full-bleed background via a spread shadow clipped to the sides; hides on
    scroll down and slides back on scroll up. */
 .site-header { position: sticky; top: 0; z-index: 60; background: var(--symbol-cream); box-shadow: 0 0 0 100vmax var(--symbol-cream); clip-path: inset(0 -100vmax -12px); will-change: transform; transition: transform .6s cubic-bezier(.22, .61, .36, 1), opacity .45s ease, background .4s ease, box-shadow .4s ease, color .4s ease; }
@@ -528,7 +537,7 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 .tilt-leave-to { opacity: 0; transform: translateY(-20px); }
 
 /* Official logo in header and footer; every click on the header logo plays the next mark animation. */
-.header-logo { width: clamp(150px, 16vw, 210px); color: var(--symbol-ink); }
+.header-logo { width: clamp(150px, 16vw, 13.125rem); color: var(--symbol-ink); }
 .footer-logo { width: 220px; color: var(--symbol-cream); margin-bottom: 8px; }
 .header-logo[class*="mark-"] .logo-disc path, .header-logo[class*="mark-"] .logo-spiral { animation-duration: .9s; }
 .header-logo.mark-spin .logo-disc path, .header-logo.mark-spin .logo-spiral { animation-name: mark-spin; animation-timing-function: cubic-bezier(.3, .8, .3, 1); }
