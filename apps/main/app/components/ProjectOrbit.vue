@@ -203,8 +203,9 @@ onMounted(async () => {
 })
 let runnerObserver: IntersectionObserver | undefined
 
-// Safari does not repaint text set on a path (textPath) when the theme's colours change, so some titles stayed dark
-// on the dark page. On every theme change each title gets its colour set once more, which forces the repaint.
+// Safari does not always repaint text set on a path (textPath) when its colour changes — on a theme change, or when
+// a title stops being the active one — so some titles stayed dark on the dark page. After each such change every
+// title gets its colour set once more, which forces the repaint (and the colour itself no longer animates).
 let themeObserver: MutationObserver | undefined
 let systemTheme: MediaQueryList | undefined
 function repaintTitles() {
@@ -217,6 +218,7 @@ function repaintTitles() {
     }
   })
 }
+watch(active, () => nextTick(repaintTitles))
 onMounted(() => {
   themeObserver = new MutationObserver(repaintTitles)
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
@@ -290,7 +292,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 .orbit-hook__core { transform-origin: 500px 500px; animation: orbit-breathe 7s ease-in-out infinite; }
 .orbit-hook__parallax { transform: translate(calc(var(--tilt-x, 0) * -18px), calc(var(--tilt-y, 0) * -18px)); transition: transform .3s ease-out; }
 .orbit-hook__runner rect { fill: var(--symbol-apricot); stroke: var(--symbol-plum); stroke-width: 1.5; }
-.orbit-hook__title { font-family: var(--font-display); font-size: calc(23px * var(--orbit-fit, 1)); fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1), fill .25s ease; }
+.orbit-hook__title { font-family: var(--font-display); font-size: calc(23px * var(--orbit-fit, 1)); fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1); }
 .orbit-hook.is-measuring .orbit-hook__title { transition: none; }
 .orbit-hook__title a { cursor: pointer; outline: none; }
 .orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: calc(27px * var(--orbit-fit, 1)); text-decoration: underline; }
