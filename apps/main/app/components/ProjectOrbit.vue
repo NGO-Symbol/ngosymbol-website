@@ -282,7 +282,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 
 <style scoped>
 .orbit-hook { display: grid; gap: 18px; justify-items: center; }
-.orbit-hook__svg { width: 100%; max-width: 640px; height: auto; overflow: visible; transform: perspective(1400px) rotateY(calc(var(--tilt-x, 0) * 10deg)) rotateX(calc(var(--tilt-y, 0) * -10deg)); transition: transform .25s ease-out; }
+.orbit-hook__svg { width: 100%; max-width: 40rem; height: auto; overflow: visible; transform: perspective(1400px) rotateY(calc(var(--tilt-x, 0) * 10deg)) rotateX(calc(var(--tilt-y, 0) * -10deg)); transition: transform .25s ease-out; }
 .orbit-hook__turn { transform-origin: 500px 500px; transform: rotate(var(--scroll-turn, 0deg)); }
 .orbit-hook__ring { fill: none; stroke: var(--symbol-plum); stroke-width: 1.2; opacity: .35; }
 .orbit-hook__ring--dashed { stroke-dasharray: 3 9; opacity: .5; transform-origin: 500px 500px; animation: orbit-spin 60s linear infinite reverse; }
@@ -295,6 +295,8 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 .orbit-hook__title { font-family: var(--font-display); font-size: calc(23px * var(--orbit-fit, 1)); fill: var(--symbol-plum); transition: font-size .45s cubic-bezier(.2, 1, .3, 1); }
 .orbit-hook.is-measuring .orbit-hook__title { transition: none; }
 .orbit-hook__title a { cursor: pointer; outline: none; }
+/* Visited projects keep the same colour (browsers may paint visited links differently). */
+.orbit-hook__title a:visited { fill: inherit; }
 .orbit-hook__title.is-active { fill: var(--symbol-violet); font-size: calc(27px * var(--orbit-fit, 1)); text-decoration: underline; }
 /* Phones: the orbit is drawn small, so titles get larger type and the years step aside to make room. */
 @media (max-width: 600px) {
