@@ -202,7 +202,28 @@ onMounted(async () => {
   window.addEventListener('scroll', onScroll, { passive: true })
 })
 let runnerObserver: IntersectionObserver | undefined
-onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.removeEventListener('change', measure); cancelAnimationFrame(frame); cancelAnimationFrame(runnerFrame); runnerObserver?.disconnect() })
+
+// Safari does not repaint text set on a path (textPath) when the theme's colours change, so some titles stayed dark
+// on the dark page. On every theme change each title gets its colour set once more, which forces the repaint.
+let themeObserver: MutationObserver | undefined
+let systemTheme: MediaQueryList | undefined
+function repaintTitles() {
+  requestAnimationFrame(() => {
+    for (const path of paths) {
+      const text = path?.parentElement
+      if (!text) continue
+      text.style.fill = getComputedStyle(text).fill
+      requestAnimationFrame(() => { text.style.fill = '' })
+    }
+  })
+}
+onMounted(() => {
+  themeObserver = new MutationObserver(repaintTitles)
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+  systemTheme = matchMedia('(prefers-color-scheme: dark)')
+  systemTheme.addEventListener('change', repaintTitles)
+})
+onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.removeEventListener('change', measure); cancelAnimationFrame(frame); cancelAnimationFrame(runnerFrame); runnerObserver?.disconnect(); themeObserver?.disconnect(); systemTheme?.removeEventListener('change', repaintTitles) })
 </script>
 
 <template>
