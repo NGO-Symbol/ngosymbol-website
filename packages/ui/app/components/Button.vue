@@ -1,4 +1,9 @@
 <script setup lang="ts">
+// Explicit imports: the main site uses this single file without extending the layer (SymSiteHeader imports it).
+import { computed, resolveComponent } from 'vue'
+import SymIcon from './Icon.vue'
+import { isOffSite } from '../utils/links'
+
 /**
  * The call-to-action control. Renders <button>, <a> (href) or a router link (to); an off-site href opens in a new tab and shows an
  * arrow-up-right with a hidden «(відкриється в новій вкладці)». Colours follow the surrounding tone: solid = text colour on tone

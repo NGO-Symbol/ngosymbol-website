@@ -61,7 +61,8 @@ export const eventItems: EventItem[] = [
     cover: event.gallery?.[0]?.src ?? projectMap.get(event.project)?.poster ?? projectMap.get(event.project)?.gallery?.[0]?.src
   })),
   ...projects
-    .filter(project => project.kind === 'single' && project.start)
+    // a project with its own event record of the same slug stays one row
+    .filter(project => project.kind === 'single' && project.start && !eventMap.has(project.slug))
     .map(project => ({
       slug: project.slug,
       title: project.title,

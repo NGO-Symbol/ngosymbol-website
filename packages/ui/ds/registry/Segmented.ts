@@ -12,7 +12,7 @@ export default defineDs({
     { file: 'Views', title: 'Вигляд сторінки', description: 'Натисніть будь-де: варіант перемикається, бігунець їде.' },
     { file: 'Sizes', title: 'Розміри', description: 's для шапки, m поруч із кнопками й селектами, l для вибору, якому присвячено секцію.' },
   ],
-  playground: { props: { size: { type: 'select', options: ['s', 'm', 'l'], default: 'm' }, tabs: { type: 'boolean' } } },
+  playground: { props: { size: { type: 'select', options: ['s', 'm', 'l'], default: 'm' }, tabs: { type: 'boolean' } }, fixed: { label: 'Вигляд', modelValue: 'list', options: [{ value: 'list', label: 'Список' }, { value: 'calendar', label: 'Календар' }] } },
   keyboard: [{ keys: 'Tab', action: 'Фокус на варіант (на посилання, коли задано to).' }, { keys: 'Enter / Space', action: 'Обрати варіант; на вже обраному з двох перемикає на інший.' }],
   a11y: ['Група кнопок оголошує aria-pressed; з tabs це tablist, tab і aria-selected.', 'Режим to: одне посилання, його назву задає label, підписи приховані від читача екрана.', 'Розмір s має зону натискання 44 px; обраний стан це заливка, а не лише колір тексту.'],
   motion: ['Бігунець: translate, medium (множиться на налаштування зменшеного руху). Колір тексту: fx-small.'],

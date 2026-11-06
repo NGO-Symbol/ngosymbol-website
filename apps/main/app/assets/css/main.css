@@ -7,6 +7,7 @@
 :root { --font-display: 'Zakon', Georgia, serif; --font-body: 'Zakon', Georgia, serif; }
 
 * { box-sizing: border-box; }
+img { height: auto; } /* width/height attributes only reserve the space (MediaImg); CSS decides the shape */
 
 html { background: var(--symbol-cream); color: var(--symbol-plum); font-family: var(--font-body); }
 body { margin: 0; }
@@ -22,6 +23,8 @@ button { font: inherit; }
   --sym-fg: var(--symbol-plum); --sym-bg: var(--symbol-cream); --sym-rule-width: 1px; --sym-shape-chip: 999px; --sym-size-touch: 44px;
   --sym-control-s: 36px; --sym-control-m: var(--control-h); --sym-control-l: 52px;
   --sym-text-caption: .78rem; --sym-text-body-sm: 1rem; --sym-text-body: 1rem;
+  --sym-width-page: var(--page); --sym-page-margin: 20px; --sym-z-sticky: 60; --sym-radius-pill: 999px; --sym-accent: var(--symbol-violet); /* header (SymSiteHeader dropdown) */
+  --sym-highlight: var(--symbol-apricot); --sym-on-highlight: #211b28; /* the «Підтримати» pill: apricot with dark text in both themes */
   --sym-t-medium: .45s cubic-bezier(.3, 1.2, .4, 1); --sym-t-fx-small: .35s ease;
 }
 @media (min-width: 1440px) {
@@ -30,58 +33,18 @@ button { font: inherit; }
 }
 .container { width: min(var(--page), calc(100% - 40px)); margin-inline: auto; }
 .site-shell { min-height: 100vh; overflow: clip; }
-.site-header { min-height: 5.25rem; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--symbol-plum); }
-/* Sticky header (always reachable): full-bleed background via a spread shadow clipped to the sides; hides on
-   scroll down and slides back on scroll up. */
-.site-header { position: sticky; top: 0; z-index: 60; background: var(--symbol-cream); box-shadow: 0 0 0 100vmax var(--symbol-cream); clip-path: inset(0 -100vmax -12px); will-change: transform; transition: transform .6s cubic-bezier(.22, .61, .36, 1), opacity .45s ease, background .4s ease, box-shadow .4s ease, color .4s ease; }
-/* The full-bleed background reaches 12px below the header (clip-path), so hiding moves it that much further. */
-.site-header.is-hidden { transform: translateY(calc(-100% - 14px)); opacity: .2; transition: transform .7s cubic-bezier(.22, .61, .36, 1), opacity .7s ease, background .4s ease, box-shadow .4s ease, color .4s ease; }
-.site-header.is-scrolled { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
-@media (prefers-reduced-motion: reduce) { .site-header, .site-header nav, .site-header nav > a { transition: none !important; } }
-
-/* Project pages with their own identity recolour the header (html[data-page-theme] set by the project page). */
-html[data-page-theme="documents"] .site-header { color: var(--docs-ink); border-bottom: 3px solid var(--docs-ink); }
-html[data-page-theme="documents"] .site-header nav { font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; font-size: .76rem; letter-spacing: .04em; }
-html[data-page-theme="documents"] .nav-support { background: var(--docs-ink); color: var(--docs-paper); border-radius: 0; box-shadow: 3px 3px 0 var(--docs-stamp); }
-html[data-page-theme="documents"] .nav-support:hover { background: var(--docs-stamp); color: #fff; }
+/* The header is SymSiteHeader (packages/ui, dropdown layout): its styles come with the component. What stays here is the page theme and
+   the logo. Project pages with their own identity recolour the header (html[data-page-theme] set by the project page). */
+html[data-page-theme="documents"] .sym-site-header { color: var(--docs-ink); border-bottom-width: 3px; border-bottom-color: var(--docs-ink); }
+html[data-page-theme="documents"] .sym-site-header__nav { font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; font-size: .76rem; letter-spacing: .04em; }
+html[data-page-theme="documents"] .sym-site-header__support { background: var(--docs-ink); color: var(--docs-paper); border-radius: 0; box-shadow: 3px 3px 0 var(--docs-stamp); }
+html[data-page-theme="documents"] .sym-site-header__support:hover { background: var(--docs-stamp); color: #fff; }
 html[data-page-theme="documents"] { --sym-shape-chip: 0; }
-html[data-page-theme="documents"] .site-header { --sym-fg: var(--docs-ink); --sym-bg: var(--docs-paper); }
-html[data-page-theme="documents"] .theme-toggle { border-radius: 0; }
-html[data-page-theme="documents"] .nav-ink { border-radius: 0; }
+html[data-page-theme="documents"] .sym-site-header { --sym-fg: var(--docs-ink); --sym-bg: var(--docs-paper); --sym-accent: var(--docs-stamp); }
+html[data-page-theme="documents"] .sym-site-header .theme-toggle { border-radius: 0; }
+html[data-page-theme="documents"] .sym-site-header__ink { border-radius: 0; }
 .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; letter-spacing: .12em; }
-.site-header nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 32px); font-size: .85rem; margin-left: auto; }
-.header-tools { display: flex; align-items: center; gap: 12px; margin-left: calc(clamp(14px, 2.2vw, 32px) - 24px); font-size: .85rem; }
-.site-header nav { position: relative; }
-.site-header nav a, .header-tools a { text-decoration: none; }
-/* Tabs: on hover the label rolls up to a violet copy; the active tab has a sliding ink bar; a click springs. */
-.nav-tab { position: relative; display: inline-block; padding-block: 4px; }
-.nav-tab__label { display: inline-block; overflow: hidden; vertical-align: bottom; line-height: 1.3; }
-.nav-tab__roll { position: relative; display: block; transition: transform .45s cubic-bezier(.3, 1.2, .4, 1); }
-.nav-tab__roll::after { content: attr(data-label); position: absolute; left: 0; top: 100%; color: var(--symbol-violet); }
-.nav-tab:hover .nav-tab__roll, .nav-tab:focus-visible .nav-tab__roll { transform: translateY(-100%); }
-.nav-tab.is-pressed { animation: nav-press .5s cubic-bezier(.3, 1.6, .5, 1); }
-@keyframes nav-press { 0% { transform: scale(1); } 30% { transform: scale(.88) rotate(-2deg); } 100% { transform: none; } }
-.nav-ink { position: absolute; left: 0; top: 0; height: 3px; border-radius: 3px; background: var(--symbol-violet); opacity: 0; transform-origin: left; transition: transform .55s cubic-bezier(.3, 1.3, .4, 1), width .55s cubic-bezier(.3, 1.3, .4, 1), opacity .3s ease; pointer-events: none; }
-.nav-ink.is-visible { opacity: 1; }
-.nav-ink::after { content: ''; position: absolute; right: -4px; top: -2.5px; width: 8px; height: 8px; border-radius: 50%; background: var(--symbol-apricot); animation: nav-ink-dot 2.4s ease-in-out infinite; }
-@keyframes nav-ink-dot { 50% { transform: translateX(-6px) scale(.7); } }
-@media (prefers-reduced-motion: reduce) { .nav-ink, .nav-tab__roll { transition: none; } .nav-ink::after, .nav-tab.is-pressed { animation: none; } }
-/* Language switch: a pill whose thumb slides between UA and EN */
-/* Theme toggle: the half-filled circle turns like the logo spiral */
-/* Header controls (language switch, search, theme) share one height: --tool-size. Round icon buttons use .tool-btn. */
-.header-tools { --tool-size: 36px; --sym-control-s: var(--tool-size); }
-.tool-btn { width: var(--tool-size); height: var(--tool-size); flex: none; display: grid; place-items: center; padding: 0; border: 1px solid var(--symbol-plum); border-radius: 50%; background: transparent; color: var(--symbol-plum); cursor: pointer; }
-.theme-toggle svg { width: 18px; height: 18px; transition: transform .6s cubic-bezier(.4, 0, .2, 1); }
-/* Menu button (phones only): three bars that fold into a cross. */
-.header-trail { display: none; }
-.menu-toggle { display: none; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 8px; background: transparent; -webkit-tap-highlight-color: transparent; color: var(--symbol-plum); cursor: pointer; place-content: center; gap: 5px; }
-.menu-toggle span { display: block; width: 22px; height: 2px; margin-inline: auto; background: currentColor; border-radius: 1px; transition: transform .35s cubic-bezier(.4, 0, .2, 1), opacity .2s ease; }
-.menu-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.menu-toggle.is-open span:nth-child(2) { opacity: 0; }
-.menu-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.theme-toggle circle { fill: none; stroke: currentColor; stroke-width: 2; }
-.theme-toggle path { fill: currentColor; }
-.theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
+/* Header controls (SymSegmented s, SymIconButton s) share one height: --sym-control-s (36 px, bridge above). */
 .theme-switching, .theme-switching * { transition: background-color .6s ease, color .6s ease, border-color .6s ease, box-shadow .6s ease, fill .6s ease, stroke .6s ease, filter .6s ease !important; }
 /* Theme switch (View Transitions): the old page and the new one cross-fade as single pictures, header included. */
 .theme-wipe::view-transition-old(root), .theme-wipe::view-transition-new(root) { animation-duration: .55s; animation-timing-function: ease; mix-blend-mode: normal; }
@@ -204,8 +167,6 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .button--dark:hover { background: var(--symbol-ink); }
 .text-button { border: 0; background: none; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; font-size: .88rem; }
 .selectable { user-select: all; }
-.nav-support { padding: 7px 14px; border-radius: 999px; background: var(--symbol-apricot); color: #211b28; border-bottom: 0 !important; }
-.nav-support:hover, .nav-support.router-link-active { background: var(--symbol-violet); color: #211b28; }
 :focus-visible { outline: 2px solid var(--symbol-violet); outline-offset: 3px; }
 /* No browser rings or blue tap flashes for mouse and touch; a tidy ring stays for keyboard navigation (above).
    Elements focused by the site itself (the main area after a page change) never show a ring. */
@@ -558,48 +519,12 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 @keyframes mark-flip { 50% { transform: scaleX(-1) scale(1.1); } }
 @keyframes mark-wobble { 15% { transform: rotate(32deg); } 35% { transform: rotate(-26deg); } 55% { transform: rotate(16deg); } 75% { transform: rotate(-8deg); } }
 @keyframes mark-pulse { 30% { transform: scale(1.25); } 60% { transform: scale(.9); } }
-@keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } }
-@keyframes menu-dim { from { opacity: 0; } }
 @keyframes mark-unwind { 40% { transform: rotate(180deg) scale(.6); } }
 
 @media (max-width: 820px) {
-  /* Phones and tablets: the logo and the switches share the first line, the sections (with «Підтримати») scroll
-     sideways in the second; less space above the page. */
-  .site-header { flex-wrap: wrap; align-items: center; gap: 10px 12px; min-height: 0; padding-block: 12px 8px; }
+  /* Phones and tablets: one compact header line (SymSiteHeader); less space above the page. The logo is a smaller one here. */
   .header-logo { width: 132px; }
-  .site-header .wordmark { flex: 0 0 132px; }
-  .header-tools { margin-left: auto; gap: 8px; }
-  /* Sections behind the menu button: one compact header line; the menu opens below it as a list. */
-  .menu-toggle { display: grid; }
-  .header-trail { display: block; order: 4; flex: 1 0 100%; padding-top: 2px; }
-  /* the button sits left of the logo; negative margin keeps the 48 px target but aligns the bars with the page margin */
-  .site-header > .menu-toggle { margin-inline: -13px -4px; }
-  .menu-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
-  /* The menu unfolds and folds back smoothly (height, then the items one after another), instead of popping in. */
-  .site-header nav { order: 3; flex: 1 0 100%; margin-left: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 0; font-size: 1.2rem; max-height: 0; overflow: hidden; visibility: hidden; transition: max-height .45s cubic-bezier(.4, 0, .2, 1), padding .45s cubic-bezier(.4, 0, .2, 1), visibility 0s linear .45s; }
-  .site-header nav.is-open { max-height: 460px; padding: 4px 0 12px; visibility: visible; transition: max-height .55s cubic-bezier(.2, .9, .3, 1), padding .55s cubic-bezier(.2, .9, .3, 1), visibility 0s; }
-  .site-header nav > a { opacity: 0; transform: translateY(-10px); transition: opacity .2s ease, transform .3s cubic-bezier(.4, 0, .2, 1); }
-  .site-header nav.is-open > a { opacity: 1; transform: none; transition: opacity .35s ease, transform .45s cubic-bezier(.2, .9, .3, 1); }
-  .site-header nav.is-open > a:nth-of-type(2) { transition-delay: .04s; }
-  .site-header nav.is-open > a:nth-of-type(3) { transition-delay: .08s; }
-  .site-header nav.is-open > a:nth-of-type(4) { transition-delay: .12s; }
-  .site-header nav.is-open > a:nth-of-type(5) { transition-delay: .16s; }
-  .site-header nav.is-open > a:nth-of-type(6) { transition-delay: .2s; }
-  .site-header nav.is-open > a:nth-of-type(7) { transition-delay: .24s; }
-  .site-header nav .nav-tab { padding: 12px 0; border-bottom: 1px solid color-mix(in srgb, var(--symbol-plum) 14%, transparent); }
-  .site-header nav .nav-ink { display: none; }
-  .site-header nav .nav-tab.router-link-active { color: var(--symbol-violet); }
-  .site-header nav .nav-support { align-self: flex-start; margin-top: 14px; padding: 9px 18px; font-size: 1rem; }
-  .site-header.is-menu-open { box-shadow: 0 0 0 100vmax var(--symbol-cream), 0 18px 30px -18px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
-  /* The menu lies over the page instead of pushing it down (a tap on the dimmed page closes it): it hangs below the header line (absolute). The header's
-     full-bleed background is a ::before here (not the clipped spread shadow), so nothing clips the open menu. */
-  .site-header, .site-header.is-scrolled, .site-header.is-menu-open { box-shadow: none; clip-path: none; }
-  .site-header::before { content: ''; position: absolute; z-index: -1; inset: 0 -100vmax; background: inherit; transition: box-shadow .4s ease; }
-  .site-header.is-scrolled::before { box-shadow: 0 8px 18px -12px color-mix(in srgb, var(--symbol-plum) 45%, transparent); }
-  .site-header nav { position: absolute; z-index: 1; top: 100%; left: 0; right: 0; background: inherit; overflow: visible; clip-path: inset(0 -100vmax); }
-  .site-header nav::before { content: ''; position: absolute; z-index: -1; inset: 0 -100vmax; background: inherit; }
-  .site-header nav.is-open { border-bottom: 1px solid var(--symbol-plum); }
-  .site-header.is-menu-open::after { content: ''; position: absolute; z-index: -2; top: 100%; left: -100vmax; right: -100vmax; height: 100vh; background: color-mix(in srgb, var(--symbol-ink) 28%, transparent); animation: menu-dim .45s ease both; cursor: pointer; }
+  .wordmark { flex: 0 0 132px; }
   .page { padding-block: 18px 64px; }
   .hero-bottom,.section-heading,.statement-grid,.footer-grid,.about-grid,.project-content { grid-template-columns: 1fr; }
   /* Phones: two project cards to a row; every photo in the same square frame (see the card block below). */
@@ -682,7 +607,7 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
   .project-card__badge { left: 6px; bottom: 6px; padding: 3px 6px; font-size: .56rem; }
   .project-card__badge--site { display: none; }
   /* Phones: smaller portraits on person pages and in the people lists. */
-  .person-portrait { max-width: 150px; margin-bottom: 16px; }
+  .person-portrait { max-width: 120px; margin-bottom: 16px; }
   .project-sections { gap: 28px; }
   /* One rhythm for phones: 24 px between the title block, the aside (portrait, links) and the sections. */
   .project-content { gap: 24px; padding-block: 24px 40px; }
@@ -696,6 +621,7 @@ html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: transl
 }
 
 @media (max-width: 520px) {
+  :root { --sym-page-margin: 14px; } /* the header's width follows .container */
   .container { width: min(100% - 28px, 1180px); }
   .hero h1 { font-size: 3.6rem; }
   .featured { min-height: 470px; }
@@ -731,7 +657,7 @@ html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) cen
 @keyframes tap-turn { 0% { transform: rotate(0); } 100% { transform: rotate(180deg); } }
 @keyframes tap-hop { 0% { transform: translateY(0); } 35% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
 @keyframes tap-ink { 0% { color: inherit; } 30% { color: var(--symbol-violet); } 100% { color: inherit; } }
-.button.is-tapped, .nav-support.is-tapped, .sym-segmented__option.is-tapped { animation: tap-squish .45s cubic-bezier(.3, 1.4, .5, 1); }
+.button.is-tapped, .sym-site-header__support.is-tapped, .sym-segmented__option.is-tapped { animation: tap-squish .45s cubic-bezier(.3, 1.4, .5, 1); }
 .project-card.is-tapped { animation: tap-press .5s cubic-bezier(.3, 1.2, .5, 1); }
 .event-row.is-tapped, .news-item.is-tapped { animation: tap-slide .45s cubic-bezier(.3, 1.3, .5, 1); }
 .person-card.is-tapped .person-card__avatar { animation: tap-wink .55s cubic-bezier(.3, 1.3, .5, 1); }
@@ -740,7 +666,7 @@ html[data-cross="enter"] body::after { background: #9280a6 url(/favicon.svg) cen
 .reel__arrow.is-tapped, .search-toggle.is-tapped, .to-top.is-tapped { animation: tap-pop .45s cubic-bezier(.3, 1.4, .5, 1); }
 /* The theme toggle turns through its own transition (no extra tap animation, which made the icon jump). */
 .social-link.is-tapped, .footer-icon-link.is-tapped { animation: tap-hop .4s cubic-bezier(.3, 1.4, .5, 1); }
-.site-header nav a.is-tapped, .text-link.is-tapped, .subscribe__links a.is-tapped { animation: tap-ink .5s ease-out; }
+.sym-site-header__nav a.is-tapped, .text-link.is-tapped, .subscribe__links a.is-tapped { animation: tap-ink .5s ease-out; }
 @media (prefers-reduced-motion: reduce) { .is-tapped, .is-tapped * { animation: none !important; } }
 
 /* Motion tier «lite» (plugins/motion.client.ts): weak or busy devices keep the content, lose the decoration. */

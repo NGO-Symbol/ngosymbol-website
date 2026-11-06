@@ -5,7 +5,7 @@
    barcode rules, blue stamp). Applied to the project page through .theme-documents. */
 /* Palette is shared with the header on this page (html[data-page-theme="documents"], main.css).
    Dark mode keeps the identity: carbon paper, off-white ink, a brighter stamp blue. */
-.theme-documents, html[data-page-theme="documents"] .site-header {
+.theme-documents, html[data-page-theme="documents"] .sym-site-header {
   --docs-paper: #e8e8e5;
   --docs-ink: #111111;
   --docs-stamp: #3a6fd2;
@@ -16,9 +16,9 @@
   --symbol-lilac: color-mix(in srgb, var(--docs-ink) 18%, var(--docs-paper));
   --symbol-violet: var(--docs-stamp);
 }
-:root[data-theme="dark"] :is(.theme-documents, [data-page-theme="documents"] .site-header) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; }
+:root[data-theme="dark"] :is(.theme-documents, [data-page-theme="documents"] .sym-site-header) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) :is(.theme-documents, [data-page-theme="documents"] .site-header) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; }
+  :root:not([data-theme="light"]) :is(.theme-documents, [data-page-theme="documents"] .sym-site-header) { --docs-paper: #151515; --docs-ink: #e8e8e5; --docs-stamp: #6f9bff; --docs-stamp-blend: screen; }
 }
 .theme-documents {
   --docs-display: 'EXDocument', 'Arial Narrow', sans-serif;

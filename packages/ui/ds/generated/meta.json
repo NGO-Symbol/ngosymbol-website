@@ -682,9 +682,15 @@
   "props": [
    {
     "name": "name",
-    "type": "\"arrow-right\" | \"arrow-left\" | \"arrow-up-right\" | \"arrow-down\" | \"menu\" | \"close\" | \"plus\" | \"minus\" | \"chevron-down\" | \"chevron-right\" | \"check\" | \"mail\" | \"phone\" | \"map-pin\" | \"calendar\" | \"download\" | \"link\" | \"globe\" | \"play\" | \"instagram\" | \"facebook\" | \"telegram\" | \"youtube\"",
+    "type": "\"search\" | \"link\" | \"arrow-up-right\" | \"arrow-right\" | \"arrow-left\" | \"arrow-down\" | \"menu\" | \"close\" | \"plus\" | \"minus\" | \"chevron-down\" | \"chevron-right\" | \"check\" | \"mail\" | \"phone\" | \"map-pin\" | \"calendar\" | \"download\" | \"globe\" | \"play\" | \"instagram\" | \"facebook\" | \"telegram\" | \"youtube\" | \"theme\" | \"burger\"",
     "required": true,
     "description": "Icon name."
+   },
+   {
+    "name": "open",
+    "type": "false | true",
+    "required": false,
+    "description": "Burger only: fold the three bars into a cross."
    },
    {
     "name": "size",
@@ -718,10 +724,10 @@
    },
    {
     "name": "size",
-    "type": "\"m\" | \"l\"",
+    "type": "\"m\" | \"l\" | \"s\"",
     "required": false,
     "default": "\"m\"",
-    "description": "m = 44 px (default), l = 56 px (primary phone actions)."
+    "description": "s = 36 px circle with a 44 px touch area (header tools, same height as SymSegmented s), m = 44 px (default), l = 56 px (primary phone actions)."
    },
    {
     "name": "variant",
@@ -754,6 +760,12 @@
     "type": "false | true",
     "required": false,
     "description": "Disables the button (ignored for links)."
+   },
+   {
+    "name": "open",
+    "type": "false | true",
+    "required": false,
+    "description": "Burger icon only: draw the cross (menu open)."
    }
   ],
   "slots": [],
@@ -1552,13 +1564,50 @@
     "required": false,
     "default": "\"Основна навігація\"",
     "description": "Accessible name of the navigation landmark."
+   },
+   {
+    "name": "variant",
+    "type": "\"drawer\" | \"dropdown\"",
+    "required": false,
+    "default": "\"drawer\"",
+    "description": "drawer = full-screen drawer on phones (default); dropdown = menu button left of the logo, list below the header, `tools` and `trail` slots."
+   },
+   {
+    "name": "autohide",
+    "type": "false | true",
+    "required": false,
+    "description": "dropdown only: hide while scrolling down and show again on scroll up; publishes --header-h and data-header (\"shown\" | \"hidden\") on <html> for sticky bars below."
+   },
+   {
+    "name": "openLabel",
+    "type": "string",
+    "required": false,
+    "default": "\"Відкрити меню\"",
+    "description": "Accessible name of the menu button while the menu is closed."
+   },
+   {
+    "name": "closeLabel",
+    "type": "string",
+    "required": false,
+    "default": "\"Закрити меню\"",
+    "description": "Accessible name of the menu button while the menu is open."
    }
   ],
   "slots": [
    {
     "name": "logo",
     "type": "any",
-    "description": ""
+    "description": "The logo; default is SymWordmark linking to \"/\"."
+   },
+   {
+    "name": "tools",
+    "type": "any",
+    "description": "dropdown: controls after the navigation (language switch, search, theme), one row at a single control height."
+   },
+   {
+    "name": "trail",
+    "type": "any",
+    "description": "dropdown: second line of the header on phones (the breadcrumb path); hidden from 821 px up."
    }
   ],
   "events": []

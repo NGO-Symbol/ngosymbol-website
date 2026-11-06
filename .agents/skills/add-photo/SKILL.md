@@ -7,6 +7,10 @@ description: Add, replace or remove a photograph on any site («додай фо�
 
 Photographs go through one pipeline (`scripts/optimize-images.mjs`, ADR-0010). Each photo is stored as one web master (`.jpg`, long side ≤ 1600 px, no EXIF/location) plus AVIF variants in an `_opt/` folder next to it, and listed in `apps/main/app/data/images.json`. Pages never handle sizes themselves: `<MediaImg>` reads the list and writes `srcset`, `sizes`, `width`/`height`, lazy loading and a colour placeholder.
 
+## Do it without being asked
+
+Whenever a photo is part of a task, run this pipeline yourself: nobody has to request it. Do not leave it for later and do not ask whether to compress. If a photo is mentioned but the file is missing, say so and name the folder to put it in. If you notice images in the repo that `pnpm images:check` rejects, fix them or tell the person. Say in one line what the pipeline did (for example: «стиснуто, 2,4 МБ → 180 КБ»).
+
 ## Steps
 
 1. Keep the team's original in `media-inbox/` (local, not in git). Never put originals in `apps/`.

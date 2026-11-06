@@ -35,7 +35,7 @@ onMounted(() => {
     if (state.value !== 'cover') return
     window.scrollTo({ top: 0 })
     // The header may be hidden by the scroll: bring it back so the disc lands in the logo.
-    document.querySelector('.site-header')?.classList.remove('is-hidden')
+    document.querySelector('.sym-site-header')?.removeAttribute('data-hidden')
     target.value = logoDisc()
     state.value = 'reveal'
     window.setTimeout(() => (state.value = 'idle'), 750)
