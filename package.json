@@ -14,9 +14,10 @@
     "generate": "pnpm -r generate",
     "typecheck": "pnpm -r typecheck",
     "kb:validate": "node scripts/kb-validate.mjs",
-    "media:previews": "node scripts/make-previews.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs optimize",
+    "images:check": "node scripts/optimize-images.mjs check",
     "media:import-psd-artists": "node scripts/import-psd-artist-photos.mjs",
-    "check": "pnpm kb:validate && pnpm ds:contrast && pnpm ds:lint && pnpm lint:arrows && pnpm typecheck && pnpm build && pnpm i18n:check",
+    "check": "pnpm kb:validate && pnpm ds:contrast && pnpm ds:lint && pnpm lint:arrows && pnpm images:check && pnpm typecheck && pnpm build && pnpm i18n:check",
     "i18n:check": "node scripts/i18n-parity.mjs --build",
     "task:status": "node scripts/task.mjs status",
     "task:new": "node scripts/task.mjs new",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "axe-core": "^4.14.0",
     "fontkit": "^2.0.4",
-    "playwright-core": "^1.64.1"
+    "playwright-core": "^1.64.1",
+    "sharp": "^0.35.5"
   }
 }

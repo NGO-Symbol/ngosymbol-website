@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // A strip of photographs that scrolls sideways (swipe, trackpad, arrows), with a full-screen view:
 // swipe or ← → to go through, Esc or a tap outside to close. Each photo links to its project.
-import { highlightCaption, thumbOf, type Highlight } from '~/data/highlights'
+import { highlightCaption, type Highlight } from '~/data/highlights'
 
 // placeholders: empty frames shown until the selection is made (keeps the layout still while it loads).
 const props = defineProps<{ photos: Highlight[]; placeholders?: number }>()
@@ -60,7 +60,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
       <li v-for="n in (photos.length ? 0 : placeholders ?? 0)" :key="`p${n}`" class="reel__item" aria-hidden="true"><span class="reel__photo reel__photo--empty" /></li>
       <li v-for="(photo, index) in photos" :key="photo.src" class="reel__item">
         <button type="button" class="reel__photo" :aria-label="`${isEn ? 'Open photo' : 'Відкрити фото'}: ${altOf(photo)}`" @click="open = index">
-          <MediaImg :src="photo.src" :fallback="thumbOf(photo.src)" :alt="altOf(photo)" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')" />
+          <MediaImg :src="photo.src" :alt="altOf(photo)" :loading="index < 4 ? 'eager' : 'lazy'" decoding="async" @load="($event.target as HTMLImageElement).classList.add('is-loaded')" />
         </button>
         <p class="reel__meta"><span class="reel__index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><NuxtLink class="reel__caption" :to="photo.to">{{ highlightCaption(photo, isEn) }}</NuxtLink></p>
       </li>
@@ -76,7 +76,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
       <div v-if="current" class="reel-view" role="dialog" aria-modal="true" :aria-label="altOf(current)" @click.self="close" @touchstart.passive="onTouchStart" @touchend.passive="onTouchEnd">
         <figure>
           <Transition name="reel-photo" mode="out-in">
-            <img :key="current.src" :src="current.src" :alt="altOf(current)">
+            <MediaImg :key="current.src" :src="current.src" :alt="altOf(current)" sizes="100vw" priority />
           </Transition>
           <figcaption>
             <span class="reel-view__count">{{ (open ?? 0) + 1 }} / {{ photos.length }}</span>
