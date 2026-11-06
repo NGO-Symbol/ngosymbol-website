@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SymSegmented from '@symbol/ui/app/components/Segmented.vue'
+
 // Header of the project site: a bright way back to symbol.ngo (the organization behind the exhibition) that returns
 // to the very page the visitor came from, the project mark, the sections, the language switch and the day/night
 // switch. On phones the sections scroll sideways in one row.
@@ -50,9 +52,7 @@ function toggleTheme() {
           <span class="docs-back__text"><span aria-hidden="true">←</span> <span class="docs-back__long">{{ t('Повернутися на сайт ГО «Символ»', 'Back to NGO Symbol') }}</span><span class="docs-back__short">{{ t('Сайт «Символу»', 'NGO Symbol') }}</span></span>
         </a>
         <div class="docs-back__tools">
-          <NuxtLink class="docs-lang" :to="switchPath" :lang="isEn ? 'uk' : 'en'" :aria-label="t('English version', 'Українська версія')">
-            <span :class="{ 'is-on': !isEn }">UA</span><span :class="{ 'is-on': isEn }">EN</span>
-          </NuxtLink>
+          <SymSegmented class="docs-lang" size="s" :options="[{ value: 'uk', label: 'UA' }, { value: 'en', label: 'EN' }]" :model-value="isEn ? 'en' : 'uk'" :to="switchPath" :label="t('English version', 'Українська версія')" :lang="isEn ? 'uk' : 'en'" />
           <button type="button" class="docs-theme" :aria-pressed="dark" :aria-label="t('Денний або нічний режим', 'Day or night mode')" @click="toggleTheme">
             <svg v-if="dark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" /></svg>
             <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z" /></svg>
@@ -90,9 +90,11 @@ function toggleTheme() {
 .docs-back__mark { width: 28px; height: 28px; border-radius: 50%; box-shadow: 0 0 0 2px #fff7eb; }
 @keyframes docs-back-call { 0% { box-shadow: 0 0 0 0 rgba(253, 208, 143, .75); } 100% { box-shadow: 0 0 0 14px rgba(253, 208, 143, 0); } }
 .docs-back__tools { display: flex; align-items: center; gap: 8px; }
-.docs-lang { display: inline-flex; border: 1px solid #fff7eb; border-radius: 999px; overflow: hidden; font-family: var(--docs-mono); font-size: .75rem; text-decoration: none; color: #fff7eb; }
-.docs-lang span { padding: 4px 9px; }
-.docs-lang span.is-on { background: #fff7eb; color: #302738; }
+.docs-lang {
+  --sym-fg: #fff7eb; --sym-bg: #302738; --sym-rule-width: 1px; --sym-shape-chip: 999px; --sym-size-touch: 44px; --sym-control-s: 28px;
+  --sym-text-caption: .75rem; --sym-t-medium: .45s cubic-bezier(.3, 1.2, .4, 1); --sym-t-fx-small: .35s ease;
+  font-family: var(--docs-mono);
+}
 .docs-theme { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #fff7eb; border-radius: 50%; background: transparent; color: #fff7eb; cursor: pointer; }
 .docs-theme svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
 .docs-header__main { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 12px; flex-wrap: wrap; }
@@ -114,7 +116,6 @@ function toggleTheme() {
   .docs-back__mark { width: 22px; height: 22px; }
   .docs-back__long { display: none; }
   .docs-back__short { display: inline; }
-  .docs-lang span { padding: 3px 8px; }
   .docs-theme { width: 28px; height: 28px; }
   .docs-header__main { padding-block: 8px; }
   .docs-header__main { padding-block: 6px; }

@@ -50,7 +50,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutside))
 
 <style scoped>
 .subscribe-menu { position: relative; }
-.subscribe-menu__button { display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; cursor: pointer; transition: background .25s ease, color .25s ease; }
+.subscribe-menu__button { display: inline-flex; align-items: center; gap: 10px; min-height: var(--control-h); padding: 0 18px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; cursor: pointer; transition: background .25s ease, color .25s ease; }
 .subscribe-menu__button:hover, .is-open .subscribe-menu__button { background: var(--symbol-plum); color: var(--symbol-cream); }
 .subscribe-menu__button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
 .subscribe-menu__panel { position: absolute; z-index: 20; top: calc(100% + 8px); left: 0; width: min(330px, 86vw); padding: 14px; background: var(--symbol-cream); color: var(--symbol-plum); border: 1px solid var(--symbol-plum); box-shadow: 8px 8px 0 var(--symbol-violet); }

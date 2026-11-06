@@ -46,7 +46,7 @@ Items here are unresolved and must not be silently assumed.
 
 - Design pass: exact tone values (type pair from the design-system branch: Playfair Display + Commissioner + logo face for labels; on 2026-10-29 Петро asked for the team-supplied Zakon on the main site — reconcile), dark theme — decided 2026-10-29: light and dark modes with a toggle (see design-system.md), square vs softer card shapes, photo treatment, hero animation personality.
 - Choose how widely to use the logo typeface (options A–D in the artifact «Шрифт Символу»; recommended: wordmark and name, plus navigation, eyebrows, tags and button labels). Confirm the font author's permission (Oleksii Chekal) to publish it as a web font on a public site.
-- Migrate `apps/main` and `apps/istoriia-vulytsi` to the design system (page by page, using the gallery templates).
+- Migrate `apps/main` and `apps/istoriia-vulytsi` to the design system (page by page, using the gallery templates). `apps/main` has started: header and switches are shared components, imported one by one through a token bridge in `main.css`.
 
 ## Infrastructure
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SymIconButton from '@symbol/ui/app/components/IconButton.vue'
+
 // Site search: a header button (also «/» or Ctrl/⌘+K) opens a panel that searches projects, events,
 // people, news and opportunities on the client. Everything is in the bundle, so it works on the static site.
 const props = defineProps<{ en?: boolean }>()
@@ -86,9 +88,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKey))
 </script>
 
 <template>
-  <button type="button" class="search-toggle" :aria-label="en ? 'Search the site' : 'Пошук по сайту'" :aria-expanded="open" @click="show">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg>
-  </button>
+  <SymIconButton class="search-toggle" size="s" variant="outline" icon="search" :label="en ? 'Search the site' : 'Пошук по сайту'" :aria-expanded="open" @click="show" />
   <Teleport to="body">
     <Transition name="site-search">
       <div v-if="open" class="site-search" role="dialog" aria-modal="true" :aria-label="en ? 'Search' : 'Пошук'" @click.self="hide">
@@ -128,11 +128,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKey))
 </template>
 
 <style scoped>
-.search-toggle { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--symbol-plum); border-radius: 50%; background: transparent; color: var(--symbol-plum); cursor: pointer; transition: background .25s ease, color .25s ease; }
-.search-toggle:hover { background: var(--symbol-plum); color: var(--symbol-cream); }
-.search-toggle:hover svg { animation: search-wiggle .6s ease; }
 svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-@keyframes search-wiggle { 30% { transform: rotate(-18deg) scale(1.1); } 60% { transform: rotate(10deg); } }
 
 .site-search { position: fixed; inset: 0; z-index: 90; display: grid; justify-items: center; align-items: start; padding: 12vh 16px 16px; background: color-mix(in srgb, var(--symbol-plum) 45%, transparent); backdrop-filter: blur(6px); }
 .site-search__panel { width: min(680px, 100%); max-height: 76vh; display: grid; grid-template-rows: auto 1fr; background: var(--symbol-cream); color: var(--symbol-plum); border: 1px solid var(--symbol-plum); box-shadow: 10px 10px 0 var(--symbol-violet); overflow: hidden; }
@@ -163,6 +159,6 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .site-search-enter-from, .site-search-leave-to { opacity: 0; }
 .site-search-enter-from .site-search__panel { transform: translateY(-16px) scale(.97); }
 .site-search-leave-to .site-search__panel { transform: translateY(-8px); }
-@media (prefers-reduced-motion: reduce) { .site-search__results li, .search-toggle:hover svg { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .site-search__results li { animation: none; } }
 @media (max-width: 560px) { .site-search__results a { grid-template-columns: 1fr; } .site-search__kind { grid-row: auto; padding: 0; } }
 </style>

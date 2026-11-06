@@ -55,8 +55,6 @@ export const highlights: Highlight[] = [
 /** How many photos the home page shows at once. */
 export const highlightsShown = 14
 
-/** Light preview for the strip (public/media/thumbs, 720 px); the full photo opens only in the viewer. */
-export const thumbOf = (src: string) => src.replace(/^\/media\//, '/media/thumbs/')
 
 /**
  * A fresh selection for each visit that mixes projects: photos are shuffled within each project, then taken from

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SymPortraitArt from '@symbol/ui/app/components/PortraitArt.vue'
 import { opportunitiesEn } from '~/data/editorial-en'
 import { projectsEn } from '~/data/projects-en'
 import { eventsEn } from '~/data/events-en'
@@ -70,7 +71,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="[`tone-${project.tone}`, { 'has-backdrop': project.backdrop }]">
-      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="projectTitleIn(project, isEn)" />
+      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="projectTitleIn(project, isEn)" sizes="100vw" priority />
       <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="programName">
       <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">
@@ -134,10 +135,12 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
                 <li v-for="person in group.people" :key="person.slug">
                   <NuxtLink v-if="person.hasPage !== false" class="project-person" :to="localePath(`/people/${person.slug}`)">
                     <MediaImg v-if="person.photo" :src="person.photo" :alt="personName(person)" loading="lazy" />
+                    <SymPortraitArt v-else class="project-person__art" :seed="person.slug" />
                     <span>{{ personName(person) }}</span>
                   </NuxtLink>
                   <span v-else class="project-person">
                     <MediaImg v-if="person.photo" :src="person.photo" :alt="personName(person)" loading="lazy" />
+                    <SymPortraitArt v-else class="project-person__art" :seed="person.slug" />
                     <span>{{ personName(person) }}</span>
                   </span>
                 </li>

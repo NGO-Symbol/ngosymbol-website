@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SymPortraitArt from '@symbol/ui/app/components/PortraitArt.vue'
 import { psdPeopleEn } from '~/data/psd-artists-en'
 import { peopleEn } from '~/data/people-en'
 import { projectsEn } from '~/data/projects-en'
@@ -43,7 +44,6 @@ onMounted(() => {
   hint.value = `${t('Наприклад', 'For example')}, ${name}`
 })
 
-const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => part[0]).join('')
 </script>
 
 <template>
@@ -66,7 +66,7 @@ const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => par
         <li v-for="{ person, appearances } in group.items" :key="person.slug">
           <NuxtLink class="person-card" :class="{ 'person-card--team': person.team }" :to="`/people/${person.slug}`">
             <MediaImg v-if="person.photo" class="person-card__avatar person-card__avatar--photo" :src="person.photo" :alt="displayName(person)" loading="lazy" />
-            <span v-else class="person-card__avatar" aria-hidden="true">{{ initials(displayName(person)) }}</span>
+            <SymPortraitArt v-else class="person-card__avatar person-card__avatar--photo" :seed="person.slug" />
             <span class="person-card__name">{{ displayName(person) }}</span>
             <span v-if="person.team && displayTeamRole(person)" class="person-card__team">{{ displayTeamRole(person) }}</span>
             <span class="person-card__projects">{{ appearances.map(appearanceName).join(' · ') }}</span>

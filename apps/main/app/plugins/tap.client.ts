@@ -2,8 +2,8 @@
 // `:active` alone is too brief to see on a quick tap, so the class stays until the animation has played.
 const TAPPABLE = [
   '.button', '.project-card', '.event-row', '.news-item', '.person-card', '.partner', '.reel__photo',
-  '.reel__arrow', '.theme-toggle', '.search-toggle', '.to-top', '.site-header nav a', '.nav-support',
-  '.text-link', '.social-link', '.footer-icon-link', '.subscribe__links a', '.segmented button'
+  '.reel__arrow', '.theme-toggle', '.search-toggle', '.to-top', '.sym-site-header__nav a',
+  '.text-link', '.social-link', '.footer-icon-link', '.subscribe__links a', '.sym-segmented__option'
 ].join(', ')
 
 export default defineNuxtPlugin(() => {

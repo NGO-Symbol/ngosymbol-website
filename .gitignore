@@ -16,3 +16,4 @@ dist
 # Local working material (not for the repository)
 media-inbox/
 Сайт_*/
+.claude/worktrees/

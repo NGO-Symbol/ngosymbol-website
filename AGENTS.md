@@ -14,6 +14,7 @@ Skills live in `.agents/skills/`. If your tool does not load them automatically,
 
 - `site-workflow` — session start, saving, publishing, «збережи», «опублікуй», «що нового».
 - `build-with-design-system` — ANY page, layout, style, animation or component work («зроби сторінку», «адаптуй під телефон»). Pages are built only from `Sym*` components and tokens (`packages/ui/docs/CONTEXT.md`).
+- `add-photo` — ANY photograph added, replaced or removed («додай фото», portraits, galleries, covers): copy to `apps/main/public/media/…`, `pnpm images:optimize` (or `task:save`), show with `<MediaImg>`. `pnpm images:check` fails the build on raw or heavy images.
 - `social-links` — any link to a social network or partner page (artists, team, partners, donors): name + minimal icon via `<SocialLink>`, never plain text; copyable details via `<CopyValue>`.
 - `symbol-project-memory` — organization facts, product, design, architecture, or content decisions.
 - `update-symbol-context` — «онови контекст», «синхронізуй контекст», `$update-symbol-context`.
@@ -39,6 +40,7 @@ When the user says “онови контекст”, “синхронізуй 
 - Colour comes from the section's `tone` (`paper | white | lilac | violet | apricot | plum`). Motion follows the ladder in `packages/ui/docs/foundations/motion.md`. Mobile first: check 390 px before 1280 px.
 - Live gallery: `pnpm dev:design` (http://localhost:3002), published at `https://symbol.ngo/design/`. Enforced by `pnpm ds:lint` (part of `pnpm check`).
 
+- Photographs only through `<MediaImg>` and the image pipeline (ADR-0010): no bare `<img>`/`background-image` for photos, no originals in `apps/`. Enforced by `pnpm images:check` (part of `pnpm check`).
 - No decorative arrows (↗) after links or labels on any site: a link is clickable without them. Arrows stay only where they move you somewhere (← → pagers, sliders, back links). Enforced by `pnpm lint:arrows` (part of `pnpm check`).
 
 ## Product invariants

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SymPortraitArt from '@symbol/ui/app/components/PortraitArt.vue'
 import { psdPeopleEn } from '~/data/psd-artists-en'
 import { peopleEn } from '~/data/people-en'
 import { projectsEn } from '~/data/projects-en'
@@ -30,7 +31,7 @@ const tagEn: Record<string, string> = {
   'Артменеджерка': 'Art manager', 'Менеджер проєктів': 'Project manager', 'Куратор': 'Curator',
   'ЄрміловЦентр': 'YermilovCentre', 'Ілюстраторка': 'Illustrator', 'Історик архітектури': 'Architectural historian',
   'Акторка плейбек-театру': 'Playback theatre actor', 'Архітектор': 'Architect', 'Звукорежисер': 'Sound engineer',
-  'Каліграф': 'Calligrapher', 'Мисткиня піксель-арту': 'Pixel artist', 'Оператор': 'Cinematographer', 'Психологиня': 'Psychologist',
+  'Каліграф': 'Calligrapher', 'Митець піксель-арту': 'Pixel artist', 'Оператор': 'Cinematographer', 'Психологиня': 'Psychologist',
   'Режисерка': 'Director', 'Типограф': 'Type designer', 'Тренер mhGAP': 'mhGAP trainer', 'Тренерка mhGAP': 'mhGAP trainer',
   'Фотографка': 'Photographer', 'Фуд-дизайнерка': 'Food designer', 'Художниця-графікиня': 'Graphic artist'
 }
@@ -101,6 +102,7 @@ useHead({
     <div class="project-content">
       <aside>
         <MediaImg v-if="person.photo" class="person-portrait" :src="person.photo" :alt="displayPerson.name" />
+        <SymPortraitArt v-else class="person-portrait" :seed="person.slug" />
         <ul v-if="person.links?.length" class="link-list">
           <li v-for="link in person.links" :key="link.url"><SocialLink :url="link.url" :label="isSocialUrl(link.url) ? undefined : translate(link.label, isEn)" /></li>
         </ul>
