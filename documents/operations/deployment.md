@@ -176,3 +176,8 @@ deploy repository, key, and domain variables, and add one `CNAME` record for the
 - Site loads without styles: the custom-domain setting and the `STREET_DOMAIN` variable or
   Pages custom domain disagree; rerun the Deploy workflow after fixing.
 - Certificate stays pending: a record is proxied (orange cloud) in Cloudflare.
+
+## Image weight (2026-11-06)
+
+- `pnpm check` (and so the CI job and `pnpm task:ship`) runs `pnpm images:check`: a photograph that was not processed by `scripts/optimize-images.mjs`, is over 400 KB or 1600 px, or has no AVIF variants fails the pull request. Fix: `pnpm images:optimize`, commit the result. GitHub Pages limits a site to 1 GB; the published media folder is now far below that.
+- The exhibition site serves `/media/_opt` from the main site's media (`apps/documents/nuxt.config.ts`); the deploy still excludes `media` from its own copy.

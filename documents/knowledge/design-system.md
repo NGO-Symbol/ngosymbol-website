@@ -134,3 +134,7 @@ The PSD stamp on the project page carries a working QR code to `https://document
 - Growth stops at 2560 px.
 - The rules are `:root { --page }` and `.container` in `apps/main/app/assets/css/main.css`.
 - New layout sizes should use `rem` or the `--page` width, not fixed `px`, so they follow the screen.
+
+## Photographs (2026-11-06)
+
+- A photograph is shown only through `<MediaImg>` (`srcset`, `sizes`, intrinsic `width`/`height`, colour placeholder, lazy; `priority` for the first big photo; `sizes="100vw"` for full-width). No bare `<img>` and no CSS `background-image` for photographs, no per-page sizing CSS. Logos stay plain PNG/SVG (`PartnerLogo`). See ADR-0010 and `.agents/skills/add-photo`.

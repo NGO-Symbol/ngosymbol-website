@@ -26,7 +26,7 @@ publish it first or continue it; do not mix topics in one branch.
 
 After each finished, coherent step (a page section done, a text replaced, a component fixed),
 run `pnpm task:save "<what changed, in English, imperative>"`. Do not save half-broken states;
-do not batch an entire session into one save. Saving is local and safe.
+do not batch an entire session into one save. Saving is local and safe. `task:save` also runs the image pipeline over new photographs (see `add-photo`).
 
 ## Publishing
 

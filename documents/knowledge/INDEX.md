@@ -28,6 +28,7 @@ Repository boundaries are summarized in [`../../ARCHITECTURE.md`](../../ARCHITEC
 - First autonomous project: `my-street.symbol.ngo` (renamed from `istoriia-vulytsi.symbol.ngo` on 2026-10-29; hidden behind a «coming soon» page while in development).
 - Every project has a main-site page; projects with a subsite link to it from there (ADR-0008).
 - Every page has an English mirror under `/en`; the UA/EN switch keeps the same page (ADR-0009).
+- Photographs are optimized by one pipeline and guarded by `pnpm images:check` (ADR-0010; skill `add-photo`).
 - Linked content model: projects, events (each belongs to a project), people, opportunities, press, organizations.
 - No CMS; project content is maintained in code.
 - Framework: Nuxt 4 / Vue 3, static-first.
