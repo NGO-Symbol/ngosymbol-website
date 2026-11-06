@@ -70,7 +70,7 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
   <article v-if="project" class="project-page" :class="project.theme && `theme-${project.theme}`">
     <ThemesDocumentsHero v-if="project.theme === 'documents'" :project="project" />
     <header v-else class="project-hero" :class="[`tone-${project.tone}`, { 'has-backdrop': project.backdrop }]">
-      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="projectTitleIn(project, isEn)" />
+      <MediaImg v-if="project.backdrop" class="project-hero__backdrop" :src="project.backdrop" :alt="projectTitleIn(project, isEn)" sizes="100vw" priority />
       <img v-if="project.programLogo" class="project-hero__program" :src="project.programLogo.src" :alt="programName">
       <ProjectMotif v-else class="project-hero__motif" :motif="project.motif" live />
       <div class="container">

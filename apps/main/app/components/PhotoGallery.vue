@@ -35,7 +35,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
   <Teleport to="body">
     <div v-if="current" class="lightbox" role="dialog" aria-modal="true" :aria-label="photoLabel(open!)" @click.self="open = null">
       <figure>
-        <img :src="current.src" :alt="photoLabel(open!)">
+        <MediaImg :src="current.src" :alt="photoLabel(open!)" sizes="100vw" priority />
         <figcaption>{{ photoLabel(open!) }}<template v-if="current.credit"> · {{ isEn ? 'Photo' : 'Фото' }}: {{ photoCredit(current.credit) }}</template></figcaption>
       </figure>
       <button type="button" class="lightbox__close" :aria-label="isEn ? 'Close' : 'Закрити'" @click="open = null">×</button>

@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
     <div v-if="current" class="docs-lightbox" role="dialog" aria-modal="true" :aria-label="alt(current)" @click.self="close">
       <p class="docs-lightbox__file" aria-live="polite">{{ t('Фотодокумент', 'Photo document') }} {{ String((open ?? 0) + 1).padStart(2, '0') }} / {{ String(photos.length).padStart(2, '0') }}</p>
       <figure>
-        <img :src="current.src" :alt="alt(current)">
+        <MediaImg :src="current.src" :alt="alt(current)" sizes="100vw" priority />
         <figcaption>{{ alt(current) }}<template v-if="current.credit"> · {{ t('Фото', 'Photo') }}: {{ creditIn(current.credit, isEn) }}</template></figcaption>
       </figure>
       <button ref="closeButton" type="button" class="docs-lightbox__close" :aria-label="t('Закрити', 'Close')" @click="close">×</button>
