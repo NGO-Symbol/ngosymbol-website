@@ -86,7 +86,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKey))
 </script>
 
 <template>
-  <button type="button" class="search-toggle" :aria-label="en ? 'Search the site' : 'Пошук по сайту'" :aria-expanded="open" @click="show">
+  <button type="button" class="tool-btn search-toggle" :aria-label="en ? 'Search the site' : 'Пошук по сайту'" :aria-expanded="open" @click="show">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg>
   </button>
   <Teleport to="body">
@@ -128,7 +128,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKey))
 </template>
 
 <style scoped>
-.search-toggle { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--symbol-plum); border-radius: 50%; background: transparent; color: var(--symbol-plum); cursor: pointer; transition: background .25s ease, color .25s ease; }
+.search-toggle { transition: background .25s ease, color .25s ease; }
 .search-toggle:hover { background: var(--symbol-plum); color: var(--symbol-cream); }
 .search-toggle:hover svg { animation: search-wiggle .6s ease; }
 svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }

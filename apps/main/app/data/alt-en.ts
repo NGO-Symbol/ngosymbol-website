@@ -235,8 +235,8 @@ export const altsEn: Record<string, string> = {
   'Акварель Алли Пасічник: рожева троянда': 'A watercolour by Alla Pasichnyk: a pink rose',
   'Акварель Алли Пасічник': 'A watercolour by Alla Pasichnyk',
   'Робота Алли Пасічник': 'A work by Alla Pasichnyk',
-  'Піксель-арт Магран Тати: обличчя з червоними очима на чорному тлі': 'Pixel art by Magran Tata: a face with red eyes on a black background',
-  'Піксель-арт Магран Тати': 'Pixel art by Magran Tata',
+  'Піксель-арт Маграна Тати: обличчя з червоними очима на чорному тлі': 'Pixel art by Magran Tata: a face with red eyes on a black background',
+  'Піксель-арт Маграна Тати': 'Pixel art by Magran Tata',
   'Суха голка Руслани Ключко з серії «Розмиваючи межу»: птах': 'A drypoint by Ruslana Kliuchko from the series Blurring the Line: a bird',
   'Суха голка Руслани Ключко з серії «Розмиваючи межу»': 'A drypoint by Ruslana Kliuchko from the series Blurring the Line'
 }

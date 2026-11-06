@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SymSegmented from '@symbol/ui/app/components/Segmented.vue'
+
 // Every click on the logo plays the next animation of the mark.
 const markAnimations = ['mark-spin', 'mark-bounce', 'mark-flip', 'mark-wobble', 'mark-pulse']
 const clicks = ref(0)
@@ -20,6 +22,7 @@ const route = useRoute()
 const { isEn } = useLang()
 const otherLang = (toEn: boolean) => ({ path: switchLangPath(route.path, toEn), query: route.query, hash: route.hash })
 const choose = () => { langSwitch.explicit = true }
+const langOptions: { value: 'uk' | 'en'; label: string }[] = [{ value: 'uk', label: 'UA' }, { value: 'en', label: 'EN' }]
 const nav = computed(() => isEn.value
   ? [{ to: '/en/projects', label: 'Projects' }, { to: '/en/events', label: 'Events' }, { to: '/en/opportunities', label: 'Opportunities' }, { to: '/en/people', label: 'People' }, { to: '/en/about', label: 'About' }]
   : [{ to: '/projects', label: 'Проєкти' }, { to: '/events', label: 'Події' }, { to: '/opportunities', label: 'Можливості' }, { to: '/people', label: 'Люди' }, { to: '/about', label: 'Про нас' }])
@@ -136,6 +139,10 @@ function toggleTheme() {
 
 <template>
   <header ref="headerEl" class="site-header container" :class="{ 'is-hidden': hidden && !menuOpen, 'is-scrolled': scrolled, 'is-menu-open': menuOpen }" @focusin="hidden = false" @click.self="menuOpen = false">
+    <!-- Phones: the menu button comes first, left of the logo, with a 48 px touch area and no outline. -->
+    <button type="button" class="menu-toggle" :class="{ 'is-open': menuOpen }" aria-controls="site-nav" :aria-expanded="menuOpen" :aria-label="menuOpen ? (isEn ? 'Close menu' : 'Закрити меню') : (isEn ? 'Menu' : 'Меню')" @click="menuOpen = !menuOpen">
+      <span /><span /><span />
+    </button>
     <NuxtLink class="wordmark" :to="isEn ? '/en' : '/'" :aria-label="isEn ? 'NGO Symbol — home' : 'ГО «Символ» — головна'" @click="animateMark">
       <SymbolLogo class="header-logo" :class="markClass" @animationend="markClass = ''" />
     </NuxtLink>
@@ -148,17 +155,11 @@ function toggleTheme() {
     </nav>
     <!-- Switches: beside the logo on phones, after the sections on wide screens. -->
     <div class="header-tools">
-      <div class="lang-switch" role="group" :aria-label="isEn ? 'Language' : 'Мова'" :class="{ 'is-en': isEn }">
-        <span class="lang-switch__thumb" aria-hidden="true" />
-        <NuxtLink :to="otherLang(false)" lang="uk" :aria-current="!isEn ? 'true' : undefined" @click="choose">UA</NuxtLink>
-        <NuxtLink :to="otherLang(true)" lang="en" :aria-current="isEn ? 'true' : undefined" @click="choose">EN</NuxtLink>
-      </div>
+      <!-- One link: a tap anywhere on the switch goes to the other language. -->
+      <SymSegmented size="s" :options="langOptions" :model-value="isEn ? 'en' : 'uk'" :to="otherLang(!isEn)" :label="isEn ? 'Українська версія' : 'English version'" :lang="isEn ? 'uk' : 'en'" :hreflang="isEn ? 'uk' : 'en'" @click="choose" />
       <SiteSearch :en="isEn" />
-      <button type="button" class="theme-toggle" :aria-label="theme === 'dark' ? (isEn ? 'Light mode' : 'Світлий режим') : (isEn ? 'Dark mode' : 'Темний режим')" :aria-pressed="theme === 'dark'" @click="toggleTheme">
+      <button type="button" class="tool-btn theme-toggle" :aria-label="theme === 'dark' ? (isEn ? 'Light mode' : 'Світлий режим') : (isEn ? 'Dark mode' : 'Темний режим')" :aria-pressed="theme === 'dark'" @click="toggleTheme">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18z" /></svg>
-      </button>
-      <button type="button" class="menu-toggle" :class="{ 'is-open': menuOpen }" aria-controls="site-nav" :aria-expanded="menuOpen" :aria-label="menuOpen ? (isEn ? 'Close menu' : 'Закрити меню') : (isEn ? 'Menu' : 'Меню')" @click="menuOpen = !menuOpen">
-        <span /><span /><span />
       </button>
     </div>
     <!-- Phones: the path to the current page, as a second line of the header (the open menu lies below it). -->

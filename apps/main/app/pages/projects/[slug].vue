@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SymPortraitArt from '@symbol/ui/app/components/PortraitArt.vue'
 import { opportunitiesEn } from '~/data/editorial-en'
 import { projectsEn } from '~/data/projects-en'
 import { eventsEn } from '~/data/events-en'
@@ -134,10 +135,12 @@ const others = projects.filter(other => other.slug !== project.slug && !related.
                 <li v-for="person in group.people" :key="person.slug">
                   <NuxtLink v-if="person.hasPage !== false" class="project-person" :to="localePath(`/people/${person.slug}`)">
                     <MediaImg v-if="person.photo" :src="person.photo" :alt="personName(person)" loading="lazy" />
+                    <SymPortraitArt v-else class="project-person__art" :seed="person.slug" />
                     <span>{{ personName(person) }}</span>
                   </NuxtLink>
                   <span v-else class="project-person">
                     <MediaImg v-if="person.photo" :src="person.photo" :alt="personName(person)" loading="lazy" />
+                    <SymPortraitArt v-else class="project-person__art" :seed="person.slug" />
                     <span>{{ personName(person) }}</span>
                   </span>
                 </li>

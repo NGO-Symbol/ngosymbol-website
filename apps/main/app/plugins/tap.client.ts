@@ -3,7 +3,7 @@
 const TAPPABLE = [
   '.button', '.project-card', '.event-row', '.news-item', '.person-card', '.partner', '.reel__photo',
   '.reel__arrow', '.theme-toggle', '.search-toggle', '.to-top', '.site-header nav a', '.nav-support',
-  '.text-link', '.social-link', '.footer-icon-link', '.subscribe__links a', '.segmented button'
+  '.text-link', '.social-link', '.footer-icon-link', '.subscribe__links a', '.sym-segmented__option'
 ].join(', ')
 
 export default defineNuxtPlugin(() => {

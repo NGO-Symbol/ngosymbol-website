@@ -1106,6 +1106,18 @@
   "slots": [],
   "events": []
  },
+ "SymPortraitArt": {
+  "props": [
+   {
+    "name": "seed",
+    "type": "string",
+    "required": true,
+    "description": "What the picture depends on: a stable id such as the person's slug."
+   }
+  ],
+  "slots": [],
+  "events": []
+ },
  "SymProjectBar": {
   "props": [
    {
@@ -1404,6 +1416,55 @@
    }
   ],
   "events": []
+ },
+ "SymSegmented": {
+  "props": [
+   {
+    "name": "options",
+    "type": "{ value: T; label: string; id?: string; }[]",
+    "required": true,
+    "description": "The options, each with a value, a label and an optional id (a tab's id for aria-labelledby)."
+   },
+   {
+    "name": "modelValue",
+    "type": "T",
+    "required": true,
+    "description": "The chosen value."
+   },
+   {
+    "name": "label",
+    "type": "string",
+    "required": true,
+    "description": "Accessible name: of the group, or of the link when `to` is set."
+   },
+   {
+    "name": "size",
+    "type": "\"m\" | \"l\" | \"s\"",
+    "required": false,
+    "default": "\"m\"",
+    "description": "Control height: s 36 px (header), m 44 px (toolbars, beside buttons), l 52 px (the choice a section is about)."
+   },
+   {
+    "name": "tabs",
+    "type": "false | true",
+    "required": false,
+    "description": "Announce as tabs (role tablist / tab). The panel still sets its own role and aria-labelledby."
+   },
+   {
+    "name": "to",
+    "type": "string | object",
+    "required": false,
+    "description": "Makes the whole control one link to this target. Two options only."
+   }
+  ],
+  "slots": [],
+  "events": [
+   {
+    "name": "update:modelValue",
+    "type": "[value: T]",
+    "description": ""
+   }
+  ]
  },
  "SymSiteFooter": {
   "props": [

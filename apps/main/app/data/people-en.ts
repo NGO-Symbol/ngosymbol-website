@@ -207,7 +207,7 @@ const peopleBioEn: Record<string, { bio?: string[]; cv?: CvSection[] }> = {
     ]
   },
   'magran-tata': {
-    bio: ['Works in pixel art. At the exhibition [[project:2-10-300]] (Hungary, 2024) she showed a series of works from 2022–2023 with the inscriptions “60 days of death”, “preserve the cultural code”, “Blood flows down the Dnipro into the Black Sea”, “yellow ribbon”, “bloody wave”, “return”.']
+    bio: ['Works in pixel art. At the exhibition [[project:2-10-300]] (Hungary, 2024) he showed a series of works from 2022–2023 with the inscriptions “60 days of death”, “preserve the cultural code”, “Blood flows down the Dnipro into the Black Sea”, “yellow ribbon”, “bloody wave”, “return”.']
   },
   'ruslana-kliuchko': {
     bio: [

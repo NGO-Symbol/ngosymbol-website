@@ -55,6 +55,9 @@
     --sym-width-wide: 1440px;       /* wide media bands */
     --sym-width-narrow: 760px;      /* one-column pages, forms */
     --sym-width-prose: 66ch;        /* running text */
+    --sym-control-s: 36px;          /* control heights: header */
+    --sym-control-m: 44px;          /* buttons, switches, selects in a row */
+    --sym-control-l: 52px;          /* the choice a section is about */
     --sym-size-touch: 44px;         /* minimum hit area of any control (WCAG 2.5.5 AAA; AA needs 24) */
     --sym-size-orbit-hero: clamp(15rem, 2.93rem + 49.52vw, 47.5rem);
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SymSegmented from '@symbol/ui/app/components/Segmented.vue'
 import { projectsEn } from '~/data/projects-en'
 import { eventsEn } from '~/data/events-en'
 const { isEn } = useLang()
@@ -27,6 +28,10 @@ const pastYears = computed(() => {
 const initial = (upcoming.value[0] ?? past.value[0])?.start ?? todayIso()
 const month = ref({ year: Number(initial.slice(0, 4)), month: Number(initial.slice(5, 7)) - 1 })
 
+function goToday() {
+  const date = new Date()
+  month.value = { year: date.getFullYear(), month: date.getMonth() }
+}
 function shift(delta: number) {
   const date = new Date(month.value.year, month.value.month + delta, 1)
   month.value = { year: date.getFullYear(), month: date.getMonth() }
@@ -74,10 +79,7 @@ const days = computed(() => {
     </div>
 
     <div class="events-toolbar">
-      <div class="segmented" role="group" :aria-label="t('Вигляд', 'View')">
-        <button type="button" :class="{ active: view === 'list' }" :aria-pressed="view === 'list'" @click="view = 'list'">{{ t('Список', 'List') }}</button>
-        <button type="button" :class="{ active: view === 'calendar' }" :aria-pressed="view === 'calendar'" @click="view = 'calendar'">{{ t('Календар', 'Calendar') }}</button>
-      </div>
+      <SymSegmented v-model="view" :label="t('Вигляд', 'View')" :options="[{ value: 'list', label: t('Список', 'List') }, { value: 'calendar', label: t('Календар', 'Calendar') }]" />
       <ProjectPicker v-model="projectFilter" :label="t('Проєкт', 'Project')" :all-label="t('Усі проєкти', 'All projects')" :options="eventProjects.map(project => ({ value: project.slug, label: projectTitle(project) }))" />
       <CalendarSubscribe :en="isEn" />
     </div>
@@ -99,6 +101,7 @@ const days = computed(() => {
         <button type="button" :aria-label="t('Попередній місяць', 'Previous month')" @click="shift(-1)">←</button>
         <h2>{{ isEn ? ['January','February','March','April','May','June','July','August','September','October','November','December'][month.month] : monthNames[month.month] }} {{ month.year }}</h2>
         <button type="button" :aria-label="t('Наступний місяць', 'Next month')" @click="shift(1)">→</button>
+        <button type="button" class="calendar__today" :aria-label="t('Перейти до сьогодні', 'Go to today')" @click="goToday"><SocialIcon network="calendar" /><span>{{ t('Сьогодні', 'Today') }}</span></button>
       </div>
       <div class="calendar__grid">
         <span v-for="weekday in (isEn ? ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] : ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])" :key="weekday" class="calendar__weekday">{{ weekday }}</span>

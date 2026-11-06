@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SymSegmented from '@symbol/ui/app/components/Segmented.vue'
 const { isEn } = useLang()
 useSeoMeta({ title: () => isEn.value ? 'Join and support us' : 'Доєднатися і підтримати', description: () => isEn.value ? 'Support NGO Symbol through donations, patronage, partnership, or volunteering.' : 'Як підтримати ГО «Символ»: внески, меценатство, партнерство, волонтерство.' })
 
@@ -30,10 +31,7 @@ const requisites = [
           <div><h3>Transparency</h3><p>We publish reports and name the partners and donors of every project.</p></div>
         </div>
       </div>
-      <div class="segmented segmented--large" role="tablist" aria-label="Way to participate">
-        <button id="tab-patron-en" type="button" role="tab" :aria-selected="tab === 'patron'" :class="{ active: tab === 'patron' }" @click="tab = 'patron'">Become a patron</button>
-        <button id="tab-community-en" type="button" role="tab" :aria-selected="tab === 'community'" :class="{ active: tab === 'community' }" @click="tab = 'community'">Join the community</button>
-      </div>
+      <SymSegmented v-model="tab" class="support-tabs" size="l" tabs label="Way to participate" :options="[{ value: 'patron', label: 'Become a patron', id: 'tab-patron-en' }, { value: 'community', label: 'Join the community', id: 'tab-community-en' }]" />
       <Transition name="swap" mode="out-in">
         <div v-if="tab === 'patron'" class="support-options" role="tabpanel" aria-labelledby="tab-patron-en">
           <div class="support-option"><h3>One-off donation</h3><p>Any amount supporting the organisation’s statutory activities.</p></div>
@@ -76,10 +74,7 @@ const requisites = [
       </div>
     </div>
 
-    <div class="segmented segmented--large" role="tablist" aria-label="Спосіб участі">
-      <button id="tab-patron" type="button" role="tab" :aria-selected="tab === 'patron'" :class="{ active: tab === 'patron' }" @click="tab = 'patron'">Стати меценатом</button>
-      <button id="tab-community" type="button" role="tab" :aria-selected="tab === 'community'" :class="{ active: tab === 'community' }" @click="tab = 'community'">Доєднатися до спільноти</button>
-    </div>
+    <SymSegmented v-model="tab" class="support-tabs" size="l" tabs label="Спосіб участі" :options="[{ value: 'patron', label: 'Стати меценатом', id: 'tab-patron' }, { value: 'community', label: 'Доєднатися до спільноти', id: 'tab-community' }]" />
 
     <Transition name="swap" mode="out-in">
     <div v-if="tab === 'patron'" class="support-options" role="tabpanel" aria-labelledby="tab-patron">

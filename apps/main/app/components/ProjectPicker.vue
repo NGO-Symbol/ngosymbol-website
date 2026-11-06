@@ -59,7 +59,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutside))
 
 <style scoped>
 .picker { position: relative; display: grid; gap: 6px; }
-.picker__button { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; min-width: 240px; padding: 9px 16px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; cursor: pointer; transition: background .25s ease, color .25s ease; }
+.picker__button { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; min-width: 240px; min-height: var(--control-h); padding: 0 16px; border: 1px solid var(--symbol-plum); border-radius: 999px; background: transparent; color: var(--symbol-plum); font: inherit; cursor: pointer; transition: background .25s ease, color .25s ease; }
 .picker__button:hover, .is-open .picker__button { background: var(--symbol-plum); color: var(--symbol-cream); }
 .picker__button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s cubic-bezier(.3, 1.4, .5, 1); }
 .is-open .picker__button svg { transform: rotate(180deg); }
