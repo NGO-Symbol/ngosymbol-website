@@ -138,6 +138,11 @@ function save(message) {
   if (git('diff', '--name-only', '--diff-filter=U')) {
     fail('Merge conflicts are still unresolved.', 'Fix the conflicted files listed by `git status`, then save again.')
   }
+  // New or replaced photographs go through the image pipeline before they are committed (ADR-0010).
+  // Already-processed photographs are skipped by hash, so this is quick when nothing changed.
+  if (!run('pnpm', ['images:optimize'], { allowFail: true, inherit: true }).ok) {
+    fail('The image pipeline failed; nothing was saved.', 'Read the message above. See .agents/skills/add-photo/SKILL.md.')
+  }
   git('add', '--all')
   if (!git('diff', '--cached', '--name-only')) {
     console.log('Nothing new to save.')
