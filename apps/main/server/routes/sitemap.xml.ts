@@ -60,7 +60,8 @@ export default defineEventHandler((event) => {
         path: '/documentsart/mytsi',
         images: uniqueImages(artists.flatMap((artist) => {
           const slugs = [artist.slug, ...(exhibitionCoAuthors[artist.slug] ?? [])]
-          return [coverPhoto[artist.slug] ? { src: coverPhoto[artist.slug], title: `${artist.name}: ${artist.works.map(work => `«${work.title}»`).join(', ')}` } : undefined, ...slugs.map(slug => {
+          const cover = coverPhoto[artist.slug]
+          return [cover ? { src: cover, title: `${artist.name}: ${artist.works.map(work => `«${work.title}»`).join(', ')}` } : undefined, ...slugs.map(slug => {
             const person = personOf(slug)
             return person?.photo ? { src: person.photo, title: person.name } : undefined
           })]
