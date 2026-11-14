@@ -31,6 +31,33 @@ const groups = computed(() => [
   { key: 'participants', label: t('Митці, куратори, автори', 'Artists, curators, authors'), title: t('Учасники проєктів', 'Project participants'), items: visible.value.filter(({ person }) => !person.team) }
 ].filter(group => group.items.length))
 
+// CollectionPage connects every visible name, portrait and canonical profile URL. This helps a name query resolve to
+// the individual profile (whose own primary image is the portrait) instead of stopping at the generic listing page.
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: () => JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: t('Люди ГО «Символ»', 'People of NGO Symbol'),
+      url: `https://symbol.ngo${isEn.value ? '/en' : ''}/people/`,
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: listed.value.map(({ person }, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: `https://symbol.ngo${isEn.value ? '/en' : ''}/people/${person.slug}/`,
+          item: {
+            '@type': 'Person',
+            name: displayName(person),
+            image: person.photo ? `https://symbol.ngo${person.photo}` : undefined
+          }
+        }))
+      }
+    })
+  }]
+})
+
 // The search hint names a different artist on every visit (never the same twice in a row).
 const hint = ref(t('Наприклад, Маков', 'For example, Makov'))
 onMounted(() => {

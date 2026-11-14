@@ -25,27 +25,41 @@ const partners = toTiles([...(event.partners ?? [])].sort(bySignificance))
 const donors = toTiles(project.donors)
 
 const shareImage = event.gallery?.[0]?.src ?? project.poster ?? project.gallery?.[0]?.src
+const shareImageUrl = shareImage ? `https://symbol.ngo${shareImage}` : undefined
+const pageUrl = computed(() => `https://symbol.ngo${isEn.value ? '/en' : ''}/events/${event.slug}/`)
+const schemaImages = computed(() => {
+  const photos = event.gallery?.length ? event.gallery : (shareImage ? [{ src: shareImage, alt: eventText.value.title }] : [])
+  return photos.map(photo => ({
+    '@type': 'ImageObject',
+    contentUrl: `https://symbol.ngo${photo.src}`,
+    url: `https://symbol.ngo${photo.src}`,
+    caption: photo.alt || eventText.value.title
+  }))
+})
 useSeoMeta({
   title: () => eventText.value.title,
   description: () => `${isEn.value ? formatRangeEn(event.start, event.end) : formatRange(event.start, event.end)} · ${placeLine.value}`,
-  ogImage: shareImage ? `https://symbol.ngo${shareImage}` : undefined
+  ogImage: shareImageUrl,
+  ogImageAlt: () => event.gallery?.[0]?.alt ?? eventText.value.title,
+  twitterImage: shareImageUrl
 })
 
 // schema.org Event for search engines.
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({
+    innerHTML: () => JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Event',
-      name: event.title,
+      name: eventText.value.title,
       startDate: event.start,
       endDate: event.end,
       location: { '@type': 'Place', name: event.venue.name ?? event.venue.city, address: venueLine(event.venue) },
       organizer: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' },
-      url: `https://symbol.ngo/events/${event.slug}/`,
-      description: event.description?.map(plainText).join(' ').slice(0, 500),
-      image: shareImage ? [`https://symbol.ngo${shareImage}`] : undefined,
+      url: pageUrl.value,
+      inLanguage: isEn.value ? 'en' : 'uk',
+      description: eventText.value.description?.map(plainText).join(' ').slice(0, 500),
+      image: schemaImages.value.length ? schemaImages.value : undefined,
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
       superEvent: { '@type': 'CreativeWork', name: project.title, url: `https://symbol.ngo/projects/${project.slug}/` }

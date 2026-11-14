@@ -54,7 +54,9 @@ useHead({
 
 <template>
   <div class="site-shell">
-    <IntroSplash />
+    <!-- Decorative intro is client-only: the prerendered document starts with the real page content and images.
+         Human visitors still get the same once-per-session animation after hydration. -->
+    <ClientOnly><IntroSplash /></ClientOnly>
     <HomeWipe />
     <a class="skip-link" href="#main">{{ isEn ? 'Skip to content' : 'Перейти до змісту' }}</a>
     <SiteHeader />

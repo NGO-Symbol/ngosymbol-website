@@ -33,7 +33,7 @@ const fields = computed(() => [
 
         <div class="form-sheet__body">
           <figure class="form-photo">
-            <MediaImg v-if="photo" :src="photo.src" :alt="altIn(photo.alt, isEn)" />
+            <MediaImg v-if="photo" :src="photo.src" :alt="altIn(photo.alt, isEn)" sizes="100vw" priority />
             <figcaption>{{ t('Фото 3×4', 'Photo 3×4') }}</figcaption>
             <DocsStamp class="form-photo__stamp" />
           </figure>

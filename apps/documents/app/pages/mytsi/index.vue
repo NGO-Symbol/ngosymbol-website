@@ -25,7 +25,7 @@ const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
               <MediaImg v-for="person in [artist.person, ...artist.coAuthors].filter(p => p?.photo)" :key="person!.slug" :src="person!.photo!" :alt="(isEn && (psdPeopleEn[person!.slug]?.name ?? peopleEn[person!.slug]?.name)) || person!.name" loading="lazy" />
             </span>
             <MediaImg v-else-if="artist.person?.photo" class="artist__portrait" :src="artist.person.photo" :alt="artistName(artist, isEn)" loading="lazy" />
-            <MediaImg v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)!" loading="lazy" />
+            <MediaImg v-if="cover(artist.slug)" class="artist__work" :src="cover(artist.slug)!" :alt="`${artistName(artist, isEn)}: ${artistCopy(artist, isEn).works.map(work => `«${work.title}»`).join(', ')}`" loading="lazy" />
           </span>
           <span class="artist__name">{{ artistName(artist, isEn) }}</span>
           <span class="artist__works">{{ artistCopy(artist, isEn).works.map(work => `«${work.title}»`).join(', ') }}</span>
