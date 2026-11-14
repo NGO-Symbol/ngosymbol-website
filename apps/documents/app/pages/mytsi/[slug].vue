@@ -10,8 +10,6 @@ const route = useRoute()
 const artist = getArtist(String(route.params.slug))
 if (!artist) throw createError({ statusCode: 404, statusMessage: 'Сторінку не знайдено' })
 const displayArtist = artistCopy(artist, isEn.value)
-
-useSeoMeta({ title: displayArtist.name, description: displayArtist.bio[0] })
 const index = exhibitionArtists.indexOf(artist)
 const prev = exhibitionArtists[(index - 1 + exhibitionArtists.length) % exhibitionArtists.length]!
 const next = exhibitionArtists[(index + 1) % exhibitionArtists.length]!
@@ -22,6 +20,56 @@ const photoGroups = (artistPhotoGroups[artist.slug] ?? []).map((group, groupInde
   photos: group.photos.map(photo => ({ ...photo, alt: `${displayArtist.name}: «${displayArtist.works[groupIndex]?.title ?? group.title}»` }))
 }))
 const photos = photoGroups.flatMap(group => group.photos)
+const portraits = [artist.person, ...artist.coAuthors].filter((person): person is NonNullable<typeof person> & { photo: string } => !!person?.photo)
+const pageUrl = computed(() => `https://symbol.ngo/documentsart${isEn.value ? '/en' : ''}/mytsi/${artist.slug}/`)
+const sharePhoto = computed(() => portraits[0]?.photo ?? photos[0]?.src)
+const sharePhotoAlt = computed(() => portraits[0] ? ((isEn.value && (psdPeopleEn[portraits[0].slug]?.name ?? portraits[0].name)) || portraits[0].name) : `${displayArtist.name}: «${photoGroups[0]?.title ?? displayArtist.works[0]?.title ?? ''}»`)
+
+useSeoMeta({
+  title: () => displayArtist.name,
+  description: () => displayArtist.bio[0],
+  ogType: 'profile',
+  ogImage: () => sharePhoto.value ? `https://symbol.ngo${sharePhoto.value}` : undefined,
+  ogImageAlt: sharePhotoAlt,
+  twitterImage: () => sharePhoto.value ? `https://symbol.ngo${sharePhoto.value}` : undefined
+})
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: () => JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': pageUrl.value,
+      url: pageUrl.value,
+      inLanguage: isEn.value ? 'en' : 'uk',
+      name: displayArtist.name,
+      primaryImageOfPage: sharePhoto.value ? {
+        '@type': 'ImageObject',
+        contentUrl: `https://symbol.ngo${sharePhoto.value}`,
+        caption: sharePhotoAlt.value,
+        representativeOfPage: true
+      } : undefined,
+      mainEntity: {
+        '@type': 'Person',
+        name: displayArtist.name,
+        description: displayArtist.bio[0],
+        image: portraits.map(person => `https://symbol.ngo${person.photo}`),
+        url: pageUrl.value,
+        sameAs: [...(artist.person?.links ?? []), ...artist.coAuthors.flatMap(person => person.links ?? [])].map(link => link.url)
+      },
+      hasPart: photoGroups.map(group => ({
+        '@type': 'VisualArtwork',
+        name: group.title,
+        creator: { '@type': 'Person', name: displayArtist.name },
+        image: group.photos.map(photo => ({
+          '@type': 'ImageObject',
+          contentUrl: `https://symbol.ngo${photo.src}`,
+          caption: `${displayArtist.name}: «${group.title}»`
+        }))
+      }))
+    })
+  }]
+})
 const creditEn: Record<string, string> = { 'Олександр Осіпов': 'Oleksandr Osipov', 'Петро Чекаль': 'Petro Chekal' }
 const translateCredit = (credit: string | undefined) => credit && isEn.value ? (creditEn[credit] ?? credit) : credit
 const credits = [...new Set(photos.map(photo => translateCredit('credit' in photo ? photo.credit : undefined)).filter(Boolean))]
@@ -54,7 +102,6 @@ const stainOf = (sheet: number) => {
   return undefined
 }
 definePageMeta({ pageTransition: { name: 'case-turn', mode: 'out-in' } })
-const portraits = [artist.person, ...artist.coAuthors].filter((person): person is NonNullable<typeof person> & { photo: string } => !!person?.photo)
 const links = [...(artist.person?.links ?? []), ...artist.coAuthors.flatMap(person => person.links ?? [])]
 // ← and → leaf through the files, as in a drawer.
 const router = useRouter()
@@ -90,7 +137,7 @@ const caseNo = computed(() => `${t('Особова справа', 'Personal file
         <div class="case-cover__grid">
           <div v-if="portraits.length" class="case-cover__photos" :class="{ 'is-duo': portraits.length > 1 }">
             <figure v-for="person in portraits" :key="person.slug" class="case-cover__photo">
-              <MediaImg :src="person.photo!" :alt="personName(person)" />
+              <MediaImg :src="person.photo!" :alt="personName(person)" priority />
               <span class="case-cover__clip" aria-hidden="true" />
             </figure>
           </div>

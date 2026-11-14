@@ -20,22 +20,40 @@ const programName = computed(() => isEn.value ? projectsEn[project.slug]?.progra
 const personName = (person: (typeof people)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
 const place = computed(() => isEn.value ? [project.venue?.nameEn ?? project.venue?.name, project.venue?.addressEn ?? project.venue?.address, project.venue?.city ?? project.city, project.venue?.country ?? project.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : (project.venue ? venueLine(project.venue) : projectPlace(project)))
 const shareImage = project.poster ?? project.gallery?.[0]?.src ?? project.backdrop
+const shareImageUrl = shareImage ? `https://symbol.ngo${shareImage}` : undefined
+const pageUrl = computed(() => `https://symbol.ngo${isEn.value ? '/en' : ''}/projects/${project.slug}/`)
+const schemaImages = computed(() => {
+  const images = [
+    ...(project.poster ? [{ src: project.poster, alt: text.value.title }] : []),
+    ...(project.backdrop ? [{ src: project.backdrop, alt: text.value.title }] : []),
+    ...(project.gallery ?? [])
+  ]
+  return [...new Map(images.map(image => [image.src, image])).values()].map(image => ({
+    '@type': 'ImageObject',
+    contentUrl: `https://symbol.ngo${image.src}`,
+    url: `https://symbol.ngo${image.src}`,
+    caption: image.alt || text.value.title
+  }))
+})
 useSeoMeta({
   title: () => `${text.value.title} · ${projectYears(project)}`,
   description: () => text.value.summary,
-  ogImage: shareImage ? `https://symbol.ngo${shareImage}` : undefined
+  ogImage: shareImageUrl,
+  ogImageAlt: () => project.gallery?.find(photo => photo.src === shareImage)?.alt ?? text.value.title,
+  twitterImage: shareImageUrl
 })
 // schema.org CreativeWork: the project with its years, place, image and the people credited in it.
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({
+    innerHTML: () => JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'CreativeWork',
-      name: project.title,
-      description: project.summary,
-      url: `https://symbol.ngo/projects/${project.slug}/`,
-      image: shareImage ? `https://symbol.ngo${shareImage}` : undefined,
+      name: text.value.title,
+      description: text.value.summary,
+      url: pageUrl.value,
+      inLanguage: isEn.value ? 'en' : 'uk',
+      image: schemaImages.value.length ? schemaImages.value : undefined,
       dateCreated: String(project.yearStart),
       locationCreated: project.city ? { '@type': 'Place', name: project.city } : undefined,
       creator: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' },

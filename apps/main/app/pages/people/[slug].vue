@@ -60,27 +60,56 @@ const bioParagraphs = computed(() => {
   return paragraphs
 })
 
+const pageUrl = computed(() => `https://symbol.ngo${isEn.value ? '/en' : ''}/people/${person.slug}/`)
+const portraitUrl = person.photo ? `https://symbol.ngo${person.photo}` : undefined
+const portraitId = `${pageUrl.value}#primary-image`
+const personId = `${pageUrl.value}#person`
+
 useSeoMeta({
   title: () => displayPerson.value.name,
   description: () => displayPerson.value.shortBio ?? t(`${displayPerson.value.name} у проєктах ГО «Символ».`, `${displayPerson.value.name} in NGO Symbol projects.`),
   // The portrait is the share image, so a search or a shared link shows the person's own photo.
-  ogImage: person.photo ? `https://symbol.ngo${person.photo}` : undefined,
-  ogImageAlt: () => person.photo ? displayPerson.value.name : undefined
+  ogImage: portraitUrl,
+  ogImageAlt: () => person.photo ? displayPerson.value.name : undefined,
+  twitterImage: portraitUrl,
+  twitterImageAlt: () => person.photo ? displayPerson.value.name : undefined
 })
-// schema.org Person: name, portrait, links, role in the team — helps search engines match the person and the photo.
+// ProfilePage + ImageObject explicitly make the portrait the representative image of this exact profile.
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({
+    innerHTML: () => JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: displayPerson.value.name,
-      description: displayPerson.value.shortBio,
-      url: `https://symbol.ngo/people/${person.slug}/`,
-      image: person.photo ? `https://symbol.ngo${person.photo}` : undefined,
-      jobTitle: person.teamRole ?? person.tags?.join(', '),
-      sameAs: person.links?.map(link => link.url),
-      affiliation: person.team ? { '@type': 'Organization', name: isEn.value ? 'NGO Symbol' : 'ГО «Символ»', url: 'https://symbol.ngo/' } : undefined
+      '@graph': [
+        {
+          '@type': 'ProfilePage',
+          '@id': pageUrl.value,
+          url: pageUrl.value,
+          inLanguage: isEn.value ? 'en' : 'uk',
+          name: displayPerson.value.name,
+          primaryImageOfPage: portraitUrl ? { '@id': portraitId } : undefined,
+          mainEntity: { '@id': personId }
+        },
+        portraitUrl ? {
+          '@type': 'ImageObject',
+          '@id': portraitId,
+          contentUrl: portraitUrl,
+          url: portraitUrl,
+          caption: displayPerson.value.name,
+          representativeOfPage: true
+        } : undefined,
+        {
+          '@type': 'Person',
+          '@id': personId,
+          name: displayPerson.value.name,
+          description: displayPerson.value.shortBio,
+          url: pageUrl.value,
+          image: portraitUrl ? { '@id': portraitId } : undefined,
+          jobTitle: displayPerson.value.teamRole ?? person.tags?.join(', '),
+          sameAs: person.links?.map(link => link.url),
+          affiliation: person.team ? { '@type': 'Organization', name: isEn.value ? 'NGO Symbol' : 'ГО «Символ»', url: 'https://symbol.ngo/' } : undefined
+        }
+      ].filter(Boolean)
     })
   }]
 })
@@ -101,7 +130,7 @@ useHead({
     </div>
     <div class="project-content">
       <aside>
-        <MediaImg v-if="person.photo" class="person-portrait" :src="person.photo" :alt="displayPerson.name" />
+        <MediaImg v-if="person.photo" class="person-portrait" :src="person.photo" :alt="displayPerson.name" priority />
         <SymPortraitArt v-else class="person-portrait" :seed="person.slug" />
         <ul v-if="person.links?.length" class="link-list">
           <li v-for="link in person.links" :key="link.url"><SocialLink :url="link.url" :label="isSocialUrl(link.url) ? undefined : translate(link.label, isEn)" /></li>

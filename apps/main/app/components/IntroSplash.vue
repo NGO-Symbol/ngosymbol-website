@@ -41,6 +41,11 @@ function spiralIntoHeader() {
 }
 
 onMounted(() => {
+  // Decorative motion must never cover the page while a crawler renders it for search or a visual preview.
+  if (/bot|crawler|spider|crawling|Google-InspectionTool|GoogleOther/i.test(navigator.userAgent)) {
+    finish()
+    return
+  }
   if (document.documentElement.classList.contains('intro-done')) {
     visible.value = false
     return
