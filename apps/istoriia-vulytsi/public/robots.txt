@@ -1,0 +1,17 @@
+# my-street.symbol.ngo, the built site (published when the team opens it; until then apps/istoriia-vulytsi/hidden/ is
+# published). While `indexable` is false in nuxt.config.ts every page carries noindex, nofollow.
+#
+# Nothing is blocked for ordinary crawlers on purpose: a crawler that may not open a page never sees its noindex, and a
+# forbidden address can still show up in search as a bare link. Letting them read the page keeps it out of the index.
+User-agent: *
+Allow: /
+
+# AI training crawlers copy pages to train models; nothing on this site is meant for that, so they are kept out entirely.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+Disallow: /

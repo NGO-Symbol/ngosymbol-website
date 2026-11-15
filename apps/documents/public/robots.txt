@@ -1,0 +1,16 @@
+# documentsart.symbol.ngo: the exhibition site «Покажіть свої документи…» when it is published on its own address.
+# (Today it lives at symbol.ngo/documentsart/ and the robots.txt of symbol.ngo applies; the deploy does not copy this file there.)
+#
+# Search engines and AI search may read the site. AI training crawlers may not: the artists of the exhibition did not
+# consent to their work being used to train AI models, and this whole site is about that work.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+Disallow: /
