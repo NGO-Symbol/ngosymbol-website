@@ -50,5 +50,6 @@ useHead({
     <main id="main" tabindex="-1"><NuxtPage /></main>
     <DocsFooter />
     <DocsTabs />
+    <CookieConsent />
   </div>
 </template>

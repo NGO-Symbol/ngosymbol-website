@@ -2,6 +2,11 @@
 const { isEn, t, localePath } = useLang()
 const backHref = ref(isEn.value ? `${SYMBOL}/en/` : SYMBOL)
 onMounted(() => { backHref.value = returnUrl(isEn.value) })
+// Privacy and cookie page lives on symbol.ngo; the cookie control appears when a tool that needs consent is connected.
+const { $consent } = useNuxtApp()
+const reopened = useState('consent-reopened', () => false)
+const consentEnabled = ref(false)
+onMounted(() => { consentEnabled.value = !!$consent?.enabled })
 const links = computed(() => [
   { to: '/', label: t('Про виставку', 'About') },
   { to: '/kontseptsiia', label: t('Концепція', 'Concept') },
@@ -25,6 +30,8 @@ const links = computed(() => [
       <div class="docs-footer__symbol">
         <a class="docs-footer__back" :href="backHref" @click="leaveTo($event, backHref)">← {{ t('Сайт ГО «Символ»', 'NGO Symbol website') }}</a>
         <a :href="`${SYMBOL}${isEn ? '/en' : ''}/projects/pokazhit-svoi-dokumenty/`">{{ t('Проєкт на symbol.ngo', 'The project on symbol.ngo') }}</a>
+        <a class="docs-footer__legal" :href="`${SYMBOL}${isEn ? '/en' : ''}/privacy/`">{{ t('Конфіденційність і кукі', 'Privacy and cookies') }}</a>
+        <button v-if="consentEnabled" type="button" class="docs-footer__legal" @click="reopened = true">{{ t('Налаштування кукі', 'Cookie settings') }}</button>
       </div>
     </div>
   </footer>
@@ -37,6 +44,7 @@ const links = computed(() => [
 .docs-footer__title { font-family: var(--docs-display); text-transform: uppercase; font-size: 1.6rem; line-height: 1; }
 .docs-footer__nav, .docs-footer__symbol { display: grid; gap: 8px; align-content: start; justify-items: start; }
 .docs-footer a { color: inherit; }
+.docs-footer__legal { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: .78rem; opacity: .75; text-decoration: underline; cursor: pointer; }
 .docs-footer__back { padding: 6px 12px; border-radius: 999px; background: #9280a6; color: #fff7eb !important; text-decoration: none; }
 @media (max-width: 760px) { .docs-footer__inner { grid-template-columns: 1fr; } }
 </style>
