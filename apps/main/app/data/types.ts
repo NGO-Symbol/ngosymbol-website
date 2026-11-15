@@ -142,6 +142,8 @@ export interface NewsItem {
 
 export interface PressMention {
   outlet: string
+  /** A shorter name for tight lists, when the full one breaks the line; items sharing it read as one outlet. */
+  shortName?: string
   title: string
   date?: string
   url: string
