@@ -6,6 +6,8 @@
 //   application   a link out of an opportunity page (a call, a form, an organiser's site)
 //   outbound      any other link to another website
 // mailto:, tel: and other non-web links are not sent: an e-mail address or a phone number is personal data.
+// Parameter names (target_*, click_*, page_lang) are deliberately not GA4's own link_url / page_path, so they never clash
+// with built-in or reserved names; the owner registers them as event-scoped custom dimensions (analytics.md).
 import { PRODUCTION_DOMAIN } from './hosts'
 
 export type LinkEventName = 'support' | 'calendar' | 'project_site' | 'application' | 'outbound'
@@ -14,12 +16,12 @@ export interface LinkEvent {
   name: LinkEventName
   params: {
     /** The target without query string and fragment (they can carry names, tokens or the ?from= page memory). */
-    link_url: string
-    link_domain: string
+    target_url: string
+    target_domain: string
     /** Where on the page the link was: header | footer | main | other. */
-    link_location: string
+    click_area: string
     /** The page the click happened on, without the language prefix, query string and fragment. */
-    page_path: string
+    click_page: string
     page_lang: 'uk' | 'en'
   }
 }
@@ -47,10 +49,10 @@ export function classifyLink(target: URL, here: Pick<URL, 'origin' | 'host' | 'p
   return {
     name,
     params: {
-      link_url: `${target.protocol}//${target.host}${target.pathname}`,
-      link_domain: target.hostname,
-      link_location: location,
-      page_path: herePath,
+      target_url: `${target.protocol}//${target.host}${target.pathname}`,
+      target_domain: target.hostname,
+      click_area: location,
+      click_page: herePath,
       page_lang: /^\/en(\/|$)/.test(here.pathname) ? 'en' : 'uk'
     }
   }
