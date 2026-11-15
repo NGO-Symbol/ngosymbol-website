@@ -6,6 +6,7 @@
 - English-facing name: **NGO Symbol**. `USER_CONFIRMED`
 - Registration code: **45221328**. `EXTRACTED`
 - Registered: **2023-10-11**, Kharkiv. `EXTRACTED`
+- Full legal name used on the privacy page: **Громадська організація «Символ»** (from the 2026-11-15 release brief; confirm against the ЄДР extract). `PROPOSED`
 - Head/director: **Юрій Рассоха**. `USER_CONFIRMED` and `EXTRACTED`
 - Website domain: **symbol.ngo**. `USER_CONFIRMED`
 - Instagram: **@symbol.ngo**. `EXTRACTED`
