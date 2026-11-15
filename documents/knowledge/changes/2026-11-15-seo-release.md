@@ -32,7 +32,7 @@ Structured data (JSON-LD, `<` always written as `<` through `ldJson`)
 
 Sitemap, calendar
 - `lastmod` per URL: events use their own date, `/news` the newest news item, every other page the date of the last git commit touching its source file or data (needs full history: both workflows fetch it; without history the date is left out, never the build date). `image:title` removed (Google deprecated it in 2022 and ignores it); image entries stay. `/people/alina-voitiuk` is not in the sitemap.
-- `/people/alina-voitiuk` stays a redirect stub (a static host cannot send a 301). It is not listed and not linked; a stub with a meta refresh is kinder to old links than a 404, and it is invisible to the gate because it is not in the sitemap.
+- `/people/alina-voitiuk` (and `/en/people/alina-voitiuk`) is a small static page (`apps/main/public/…`): meta refresh to `/people/hanna-franyk/`, `rel=canonical` to it, `noindex, follow`, not in the sitemap and not linked. Chosen over dropping the URL because a static host cannot send a 301: a 404 would leave old links dead and old search entries lingering, while the stub moves visitors at once and asks to be dropped from the index; the gate does not see it because it is not in the sitemap.
 - `/events.ics`: timed events without an end last two hours (DTEND was equal to DTSTART), DTSTAMP is the event's own day, not the build time. The «Add to Google Calendar» link uses the same two hours.
 
 404

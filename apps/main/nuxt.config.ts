@@ -31,12 +31,11 @@ export default defineNuxtConfig({
       for (const page of mirrored) pages.push({ ...page, name: `en-${String(page.name)}`, path: page.path === '/' ? '/en' : `/en${page.path}` })
     }
   },
-  // Former page: Аліна Войтюк is Ганна Франик (one person).
-  routeRules: { '/people/alina-voitiuk': { redirect: '/people/hanna-franyk' } },
+  // Former page «Аліна Войтюк» (one person with Ганна Франик): public/people/alina-voitiuk/index.html, a noindex stub with a canonical.
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/events.ics', '/sitemap.xml', '/people/alina-voitiuk']
+      routes: ['/events.ics', '/sitemap.xml']
     }
   }
 })
