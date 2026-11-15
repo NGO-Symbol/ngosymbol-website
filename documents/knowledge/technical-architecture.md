@@ -30,6 +30,15 @@ Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). T
 
 Indexing: since 2026-10-30 the main site and the exhibition site are open to search engines (`indexable = true` in their `nuxt.config.ts`; `apps/main/public/robots.txt` allows all crawlers and names the sitemap). The «Історія моєї вулиці» app keeps `indexable = false` (`noindex, nofollow` on every page) until its launch.
 
+SEO release (2026-11-15, [`changes/2026-11-15-seo-release.md`](changes/2026-11-15-seo-release.md)):
+- Titles, descriptions, Open Graph: one `usePageSeo()` call per page (main and exhibition apps); the project's search texts are data (`seoTitle` / `seoDescription`, UA in `projects.ts`, EN in `projects-en.ts`); the site name is written once; share images carry their real size from `images.json`.
+- Structured data: `ldJson()` (escapes `<`), `kyivDateTime()`, ids `…/#org` and `…/#website` (one pair per language) in `packages/brand/app/utils/seo.ts`; the home page carries the organisation graph, events and projects use the project `role` (`organizer` / `partner`).
+- `404.html` is the site's own `error.vue` (`experimental.prerenderErrorPages`); GitHub Pages serves it with status 404.
+- `robots.txt`: AI search allowed; AI training crawlers kept out of the exhibition and artists' works (`USER_CONFIRMED`: no consent); the street app is crawlable so its `noindex` is seen.
+- Sitemap `lastmod` from content dates and git history (CI checkouts fetch full history); no `image:title`.
+- `pnpm seo:check` (SEO gate) runs in `pnpm check` after the generated sites exist; `pnpm i18n:check` also checks the JSON-LD of English pages.
+- The entry script and its modulepreload hints are added after the first paint (`apps/main/server/plugins/defer-entry.ts`): they shared the bandwidth with the stylesheet and font and delayed the first paint of the home page on phones.
+
 ## Change workflow
 
 All changes go through `task/*` branches and pull requests guarded by the `validate` check; agents drive Git through `pnpm task:*` ([ADR-0006](decisions/ADR-0006-agent-git-workflow.md), [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md)).

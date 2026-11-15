@@ -50,7 +50,7 @@ Items here are unresolved and must not be silently assumed.
 
 ## Infrastructure
 
-- Launch: resolved 2026-10-30 (`USER_CONFIRMED`) — symbol.ngo and the exhibition site (/documentsart/) are open to search engines (`indexable = true`), `robots.txt` points to the sitemap. «Історія моєї вулиці» (my-street) stays hidden until its own launch. Next: complete the sitemap (exhibition site, news), Search Console, structured data — see the SEO stage of the site plan.
+- Launch: resolved 2026-10-30 (`USER_CONFIRMED`) — symbol.ngo and the exhibition site (/documentsart/) are open to search engines (`indexable = true`), `robots.txt` points to the sitemap. «Історія моєї вулиці» (my-street) stays hidden until its own launch. Done 2026-11-15: complete sitemap with `lastmod`, structured data, titles and descriptions, SEO gate (see `changes/2026-11-15-seo-release.md`). Next: Search Console.
 - Invite remaining editors to the `NGO-Symbol` organization with Write access.
 - Decide whether pull requests need a human approval before going live (currently CI only).
 - Configure GitHub CLI authentication on each editor's computer.

@@ -11,6 +11,11 @@ The decision and its alternatives are recorded in
 | `my-street.symbol.ngo` | `apps/istoriia-vulytsi` | `NGO-Symbol/istoriia-vulytsi` (deploy-only) | `gh-pages` branch |
 | `documentsart.symbol.ngo` | `apps/documents` | `NGO-Symbol/documentsart` (deploy-only) | `gh-pages` branch |
 
+The main-site job and CI fetch the full git history (`fetch-depth: 0`): the sitemap's `lastmod` dates come from the
+last commit that touched each page's files. The exhibition's `robots.txt` is for its own address only; the main deploy
+does not copy it into `/documentsart/` (`rsync --exclude robots.txt`), where the `robots.txt` of `symbol.ngo` applies.
+GitHub Pages serves the root `404.html` (the site's own error page) with status 404 for every missing address.
+
 GitHub Pages serves one site per repository, so each autonomous project needs its own
 deploy-only repository. Nobody edits those repositories by hand; the workflow overwrites them.
 

@@ -1447,7 +1447,7 @@
     "name": "label",
     "type": "string",
     "required": true,
-    "description": "Accessible name: of the group, or of the link when `to` is set."
+    "description": "Accessible name: of the group; with `to` it follows the visible option texts («UA EN: …»)."
    },
    {
     "name": "size",
