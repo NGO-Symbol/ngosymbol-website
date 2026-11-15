@@ -123,6 +123,8 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .footer-grid .label { margin-bottom: 4px; color: var(--symbol-cream); font-weight: 700; font-size: .78rem; letter-spacing: .14em; opacity: 1; }
 .footer-socials { display: flex; flex-wrap: wrap; gap: 6px 16px; }
 .footer-consent { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: .78rem; opacity: .75; text-decoration: underline; cursor: pointer; }
+.footer-grid .footer-privacy { display: block; margin-top: 8px; margin-bottom: 8px; font-size: .78rem; opacity: .75; }
+.footer-grid .footer-privacy:hover { opacity: 1; }
 .footer-mark { display: flex; align-items: center; gap: 10px; }
 /* Little space above a page: the header line is enough of a gap; generous space stays at the bottom. */
 .page { padding-block: clamp(28px, 3.5vw, 52px) clamp(70px, 10vw, 130px); }

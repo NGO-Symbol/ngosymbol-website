@@ -9,6 +9,7 @@ const en: Record<string, string> = {
   'Для медіа': 'Press',
   'Підтримати': 'Support',
   'Контакти': 'Contact',
+  'Конфіденційність і кукі': 'Privacy and cookies',
   'Виставка': 'Exhibition', 'Онлайн-виставка': 'Online exhibition', 'Фестиваль': 'Festival',
   'Вистава': 'Theatre', 'Перформанс': 'Performance', 'Плейбек': 'Playback theatre', 'Резиденція': 'Residency',
   'Презентація': 'Presentation', 'Опен-кол': 'Open call', 'Лекція': 'Lecture', 'Концерт': 'Concert',

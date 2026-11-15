@@ -38,6 +38,7 @@ const labels: Record<string, [string, string]> = {
         <p v-if="isEn">Kharkiv · Kyiv · Zakarpattia<br>Ukraine and international projects</p>
         <p v-else>Харків · Київ · Закарпаття<br>Україна та міжнародні проєкти</p>
         <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} <CopyValue value="45221328" :en="isEn" plain /></p>
+        <NuxtLink class="footer-privacy" :to="localePath('/privacy')">{{ isEn ? 'Privacy and cookies' : 'Конфіденційність і кукі' }}</NuxtLink>
         <button v-if="consentEnabled" type="button" class="footer-consent" @click="reopened = true">{{ isEn ? 'Cookie settings' : 'Налаштування кукі' }}</button>
       </div>
     </div>
