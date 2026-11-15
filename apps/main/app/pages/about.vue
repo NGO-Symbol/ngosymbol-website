@@ -83,8 +83,8 @@ const supporters = organizations
           <p>
             <template v-for="(outlet, index) in group.outlets" :key="outlet.name">
               <span class="press-line__outlet" :lang="originalLang(outlet.name, isEn)">
-                <a v-if="outlet.items.length === 1" :href="outlet.items[0]!.url" target="_blank" rel="noreferrer" :title="outlet.items[0]!.title" :aria-label="`${outlet.name}: ${outlet.items[0]!.title}`">{{ outlet.name }}</a>
-                <template v-else>{{ outlet.name }}<sup><a v-for="(item, piece) in outlet.items" :key="item.url" :href="item.url" target="_blank" rel="noreferrer" :title="item.title" :aria-label="`${outlet.name}: ${item.title}`">{{ piece + 1 }}</a></sup></template>
+                <a v-if="outlet.items.length === 1" :lang="originalLang(outlet.name + outlet.items[0]!.title, isEn)" :href="outlet.items[0]!.url" target="_blank" rel="noreferrer" :title="outlet.items[0]!.title" :aria-label="`${outlet.name}: ${outlet.items[0]!.title}`">{{ outlet.name }}</a>
+                <template v-else>{{ outlet.name }}<sup><a v-for="(item, piece) in outlet.items" :key="item.url" :lang="originalLang(outlet.name + item.title, isEn)" :href="item.url" target="_blank" rel="noreferrer" :title="item.title" :aria-label="`${outlet.name}: ${item.title}`">{{ piece + 1 }}</a></sup></template>
                 <span v-if="index < group.outlets.length - 1" class="press-line__sep" aria-hidden="true"> /</span>
               </span>
               {{ ' ' }}
