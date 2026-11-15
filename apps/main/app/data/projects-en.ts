@@ -31,7 +31,7 @@ export const projectsEn: Record<string, ProjectEn> = {
     fundingNotice: 'Funded by the European Union. Views and opinions expressed are, however, those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them.'
   },
   'pokazhit-svoi-dokumenty': {
-    title: 'May I See Your Documents?..',
+    title: 'May I See Your Documents…',
     summary: 'An exhibition about the document as an artistic phenomenon: 20 artists at YermilovCentre.',
     body: [
       'The exhibition explores the **document as an artistic phenomenon** that extends beyond its functional role. Here, a document is not merely a mechanism of bureaucratic control, but also an aesthetic, ritual, and social artefact.',

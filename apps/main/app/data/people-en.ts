@@ -11,8 +11,8 @@ export const peopleEn: Record<string, PersonEn> = {
   'andrii-skrypka': { name: 'Andrii Skrypka', shortBio: 'Interdisciplinary artist and designer born in Kerch, Crimea.' },
   'vira-pakosh': { name: 'Vira Pakosh', shortBio: 'Interdisciplinary artist working with perceptions of reality, memory, and recollection.' },
   'nataliia-ivanova': { name: 'Nataliia Ivanova', shortBio: 'Curator and educator; founder and director of YermilovCentre in Kharkiv and recipient of the 2026 Igor Zabel Award.' },
-  'sofiia-hurilova': { name: 'Sofiia Hurilova', shortBio: 'YermilovCentre coordinator for May I See Your Documents?..' },
-  'oleksii-chekal': { name: 'Oleksii Chekal', shortBio: 'Graphic designer, type designer, and calligrapher; co-author of the national typeface Zakon and creator of the exhibition identity and EXDocument typeface for May I See Your Documents?..' },
+  'sofiia-hurilova': { name: 'Sofiia Hurilova', shortBio: 'YermilovCentre coordinator for May I See Your Documents…' },
+  'oleksii-chekal': { name: 'Oleksii Chekal', shortBio: 'Graphic designer, type designer, and calligrapher; co-author of the national typeface Zakon and creator of the exhibition identity and EXDocument typeface for May I See Your Documents…' },
   'larysa-chaika': { name: 'Larysa Chaika', teamRole: 'Co-founder and Board member', shortBio: 'Graphic artist, graphic designer, and lecturer at the Kharkiv State Academy of Design and Arts; lead illustrator for The Story of My Street.' },
   'maksym-rozenfeld': { name: 'Maksym Rozenfeld', shortBio: 'Architect, architectural historian, Kharkiv researcher, author of Facades: Kharkiv, and chair of the expert council for The Story of My Street.' },
   'vero-yuzepchuk': { name: 'Veronika Yuzepchuk', shortBio: 'Director of the 2023 documentary The Lily of the Valley Collector.' },
@@ -49,7 +49,7 @@ const peopleBioEn: Record<string, { bio?: string[]; cv?: CvSection[] }> = {
       ] },
       { title: 'Experience', items: [
         { period: 'since 10/2023', text: 'Chair of NGO Symbol' },
-        { period: '06–12/2025', text: 'Project manager and co-curator of the exhibition May I See Your Documents?.., YermilovCentre, Kharkiv (Grant of the President of Ukraine for Young Artists)' },
+        { period: '06–12/2025', text: 'Project manager and co-curator of the exhibition May I See Your Documents…, YermilovCentre, Kharkiv (Grant of the President of Ukraine for Young Artists)' },
         { period: '12/2024–09/2025', text: 'Project manager of the mhGAP trainings in Kyiv Region (supported by the Mental Health for Ukraine project): four in-person trainings, 121 certified participants' },
         { period: '08/2024', text: 'Co-organiser of the festival A Day at the Sviatopolk-Mirsky Estate, Liubotyn (NGO Troubadours)' },
         { period: '04–06/2024', text: 'Took part in organising the local culture festival Kharkiv Sea (NGO Symbol was a festival partner)' },
@@ -59,7 +59,7 @@ const peopleBioEn: Record<string, { bio?: string[]; cv?: CvSection[] }> = {
       ] },
       { title: 'Exhibitions', items: [
         { period: '05/2026', text: 'Those Who Have Seen the World, Villa Scheibler, Festival of Ukrainian Books in Milan — photographer' },
-        { period: '10–12/2025', text: 'May I See Your Documents?.., YermilovCentre, Kharkiv — co-curator, project manager' },
+        { period: '10–12/2025', text: 'May I See Your Documents…, YermilovCentre, Kharkiv — co-curator, project manager' },
         { period: '04/2024', text: '2, 10, 300 Years Later, Balassagyarmat, Hungary — participant' },
         { period: '03/2024', text: 'Fleuraison de Kharkiv, CAPV gallery, Lille, France — participant (curated by Yevseviia Ziakina)' }
       ] },
@@ -84,7 +84,7 @@ const peopleBioEn: Record<string, { bio?: string[]; cv?: CvSection[] }> = {
         { text: 'Chekachkov Academy; MYPH educational programme; ArtHub cinematography course' }
       ] },
       { title: 'Curating', items: [
-        { period: '2025', text: 'May I See Your Documents?.., YermilovCentre, Kharkiv' },
+        { period: '2025', text: 'May I See Your Documents…, YermilovCentre, Kharkiv' },
         { period: '2024', text: 'Co-organisation of PHOTORUKH, Lviv; exhibition at the Khvylia space, Lviv' },
         { period: '2022', text: 'Roots, Dzyga, Lviv — debut of the Roots photographers’ association; Looking for Home' },
         { period: '2021', text: 'The Ceramist, Hudprom, Kharkiv — about Volodymyr Shapovalov, with the premiere of a documentary film' }
@@ -95,7 +95,7 @@ const peopleBioEn: Record<string, { bio?: string[]; cv?: CvSection[] }> = {
         { text: 'Exhibitions in Palermo, Lille, Paris, New York; publications in New York Magazine, Spalakh, Uncommon' }
       ] },
       { title: 'Awards', items: [
-        { period: '2024', text: 'Grant of the President of Ukraine for Young Artists — for the project May I See Your Documents?..' }
+        { period: '2024', text: 'Grant of the President of Ukraine for Young Artists — for the project May I See Your Documents…' }
       ] }
     ]
   },
@@ -117,7 +117,7 @@ const peopleBioEn: Record<string, { bio?: string[]; cv?: CvSection[] }> = {
       ] },
       { title: 'Nema theatre (actor and musician, 2023–2026)', items: [
         { period: '2025–2026', text: 'Playback performances at Kharkiv Pride Hub for the LGBTQ+ community, Kharkiv' },
-        { period: '2025', text: 'Playback performance within the exhibition May I See Your Documents?.., YermilovCentre, Kharkiv' },
+        { period: '2025', text: 'Playback performance within the exhibition May I See Your Documents…, YermilovCentre, Kharkiv' },
         { period: '2025', text: 'Post-documentary performance Ukraine.pov Stage version, YermilovCentre, Kharkiv' },
         { period: '2025', text: 'Playback performance The Glass Tower within the festival Kharkiv: Cultural, Municipal Gallery, Kharkiv' },
         { period: '2024–2025', text: 'A series of research performances on urban identity within the Kharkiv Sea festival, Kharkiv' },

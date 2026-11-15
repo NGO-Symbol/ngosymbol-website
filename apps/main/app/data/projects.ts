@@ -291,7 +291,7 @@ const entries: Project[] = [
     slug: '2-10-300',
     title: '2, 10, 300 років потому',
     yearStart: 2024,
-    city: 'Балашадьярмат',
+    city: 'Балашшадьярмат',
     country: 'Угорщина',
     kind: 'single',
     status: 'completed',
@@ -322,7 +322,7 @@ const entries: Project[] = [
     ],
     start: '2024-04-26',
     end: '2024-04-28',
-    venue: { city: 'Балашадьярмат', country: 'Угорщина' }
+    venue: { city: 'Балашшадьярмат', country: 'Угорщина' }
   },
   {
     slug: 'kharkivske-more',

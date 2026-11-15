@@ -2,12 +2,12 @@ export interface EventEn { title: string; description?: string[] }
 
 export const eventsEn: Record<string, EventEn> = {
   'pokazhit-svoi-dokumenty-vidkryttia': {
-    title: 'Opening of May I See Your Documents?..',
+    title: 'Opening of May I See Your Documents…',
     description: ['**Official exhibition opening**: speeches by the curators, project manager, director of YermilovCentre, rector of V. N. Karazin Kharkiv National University, and [[event:pokazhit-svoi-dokumenty-shreder-shredingera|Oleksii Chekal’s performance Schrödinger’s Shredder]].']
   },
   'pokazhit-svoi-dokumenty-shreder-shredingera': {
     title: 'Performance: Schrödinger’s Shredder',
-    description: ['[[person:oleksii-chekal|Oleksii Chekal]] performed **Schrödinger’s Shredder** on the opening day of May I See Your Documents?..']
+    description: ['[[person:oleksii-chekal|Oleksii Chekal]] performed **Schrödinger’s Shredder** on the opening day of May I See Your Documents…']
   },
   'pokazhit-svoi-dokumenty-ekskursiia': {
     title: 'Curators’ Tour',

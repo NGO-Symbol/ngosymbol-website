@@ -43,7 +43,7 @@ const appearanceTitle = (item: (typeof appearances)[number]) => {
 }
 const appearanceByline = (byline: string) => {
   if (!isEn.value) return byline
-  const placeMap: Record<string, string> = { 'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Київська область': 'Kyiv Region', 'Закарпаття': 'Zakarpattia', 'Мілан': 'Milan', 'Балашадьярмат': 'Balassagyarmat' }
+  const placeMap: Record<string, string> = { 'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Київська область': 'Kyiv Region', 'Закарпаття': 'Zakarpattia', 'Мілан': 'Milan', 'Балашшадьярмат': 'Balassagyarmat' }
   const parts = byline.split(' · ')
   return `${parts[0]} · ${placeMap[parts[1] ?? ''] ?? parts[1] ?? ''}`
 }
