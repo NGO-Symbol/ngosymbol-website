@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import SymSegmented from '@symbol/ui/app/components/Segmented.vue'
 const { isEn } = useLang()
-useSeoMeta({ title: () => isEn.value ? 'Join and support us' : 'Доєднатися і підтримати', description: () => isEn.value ? 'Support NGO Symbol through donations, patronage, partnership, or volunteering.' : 'Як підтримати ГО «Символ»: внески, меценатство, партнерство, волонтерство.' })
+const t = (uk: string, en: string) => isEn.value ? en : uk
+usePageSeo({ title: () => t('Підтримати: внесок, меценатство, волонтерство', 'Support us: donate, patronage, volunteering'), description: () => t('Підтримайте мистецькі проєкти й програми психічного здоров’я ГО «Символ»: разовий чи регулярний внесок, підтримка проєкту, партнерство, волонтерство.', 'Support NGO Symbol’s art projects and mental health programmes: a one-off or regular donation, project sponsorship, partnership or volunteering.') })
 
 const route = useRoute()
 const tab = ref<'patron' | 'community'>(route.hash === '#community' ? 'community' : 'patron')

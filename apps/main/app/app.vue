@@ -6,8 +6,7 @@ const { isEn } = useLang()
 const route = useRoute()
 
 // Search engines and social cards: one canonical address per page (with the trailing slash GitHub Pages uses),
-// the Ukrainian and English versions linked to each other, and a default share card that pages override.
-const SITE = 'https://symbol.ngo'
+// the Ukrainian and English versions linked to each other. Titles, descriptions and share cards: composables/usePageSeo.ts.
 const withSlash = (path: string) => (path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`)
 const canonical = computed(() => SITE + withSlash(route.path))
 const ukPath = computed(() => withSlash(switchLangPath(route.path, false)))
@@ -26,17 +25,13 @@ useSeoMeta({
     ? 'An independent Ukrainian organisation that develops contemporary culture and art and promotes attentive care for mental health.'
     : 'Незалежна українська організація, що розвиває сучасну культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.'),
   ogSiteName: () => (isEn.value ? 'NGO Symbol' : 'ГО «Символ»'),
-  ogType: 'website',
   ogUrl: canonical,
   ogLocale: () => (isEn.value ? 'en_US' : 'uk_UA'),
-  ogImage: `${SITE}/og-default.jpg`,
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
   twitterCard: 'summary_large_image'
 })
 useHead({
   htmlAttrs: { lang: () => (isEn.value ? 'en' : 'uk') },
-  titleTemplate: title => (isEn.value ? (title && title !== 'NGO Symbol' ? `${title} · NGO Symbol` : 'NGO Symbol') : (title && title !== 'ГО «Символ»' ? `${title} · ГО «Символ»` : 'ГО «Символ»')),
+  titleTemplate: title => siteTitle(title ?? undefined, isEn.value),
   script: [{
     // Back from a project site (?via=project, plugins/project-crossing.client.ts): no logo intro, tidy the address and
     // lift the violet curtain the project site dropped. After a browser «back» the leaving curtain is taken down.

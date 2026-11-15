@@ -1,4 +1,4 @@
-export interface EventEn { title: string; description?: string[] }
+export interface EventEn { title: string; seoTitle?: string; description?: string[] }
 
 export const eventsEn: Record<string, EventEn> = {
   'pokazhit-svoi-dokumenty-vidkryttia': {
@@ -32,6 +32,7 @@ export const eventsEn: Record<string, EventEn> = {
   },
   'pokazhit-svoi-dokumenty-zmina-dyskusiia': {
     title: 'Panel: Ukraine’s Human Rights Community During the War—How Are We Changing?',
+    seoTitle: 'Discussion on the human rights community in wartime',
     description: [
       'During the full-scale invasion, human rights work has become **part of everyday survival**: documenting the war, protecting civilians, and helping displaced and mobilised people. The discussion addressed **the cost of activism and moral resilience**, media representation, and a shared language between human rights, cultural, and academic communities.',
       'Speakers: Maksym Potapovych, Anna Sharyhina, and Iryna Yuzyk. Moderator: Inna Ilchenko, project manager at the ZMINA Human Rights Centre.'

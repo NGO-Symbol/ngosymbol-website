@@ -13,7 +13,7 @@ const appearanceName = (item: { title: string; to: string }) => {
   const slug = item.to.match(/\/projects\/([^/]+)/)?.[1]
   return slug ? projectsEn[slug]?.title ?? item.title : item.title
 }
-useSeoMeta({ title: () => t('Люди', 'People'), description: () => t('Митці, куратори, лектори й команда проєктів ГО «Символ».', 'Artists, curators, educators and the teams behind NGO Symbol projects.') })
+usePageSeo({ title: () => t('Люди: команда, куратори, митці, тренери', 'People: team, curators, artists, trainers'), description: () => t('Команда ГО «Символ», куратори, митці й тренери проєктів: Юрій Рассоха, Петро Чекаль, Ганна Франик, Олена Мордик та учасники виставок і тренінгів.', 'The NGO Symbol team, curators, artists and trainers: Yurii Rassokha, Petro Chekal, Hanna Franyk, Olena Mordyk and project participants.') })
 
 const query = ref('')
 const listed = computed(() => people
@@ -36,17 +36,17 @@ const groups = computed(() => [
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: () => JSON.stringify({
+    innerHTML: () => ldJson({
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: t('Люди ГО «Символ»', 'People of NGO Symbol'),
-      url: `https://symbol.ngo${isEn.value ? '/en' : ''}/people/`,
+      url: pageUrlOf('/people', isEn.value),
       mainEntity: {
         '@type': 'ItemList',
         itemListElement: listed.value.map(({ person }, index) => ({
           '@type': 'ListItem',
           position: index + 1,
-          url: `https://symbol.ngo${isEn.value ? '/en' : ''}/people/${person.slug}/`,
+          url: pageUrlOf(`/people/${person.slug}`, isEn.value),
           item: {
             '@type': 'Person',
             name: displayName(person),

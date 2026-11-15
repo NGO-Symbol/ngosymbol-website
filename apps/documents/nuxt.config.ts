@@ -17,7 +17,8 @@ export default defineNuxtConfig({
   extends: ['@symbol/brand'],
   // GitHub Pages serves every page as a folder (/projects/x/) and redirects /projects/x there; internal links
   // carry the slash so no visit pays for that redirect.
-  experimental: { defaults: { nuxtLink: { trailingSlash: 'append' } } },
+  // prerenderErrorPages: 404.html is the site's own error page (app/error.vue) rendered at build time, not an empty app shell.
+  experimental: { prerenderErrorPages: true, defaults: { nuxtLink: { trailingSlash: 'append' } } },
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
   alias: { '#symbol': main('app/data') },

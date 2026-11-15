@@ -199,6 +199,7 @@ export const events: SymbolEvent[] = [
   {
     slug: 'pokazhit-svoi-dokumenty-zmina-dyskusiia',
     title: 'Панельна дискусія «Правозахисна спільнота в Україні під час війни: як ми змінюємось?»',
+    seoTitle: 'Дискусія про правозахисну спільноту під час війни',
     project: 'pokazhit-svoi-dokumenty',
     format: 'discussion',
     start: '2025-11-15T16:00',

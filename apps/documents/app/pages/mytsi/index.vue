@@ -4,7 +4,30 @@ import { psdPeopleEn } from '#symbol/psd-artists-en'
 import { peopleEn } from '#symbol/people-en'
 
 const { isEn, t, localePath } = useLang()
-useSeoMeta({ title: () => t('Митці', 'Artists'), description: () => t('Митці виставки «Покажіть свої документи…» та їхні роботи.', 'Artists of the exhibition «May I See Your Documents…» and their works.') })
+usePageSeo({
+  title: () => t('Митці', 'Artists'),
+  description: () => t('20 митців і мисткинь виставки «Покажіть свої документи…» та їхні роботи: біографії, описи робіт, фотографії.', '20 artists of the exhibition «May I See Your Documents…» and their work: biographies, descriptions of the works, photographs.'),
+  graph: () => [
+    {
+      '@type': 'CollectionPage',
+      url: docsUrl('/mytsi', isEn.value),
+      name: t('Митці', 'Artists'),
+      inLanguage: isEn.value ? 'en' : 'uk',
+      about: { '@id': exhibitionId(isEn.value) },
+      isPartOf: { '@id': docsSiteId(isEn.value) },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: exhibitionArtists.map((artist, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: docsUrl(`/mytsi/${artist.slug}`, isEn.value),
+          item: { '@type': 'Person', name: artistName(artist, isEn.value), url: docsUrl(`/mytsi/${artist.slug}`, isEn.value) }
+        }))
+      }
+    },
+    docsBreadcrumbs(isEn.value, t('Митці', 'Artists'), '/mytsi')
+  ]
+})
 // On hover the portrait gives way to the photograph that shows the artist's work best (data/workPhotos.ts).
 const cover = (slug: string) => coverPhoto[slug] ?? workPhotos(slug)[0]
 </script>

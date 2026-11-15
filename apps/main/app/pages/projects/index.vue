@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
-useSeoMeta({ title: () => t('Проєкти', 'Projects'), description: () => t('Усі проєкти ГО «Символ» за роками: виставки, фільми, плейбек-театр, тренінги, фестивалі.', 'All NGO Symbol projects by year: exhibitions, films, playback theatre, training, and festivals.') })
+usePageSeo({ title: () => t('Проєкти: виставки, плейбек-театр, кіно, тренінги', 'Projects: exhibitions, theatre, film, training'), description: () => t('Проєкти ГО «Символ» за роками, з 2023: виставки сучасного мистецтва, документальне кіно, плейбек-театр, тренінги з психічного здоров’я, фестивалі.', 'NGO Symbol projects by year since 2023: contemporary art exhibitions, documentary film, playback theatre, mental health training and festivals.') })
 
 const route = useRoute()
 const router = useRouter()

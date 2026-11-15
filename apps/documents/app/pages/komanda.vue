@@ -5,7 +5,29 @@ import { psdPeopleEn } from '#symbol/psd-artists-en'
 import { peopleEn } from '#symbol/people-en'
 
 const { isEn, t } = useLang()
-useSeoMeta({ title: () => t('Команда', 'Team'), description: () => t('Команда виставки «Покажіть свої документи…» та ГО «Символ».', 'The team of «May I See Your Documents…» and NGO Symbol.') })
+usePageSeo({
+  title: () => t('Команда', 'Team'),
+  description: () => t('Команда виставки «Покажіть свої документи…» та ГО «Символ»: куратори, менеджерка проєкту, дизайн айдентики, координація від ЄрміловЦентру.', 'The team of «May I See Your Documents…» and NGO Symbol: curators, project manager, identity design, coordination from YermilovCentre.'),
+  graph: () => [
+    {
+      '@type': 'AboutPage',
+      url: docsUrl('/komanda', isEn.value),
+      name: t('Команда', 'Team'),
+      inLanguage: isEn.value ? 'en' : 'uk',
+      about: { '@id': exhibitionId(isEn.value) },
+      isPartOf: { '@id': docsSiteId(isEn.value) },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: team.map((credit, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: { '@type': 'Person', name: personName(credit.person), jobTitle: isEn.value ? (roleEn[credit.role] ?? credit.role) : credit.role, url: symbolPersonUrl(credit.person.slug, isEn.value) }
+        }))
+      }
+    },
+    docsBreadcrumbs(isEn.value, t('Команда', 'Team'), '/komanda')
+  ]
+})
 const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Менеджерка проєкту': 'Project manager', 'Дизайн айдентики та шрифт EXDocument': 'Identity design and the EXDocument typeface', 'Координація від ЄрміловЦентру': 'Coordination, YermilovCentre' }
 const personName = (person: (typeof team)[number]['person']) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
 </script>

@@ -7,7 +7,12 @@ import { projectsEn } from '#symbol/projects-en'
 import { organizationsEn } from '#symbol/organizations-en'
 
 const { isEn, t, localePath } = useLang()
-useSeoMeta({ title: () => t('Про виставку', 'About the exhibition') })
+// The approved search title already carries the exhibition's name, so nothing is added to it.
+usePageSeo({
+  title: () => t('Покажіть свої документи… — виставка в ЄрміловЦентрі, Харків', 'May I See Your Documents… — exhibition, Kharkiv'),
+  description: () => t('Сайт виставки про документ як мистецький феномен: 20 митців, куратори Петро Чекаль і Юрій Рассоха, ЄрміловЦентр, Харків, 17.10–07.12.2025. Проєкт ГО «Символ».', 'The exhibition about the document as an artistic phenomenon: 20 artists, curators Petro Chekal and Yurii Rassokha, YermilovCentre, Kharkiv, 17.10–07.12.2025.'),
+  graph: () => [exhibitionNode(isEn.value), docsWebsiteNode(isEn.value)]
+})
 const exhibitionBody = computed(() => isEn.value ? projectsEn[exhibition.slug]?.body ?? exhibition.body : exhibition.body)
 const orgName = (org: NonNullable<(typeof exhibitionPartners)[number]>) => isEn.value ? organizationsEn[org.slug] ?? org.name : org.name
 
