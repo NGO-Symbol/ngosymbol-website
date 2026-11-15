@@ -13,7 +13,11 @@ export const langSwitch = { explicit: false }
 
 export function useLang() {
   const route = useRoute()
-  const isEn = computed(() => isEnPath(route.path))
+  // The static 404.html is built for «/404.html» (Ukrainian) and opened at the missing address; while it hydrates the error
+  // page keeps the language it was built in, then (plugins/lang-settled.client.ts) follows the address.
+  const error = useError()
+  const settled = useState('lang-settled', () => false)
+  const isEn = computed(() => isEnPath(route.path) && (!error.value || settled.value))
   /** Prefix an internal link for the current language. */
   const localePath = (path: string) => (isEn.value ? switchLangPath(path, true) : path)
   return { isEn, localePath }

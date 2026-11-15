@@ -1,7 +1,30 @@
 <script setup lang="ts">
 import { eventsEn } from '#symbol/events-en'
 const { isEn, t } = useLang()
-useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Паралельна програма виставки «Покажіть свої документи…»: екскурсії, розмови, дискусії, перформанси.', 'The programme of the exhibition «May I See Your Documents…»: tours, talks, discussions, performances.') })
+usePageSeo({
+  title: () => t('Події', 'Events'),
+  description: () => t('Паралельна програма виставки «Покажіть свої документи…»: екскурсії, розмови з митцями, лекція, дискусії, плейбек-театр і музичний перформанс.', 'The programme of the exhibition «May I See Your Documents…»: tours, artist talks, a lecture, discussions, playback theatre and a music performance.'),
+  graph: () => [
+    {
+      '@type': 'CollectionPage',
+      url: docsUrl('/podii', isEn.value),
+      name: t('Події', 'Events'),
+      inLanguage: isEn.value ? 'en' : 'uk',
+      about: { '@id': exhibitionId(isEn.value) },
+      isPartOf: { '@id': docsSiteId(isEn.value) },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: programme.map((event, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: `${docsUrl('/podii', isEn.value)}#${event.slug}`,
+          item: { '@type': 'Event', name: eventCopy(event).title, startDate: kyivDateTime(event.start), endDate: kyivDateTime(event.end ?? event.start), url: pageUrlOf(`/events/${event.slug}`, isEn.value), superEvent: { '@id': exhibitionId(isEn.value) } }
+        }))
+      }
+    },
+    docsBreadcrumbs(isEn.value, t('Події', 'Events'), '/podii')
+  ]
+})
 const eventCopy = (event: (typeof programme)[number]) => isEn.value ? eventsEn[event.slug] ?? event : event
 </script>
 

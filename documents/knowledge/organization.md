@@ -6,6 +6,9 @@
 - English-facing name: **NGO Symbol**. `USER_CONFIRMED`
 - Registration code: **45221328**. `EXTRACTED`
 - Registered: **2023-10-11**, Kharkiv. `EXTRACTED`
+- Legal name: **Громадська організація «Символ»**; short forms «NGO Symbol», «Symbol NGO». Used in structured data (`legalName`, `alternateName`). `USER_CONFIRMED` 2026-11-15
+- Hungarian partner city is written **«Балашшадьярмат»** in Ukrainian («у Балашшадьярматі»), Balassagyarmat in English. `USER_CONFIRMED` 2026-11-15
+- Role in «Харківське море» (2024 and 2026): partner, not creator or organizer. `USER_CONFIRMED` 2026-11-15
 - Head/director: **Юрій Рассоха**. `USER_CONFIRMED` and `EXTRACTED`
 - Website domain: **symbol.ngo**. `USER_CONFIRMED`
 - Instagram: **@symbol.ngo**. `EXTRACTED`

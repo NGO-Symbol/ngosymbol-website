@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { eventsEn } from '~/data/events-en'
+import { altIn } from '~/data/alt-en'
 import { projectsEn } from '~/data/projects-en'
 import { psdPeopleEn } from '~/data/psd-artists-en'
 import { peopleEn } from '~/data/people-en'
@@ -25,44 +26,65 @@ const partners = toTiles([...(event.partners ?? [])].sort(bySignificance))
 const donors = toTiles(project.donors)
 
 const shareImage = event.gallery?.[0]?.src ?? project.poster ?? project.gallery?.[0]?.src
-const shareImageUrl = shareImage ? `https://symbol.ngo${shareImage}` : undefined
-const pageUrl = computed(() => `https://symbol.ngo${isEn.value ? '/en' : ''}/events/${event.slug}/`)
-const schemaImages = computed(() => {
-  const photos = event.gallery?.length ? event.gallery : (shareImage ? [{ src: shareImage, alt: eventText.value.title }] : [])
-  return photos.map(photo => ({
-    '@type': 'ImageObject',
-    contentUrl: `https://symbol.ngo${photo.src}`,
-    url: `https://symbol.ngo${photo.src}`,
-    caption: photo.alt || eventText.value.title
-  }))
+const pageUrl = computed(() => pageUrlOf(`/events/${event.slug}`, isEn.value))
+const schemaImages = computed(() => imageObjects(
+  event.gallery?.length ? event.gallery : (shareImage ? [{ src: shareImage, alt: eventText.value.title }] : []),
+  isEn.value,
+  eventText.value.title
+))
+// Search title: events that share a name (the same tour on several days, a training run four times) get their date,
+// so no two pages have the same title. The name shown on the page stays as it is.
+const searchTitle = computed(() => {
+  const title = (isEn.value ? eventsEn[event.slug]?.seoTitle : event.seoTitle) ?? eventText.value.title
+  const shared = events.some(other => other.slug !== event.slug && eventTitleIn(other, isEn.value) === title)
+  return shared ? `${title}, ${isEn.value ? formatDateEn(event.start) : formatDate(event.start)}` : title
 })
-useSeoMeta({
-  title: () => eventText.value.title,
+usePageSeo({
+  title: searchTitle,
   description: () => `${isEn.value ? formatRangeEn(event.start, event.end) : formatRange(event.start, event.end)} · ${placeLine.value}`,
-  ogImage: shareImageUrl,
-  ogImageAlt: () => event.gallery?.[0]?.alt ?? eventText.value.title,
-  twitterImage: shareImageUrl
+  image: shareImage,
+  imageAlt: () => altIn(event.gallery?.[0]?.alt ?? '', isEn.value) || eventText.value.title
 })
 
-// schema.org Event for search engines.
+// schema.org Event for search engines: Kyiv time with its offset, the end (the start for a one-day event), the venue as
+// a Place with the parts of its address the data has, and the organizer by the project's `role`.
+const place = computed(() => {
+  const venue = event.venue
+  const name = (isEn.value ? venue.nameEn ?? translatePlace(venue.name, true) : venue.name) ?? translatePlace(venue.city, isEn.value)
+  const street = isEn.value ? venue.addressEn ?? translatePlace(venue.address, true) : venue.address
+  return {
+    '@type': 'Place',
+    name,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: street,
+      addressLocality: translatePlace(venue.city, isEn.value),
+      addressCountry: translatePlace(venue.country, isEn.value)
+    }
+  }
+})
+const organizer = computed(() => project.role === 'partner'
+  ? (project.organizer ? { '@type': 'Organization', name: isEn.value ? project.organizer.nameEn : project.organizer.name } : undefined)
+  : orgRef(isEn.value))
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: () => JSON.stringify({
+    innerHTML: () => ldJson({
       '@context': 'https://schema.org',
       '@type': 'Event',
       name: eventText.value.title,
-      startDate: event.start,
-      endDate: event.end,
-      location: { '@type': 'Place', name: event.venue.name ?? event.venue.city, address: venueLine(event.venue) },
-      organizer: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' },
+      startDate: kyivDateTime(event.start),
+      endDate: kyivDateTime(event.end ?? event.start),
+      location: place.value,
+      organizer: organizer.value,
+      contributor: project.role === 'partner' ? orgRef(isEn.value) : undefined,
       url: pageUrl.value,
       inLanguage: isEn.value ? 'en' : 'uk',
       description: eventText.value.description?.map(plainText).join(' ').slice(0, 500),
       image: schemaImages.value.length ? schemaImages.value : undefined,
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
-      superEvent: { '@type': 'CreativeWork', name: project.title, url: `https://symbol.ngo/projects/${project.slug}/` }
+      superEvent: { '@type': 'CreativeWork', name: projectText.value.title, url: pageUrlOf(`/projects/${project.slug}`, isEn.value) }
     })
   }]
 })
@@ -70,7 +92,11 @@ useHead({
 const googleUrl = computed(() => {
   const stamp = (iso: string, fallbackTime: string) => `${iso.slice(0, 10).replace(/-/g, '')}T${iso.length > 10 ? iso.slice(11, 16).replace(':', '') : fallbackTime}00`
   const start = stamp(event.start, '0000')
-  const end = stamp(event.end ?? event.start, '2359')
+  // A timed event without an end lasts two hours (as in the calendar feed, server/routes/events.ics.ts).
+  const timedWithoutEnd = event.start.length > 10 && !(event.end && event.end.length > 10)
+  const end = timedWithoutEnd
+    ? new Date(new Date(`${event.start.slice(0, 16)}:00Z`).getTime() + 120 * 60000).toISOString().slice(0, 16).replace(/[-:]/g, '') + '00'
+    : stamp(event.end ?? event.start, '2359')
   const params = new URLSearchParams({ action: 'TEMPLATE', text: eventText.value.title, dates: `${start}/${end}`, location: placeLine.value, ctz: 'Europe/Kyiv' })
   return `https://calendar.google.com/calendar/render?${params}`
 })

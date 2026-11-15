@@ -43,7 +43,7 @@ const appearanceTitle = (item: (typeof appearances)[number]) => {
 }
 const appearanceByline = (byline: string) => {
   if (!isEn.value) return byline
-  const placeMap: Record<string, string> = { 'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Київська область': 'Kyiv Region', 'Закарпаття': 'Zakarpattia', 'Мілан': 'Milan', 'Балашадьярмат': 'Balassagyarmat' }
+  const placeMap: Record<string, string> = { 'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Київська область': 'Kyiv Region', 'Закарпаття': 'Zakarpattia', 'Мілан': 'Milan', 'Балашшадьярмат': 'Balassagyarmat' }
   const parts = byline.split(' · ')
   return `${parts[0]} · ${placeMap[parts[1] ?? ''] ?? parts[1] ?? ''}`
 }
@@ -60,25 +60,33 @@ const bioParagraphs = computed(() => {
   return paragraphs
 })
 
-const pageUrl = computed(() => `https://symbol.ngo${isEn.value ? '/en' : ''}/people/${person.slug}/`)
-const portraitUrl = person.photo ? `https://symbol.ngo${person.photo}` : undefined
+const pageUrl = computed(() => pageUrlOf(`/people/${person.slug}`, isEn.value))
+const portraitUrl = person.photo ? `${SITE}${person.photo}` : undefined
 const portraitId = `${pageUrl.value}#primary-image`
 const personId = `${pageUrl.value}#person`
+const tagLine = computed(() => person.tags?.map(tag => (isEn.value ? tagEn[tag] ?? tag : tag)).join(', '))
 
-useSeoMeta({
+// A short line («Митець піксель-арту.») is a poor search snippet: it is completed with the name and the projects the person took part in.
+const personDescription = computed(() => {
+  const lead = displayPerson.value.shortBio
+  const titles = appearances.slice(0, 3).map(appearanceTitle).join(', ')
+  if (lead && lead.length >= 60) return lead
+  const projectsLine = titles ? t(` Проєкти ГО «Символ»: ${titles}.`, ` NGO Symbol projects: ${titles}.`) : ''
+  return lead ? `${displayPerson.value.name}: ${lead}${projectsLine}` : t(`${displayPerson.value.name} у проєктах ГО «Символ».${projectsLine}`, `${displayPerson.value.name} in NGO Symbol projects.${projectsLine}`)
+})
+usePageSeo({
   title: () => displayPerson.value.name,
-  description: () => displayPerson.value.shortBio ?? t(`${displayPerson.value.name} у проєктах ГО «Символ».`, `${displayPerson.value.name} in NGO Symbol projects.`),
+  description: () => personDescription.value,
   // The portrait is the share image, so a search or a shared link shows the person's own photo.
-  ogImage: portraitUrl,
-  ogImageAlt: () => person.photo ? displayPerson.value.name : undefined,
-  twitterImage: portraitUrl,
-  twitterImageAlt: () => person.photo ? displayPerson.value.name : undefined
+  image: person.photo,
+  imageAlt: () => (person.photo ? displayPerson.value.name : undefined),
+  type: 'profile'
 })
 // ProfilePage + ImageObject explicitly make the portrait the representative image of this exact profile.
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: () => JSON.stringify({
+    innerHTML: () => ldJson({
       '@context': 'https://schema.org',
       '@graph': [
         {
@@ -105,9 +113,9 @@ useHead({
           description: displayPerson.value.shortBio,
           url: pageUrl.value,
           image: portraitUrl ? { '@id': portraitId } : undefined,
-          jobTitle: displayPerson.value.teamRole ?? person.tags?.join(', '),
+          jobTitle: displayPerson.value.teamRole ?? tagLine.value,
           sameAs: person.links?.map(link => link.url),
-          affiliation: person.team ? { '@type': 'Organization', name: isEn.value ? 'NGO Symbol' : 'ГО «Символ»', url: 'https://symbol.ngo/' } : undefined
+          affiliation: person.team ? orgRef(isEn.value) : undefined
         }
       ].filter(Boolean)
     })

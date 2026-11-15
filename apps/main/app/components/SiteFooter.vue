@@ -25,6 +25,7 @@ const labels: Record<string, [string, string]> = {
       <div>
         <span class="label">{{ isEn ? 'Sections' : 'Розділи' }}</span>
         <NuxtLink v-for="path in sections" :key="path" :to="localePath(path)">{{ labels[path]![isEn ? 1 : 0] }}</NuxtLink>
+        <NuxtLink :to="localePath('/contact')">{{ isEn ? 'Contact' : 'Контакти' }}</NuxtLink>
       </div>
       <div>
         <span class="label">{{ isEn ? 'Contact' : 'Зв’язок' }}</span>

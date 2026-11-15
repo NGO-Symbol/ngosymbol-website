@@ -38,7 +38,7 @@ export const translate = (uk: string, toEn: boolean) => (toEn ? en[uk] ?? uk : u
 
 const places: Record<string, string> = {
   'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Закарпаття': 'Zakarpattia', 'Київська область': 'Kyiv Region',
-  'Мілан': 'Milan', 'Італія': 'Italy', 'Угорщина': 'Hungary', 'Балашадьярмат': 'Balassagyarmat',
+  'Мілан': 'Milan', 'Італія': 'Italy', 'Угорщина': 'Hungary', 'Балашшадьярмат': 'Balassagyarmat',
   'Біла Церква': 'Bila Tserkva', 'Берегове': 'Berehove', 'Ужгород': 'Uzhhorod',
   'майдан Свободи, 4': '4 Svobody Square', 'ЄрміловЦентр': 'YermilovCentre'
 }

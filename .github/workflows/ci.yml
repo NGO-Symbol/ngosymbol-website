@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # full history: the sitemap's lastmod dates come from git (apps/main/server/routes/sitemap.xml.ts)
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.25.0

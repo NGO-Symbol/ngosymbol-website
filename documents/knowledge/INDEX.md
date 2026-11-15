@@ -1,6 +1,6 @@
 # NGO Symbol knowledge base
 
-Last consolidated: 2026-10-29.
+Last consolidated: 2026-11-15.
 
 This directory is the canonical memory for the institutional website and its project websites. It borrows Graphify’s useful ideas—explicit entities and relationships, source-aware confidence labels, architecture documentation, deterministic validation, and agent guidance—without importing Graphify’s application code.
 

@@ -240,7 +240,7 @@ export const people: Person[] = [
     slug: 'oleksii-sai',
     name: 'Олексій Сай',
     tags: ['Художник'],
-    links: [{ label: 'Сайт', url: 'https://oleksiysai.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/oleksiysai/' }, { label: 'Facebook', url: 'https://www.facebook.com/liosha.say' }, { label: 'Вікіпедія', url: 'https://en.wikipedia.org/wiki/Oleksiy_Sai' }],
+    links: [{ label: 'Сайт', url: 'https://oleksiysai.com/' }, { label: 'Instagram', url: 'https://www.instagram.com/oleksiysai/' }, { label: 'Facebook', url: 'https://www.facebook.com/liosha.say' }],
     photo: '/media/people/oleksii-sai.jpg',
     shortBio: 'Олексій Сай — український художник, автор Excel-Art, номінант PinchukArtCentre Prize (2009); живе й працює в Києві.',
     // Bio sources (2026-10-30): HEK Basel (share.hek.ch), Voloshyn Gallery, Wikipedia (EN, incl. Burning Man pages),
@@ -278,7 +278,7 @@ export const people: Person[] = [
     slug: 'alina-prokopenko',
     name: 'Аліна Прокопенко (Apris)',
     tags: ['Фуд-дизайнерка', 'Мисткиня'],
-    links: [{ label: 'Сайт', url: 'https://www.apris.art/' }, { label: 'Instagram', url: 'https://www.instagram.com/a.pr.is' }],
+    links: [{ label: 'Instagram', url: 'https://www.instagram.com/a.pr.is' }],
     photo: '/media/people/alina-prokopenko.jpg',
     shortBio: 'Аліна Прокопенко (Aprís) — українська фуд-дизайнерка й кондитерка, що працює в Парижі з модними домами.',
     // Bio sources (2026-10-30): Hypebae (2026), Luxurious Magazine, Lulu Bistrot, The Upcoming / Broadsheet (London 2025), SF Standard.

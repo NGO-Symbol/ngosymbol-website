@@ -44,9 +44,14 @@ export interface Project {
   kind: ProjectKind
   status: ProjectStatus
   role: ProjectRole
+  /** Who runs the project when it is not Symbol (`role: 'partner'`): shown in structured data as the organizer. */
+  organizer?: { name: string; nameEn: string }
   formats: string[]
   directions: string[]
   summary: string
+  /** Search-result title (without the « · ГО «Символ»» suffix) and description; the year is written once, inside the title. */
+  seoTitle?: string
+  seoDescription?: string
   body?: Paragraphs
   concept?: Paragraphs
   tone: Tone
@@ -81,6 +86,8 @@ export interface Project {
 export interface SymbolEvent {
   slug: string
   title: string
+  /** A shorter title for search results, when the event's name is longer than a result shows (about 60 characters with the site name). */
+  seoTitle?: string
   project: string
   format: string
   start: string

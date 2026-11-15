@@ -6,7 +6,7 @@ export const news: NewsItem[] = [
     slug: 'holosy-u-rusi-culture-helps-solidarity',
     date: '2026-07-09',
     title: '«Голоси у русі» отримали підтримку програми «Культура допомагає: Солідарність»',
-    body: ['Проєкт плейбек-театру на Закарпатті співфінансується в межах програми Culture Helps Solidarity, яку реалізує консорціум на чолі з European Cultural Foundation за підтримки «Креативної Європи». [[project:holosy-u-rusi]]'],
+    body: ['Проєкт плейбек-театру на Закарпатті співфінансується в межах програми Culture Helps Solidarity, яку реалізує консорціум на чолі з European Cultural Foundation. Програму співфінансує Європейський Союз. [[project:holosy-u-rusi]]'],
     project: 'holosy-u-rusi'
   },
   {

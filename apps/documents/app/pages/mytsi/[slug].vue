@@ -21,28 +21,26 @@ const photoGroups = (artistPhotoGroups[artist.slug] ?? []).map((group, groupInde
 }))
 const photos = photoGroups.flatMap(group => group.photos)
 const portraits = [artist.person, ...artist.coAuthors].filter((person): person is NonNullable<typeof person> & { photo: string } => !!person?.photo)
-const pageUrl = computed(() => `https://symbol.ngo/documentsart${isEn.value ? '/en' : ''}/mytsi/${artist.slug}/`)
+const pageUrl = computed(() => docsUrl(`/mytsi/${artist.slug}`, isEn.value))
 const sharePhoto = computed(() => portraits[0]?.photo ?? photos[0]?.src)
 const sharePhotoAlt = computed(() => portraits[0] ? ((isEn.value && (psdPeopleEn[portraits[0].slug]?.name ?? portraits[0].name)) || portraits[0].name) : `${displayArtist.name}: «${photoGroups[0]?.title ?? displayArtist.works[0]?.title ?? ''}»`)
 
-useSeoMeta({
-  title: () => displayArtist.name,
+const artistTitle = computed(() => displayArtist.name)
+usePageSeo({
+  title: artistTitle,
   description: () => displayArtist.bio[0],
-  ogType: 'profile',
-  ogImage: () => sharePhoto.value ? `https://symbol.ngo${sharePhoto.value}` : undefined,
-  ogImageAlt: sharePhotoAlt,
-  twitterImage: () => sharePhoto.value ? `https://symbol.ngo${sharePhoto.value}` : undefined
-})
-useHead({
-  script: [{
-    type: 'application/ld+json',
-    innerHTML: () => JSON.stringify({
-      '@context': 'https://schema.org',
+  type: 'profile',
+  image: sharePhoto,
+  imageAlt: sharePhotoAlt,
+  graph: () => [
+    {
       '@type': 'ProfilePage',
       '@id': pageUrl.value,
       url: pageUrl.value,
       inLanguage: isEn.value ? 'en' : 'uk',
       name: displayArtist.name,
+      isPartOf: { '@id': docsSiteId(isEn.value) },
+      about: { '@id': exhibitionId(isEn.value) },
       primaryImageOfPage: sharePhoto.value ? {
         '@type': 'ImageObject',
         contentUrl: `https://symbol.ngo${sharePhoto.value}`,
@@ -67,8 +65,9 @@ useHead({
           caption: `${displayArtist.name}: «${group.title}»`
         }))
       }))
-    })
-  }]
+    },
+    docsBreadcrumbs(isEn.value, displayArtist.name, `/mytsi/${artist.slug}`, { label: isEn.value ? 'Artists' : 'Митці', path: '/mytsi' })
+  ]
 })
 const creditEn: Record<string, string> = { 'Олександр Осіпов': 'Oleksandr Osipov', 'Петро Чекаль': 'Petro Chekal' }
 const translateCredit = (credit: string | undefined) => credit && isEn.value ? (creditEn[credit] ?? credit) : credit
