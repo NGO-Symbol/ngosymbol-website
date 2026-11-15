@@ -46,6 +46,17 @@ const dateOnly = (iso: string, addDays = 0) => {
   return date.toISOString().slice(0, 10).replace(/-/g, '')
 }
 
+// A timed event without an end lasts this long in the calendar (the programme's shortest listed events run 1.5–2 hours).
+const DEFAULT_MINUTES = 120
+/** Local time `minutes` later, as an ICS local date-time (no time zone: TZID=Europe/Kyiv is applied by the caller). */
+const plusMinutes = (iso: string, minutes: number) => {
+  const date = new Date(`${iso.slice(0, 16)}:00Z`)
+  date.setUTCMinutes(date.getUTCMinutes() + minutes)
+  return date.toISOString().slice(0, 16).replace(/[-:]/g, '') + '00'
+}
+// DTSTAMP is a content date, never the build time: the day the event takes place (the feed then stays the same between builds).
+const contentStamp = (iso: string) => `${iso.slice(0, 10).replace(/-/g, '')}T000000Z`
+
 export default defineEventHandler((event) => {
   const lines = [
     'BEGIN:VCALENDAR',
@@ -66,9 +77,9 @@ export default defineEventHandler((event) => {
     lines.push(
       'BEGIN:VEVENT',
       `UID:${item.slug}@symbol.ngo`,
-      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
+      `DTSTAMP:${contentStamp(item.start)}`,
       timed ? `DTSTART;TZID=Europe/Kyiv:${stamp(item.start, '0000')}` : `DTSTART;VALUE=DATE:${dateOnly(item.start)}`,
-      timed ? `DTEND;TZID=Europe/Kyiv:${stamp(item.end ?? item.start, '2359')}` : `DTEND;VALUE=DATE:${dateOnly(item.end ?? item.start, 1)}`,
+      timed ? `DTEND;TZID=Europe/Kyiv:${item.end && item.end.length > 10 ? stamp(item.end, '2359') : plusMinutes(item.start, DEFAULT_MINUTES)}` : `DTEND;VALUE=DATE:${dateOnly(item.end ?? item.start, 1)}`,
       `SUMMARY:${escape(item.title)}`,
       `LOCATION:${escape(venueLine(item.venue))}`,
       `DESCRIPTION:${escape(`Проєкт «${item.project.title}». https://symbol.ngo${item.to}`)}`,

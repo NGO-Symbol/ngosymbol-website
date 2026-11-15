@@ -25,7 +25,9 @@ function animateMark(event: MouseEvent) {
 // The switch keeps the visitor on the same page; the header speaks the page's language.
 const route = useRoute()
 const { isEn } = useLang()
-const otherLang = (toEn: boolean) => ({ path: switchLangPath(route.path, toEn), query: route.query, hash: route.hash })
+// On the error page the address is a missing one (or «/404.html» in the static build): the switch leads to the home page.
+const error = useError()
+const otherLang = (toEn: boolean) => (error.value ? { path: toEn ? '/en' : '/' } : { path: switchLangPath(route.path, toEn), query: route.query, hash: route.hash })
 const choose = () => { langSwitch.explicit = true }
 const langOptions: { value: 'uk' | 'en'; label: string }[] = [{ value: 'uk', label: 'UA' }, { value: 'en', label: 'EN' }]
 const nav = computed(() => isEn.value
