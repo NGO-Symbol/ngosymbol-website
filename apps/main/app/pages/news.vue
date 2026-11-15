@@ -2,7 +2,7 @@
 import { newsEn } from '~/data/editorial-en'
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
-useSeoMeta({ title: () => t('Новини', 'News'), description: () => t('Новини ГО «Символ»: виставки, гранти, події.', 'NGO Symbol news: exhibitions, grants, and events.') })
+usePageSeo({ title: () => t('Новини', 'News'), description: () => t('Новини ГО «Символ»: виставки, гранти, події.', 'NGO Symbol news: exhibitions, grants, and events.') })
 const items = [...news].sort((a, b) => b.date.localeCompare(a.date))
 const display = (item: (typeof news)[number]) => isEn.value ? newsEn[item.slug] ?? item : item
 </script>

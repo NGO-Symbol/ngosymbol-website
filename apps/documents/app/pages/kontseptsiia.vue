@@ -4,7 +4,24 @@
 import { concept, conceptEn, conceptLead, conceptLeadEn } from '~/data/concept'
 
 const { isEn, t } = useLang()
-useSeoMeta({ title: () => t('Кураторська концепція', 'Curatorial concept'), description: () => (isEn.value ? conceptLeadEn : conceptLead) })
+usePageSeo({
+  title: () => t('Кураторська концепція', 'Curatorial concept'),
+  description: () => (isEn.value ? conceptLeadEn : conceptLead),
+  graph: () => [
+    {
+      '@type': 'Article',
+      '@id': `${docsUrl('/kontseptsiia', isEn.value)}#concept`,
+      headline: t('Кураторська концепція', 'Curatorial concept'),
+      url: docsUrl('/kontseptsiia', isEn.value),
+      inLanguage: isEn.value ? 'en' : 'uk',
+      about: { '@id': exhibitionId(isEn.value) },
+      isPartOf: { '@id': docsSiteId(isEn.value) },
+      author: (exhibitionNode(isEn.value).contributor ?? []).map(({ name, url }) => ({ '@type': 'Person', name, url })),
+      publisher: orgRef(isEn.value)
+    },
+    docsBreadcrumbs(isEn.value, t('Кураторська концепція', 'Curatorial concept'), '/kontseptsiia')
+  ]
+})
 const blocks = computed(() => (isEn.value ? conceptEn : concept))
 // The text is split where the concept turns from «what a document is» to documents as instruments of power.
 const split = computed(() => Math.max(1, blocks.value.findIndex(block => /інструменти влади|instruments of power/i.test(block.text ?? ''))))

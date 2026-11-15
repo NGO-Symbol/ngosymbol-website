@@ -123,3 +123,43 @@ export function textParts(source: string, english = false): TextPart[] {
   if (last < paragraph.length) parts.push({ text: paragraph.slice(last) })
   return parts
 }
+
+// ---------- Structured data: the exhibition as an ExhibitionEvent ----------
+// Dates are the programme's first and last day (the opening 2025-10-17 and the finissage 2025-12-07, USER_CONFIRMED in
+// documents/knowledge/project-registry.md), the venue is the one of the programme's events, the curators are the
+// project's «Куратори» credits.
+const placesEn: Record<string, string> = { 'ЄрміловЦентр': 'YermilovCentre', 'майдан Свободи, 4': '4 Svobody Square', 'Харків': 'Kharkiv' }
+const inEn = (value: string | undefined, english: boolean) => (english && value ? placesEn[value] ?? value : value)
+const personNameIn = (person: Person, english: boolean) => (english ? psdArtistsEn[person.slug]?.name ?? peopleEn[person.slug]?.name : undefined) ?? person.name
+
+export const exhibitionDates = {
+  start: programme[0]!.start.slice(0, 10),
+  end: (programme.at(-1)!.end ?? programme.at(-1)!.start).slice(0, 10)
+}
+
+export function exhibitionNode(english: boolean) {
+  const venue = programme[0]!.venue
+  const copy = english ? projectsEn[exhibition.slug] : undefined
+  const curators = (exhibition.people ?? []).filter(credit => credit.role === 'Куратори').map(credit => personOf(credit.person)).filter((person): person is Person => !!person)
+  return {
+    '@type': 'ExhibitionEvent',
+    '@id': exhibitionId(english),
+    name: copy?.title ?? exhibition.title,
+    description: copy?.seoDescription ?? exhibition.seoDescription,
+    url: docsUrl('/', english),
+    inLanguage: english ? 'en' : 'uk',
+    startDate: exhibitionDates.start,
+    endDate: exhibitionDates.end,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: {
+      '@type': 'Place',
+      name: inEn(venue.name, english),
+      url: 'https://yermilovcentre.org',
+      address: { '@type': 'PostalAddress', streetAddress: inEn(venue.address, english), addressLocality: inEn(venue.city, english) }
+    },
+    organizer: orgRef(english),
+    contributor: curators.map(person => ({ '@type': 'Person', name: personNameIn(person, english), jobTitle: english ? 'Curator' : 'Куратор', url: symbolPersonUrl(person.slug, english) })),
+    image: exhibition.poster ? [`${SITE}${exhibition.poster}`] : undefined
+  }
+}

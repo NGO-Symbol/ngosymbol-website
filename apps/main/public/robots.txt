@@ -1,5 +1,38 @@
-# symbol.ngo is open to search engines (2026-10-30).
+# symbol.ngo is open to search engines (2026-10-30) and to AI search: being found and cited is what an
+# organisation's site is for.
+
 User-agent: *
 Allow: /
+
+# AI search and assistants: they fetch a page to answer a person's question and link back to it. Allowed.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+Allow: /
+
+# AI training crawlers: they copy pages to train models, with no link back. The artists of the exhibition
+# «Покажіть свої документи…» did not consent to their work being used for AI training, so these crawlers are kept out of
+# everything that shows that work. The rest of the site (texts about projects, events, people) stays readable.
+#   /documentsart/                         the exhibition site: artist pages, works, concept
+#   /media/people/works/                   photographs of the artists' works (+ /media/_opt/…: the same files as AVIF)
+#   /media/projects/pokazhit-svoi-dokumenty/ and /media/events/pokazhit-svoi-dokumenty-…
+#                                          the exhibition's own photographs: the works themselves, hover covers, views of the halls
+# A crawler obeys the one group that names it, so an AI search bot above is not affected by these lines.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+Disallow: /documentsart/
+Disallow: /media/people/works/
+Disallow: /media/_opt/people/works/
+Disallow: /media/projects/pokazhit-svoi-dokumenty/
+Disallow: /media/_opt/projects/pokazhit-svoi-dokumenty/
+Disallow: /media/events/pokazhit-svoi-dokumenty-
+Disallow: /media/_opt/events/pokazhit-svoi-dokumenty-
 
 Sitemap: https://symbol.ngo/sitemap.xml

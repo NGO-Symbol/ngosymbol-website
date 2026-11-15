@@ -82,6 +82,18 @@ export const isUpcoming = (item: { start: string; end?: string }) => (item.end ?
 
 export const eventsOfProject = (slug: string) => events.filter(event => event.project === slug).sort((a, b) => a.start.localeCompare(b.start))
 export const pressOfProject = (slug: string) => press.filter(item => item.projects.includes(slug))
+// All mentions as one quiet list: by project (most covered first), each outlet once, its pieces newest first.
+export const pressByProject = () => {
+  const outletName = (item: (typeof press)[number]) => item.shortName ?? item.outlet.replace(/ \((Instagram|YouTube)\)$/, '')
+  const newestFirst = [...press].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+  return [...new Set(press.flatMap(item => item.projects))]
+    .map((slug) => {
+      const items = newestFirst.filter(item => item.projects.includes(slug))
+      const outlets = [...new Set(items.map(outletName))].map(name => ({ name, items: items.filter(item => outletName(item) === name) }))
+      return { slug, count: items.length, outlets }
+    })
+    .sort((a, b) => b.count - a.count)
+}
 export const opportunitiesOfProject = (slug: string) => opportunities.filter(item => item.project === slug && isActive(item))
 export const isActive = (opportunity: Opportunity) => opportunity.deadline >= todayIso()
 export const activeOpportunities = () => opportunities.filter(isActive).sort((a, b) => a.deadline.localeCompare(b.deadline))

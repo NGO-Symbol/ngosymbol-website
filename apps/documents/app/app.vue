@@ -2,7 +2,8 @@
 const { isEn } = useLang()
 const route = useRoute()
 
-// Canonical address of each exhibition page under symbol.ngo/documentsart/ and a default share card.
+// Canonical address of each exhibition page under symbol.ngo/documentsart/. Titles, descriptions, share cards and structured
+// data: composables/usePageSeo.ts.
 const BASE = 'https://symbol.ngo/documentsart'
 const withSlash = (path: string) => (path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`)
 const canonical = computed(() => BASE + withSlash(route.path))
@@ -17,22 +18,14 @@ useHead({
   ]
 })
 useSeoMeta({
-  // Default description in the page's language (pages with their own description override it).
-  description: () => (isEn.value
-    ? 'May I See Your Documents?..: the document as an artistic phenomenon. 20 artists, YermilovCentre, Kharkiv, 17.10–07.12.2025.'
-    : 'Виставка «Покажіть свої документи…»: документ як мистецький феномен. 20 митців, ЄрміловЦентр, Харків, 17.10–07.12.2025.'),
   ogSiteName: () => (isEn.value ? 'May I See Your Documents… · NGO Symbol' : 'Покажіть свої документи… · ГО «Символ»'),
-  ogType: 'website',
   ogUrl: canonical,
   ogLocale: () => (isEn.value ? 'en_US' : 'uk_UA'),
-  ogImage: 'https://symbol.ngo/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg',
   twitterCard: 'summary_large_image'
 })
 useHead({
   htmlAttrs: { lang: () => (isEn.value ? 'en' : 'uk') },
-  titleTemplate: title => (isEn.value
-    ? (title ? `${title} · May I See Your Documents…` : 'May I See Your Documents… · NGO Symbol exhibition')
-    : (title ? `${title} · Покажіть свої документи…` : 'Покажіть свої документи… · виставка ГО «Символ»')),
+  titleTemplate: title => docsTitle(title ?? undefined, isEn.value),
   // Day / night chosen by the visitor is applied before paint; without a choice the system setting applies.
   script: [
     { tagPosition: 'head', innerHTML: "try{var t=localStorage.getItem('docs-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}" },
@@ -50,5 +43,6 @@ useHead({
     <main id="main" tabindex="-1"><NuxtPage /></main>
     <DocsFooter />
     <DocsTabs />
+    <CookieConsent />
   </div>
 </template>

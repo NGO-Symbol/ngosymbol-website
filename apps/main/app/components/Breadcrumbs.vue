@@ -11,10 +11,10 @@ const trail = computed(() => [{ label: 'Головна', to: '/' }, ...(props.it
 if (!props.inHeader) useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({
+    innerHTML: ldJson({
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      itemListElement: trail.value.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.label, item: item.to ? `https://symbol.ngo${item.to}` : undefined }))
+      itemListElement: trail.value.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.label, item: item.to ? `${SITE}${item.to === '/' ? '' : item.to.replace(/\/+$/, '')}/` : `${SITE}${route.path.replace(/\/+$/, '')}/` }))
     })
   }]
 })

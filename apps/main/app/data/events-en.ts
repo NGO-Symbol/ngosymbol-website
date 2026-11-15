@@ -1,13 +1,13 @@
-export interface EventEn { title: string; description?: string[] }
+export interface EventEn { title: string; seoTitle?: string; description?: string[] }
 
 export const eventsEn: Record<string, EventEn> = {
   'pokazhit-svoi-dokumenty-vidkryttia': {
-    title: 'Opening of May I See Your Documents?..',
+    title: 'Opening of May I See Your Documents…',
     description: ['**Official exhibition opening**: speeches by the curators, project manager, director of YermilovCentre, rector of V. N. Karazin Kharkiv National University, and [[event:pokazhit-svoi-dokumenty-shreder-shredingera|Oleksii Chekal’s performance Schrödinger’s Shredder]].']
   },
   'pokazhit-svoi-dokumenty-shreder-shredingera': {
     title: 'Performance: Schrödinger’s Shredder',
-    description: ['[[person:oleksii-chekal|Oleksii Chekal]] performed **Schrödinger’s Shredder** on the opening day of May I See Your Documents?..']
+    description: ['[[person:oleksii-chekal|Oleksii Chekal]] performed **Schrödinger’s Shredder** on the opening day of May I See Your Documents…']
   },
   'pokazhit-svoi-dokumenty-ekskursiia': {
     title: 'Curators’ Tour',
@@ -32,6 +32,7 @@ export const eventsEn: Record<string, EventEn> = {
   },
   'pokazhit-svoi-dokumenty-zmina-dyskusiia': {
     title: 'Panel: Ukraine’s Human Rights Community During the War—How Are We Changing?',
+    seoTitle: 'Discussion on the human rights community in wartime',
     description: [
       'During the full-scale invasion, human rights work has become **part of everyday survival**: documenting the war, protecting civilians, and helping displaced and mobilised people. The discussion addressed **the cost of activism and moral resilience**, media representation, and a shared language between human rights, cultural, and academic communities.',
       'Speakers: Maksym Potapovych, Anna Sharyhina, and Iryna Yuzyk. Moderator: Inna Ilchenko, project manager at the ZMINA Human Rights Centre.'

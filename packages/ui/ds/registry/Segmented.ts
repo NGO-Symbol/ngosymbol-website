@@ -14,7 +14,7 @@ export default defineDs({
   ],
   playground: { props: { size: { type: 'select', options: ['s', 'm', 'l'], default: 'm' }, tabs: { type: 'boolean' } }, fixed: { label: 'Вигляд', modelValue: 'list', options: [{ value: 'list', label: 'Список' }, { value: 'calendar', label: 'Календар' }] } },
   keyboard: [{ keys: 'Tab', action: 'Фокус на варіант (на посилання, коли задано to).' }, { keys: 'Enter / Space', action: 'Обрати варіант; на вже обраному з двох перемикає на інший.' }],
-  a11y: ['Група кнопок оголошує aria-pressed; з tabs це tablist, tab і aria-selected.', 'Режим to: одне посилання, його назву задає label, підписи приховані від читача екрана.', 'Розмір s має зону натискання 44 px; обраний стан це заливка, а не лише колір тексту.'],
+  a11y: ['Група кнопок оголошує aria-pressed; з tabs це tablist, tab і aria-selected.', 'Режим to: одне посилання; його назва складається з видимих підписів і label («UA EN: …», WCAG 2.5.3), самі підписи приховані від читача екрана.', 'Розмір s має зону натискання 44 px; обраний стан це заливка, а не лише колір тексту.'],
   motion: ['Бігунець: translate, medium (множиться на налаштування зменшеного руху). Колір тексту: fx-small.'],
   tokens: ['--sym-fg / --sym-bg (тон)', '--sym-control-s / -m / -l', '--sym-shape-chip', '--sym-size-touch', '--sym-t-medium', '--sym-t-fx-small'],
   related: ['Chip', 'FilterBar', 'Button'],

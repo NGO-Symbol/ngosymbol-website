@@ -25,6 +25,7 @@ const labels: Record<string, [string, string]> = {
       <div>
         <span class="label">{{ isEn ? 'Sections' : 'Розділи' }}</span>
         <NuxtLink v-for="path in sections" :key="path" :to="localePath(path)">{{ labels[path]![isEn ? 1 : 0] }}</NuxtLink>
+        <NuxtLink :to="localePath('/contact')">{{ isEn ? 'Contact' : 'Контакти' }}</NuxtLink>
       </div>
       <div>
         <span class="label">{{ isEn ? 'Contact' : 'Зв’язок' }}</span>
@@ -38,6 +39,7 @@ const labels: Record<string, [string, string]> = {
         <p v-if="isEn">Kharkiv · Kyiv · Zakarpattia<br>Ukraine and international projects</p>
         <p v-else>Харків · Київ · Закарпаття<br>Україна та міжнародні проєкти</p>
         <p class="footer-small">{{ isEn ? 'Registration code (EDRPOU)' : 'ЄДРПОУ' }} <CopyValue value="45221328" :en="isEn" plain /></p>
+        <NuxtLink class="footer-privacy" :to="localePath('/privacy')">{{ isEn ? 'Privacy and cookies' : 'Конфіденційність і кукі' }}</NuxtLink>
         <button v-if="consentEnabled" type="button" class="footer-consent" @click="reopened = true">{{ isEn ? 'Cookie settings' : 'Налаштування кукі' }}</button>
       </div>
     </div>

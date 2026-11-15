@@ -9,6 +9,7 @@ const en: Record<string, string> = {
   'Для медіа': 'Press',
   'Підтримати': 'Support',
   'Контакти': 'Contact',
+  'Конфіденційність і кукі': 'Privacy and cookies',
   'Виставка': 'Exhibition', 'Онлайн-виставка': 'Online exhibition', 'Фестиваль': 'Festival',
   'Вистава': 'Theatre', 'Перформанс': 'Performance', 'Плейбек': 'Playback theatre', 'Резиденція': 'Residency',
   'Презентація': 'Presentation', 'Опен-кол': 'Open call', 'Лекція': 'Lecture', 'Концерт': 'Concert',
@@ -38,7 +39,7 @@ export const translate = (uk: string, toEn: boolean) => (toEn ? en[uk] ?? uk : u
 
 const places: Record<string, string> = {
   'Харків': 'Kharkiv', 'Київ': 'Kyiv', 'Закарпаття': 'Zakarpattia', 'Київська область': 'Kyiv Region',
-  'Мілан': 'Milan', 'Італія': 'Italy', 'Угорщина': 'Hungary', 'Балашадьярмат': 'Balassagyarmat',
+  'Мілан': 'Milan', 'Італія': 'Italy', 'Угорщина': 'Hungary', 'Балашшадьярмат': 'Balassagyarmat',
   'Біла Церква': 'Bila Tserkva', 'Берегове': 'Berehove', 'Ужгород': 'Uzhhorod',
   'майдан Свободи, 4': '4 Svobody Square', 'ЄрміловЦентр': 'YermilovCentre'
 }

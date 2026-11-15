@@ -1,33 +1,53 @@
 <script setup lang="ts">
-import { socials } from '~/data/social'
+import { contactEmail, socials } from '~/data/social'
 import { highlights, pickHighlights } from '~/data/highlights'
 import { newsEn, opportunitiesEn } from '~/data/editorial-en'
 // One home page for both languages (/ and /en), so the English home always has the same sections and photos.
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
-useSeoMeta({
-  title: () => t('ГО «Символ»', 'NGO Symbol'),
-  ogTitle: () => t('ГО «Символ» — культура в русі', 'NGO Symbol — culture in motion'),
-  description: () => t('Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.', 'Independent Ukrainian NGO from Kharkiv: contemporary art, culture, and care for mental health.'),
-  ogDescription: () => t('Незалежна українська організація: сучасне мистецтво, культура й уважне ставлення до психічного здоров’я.', 'Independent Ukrainian NGO from Kharkiv: contemporary art, culture, and care for mental health.')
+usePageSeo({
+  // The complete title: the site name is part of it, so it is not added a second time.
+  title: () => t('ГО «Символ» — сучасне мистецтво й психічне здоров’я, Харків', 'NGO Symbol — contemporary art and mental health, Kharkiv'),
+  description: () => t('Громадська організація з Харкова, заснована 2023 року: виставки сучасного мистецтва, документальне кіно, плейбек-театр і програми психічного здоров’я.', 'Independent Ukrainian non-profit founded in Kharkiv in 2023: contemporary art exhibitions, documentary film, playback theatre and mental health programmes.')
 })
-// schema.org Organization: who we are, for search engines (facts from documents/knowledge/organization.md).
+// schema.org: one graph with the organisation (facts from documents/knowledge/organization.md) and the website, with stable
+// ids that every other page's structured data points to. The English home page describes the same two in English.
+const kharkiv = computed(() => ({ '@type': 'PostalAddress', addressLocality: translatePlace('Харків', isEn.value), addressCountry: 'UA' }))
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({
+    innerHTML: () => ldJson({
       '@context': 'https://schema.org',
-      '@type': 'NGO',
-      name: 'ГО «Символ»',
-      alternateName: ['Громадська організація «Символ»', 'NGO Symbol'],
-      url: 'https://symbol.ngo/',
-      logo: 'https://symbol.ngo/press-kit/symbol-mark.png',
-      description: 'Незалежна українська організація, що розвиває сучасну українську культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.',
-      foundingDate: '2023-10-11',
-      address: { '@type': 'PostalAddress', addressLocality: 'Харків', addressCountry: 'UA' },
-      areaServed: ['Харків', 'Закарпаття', 'Київ'],
-      email: 'ngo.symbol@gmail.com',
-      sameAs: socials.map(item => item.url)
+      '@graph': [
+        {
+          '@type': 'NGO',
+          '@id': orgId(isEn.value),
+          name: brandOf(isEn.value),
+          // The registered name has no English form; it stays in the original on the English page too (scripts/i18n-parity.mjs allows it).
+          legalName: 'Громадська організація «Символ»',
+          alternateName: isEn.value ? ['Symbol NGO'] : ['Громадська організація «Символ»', 'NGO Symbol', 'Symbol NGO'],
+          url: pageUrlOf('/', isEn.value),
+          logo: { '@type': 'ImageObject', url: `${SITE}/press-kit/symbol-mark.png`, contentUrl: `${SITE}/press-kit/symbol-mark.png`, width: 1000, height: 1000 },
+          description: t('Незалежна українська організація, що розвиває сучасну українську культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.', 'An independent Ukrainian organisation that develops contemporary Ukrainian culture and art and promotes attentive care for mental health.'),
+          disambiguatingDescription: t('Незалежна громадська організація з Харкова: виставки сучасного мистецтва, документальне кіно, плейбек-театр і програми психічного здоров’я.', 'An independent non-profit from Kharkiv: contemporary art exhibitions, documentary film, playback theatre and mental health programmes.'),
+          foundingDate: '2023-10-11',
+          foundingLocation: { '@type': 'Place', name: translatePlace('Харків', isEn.value), address: kharkiv.value },
+          address: kharkiv.value,
+          areaServed: ['Харків', 'Закарпаття', 'Київ'].map(place => translatePlace(place, isEn.value)),
+          identifier: { '@type': 'PropertyValue', propertyID: isEn.value ? 'EDRPOU' : 'ЄДРПОУ', value: '45221328' },
+          email: contactEmail,
+          sameAs: socials.map(item => item.url)
+        },
+        {
+          '@type': 'WebSite',
+          '@id': websiteId(isEn.value),
+          name: brandOf(isEn.value),
+          alternateName: ['Symbol NGO', 'symbol.ngo'],
+          url: pageUrlOf('/', isEn.value),
+          inLanguage: isEn.value ? 'en' : 'uk',
+          publisher: { '@id': orgId(isEn.value) }
+        }
+      ]
     })
   }]
 })
@@ -63,8 +83,8 @@ const supporters = organizations
     <section class="home-hero container">
       <div class="home-hero__text">
         <div class="eyebrow">{{ t('Харків · мистецтво · психічне здоров’я', 'Kharkiv · art · mental health') }}</div>
-        <h1>{{ t('Створюємо простір для уважності й сучасної культури', 'Space for attention and contemporary culture') }}</h1>
-        <p>{{ t('Незалежна українська організація. Виставки, кіно, плейбек-театр і програми психічного здоров’я — від Харкова до Закарпаття й за кордоном.', 'An independent Ukrainian non-profit. Exhibitions, documentary film, playback theatre and mental health programmes — from Kharkiv to Zakarpattia and abroad.') }}</p>
+        <h1>{{ t('Сучасне мистецтво й психічне здоров’я з Харкова', 'Contemporary art and mental health from Kharkiv') }}</h1>
+        <p>{{ t('ГО «Символ» — незалежна громадська організація з Харкова. Виставки сучасного мистецтва, документальне кіно, плейбек-театр і програми психічного здоров’я — від Харкова до Закарпаття й за кордоном.', 'NGO Symbol is an independent non-profit from Kharkiv. Contemporary art exhibitions, documentary film, playback theatre and mental health programmes — from Kharkiv to Zakarpattia and abroad.') }}</p>
         <div class="button-row">
           <NuxtLink class="button button--dark" to="/projects">{{ t('Усі проєкти', 'All projects') }}</NuxtLink>
           <NuxtLink class="button" to="/support">{{ t('Підтримати', 'Support us') }}</NuxtLink>

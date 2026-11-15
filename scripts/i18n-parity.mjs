@@ -4,7 +4,8 @@
 //   1. the English page carries the same content: as many photos, headings, sections and links as the Ukrainian one
 //      (a section or photo shown only in one language means the two versions drifted apart);
 //   2. the English page has no Ukrainian left in what a visitor reads or a search engine indexes: visible text,
-//      image alt texts, aria labels, the page title and description.
+//      image alt texts, aria labels, the page title and description, Open Graph texts, and every text in its
+//      JSON-LD structured data (the machine-readable copy a search engine shows as a rich result).
 // Text that stays in the original Ukrainian on purpose (a press headline, an outlet) is marked lang="uk" in the page
 // and skipped; other exceptions go to ALLOWED below, with the reason.
 // Usage: node scripts/i18n-parity.mjs [--build] [--verbose]. With --build it generates both sites first
@@ -24,6 +25,12 @@ const ALLOWED = [
   /^UA$/, // the language switch
   /^Українська$/ // the language name in the switch
 ]
+// JSON-LD on English pages: a Cyrillic text is allowed only where it is a proper name that has no English form.
+//  - the value of `legalName`: the organisation's registered name, as written in the register («Громадська організація «Символ»»);
+//  - a URL (http…): an address is not text for a reader (any other string must be English).
+// Everything else (names, descriptions, captions, places, job titles) must be written in English, with English urls.
+const LD_ALLOWED_KEYS = new Set(['legalName'])
+const LD_ALLOWED_VALUE = [/^https?:\/\//]
 // Names written with a Cyrillic letter even in English (removed before the check).
 const NAMES = ['Ukraїner', 'LesяLesь']
 const verbose = process.argv.includes('--verbose')
@@ -59,6 +66,20 @@ function without(html, skip) {
   return out + (depth ? '' : html.slice(last))
 }
 
+/** Every string of every JSON-LD block of a page, with the name of the property it belongs to (a block that does not parse is reported as a string). */
+function jsonLdStrings(html) {
+  const found = []
+  const walk = (value, key) => {
+    if (typeof value === 'string') found.push({ key, value })
+    else if (Array.isArray(value)) value.forEach(item => walk(item, key))
+    else if (value && typeof value === 'object') for (const [name, item] of Object.entries(value)) walk(item, name)
+  }
+  for (const block of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
+    try { walk(JSON.parse(block[1]), '') } catch (error) { found.push({ key: '@invalid', value: `JSON-LD does not parse: ${error.message}` }) }
+  }
+  return found
+}
+
 function read(file) {
   const full = readFileSync(file, 'utf8')
   const html = without(full, (tag, attrs) => tag !== 'html' && /\slang="uk"/.test(attrs))
@@ -73,7 +94,9 @@ function read(file) {
     ...[...html.matchAll(/<meta[^>]+(?:name|property)="(?:description|og:title|og:description|twitter:title|twitter:description)"[^>]+content="([^"]*)"/g)].map(match => match[1])
   ]
   const text = body.replace(/<[^>]+>/g, '\n').split('\n')
+  const ld = jsonLdStrings(full)
   return {
+    ld,
     shape: { photos: count(/<img\b/g), headings: count(/<h[1-3]\b/g), sections: count(/<section\b/g), links: count(/<a\b/g) },
     strings: [...text, ...attrs, ...meta].map(value => (value ?? '').replace(/&[a-z#0-9]+;/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean)
   }
@@ -95,6 +118,12 @@ for (const site of sites) {
     const b = read(join(out, enPath, 'index.html'))
     const diff = Object.keys(a.shape).filter(key => a.shape[key] !== b.shape[key]).map(key => `${key} ${a.shape[key]} ↔ ${b.shape[key]}`)
     if (diff.length) { console.log(`✗ ${label}: different content in English — ${diff.join(', ')}`); problems++ }
+    const ldLeftovers = [...new Set(b.ld.filter(({ key, value }) => cyrillic.test(NAMES.reduce((text, name) => text.replaceAll(name, ''), value)) && !LD_ALLOWED_KEYS.has(key) && !LD_ALLOWED_VALUE.some(rule => rule.test(value))).map(({ key, value }) => `${key}: ${value}`))]
+    if (ldLeftovers.length) {
+      console.log(`✗ ${label}: Ukrainian in the JSON-LD of the English page (${ldLeftovers.length}) — e.g. «${ldLeftovers[0].slice(0, 100)}»`)
+      if (verbose) for (const value of ldLeftovers.slice(0, 40)) console.log(`    «${value.slice(0, 140)}»`)
+      problems++
+    }
     const leftovers = [...new Set(b.strings.filter(value => cyrillic.test(NAMES.reduce((text, name) => text.replaceAll(name, ''), value)) && !ALLOWED.some(rule => rule.test(value))))]
     if (leftovers.length) {
       console.log(`✗ ${label}: Ukrainian text on the English page (${leftovers.length})${verbose ? '' : ` — e.g. «${leftovers[0].slice(0, 80)}»`}`)

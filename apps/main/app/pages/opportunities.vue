@@ -4,7 +4,7 @@ import { opportunitiesEn } from '~/data/editorial-en'
 import { projectsEn } from '~/data/projects-en'
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
-useSeoMeta({ title: () => t('Можливості', 'Opportunities'), description: () => t('Опен-коли, резиденції та інші можливості від ГО «Символ».', 'Open calls, residencies, and other opportunities from NGO Symbol.') })
+usePageSeo({ title: () => t('Опен-коли, резиденції, волонтерство', 'Open calls, residencies, volunteering'), description: () => t('Відкриті конкурси для митців і набори учасників від ГО «Символ». Тут же архів: опен-кол на виставку «Покажіть свої документи…» і набір на тренінги mhGAP.', 'Open calls for artists and participant recruitment by NGO Symbol, with an archive: the open call for “May I See Your Documents…” and mhGAP training sign-up.') })
 
 const typeLabels: Record<string, string> = { 'open-call': 'Опен-кол', residency: 'Резиденція', vacancy: 'Вакансія', volunteering: 'Волонтерство' }
 const active = activeOpportunities()

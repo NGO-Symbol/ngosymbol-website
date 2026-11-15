@@ -5,7 +5,21 @@
 import { press } from '~/data/press'
 
 const { t, isEn } = useLang()
-useSeoMeta({ title: () => t('Преса', 'Press'), description: () => t('Публікації в медіа про виставку «Покажіть свої документи…».', 'Media coverage of the exhibition «May I See Your Documents…».') })
+usePageSeo({
+  title: () => t('Преса', 'Press'),
+  description: () => t('Публікації в медіа про виставку «Покажіть свої документи…»: анонси, огляди, інтерв’ю й опен-кол.', 'Media coverage of the exhibition «May I See Your Documents…»: announcements, reviews, interviews and the open call.'),
+  graph: () => [
+    {
+      '@type': 'CollectionPage',
+      url: docsUrl('/presa', isEn.value),
+      name: t('Преса', 'Press'),
+      inLanguage: isEn.value ? 'en' : 'uk',
+      about: { '@id': exhibitionId(isEn.value) },
+      isPartOf: { '@id': docsSiteId(isEn.value) }
+    },
+    docsBreadcrumbs(isEn.value, t('Преса', 'Press'), '/presa')
+  ]
+})
 const items = [...press].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
 const kinds = { review: ['Огляд', 'Review'], announcement: ['Анонс', 'Announcement'], 'open-call': ['Опен-кол', 'Open call'], listing: ['Добірка', 'Listing'], video: ['Відео', 'Video'], radio: ['Радіо', 'Radio'], post: ['Допис', 'Post'] } as const
 const formatDate = (iso: string) => new Date(iso).toLocaleDateString(isEn.value ? 'en-GB' : 'uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric' })

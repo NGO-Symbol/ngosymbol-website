@@ -1,2 +1,18 @@
+# my-street.symbol.ngo is hidden while it is being built: the page says «незабаром» and carries
+# <meta name="robots" content="noindex, nofollow">.
+#
+# Nothing here is blocked for ordinary crawlers on purpose. A crawler that is forbidden to open a page never sees that
+# page's noindex, and a forbidden address can still show up in search as a bare link. Letting search engines read the
+# page is what keeps it out of the index.
 User-agent: *
+Allow: /
+
+# AI training crawlers copy pages to train models; nothing on this site is meant for that, so they are kept out entirely.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
 Disallow: /

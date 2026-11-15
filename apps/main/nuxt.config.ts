@@ -5,7 +5,8 @@ export default defineNuxtConfig({
   extends: ['@symbol/brand'],
   // GitHub Pages serves every page as a folder (/projects/x/) and redirects /projects/x there; internal links
   // carry the slash so no visit pays for that redirect.
-  experimental: { defaults: { nuxtLink: { trailingSlash: 'append' } } },
+  // prerenderErrorPages: 404.html is the site's own error page (app/error.vue) rendered at build time, not an empty app shell.
+  experimental: { prerenderErrorPages: true, defaults: { nuxtLink: { trailingSlash: 'append' } } },
   compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
   css: ['@symbol/brand/tokens.css', '~/assets/css/main.css', '~/assets/css/theme-documents.css'],
@@ -15,7 +16,6 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'uk' },
       // The text face is needed for the first paint, so it starts loading with the page.
       link: [{ rel: 'preload', href: '/fonts/zakon/Zakon-Regular.woff2', as: 'font', type: 'font/woff2', crossorigin: '' }],
-      titleTemplate: '%s · ГО «Символ»',
       meta: [
         ...(indexable ? [] : [{ name: 'robots', content: 'noindex, nofollow' }]),
         { name: 'description', content: 'Незалежна українська організація, що розвиває сучасну культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.' },
@@ -31,12 +31,11 @@ export default defineNuxtConfig({
       for (const page of mirrored) pages.push({ ...page, name: `en-${String(page.name)}`, path: page.path === '/' ? '/en' : `/en${page.path}` })
     }
   },
-  // Former page: Аліна Войтюк is Ганна Франик (one person).
-  routeRules: { '/people/alina-voitiuk': { redirect: '/people/hanna-franyk' } },
+  // Former page «Аліна Войтюк» (one person with Ганна Франик): public/people/alina-voitiuk/index.html, a noindex stub with a canonical.
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/events.ics', '/sitemap.xml', '/people/alina-voitiuk']
+      routes: ['/events.ics', '/sitemap.xml']
     }
   }
 })

@@ -30,6 +30,15 @@ Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). T
 
 Indexing: since 2026-10-30 the main site and the exhibition site are open to search engines (`indexable = true` in their `nuxt.config.ts`; `apps/main/public/robots.txt` allows all crawlers and names the sitemap). The «Історія моєї вулиці» app keeps `indexable = false` (`noindex, nofollow` on every page) until its launch.
 
+SEO release (2026-11-15, [`changes/2026-11-15-seo-release.md`](changes/2026-11-15-seo-release.md)):
+- Titles, descriptions, Open Graph: one `usePageSeo()` call per page (main and exhibition apps); the project's search texts are data (`seoTitle` / `seoDescription`, UA in `projects.ts`, EN in `projects-en.ts`); the site name is written once; share images carry their real size from `images.json`.
+- Structured data: `ldJson()` (escapes `<`), `kyivDateTime()`, ids `…/#org` and `…/#website` (one pair per language) in `packages/brand/app/utils/seo.ts`; the home page carries the organisation graph, events and projects use the project `role` (`organizer` / `partner`).
+- `404.html` is the site's own `error.vue` (`experimental.prerenderErrorPages`); GitHub Pages serves it with status 404.
+- `robots.txt`: AI search allowed; AI training crawlers kept out of the exhibition and artists' works (`USER_CONFIRMED`: no consent); the street app is crawlable so its `noindex` is seen.
+- Sitemap `lastmod` from content dates and git history (CI checkouts fetch full history); no `image:title`.
+- `pnpm seo:check` (SEO gate) runs in `pnpm check` after the generated sites exist; `pnpm i18n:check` also checks the JSON-LD of English pages.
+- The entry script and its modulepreload hints are added after the first paint (`apps/main/server/plugins/defer-entry.ts`): they shared the bandwidth with the stylesheet and font and delayed the first paint of the home page on phones.
+
 ## Change workflow
 
 All changes go through `task/*` branches and pull requests guarded by the `validate` check; agents drive Git through `pnpm task:*` ([ADR-0006](decisions/ADR-0006-agent-git-workflow.md), [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md)).
@@ -73,4 +82,6 @@ SEO (2026-11-14, stage 2 of the site plan): every page has a canonical URL with 
 
 Motion tiers (2026-10-30): `plugins/motion.client.ts` sets `html[data-motion]` to `full`, `lite` or `off` — off for reduced motion; lite for data saver, ≤2 CPU cores or ≤2 GB memory, or when the page keeps dropping frames (watched live, one-way). Lite removes endless and decorative motion (orbit ring and core, tilt, logo and tap animations, long reveals) and keeps the content. Crossing between symbol.ngo and a project site takes about 0.4 s on phones.
 
-Analytics (2026-10-30): IDs live in `apps/main/app/data/analytics.ts` (empty until the team adds them). `plugins/analytics.client.ts` loads Google Analytics 4 and Microsoft Clarity only after the visitor accepts in `CookieConsent` (choice in localStorage `symbol-consent`; «Відхилити» as visible as «Прийняти»; «Налаштування кукі» in the footer reopens it) and sends GA4 events support, calendar, project_site, application, outbound. With empty IDs nothing loads and no banner shows.
+Analytics (2026-10-30, reworked 2026-11-15): the logic is shared by both sites in `packages/brand/analytics` (`@symbol/brand/analytics`); ids and the Clarity switch live in `apps/main/app/data/analytics.ts` (GA4 id and Cloudflare token empty until the owner creates them; Clarity `z5y92kh1wr` behind `clarityEnabled: false`). Nothing runs off production hosts (`symbol.ngo` and subdomains; not localhost, previews, `/design/`) or for bots. Cloudflare Web Analytics (cookieless) loads without consent when its token is set; Google Analytics 4 and Microsoft Clarity load only after the visitor accepts in the banner (`CookieConsent` in each app; choice in localStorage `symbol-consent`, shared by both sites; «Відхилити» as visible as «Прийняти»; «Налаштування кукі» in both footers reopens it). Clarity gets `consentv2`. GA4 events support, calendar, project_site, application, outbound carry clean parameters. Privacy and cookie policy: `/privacy`, `/en/privacy` (draft pending team approval). Details: [`../operations/analytics.md`](../operations/analytics.md).
+
+Operations (2026-11-15): uptime and expiry monitoring by GitHub Actions ([`../operations/monitoring.md`](../operations/monitoring.md)); every outside service and its owner in [`../operations/services.md`](../operations/services.md).

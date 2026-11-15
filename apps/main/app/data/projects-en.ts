@@ -1,6 +1,8 @@
 export interface ProjectEn {
   title: string
   summary: string
+  seoTitle?: string
+  seoDescription?: string
   body: string[]
   concept?: string[]
   donorCredit?: string
@@ -13,6 +15,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'istoriia-moiei-vulytsi': {
     title: 'The Story of My Street',
     summary: 'Plaques with QR codes on Kharkiv streets and a page for every street: the stories the city tells about itself.',
+    seoTitle: 'The Story of My Street: QR plaques in Kharkiv',
+    seoDescription: 'An NGO Symbol project on the stories of Kharkiv streets: QR-code plaques lead to a page for each street; an expert council reviews the texts. 2026–2027.',
     body: [
       'The project collects the **stories of Kharkiv streets**. **Plaques with QR codes** will appear in the city and lead to individual street pages on the project website.',
       'All texts are reviewed by an **expert council**. A dedicated project website with its own structure and visual identity is currently in development.'
@@ -22,6 +26,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'holosy-u-rusi': {
     title: 'Voices in Motion',
     summary: 'Playback theatre in Zakarpattia: real people’s stories, played back here and now.',
+    seoTitle: 'Voices in Motion: playback theatre in Zakarpattia',
+    seoDescription: 'Playback performances by the Serdenky theatre in Uzhhorod, Berehove and Bakosh: actors act out the audience’s own stories. An NGO Symbol project, 2026.',
     body: [
       'Voices in Motion is a project about **playback theatre and lived stories in Zakarpattia**. Playback theatre is an interactive form of improvisational theatre in which actors perform stories shared by audience members during the event.',
       'The Serdenky playback theatre company presents the performances during a **tour of Zakarpattia Oblast**: at Station Uzh art space in Uzhhorod, a lyceum in Bakosh, and in Berehove. The project events are listed below.',
@@ -31,8 +37,10 @@ export const projectsEn: Record<string, ProjectEn> = {
     fundingNotice: 'Funded by the European Union. Views and opinions expressed are, however, those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them.'
   },
   'pokazhit-svoi-dokumenty': {
-    title: 'May I See Your Documents?..',
+    title: 'May I See Your Documents…',
     summary: 'An exhibition about the document as an artistic phenomenon: 20 artists at YermilovCentre.',
+    seoTitle: 'May I See Your Documents…: exhibition, Kharkiv',
+    seoDescription: 'A contemporary art exhibition about the document: 20 artists, curated by Petro Chekal and Yurii Rassokha, YermilovCentre, Kharkiv, 17 October — 7 December 2025.',
     body: [
       'The exhibition explores the **document as an artistic phenomenon** that extends beyond its functional role. Here, a document is not merely a mechanism of bureaucratic control, but also an aesthetic, ritual, and social artefact.',
       'The participants worked with photography, text, painting, collage, and performative practices. The exhibition brought together **20 artists**, including [[person:pavlo-makov]], [[person:oleh-tistol]], and [[person:roman-piatkovka]].',
@@ -48,6 +56,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'istorii-riznykh': {
     title: 'Stories of the Different',
     summary: 'A playback performance in which actors played back the audience’s own stories.',
+    seoTitle: 'Stories of the Different: playback show, Kyiv',
+    seoDescription: 'A playback performance for teenagers and young people aged 12–21 at the “Arsenal of Ideas” festival, Mystetskyi Arsenal, Kyiv, 20 September 2025.',
     body: [
       'A playback performance **for teenagers and young people aged 12–21** at the Arsenal of Ideas: Different Together festival at Mystetskyi Arsenal. Playback theatre is an interactive form of improvisational theatre: actors transform audience members’ stories into artistic and symbolic scenes. It creates a **space of safety and dialogue** where every voice matters.',
       'Since 2014, playback theatre has been actively used in Ukraine as a **tool for psychosocial support**.',
@@ -57,6 +67,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'mhgap-kyiv': {
     title: 'mhGAP Trainings in Kyiv Region',
     summary: 'Training primary care workers in the WHO mental health programme.',
+    seoTitle: 'mhGAP trainings in Kyiv Region: medical training',
+    seoDescription: 'Four WHO mhGAP trainings for primary care workers in Kyiv Region, February — May 2025: 121 certified participants.',
     body: [
       'mhGAP is the **World Health Organization’s Mental Health Gap Action Programme** for addressing gaps in mental health care at the primary-care level.',
       '**From February to May 2025**, Symbol delivered **four training courses**—three five-day courses and one four-day course—for **primary health-care workers from Kyiv Region**, including family doctors, nurses, paediatricians, paramedics, and general practitioners. Accommodation, meals, and training manuals were provided. After the courses, participants received **online supervision** from qualified specialists.',
@@ -70,6 +82,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'ti-khto-pobachyly-svit': {
     title: 'Those Who Have Seen the World',
     summary: 'A photo exhibition by Petro Chekal and Yurii Rassokha at the Festival of Ukrainian Books in Milan.',
+    seoTitle: 'Those Who Have Seen the World: photos in Milan',
+    seoDescription: 'A photo exhibition by Petro Chekal and Yurii Rassokha: 20 works at the Festival of Ukrainian Books in Milan, Villa Scheibler, 30–31 May 2026.',
     body: [
       'The Ones Who Saw the World / Coloro che hanno visto il mondo is a **long and attentive observation of Ukraine** through a period of change. The photographs were made in almost every region of the country—in cities, villages, outskirts, everyday spaces, and places marked by war. Together they form not a geographical map but an **inner portrait of the country**.',
       'The project also examines photography itself: colour, rhythm, texture, and composition—and how photographic language can interpret reality rather than merely record it. The festival presented **20 works**.',
@@ -80,6 +94,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   '2-10-300': {
     title: '2, 10, 300 Years Later',
     summary: 'An open-air exhibition of works by artists from eastern Ukraine.',
+    seoTitle: '2, 10, 300 Years Later: open-air show, Hungary',
+    seoDescription: 'NGO Symbol’s first exhibition: works by artists from eastern Ukraine on Civitas Fortissima square in Balassagyarmat, Hungary, 26–28 April 2024.',
     body: [
       '**Symbol’s first exhibition** took place outdoors in Civitas Fortissima Square in **Balassagyarmat, Hungary**, and marked **ten years since the occupation of Donetsk**. Works by artists from eastern Ukraine—particularly Kharkiv and Donetsk regions—told local residents about the **resilience of Ukrainian art** during wartime.',
       'We noticed that people in smaller Hungarian cities knew little about Ukraine but were interested in Ukrainian art. Contact with Ukrainian culture is an important contribution to Ukraine’s European integration.',
@@ -90,6 +106,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'kharkivske-more': {
     title: 'Kharkiv Sea 2024',
     summary: 'An independent multidisciplinary festival of local culture. Symbol is a partner of the festival.',
+    seoTitle: 'Kharkiv Sea 2024: festival, Symbol is a partner',
+    seoDescription: 'An independent multidisciplinary festival on Kharkiv’s identity in wartime. NGO Symbol is a partner of the festival, not its organiser.',
     body: [
       'The festival explores **Kharkiv’s identity during wartime**, working with urban identity, memory, and lived experience through artistic practices.',
       'Symbol is a **festival partner**, not the organiser. See also the [[project:kharkivske-more-2026|2026 festival]].'
@@ -98,6 +116,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'kharkivske-more-2026': {
     title: 'Kharkiv Sea 2026',
     summary: 'The 2026 festival of local culture. A partner project organised by the NGO Platform of Theatre Initiatives.',
+    seoTitle: 'Kharkiv Sea 2026: festival, Symbol is a partner',
+    seoDescription: 'The 2026 festival of local culture in Kharkiv, organised by the NGO Platform of Theatre Initiatives. NGO Symbol is a partner of the project.',
     body: [
       'The **Kharkiv Sea local culture festival** returned in August 2026 with exhibitions, workshops, theatre productions, playback performances, lectures, and concerts across Kharkiv.',
       'This is **not a Symbol project**, but a partnership project organised by the **NGO Platform of Theatre Initiatives** with a European Cultural Foundation grant through Culture Helps Solidarity, co-funded by the European Union. Symbol is a festival partner.',
@@ -107,6 +127,8 @@ export const projectsEn: Record<string, ProjectEn> = {
   'zbyrach-konvalii': {
     title: 'The Lily of the Valley Collector',
     summary: 'A documentary about Oleksandr Suprun, a photographer of the Kharkiv School of Photography.',
+    seoTitle: 'Lily of the Valley Collector: film about Suprun',
+    seoDescription: 'A 2023 documentary about Oleksandr Suprun, a Kharkiv School of Photography photographer. Best cinematography award from Media Development Foundation.',
     body: [
       'The film tells the story of **Oleksandr Suprun**, one of the most prominent representatives of the **Kharkiv School of Photography**—a retired teacher and artist living in a residential district of Kharkiv. His everyday life consists of checking utility meters, teaching students remotely, and following the news of the war. He decides to share his artistic experience: how he chose the subjects of his works, how he created under Soviet censorship, and what makes art endure.',
       'The film aims to **promote Kharkiv art** and its creators. **Ninety per cent of the film was shot handheld.**',

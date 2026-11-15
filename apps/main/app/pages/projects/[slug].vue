@@ -2,6 +2,7 @@
 import SymPortraitArt from '@symbol/ui/app/components/PortraitArt.vue'
 import { opportunitiesEn } from '~/data/editorial-en'
 import { projectsEn } from '~/data/projects-en'
+import { altIn } from '~/data/alt-en'
 import { eventsEn } from '~/data/events-en'
 import { psdPeopleEn } from '~/data/psd-artists-en'
 import { peopleEn } from '~/data/people-en'
@@ -20,33 +21,37 @@ const programName = computed(() => isEn.value ? projectsEn[project.slug]?.progra
 const personName = (person: (typeof people)[number]) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
 const place = computed(() => isEn.value ? [project.venue?.nameEn ?? project.venue?.name, project.venue?.addressEn ?? project.venue?.address, project.venue?.city ?? project.city, project.venue?.country ?? project.country].map(value => translatePlace(value, true)).filter(Boolean).join(', ') : (project.venue ? venueLine(project.venue) : projectPlace(project)))
 const shareImage = project.poster ?? project.gallery?.[0]?.src ?? project.backdrop
-const shareImageUrl = shareImage ? `https://symbol.ngo${shareImage}` : undefined
-const pageUrl = computed(() => `https://symbol.ngo${isEn.value ? '/en' : ''}/projects/${project.slug}/`)
-const schemaImages = computed(() => {
-  const images = [
+const pageUrl = computed(() => pageUrlOf(`/projects/${project.slug}`, isEn.value))
+const schemaImages = computed(() => imageObjects(
+  [...new Map([
     ...(project.poster ? [{ src: project.poster, alt: text.value.title }] : []),
     ...(project.backdrop ? [{ src: project.backdrop, alt: text.value.title }] : []),
     ...(project.gallery ?? [])
-  ]
-  return [...new Map(images.map(image => [image.src, image])).values()].map(image => ({
-    '@type': 'ImageObject',
-    contentUrl: `https://symbol.ngo${image.src}`,
-    url: `https://symbol.ngo${image.src}`,
-    caption: image.alt || text.value.title
-  }))
+  ].map(image => [image.src, image])).values()],
+  isEn.value,
+  text.value.title
+))
+// The title carries the year(s) once. Projects have their own search title (seoTitle, in both languages); without one
+// the name gets the years unless it already contains the year.
+const seoTitle = computed(() => {
+  const own = isEn.value ? projectsEn[project.slug]?.seoTitle : project.seoTitle
+  if (own) return own
+  const years = projectYears(project)
+  return text.value.title.includes(String(project.yearStart)) ? text.value.title : `${text.value.title} · ${years}`
 })
-useSeoMeta({
-  title: () => `${text.value.title} · ${projectYears(project)}`,
-  description: () => text.value.summary,
-  ogImage: shareImageUrl,
-  ogImageAlt: () => project.gallery?.find(photo => photo.src === shareImage)?.alt ?? text.value.title,
-  twitterImage: shareImageUrl
+usePageSeo({
+  title: seoTitle,
+  description: () => (isEn.value ? projectsEn[project.slug]?.seoDescription : project.seoDescription) ?? text.value.summary,
+  image: shareImage,
+  imageAlt: () => altIn(project.gallery?.find(photo => photo.src === shareImage)?.alt ?? '', isEn.value) || text.value.title
 })
-// schema.org CreativeWork: the project with its years, place, image and the people credited in it.
+// schema.org CreativeWork: the project with its years, place, image and the people credited in it. `role` decides how
+// Symbol appears: the creator of its own projects, a contributor (partner) to someone else's, whose organizer is named when known.
+const organizerName = computed(() => project.organizer && (isEn.value ? project.organizer.nameEn : project.organizer.name))
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: () => JSON.stringify({
+    innerHTML: () => ldJson({
       '@context': 'https://schema.org',
       '@type': 'CreativeWork',
       name: text.value.title,
@@ -55,9 +60,16 @@ useHead({
       inLanguage: isEn.value ? 'en' : 'uk',
       image: schemaImages.value.length ? schemaImages.value : undefined,
       dateCreated: String(project.yearStart),
-      locationCreated: project.city ? { '@type': 'Place', name: project.city } : undefined,
-      creator: { '@type': 'Organization', name: 'ГО «Символ»', url: 'https://symbol.ngo/' },
-      contributor: project.people?.map(credit => ({ '@type': 'Person', name: getPerson(credit.person)?.name, url: `https://symbol.ngo/people/${credit.person}/` })).filter(item => item.name)
+      locationCreated: project.city ? { '@type': 'Place', name: translatePlace(project.city, isEn.value) } : undefined,
+      creator: project.role === 'partner'
+        ? (organizerName.value ? { '@type': 'Organization', name: organizerName.value } : undefined)
+        : orgRef(isEn.value),
+      contributor: [
+        ...(project.role === 'partner' ? [orgRef(isEn.value)] : []),
+        ...(project.people ?? []).map(credit => ({ credit, person: getPerson(credit.person) }))
+          .filter(item => item.person)
+          .map(item => ({ '@type': 'Person', name: personName(item.person!), url: pageUrlOf(`/people/${item.credit.person}`, isEn.value) }))
+      ]
     })
   }]
 })

@@ -1,6 +1,6 @@
 # NGO Symbol knowledge base
 
-Last consolidated: 2026-10-29.
+Last consolidated: 2026-11-15.
 
 This directory is the canonical memory for the institutional website and its project websites. It borrows Graphify’s useful ideas—explicit entities and relationships, source-aware confidence labels, architecture documentation, deterministic validation, and agent guidance—without importing Graphify’s application code.
 
@@ -12,6 +12,10 @@ This directory is the canonical memory for the institutional website and its pro
 | Plan pages or content | [`website-strategy.md`](website-strategy.md), [`information-architecture.md`](information-architecture.md) |
 | Design UI | [`design-system.md`](design-system.md), [`content-inventory.md`](content-inventory.md), [`../../packages/ui/docs/CONTEXT.md`](../../packages/ui/docs/CONTEXT.md) (components, tokens, motion) |
 | Change code or deployment | [`technical-architecture.md`](technical-architecture.md), [`decisions/`](decisions/), [`../operations/deployment.md`](../operations/deployment.md) |
+| Analytics, cookies, privacy page | [`../operations/analytics.md`](../operations/analytics.md), `apps/main/app/pages/privacy.vue`, [`changes/2026-11-15-analytics-privacy-operations.md`](changes/2026-11-15-analytics-privacy-operations.md) |
+| Outside services, accounts, monthly checks | [`../operations/services.md`](../operations/services.md) |
+| Uptime and expiry alerts | [`../operations/monitoring.md`](../operations/monitoring.md) |
+| Owner guides (Ukrainian): Search Console, Bing, GA4, GitHub domain, Cloudflare Web Analytics, Telegram bot, Google for Nonprofits | [`../operations/owner-search-console.md`](../operations/owner-search-console.md), [`owner-bing-webmaster`](../operations/owner-bing-webmaster.md), [`owner-ga4`](../operations/owner-ga4.md), [`owner-github-domain-verification`](../operations/owner-github-domain-verification.md), [`owner-cloudflare-web-analytics`](../operations/owner-cloudflare-web-analytics.md), [`owner-telegram-alerts`](../operations/owner-telegram-alerts.md), [`owner-google-nonprofits`](../operations/owner-google-nonprofits.md) |
 | Save or publish work | [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md), `.agents/skills/site-workflow` |
 | Verify a claim | [`sources.md`](sources.md), [`schema.md`](schema.md) |
 | Team bios and CVs | [`team-cv.md`](team-cv.md) |

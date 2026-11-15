@@ -3,7 +3,7 @@ import { contactEmail, socials } from '~/data/social'
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
 
-useSeoMeta({ title: () => t('Для медіа', 'Press'), description: () => t('Логотип, опис, фото й контакти ГО «Символ» для журналістів і партнерів.', 'NGO Symbol logo, boilerplate, photographs, and contacts for journalists and partners.') })
+usePageSeo({ title: () => t('Для медіа', 'Press'), description: () => t('Логотип, опис, фото й контакти ГО «Символ» для журналістів і партнерів.', 'NGO Symbol logo, boilerplate, photographs, and contacts for journalists and partners.') })
 
 const boilerplateUk = 'ГО «Символ» — незалежна громадська організація з Харкова, заснована 2023 року. Розвиває сучасну українську культуру й мистецтво та сприяє уважному ставленню до психічного здоров’я: виставки, документальне кіно, плейбек-театр, програми психічного здоров’я.'
 const boilerplateEn = 'NGO Symbol is an independent Ukrainian non-profit founded in Kharkiv in 2023. It develops contemporary Ukrainian culture and art and promotes care for mental health through exhibitions, documentary film, playback theatre, and mental health programmes.'

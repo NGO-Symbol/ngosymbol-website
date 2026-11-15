@@ -5,7 +5,7 @@ import { getEvent, getPerson, getProject, projectYears } from './content'
 
 const sections: Record<string, string> = {
   projects: 'Проєкти', people: 'Люди', events: 'Події', news: 'Новини', support: 'Підтримати',
-  press: 'Для медіа', opportunities: 'Можливості', about: 'Про нас', contact: 'Контакти'
+  press: 'Для медіа', opportunities: 'Можливості', about: 'Про нас', contact: 'Контакти', privacy: 'Конфіденційність і кукі'
 }
 
 export function trailFor(path: string, toEn = isEnPath(path)): { label: string; to?: string }[] | undefined {

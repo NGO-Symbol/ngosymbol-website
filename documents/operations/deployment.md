@@ -11,6 +11,11 @@ The decision and its alternatives are recorded in
 | `my-street.symbol.ngo` | `apps/istoriia-vulytsi` | `NGO-Symbol/istoriia-vulytsi` (deploy-only) | `gh-pages` branch |
 | `documentsart.symbol.ngo` | `apps/documents` | `NGO-Symbol/documentsart` (deploy-only) | `gh-pages` branch |
 
+The main-site job and CI fetch the full git history (`fetch-depth: 0`): the sitemap's `lastmod` dates come from the
+last commit that touched each page's files. The exhibition's `robots.txt` is for its own address only; the main deploy
+does not copy it into `/documentsart/` (`rsync --exclude robots.txt`), where the `robots.txt` of `symbol.ngo` applies.
+GitHub Pages serves the root `404.html` (the site's own error page) with status 404 for every missing address.
+
 GitHub Pages serves one site per repository, so each autonomous project needs its own
 deploy-only repository. Nobody edits those repositories by hand; the workflow overwrites them.
 
@@ -124,7 +129,7 @@ Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io` (DNS only). Until 
 `symbol.ngo` is registered at Cloudflare and its DNS lives there. Google Workspace mail uses the
 existing `MX` and `TXT` records — **do not delete or edit them**.
 
-1. Verify the domain for the organization (prevents takeover): github.com/organizations/NGO-Symbol/settings/pages →
+1. Verify the domain for the organization (prevents takeover; step-by-step in Ukrainian: [`owner-github-domain-verification.md`](owner-github-domain-verification.md)): github.com/organizations/NGO-Symbol/settings/pages →
    Add a domain → `symbol.ngo`. Add the shown `TXT` record (`_github-pages-challenge-NGO-Symbol`)
    in Cloudflare, then press Verify.
 2. In Cloudflare → `symbol.ngo` → DNS → Records, add (Proxy status: **DNS only**, grey cloud —
@@ -181,3 +186,9 @@ deploy repository, key, and domain variables, and add one `CNAME` record for the
 
 - `pnpm check` (and so the CI job and `pnpm task:ship`) runs `pnpm images:check`: a photograph that was not processed by `scripts/optimize-images.mjs`, is over 400 KB or 1600 px, or has no AVIF variants fails the pull request. Fix: `pnpm images:optimize`, commit the result. GitHub Pages limits a site to 1 GB; the published media folder is now far below that.
 - The exhibition site serves `/media/_opt` from the main site's media (`apps/documents/nuxt.config.ts`); the deploy still excludes `media` from its own copy.
+
+## Related operations documents
+
+- [`services.md`](services.md): every outside service, its owner and the monthly check list.
+- [`monitoring.md`](monitoring.md): uptime, certificate and domain expiry alerts (GitHub Actions + Telegram).
+- [`analytics.md`](analytics.md): analytics, cookie consent and the privacy page.

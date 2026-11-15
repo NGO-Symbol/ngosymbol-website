@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
   options: { value: T; label: string; id?: string }[]
   /** The chosen value. */
   modelValue: T
-  /** Accessible name: of the group, or of the link when `to` is set. */
+  /** Accessible name: of the group; with `to` it follows the visible option texts («UA EN: …»). */
   label: string
   /** Control height: s 36 px (header), m 44 px (toolbars, beside buttons), l 52 px (the choice a section is about). */
   size?: 's' | 'm' | 'l'
@@ -25,7 +25,10 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{ 'update:modelValue': [value: T] }>()
 
 const activeIndex = computed(() => Math.max(props.options.findIndex(option => option.value === props.modelValue), 0))
-const rootAttrs = computed(() => (props.to ? { to: props.to, 'aria-label': props.label } : { role: props.tabs ? 'tablist' : 'group', 'aria-label': props.label }))
+// As a link the options are aria-hidden text, so the link's name is built from them: the visible words come first
+// («UA EN: English version»), as WCAG 2.5.3 (label in name) asks, then what the link does.
+const linkName = computed(() => `${props.options.map(option => option.label).join(' ')}: ${props.label}`)
+const rootAttrs = computed(() => (props.to ? { to: props.to, 'aria-label': linkName.value } : { role: props.tabs ? 'tablist' : 'group', 'aria-label': props.label }))
 const isActive = (value: T) => value === props.modelValue
 
 function pick(value: T) {

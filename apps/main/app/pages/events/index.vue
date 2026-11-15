@@ -4,7 +4,7 @@ import { projectsEn } from '~/data/projects-en'
 import { eventsEn } from '~/data/events-en'
 const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
-useSeoMeta({ title: () => t('Події', 'Events'), description: () => t('Події ГО «Символ»: відкриття, екскурсії, перформанси, лекції. Список і календар.', 'NGO Symbol events: openings, tours, performances, and lectures. List and calendar views.') })
+usePageSeo({ title: () => t('Події й календар: екскурсії, лекції, перформанси', 'Events and calendar: tours, talks, performances'), description: () => t('Календар подій ГО «Символ»: відкриття виставок, кураторські екскурсії, лекції й плейбек-перформанси в Харкові, Ужгороді та Береговому.', 'NGO Symbol event calendar: exhibition openings, curators’ tours, lectures and playback performances in Kharkiv, Uzhhorod and Berehove.') })
 const eventTitle = (item: (typeof eventItems)[number]) => isEn.value ? (item.isProject ? projectsEn[item.slug]?.title : eventsEn[item.slug]?.title) ?? item.title : item.title
 const projectTitle = (project: (typeof projects)[number]) => isEn.value ? projectsEn[project.slug]?.title ?? project.title : project.title
 

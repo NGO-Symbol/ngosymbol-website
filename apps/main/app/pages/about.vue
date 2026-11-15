@@ -5,7 +5,7 @@ const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
 const displayName = (person: (typeof people)[number]) => isEn.value ? peopleEn[person.slug]?.name ?? person.name : person.name
 const displayRole = (person: (typeof people)[number]) => isEn.value ? peopleEn[person.slug]?.teamRole ?? peopleEn[person.slug]?.shortBio ?? person.teamRole ?? '' : person.teamRole ?? person.shortBio ?? ''
-useSeoMeta({ title: () => t('Про нас', 'About us'), description: () => t('ГО «Символ»: місія, цінності, команда, партнери й звіти.', 'NGO Symbol: mission, values, team, partners, and reporting.') })
+usePageSeo({ title: () => t('Про організацію: місія, команда, партнери', 'About the organisation: mission, team, partners'), description: () => t('Місія, цінності й постійна команда ГО «Символ» — громадської організації з Харкова, зареєстрованої 11 жовтня 2023 року. Партнери, донори, проєкти за роками.', 'Mission, values and permanent team of NGO Symbol, a non-profit from Kharkiv registered on 11 October 2023. Partners, donors and projects by year.') })
 
 const team = people.filter(person => person.team).sort((a, b) => (a.teamOrder ?? 99) - (b.teamOrder ?? 99))
 const supporters = organizations
@@ -77,16 +77,22 @@ const supporters = organizations
         <div><span class="label">{{ t('Медіа', 'Media') }}</span><h2>{{ t('Про нас пишуть', 'Coverage of our work') }}</h2></div>
         <p>{{ t('Згадки в медіа зібрані й на сторінках відповідних проєктів.', 'Media mentions are also collected on the relevant project pages.') }}</p>
       </div>
-      <ul class="press-list">
-        <li v-for="item in press" :key="item.url">
-          <a :href="item.url" target="_blank" rel="noreferrer" :lang="originalLang(item.outlet + item.title, isEn)"><strong>{{ item.outlet }}</strong> — {{ item.title }}</a>
-          <span>
-            <template v-for="(slug, index) in item.projects" :key="slug">
-              <NuxtLink :to="`/projects/${slug}`">{{ isEn ? projectsEn[slug]?.title ?? getProject(slug)?.title : getProject(slug)?.title }}</NuxtLink><template v-if="index < item.projects.length - 1">, </template>
+      <div class="press-lines">
+        <section v-for="group in pressByProject()" :key="group.slug" class="press-line">
+          <h3><NuxtLink :to="`/projects/${group.slug}`">{{ isEn ? projectsEn[group.slug]?.title ?? getProject(group.slug)?.title : getProject(group.slug)?.title }}</NuxtLink></h3>
+          <p>
+            <template v-for="(outlet, index) in group.outlets" :key="outlet.name">
+              <span class="press-line__outlet" :lang="originalLang(outlet.name, isEn)">
+                <a v-if="outlet.items.length === 1" :lang="originalLang(outlet.name + outlet.items[0]!.title, isEn)" :href="outlet.items[0]!.url" target="_blank" rel="noreferrer" :title="outlet.items[0]!.title" :aria-label="`${outlet.name}: ${outlet.items[0]!.title}`">{{ outlet.name }}</a>
+                <template v-else>{{ outlet.name }}<sup><a v-for="(item, piece) in outlet.items" :key="item.url" :lang="originalLang(outlet.name + item.title, isEn)" :href="item.url" target="_blank" rel="noreferrer" :title="item.title" :aria-label="`${outlet.name}: ${item.title}`">{{ piece + 1 }}</a></sup></template>
+                <span v-if="index < group.outlets.length - 1" class="press-line__sep" aria-hidden="true"> /</span>
+              </span>
+              {{ ' ' }}
             </template>
-          </span>
-        </li>
-      </ul>
+          </p>
+        </section>
+        <p class="press-lines__note">{{ t('Кожна назва веде до публікації. Цифри біля назви: кілька матеріалів одного видання.', 'Each name opens the publication. Numbers beside a name mark several pieces from one outlet.') }}</p>
+      </div>
     </section>
 
     <section class="section section--tight">
