@@ -12,7 +12,8 @@
     "./symbol-spiral.svg": "./assets/symbol-spiral.svg",
     "./symbol-logo.svg": "./assets/symbol-logo.svg",
     "./fonts/ex-document.woff2": "./fonts/ex-document.woff2",
-    "./nuxt.config.ts": "./nuxt.config.ts"
+    "./nuxt.config.ts": "./nuxt.config.ts",
+    "./analytics": "./analytics/index.ts"
   },
   "main": "./nuxt.config.ts"
 }
