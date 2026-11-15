@@ -129,7 +129,7 @@ Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io` (DNS only). Until 
 `symbol.ngo` is registered at Cloudflare and its DNS lives there. Google Workspace mail uses the
 existing `MX` and `TXT` records — **do not delete or edit them**.
 
-1. Verify the domain for the organization (prevents takeover): github.com/organizations/NGO-Symbol/settings/pages →
+1. Verify the domain for the organization (prevents takeover; step-by-step in Ukrainian: [`owner-github-domain-verification.md`](owner-github-domain-verification.md)): github.com/organizations/NGO-Symbol/settings/pages →
    Add a domain → `symbol.ngo`. Add the shown `TXT` record (`_github-pages-challenge-NGO-Symbol`)
    in Cloudflare, then press Verify.
 2. In Cloudflare → `symbol.ngo` → DNS → Records, add (Proxy status: **DNS only**, grey cloud —
@@ -186,3 +186,9 @@ deploy repository, key, and domain variables, and add one `CNAME` record for the
 
 - `pnpm check` (and so the CI job and `pnpm task:ship`) runs `pnpm images:check`: a photograph that was not processed by `scripts/optimize-images.mjs`, is over 400 KB or 1600 px, or has no AVIF variants fails the pull request. Fix: `pnpm images:optimize`, commit the result. GitHub Pages limits a site to 1 GB; the published media folder is now far below that.
 - The exhibition site serves `/media/_opt` from the main site's media (`apps/documents/nuxt.config.ts`); the deploy still excludes `media` from its own copy.
+
+## Related operations documents
+
+- [`services.md`](services.md): every outside service, its owner and the monthly check list.
+- [`monitoring.md`](monitoring.md): uptime, certificate and domain expiry alerts (GitHub Actions + Telegram).
+- [`analytics.md`](analytics.md): analytics, cookie consent and the privacy page.

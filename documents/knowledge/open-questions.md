@@ -56,3 +56,14 @@ Items here are unresolved and must not be silently assumed.
 - Configure GitHub CLI authentication on each editor's computer.
 
 - «2, 10, 300 років потому»: website or social page of the partner Union Forum (logo only so far).
+
+## Analytics, privacy and operations (2026-11-15)
+
+- Approve the privacy page (`/privacy`, draft): Юрій Рассоха and Петро Чекаль. Then set `clarityEnabled: true` in `apps/main/app/data/analytics.ts`.
+- Create the GA4 property (measurement id), the Cloudflare Web Analytics token and the Telegram alert bot with its two GitHub secrets (guides in `documents/operations/owner-*.md`).
+- Who owns each outside account (`documents/operations/services.md`, «to fill»); who owns the Clarity project `z5y92kh1wr`.
+- Confirm the full legal name «Громадська організація «Символ»» against the ЄДР extract, and whether the organization is in the Register of non-profit organizations (needed for Google for Nonprofits).
+- Legal basis for cookieless Cloudflare Web Analytics and the rights wording: ask a lawyer to confirm.
+- Re-check Clarity cookie lifetimes in a browser when it is switched on (Microsoft publishes none).
+- Self-host IBM Plex Mono on the exhibition project page to drop the Google Fonts request (named on the privacy page today).
+- Add `/privacy` and `/en/privacy` to `sitemap.xml`.
