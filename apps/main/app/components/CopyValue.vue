@@ -44,5 +44,5 @@ async function copy() {
 .copy-value__button:hover, .copy-value__button:focus-visible { opacity: 1; }
 .copy-value__button.is-copied { opacity: 1; }
 .copy-value--plain { display: grid; gap: 6px; justify-items: start; }
-.copy-value--plain .copy-value__button { min-height: 0; padding: 0; border: 0; border-radius: 0; font-size: inherit; opacity: .75; gap: .45em; }
+.copy-value--plain .copy-value__button { min-height: 0; padding: 0; border: 0; border-radius: 0; font-size: inherit; opacity: .9; gap: .45em; }
 </style>

@@ -17,11 +17,12 @@ const title = computed(() => isEn.value ? projectsEn[props.project.slug]?.title 
 
       <div class="docs-hero__grid">
         <div class="docs-hero__main">
-          <p class="docs-kicker"><span>{{ isEn ? 'Contemporary' : 'Виставка' }}</span><span>{{ isEn ? 'art' : 'сучасного' }}</span><span>{{ isEn ? 'exhibition' : 'мистецтва' }}</span></p>
-          <h1 class="docs-title" :aria-label="title">
-            <span class="docs-word docs-word--1" aria-hidden="true">{{ isEn ? 'May I see' : 'Покажіть' }}</span>
-            <span class="docs-word docs-word--2" aria-hidden="true">{{ isEn ? 'your' : 'свої' }}</span>
-            <span class="docs-word docs-word--3" aria-hidden="true">{{ isEn ? 'documents…' : 'документи…' }}</span>
+          <p class="docs-kicker"><span>{{ isEn ? 'Contemporary' : 'Виставка' }}</span>&#32;<span>{{ isEn ? 'art' : 'сучасного' }}</span>&#32;<span>{{ isEn ? 'exhibition' : 'мистецтва' }}</span></p>
+          <!-- Real words with real spaces between the tape strips (aria-label plus hidden words read as one word without spaces). -->
+          <h1 class="docs-title">
+            <span class="docs-word docs-word--1">{{ isEn ? 'May I see' : 'Покажіть' }}</span>&#32;
+            <span class="docs-word docs-word--2">{{ isEn ? 'your' : 'свої' }}</span>&#32;
+            <span class="docs-word docs-word--3">{{ isEn ? 'documents…' : 'документи…' }}</span>
           </h1>
         </div>
 

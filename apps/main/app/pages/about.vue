@@ -5,7 +5,7 @@ const { isEn } = useLang()
 const t = (uk: string, en: string) => isEn.value ? en : uk
 const displayName = (person: (typeof people)[number]) => isEn.value ? peopleEn[person.slug]?.name ?? person.name : person.name
 const displayRole = (person: (typeof people)[number]) => isEn.value ? peopleEn[person.slug]?.teamRole ?? peopleEn[person.slug]?.shortBio ?? person.teamRole ?? '' : person.teamRole ?? person.shortBio ?? ''
-useSeoMeta({ title: () => t('Про нас', 'About us'), description: () => t('ГО «Символ»: місія, цінності, команда, партнери й звіти.', 'NGO Symbol: mission, values, team, partners, and reporting.') })
+usePageSeo({ title: () => t('Про організацію: місія, команда, партнери', 'About the organisation: mission, team, partners'), description: () => t('Місія, цінності й постійна команда ГО «Символ» — громадської організації з Харкова, зареєстрованої 11 жовтня 2023 року. Партнери, донори, проєкти за роками.', 'Mission, values and permanent team of NGO Symbol, a non-profit from Kharkiv registered on 11 October 2023. Partners, donors and projects by year.') })
 
 const team = people.filter(person => person.team).sort((a, b) => (a.teamOrder ?? 99) - (b.teamOrder ?? 99))
 const supporters = organizations
@@ -83,8 +83,8 @@ const supporters = organizations
           <p>
             <template v-for="(outlet, index) in group.outlets" :key="outlet.name">
               <span class="press-line__outlet" :lang="originalLang(outlet.name, isEn)">
-                <a v-if="outlet.items.length === 1" :href="outlet.items[0]!.url" target="_blank" rel="noreferrer" :title="outlet.items[0]!.title" :aria-label="`${outlet.name}: ${outlet.items[0]!.title}`">{{ outlet.name }}</a>
-                <template v-else>{{ outlet.name }}<sup><a v-for="(item, piece) in outlet.items" :key="item.url" :href="item.url" target="_blank" rel="noreferrer" :title="item.title" :aria-label="`${outlet.name}: ${item.title}`">{{ piece + 1 }}</a></sup></template>
+                <a v-if="outlet.items.length === 1" :href="outlet.items[0]!.url" target="_blank" rel="noreferrer" :lang="originalLang(outlet.items[0]!.title, isEn)" :title="outlet.items[0]!.title" :aria-label="`${outlet.name}: ${outlet.items[0]!.title}`">{{ outlet.name }}</a>
+                <template v-else>{{ outlet.name }}<sup><a v-for="(item, piece) in outlet.items" :key="item.url" :href="item.url" target="_blank" rel="noreferrer" :lang="originalLang(item.title, isEn)" :title="item.title" :aria-label="`${outlet.name}: ${item.title}`">{{ piece + 1 }}</a></sup></template>
                 <span v-if="index < group.outlets.length - 1" class="press-line__sep" aria-hidden="true"> /</span>
               </span>
               {{ ' ' }}
