@@ -30,6 +30,8 @@ Skills live in `.agents/skills/`. If your tool does not load them automatically,
 
 When work changes a durable fact, scope, route contract, design token, technical decision, project status, or open question, update the corresponding knowledge document in the same change. Add an ADR when the decision has meaningful alternatives or migration consequences. Do not record temporary debugging details as durable memory.
 
+Docs ship with the change: update the note in the same commit. Router for tasks: `docs/CONTEXT.md` (it points into `documents/`). Run `python3 scripts/docs_tool.py map && python3 scripts/docs_tool.py check` when `docs/` changes.
+
 Run `pnpm kb:validate` after knowledge-graph changes and `pnpm check` after application changes when dependencies are available.
 
 When the user says “онови контекст”, “синхронізуй контекст”, “запам’ятай ці рішення”, or invokes `$update-symbol-context`, use `.agents/skills/update-symbol-context/SKILL.md` to perform an explicit knowledge synchronization pass.
