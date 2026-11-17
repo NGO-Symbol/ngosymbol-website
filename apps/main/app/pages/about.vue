@@ -18,61 +18,67 @@ const supporters = organizations
 </script>
 
 <template>
-  <section class="page container">
-    <Breadcrumbs />
-    <div class="page-title page-title--wide">
+  <div class="about">
+    <section class="page container about-intro">
+      <Breadcrumbs />
       <span class="eyebrow">{{ t('ГО «Символ»', 'NGO Symbol') }}</span>
       <h1>{{ t('Незалежна організація про культуру, мистецтво й уважність', 'An independent organisation for culture, art, and attentive care') }}</h1>
-    </div>
+      <div class="about-grid">
+        <div>
+          <span class="label">{{ t('Місія', 'Mission') }}</span>
+          <p class="large-copy">{{ t('Розвиваємо сучасну українську культуру і мистецтво та сприяємо уважному ставленню до психічного здоров’я.', 'We develop contemporary Ukrainian culture and art and promote attentive care for mental health.') }}</p>
+        </div>
+        <div>
+          <span class="label">{{ t('Працюємо', 'Where we work') }}</span>
+          <p class="about-grid__place">{{ t('Харків · Київ · Закарпаття', 'Kharkiv · Kyiv · Zakarpattia') }}</p>
+          <p>{{ t('Прагнемо працювати по всій Україні та створювати проєкти за кордоном.', 'We aim to work throughout Ukraine and create international projects.') }}</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="about-grid">
-      <div>
-        <span class="label">{{ t('Місія', 'Mission') }}</span>
-        <p class="large-copy">{{ t('Розвиваємо сучасну українську культуру і мистецтво та сприяємо уважному ставленню до психічного здоров’я.', 'We develop contemporary Ukrainian culture and art and promote attentive care for mental health.') }}</p>
+    <section class="about-band about-band--violet">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="label">{{ t('Цінності', 'Values') }}</span><h2>{{ t('Мистецтво, яке говорить з людьми', 'Art that speaks with people') }}</h2></div>
+        </div>
+        <div class="values">
+          <div><h3>{{ t('Молодь для молоді', 'Young people for young people') }}</h3><p>{{ t('Більшість команди — молоде покоління українців, яке прагне структурних змін.', 'Most of our team belongs to a young generation of Ukrainians seeking structural change.') }}</p></div>
+          <div><h3>{{ t('Нічого про нас без нас', 'Nothing about us without us') }}</h3><p>{{ t('Залучаємо людей до рішень, які їх стосуються.', 'We involve people in decisions that affect them.') }}</p></div>
+          <div><h3>{{ t('Діалог, а не елітарність', 'Dialogue, not elitism') }}</h3><p>{{ t('Поєднуємо художні практики з психоедукаційними та правопросвітницькими форматами.', 'We combine artistic practices with psychoeducation and human-rights education.') }}</p></div>
+        </div>
       </div>
-      <div>
-        <span class="label">{{ t('Працюємо', 'Where we work') }}</span>
-        <p>{{ t('Харків · Київ · Закарпаття', 'Kharkiv · Kyiv · Zakarpattia') }}</p>
-        <p>{{ t('Прагнемо працювати по всій Україні та створювати проєкти за кордоном.', 'We aim to work throughout Ukraine and create international projects.') }}</p>
-      </div>
-    </div>
+    </section>
 
     <StatsCounters />
 
-    <section class="section section--tight">
-      <div class="section-heading">
-        <div><span class="label">{{ t('Цінності', 'Values') }}</span><h2>{{ t('Мистецтво, яке говорить з людьми', 'Art that speaks with people') }}</h2></div>
-      </div>
-      <div class="values">
-        <div><h3>{{ t('Молодь для молоді', 'Young people for young people') }}</h3><p>{{ t('Більшість команди — молоде покоління українців, яке прагне структурних змін.', 'Most of our team belongs to a young generation of Ukrainians seeking structural change.') }}</p></div>
-        <div><h3>{{ t('Нічого про нас без нас', 'Nothing about us without us') }}</h3><p>{{ t('Залучаємо людей до рішень, які їх стосуються.', 'We involve people in decisions that affect them.') }}</p></div>
-        <div><h3>{{ t('Діалог, а не елітарність', 'Dialogue, not elitism') }}</h3><p>{{ t('Поєднуємо художні практики з психоедукаційними та правопросвітницькими форматами.', 'We combine artistic practices with psychoeducation and human-rights education.') }}</p></div>
-      </div>
-    </section>
-
-    <section id="team" class="section section--tight">
-      <div class="section-heading">
-        <div><span class="label">{{ t('Постійна команда', 'Core team') }}</span><h2>{{ t('Люди «Символу»', 'People of Symbol') }}</h2></div>
-        <p>{{ t('Команди окремих проєктів — на сторінках проєктів.', 'Individual project teams are listed on their project pages.') }} <NuxtLink class="text-link" :to="isEn ? '/en/people' : '/people'">{{ t('Усі люди', 'Everyone') }} →</NuxtLink></p>
-      </div>
-      <div class="team-list">
-        <NuxtLink v-for="(person, index) in team" :key="person.slug" :to="`/people/${person.slug}`">
-          <MediaImg v-if="person.photo" class="team-photo" :src="person.photo" :alt="displayName(person)" loading="lazy" />
-          <span v-else>{{ String(index + 1).padStart(2, '0') }}</span>
-          <strong>{{ displayName(person) }}</strong>
-          <p>{{ displayRole(person) }}</p>
-        </NuxtLink>
+    <section id="team" class="about-band about-band--lilac">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="label">{{ t('Постійна команда', 'Core team') }}</span><h2>{{ t('Люди «Символу»', 'People of Symbol') }}</h2></div>
+          <p>{{ t('Команди окремих проєктів — на сторінках проєктів.', 'Individual project teams are listed on their project pages.') }} <NuxtLink class="text-link" :to="isEn ? '/en/people' : '/people'">{{ t('Усі люди', 'Everyone') }}</NuxtLink></p>
+        </div>
+        <div class="team-list">
+          <NuxtLink v-for="(person, index) in team" :key="person.slug" :to="`/people/${person.slug}`">
+            <MediaImg v-if="person.photo" class="team-photo" :src="person.photo" :alt="displayName(person)" loading="lazy" />
+            <span v-else>{{ String(index + 1).padStart(2, '0') }}</span>
+            <strong>{{ displayName(person) }}</strong>
+            <p>{{ displayRole(person) }}</p>
+          </NuxtLink>
+        </div>
       </div>
     </section>
 
-    <section id="partners" class="section section--tight">
-      <div class="section-heading">
-        <div><span class="label">{{ t('Партнери й донори', 'Partners and donors') }}</span><h2>{{ t('З ким ми працюємо', 'Who we work with') }}</h2></div>
+    <section id="partners" class="about-band">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="label">{{ t('Партнери й донори', 'Partners and donors') }}</span><h2>{{ t('З ким ми працюємо', 'Who we work with') }}</h2></div>
+        </div>
+        <PartnerTiles :items="supporters" compact />
       </div>
-      <PartnerTiles :items="supporters" compact />
     </section>
 
-    <section id="press" class="section section--tight">
+    <section id="press" class="about-band about-band--white">
+      <div class="container">
       <div class="section-heading">
         <div><span class="label">{{ t('Медіа', 'Media') }}</span><h2>{{ t('Про нас пишуть', 'Coverage of our work') }}</h2></div>
         <p>{{ t('Згадки в медіа зібрані й на сторінках відповідних проєктів.', 'Media mentions are also collected on the relevant project pages.') }}</p>
@@ -93,9 +99,11 @@ const supporters = organizations
         </section>
         <p class="press-lines__note">{{ t('Кожна назва веде до публікації. Цифри біля назви: кілька матеріалів одного видання.', 'Each name opens the publication. Numbers beside a name mark several pieces from one outlet.') }}</p>
       </div>
+      </div>
     </section>
 
-    <section class="section section--tight">
+    <section class="about-band about-band--apricot">
+      <div class="container">
       <div class="section-heading">
         <div><span class="label">{{ t('Прозорість', 'Transparency') }}</span><h2>{{ t('Звіти й документи', 'Reports and documents') }}</h2></div>
         <p>{{ t('Для кожного донорського проєкту ми готуємо фінансові й описові звіти та подаємо державну звітність. Публічні звіти, статут і політики з’являться тут після погодження.', 'For every donor-funded project, we prepare financial and narrative reports and submit statutory reporting. Public reports, our charter, and policies will appear here after approval.') }}</p>
@@ -105,6 +113,7 @@ const supporters = organizations
         <div><dt>{{ t('ЄДРПОУ', 'Registration code (EDRPOU)') }}</dt><dd><CopyValue value="45221328" /></dd></div>
         <div><dt>{{ t('Зареєстровано', 'Registered') }}</dt><dd>{{ t('11 жовтня 2023, Харків', '11 October 2023, Kharkiv') }}</dd></div>
       </dl>
+      </div>
     </section>
-  </section>
+  </div>
 </template>
