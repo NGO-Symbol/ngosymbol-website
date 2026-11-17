@@ -4,7 +4,7 @@ Items here are unresolved and must not be silently assumed.
 
 ## Organization and content
 
-- Confirm public role/title and approved short biography for Петро Чекаль, Ганна Франик, and Олена Мордик.
+- Confirm approved short biography for Петро Чекаль, Ганна Франик, and Олена Мордик (team roles confirmed 2026-11-17, see team-cv.md).
 - Map ЄрміловЦентр, MH4U, European Cultural Foundation, and other partners/donors to exact projects and approved logo assets.
 - Confirm the public list, date, location, team, and outcomes for each older project.
 - Decide which policies and reports are ready for publication.

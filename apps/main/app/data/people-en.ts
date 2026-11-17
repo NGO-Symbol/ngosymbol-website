@@ -6,8 +6,8 @@ export interface PersonEn { name: string; shortBio?: string; bio?: string[]; tea
 export const peopleEn: Record<string, PersonEn> = {
   'yurii-rassokha': { name: 'Yurii Rassokha', teamRole: 'Chair of the organisation', shortBio: 'Chair of NGO Symbol; cultural project manager, cultural studies specialist, curator, and photographer from Kharkiv.' },
   'petro-chekal': { name: 'Petro Chekal', teamRole: 'Deputy Chair', shortBio: 'Documentary and conceptual photographer, curator, cinematographer, and producer (born 2001 in Kharkiv); member of the Ukrainian Association of Professional Photographers.' },
-  'hanna-franyk': { name: 'Ana Franyk (Alina Voitiuk)', shortBio: 'Art manager, interdisciplinary artist, and facilitator of peer-support groups.' },
-  'olena-mordyk': { name: 'Olena Mordyk', shortBio: 'Playback theatre actor, performer, cultural project manager, and interdisciplinary artist. At Symbol, she leads communications for The Story of My Street.' },
+  'hanna-franyk': { name: 'Ana Franyk (Alina Voitiuk)', teamRole: 'Project manager', shortBio: 'Art manager, interdisciplinary artist, and facilitator of peer-support groups.' },
+  'olena-mordyk': { name: 'Olena Mordyk', teamRole: 'Communications', shortBio: 'Playback theatre actor, performer, cultural project manager, and interdisciplinary artist. At Symbol, she leads communications for The Story of My Street.' },
   'andrii-skrypka': { name: 'Andrii Skrypka', shortBio: 'Interdisciplinary artist and designer born in Kerch, Crimea.' },
   'vira-pakosh': { name: 'Vira Pakosh', shortBio: 'Interdisciplinary artist working with perceptions of reality, memory, and recollection.' },
   'nataliia-ivanova': { name: 'Nataliia Ivanova', shortBio: 'Curator and educator; founder and director of YermilovCentre in Kharkiv and recipient of the 2026 Igor Zabel Award.' },

@@ -91,6 +91,7 @@ export const people: Person[] = [
     slug: 'hanna-franyk',
     // Ганна Франик is the artistic name of Аліна Войтюк (USER_CONFIRMED 2026-10-29): one person, one page.
     name: 'Ганна Франик (Аліна Войтюк)',
+    teamRole: 'Проєктна менеджерка',
     tags: ['Артменеджерка', 'Мисткиня'],
     links: [{ label: 'Instagram', url: 'https://www.instagram.com/ana_voltfranka/' }],
     photo: '/media/people/hanna-franyk.jpg',
@@ -109,6 +110,7 @@ export const people: Person[] = [
   {
     slug: 'olena-mordyk',
     name: 'Олена Мордик',
+    teamRole: 'Комунікаційниця',
     tags: ['Акторка плейбек-театру', 'Мисткиня'],
     photo: '/media/people/olena-mordyk.jpg',
     team: true,
