@@ -19,7 +19,7 @@ const { t } = useLang()
 </template>
 
 <style scoped>
-.docs-sheet { position: relative; overflow: hidden; padding: clamp(18px, 3.4vw, 44px) clamp(18px, 4vw, 56px) 18px; background: var(--docs-sheet); border: 1px solid color-mix(in srgb, var(--docs-ink) 45%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--docs-ink) 10%, transparent), 8px 10px 0 -2px color-mix(in srgb, var(--docs-ink) 10%, transparent); transform: rotate(var(--tilt)); animation: docs-sheet-in .6s cubic-bezier(.2, .8, .2, 1) both; }
+.docs-sheet { position: relative; overflow: hidden; min-width: 0; max-width: 100%; overflow-wrap: anywhere; padding: clamp(18px, 3.4vw, 44px) clamp(18px, 4vw, 56px) 18px; background: var(--docs-sheet); border: 1px solid color-mix(in srgb, var(--docs-ink) 45%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--docs-ink) 10%, transparent), 8px 10px 0 -2px color-mix(in srgb, var(--docs-ink) 10%, transparent); transform: rotate(var(--tilt)); animation: docs-sheet-in .6s cubic-bezier(.2, .8, .2, 1) both; }
 .docs-sheet + .docs-sheet { margin-top: 28px; }
 /* Punched holes along the left edge, as in a filed sheet. */
 .docs-sheet::before { content: ''; position: absolute; left: 10px; top: 50%; width: 9px; height: 90px; transform: translateY(-50%); background: radial-gradient(circle, var(--docs-paper) 0 3.5px, color-mix(in srgb, var(--docs-ink) 40%, transparent) 3.5px 4.5px, transparent 4.6px) center top / 9px 9px no-repeat, radial-gradient(circle, var(--docs-paper) 0 3.5px, color-mix(in srgb, var(--docs-ink) 40%, transparent) 3.5px 4.5px, transparent 4.6px) center bottom / 9px 9px no-repeat; }

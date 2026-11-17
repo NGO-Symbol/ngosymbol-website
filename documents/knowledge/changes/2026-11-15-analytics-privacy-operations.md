@@ -1,7 +1,7 @@
 # Analytics, privacy and operations
 
 Date: 2026-11-15
-Status: implemented locally on a branch started from `task/release-seo`; not published. **The privacy page is a DRAFT awaiting
+Status: published in #70 (live on symbol.ngo). The privacy page was approved on 2026-11-17 and Clarity switched on (#71).
 approval by Юрій Рассоха and Петро Чекаль.** It may be published because every statement on it is true for the site as it is
 (its tool status lines follow `apps/main/app/data/analytics.ts`), but the Clarity switch stays off until they approve it.
 

@@ -41,7 +41,6 @@ useHead({
         <CopyValue :value="contactEmail" :en="isEn"><a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a></CopyValue>
         <SocialLink v-for="item in socials" :key="item.url" :url="item.url" />
       </div>
-      <p>{{ t('Корпоративна пошта з’явиться після налаштування Google Workspace для неприбуткових організацій.', 'An organisation email address will be added after Google Workspace for Nonprofits is configured.') }}</p>
     </div>
   </section>
 </template>

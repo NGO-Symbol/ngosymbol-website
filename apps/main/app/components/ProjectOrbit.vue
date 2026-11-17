@@ -306,7 +306,7 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); phone?.r
 .orbit-hook__caption { width: min(100%, 460px); display: grid; gap: 6px; text-align: center; text-decoration: none; min-height: 7.5em; animation: caption-in .45s cubic-bezier(.2, 1.2, .4, 1); }
 .orbit-hook__caption strong { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
 .orbit-hook__caption span:last-child { font-size: .92rem; line-height: 1.5; }
-.orbit-hook__caption .label { color: var(--symbol-violet); }
+.orbit-hook__caption .label { color: var(--symbol-violet-text); }
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 @keyframes orbit-breathe { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(-14deg) scale(1.06); } }
 @keyframes orbit-launch { to { transform: rotate(60deg); opacity: 0; } }

@@ -5,6 +5,9 @@ import { psdPeopleEn } from '#symbol/psd-artists-en'
 import { peopleEn } from '#symbol/people-en'
 
 const { isEn, t } = useLang()
+// declared before usePageSeo: its graph is evaluated right away in the browser
+const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Менеджерка проєкту': 'Project manager', 'Дизайн айдентики та шрифт EXDocument': 'Identity design and the EXDocument typeface', 'Координація від ЄрміловЦентру': 'Coordination, YermilovCentre' }
+const personName = (person: (typeof team)[number]['person']) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
 usePageSeo({
   title: () => t('Команда', 'Team'),
   description: () => t('Команда виставки «Покажіть свої документи…» та ГО «Символ»: куратори, менеджерка проєкту, дизайн айдентики, координація від ЄрміловЦентру.', 'The team of «May I See Your Documents…» and NGO Symbol: curators, project manager, identity design, coordination from YermilovCentre.'),
@@ -28,8 +31,6 @@ usePageSeo({
     docsBreadcrumbs(isEn.value, t('Команда', 'Team'), '/komanda')
   ]
 })
-const roleEn: Record<string, string> = { 'Куратори': 'Curators', 'Менеджерка проєкту': 'Project manager', 'Дизайн айдентики та шрифт EXDocument': 'Identity design and the EXDocument typeface', 'Координація від ЄрміловЦентру': 'Coordination, YermilovCentre' }
-const personName = (person: (typeof team)[number]['person']) => isEn.value ? (psdPeopleEn[person.slug]?.name ?? peopleEn[person.slug]?.name ?? person.name) : person.name
 </script>
 
 <template>

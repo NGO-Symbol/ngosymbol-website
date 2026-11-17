@@ -140,12 +140,12 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .site-search__results a { display: grid; grid-template-columns: 96px 1fr; gap: 2px 14px; padding: 10px 12px; text-decoration: none; border-radius: 4px; transition: background .2s ease; }
 .site-search__results a.is-active { background: var(--symbol-lilac); }
 .site-search__results strong { font-family: var(--font-display); font-weight: 400; font-size: 1.2rem; line-height: 1.2; }
-.site-search__kind { grid-row: span 2; font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--symbol-violet); padding-top: 5px; }
+.site-search__kind { grid-row: span 2; font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--symbol-violet-text); padding-top: 5px; }
 .site-search__meta { font-size: .82rem; opacity: .75; }
 .site-search__empty, .site-search__hint { margin: 0; padding: 18px; font-size: .9rem; opacity: .75; }
 .site-search__intro { padding: 0 0 16px; overflow-y: auto; }
 .site-search__intro .site-search__hint { opacity: .9; padding-bottom: 8px; }
-.site-search__label { display: block; padding: 10px 18px 6px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--symbol-violet); }
+.site-search__label { display: block; padding: 10px 18px 6px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--symbol-violet-text); }
 .site-search__examples, .site-search__sections { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px; }
 .site-search__examples button { padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: .85rem; cursor: pointer; transition: background .2s ease, color .2s ease; }
 .site-search__examples button:hover { background: var(--symbol-plum); color: var(--symbol-cream); }

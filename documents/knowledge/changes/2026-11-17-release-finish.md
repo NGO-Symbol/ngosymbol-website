@@ -6,3 +6,14 @@
 - Google services (Search Console, GA4, Google for Nonprofits) belong to `ngo.symbol@gmail.com`; the team applies to Google for Nonprofits itself (the register extract exists).
 - Outreach list for links from partners and media: [`../../operations/partner-links.md`](../../operations/partner-links.md).
 - Waiting for the team: the Cloudflare account owner (Web Analytics token), the Search Console check, the GA4 property, the Gmail app password for alerts, links in the social profiles.
+
+## Fixes from the final audit (same day)
+
+- The exhibition pages «Події» and «Команда» (UA and EN) failed on a direct visit: a helper used by the page's structured data was declared after `usePageSeo`, which evaluates it at once in the browser. Declarations moved above it; all 50 exhibition pages load without errors.
+- Dark theme: the «Підтримати» pill kept light text on apricot (1.1:1) because main.css's unlayered `a { color: inherit }` won over the layered component rule; now dark text in both themes.
+- Small violet text (labels, dates, eyebrows): new token `--symbol-violet-text` (#5f4f73, 6.9:1 on cream; #b7a6cc in dark); the brand violet stays for fills and large type. Contact page: dark ink on the violet band (5.1:1).
+- Support page: the empty IBAN row is hidden; the page says the account number is sent on request by email.
+- Contact page: the internal note about Google Workspace is removed.
+- `/events/?view=calendar` opens the calendar again (the prerendered page did not read the query).
+- Language switch: the visible text now reads «UA EN», as the accessible name does.
+- Exhibition: no horizontal scroll on the artist and programme pages at 320–390 px; typo «ґспосіб» fixed; programme events carry their venue in JSON-LD.

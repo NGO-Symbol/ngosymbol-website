@@ -1,7 +1,7 @@
 # SEO release: titles, structured data, robots, 404, SEO gate
 
 Date: 2026-11-15
-Status: implemented locally on branch `worktree-agent-a79bcfa641e1a8401` (from `task/release-seo`); not published. Every item was approved by the owner and the team after the audit of the live site (crawl of 211 sitemap pages, Lighthouse, JSON-LD and link analysis).
+Status: published in #70 (live on symbol.ngo).
 
 ## Facts recorded (`USER_CONFIRMED` 2026-11-15)
 
