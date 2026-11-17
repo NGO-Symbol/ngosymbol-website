@@ -215,5 +215,16 @@
     "visual-guard",
     "worker-audit",
     "worktrees"
+  ],
+  "profile": "dev",
+  "profile_touched": [
+    "deep-audit",
+    "human-writing",
+    "mobile-native",
+    "review-2axis",
+    "security-audit",
+    "self-review",
+    "services-check",
+    "sync-docs"
   ]
 }

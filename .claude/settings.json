@@ -98,5 +98,15 @@
         ]
       }
     ]
+  },
+  "skillOverrides": {
+    "deep-audit": "user-invocable-only",
+    "human-writing": "user-invocable-only",
+    "mobile-native": "user-invocable-only",
+    "review-2axis": "user-invocable-only",
+    "security-audit": "user-invocable-only",
+    "self-review": "user-invocable-only",
+    "services-check": "user-invocable-only",
+    "sync-docs": "user-invocable-only"
   }
 }
