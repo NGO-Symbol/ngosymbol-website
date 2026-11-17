@@ -16,7 +16,7 @@ export const analytics = {
    * Петро Чекаль. To switch it on: set `true`, run `pnpm check`, open a pull request; after the merge the banner names
    * Clarity and it loads for visitors who accept. To switch it off again: set `false`.
    */
-  clarityEnabled: false,
+  clarityEnabled: true, // privacy page approved by the head of the NGO, Юрій Рассоха (2026-11-17)
   /** Cloudflare Web Analytics token (Cloudflare → Analytics & logs → Web analytics → the site → Manage site). Empty until the owner creates it (documents/operations/owner-cloudflare-web-analytics.md). */
   cloudflareToken: ''
 }

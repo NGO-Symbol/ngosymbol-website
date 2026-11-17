@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Privacy and cookie policy. DRAFT awaiting approval by Юрій Рассоха and Петро Чекаль (documents/knowledge/changes/2026-11-15-analytics-privacy-operations.md).
+// Privacy and cookie policy. Approved by the head of the NGO, Юрій Рассоха, on 2026-11-17 (all sections, no edits).
 // Facts only from documents/knowledge and the vendors' own documentation; the status of each tool follows data/analytics.ts,
 // so the page never says a tool is running when it is not. Ukrainian and English share one template (ADR-0009).
 import { analytics } from '~/data/analytics'
@@ -7,12 +7,12 @@ import { contactEmail } from '~/data/social'
 
 const { isEn } = useLang()
 const t = (uk: string, en: string) => (isEn.value ? en : uk)
-useSeoMeta({
+usePageSeo({
   title: () => t('Конфіденційність і кукі', 'Privacy and cookies'),
   description: () => t('Які дані збирає сайт ГО «Символ», які кукі він використовує, на якій підставі і як змінити вибір.', 'What data the NGO Symbol website collects, which cookies it uses, on what basis and how to change your choice.')
 })
 
-const updated = computed(() => t('15 листопада 2026', '15 November 2026'))
+const updated = computed(() => t('17 листопада 2026', '17 November 2026'))
 const status = (on: boolean) => (on ? t('підключено', 'in use') : t('ще не підключено', 'not connected yet'))
 const gaOn = Boolean(analytics.ga4)
 const clarityOn = Boolean(analytics.clarity && analytics.clarityEnabled)

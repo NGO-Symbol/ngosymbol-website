@@ -16,7 +16,7 @@ import { coverPhoto } from '../../../documents/app/data/workPhotos'
 import { events, news, people, projects } from '../../app/utils/content'
 
 const base = 'https://symbol.ngo'
-const staticPages = ['/', '/projects', '/events', '/opportunities', '/people', '/about', '/support', '/contact', '/news', '/press']
+const staticPages = ['/', '/projects', '/events', '/opportunities', '/people', '/about', '/support', '/contact', '/news', '/press', '/privacy']
 const exhibitionPages = ['/', '/kontseptsiia', '/mytsi', '/podii', '/komanda', '/presa', ...artists.map(artist => `/mytsi/${artist.slug}`)]
 
 interface SitemapImage { src: string; title: string }
@@ -54,7 +54,8 @@ const pageSources: Record<string, string[]> = {
   '/support': [`${mainDir}/pages/support.vue`],
   '/contact': [`${mainDir}/pages/contact.vue`, ...dataFiles('social.ts')],
   '/news': [`${mainDir}/pages/news.vue`],
-  '/press': [`${mainDir}/pages/press.vue`, ...dataFiles('press.ts')]
+  '/press': [`${mainDir}/pages/press.vue`, ...dataFiles('press.ts')],
+  '/privacy': [`${mainDir}/pages/privacy.vue`, `${mainDir}/data/analytics.ts`]
 }
 const exhibitionSources = (path: string) => {
   const shared = [...dataFiles('psd-artists-en.ts', 'alt-en.ts')]

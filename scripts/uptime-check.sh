@@ -14,7 +14,8 @@
 #     renewal is stuck, for example the DNS records changed), and
 #   - the registration of the domain symbol.ngo expires in < 30 days (RDAP of the .ngo registry; renew at Cloudflare).
 #
-# Env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (repository secrets), STATE_FILE, MODE (check | daily | test).
+# Env: SMTP_USER, SMTP_PASSWORD, ALERT_EMAIL_TO (email alerts) and/or TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (repository secrets),
+#      SMTP_HOST (default smtp.gmail.com), STATE_FILE, MODE (check | daily | test).
 # Without the two secrets nothing is sent: the script prints what it would have sent, and still exits 0.
 # Locally: bash scripts/uptime-check.sh          (prints instead of sending)
 #          MODE=daily bash scripts/uptime-check.sh
@@ -46,9 +47,34 @@ REDIRECTS=(
 # Telegram uses HTML parse mode: a literal < or & in a message would be rejected.
 escape_html() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'; }
 
+# Email through SMTP over TLS (a Gmail app password of the sending account). Recipients: comma-separated ALERT_EMAIL_TO.
+send_email() {
+  if [[ -z "${SMTP_USER:-}" || -z "${SMTP_PASSWORD:-}" || -z "${ALERT_EMAIL_TO:-}" ]]; then
+    echo "[email disabled: secrets SMTP_USER / SMTP_PASSWORD / ALERT_EMAIL_TO are not set]"
+    return
+  fi
+  local text subject mail rcpts=() addr
+  # The messages are written for Telegram's HTML mode: drop the tags and decode the three escapes for plain text.
+  text=$(printf '%s' "$1" | sed -e 's/<[^>]*>//g' -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&amp;/\&/g')
+  subject="=?UTF-8?B?$(printf '%s' "$(printf '%s\n' "$text" | head -n 1)" | base64 | tr -d '\n')?="
+  mail=$(mktemp)
+  printf 'From: symbol.ngo uptime <%s>\r\nTo: %s\r\nSubject: %s\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n%s\r\n' \
+    "$SMTP_USER" "$ALERT_EMAIL_TO" "$subject" "$text" > "$mail"
+  IFS=',' read -ra list <<< "$ALERT_EMAIL_TO"
+  for addr in "${list[@]}"; do addr="${addr// /}"; [[ -n "$addr" ]] && rcpts+=(--mail-rcpt "$addr"); done
+  if curl -sS --max-time 30 --ssl-reqd --url "smtps://${SMTP_HOST:-smtp.gmail.com}:465" --user "$SMTP_USER:$SMTP_PASSWORD" \
+      --mail-from "$SMTP_USER" "${rcpts[@]}" --upload-file "$mail" >/dev/null 2>&1; then
+    echo "Email: sent"
+  else
+    echo "::warning::Email send failed (check SMTP_USER / SMTP_PASSWORD; Gmail needs an app password)"
+  fi
+  rm -f "$mail"
+}
+
 send() {
+  send_email "$1"
   if [[ -z "${TELEGRAM_BOT_TOKEN:-}" || -z "${TELEGRAM_CHAT_ID:-}" ]]; then
-    echo "[telegram disabled: secrets TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID are not set] Would have sent:"
+    echo "[telegram disabled: secrets TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID are not set] Message:"
     echo "$1"
     return
   fi
