@@ -1,0 +1,219 @@
+{
+  "pack": "skill-pack",
+  "settings_target": "shared",
+  "items": {
+    "verify-before-done": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/verify-before-done/SKILL.md": "40050d05188e4710"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "state-not-exit": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "ui-verify": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "debugging": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/debugging/SKILL.md": "fc39e2a7965e5c69"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "retro": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/retro/SKILL.md": "6012e03f21e129f0"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "session-context": {
+      "version": "1.0.1",
+      "files": {
+        ".claude/hooks/session_context.py": "da7bd15facefb5b0"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "dangerous-bash": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/hooks/dangerous_bash.py": "3d8fb1fa7d49702a"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "irreversible-gate": {
+      "version": "1.0.0",
+      "files": {},
+      "facet_of": "dangerous-bash"
+    },
+    "path-guard": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/hooks/path_guard.py": "89ac9940d2484f1f"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "read-hygiene": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/hooks/read_hygiene.py": "d3ffe5001e5c9187"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "commit-gate": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/hooks/commit_gate.py": "f7431c58cc333614"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "docs-architecture": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "save-context": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "remember-routing": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "spec-first": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "done-when": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "grilling": {
+      "version": "1.0.0",
+      "files": {},
+      "facet_of": "spec-first"
+    },
+    "mobile-native": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/mobile-native/SKILL.md": "3ec7ebba89d58c95"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "human-writing": {
+      "version": "1.0.0",
+      "files": {},
+      "installed": "2026-11-17T19:59:02"
+    },
+    "worktrees": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/worktrees/SKILL.md": "6a5468666aa24320"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "review-2axis": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/review-2axis/SKILL.md": "e6facae46d3b6488"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "security-audit": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/security-audit/SKILL.md": "98e06a8ba5e6662e"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "services-check": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/hooks/services_nudge.py": "c930b04eb0f1d4e2",
+        ".claude/services.md": "7db3ba26937b82a9",
+        ".claude/skills/services-check/SKILL.md": "09a7de4335d989e0"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "log-to-file": {
+      "version": "1.0.1",
+      "files": {
+        ".claude/bin/run-logged": "a75a4fe494bf3627"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "docs-staleness": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/hooks/docs_staleness.py": "1b87edb46253a76f"
+      },
+      "installed": "2026-11-17T19:59:02"
+    },
+    "sync-docs": {
+      "version": "1.0.0",
+      "files": {
+        ".claude/skills/sync-docs/SKILL.md": "641df9aa937347ef"
+      },
+      "installed": "2026-11-17T19:59:02"
+    }
+  },
+  "declined": {},
+  "pack_version": "2026.11.1",
+  "seen": [
+    "adr",
+    "bootstrap-project",
+    "check-loop",
+    "commit-gate",
+    "dangerous-bash",
+    "debugging",
+    "deep-audit",
+    "docs-architecture",
+    "docs-staleness",
+    "domain-reviewers",
+    "done-when",
+    "experiment-log",
+    "fanout-readonly",
+    "format-on-edit",
+    "grilling",
+    "human-writing",
+    "irreversible-gate",
+    "log-to-file",
+    "long-jobs",
+    "mobile-native",
+    "orchestrator-mode",
+    "path-guard",
+    "pr-review",
+    "progress",
+    "read-hygiene",
+    "remember-routing",
+    "retro",
+    "review-2axis",
+    "save-context",
+    "security-audit",
+    "self-review",
+    "services-check",
+    "session-context",
+    "ship",
+    "skill-lint",
+    "spec-first",
+    "state-not-exit",
+    "strict-reviewer",
+    "sync-docs",
+    "tdd",
+    "ui-verify",
+    "verify-before-done",
+    "visual-guard",
+    "worker-audit",
+    "worktrees"
+  ]
+}

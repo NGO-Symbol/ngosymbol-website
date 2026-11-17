@@ -10,6 +10,92 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/session_context.py\" # skillpack:session-context",
+            "timeout": 10,
+            "statusMessage": "Знімок git…"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/services_nudge.py\" # skillpack:services-check",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/dangerous_bash.py\" # skillpack:dangerous-bash",
+            "timeout": 10,
+            "statusMessage": "Перевірка команди…"
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/commit_gate.py\" # skillpack:commit-gate",
+            "timeout": 300,
+            "statusMessage": "Перевірка перед комітом…"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/path_guard.py\" # skillpack:path-guard",
+            "timeout": 10,
+            "statusMessage": "Перевірка шляху…"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/path_guard.py\" # skillpack:path-guard",
+            "timeout": 10,
+            "statusMessage": "Пошук секретів…"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/read_hygiene.py\" # skillpack:read-hygiene",
+            "timeout": 5,
+            "statusMessage": "Read hygiene…"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/docs_staleness.py\" # skillpack:docs-staleness",
+            "timeout": 10,
+            "statusMessage": "Перевірка документації…"
+          }
+        ]
       }
     ]
   }

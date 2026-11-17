@@ -64,3 +64,11 @@ When the user says “онови контекст”, “синхронізуй 
 - Headlines and names that stay in the original Ukrainian on purpose are marked `lang="uk"`.
 
 Never invent impact metrics, donor relationships, project roles, quotes, or team biographies.
+
+<!-- skillpack:log-to-file -->
+Run test suites, builds, deploys and any command that prints more than 100 lines through
+`.claude/bin/run-logged <cmd>` instead of running it bare.
+It saves the full output to `.claude/logs/<timestamp>-<slug>.log` (keep `.claude/logs/` in .gitignore)
+and prints only: exit code, duration, the last 40 lines, lines matching error|fail|traceback, and the log path.
+If you need more detail, read the log file by line range (offset/limit) or grep it; do not re-run the command.
+<!-- /skillpack:log-to-file -->
