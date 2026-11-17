@@ -55,3 +55,5 @@ Bios may now cite a source inline as `[label](https://…)` (utils/content.ts �
 
 Second, deeper pass (2026-10-30), searching each person by every known alias (Aprís, Chambo, Anny Gareeva, Hlyvlias/Constantine, Fomitski/Eva, Sholokh/M17…): full multi-paragraph bios for Пятковка, Маков, Тістол, Сай, Мельниченко, Кузнецов, Аліна Прокопенко, Марія Прокопенко, Гареєва, Гливляс, Señora Serpiente, Самойлов, Фоміцкі, Шолох and the mhGAP trainers (from Symbol's own records). Corrected: Пятковка was not a member of «Время» (his generation was shaped by it; Михайлов was his teacher) and studied lighting design on courses in Kyiv. Still nothing public for Пакош, Охман, Kinich Azla, Юзепчук, Коваль, Пасічник, Гурільова, Магран Тата, Горбенко.
 Person pages show role tags (`Person.tags`) at the top right.
+
+Permanent-team roles on «Про нас» (USER_CONFIRMED 2026-11-17, short and uniform): Юрій Рассоха — Голова організації; Петро Чекаль — Заступник голови; Ганна Франик (Аліна Войтюк) — Проєктна менеджерка (EN «Project manager»); Олена Мордик — Комунікаційниця (EN «Communications»); Лариса Чайка — Співзасновниця, членкиня Керівної ради.
