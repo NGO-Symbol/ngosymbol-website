@@ -13,7 +13,11 @@ Root: --root PATH, else the folder above scripts/ when it has docs/, else the cu
 
 Optional docs/.docs.json (all keys optional):
   {"name": "Project", "files_field": "code", "concepts_dir": "concepts",
-   "note_warn": 200, "note_max": 400, "router_max": 80, "agents_max": 150}
+   "note_warn": 200, "note_max": 400, "router_max": 80, "agents_max": 150,
+   "map_cmd": "node tools/docs-map.mjs"}
+  map_cmd — the project already has its own _MAP generator (e.g. CI-gated): `map` runs it instead,
+  and `check` leaves _MAP freshness to that generator's own gate.
+[[links]] resolve by filename stem or by a note's frontmatter `id:` (ids may carry prefixes).
 """
 
 from __future__ import annotations
@@ -79,6 +83,7 @@ class Cfg:
     note_max: int = 400
     router_max: int = 80
     agents_max: int = 150
+    map_cmd: str = ""
 
     @property
     def docs(self) -> Path:
@@ -184,7 +189,16 @@ def router_paths(cfg: Cfg) -> List[Path]:
 
 
 def known_ids(cfg: Cfg) -> set:
-    return {p.stem for p in cfg.docs.rglob("*.md")}
+    out = set()
+    for p in cfg.docs.rglob("*.md"):
+        out.add(p.stem)
+        try:
+            m = re.search(r"\A---\n(?:.*\n)*?id:\s*(\S+)", p.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError):
+            m = None
+        if m:
+            out.add(m.group(1).strip("'\""))
+    return out
 
 
 def category_of(cfg: Cfg, p: Path) -> str:
@@ -255,6 +269,8 @@ def render_map(cfg: Cfg) -> str:
 
 
 def cmd_map(cfg: Cfg) -> int:
+    if cfg.map_cmd:
+        return subprocess.call(cfg.map_cmd, shell=True, cwd=cfg.root)
     text = render_map(cfg)
     (cfg.docs / "_MAP.md").write_text(text, encoding="utf-8")
     print(f"map: {text.count(chr(10))} lines → {rel(cfg, cfg.docs / '_MAP.md')}")
@@ -362,7 +378,7 @@ def cmd_check(cfg: Cfg, quiet: bool) -> int:
         )
 
     mp = cfg.docs / "_MAP.md"
-    if not mp.exists() or mp.read_text(encoding="utf-8") != render_map(cfg):
+    if not cfg.map_cmd and (not mp.exists() or mp.read_text(encoding="utf-8") != render_map(cfg)):
         errors.append("docs/_MAP.md is stale — run `python3 scripts/docs_tool.py map`")
 
     if not quiet:
