@@ -67,7 +67,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutside))
 .picker__list li { padding: 9px 12px; cursor: pointer; white-space: nowrap; border-radius: 4px; animation: picker-row .3s cubic-bezier(.2, 1, .3, 1) both; animation-delay: calc(var(--i) * 25ms); }
 .picker__list li.is-active { background: var(--symbol-lilac); }
 .picker__list li.is-selected { font-weight: 600; }
-.picker__list li.is-selected::before { content: '✓ '; color: var(--symbol-violet); }
+.picker__list li.is-selected::before { content: '✓ '; color: var(--symbol-violet-text); }
 .picker-enter-active, .picker-leave-active { transition: opacity .2s ease, transform .25s cubic-bezier(.2, 1.2, .3, 1); }
 .picker-enter-from, .picker-leave-to { opacity: 0; transform: translateY(-6px); }
 @keyframes picker-row { from { opacity: 0; transform: translateY(4px); } }

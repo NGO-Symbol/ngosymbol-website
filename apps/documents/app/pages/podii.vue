@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { eventsEn } from '#symbol/events-en'
 const { isEn, t } = useLang()
+// declared before usePageSeo: its graph is evaluated right away in the browser
+// Every programme event took place at the exhibition venue (the page text says so).
+const venue = computed(() => ({ '@type': 'Place', name: t('ЄрміловЦентр', 'Yermilov Centre'), address: { '@type': 'PostalAddress', streetAddress: t('майдан Свободи, 4', '4 Svobody Square'), addressLocality: t('Харків', 'Kharkiv'), addressCountry: 'UA' } }))
+const eventCopy = (event: (typeof programme)[number]) => isEn.value ? eventsEn[event.slug] ?? event : event
 usePageSeo({
   title: () => t('Події', 'Events'),
   description: () => t('Паралельна програма виставки «Покажіть свої документи…»: екскурсії, розмови з митцями, лекція, дискусії, плейбек-театр і музичний перформанс.', 'The programme of the exhibition «May I See Your Documents…»: tours, artist talks, a lecture, discussions, playback theatre and a music performance.'),
@@ -18,14 +22,13 @@ usePageSeo({
           '@type': 'ListItem',
           position: index + 1,
           url: `${docsUrl('/podii', isEn.value)}#${event.slug}`,
-          item: { '@type': 'Event', name: eventCopy(event).title, startDate: kyivDateTime(event.start), endDate: kyivDateTime(event.end ?? event.start), url: pageUrlOf(`/events/${event.slug}`, isEn.value), superEvent: { '@id': exhibitionId(isEn.value) } }
+          item: { '@type': 'Event', name: eventCopy(event).title, startDate: kyivDateTime(event.start), endDate: kyivDateTime(event.end ?? event.start), eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', location: venue.value, url: pageUrlOf(`/events/${event.slug}`, isEn.value), superEvent: { '@id': exhibitionId(isEn.value) } }
         }))
       }
     },
     docsBreadcrumbs(isEn.value, t('Події', 'Events'), '/podii')
   ]
 })
-const eventCopy = (event: (typeof programme)[number]) => isEn.value ? eventsEn[event.slug] ?? event : event
 </script>
 
 <template>
@@ -61,7 +64,7 @@ const eventCopy = (event: (typeof programme)[number]) => isEn.value ? eventsEn[e
 .event__photos { margin: 8px 0 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); }
 .event__more { font-size: .85rem; }
 @media (max-width: 640px) {
-  .event { grid-template-columns: 1fr; gap: 10px; }
+  .event { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .event__date { grid-auto-flow: column; justify-content: start; align-items: center; gap: 10px; }
   .event__day { font-size: 1.8rem; }
 }

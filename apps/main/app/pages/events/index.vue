@@ -11,6 +11,13 @@ const projectTitle = (project: (typeof projects)[number]) => isEn.value ? projec
 // «Підписатися на календар подій» elsewhere on the site opens this page straight in the calendar (?view=calendar).
 const route = useRoute()
 const view = ref<'list' | 'calendar'>(route.query.view === 'calendar' ? 'calendar' : 'list')
+// The page is prerendered without a query: during hydration the router briefly holds the bare path and puts the
+// query back afterwards, so ?view=calendar is picked up whenever it appears (it only ever switches to the calendar).
+onMounted(() => {
+  const fromAddress = () => new URLSearchParams(window.location.search).get('view') === 'calendar'
+  if (fromAddress()) view.value = 'calendar'
+  watch(() => route.query.view, value => { if (value === 'calendar' || fromAddress()) view.value = 'calendar' })
+})
 const projectFilter = ref('')
 
 const eventProjects = [...new Map(eventItems.map(item => [item.project.slug, item.project])).values()]

@@ -1,7 +1,7 @@
 # Image-search SEO completeness
 
 Date: 2026-11-14
-Status: implemented locally on branch `task/image-search-seo`; not published.
+Status: published in #69 (live on symbol.ngo).
 
 ## What changed
 

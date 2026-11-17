@@ -111,7 +111,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.d
 .reel__photo--empty { display: block; height: 100%; }
 .reel__photo:hover img { transform: scale(1.03); }
 .reel__meta { margin: 0; display: flex; gap: 10px; align-items: baseline; }
-.reel__index { font-size: .7rem; letter-spacing: .12em; font-variant-numeric: tabular-nums; color: var(--symbol-violet); flex: none; }
+.reel__index { font-size: .7rem; letter-spacing: .12em; font-variant-numeric: tabular-nums; color: var(--symbol-violet-text); flex: none; }
 .reel__caption { font-size: .8rem; line-height: 1.3; color: color-mix(in srgb, var(--symbol-plum) 75%, transparent); text-decoration: none; width: fit-content; }
 .reel__caption:hover { color: var(--symbol-plum); text-decoration: underline; }
 .reel__controls { display: flex; gap: 8px; justify-content: flex-end; }

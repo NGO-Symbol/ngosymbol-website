@@ -96,7 +96,7 @@ onMounted(() => {
 .intro__disc { transform-origin: 500px 500px; animation: intro-disc .6s cubic-bezier(.2, 1.3, .4, 1) both; }
 .intro__sweep { stroke-dasharray: 100 100; stroke-dashoffset: 100; animation: intro-sweep .9s cubic-bezier(.6, 0, .2, 1) .3s forwards; }
 .intro__word { width: min(70vw, 420px); color: var(--symbol-ink); clip-path: inset(0 100% 0 0); animation: intro-word .7s cubic-bezier(.6, 0, .2, 1) .6s forwards; }
-.intro__skip { position: absolute; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--symbol-violet); }
+.intro__skip { position: absolute; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--symbol-violet-text); }
 @keyframes intro-disc { from { transform: scale(0); } to { transform: scale(1); } }
 @keyframes intro-sweep { to { stroke-dashoffset: 0; } }
 @keyframes intro-word { to { clip-path: inset(0 0 0 0); } }

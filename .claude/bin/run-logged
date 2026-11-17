@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# run-logged <cmd...>: run a command, tee full output to .claude/logs/, print only a digest.
+if [ $# -eq 0 ]; then echo "usage: run-logged <command> [args...]" >&2; exit 2; fi
+root="${CLAUDE_PROJECT_DIR:-$PWD}"
+dir="$root/.claude/logs"
+mkdir -p "$dir"
+[ -f "$dir/.gitignore" ] || printf '*\n' > "$dir/.gitignore"   # logs never reach git
+slug=$(printf '%s' "$*" | tr -c 'A-Za-z0-9' '-' | sed 's/--*/-/g; s/^-//; s/-$//' | cut -c1-40)
+log="$dir/$(date +%Y%m%d-%H%M%S)-${slug:-cmd}.log"
+start=$(date +%s)
+"$@" >"$log" 2>&1
+code=$?
+dur=$(( $(date +%s) - start ))
+echo "exit code: $code"
+echo "duration: ${dur}s"
+echo "--- last 40 lines ---"
+tail -n 40 "$log"
+matches=$(grep -nEi 'error|fail|traceback' "$log" | head -n 40)
+if [ -n "$matches" ]; then
+  echo "--- lines matching error|fail|traceback (max 40) ---"
+  printf '%s\n' "$matches"
+fi
+echo "--- full log: $log ---"
+exit $code

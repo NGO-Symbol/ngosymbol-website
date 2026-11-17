@@ -17,3 +17,7 @@ dist
 media-inbox/
 Сайт_*/
 .claude/worktrees/
+
+# Temporary scripts of agents and audits (never commit)
+scripts/_tmp*
+scripts/_dbg*

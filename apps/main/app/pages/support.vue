@@ -7,7 +7,8 @@ usePageSeo({ title: () => t('Підтримати: внесок, меценат�
 const route = useRoute()
 const tab = ref<'patron' | 'community'>(route.hash === '#community' ? 'community' : 'patron')
 
-// Donations go only to an account of the NGO. The IBAN is left empty on purpose until the team adds it (2026-10-30).
+// Donations go only to an account of the NGO. The IBAN is left empty on purpose until the team adds it (2026-10-30);
+// rows without a value are not shown, and the page asks visitors to write for the account number meanwhile.
 const requisites = [
   { label: 'Отримувач', value: 'ГО «Символ»' },
   { label: 'ЄДРПОУ', value: '45221328' },
@@ -51,11 +52,10 @@ const requisites = [
         <dl>
           <div><dt>Recipient</dt><dd><CopyValue value="NGO Symbol" en /></dd></div>
           <div><dt>Registration code (EDRPOU)</dt><dd><CopyValue value="45221328" en /></dd></div>
-          <div><dt>IBAN (UAH)</dt><dd /></div>
           <div><dt>Bank</dt><dd>JSC CB PrivatBank</dd></div>
           <div><dt>Payment purpose</dt><dd>Charitable contribution to statutory activities</dd></div>
         </dl>
-        <p class="footer-small">Card payments and foreign-currency bank details will appear after the organisation’s account is configured.</p>
+        <p class="footer-small">We will send the account number (IBAN) on request: <a href="mailto:ngo.symbol@gmail.com">ngo.symbol@gmail.com</a>. Card payments and foreign-currency bank details will appear after the organisation’s account is configured.</p>
       </section>
     </template>
     <template v-else>
@@ -95,14 +95,14 @@ const requisites = [
     <section class="requisites">
       <span class="label">Реквізити</span>
       <dl>
-        <div v-for="item in requisites" :key="item.label">
+        <div v-for="item in requisites.filter(row => row.value)" :key="item.label">
           <dt>{{ item.label }}</dt>
           <dd>
             <CopyValue v-if="item.value" :value="item.value" />
           </dd>
         </div>
       </dl>
-      <p class="footer-small">Оплата карткою на сайті й валютні реквізити з’являться після налаштування рахунку організації.</p>
+      <p class="footer-small">Номер рахунку (IBAN) надішлемо на запит: <a href="mailto:ngo.symbol@gmail.com">ngo.symbol@gmail.com</a>. Оплата карткою на сайті й валютні реквізити з’являться після налаштування рахунку організації.</p>
     </section>
     </template>
   </section>

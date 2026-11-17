@@ -36,7 +36,7 @@ if (!props.inHeader) useHead({
 .breadcrumbs { margin-bottom: 28px; font-size: .82rem; }
 .breadcrumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; }
 .breadcrumbs li { display: inline-flex; align-items: center; min-width: 0; }
-.breadcrumbs li + li::before { content: '›'; margin: 0 10px; color: var(--symbol-violet); font-size: 1.1em; }
+.breadcrumbs li + li::before { content: '›'; margin: 0 10px; color: var(--symbol-violet-text); font-size: 1.1em; }
 .breadcrumbs a { text-decoration: none; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--symbol-lilac) 55%, transparent); transition: background .2s ease; }
 .breadcrumbs a:hover { background: var(--symbol-apricot); }
 .breadcrumbs [aria-current] { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 46ch; }

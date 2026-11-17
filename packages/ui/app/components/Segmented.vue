@@ -50,6 +50,8 @@ function onRootClick(event: MouseEvent) {
     <span class="sym-segmented__thumb" aria-hidden="true" />
     <template v-for="option in options" :key="option.value">
       <span v-if="to" class="sym-segmented__option" :data-active="isActive(option.value) || undefined" aria-hidden="true">{{ option.label }}</span>
+      <!-- a space between the labels (ignored by the grid layout) so the visible text reads «UA EN» like the accessible name -->
+      <template v-if="to">{{ ' ' }}</template>
       <button
         v-else
         :id="option.id"

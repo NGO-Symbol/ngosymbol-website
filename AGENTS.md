@@ -30,6 +30,8 @@ Skills live in `.agents/skills/`. If your tool does not load them automatically,
 
 When work changes a durable fact, scope, route contract, design token, technical decision, project status, or open question, update the corresponding knowledge document in the same change. Add an ADR when the decision has meaningful alternatives or migration consequences. Do not record temporary debugging details as durable memory.
 
+Docs ship with the change: update the note in the same commit. Router for tasks: `docs/CONTEXT.md` (it points into `documents/`). Run `python3 scripts/docs_tool.py map && python3 scripts/docs_tool.py check` when `docs/` changes.
+
 Run `pnpm kb:validate` after knowledge-graph changes and `pnpm check` after application changes when dependencies are available.
 
 When the user says “онови контекст”, “синхронізуй контекст”, “запам’ятай ці рішення”, or invokes `$update-symbol-context`, use `.agents/skills/update-symbol-context/SKILL.md` to perform an explicit knowledge synchronization pass.
@@ -64,3 +66,11 @@ When the user says “онови контекст”, “синхронізуй 
 - Headlines and names that stay in the original Ukrainian on purpose are marked `lang="uk"`.
 
 Never invent impact metrics, donor relationships, project roles, quotes, or team biographies.
+
+<!-- skillpack:log-to-file -->
+Run test suites, builds, deploys and any command that prints more than 100 lines through
+`.claude/bin/run-logged <cmd>` instead of running it bare.
+It saves the full output to `.claude/logs/<timestamp>-<slug>.log` (keep `.claude/logs/` in .gitignore)
+and prints only: exit code, duration, the last 40 lines, lines matching error|fail|traceback, and the log path.
+If you need more detail, read the log file by line range (offset/limit) or grep it; do not re-run the command.
+<!-- /skillpack:log-to-file -->

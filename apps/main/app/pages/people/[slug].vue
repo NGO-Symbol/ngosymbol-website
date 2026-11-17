@@ -192,6 +192,6 @@ useHead({
 /* Who the person is: small outline labels at the top right, on the breadcrumbs line (they wrap under it on phones). */
 .person-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 24px; }
 .person-tags { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
-.person-tags li { padding: 4px 12px; border: 1px solid currentColor; border-radius: 999px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--symbol-violet); white-space: nowrap; }
+.person-tags li { padding: 4px 12px; border: 1px solid currentColor; border-radius: 999px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--symbol-violet-text); white-space: nowrap; }
 @media (max-width: 720px) { .person-tags { justify-content: flex-start; } }
 </style>
