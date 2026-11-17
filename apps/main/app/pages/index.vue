@@ -83,7 +83,7 @@ const supporters = organizations
     <section class="home-hero container">
       <div class="home-hero__text">
         <div class="eyebrow">{{ t('Харків · мистецтво · психічне здоров’я', 'Kharkiv · art · mental health') }}</div>
-        <h1>{{ t('Сучасне мистецтво й психічне здоров’я з Харкова', 'Contemporary art and mental health from Kharkiv') }}</h1>
+        <h1>{{ t('Слухати. Підтримувати. Створювати.', 'Listen. Support. Create.') }}</h1>
         <p>{{ t('ГО «Символ» — незалежна громадська організація з Харкова. Виставки сучасного мистецтва, документальне кіно, плейбек-театр і програми психічного здоров’я — від Харкова до Закарпаття й за кордоном.', 'NGO Symbol is an independent non-profit from Kharkiv. Contemporary art exhibitions, documentary film, playback theatre and mental health programmes — from Kharkiv to Zakarpattia and abroad.') }}</p>
         <div class="button-row">
           <NuxtLink class="button button--dark" to="/projects">{{ t('Усі проєкти', 'All projects') }}</NuxtLink>
