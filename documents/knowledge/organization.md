@@ -6,7 +6,8 @@
 - English-facing name: **NGO Symbol**. `USER_CONFIRMED`
 - Registration code: **45221328**. `EXTRACTED`
 - Registered: **2023-10-11**, Kharkiv. `EXTRACTED`
-- Legal name: **Громадська організація «Символ»** (as the About page states it); short forms «NGO Symbol», «Symbol NGO». Used in structured data (`legalName`, `alternateName`) and on the privacy page. To confirm against the ЄДР extract. `PROPOSED`
+- Legal name in the ЄДР: **ГРОМАДСЬКА ОРГАНІЗАЦІЯ "СИМВОЛ"** (ГО "СИМВОЛ"), ЄДРПОУ 45221328. In the Statute: «Громадська організація «Символ»», short «ГО «Символ»», English «Symbol». The site uses the Statute form (`legalName`) and «Symbol», «NGO Symbol», «Symbol NGO» as `alternateName`. `USER_CONFIRMED` 2026-11-17
+- Non-profit status: included in the Register of non-profit institutions and organizations on 2023-10-11, non-profit code 0032, decision № 2320304600117 of 2023-10-12 (needed for Google for Nonprofits). `USER_CONFIRMED` 2026-11-17
 - Hungarian partner city is written **«Балашшадьярмат»** in Ukrainian («у Балашшадьярматі»), Balassagyarmat in English. `USER_CONFIRMED` 2026-11-15
 - Role in «Харківське море» (2024 and 2026): partner, not creator or organizer. `USER_CONFIRMED` 2026-11-15
 - Head/director: **Юрій Рассоха**. `USER_CONFIRMED` and `EXTRACTED`

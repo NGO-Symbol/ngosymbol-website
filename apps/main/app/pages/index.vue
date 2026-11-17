@@ -25,7 +25,7 @@ useHead({
           name: brandOf(isEn.value),
           // The registered name has no English form; it stays in the original on the English page too (scripts/i18n-parity.mjs allows it).
           legalName: 'Громадська організація «Символ»',
-          alternateName: isEn.value ? ['Symbol NGO'] : ['Громадська організація «Символ»', 'NGO Symbol', 'Symbol NGO'],
+          alternateName: isEn.value ? ['Symbol', 'Symbol NGO'] : ['ГО «Символ»', 'Symbol', 'NGO Symbol', 'Symbol NGO'],
           url: pageUrlOf('/', isEn.value),
           logo: { '@type': 'ImageObject', url: `${SITE}/press-kit/symbol-mark.png`, contentUrl: `${SITE}/press-kit/symbol-mark.png`, width: 1000, height: 1000 },
           description: t('Незалежна українська організація, що розвиває сучасну українську культуру і мистецтво та сприяє уважному ставленню до психічного здоров’я.', 'An independent Ukrainian organisation that develops contemporary Ukrainian culture and art and promotes attentive care for mental health.'),
