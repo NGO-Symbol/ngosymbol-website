@@ -58,14 +58,14 @@ html[data-page-theme="documents"] .sym-site-header__ink { border-radius: 0; }
 /* Dark mode: page surfaces turn dark; brand-coloured blocks (cards, bands, project heroes) stay as light islands. */
 :root[data-theme="dark"] { --symbol-cream: #17131b; --symbol-white: #221c28; --symbol-plum: #ebe2f0; --symbol-ink: #f7f1fa; --symbol-lilac: #3a3145; --symbol-violet: #b7a6cc; color-scheme: dark; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --symbol-cream: #17131b; --symbol-white: #221c28; --symbol-plum: #ebe2f0; --symbol-ink: #f7f1fa; --symbol-lilac: #3a3145; --symbol-violet: #b7a6cc; color-scheme: dark; } }
-:root[data-theme="dark"] :is(.project-card, .project-hero, .support-band, .open-calls, .subscribe, .orbit-hook__core),
-:root[data-theme="dark"] .site-footer { --symbol-cream: #fff7eb; --symbol-white: #fffdf8; --symbol-plum: #302738; --symbol-ink: #211b28; --symbol-lilac: #d8cfe1; --symbol-violet: #9280a6; }
+:root[data-theme="dark"] :is(.project-card, .project-hero, .support-band, .open-calls, .subscribe, .orbit-hook__core, .about-band--violet, .about-band--apricot),
+:root[data-theme="dark"] .site-footer { --symbol-cream: #fff7eb; --symbol-white: #fffdf8; --symbol-plum: #302738; --symbol-ink: #211b28; --symbol-lilac: #d8cfe1; --symbol-violet: #9280a6; --symbol-violet-text: #5f4f73; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) :is(.project-card, .project-hero, .support-band, .open-calls, .subscribe, .orbit-hook__core),
-  :root:not([data-theme="light"]) .site-footer { --symbol-cream: #fff7eb; --symbol-white: #fffdf8; --symbol-plum: #302738; --symbol-ink: #211b28; --symbol-lilac: #d8cfe1; --symbol-violet: #9280a6; }
+  :root:not([data-theme="light"]) :is(.project-card, .project-hero, .support-band, .open-calls, .subscribe, .orbit-hook__core, .about-band--violet, .about-band--apricot),
+  :root:not([data-theme="light"]) .site-footer { --symbol-cream: #fff7eb; --symbol-white: #fffdf8; --symbol-plum: #302738; --symbol-ink: #211b28; --symbol-lilac: #d8cfe1; --symbol-violet: #9280a6; --symbol-violet-text: #5f4f73; }
 }
 /* Light islands set their own text colour: inherited light text would vanish on apricot/cream. */
-:is(.project-card, .project-hero, .support-band, .open-calls, .subscribe) { color: var(--symbol-plum); }
+:is(.project-card, .project-hero, .support-band, .open-calls, .subscribe, .about-band--violet, .about-band--apricot) { color: var(--symbol-plum); }
 :root[data-theme="dark"] .site-footer { background: #0f0c12; color: #ebe2f0; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .site-footer { background: #0f0c12; color: #ebe2f0; } }
 body { background: var(--symbol-cream); }
@@ -149,6 +149,20 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .project-content section > p { font-size: 1.05rem; line-height: 1.7; max-width: 680px; }
 .content-placeholder { min-height: 390px; display: grid; place-items: center; margin-top: 60px; background: var(--symbol-lilac); padding: 30px; text-align: center; }
 .about-grid { display: grid; grid-template-columns: 1.5fr .6fr; gap: 80px; padding: 50px 0 20px; border-top: 1px solid var(--symbol-plum); }
+/* About: a compact intro, then full-width bands that alternate colour so each block reads at a glance. */
+.about-intro { padding-bottom: clamp(48px, 6vw, 80px); }
+.about-intro h1 { font-size: clamp(1.9rem, calc(1rem + 2.6vw), 3.4rem); line-height: 1.08; letter-spacing: -.015em; max-width: 22ch; margin-bottom: clamp(28px, 4vw, 48px); }
+.about-intro .about-grid { padding-top: 28px; gap: clamp(28px, 5vw, 64px); }
+.about-intro .large-copy { font-size: clamp(1.2rem, calc(.9rem + .9vw), 1.7rem); line-height: 1.25; max-width: 32ch; margin-top: 10px; }
+.about-grid__place { font-family: var(--font-display); font-size: 1.25rem; margin: 10px 0 8px; }
+.about-band { padding-block: clamp(52px, 7vw, 96px); }
+.about-band--violet { background: var(--symbol-violet); }
+.about-band--lilac { background: var(--symbol-lilac); }
+.about-band--white { background: var(--symbol-white); }
+.about-band--apricot { background: var(--symbol-apricot); }
+.about-band .section-heading { margin-bottom: clamp(28px, 4vw, 40px); }
+.about-band .section-heading h2 { font-size: clamp(1.6rem, calc(.9rem + 2vw), 2.8rem); }
+.about-band--violet .values > div { border-top-color: var(--symbol-plum); }
 .large-copy { font-family: var(--font-display); font-size: clamp(1.35rem, calc(.9rem + 1.5vw), 2.3rem); line-height: 1.12; max-width: 24ch; }
 .team-list { border-top: 1px solid var(--symbol-plum); }
 .team-list > * { text-decoration: none; display: grid; grid-template-columns: 60px 1fr 1fr; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--symbol-plum); }
