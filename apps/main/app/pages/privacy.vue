@@ -12,7 +12,7 @@ usePageSeo({
   description: () => t('Які дані збирає сайт ГО «Символ», які кукі він використовує, на якій підставі і як змінити вибір.', 'What data the NGO Symbol website collects, which cookies it uses, on what basis and how to change your choice.')
 })
 
-const updated = computed(() => t('17 листопада 2026', '17 November 2026'))
+const updated = computed(() => t('18 листопада 2026', '18 November 2026'))
 const status = (on: boolean) => (on ? t('підключено', 'in use') : t('ще не підключено', 'not connected yet'))
 const gaOn = Boolean(analytics.ga4)
 const clarityOn = Boolean(analytics.clarity && analytics.clarityEnabled)
@@ -23,7 +23,7 @@ const cookies = computed(() => [
   { name: '_ga_<id>', tool: 'Google Analytics', purpose: t('зберігає стан відвідування (сесії)', 'keeps the state of the visit (session)'), life: t('2 роки', '2 years') },
   { name: '_clck', tool: 'Microsoft Clarity', purpose: t('зберігає випадковий ідентифікатор відвідувача', 'keeps a random visitor identifier'), life: t('до 1 року', 'up to 1 year') },
   { name: '_clsk', tool: 'Microsoft Clarity', purpose: t('поєднує перегляди сторінок в одне відвідування', 'joins page views into one visit'), life: t('1 день', '1 day') },
-  { name: 'CLID, MUID, SM, MR, ANONCHK', tool: 'Microsoft Clarity', purpose: t('кукі Microsoft, які може встановити Clarity (ідентифікація браузера в сервісах Microsoft)', 'Microsoft cookies that Clarity may set (identifying the browser across Microsoft services)'), life: t('до 13 місяців', 'up to 13 months') }
+  { name: 'CLID, MUID, SM, MR, SRM_B, ANONCHK', tool: 'Microsoft Clarity', purpose: t('кукі Microsoft, які може встановити Clarity (ідентифікація браузера в сервісах Microsoft)', 'Microsoft cookies that Clarity may set (identifying the browser across Microsoft services)'), life: t('до 13 місяців', 'up to 13 months') }
 ])
 </script>
 
@@ -67,7 +67,7 @@ const cookies = computed(() => [
         </article>
         <article>
           <h3>Microsoft Clarity <small>{{ status(clarityOn) }}</small></h3>
-          <p>{{ t('Лише після вашої згоди. Показує нам, де на сторінці клікають і як далеко гортають, і записує перебіг відвідування за випадковим ідентифікатором, без вашого імені (рухи миші, кліки, гортання). Поля введення маскуються. Згоду ми передаємо Clarity за його Consent API v2 (рекламні кукі заборонені, аналітичні дозволені після вашої згоди). Записи зберігаються 30 днів; обрані вручну й вибіркові записи — до 9 місяців.', 'Only after you accept. It shows us where visitors click and how far they scroll, and records the course of the visit under a random identifier, without your name (mouse movement, clicks, scrolling). Input fields are masked. We pass your choice to Clarity through its Consent API v2 (advertising storage denied, analytics storage granted after you accept). Recordings are kept for 30 days; recordings picked by hand and sampled ones for up to 9 months.') }}</p>
+          <p>{{ t('Лише після вашої згоди. Показує нам, де на сторінці клікають і як далеко гортають, і записує перебіг відвідування за випадковим ідентифікатором, без вашого імені (рухи миші, кліки, гортання). Поля введення маскуються. Згоду ми передаємо Clarity за його Consent API v2 (сховище для реклами заборонене, аналітичне дозволене після вашої згоди). Попри це, разом із Clarity Microsoft може встановити й власні кукі на доменах clarity.ms і bing.com (їх перелічено в таблиці нижче). Записи зберігаються 30 днів; обрані вручну й вибіркові записи — до 9 місяців.', 'Only after you accept. It shows us where visitors click and how far they scroll, and records the course of the visit under a random identifier, without your name (mouse movement, clicks, scrolling). Input fields are masked. We pass your choice to Clarity through its Consent API v2 (advertising storage denied, analytics storage granted after you accept). Even so, Microsoft may set its own cookies on the clarity.ms and bing.com domains together with Clarity (they are listed in the table below). Recordings are kept for 30 days; recordings picked by hand and sampled ones for up to 9 months.') }}</p>
         </article>
       </div>
     </section>
@@ -88,7 +88,7 @@ const cookies = computed(() => [
       <h2>{{ t('Підстава і як змінити вибір', 'Legal basis and how to change your choice') }}</h2>
       <ul>
         <li>{{ t('Підстава для Google Analytics і Microsoft Clarity — ваша згода. Ми нічого не завантажуємо, доки ви не натиснете «Прийняти» у банері.', 'The basis for Google Analytics and Microsoft Clarity is your consent. We load nothing until you press “Accept” in the banner.') }}</li>
-        <li>{{ t('Змінити або відкликати згоду можна будь-коли: кнопка «Налаштування кукі» внизу кожної сторінки сайту та сайту виставки знову відкриває банер. Вона з’являється, коли підключено інструмент, що потребує згоди. Відкликання зупиняє інструменти й видаляє їхні кукі з цього сайту.', 'You can change or withdraw your consent at any time: the “Cookie settings” button at the bottom of every page of this site and of the exhibition site reopens the banner. It appears when a tool that needs consent is connected. Withdrawing stops the tools and removes their cookies from this site.') }}</li>
+        <li>{{ t('Змінити або відкликати згоду можна будь-коли: кнопка «Налаштування кукі» внизу кожної сторінки сайту та сайту виставки знову відкриває банер. Вона з’являється, коли підключено інструмент, що потребує згоди. Відкликання зупиняє інструменти й видаляє їхні кукі з цього сайту. Кукі, які Microsoft встановила на власних доменах (clarity.ms, bing.com), сайт видалити не може: вони лишаються, доки ви не очистите їх у налаштуваннях браузера.', 'You can change or withdraw your consent at any time: the “Cookie settings” button at the bottom of every page of this site and of the exhibition site reopens the banner. It appears when a tool that needs consent is connected. Withdrawing stops the tools and removes their cookies from this site. Cookies that Microsoft set on its own domains (clarity.ms, bing.com) cannot be removed by this site: they stay until you clear them in your browser settings.') }}</li>
         <li>{{ t('Ви також можете видалити кукі й дані сайту в налаштуваннях браузера.', 'You can also delete cookies and site data in your browser settings.') }}</li>
       </ul>
     </section>

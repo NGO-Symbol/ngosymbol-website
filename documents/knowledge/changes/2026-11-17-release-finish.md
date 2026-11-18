@@ -17,3 +17,8 @@
 - `/events/?view=calendar` opens the calendar again (the prerendered page did not read the query).
 - Language switch: the visible text now reads «UA EN», as the accessible name does.
 - Exhibition: no horizontal scroll on the artist and programme pages at 320–390 px; typo «ґспосіб» fixed; programme events carry their venue in JSON-LD.
+
+## 2026-11-18
+
+- Privacy page: `SRM_B` added to the Microsoft cookie row; the Clarity paragraph says Microsoft may set its own cookies on clarity.ms and bing.com despite the advertising-storage denial, and the withdrawal item says the site cannot remove those (found by the security audit in a real browser). Agreed by the developer on the team's behalf; the policy date is 18 November 2026.
+- About page: text on the new violet band uses near-black ink (5.1:1).
