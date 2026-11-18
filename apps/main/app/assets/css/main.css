@@ -163,6 +163,8 @@ h1,h2 { font-family: var(--font-display); font-weight: 400; }
 .about-band .section-heading { margin-bottom: clamp(28px, 4vw, 40px); }
 .about-band .section-heading h2 { font-size: clamp(1.6rem, calc(.9rem + 2vw), 2.8rem); }
 .about-band--violet .values > div { border-top-color: var(--symbol-plum); }
+/* Text on the violet band: near-black ink (5.1:1); plum reached only 4.0:1 and violet labels about 2:1. The band stays a light island in dark mode, so the literal holds in both themes. */
+.about-band--violet, .about-band--violet :is(.label, .eyebrow, p, h2, h3) { color: #17131b; }
 .large-copy { font-family: var(--font-display); font-size: clamp(1.35rem, calc(.9rem + 1.5vw), 2.3rem); line-height: 1.12; max-width: 24ch; }
 .team-list { border-top: 1px solid var(--symbol-plum); }
 .team-list > * { text-decoration: none; display: grid; grid-template-columns: 60px 1fr 1fr; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--symbol-plum); }
