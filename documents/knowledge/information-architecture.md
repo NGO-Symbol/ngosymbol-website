@@ -41,7 +41,7 @@ Later, when content justifies it: News, Press kit. There is still no global “M
 
 ## Project site link in the header
 
-On the main-site page of a project with its own site, the middle of the site header shows a prominent pulsing button «Перейти на сайт проєкту ↗» with the project title (in the project's identity where one exists). `USER_CONFIRMED` 2026-10-29. Currently: Історія моєї вулиці, Покажіть свої документи… (subdomain name still `PROPOSED`).
+On the main-site page of a project with its own site, the middle of the site header shows a prominent pulsing button «Перейти на сайт проєкту ↗» with the project title (in the project's identity where one exists). `USER_CONFIRMED` 2026-10-29. Currently: Історія моєї вулиці, Покажіть свої документи… (subdomain `documentsart.symbol.ngo`, `USER_CONFIRMED` 2026-11-19).
 
 ## Indicators, partners, press
 
