@@ -2,7 +2,8 @@
 # External uptime check for symbol.ngo, run every 5 min by .github/workflows/uptime.yml (ported from wbm-uptime).
 #
 # It runs on GitHub's runners and checks the published site from outside. Pages and redirects:
-#   https://symbol.ngo/, /en/, /sitemap.xml, /documentsart/ answer 200 and contain an expected string;
+#   https://symbol.ngo/, /en/, /sitemap.xml and the exhibition site (DOCS_URL: /documentsart/ until documentsart.symbol.ngo is
+#   switched on) answer 200 and contain an expected string;
 #   https://www.symbol.ngo/, http://symbol.ngo/ and http://www.symbol.ngo/ end up on https://symbol.ngo/.
 #
 # State (up/down) lives in $STATE_FILE, which the workflow carries between runs with actions/cache. Telegram gets one
@@ -34,7 +35,7 @@ CHECKS=(
   "$SITE/|Символ"
   "$SITE/en/|Symbol"
   "$SITE/sitemap.xml|<urlset"
-  "$SITE/documentsart/|Покажіть свої документи"
+  "${DOCS_URL:-$SITE/documentsart/}|Покажіть свої документи"
 )
 
 # url|where it must end up (the final URL after redirects, with status 200).

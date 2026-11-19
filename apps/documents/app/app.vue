@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { DOCS_SITE } from '#symbol/docs-site'
 const { isEn } = useLang()
 const route = useRoute()
 
-// Canonical address of each exhibition page under symbol.ngo/documentsart/. Titles, descriptions, share cards and structured
+// Canonical address of each exhibition page: symbol.ngo/documentsart/… today, documentsart.symbol.ngo/… once that
+// address is switched on (DOCS_SITE, apps/main/app/data/docs-site.ts). Titles, descriptions, share cards and structured
 // data: composables/usePageSeo.ts.
-const BASE = 'https://symbol.ngo/documentsart'
+const BASE = DOCS_SITE
 const withSlash = (path: string) => (path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`)
 const canonical = computed(() => BASE + withSlash(route.path))
 const ukPath = computed(() => withSlash(route.path.replace(/^\/en(?=\/|$)/, '') || '/'))

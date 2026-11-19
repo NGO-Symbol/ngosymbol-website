@@ -23,6 +23,7 @@ Each hostname is a separate deployment target:
 
 - `symbol.ngo` builds `apps/main`.
 - `my-street.symbol.ngo` builds `apps/istoriia-vulytsi`.
+- `documentsart.symbol.ngo` builds `apps/documents` (the exhibition «Покажіть свої документи…»). Until the owner switches it on it is published inside the main site at `symbol.ngo/documentsart/`. One value decides where it lives: `DOCS_SITE` (`apps/main/app/data/docs-site.ts`, set at build time from `DOCS_SITE_URL` through the brand layer). Canonicals, both sitemaps, the project link, the uptime check and the SEO gate follow it; with the repository variable `DOCS_LIVE=true` the main site drops the exhibition from its sitemap and every old `/documentsart/…` page becomes a redirect to the same page on the subdomain (`scripts/docs-redirects.mjs`). On its own address the exhibition site has its own `robots.txt` and `sitemap.xml` (`apps/documents/server/routes/sitemap.xml.ts`, pages shared with the main sitemap through `apps/documents/server/exhibition-sitemap.ts`).
 
 Hosting is GitHub Pages ([ADR-0005](decisions/ADR-0005-multi-app-hosting.md)). The source repository is public. The `Deploy` workflow publishes `apps/main` to this repository's Pages site and each autonomous app to its own deploy-only repository (`NGO-Symbol/istoriia-vulytsi`). Builds use the Nitro `github_pages` preset; the base path switches from `/<repo>/` to `/` once a custom domain is configured. DNS stays in Cloudflare in DNS-only mode. Setup steps: [`../operations/deployment.md`](../operations/deployment.md).
 

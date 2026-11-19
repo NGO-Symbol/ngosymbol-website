@@ -49,6 +49,6 @@ export default defineNuxtConfig({
       { dir: main('public/media/projects/pokazhit-svoi-dokumenty'), baseURL: '/media/projects/pokazhit-svoi-dokumenty' },
       ...eventMedia
     ],
-    prerender: { crawlLinks: true }
+    prerender: { crawlLinks: true, routes: ['/sitemap.xml'] }
   }
 })

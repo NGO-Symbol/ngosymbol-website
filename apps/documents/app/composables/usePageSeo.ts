@@ -1,11 +1,12 @@
-// What a search result and a link preview show for a page of the exhibition site (published at
-// symbol.ngo/documentsart/): the title with the exhibition's name once, the description (≤ 160 characters), Open Graph
+// What a search result and a link preview show for a page of the exhibition site (symbol.ngo/documentsart/ today,
+// documentsart.symbol.ngo once switched on — DOCS_SITE): the title with the exhibition's name once, the description (≤ 160 characters), Open Graph
 // and Twitter copies of both, the share image with its real size (from the image pipeline's manifest; left out when the
 // file is not in it), and the structured data of the page as one JSON-LD graph.
 import type { MaybeRefOrGetter } from 'vue'
+import { DOCS_SITE } from '#symbol/docs-site'
 import { imageInfo } from '#symbol/images'
 
-const DOCS = `${SITE}/documentsart`
+const DOCS = DOCS_SITE
 const DEFAULT_IMAGE = '/media/projects/pokazhit-svoi-dokumenty/osipov-176.jpg'
 
 /** Canonical address of an exhibition page (`/mytsi`, `/` …) in the page's language. */

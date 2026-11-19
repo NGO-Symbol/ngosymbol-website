@@ -6,7 +6,8 @@
 // JSON-LD that parses. The 404 page must be the site's own error page, not indexable. See scripts/lib/seo-gate.mjs.
 //
 // The exhibition site is published inside the main site at /documentsart/ (deploy.yml copies it there), so a sitemap URL
-// under /documentsart/ is read from the exhibition site's output.
+// under /documentsart/ is read from the exhibition site's output. With DOCS_SITE_URL set (documentsart.symbol.ngo, the build of
+// its own address) its pages leave the main sitemap and the exhibition site's own sitemap.xml is checked instead.
 // Usage: node scripts/seo-gate.mjs [mainOutputDir] [documentsOutputDir]. SEO_GATE=off skips it (never in CI).
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -24,14 +25,14 @@ for (const dir of [mainDir, docsDir]) {
   if (!existsSync(dir)) { console.error(`SEO gate: no generated site in ${dir} (run pnpm i18n:check or the generate commands first)`); process.exit(1) }
 }
 const read = (file, dir) => { const path = join(dir, file); return existsSync(path) ? readFileSync(path, 'utf8') : null }
+const docsSite = (process.env.DOCS_SITE_URL || 'https://symbol.ngo/documentsart').replace(/\/+$/, '')
 const readUrl = (url) => {
-  const file = outputFile(url)
-  return file.startsWith('documentsart/') || file === 'documentsart/index.html'
-    ? read(file.replace(/^documentsart\//, ''), docsDir)
-    : read(file, mainDir)
+  if (url.startsWith(`${docsSite}/`)) return read(outputFile(`https://docs${url.slice(docsSite.length)}`), docsDir)
+  return read(outputFile(url), mainDir)
 }
 
-const sitemap = read('sitemap.xml', mainDir)
+const ownHost = !docsSite.startsWith('https://symbol.ngo/')
+const sitemap = [read('sitemap.xml', mainDir), ownHost ? read('sitemap.xml', docsDir) : null].filter(Boolean).join('\n') || null
 const urls = sitemap ? sitemapUrls(sitemap) : []
 const problems = []
 if (!urls.length) problems.push({ url: 'sitemap.xml', problem: 'the sitemap is missing or lists no URLs' })

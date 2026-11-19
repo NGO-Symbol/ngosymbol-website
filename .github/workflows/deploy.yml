@@ -41,24 +41,32 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
       # base_path is empty once a custom domain is set, otherwise "/<repo>".
+      # DOCS_SITE_URL: where the exhibition site lives. Empty (symbol.ngo/documentsart/) until the repository variable
+      # DOCS_LIVE is 'true'; then https://<DOCS_DOMAIN> — links, the sitemap and the old /documentsart/ addresses follow.
       - run: pnpm --filter @symbol/main generate
         env:
           NITRO_PRESET: github_pages
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+          DOCS_SITE_URL: ${{ vars.DOCS_LIVE == 'true' && format('https://{0}', vars.DOCS_DOMAIN) || '' }}
       # the design-system gallery is published inside the main site at /design/ (static, noindex) so it can be opened on a phone
       - run: pnpm --filter @symbol/design generate
         env:
           NITRO_PRESET: github_pages
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/design/
       - run: mkdir -p apps/main/.output/public/design && cp -R apps/design/.output/public/. apps/main/.output/public/design/
-      # Project site of «Покажіть свої документи…» at /documentsart/ until documentsart.symbol.ngo is connected.
-      # Its photos are the main site's own files (/media), so they are not copied twice; its robots.txt is for the separate address only. Fonts are copied: the built CSS
-      # points to them relative to /documentsart/ (without them the exhibition font returned 404 and fell back to Arial).
+      # Project site of «Покажіть свої документи…» at /documentsart/ until documentsart.symbol.ngo is switched on (DOCS_LIVE).
+      # Its photos are the main site's own files (/media), so they are not copied twice; its robots.txt and sitemap.xml are for
+      # the separate address only. Fonts are copied: the built CSS points to them relative to /documentsart/ (without them the
+      # exhibition font returned 404 and fell back to Arial).
+      # Once DOCS_LIVE is 'true' the old addresses stay: every page under /documentsart/ leads to the same page on the new address.
       - run: pnpm --filter @symbol/documents generate
         env:
           NITRO_PRESET: github_pages
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/documentsart/
-      - run: mkdir -p apps/main/.output/public/documentsart && rsync -a --exclude media --exclude robots.txt apps/documents/.output/public/ apps/main/.output/public/documentsart/
+      - if: vars.DOCS_LIVE != 'true'
+        run: mkdir -p apps/main/.output/public/documentsart && rsync -a --exclude media --exclude robots.txt --exclude sitemap.xml apps/documents/.output/public/ apps/main/.output/public/documentsart/
+      - if: vars.DOCS_LIVE == 'true'
+        run: node scripts/docs-redirects.mjs apps/documents/.output/public apps/main/.output/public/documentsart "https://${{ vars.DOCS_DOMAIN }}"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/main/.output/public
@@ -113,7 +121,8 @@ jobs:
   documents-site:
     name: documentsart.symbol.ngo
     # Project site of «Покажіть свої документи…». Skipped until the owner creates the deploy repository and sets
-    # DOCS_DEPLOY_REPO (+ secret DOCS_DEPLOY_KEY, var DOCS_DOMAIN=documentsart.symbol.ngo, DNS CNAME). See deployment.md.
+    # DOCS_DEPLOY_REPO (+ secret DOCS_DEPLOY_KEY, var DOCS_DOMAIN=documentsart.symbol.ngo, DNS CNAME). Then DOCS_LIVE=true
+    # moves symbol.ngo over to it (links, sitemap, redirects of /documentsart/). See deployment.md §4a.
     if: vars.DOCS_DEPLOY_REPO != ''
     runs-on: ubuntu-latest
     steps:
@@ -136,9 +145,11 @@ jobs:
         env:
           DOCS_DOMAIN: ${{ vars.DOCS_DOMAIN }}
           DOCS_REPO: ${{ vars.DOCS_DEPLOY_REPO }}
+      # On its own address the site's canonicals and sitemap point there (DOCS_SITE, apps/main/app/data/docs-site.ts).
       - run: pnpm --filter @symbol/documents generate
         env:
           NITRO_PRESET: github_pages
+          DOCS_SITE_URL: ${{ vars.DOCS_DOMAIN && format('https://{0}', vars.DOCS_DOMAIN) || '' }}
       - uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
