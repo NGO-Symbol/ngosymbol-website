@@ -1,6 +1,6 @@
 # Analytics and cookie consent
 
-How visit statistics work on `symbol.ngo` and the exhibition site (`symbol.ngo/documentsart/`), what each tool collects, and
+How visit statistics work on `symbol.ngo` and the exhibition site (`symbol.ngo/documentsart/`, later `documentsart.symbol.ngo`), what each tool collects, and
 how to switch tools on. The visitor-facing text is the privacy page (`/privacy`, `/en/privacy`, source
 `apps/main/app/pages/privacy.vue`). Account setup for the owner (in Ukrainian): [`owner-ga4.md`](owner-ga4.md),
 [`owner-cloudflare-web-analytics.md`](owner-cloudflare-web-analytics.md).
@@ -15,8 +15,9 @@ how to switch tools on. The visitor-facing text is the privacy page (`/privacy`,
 3. **Google Analytics 4 and Microsoft Clarity** load only after the visitor presses «Прийняти». «Відхилити» is as visible.
    A refusal or a later withdrawal sets `symbol-consent = denied`, removes `_ga`, `_ga_*`, `_clck`, `_clsk`, and reloads
    the page if a tool had already run, so nothing continues.
-4. The choice is stored in `localStorage` key `symbol-consent` (`granted` | `denied`). Both sites share the origin
-   `symbol.ngo`, so the visitor decides once. The footer control «Налаштування кукі» reopens the banner on both sites; it
+4. The choice is stored in `localStorage` key `symbol-consent` (`granted` | `denied`). While the exhibition site is at
+   `symbol.ngo/documentsart/` both sites share the origin `symbol.ngo`, so the visitor decides once; on
+   `documentsart.symbol.ngo` it is another origin and asks once for itself. The footer control «Налаштування кукі» reopens the banner on both sites; it
    appears only when GA4 or Clarity is switched on.
 5. With neither GA4 nor Clarity on, there is no banner at all (Cloudflare alone needs none).
 

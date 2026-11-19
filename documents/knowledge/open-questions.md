@@ -30,7 +30,7 @@ Items here are unresolved and must not be silently assumed.
 ## Покажіть свої документи… (2026-10-29)
 
 - Which November programme events took place as planned, their times, and speakers (ZMINA, artist talk guests).
-- Project site `documentsart.symbol.ngo` is built (`apps/documents`); owner still has to create `NGO-Symbol/documentsart`, the deploy key, `DOCS_*` variables and the Cloudflare CNAME (`documents/operations/deployment.md` §4a).
+- Project site `documentsart.symbol.ngo`: decided 2026-11-19 (`USER_CONFIRMED`, Петро Чекаль) to move the exhibition site from `symbol.ngo/documentsart/` to its own subdomain with its own SEO. The code is ready and switches with one variable; the owner still has to create `NGO-Symbol/documentsart`, the deploy key, the `DOCS_*` variables and the Cloudflare CNAME, check the subdomain, then set `DOCS_LIVE=true` and add the subdomain to Search Console (`documents/operations/deployment.md` §4a).
 - «Голоси у русі»: official «Funded by the European Union» emblem file for the donor tile (now text only).
 - Photographer credits for event photos and for photos not marked «Chekal».
 - Partner and donor logo files and permission to show them.

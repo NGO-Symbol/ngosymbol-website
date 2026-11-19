@@ -8,8 +8,9 @@
 //  2. Cloudflare Web Analytics (cookieless) loads for every such visitor without consent, when its token is set.
 //  3. Google Analytics 4 and Microsoft Clarity load only after the visitor accepts in the banner. A refusal or a later
 //     withdrawal removes their cookies and stops them on the next page.
-//  4. Consent is kept in localStorage «symbol-consent» (granted | denied). Both sites live on the same origin
-//     (symbol.ngo and symbol.ngo/documentsart/), so the visitor decides once.
+//  4. Consent is kept in localStorage «symbol-consent» (granted | denied). While the exhibition site is a folder of
+//     symbol.ngo (/documentsart/) both sites share it and the visitor decides once; on its own address
+//     (documentsart.symbol.ngo) the exhibition site is another origin and asks once for itself.
 import { isLikelyBot } from './bot'
 import { isProductionPage } from './hosts'
 import { classifyLink, linkLocation } from './links'

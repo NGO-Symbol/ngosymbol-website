@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Hero in the identity of «Покажіть свої документи…» (logo, banner, invitation): the project font EXDocument
 // by Олексій Чекаль, words on grey tape strips between barcode rules, mono captions, the round blue stamp.
+import { DOCS_SITE } from '~/data/docs-site'
 import type { Project } from '~/data/types'
 import { projectsEn } from '~/data/projects-en'
 
@@ -29,7 +30,7 @@ const title = computed(() => isEn.value ? projectsEn[props.project.slug]?.title 
         <aside class="docs-hero__side">
           <!-- The exhibition stamp, redrawn after the original identity by Олексій Чекаль: thick outer ring, the title
                running clockwise with «СВОЇ» at the top, a double inner ring and a QR code to the project site; rings and words carry ink grain. -->
-          <a class="docs-stamp-link" href="https://symbol.ngo/documentsart/" :aria-label="isEn ? 'May I See Your Documents… project website' : 'Сайт проєкту «Покажіть свої документи…»'">
+          <a class="docs-stamp-link" :href="`${DOCS_SITE}/`" :aria-label="isEn ? 'May I See Your Documents… project website' : 'Сайт проєкту «Покажіть свої документи…»'">
           <svg class="docs-stamp" viewBox="0 0 200 200" aria-hidden="true">
             <defs>
               <path id="docs-stamp-path" d="M100 100 m0 75 a75 75 0 1 1 0.01 0" />

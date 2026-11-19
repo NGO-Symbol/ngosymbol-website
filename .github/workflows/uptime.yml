@@ -56,6 +56,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           MODE: ${{ github.event.schedule == '17 6 * * *' && 'daily' || inputs.mode || 'check' }}
           STATE_FILE: .uptime/state
+          # The exhibition site on its own address once DOCS_LIVE is 'true' (deploy.yml); empty: symbol.ngo/documentsart/.
+          DOCS_URL: ${{ vars.DOCS_LIVE == 'true' && format('https://{0}/', vars.DOCS_DOMAIN) || '' }}
         run: bash scripts/uptime-check.sh
 
       - name: Save state

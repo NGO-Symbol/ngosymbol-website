@@ -103,9 +103,13 @@ gh api -X POST repos/NGO-Symbol/istoriia-vulytsi/pages -f "source[branch]=gh-pag
 
 Web UI: in `NGO-Symbol/istoriia-vulytsi` → Settings → Pages → Deploy from a branch → `gh-pages` / root.
 
-## 4a. «Покажіть свої документи…» deploy repository (documentsart.symbol.ngo)
+## 4a. «Покажіть свої документи…» on its own address (documentsart.symbol.ngo)
 
-Same steps as section 4, with its own names. The `documents-site` job stays skipped until `DOCS_DEPLOY_REPO` is set.
+Decided 2026-11-19: the exhibition site moves from `symbol.ngo/documentsart/` to `documentsart.symbol.ngo` with its own
+SEO. The code switches with repository variables; nothing changes until the owner does the steps below, in this order.
+
+**1. Deploy repository and key** (same as section 4, with its own names). The `documents-site` job stays skipped until
+`DOCS_DEPLOY_REPO` is set.
 
 ```bash
 gh repo create NGO-Symbol/documentsart --public \
@@ -120,9 +124,34 @@ gh variable set DOCS_DOMAIN -R NGO-Symbol/ngosymbol-website -b documentsart.symb
 rm docs_deploy_key docs_deploy_key.pub
 ```
 
-Run the Deploy workflow once, then turn on Pages for `NGO-Symbol/documentsart` (branch `gh-pages`, root), and add in
-Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io` (DNS only). Until then the site is built inside the main site at `symbol.ngo/documentsart/`; once the subdomain works, point
-`subsiteUrl` (projects.ts) and the stamp QR code in `DocumentsHero.vue` to `https://documentsart.symbol.ngo/`.
+**2. DNS.** In Cloudflare: `CNAME` `documentsart` → `ngo-symbol.github.io`, **DNS only** (grey cloud). Not a wildcard.
+
+**3. Publish.** Run the Deploy workflow once. In `NGO-Symbol/documentsart` → Settings → Pages: branch `gh-pages`, root;
+custom domain `documentsart.symbol.ngo`; tick «Enforce HTTPS» when the certificate is ready (up to an hour).
+
+**4. Check** `https://documentsart.symbol.ngo/`, `/sitemap.xml`, `/robots.txt` and an artist page. The page source shows
+`<link rel="canonical" href="https://documentsart.symbol.ngo/…">`. Until step 5 the old address keeps working as before.
+
+**5. Switch symbol.ngo over:**
+
+```bash
+gh variable set DOCS_LIVE -R NGO-Symbol/ngosymbol-website -b true
+```
+
+and run Deploy. From then on: the project page on symbol.ngo links to the subdomain; the sitemap of symbol.ngo no longer
+lists the exhibition (the subdomain has its own); every old page `symbol.ngo/documentsart/…` leads to the same page on the
+subdomain, keeping `?query` and `#anchor` (`scripts/docs-redirects.mjs`: canonical + noindex + instant refresh, because
+GitHub Pages cannot answer 301); the uptime check watches the subdomain.
+
+**6. Search.** Add `documentsart.symbol.ngo` to Google Search Console as its own property and submit
+`https://documentsart.symbol.ngo/sitemap.xml`. Optional: a Cloudflare redirect rule
+`symbol.ngo/documentsart/*` → `https://documentsart.symbol.ngo/${1}` (301) replaces the refresh pages; it needs the
+proxy (orange cloud) on `symbol.ngo`, so check the GitHub Pages certificate first.
+
+To go back: set `DOCS_LIVE` to `false` (or delete it) and run Deploy — the site is published at `/documentsart/` again.
+
+Note: on its own address the exhibition site is another origin, so the cookie banner asks once there too
+(`documents/operations/analytics.md`).
 
 ## 5. Domain (DNS is managed in Cloudflare)
 

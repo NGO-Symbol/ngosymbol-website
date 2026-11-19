@@ -1,3 +1,4 @@
+import { DOCS_SITE } from './docs-site'
 import type { Project } from './types'
 
 // Facts come from documents/knowledge/project-registry.md (portfolio 2026, presentation 2024, grant files).
@@ -93,8 +94,8 @@ const entries: Project[] = [
     motif: 'documents',
     theme: 'documents',
     poster: '/media/projects/pokazhit-svoi-dokumenty/poster.jpg',
-    // Served at symbol.ngo/documentsart/ until documentsart.symbol.ngo is connected (deployment.md §4a).
-    subsiteUrl: 'https://symbol.ngo/documentsart/',
+    // symbol.ngo/documentsart/ today, documentsart.symbol.ngo once it is switched on (docs-site.ts, deployment.md §4a).
+    subsiteUrl: `${DOCS_SITE}/`,
     summary: 'Виставка про документ як мистецький феномен: 20 митців у ЄрміловЦентрі.',
     seoTitle: 'Покажіть свої документи…: виставка, Харків',
     seoDescription: 'Виставка сучасного мистецтва про документ: 20 митців, куратори Петро Чекаль і Юрій Рассоха, ЄрміловЦентр, Харків, 17 жовтня — 7 грудня 2025.',
