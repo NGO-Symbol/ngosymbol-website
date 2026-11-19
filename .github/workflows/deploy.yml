@@ -145,6 +145,9 @@ jobs:
         env:
           DOCS_DOMAIN: ${{ vars.DOCS_DOMAIN }}
           DOCS_REPO: ${{ vars.DOCS_DEPLOY_REPO }}
+      # The exhibition app reads the main site's data files, which extend apps/main/.nuxt/tsconfig.json: prepare main first
+      # (in the main-site job the main build has made it already).
+      - run: pnpm --filter @symbol/main exec nuxt prepare
       # On its own address the site's canonicals and sitemap point there (DOCS_SITE, apps/main/app/data/docs-site.ts).
       - run: pnpm --filter @symbol/documents generate
         env:
